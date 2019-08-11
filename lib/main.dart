@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tv_randshow/generated/i18n.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,19 +8,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      localizationsDelegates: [I18n.delegate],
+      supportedLocales: I18n.delegate.supportedLocales,
+      localeResolutionCallback: I18n.delegate.resolution(fallback: Locale('en', 'US')),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'TV RandShow'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -30,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(I18n.of(context).name_app),
       ),
       body: Center(
         child: Column(
