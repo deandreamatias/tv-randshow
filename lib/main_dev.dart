@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 
 import 'package:tv_randshow/config/secure_keys.dart';
+import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/generated/i18n.dart';
+import 'package:tv_randshow/src/models/app_model.dart';
 
-import 'config/flavor_config.dart';
 
 void main() {
-  /// Populate a string [apiKey] in [secure_keys.dart], or put below your personal API Key from TMDB 
+  final AppModel appModel = AppModel();
+  /// Populate a string [apiKey] in [secure_keys.dart], or put below your personal API Key from TMDB
   FlavorConfig(
       flavor: Flavor.DEV,
       values: FlavorValues(
           baseUrl:
-              "https://raw.githubusercontent.com/JHBitencourt/ready_to_go/master/lib/json/person_qa.json", 
-              apiKey: apiKey));
-
+              "https://raw.githubusercontent.com/JHBitencourt/ready_to_go/master/lib/json/person_qa.json",
+          apiKey: apiKey));
+  appModel.init();
   runApp(MyApp());
 }
 
@@ -57,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('Test api'),
             ),
             Text(
-              'You have pushed the button this many times:',
+              FlavorConfig.instance.values.apiKey,
             ),
           ],
         ),
