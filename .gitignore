@@ -9,6 +9,7 @@
 .buildlog/
 .history
 .svn/
+**/secure_keys.dart
 
 # IntelliJ related
 *.iml
