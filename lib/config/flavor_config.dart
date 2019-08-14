@@ -4,20 +4,20 @@ import 'package:meta/meta.dart';
 enum Flavor { DEV, PROD }
 
 class FlavorValues {
-  FlavorValues({@required this.baseUrl});
+  FlavorValues({@required this.baseUrl, this.apiKey});
   final String baseUrl;
+  final String apiKey;
 }
 
 class FlavorConfig {
   final Flavor flavor;
   final String name;
-  final Color color;
   final FlavorValues values;
   static FlavorConfig _instance;
 
   factory FlavorConfig(
-      {@required Flavor flavor, Color color: Colors.blue, @required FlavorValues values}) {
-    _instance ??= FlavorConfig._internal(flavor, enumName(flavor.toString()), color, values);
+      {@required Flavor flavor, @required FlavorValues values}) {
+    _instance ??= FlavorConfig._internal(flavor, enumName(flavor.toString()), values);
     return _instance;
   }
 
@@ -26,7 +26,7 @@ class FlavorConfig {
     return paths[paths.length - 1];
   }
 
-  FlavorConfig._internal(this.flavor, this.name, this.color, this.values);
+  FlavorConfig._internal(this.flavor, this.name, this.values);
   static FlavorConfig get instance {
     return _instance;
   }
