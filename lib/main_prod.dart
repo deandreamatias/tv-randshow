@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:tv_randshow/config/secure_keys.dart';
 import 'package:tv_randshow/generated/i18n.dart';
 
 import 'config/flavor_config.dart';
 
 void main() {
   FlavorConfig(
+  /// Populate a string [apiKey] in [secure_keys.dart], or put below your personal API Key from TMDB
       flavor: Flavor.PROD,
       values: FlavorValues(
           baseUrl:
-              "https://raw.githubusercontent.com/JHBitencourt/ready_to_go/master/lib/json/person_qa.json"));
+              "https://raw.githubusercontent.com/JHBitencourt/ready_to_go/master/lib/json/person_qa.json",
+              apiKey: apiKey));
 
   runApp(MyApp());
 }
