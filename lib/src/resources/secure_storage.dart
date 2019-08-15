@@ -1,7 +1,15 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorage {
-  final storage = new FlutterSecureStorage();
+  final storage = FlutterSecureStorage();
+
+  writeStorage(String key, String value) async {
+    await storage.write(key: key, value: value).then((empty) {
+      print('-- Write token with success');
+    }).catchError((onError) {
+      print('-- Error: $onError to write token');
+    });
+  }
 
   Future<String> readStorage(String key) async {
     String value = await storage.read(key: key);
@@ -9,10 +17,10 @@ class SecureStorage {
   }
 
   deleteStorage(String key) async {
-    await storage.delete(key: key);
-  }
-
-  writeStorage(String key, String value) async {
-    await storage.write(key: key, value: value);
+    await storage.delete(key: key).then((empty) {
+      print('-- Delete token with success');
+    }).catchError((onError) {
+      print('-- Error: $onError to delete token');
+    });
   }
 }
