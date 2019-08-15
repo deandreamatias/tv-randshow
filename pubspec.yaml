@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+  http: ^0.12.0+2
   flutter_secure_storage: ^3.2.1+1
   meta: ^1.1.6
   scoped_model: ^1.0.1
