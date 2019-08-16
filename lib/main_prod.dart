@@ -23,7 +23,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
-        FlutterI18nDelegate(useCountryCode: false, fallbackFile: 'en'),
+        FlutterI18nDelegate(useCountryCode: false, fallbackFile: 'en', path: 'assets/i18n/'),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
