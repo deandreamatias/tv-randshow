@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_i18n/flutter_i18n_delegate.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:tv_randshow/config/secure_keys.dart';
 import 'package:tv_randshow/config/flavor_config.dart';
-import 'package:tv_randshow/generated/i18n.dart';
 import 'package:tv_randshow/src/models/app_model.dart';
 import 'package:tv_randshow/src/models/tv_search/tvshow_search.dart';
 import 'package:tv_randshow/src/resources/api_provider.dart';
 import 'package:tv_randshow/src/resources/secure_storage.dart';
+import 'package:tv_randshow/src/ui/screens/tvshow_fav_view.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 
 void main() {
@@ -25,13 +28,16 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
-      localizationsDelegates: [I18n.delegate],
-      supportedLocales: I18n.delegate.supportedLocales,
-      localeResolutionCallback: I18n.delegate.resolution(fallback: Locale('en', 'US')),
+      localizationsDelegates: [
+        FlutterI18nDelegate(useCountryCode: false, fallbackFile: 'en'),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: TvshowFavView(),
     );
   }
 }
@@ -49,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(I18n.of(context).name_app),
+        title: Text(FlutterI18n.translate(context, 'app.name')),
       ),
       body: Center(
         child: Column(

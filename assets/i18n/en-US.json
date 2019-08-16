@@ -1,0 +1,8 @@
+{
+    "app": {
+        "name": "TV Randshow"
+    },
+    "tvshow_search": {
+        "fab" : "Search"
+    }
+}
