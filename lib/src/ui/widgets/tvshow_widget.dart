@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowWidget extends StatelessWidget {
   final String tvshowName;
@@ -6,25 +7,31 @@ class TvshowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 150.0,
-      width: 150.0,
-      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
-      child: Stack(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: _image(),
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: _closeButton(),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _actionButton(),
-          ),
-        ],
+    return Padding(
+      padding: EdgeInsets.only(right: 8.0, left: 8.0),
+      child: Container(
+        height: 154.0,
+        width: 144.0,
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8.0))),
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              right: 6.0,
+              left: 0.0,
+              top: 6.0,
+              bottom: 18.0,
+              child: _image(),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: _closeButton(),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _actionButton(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -33,48 +40,55 @@ class TvshowWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        height: 140.0,
-        width: 150.0,
-        child: Stack(fit: StackFit.expand, children: <Widget>[
-          Image(
-            image: AssetImage('assets/img/friends.jpg'),
-            fit: BoxFit.cover,
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                tvshowName,
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-              ),
+        height: 128.0,
+        width: 144.0,
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              tvshowName,
+              style: TextStyle(color: StyleColor.WHITE, fontWeight: FontWeight.w600),
             ),
           ),
-        ]),
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage('assets/img/friends.jpg'),
+          ),
+        ),
       ),
     );
   }
 
   Widget _closeButton() {
-    return Container(
-      height: 36.0,
-      width: 36.0,
-      color: Colors.grey,
-      child: IconButton(
-        alignment: Alignment.center,
-        icon: Icon(Icons.close),
-        color: Colors.red,
-        iconSize: 16.0,
-        onPressed: () {},
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: 20.0,
+        width: 20.0,
+        decoration: BoxDecoration(
+          color: StyleColor.WHITE,
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          border: Border.all(),
+        ),
+        child: Icon(
+          Icons.close,
+          size: 12.0,
+          color: StyleColor.PRIMARY,
+        ),
       ),
     );
   }
 
   Widget _actionButton() {
     return RaisedButton.icon(
-      icon: Icon(Icons.local_play),
-      color: Colors.red,
-      label: Text('Random'),
+      icon: Icon(Icons.local_play, color: StyleColor.WHITE),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      color: StyleColor.PRIMARY,
+      label: Text('Random', style: TextStyle(color: StyleColor.WHITE)),
       onPressed: () {},
     );
   }
