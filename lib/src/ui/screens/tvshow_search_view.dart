@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
 import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
@@ -17,7 +16,6 @@ class _TvshowSearchViewState extends State<TvshowSearchView> {
 
   @override
   void initState() {
-    _tvshowSearchModel.setInit();
     textEditingController = TextEditingController(text: '');
     super.initState();
   }
@@ -31,11 +29,33 @@ class _TvshowSearchViewState extends State<TvshowSearchView> {
             children: <Widget>[
               SearchWidget(),
               Expanded(
-                child: GridView.builder(
-                  padding: EdgeInsets.all(16.0),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    return TvshowWidget(tvshowName: 'Friends');
+                child: FutureBuilder<List<TvshowWidget>>(
+                  future: _tvshowSearchModel.getSearch('friends'),
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                        print('no data');
+                        return Container(color: Colors.red);
+                        break;
+                      case ConnectionState.waiting:
+                        print('cargando');
+                        return Container(color: Colors.amber);
+                        break;
+                      case ConnectionState.done:
+                        print('pronto');
+                        return GridView.builder(
+                          padding: EdgeInsets.all(16.0),
+                          itemCount: snapshot.data.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                          itemBuilder: (context, index) {
+                            return snapshot.data[index];
+                          },
+                        );
+                        break;
+                      default:
+                        return Container(color: Colors.teal);
+                    }
                   },
                 ),
               ),
@@ -45,4 +65,6 @@ class _TvshowSearchViewState extends State<TvshowSearchView> {
       ),
     );
   }
+
+  query() {}
 }

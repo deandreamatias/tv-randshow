@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+
+import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowWidget extends StatelessWidget {
   final String tvshowName;
-  TvshowWidget({Key key, this.tvshowName}) : super(key: key);
+  final String urlImage;
+  TvshowWidget({Key key, this.tvshowName, this.urlImage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,7 @@ class TvshowWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('assets/img/friends.jpg'),
+            image: NetworkImage(Url.BASE_IMAGE + urlImage),
           ),
         ),
       ),

@@ -6,6 +6,7 @@ class KeyStorate {
 
 class Url {
   static String apiUrl = FlavorConfig.instance.values.baseUrl;
+  static const String BASE_IMAGE = 'https://image.tmdb.org/t/p/w342/';
   static const String API_VERSION = '/3';
 
   static const String AUTH_NEW_TOKEN = '$API_VERSION/authentication/token/new';
