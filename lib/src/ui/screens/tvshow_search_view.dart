@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
 import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
@@ -27,36 +28,24 @@ class _TvshowSearchViewState extends State<TvshowSearchView> {
         body: Container(
           child: Column(
             children: <Widget>[
-              SearchWidget(),
+              SearchWidget(editingController: textEditingController),
               Expanded(
-                child: FutureBuilder<List<TvshowWidget>>(
-                  future: _tvshowSearchModel.getSearch('friends'),
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.none:
-                        print('no data');
-                        return Container(color: Colors.red);
-                        break;
-                      case ConnectionState.waiting:
-                        print('cargando');
-                        return Container(color: Colors.amber);
-                        break;
-                      case ConnectionState.done:
-                        print('pronto');
-                        return GridView.builder(
-                          padding: EdgeInsets.all(16.0),
-                          itemCount: snapshot.data.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                          itemBuilder: (context, index) {
-                            return snapshot.data[index];
-                          },
-                        );
-                        break;
-                      default:
-                        return Container(color: Colors.teal);
+                child: FutureProvider<List<TvshowWidget>>(
+                  builder: (_) => _tvshowSearchModel.getSearch('how i met'),
+                  child: Consumer<List<TvshowWidget>>(builder: (context, value, child) {
+                    if (value == null) {
+                      return Center(child: CircularProgressIndicator());
+                    } else {
+                      return GridView.builder(
+                        padding: EdgeInsets.all(16.0),
+                        itemCount: value.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                        itemBuilder: (context, index) {
+                          return value[index];
+                        },
+                      );
                     }
-                  },
+                  }),
                 ),
               ),
             ],
