@@ -12,3 +12,7 @@ class Url {
   static const String AUTH_NEW_TOKEN = '$API_VERSION/authentication/token/new';
   static const String TVSHOW_SEARCH = '$API_VERSION/search/tv';
 }
+
+class ImagePath {
+  static const String emptyTvShow = 'assets/img/no_image.png';
+}
