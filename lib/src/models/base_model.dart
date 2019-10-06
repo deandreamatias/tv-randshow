@@ -1,11 +1,12 @@
-import 'package:scoped_model/scoped_model.dart';
+import 'package:flutter/material.dart';
+
 import 'package:tv_randshow/src/resources/api_provider.dart';
 import 'package:tv_randshow/src/resources/secure_storage.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 
 enum BaseState { init, loading, error }
 
-abstract class BaseModel extends Model {
+abstract class BaseModel extends ChangeNotifier {
   final SecureStorage secureStorage = SecureStorage();
   BaseState _state = BaseState.init;
   BaseState get state => _state;
