@@ -1,12 +1,12 @@
 import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/models/tv_search/tvshow_search.dart';
-import 'package:tv_randshow/src/ui/widgets/tvshow_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/tvshow_search_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 
 class TvshowSearchModel extends BaseModel {
-  List<TvshowWidget> _listTvShow;
+  List<TvshowSearchWidget> _listTvShow;
 
-  List<TvshowWidget> get listTvShow => _listTvShow;
+  List<TvshowSearchWidget> get listTvShow => _listTvShow;
   setInit();
 
   getSearch(String query) async {
@@ -16,7 +16,7 @@ class TvshowSearchModel extends BaseModel {
 
     var data = await fetchData(Url.TVSHOW_SEARCH, queryParameters);
     _listTvShow = TvshowSearch.fromRawJson(data).results.map((result) {
-      return TvshowWidget(tvshowName: result.name, urlImage: result.posterPath);
+      return TvshowSearchWidget(tvshowName: result.name, urlImage: result.posterPath);
     }).toList();
     setInit();
   }
