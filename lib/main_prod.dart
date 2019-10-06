@@ -4,20 +4,21 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/secure_keys.dart';
+import 'package:tv_randshow/src/models/app_model.dart';
 import 'package:tv_randshow/src/ui/screens/tvshow_search_view.dart';
 
 void main() {
+  final AppModel appModel = AppModel();
   FlavorConfig(
 
       /// Populate a string [apiKey] in [secure_keys.dart], or put below your personal API Key from TMDB
       flavor: Flavor.PROD,
       values: FlavorValues(baseUrl: 'api.themoviedb.org', apiKey: apiKey));
-
+  appModel.init();
   runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

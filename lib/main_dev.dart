@@ -18,7 +18,6 @@ void main() {
 }
 
 class MainApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,18 +34,3 @@ class MainApp extends StatelessWidget {
     );
   }
 }
-
-// _request() async {
-//   TvshowSearch tvshowSearch;
-//   final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
-//   var queryParameters = {'api_key': apiKey, 'language': 'en-US', 'page': '1', 'query': 'friends'};
-//   var uri = Uri.https(Url.apiUrl, Url.TVSHOW_SEARCH, queryParameters);
-//   print(uri.toString());
-//   ApiProvider().requestGet(uri.toString()).then((response) {
-//     print('Reponse: ${response.statusCode}');
-//     tvshowSearch = TvshowSearch.fromRawJson(response.body);
-//     tvshowSearch.results.forEach((f) {
-//       print('Name of results: ${f.name}');
-//     });
-//   });
-// }
