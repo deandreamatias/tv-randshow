@@ -84,4 +84,7 @@ unlinked_spec.ds
 **/ios/Flutter/flutter_assets/
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Flutter/flutter_export_environment.sh
+
+# Personal files
 lib/config/secure_keys.dart
