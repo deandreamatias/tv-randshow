@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
@@ -23,7 +25,7 @@ class TvshowSearchWidget extends StatelessWidget {
               left: 0.0,
               top: 6.0,
               bottom: 18.0,
-              child: _image(),
+              child: _image(context),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -35,9 +37,11 @@ class TvshowSearchWidget extends StatelessWidget {
     );
   }
 
-  Widget _image() {
+  Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Provider.of<TvshowSearchModel>(context).toggleDetails();
+      },
       child: Container(
         height: 128.0,
         width: 144.0,

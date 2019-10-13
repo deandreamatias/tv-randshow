@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/models/tv_search/tvshow_search.dart';
 import 'package:tv_randshow/src/ui/widgets/tvshow_search_widget.dart';
@@ -5,8 +7,11 @@ import 'package:tv_randshow/src/utils/constants.dart';
 
 class TvshowSearchModel extends BaseModel {
   List<TvshowSearchWidget> _listTvShow;
+  ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);
 
   List<TvshowSearchWidget> get listTvShow => _listTvShow;
+  ValueNotifier<bool> get tvShowDetails => _tvShowDetails;
+
   setInit();
 
   getSearch(String query) async {
@@ -19,5 +24,9 @@ class TvshowSearchModel extends BaseModel {
       return TvshowSearchWidget(tvshowName: result.name, urlImage: result.posterPath);
     }).toList();
     setInit();
+  }
+
+  toggleDetails() {
+    _tvShowDetails.value = !_tvShowDetails.value;
   }
 }
