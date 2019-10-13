@@ -12,7 +12,7 @@ class TvshowSearchModel extends BaseModel {
   getSearch(String query) async {
     setLoading();
     final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
-    var queryParameters = {'api_key': apiKey, 'language': 'en-US', 'page': '1', 'query': query};
+    var queryParameters = {'query': query, 'page': '1', 'api_key': apiKey};
 
     var data = await fetchData(Url.TVSHOW_SEARCH, queryParameters);
     _listTvShow = TvshowSearch.fromRawJson(data).results.map((result) {
