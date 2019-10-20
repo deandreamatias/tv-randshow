@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
 import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
+import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowSearchView extends StatefulWidget {
@@ -36,7 +38,7 @@ class _TvshowSearchViewState extends State<TvshowSearchView> {
                 backLayer: _buildListSearch(),
                 frontHeader: FrontPanelTitle(),
                 panelVisible: value.tvShowDetails,
-                frontPanelOpenHeight: 150.0,
+                frontPanelOpenHeight: 150.0, // TODO: Fix size show in container
                 frontHeaderVisibleClosed: false,
               );
             })),
@@ -93,6 +95,66 @@ class FrontPanelTitle extends StatelessWidget {
 class FrontPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(color: StyleColor.PRIMARY, child: Center(child: Text('TV Show Description')));
+    return SafeArea(
+        child: Container(
+      padding: EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Row(
+              children: <Widget>[
+                Container(
+                  child: Image.asset(ImagePath.emptyTvShow),
+                  decoration: BoxDecoration(
+                    borderRadius: BORDER_RADIUS,
+                  ),
+                ),
+                Padding(
+                  padding: SMALL_INSESTS,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Friends',
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              children: <Widget>[
+                InfoBoxWidget(typeInfo: 0),
+                InfoBoxWidget(typeInfo: 1),
+                InfoBoxWidget(typeInfo: 2)
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('Sinopse', style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
+                SizedBox(height: 4.0),
+                Text('Descripción .....')
+              ],
+            ),
+          ),
+        ],
+      ),
+    ));
+  }
+
+  ImageProvider checkImage() {
+    //if (urlImage == null) {
+    return AssetImage(ImagePath.emptyTvShow);
+    //} else {
+    //return NetworkImage(Url.BASE_IMAGE + urlImage);
+    //}
   }
 }
