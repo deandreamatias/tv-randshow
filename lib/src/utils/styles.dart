@@ -9,3 +9,6 @@ class StyleColor {
   static const Color WHITE = Color(0xFFFFFFFF);
   // static const Color SECONDARY = Color(0xFFE40505);
 }
+
+const BorderRadiusGeometry BORDER_RADIUS = BorderRadius.all(Radius.circular(8.0));
+const EdgeInsets SMALL_INSESTS = EdgeInsets.all(8.0);

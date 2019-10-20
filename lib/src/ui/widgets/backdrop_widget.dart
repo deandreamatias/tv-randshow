@@ -168,11 +168,11 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      final panelSize = constraints.biggest;
+      final panelSize = constraints.biggest.height;
       final closedPercentage = widget.frontHeaderVisibleClosed
-          ? (panelSize.height - widget.frontHeaderHeight) / panelSize.height
+          ? (panelSize - widget.frontHeaderHeight) / panelSize
           : 1.0;
-      final openPercentage = widget.frontPanelOpenHeight / panelSize.height;
+      final openPercentage = widget.frontPanelOpenHeight / panelSize;
 
       final panelDetailsPosition = Tween<Offset>(
         begin: Offset(0.0, closedPercentage),

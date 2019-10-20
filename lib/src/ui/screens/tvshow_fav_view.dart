@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
-import 'package:tv_randshow/src/ui/widgets/tvshow_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/tvshow_fav_widget.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowFavView extends StatefulWidget {
@@ -45,7 +45,7 @@ class _TvshowFavViewState extends State<TvshowFavView> {
                   padding: EdgeInsets.all(16.0),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                   itemBuilder: (context, index) {
-                    return TvshowWidget(tvshowName: 'Friends');
+                    return TvshowFavWidget(tvshowName: 'Friends');
                   },
                 ),
               ),
