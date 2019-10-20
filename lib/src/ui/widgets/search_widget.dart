@@ -21,15 +21,13 @@ class SearchWidget extends StatelessWidget {
             : print(editingController.text),
         autocorrect: true,
         decoration: InputDecoration(
-          hintText: "Search",
-          contentPadding: EdgeInsets.all(0.0),
-          //suffixIcon: Icon(Icons.close),
-          prefixIcon: Icon(Icons.search, color: StyleColor.SECONDARY),
-          border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: StyleColor.SECONDARY),
-              borderRadius: BorderRadius.all(Radius.circular(8.0))),
-        ),
+            hintText: "Search",
+            contentPadding: EdgeInsets.all(0.0),
+            //suffixIcon: Icon(Icons.close),
+            prefixIcon: Icon(Icons.search, color: StyleColor.SECONDARY),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: StyleColor.SECONDARY), borderRadius: BORDER_RADIUS),
+            border: OutlineInputBorder(borderRadius: BORDER_RADIUS)),
       ),
     );
   }

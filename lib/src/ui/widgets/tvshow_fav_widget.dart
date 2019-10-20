@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
-class TvshowSearchWidget extends StatelessWidget {
+class TvshowFavWidget extends StatelessWidget {
   final String tvshowName;
   final String urlImage;
-  TvshowSearchWidget({Key key, this.tvshowName, this.urlImage}) : super(key: key);
+  TvshowFavWidget({Key key, this.tvshowName, this.urlImage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,11 @@ class TvshowSearchWidget extends StatelessWidget {
               left: 0.0,
               top: 6.0,
               bottom: 18.0,
-              child: _image(context),
+              child: _image(),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: _closeButton(),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -37,18 +39,15 @@ class TvshowSearchWidget extends StatelessWidget {
     );
   }
 
-  Widget _image(BuildContext context) {
+  Widget _image() {
     return GestureDetector(
-      onTap: () {
-        Provider.of<TvshowSearchModel>(context).toggleDetails();
-      },
+      onTap: () {},
       child: Container(
         height: 128.0,
         width: 144.0,
         child: Align(
           alignment: Alignment.topLeft,
-          child: Container(
-            color: Colors.black26,
+          child: Padding(
             padding: SMALL_INSESTS,
             child: Text(
               tvshowName,
@@ -60,28 +59,39 @@ class TvshowSearchWidget extends StatelessWidget {
           borderRadius: BORDER_RADIUS,
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: checkImage(),
+            image: NetworkImage(Url.BASE_IMAGE + urlImage),
           ),
         ),
       ),
     );
   }
 
-  ImageProvider checkImage() {
-    if (urlImage == null) {
-      return AssetImage(ImagePath.emptyTvShow);
-    } else {
-      return NetworkImage(Url.BASE_IMAGE + urlImage);
-    }
+  Widget _closeButton() {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: 20.0,
+        width: 20.0,
+        decoration: BoxDecoration(
+          color: StyleColor.WHITE,
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          border: Border.all(),
+        ),
+        child: Icon(
+          Icons.close,
+          size: 12.0,
+          color: StyleColor.PRIMARY,
+        ),
+      ),
+    );
   }
 
   Widget _actionButton() {
     return RaisedButton.icon(
-      icon: Icon(Icons.star_border, color: StyleColor.PRIMARY),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: StyleColor.PRIMARY)),
-      color: StyleColor.WHITE,
-      label: Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
+      icon: Icon(Icons.local_play, color: StyleColor.WHITE),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      color: StyleColor.PRIMARY,
+      label: Text('Random', style: TextStyle(color: StyleColor.WHITE)),
       onPressed: () {},
     );
   }
