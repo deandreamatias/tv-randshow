@@ -11,78 +11,44 @@ class _BackdropPanel extends StatelessWidget {
     this.onTap,
     this.onVerticalDragUpdate,
     this.onVerticalDragEnd,
-    this.title,
     this.child,
-    this.titleHeight,
-    this.padding,
   }) : super(key: key);
 
   final VoidCallback onTap;
   final GestureDragUpdateCallback onVerticalDragUpdate;
   final GestureDragEndCallback onVerticalDragEnd;
-  final Widget title;
   final Widget child;
-  final double titleHeight;
-  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: padding,
-      child: Material(
-        elevation: 12.0,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(16.0),
-          topRight: Radius.circular(16.0),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onVerticalDragUpdate: onVerticalDragUpdate,
-              onVerticalDragEnd: onVerticalDragEnd,
-              onTap: onTap,
-              child: Container(height: titleHeight, child: title),
-            ),
-            Divider(
-              height: 1.0,
-            ),
-            Expanded(
-              child: child,
-            ),
-          ],
-        ),
+    return Material(
+      elevation: 12.0,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16.0),
+        topRight: Radius.circular(16.0),
+      ),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onVerticalDragUpdate: onVerticalDragUpdate,
+        onVerticalDragEnd: onVerticalDragEnd,
+        onTap: onTap,
+        child: child,
       ),
     );
   }
 }
 
-/// Builds a Backdrop.
-///
-/// A Backdrop widget has two panels, front and back. The front panel is shown
-/// by default, and slides down to show the back panel, from which a user
-/// can make a selection. The user can also configure the titles for when the
-/// front or back panel is showing.
 class Backdrop extends StatefulWidget {
   final Widget frontLayer;
   final Widget backLayer;
-  final Widget frontHeader;
   final double frontPanelOpenHeight;
-  final double frontHeaderHeight;
-  final bool frontHeaderVisibleClosed;
-  final EdgeInsets frontPanelPadding;
   final ValueNotifier<bool> panelVisible;
 
   Backdrop(
       {@required this.frontLayer,
       @required this.backLayer,
       this.frontPanelOpenHeight = 0.0,
-      this.frontHeaderHeight = 48.0,
-      this.frontPanelPadding = const EdgeInsets.all(0.0),
-      this.frontHeaderVisibleClosed = true,
-      this.panelVisible,
-      this.frontHeader})
+      this.panelVisible})
       : assert(frontLayer != null),
         assert(backLayer != null);
 
@@ -167,38 +133,29 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      final panelSize = constraints.biggest.height;
-      final closedPercentage = widget.frontHeaderVisibleClosed
-          ? (panelSize - widget.frontHeaderHeight) / panelSize
-          : 1.0;
-      final openPercentage = widget.frontPanelOpenHeight / panelSize;
-
-      final panelDetailsPosition = Tween<Offset>(
-        begin: Offset(0.0, closedPercentage),
-        end: Offset(0.0, openPercentage),
-      ).animate(_controller.view);
-
-      return Container(
-        key: _backdropKey,
-        child: Stack(
-          children: <Widget>[
-            widget.backLayer,
-            SlideTransition(
+    final panelDetailsPosition = Tween<Offset>(
+      begin: Offset(0.0, 1.35),
+      end: Offset(0.0, 0.30),
+    ).animate(_controller.view);
+    return Container(
+      key: _backdropKey,
+      child: Stack(
+        children: <Widget>[
+          widget.backLayer,
+          Container(
+            height: MediaQuery.of(context).size.height * 0.75,
+            child: SlideTransition(
               position: panelDetailsPosition,
               child: _BackdropPanel(
                 onTap: _toggleBackdropPanelVisibility,
                 onVerticalDragUpdate: _handleDragUpdate,
                 onVerticalDragEnd: _handleDragEnd,
-                title: widget.frontHeader,
-                titleHeight: widget.frontHeaderHeight,
                 child: widget.frontLayer,
-                padding: widget.frontPanelPadding,
               ),
             ),
-          ],
-        ),
-      );
-    });
+          ),
+        ],
+      ),
+    );
   }
 }
