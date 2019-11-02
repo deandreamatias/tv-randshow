@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tv_randshow/src/models/tvshow_fav_model.dart';
 
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowFavWidget extends StatelessWidget {
+  final int tvshowId;
   final String tvshowName;
   final String urlImage;
-  TvshowFavWidget({Key key, this.tvshowName, this.urlImage}) : super(key: key);
+  TvshowFavWidget({Key key, this.tvshowId, this.tvshowName, this.urlImage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class TvshowFavWidget extends StatelessWidget {
               left: 0.0,
               top: 6.0,
               bottom: 18.0,
-              child: _image(),
+              child: _image(context),
             ),
             Align(
               alignment: Alignment.topRight,
@@ -39,16 +42,17 @@ class TvshowFavWidget extends StatelessWidget {
     );
   }
 
-  Widget _image() {
+  Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Provider.of<TvshowFavModel>(context).toggleDetails(),
       child: Container(
         height: 128.0,
         width: 144.0,
         child: Align(
           alignment: Alignment.topLeft,
-          child: Padding(
+          child: Container(
             padding: SMALL_INSESTS,
+            decoration: BoxDecoration(borderRadius: BORDER_RADIUS, color: Colors.black38),
             child: Text(
               tvshowName,
               style: TextStyle(color: StyleColor.WHITE, fontWeight: FontWeight.w600),
@@ -59,11 +63,19 @@ class TvshowFavWidget extends StatelessWidget {
           borderRadius: BORDER_RADIUS,
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: NetworkImage(Url.BASE_IMAGE + urlImage),
+            image: checkImage(),
           ),
         ),
       ),
     );
+  }
+
+  ImageProvider checkImage() {
+    if (urlImage == null) {
+      return AssetImage(ImagePath.emptyTvShow);
+    } else {
+      return NetworkImage(Url.BASE_IMAGE + urlImage);
+    }
   }
 
   Widget _closeButton() {
