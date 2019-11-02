@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:provider/provider.dart';
+import 'package:tv_randshow/src/models/base_model.dart';
 
-import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
-import 'package:tv_randshow/src/ui/widgets/tvshow_fav_widget.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
+import 'package:tv_randshow/src/models/tvshow_fav_model.dart';
+import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
 
 class TvshowFavView extends StatefulWidget {
   TvshowFavView({Key key}) : super(key: key);
@@ -12,47 +13,56 @@ class TvshowFavView extends StatefulWidget {
 }
 
 class _TvshowFavViewState extends State<TvshowFavView> {
-  final TvshowSearchModel _tvshowSearchModel = TvshowSearchModel();
+  final TvshowFavModel _tvshowFavModel = TvshowFavModel();
 
   @override
   void initState() {
-    _tvshowSearchModel.setInit();
     super.initState();
+    _tvshowFavModel.getFavs();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          label: Text(FlutterI18n.translate(
-            context,
-            'tvshow_search.fab',
-          )),
-          icon: Icon(Icons.add),
-          backgroundColor: StyleColor.SECONDARY,
-          onPressed: () => {},
-        ),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Text('Aqui va un texto'),
-              ),
-              Expanded(
-                child: GridView.builder(
-                  padding: EdgeInsets.all(16.0),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    return TvshowFavWidget(tvshowName: 'Friends');
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.search),
+        onPressed: () => Navigator.of(context).pushNamed('/search'),
       ),
+      body: SafeArea(
+        child: ChangeNotifierProvider(
+            builder: (context) => _tvshowFavModel,
+            child: Consumer<TvshowFavModel>(builder: (context, value, child) {
+              return Backdrop(
+                frontLayer: MenuPanelWidget(),
+                backLayer: _buildListFav(),
+                panelVisible: value.tvShowDetails,
+              );
+            })),
+      ),
+    );
+  }
+
+  Widget _buildListFav() {
+    return Container(
+      child: Consumer<TvshowFavModel>(builder: (context, value, child) {
+        if (value.state != BaseState.loading) {
+          if (value.listTvShow == null) {
+            return Center(child: Text('Empty list'));
+          } else {
+            return GridView.builder(
+              semanticChildCount: value.listTvShow.length,
+              padding: EdgeInsets.all(16.0),
+              itemCount: value.listTvShow.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemBuilder: (context, index) {
+                return value.listTvShow[index];
+              },
+            );
+          }
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      }),
     );
   }
 }
