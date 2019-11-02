@@ -3,7 +3,7 @@ import 'dart:convert';
 class TvshowDetails {
   List<int> episodeRunTime;
   int id;
-  int inProduction;
+  dynamic inProduction;
   String name;
   int numberOfEpisodes;
   int numberOfSeasons;
