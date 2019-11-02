@@ -30,7 +30,7 @@ class TvshowSearchModel extends BaseModel {
     setInit();
   }
 
-  getDetails(int id) async {
+  addToFav(int id) async {
     setLoading();
     final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
     var queryParameters = {'api_key': apiKey};

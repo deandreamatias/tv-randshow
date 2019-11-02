@@ -16,7 +16,6 @@ class TvshowSearchView extends StatefulWidget {
 class _TvshowSearchViewState extends State<TvshowSearchView> {
   final TvshowSearchModel _tvshowSearchModel = TvshowSearchModel();
   TextEditingController textEditingController;
-  bool panelOpen;
 
   @override
   void initState() {
