@@ -48,8 +48,8 @@ class TvshowSearchWidget extends StatelessWidget {
         child: Align(
           alignment: Alignment.topLeft,
           child: Container(
-            color: Colors.black26,
             padding: SMALL_INSESTS,
+            decoration: BoxDecoration(borderRadius: BORDER_RADIUS, color: Colors.black38),
             child: Text(
               tvshowName,
               style: TextStyle(color: StyleColor.WHITE, fontWeight: FontWeight.w600),
