@@ -3,7 +3,7 @@ import 'dart:convert';
 class TvshowDetails {
   List<int> episodeRunTime;
   int id;
-  bool inProduction;
+  int inProduction;
   String name;
   int numberOfEpisodes;
   int numberOfSeasons;
@@ -36,7 +36,7 @@ class TvshowDetails {
         numberOfSeasons: json["number_of_seasons"],
         overview: json["overview"],
         posterPath: json["poster_path"],
-        seasons: List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
+        //seasons: List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

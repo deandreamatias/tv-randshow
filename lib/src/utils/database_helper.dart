@@ -62,7 +62,7 @@ class DatabaseHelper {
             $columnSeasons INTEGER NOT NULL,
             $columnRunTime INTEGER NOT NULL,
             $columnOverview TEXT NOT NULL,
-            $columnInProduction BOOL NOT NULL
+            $columnInProduction INTEGER NOT NULL
           )
           ''');
   }

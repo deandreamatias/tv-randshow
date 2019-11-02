@@ -81,7 +81,7 @@ class TvshowSearchWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: StyleColor.PRIMARY)),
       color: StyleColor.WHITE,
       label: Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
-      onPressed: () => Provider.of<TvshowSearchModel>(context).getDetails(tvshowId),
+      onPressed: () => Provider.of<TvshowSearchModel>(context).addToFav(tvshowId),
     );
   }
 }

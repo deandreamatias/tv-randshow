@@ -19,6 +19,7 @@ class SearchWidget extends StatelessWidget {
         onSubmitted: (value) => editingController.text.isNotEmpty
             ? tvshowSearchModel.getSearch(editingController.text)
             : print(editingController.text),
+        autofocus: true,
         autocorrect: true,
         decoration: InputDecoration(
             hintText: "Search",
