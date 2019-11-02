@@ -24,7 +24,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       home: TvshowFavView(),
       routes: <String, WidgetBuilder>{'/search': (context) => TvshowSearchView()},

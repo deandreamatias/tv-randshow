@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tv_randshow/config/flavor_config.dart';
 
 import 'package:tv_randshow/src/models/tvshow_details/tvshow_details.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "tvshowfav.db";
+  String _databaseName;
   static final _databaseVersion = 1;
   static final table = 'tvshowfav';
 
@@ -45,6 +46,12 @@ class DatabaseHelper {
       }
     } catch (e) {
       print(e);
+    }
+
+    if (FlavorConfig.isDevelopment()) {
+      _databaseName = "tvshowfavdev.db";
+    } else {
+      _databaseName = "tvshowfav.db";
     }
     String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path, version: _databaseVersion, onCreate: _onCreate);
