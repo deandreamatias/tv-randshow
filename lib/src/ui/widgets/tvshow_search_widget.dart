@@ -6,9 +6,10 @@ import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowSearchWidget extends StatelessWidget {
+  final int tvshowId;
   final String tvshowName;
   final String urlImage;
-  TvshowSearchWidget({Key key, this.tvshowName, this.urlImage}) : super(key: key);
+  TvshowSearchWidget({Key key, this.tvshowId, this.tvshowName, this.urlImage}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class TvshowSearchWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: _actionButton(),
+              child: _actionButton(context),
             ),
           ],
         ),
@@ -39,9 +40,7 @@ class TvshowSearchWidget extends StatelessWidget {
 
   Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Provider.of<TvshowSearchModel>(context).toggleDetails();
-      },
+      onTap: () => Provider.of<TvshowSearchModel>(context).toggleDetails(),
       child: Container(
         height: 128.0,
         width: 144.0,
@@ -75,14 +74,14 @@ class TvshowSearchWidget extends StatelessWidget {
     }
   }
 
-  Widget _actionButton() {
+  Widget _actionButton(BuildContext context) {
     return RaisedButton.icon(
       icon: Icon(Icons.star_border, color: StyleColor.PRIMARY),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: StyleColor.PRIMARY)),
       color: StyleColor.WHITE,
       label: Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
-      onPressed: () {},
+      onPressed: () => Provider.of<TvshowSearchModel>(context).getDetails(tvshowId),
     );
   }
 }
