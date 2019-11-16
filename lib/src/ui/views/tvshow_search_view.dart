@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
@@ -7,14 +6,13 @@ import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
 
-class TvshowSearchView extends StatefulWidget {
-  TvshowSearchView({Key key}) : super(key: key);
+class SearchView extends StatefulWidget {
+  SearchView({Key key}) : super(key: key);
 
-  _TvshowSearchViewState createState() => _TvshowSearchViewState();
+  _SearchViewState createState() => _SearchViewState();
 }
 
-class _TvshowSearchViewState extends State<TvshowSearchView> {
-  final TvshowSearchModel _tvshowSearchModel = TvshowSearchModel();
+class _SearchViewState extends State<SearchView> {
   TextEditingController textEditingController;
 
   @override

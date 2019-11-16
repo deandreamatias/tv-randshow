@@ -1,43 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tv_randshow/src/models/base_model.dart';
 
 import 'package:tv_randshow/src/models/tvshow_fav_model.dart';
+import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
 
-class TvshowFavView extends StatefulWidget {
-  TvshowFavView({Key key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  HomeView({Key key}) : super(key: key);
 
-  _TvshowFavViewState createState() => _TvshowFavViewState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _TvshowFavViewState extends State<TvshowFavView> {
-  final TvshowFavModel _tvshowFavModel = TvshowFavModel();
+class _HomeViewState extends State<HomeView> {
 
   @override
   void initState() {
     super.initState();
-    _tvshowFavModel.getFavs();
+    _tvshowFavModel.getFavs(); // TODO: Update favs when update db
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.search),
-        onPressed: () => Navigator.of(context).pushNamed('/search'),
-      ),
-      body: SafeArea(
-        child: ChangeNotifierProvider(
-            builder: (context) => _tvshowFavModel,
-            child: Consumer<TvshowFavModel>(builder: (context, value, child) {
-              return Backdrop(
-                frontLayer: MenuPanelWidget(),
-                backLayer: _buildListFav(),
-                panelVisible: value.tvShowDetails,
-              );
-            })),
+    return BaseView<>(
+          child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.search),
+          onPressed: () => Navigator.of(context).pushNamed('/search'),
+        ),
+        body: SafeArea(
+          child: Backdrop(
+            frontLayer: MenuPanelWidget(),
+            backLayer: _buildListFav(),
+            panelVisible: value.tvShowDetails,
+          ),
+        ),
       ),
     );
   }
