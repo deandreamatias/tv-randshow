@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
+import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class SearchWidget extends StatelessWidget {
   final TextEditingController editingController;
-  final TvshowSearchModel tvshowSearchModel;
-  const SearchWidget({Key key, this.editingController, this.tvshowSearchModel}) : super(key: key);
+  final SearchModel searchModel;
+  const SearchWidget({Key key, this.editingController, this.searchModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SearchWidget extends StatelessWidget {
         //autofocus: true,
         textInputAction: TextInputAction.search,
         onSubmitted: (value) => editingController.text.isNotEmpty
-            ? tvshowSearchModel.getSearch(editingController.text)
+            ? searchModel.getSearch(editingController.text)
             : print(editingController.text),
         autofocus: true,
         autocorrect: true,

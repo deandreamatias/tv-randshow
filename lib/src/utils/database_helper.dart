@@ -4,8 +4,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tv_randshow/config/flavor_config.dart';
-
-import 'package:tv_randshow/src/models/tvshow_details/tvshow_details.dart';
+import 'package:tv_randshow/src/data/tvshow_details.dart';
 
 class DatabaseHelper {
   String _databaseName;
@@ -30,7 +29,6 @@ class DatabaseHelper {
   static Database _database;
   Future<Database> get database async {
     if (_database != null) return _database;
-    // lazily instantiate the db the first time it is accessed
     _database = await _initDatabase();
     return _database;
   }

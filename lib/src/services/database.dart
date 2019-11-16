@@ -1,4 +1,4 @@
-import 'package:tv_randshow/src/models/tvshow_details/tvshow_details.dart';
+import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/utils/database_helper.dart';
 
 class Database {

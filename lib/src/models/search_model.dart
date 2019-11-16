@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:tv_randshow/src/models/base_model.dart';
-// import 'package:tv_randshow/src/models/tvshow_search.dart';
-// import 'package:tv_randshow/src/models/tvshow_details.dart';
+import 'package:tv_randshow/src/data/tvshow_details.dart';
+import 'package:tv_randshow/src/data/tvshow_search.dart';
 import 'package:tv_randshow/src/services/database.dart';
 import 'package:tv_randshow/src/ui/widgets/tvshow_search_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';

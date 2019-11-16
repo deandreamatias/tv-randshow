@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:tv_randshow/src/models/base_model.dart';
-import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
+import 'package:tv_randshow/src/models/search_model.dart';
+import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
+import 'package:tv_randshow/src/utils/states.dart';
 
 class SearchView extends StatefulWidget {
   SearchView({Key key}) : super(key: key);
@@ -23,50 +24,44 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ChangeNotifierProvider(
-            builder: (context) => _tvshowSearchModel,
-            child: Consumer<TvshowSearchModel>(builder: (context, value, child) {
-              return Backdrop(
-                frontLayer: MenuPanelWidget(),
-                backLayer: _buildListSearch(),
-                panelVisible: value.tvShowDetails,
-              );
-            })),
+    return BaseView<SearchModel>(
+      onModelReady: (model) {},
+      builder: (context, child, model) => Scaffold(
+        body: SafeArea(
+          child: Backdrop(
+            frontLayer: MenuPanelWidget(),
+            backLayer: Container(
+              child: Column(
+                children: <Widget>[
+                  SearchWidget(editingController: textEditingController, searchModel: model),
+                  _renderData(model)
+                ],
+              ),
+            ),
+            panelVisible: model.tvShowDetails,
+          ),
+        ),
       ),
     );
   }
 
-  Widget _buildListSearch() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          SearchWidget(
-              editingController: textEditingController, tvshowSearchModel: _tvshowSearchModel),
-          Expanded(
-            child: Consumer<TvshowSearchModel>(builder: (context, value, child) {
-              if (value.listTvShow == null) {
-                if (value.state == BaseState.init) {
-                  return Center(child: Text('Search data'));
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-              } else {
-                return GridView.builder(
-                  semanticChildCount: value.listTvShow.length,
-                  padding: EdgeInsets.all(16.0),
-                  itemCount: value.listTvShow.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    return value.listTvShow[index];
-                  },
-                );
-              }
-            }),
-          ),
-        ],
-      ),
-    );
+  Widget _renderData(SearchModel model) {
+    if (model.listTvShow == null) {
+      if (model.state == ViewState.init) {
+        return Center(child: Text('Search data'));
+      } else {
+        return Center(child: CircularProgressIndicator());
+      }
+    } else {
+      return GridView.builder(
+        semanticChildCount: model.listTvShow.length,
+        padding: EdgeInsets.all(16.0),
+        itemCount: model.listTvShow.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) {
+          return model.listTvShow[index];
+        },
+      );
+    }
   }
 }

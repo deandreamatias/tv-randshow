@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
+import 'package:tv_randshow/src/models/home_model.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
@@ -42,7 +44,7 @@ class TvshowFavWidget extends StatelessWidget {
 
   Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () => Provider.of<TvshowFavModel>(context).toggleDetails(),
+      onTap: () => ScopedModel.of<HomeModel>(context).toggleDetails(),
       child: Container(
         height: 128.0,
         width: 144.0,
