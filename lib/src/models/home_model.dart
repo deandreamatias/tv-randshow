@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tv_randshow/src/models/base_model.dart';
-import 'package:tv_randshow/src/resources/database.dart';
+import 'package:tv_randshow/src/services/database.dart';
 import 'package:tv_randshow/src/ui/widgets/tvshow_fav_widget.dart';
 
-class TvshowFavModel extends BaseModel {
+class HomeModel extends BaseModel {
   final Database database = Database();
   List<TvshowFavWidget> _listTvShow;
   ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);

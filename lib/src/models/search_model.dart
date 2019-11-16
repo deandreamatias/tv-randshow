@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:tv_randshow/src/models/base_model.dart';
-import 'package:tv_randshow/src/models/tv_search/tvshow_search.dart';
-import 'package:tv_randshow/src/models/tvshow_details/tvshow_details.dart';
-import 'package:tv_randshow/src/resources/database.dart';
+// import 'package:tv_randshow/src/models/tvshow_search.dart';
+// import 'package:tv_randshow/src/models/tvshow_details.dart';
+import 'package:tv_randshow/src/services/database.dart';
 import 'package:tv_randshow/src/ui/widgets/tvshow_search_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 
-class TvshowSearchModel extends BaseModel {
+class SearchModel extends BaseModel {
   final Database database = Database();
   List<TvshowSearchWidget> _listTvShow;
   ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);

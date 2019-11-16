@@ -5,8 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/secure_keys.dart';
 import 'package:tv_randshow/src/models/app_model.dart';
-import 'package:tv_randshow/src/ui/screens/tvshow_fav_view.dart';
-import 'package:tv_randshow/src/ui/screens/tvshow_search_view.dart';
+import 'package:tv_randshow/src/ui/views/tvshow_fav_view.dart';
+import 'package:tv_randshow/src/ui/views/tvshow_search_view.dart';
 
 void main() {
   final AppModel appModel = AppModel();
@@ -27,8 +27,8 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: TvshowFavView(),
-      routes: <String, WidgetBuilder>{'/search': (context) => TvshowSearchView()},
+      home: HomeView(),
+      routes: <String, WidgetBuilder>{'/search': (context) => SearchView()},
       localizationsDelegates: [
         FlutterI18nDelegate(useCountryCode: false, fallbackFile: 'en'),
         GlobalMaterialLocalizations.delegate,
