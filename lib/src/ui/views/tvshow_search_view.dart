@@ -34,7 +34,7 @@ class _SearchViewState extends State<SearchView> {
               child: Column(
                 children: <Widget>[
                   SearchWidget(editingController: textEditingController, searchModel: model),
-                  _renderData(model)
+                  Expanded(child: _renderData(model))
                 ],
               ),
             ),
