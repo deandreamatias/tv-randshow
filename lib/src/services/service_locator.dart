@@ -4,7 +4,7 @@ import 'package:tv_randshow/src/models/loading_model.dart';
 import 'package:tv_randshow/src/models/random_pick_model.dart';
 import 'package:tv_randshow/src/models/search_model.dart';
 
-GetIt locator = GetIt.instance();
+GetIt locator = GetIt.instance;
 
 void setupLocator() {
   // Register services

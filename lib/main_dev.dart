@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/secure_keys.dart';
 import 'package:tv_randshow/src/models/app_model.dart';
+import 'package:tv_randshow/src/services/service_locator.dart';
 import 'package:tv_randshow/src/ui/views/tvshow_fav_view.dart';
 import 'package:tv_randshow/src/ui/views/tvshow_search_view.dart';
 
@@ -15,6 +16,7 @@ void main() {
   FlavorConfig(
       flavor: Flavor.DEV, values: FlavorValues(baseUrl: 'api.themoviedb.org', apiKey: apiKey));
   appModel.init();
+  setupLocator();
   runApp(MainApp());
 }
 
