@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 
-import 'package:tv_randshow/src/models/tv_search/tvshow_search_model.dart';
+import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
@@ -39,7 +40,7 @@ class TvshowSearchWidget extends StatelessWidget {
 
   Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () => Provider.of<TvshowSearchModel>(context).toggleDetails(),
+      onTap: () => ScopedModel.of<SearchModel>(context).toggleDetails(),
       child: Container(
         height: 128.0,
         width: 144.0,
@@ -80,7 +81,7 @@ class TvshowSearchWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: StyleColor.PRIMARY)),
       color: StyleColor.WHITE,
       label: Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
-      onPressed: () => Provider.of<TvshowSearchModel>(context).addToFav(tvshowId),
+      onPressed: () => ScopedModel.of<SearchModel>(context).addToFav(tvshowId),
     );
   }
 }

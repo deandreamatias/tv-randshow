@@ -3,13 +3,12 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:tv_randshow/src/services/api_provider.dart';
 import 'package:tv_randshow/src/services/secure_storage.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
-
-enum BaseState { init, loading, error }
+import 'package:tv_randshow/src/utils/states.dart';
 
 abstract class BaseModel extends Model {
   final SecureStorage secureStorage = SecureStorage();
-  BaseState _state = BaseState.init;
-  BaseState get state => _state;
+  ViewState _state = ViewState.init;
+  ViewState get state => _state;
 
   Future fetchData(String url, Map<String, dynamic> queryParameters) async {
     var uri = Uri.https(Url.apiUrl, url, queryParameters);
@@ -19,20 +18,20 @@ abstract class BaseModel extends Model {
   }
 
   setInit() {
-    _setState(BaseState.init);
+    _setState(ViewState.init);
   }
 
   setLoading() {
-    _setState(BaseState.loading);
+    _setState(ViewState.loading);
   }
 
   setError() {
-    _setState(BaseState.error);
+    _setState(ViewState.error);
   }
 
-  _setState(BaseState baseState) {
-    _state = baseState;
-    print('# State of $runtimeType: $baseState');
+  _setState(ViewState viewState) {
+    _state = viewState;
+    print('# State of $runtimeType: $ViewState');
     notifyListeners();
   }
 }

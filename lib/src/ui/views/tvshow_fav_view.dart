@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tv_randshow/src/models/base_model.dart';
 
-import 'package:tv_randshow/src/models/tvshow_fav_model.dart';
+import 'package:tv_randshow/src/models/home_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
+import 'package:tv_randshow/src/utils/states.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
@@ -13,17 +13,12 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
-  @override
-  void initState() {
-    super.initState();
-    _tvshowFavModel.getFavs(); // TODO: Update favs when update db
-  }
-
   @override
   Widget build(BuildContext context) {
-    return BaseView<>(
-          child: Scaffold(
+    return BaseView<HomeModel>(onModelReady: (model) {
+      model.getFavs();
+    }, builder: (context, child, model) {
+      return Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.search),
           onPressed: () => Navigator.of(context).pushNamed('/search'),
@@ -31,35 +26,33 @@ class _HomeViewState extends State<HomeView> {
         body: SafeArea(
           child: Backdrop(
             frontLayer: MenuPanelWidget(),
-            backLayer: _buildListFav(),
-            panelVisible: value.tvShowDetails,
+            backLayer: Container(
+              child: _renderData(model),
+            ),
+            panelVisible: model.tvShowDetails,
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
-  Widget _buildListFav() {
-    return Container(
-      child: Consumer<TvshowFavModel>(builder: (context, value, child) {
-        if (value.state != BaseState.loading) {
-          if (value.listTvShow == null) {
-            return Center(child: Text('Empty list'));
-          } else {
-            return GridView.builder(
-              semanticChildCount: value.listTvShow.length,
-              padding: EdgeInsets.all(16.0),
-              itemCount: value.listTvShow.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              itemBuilder: (context, index) {
-                return value.listTvShow[index];
-              },
-            );
-          }
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      }),
-    );
+  Widget _renderData(HomeModel model) {
+    if (model.state != ViewState.loading) {
+      if (model.listTvShow == null) {
+        return Center(child: Text('Empty list'));
+      } else {
+        return GridView.builder(
+          semanticChildCount: model.listTvShow.length,
+          padding: EdgeInsets.all(16.0),
+          itemCount: model.listTvShow.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (context, index) {
+            return model.listTvShow[index];
+          },
+        );
+      }
+    } else {
+      return Center(child: CircularProgressIndicator());
+    }
   }
 }
