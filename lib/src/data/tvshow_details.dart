@@ -1,13 +1,25 @@
 import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
+
+import 'package:tv_randshow/src/data/season.dart';
+
+part 'tvshow_details.g.dart';
+
+@JsonSerializable(nullable: true, includeIfNull: false)
 class TvshowDetails {
+  @JsonKey(name: 'episode_run_time')
   List<int> episodeRunTime;
   int id;
+  @JsonKey(name: 'in_production')
   dynamic inProduction;
   String name;
+  @JsonKey(name: 'number_of_episodes')
   int numberOfEpisodes;
+  @JsonKey(name: 'number_of_seasons')
   int numberOfSeasons;
   String overview;
+  @JsonKey(name: 'poster_path')
   String posterPath;
   List<Season> seasons;
 
@@ -23,70 +35,8 @@ class TvshowDetails {
     this.seasons,
   });
 
-  factory TvshowDetails.fromRawJson(String str) => TvshowDetails.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory TvshowDetails.fromJson(Map<String, dynamic> json) => TvshowDetails(
-        episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        id: json["id"],
-        inProduction: json["in_production"],
-        name: json["name"],
-        numberOfEpisodes: json["number_of_episodes"],
-        numberOfSeasons: json["number_of_seasons"],
-        overview: json["overview"],
-        posterPath: json["poster_path"],
-        //seasons: List<Season>.from(json["seasons"].map((x) => Season.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
-        "id": id,
-        "in_production": inProduction,
-        "name": name,
-        "number_of_episodes": numberOfEpisodes,
-        "number_of_seasons": numberOfSeasons,
-        "overview": overview,
-        "poster_path": posterPath,
-      };
-}
-
-class Season {
-  int episodeCount;
-  int id;
-  String name;
-  String overview;
-  String posterPath;
-  int seasonNumber;
-
-  Season({
-    this.episodeCount,
-    this.id,
-    this.name,
-    this.overview,
-    this.posterPath,
-    this.seasonNumber,
-  });
-
-  factory Season.fromRawJson(String str) => Season.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory Season.fromJson(Map<String, dynamic> json) => Season(
-        episodeCount: json["episode_count"],
-        id: json["id"],
-        name: json["name"],
-        overview: json["overview"],
-        posterPath: json["poster_path"],
-        seasonNumber: json["season_number"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "episode_count": episodeCount,
-        "id": id,
-        "name": name,
-        "overview": overview,
-        "poster_path": posterPath,
-        "season_number": seasonNumber,
-      };
+  factory TvshowDetails.fromRawJson(String str) => _$TvshowDetailsFromJson(json.decode(str));
+  factory TvshowDetails.fromJson(Map<String, dynamic> json) => _$TvshowDetailsFromJson(json);
+  Map<String, dynamic> toJson() => _$TvshowDetailsToJson(this);
+  String toRawJson() => json.encode(_$TvshowDetailsToJson(this));
 }
