@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'package:tv_randshow/src/models/search_model.dart';
+import 'package:tv_randshow/src/data/result.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowSearchWidget extends StatelessWidget {
-  final int tvshowId;
-  final String tvshowName;
-  final String urlImage;
-  TvshowSearchWidget({Key key, this.tvshowId, this.tvshowName, this.urlImage}) : super(key: key);
+  final Result result;
+  final int rowId;
+  TvshowSearchWidget({Key key, this.rowId, this.result}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class TvshowSearchWidget extends StatelessWidget {
             padding: SMALL_INSESTS,
             decoration: BoxDecoration(borderRadius: BORDER_RADIUS, color: Colors.black38),
             child: Text(
-              tvshowName,
+              result.name,
               style: TextStyle(color: StyleColor.WHITE, fontWeight: FontWeight.w600),
             ),
           ),
@@ -67,10 +67,10 @@ class TvshowSearchWidget extends StatelessWidget {
   }
 
   ImageProvider checkImage() {
-    if (urlImage == null) {
+    if (result.posterPath == null) {
       return AssetImage(ImagePath.emptyTvShow);
     } else {
-      return NetworkImage(Url.BASE_IMAGE + urlImage);
+      return NetworkImage(Url.BASE_IMAGE + result.posterPath);
     }
   }
 
@@ -81,7 +81,7 @@ class TvshowSearchWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: StyleColor.PRIMARY)),
       color: StyleColor.WHITE,
       label: Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
-      onPressed: () => ScopedModel.of<SearchModel>(context).addToFav(tvshowId),
+      onPressed: () => ScopedModel.of<SearchModel>(context).addToFav(rowId),
     );
   }
 }

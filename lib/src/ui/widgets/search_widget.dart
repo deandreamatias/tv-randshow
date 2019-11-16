@@ -14,7 +14,6 @@ class SearchWidget extends StatelessWidget {
       padding: EdgeInsets.all(16.0),
       child: TextField(
         controller: editingController,
-        //autofocus: true,
         textInputAction: TextInputAction.search,
         onSubmitted: (value) => editingController.text.isNotEmpty
             ? searchModel.getSearch(editingController.text)

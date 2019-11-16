@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'package:tv_randshow/src/models/home_model.dart';
+import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowFavWidget extends StatelessWidget {
-  final int tvshowId;
-  final String tvshowName;
-  final String urlImage;
-  TvshowFavWidget({Key key, this.tvshowId, this.tvshowName, this.urlImage}) : super(key: key);
+  final TvshowDetails tvshowDetails;
+  final int rowId;
+  TvshowFavWidget({Key key, this.rowId, @required this.tvshowDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class TvshowFavWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: _closeButton(),
+              child: _closeButton(context),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -54,7 +54,7 @@ class TvshowFavWidget extends StatelessWidget {
             padding: SMALL_INSESTS,
             decoration: BoxDecoration(borderRadius: BORDER_RADIUS, color: Colors.black38),
             child: Text(
-              tvshowName,
+              tvshowDetails.name,
               style: TextStyle(color: StyleColor.WHITE, fontWeight: FontWeight.w600),
             ),
           ),
@@ -71,16 +71,16 @@ class TvshowFavWidget extends StatelessWidget {
   }
 
   ImageProvider checkImage() {
-    if (urlImage == null) {
+    if (tvshowDetails.posterPath == null) {
       return AssetImage(ImagePath.emptyTvShow);
     } else {
-      return NetworkImage(Url.BASE_IMAGE + urlImage);
+      return NetworkImage(Url.BASE_IMAGE + tvshowDetails.posterPath);
     }
   }
 
-  Widget _closeButton() {
+  Widget _closeButton(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => ScopedModel.of<HomeModel>(context).deleteFav(rowId),
       child: Container(
         height: 20.0,
         width: 20.0,
