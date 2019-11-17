@@ -12,9 +12,9 @@ class DatabaseHelper {
   static final table = 'tvshowfav';
 
   static final columnId = '_id';
-  static final columnIdTvshow = 'idTvshow';
+  static final columnIdTvshow = 'id';
   static final columnName = 'name';
-  static final columnPosterPath = 'posterPath';
+  static final columnPosterPath = 'poster_path';
   static final columnEpisodes = 'number_of_episodes';
   static final columnSeasons = 'number_of_seasons';
   static final columnRunTime = 'episode_run_time';
@@ -93,15 +93,15 @@ class DatabaseHelper {
     Database db = await instance.database;
 
     List<Map> maps = await db.query(table, columns: [
-      "_id",
-      "idTvshow",
-      "name",
-      "posterPath",
-      "number_of_episodes",
-      "number_of_seasons",
-      "episode_run_time",
-      "overview",
-      "in_production",
+      columnId,
+      columnIdTvshow,
+      columnName,
+      columnPosterPath,
+      columnEpisodes,
+      columnSeasons,
+      columnRunTime,
+      columnOverview,
+      columnInProduction,
     ]);
 
     return maps.map((i) => TvshowDetails.fromJson(i)).toList();
