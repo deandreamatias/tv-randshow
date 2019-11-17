@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'package:tv_randshow/src/services/api_provider.dart';
@@ -31,7 +34,8 @@ abstract class BaseModel extends Model {
 
   _setState(ViewState viewState) {
     _state = viewState;
-    print('# State of $runtimeType: $ViewState');
+    log('${DateFormat('HH:mm:ss:mmm').format(DateTime.now())} # $viewState',
+        name: runtimeType.toString());
     notifyListeners();
   }
 }
