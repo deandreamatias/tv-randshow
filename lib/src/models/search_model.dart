@@ -11,7 +11,7 @@ class SearchModel extends BaseModel {
   final Database database = Database();
   List<TvshowSearchWidget> _listTvShow;
   ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);
-  int rowId = 0;
+  int rowId = 1;
 
   List<TvshowSearchWidget> get listTvShow => _listTvShow;
   ValueNotifier<bool> get tvShowDetails => _tvShowDetails;
@@ -36,7 +36,6 @@ class SearchModel extends BaseModel {
 
     var data = await fetchData(Url.TVSHOW_DETAILS + id.toString(), queryParameters);
     database.insert(TvshowDetails.fromRawJson(data));
-    database.query();
     setInit();
   }
 
