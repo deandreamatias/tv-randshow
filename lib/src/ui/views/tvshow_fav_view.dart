@@ -6,31 +6,25 @@ import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
 import 'package:tv_randshow/src/utils/states.dart';
 
-class HomeView extends StatefulWidget {
-  HomeView({Key key}) : super(key: key);
+class FavView extends StatefulWidget {
+  FavView({Key key}) : super(key: key);
 
-  _HomeViewState createState() => _HomeViewState();
+  _FavViewState createState() => _FavViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _FavViewState extends State<FavView> {
   @override
   Widget build(BuildContext context) {
     return BaseView<HomeModel>(onModelReady: (model) {
       model.getFavs();
     }, builder: (context, child, model) {
-      return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.search),
-          onPressed: () => Navigator.of(context).pushNamed('/search'),
-        ),
-        body: SafeArea(
-          child: Backdrop(
-            frontLayer: MenuPanelWidget(),
-            backLayer: Container(
-              child: _renderData(model),
-            ),
-            panelVisible: model.tvShowDetails,
+      return SafeArea(
+        child: Backdrop(
+          frontLayer: MenuPanelWidget(),
+          backLayer: Container(
+            child: _renderData(model),
           ),
+          panelVisible: model.tvShowDetails,
         ),
       );
     });
@@ -38,7 +32,7 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _renderData(HomeModel model) {
     if (model.state != ViewState.loading) {
-      if (model.listTvShow == null) {
+      if (model.listTvShow == null || model.listTvShow.isEmpty) {
         return Center(child: Text('Empty list'));
       } else {
         return GridView.builder(
