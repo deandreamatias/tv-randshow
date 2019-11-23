@@ -8,7 +8,7 @@ part 'tvshow_seasons_details.g.dart';
 
 @JsonSerializable(nullable: true, includeIfNull: false)
 class TvshowSeasonsDetails {
-  String id;
+  int id;
   @JsonKey(name: 'air_date')
   DateTime airDate;
   List<Episode> episodes;
