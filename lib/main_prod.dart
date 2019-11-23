@@ -5,12 +5,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/secure_keys.dart';
 import 'package:tv_randshow/src/ui/views/app_view.dart';
-import 'package:tv_randshow/src/ui/views/tvshow_search_view.dart';
+import 'package:tv_randshow/src/ui/views/loading_view.dart';
 
 void main() {
   /// Populate a string [apiKey] in [secure_keys.dart], or put below your personal API Key from TMDB
   FlavorConfig(
-      flavor: Flavor.PROD, values: FlavorValues(baseUrl: 'api.themoviedb.org', apiKey: apiKey));
+      flavor: Flavor.PROD,
+      values: FlavorValues(baseUrl: 'api.themoviedb.org', apiKey: apiKey));
   runApp(MainApp());
 }
 
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
       ),
       home: AppView(),
-      routes: <String, WidgetBuilder>{'/search': (context) => SearchView()},
+      routes: <String, WidgetBuilder>{'/loading': (context) => LoadingView()},
       localizationsDelegates: [
         FlutterI18nDelegate(useCountryCode: false, fallbackFile: 'en'),
         GlobalMaterialLocalizations.delegate,
