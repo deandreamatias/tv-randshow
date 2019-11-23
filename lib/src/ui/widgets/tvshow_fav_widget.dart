@@ -3,6 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'package:tv_randshow/src/models/home_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
+import 'package:tv_randshow/src/ui/views/loading_view.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
@@ -34,7 +35,7 @@ class TvshowFavWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: _actionButton(),
+              child: _actionButton(context),
             ),
           ],
         ),
@@ -98,13 +99,17 @@ class TvshowFavWidget extends StatelessWidget {
     );
   }
 
-  Widget _actionButton() {
+  Widget _actionButton(BuildContext context) {
     return RaisedButton.icon(
       icon: Icon(Icons.local_play, color: StyleColor.WHITE),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
       label: Text('Random', style: TextStyle(color: StyleColor.WHITE)),
-      onPressed: () {},
+      onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoadingView(tvshowDetails: tvshowDetails),
+          )),
     );
   }
 }
