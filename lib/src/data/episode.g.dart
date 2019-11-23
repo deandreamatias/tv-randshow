@@ -125,7 +125,7 @@ const _$DepartmentEnumMap = {
 
 const _$JobEnumMap = {
   Job.Director: 'Director',
-  Job.Director_of_photography: 'Director_of_photography',
+  Job.Director_of_photography: 'Director of photography',
   Job.Editor: 'Editor',
   Job.Writer: 'Writer',
 };

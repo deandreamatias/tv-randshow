@@ -21,7 +21,7 @@ dependencies:
   # Others
   get_it: ^3.0.3                    # [Package] Service locator
   scoped_model: ^1.0.1              # [Package] Scoped model architecture
-  flutter_i18n: ^0.8.2              # [Package] Internationalization strings
+  flutter_i18n: ^0.6.4              # [Package] Internationalization strings
   cached_network_image: ^1.1.2+1    # [Package] Load and cached network images
   sqflite: ^1.1.7+2                 # [Plugin] SQLite
 
