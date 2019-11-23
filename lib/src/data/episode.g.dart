@@ -117,17 +117,17 @@ T _$enumDecodeNullable<T>(
 }
 
 const _$DepartmentEnumMap = {
-  Department.DIRECTING: 'DIRECTING',
-  Department.CAMERA: 'CAMERA',
-  Department.EDITING: 'EDITING',
-  Department.WRITING: 'WRITING',
+  Department.Directing: 'Directing',
+  Department.Camera: 'Camera',
+  Department.Editing: 'Editing',
+  Department.Writing: 'Writing',
 };
 
 const _$JobEnumMap = {
-  Job.DIRECTOR: 'DIRECTOR',
-  Job.DIRECTOR_OF_PHOTOGRAPHY: 'DIRECTOR_OF_PHOTOGRAPHY',
-  Job.EDITOR: 'EDITOR',
-  Job.WRITER: 'WRITER',
+  Job.Director: 'Director',
+  Job.Director_of_photography: 'Director_of_photography',
+  Job.Editor: 'Editor',
+  Job.Writer: 'Writer',
 };
 
 GuestStar _$GuestStarFromJson(Map<String, dynamic> json) {

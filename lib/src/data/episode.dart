@@ -72,22 +72,22 @@ class Crew {
   String toRawJson() => json.encode(_$CrewToJson(this));
 }
 
-enum Department { DIRECTING, CAMERA, EDITING, WRITING }
+enum Department { Directing, Camera, Editing, Writing }
 
 final departmentValues = EnumValues({
-  "Camera": Department.CAMERA,
-  "Directing": Department.DIRECTING,
-  "Editing": Department.EDITING,
-  "Writing": Department.WRITING
+  "Camera": Department.Camera,
+  "Directing": Department.Directing,
+  "Editing": Department.Editing,
+  "Writing": Department.Writing
 });
 
-enum Job { DIRECTOR, DIRECTOR_OF_PHOTOGRAPHY, EDITOR, WRITER }
+enum Job { Director, Director_of_photography, Editor, Writer }
 
 final jobValues = EnumValues({
-  "Director": Job.DIRECTOR,
-  "Director of Photography": Job.DIRECTOR_OF_PHOTOGRAPHY,
-  "Editor": Job.EDITOR,
-  "Writer": Job.WRITER
+  "Director": Job.Director,
+  "Director of Photography": Job.Director_of_photography,
+  "Editor": Job.Editor,
+  "Writer": Job.Writer
 });
 
 @JsonSerializable(nullable: true, includeIfNull: false)
