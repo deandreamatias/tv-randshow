@@ -8,6 +8,7 @@ part 'episode.g.dart';
 class Episode {
   @JsonKey(name: 'air_date')
   DateTime airDate;
+  @JsonKey(ignore: true)
   List<Crew> crew;
   @JsonKey(name: 'episode_number')
   int episodeNumber;
@@ -42,8 +43,10 @@ class Episode {
     this.voteCount,
   });
 
-  factory Episode.fromRawJson(String str) => _$EpisodeFromJson(json.decode(str));
-  factory Episode.fromJson(Map<String, dynamic> json) => _$EpisodeFromJson(json);
+  factory Episode.fromRawJson(String str) =>
+      _$EpisodeFromJson(json.decode(str));
+  factory Episode.fromJson(Map<String, dynamic> json) =>
+      _$EpisodeFromJson(json);
   Map<String, dynamic> toJson() => _$EpisodeToJson(this);
   String toRawJson() => json.encode(_$EpisodeToJson(this));
 }
@@ -108,8 +111,10 @@ class GuestStar {
     this.profilePath,
   });
 
-  factory GuestStar.fromRawJson(String str) => _$GuestStarFromJson(json.decode(str));
-  factory GuestStar.fromJson(Map<String, dynamic> json) => _$GuestStarFromJson(json);
+  factory GuestStar.fromRawJson(String str) =>
+      _$GuestStarFromJson(json.decode(str));
+  factory GuestStar.fromJson(Map<String, dynamic> json) =>
+      _$GuestStarFromJson(json);
   Map<String, dynamic> toJson() => _$GuestStarToJson(this);
   String toRawJson() => json.encode(_$GuestStarToJson(this));
 }
