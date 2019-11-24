@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:tv_randshow/src/models/app_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
-import 'package:tv_randshow/src/ui/views/tvshow_fav_view.dart';
-import 'package:tv_randshow/src/ui/views/tvshow_search_view.dart';
+import 'package:tv_randshow/src/ui/views/fav_view.dart';
+import 'package:tv_randshow/src/ui/views/search_view.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class AppView extends StatefulWidget {
@@ -34,8 +34,10 @@ class _AppViewState extends State<AppView> {
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(icon: Icon(Icons.star), title: Text('Favorites')),
-            BottomNavigationBarItem(icon: Icon(Icons.search), title: Text('Search')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.star), title: Text('Favorites')),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.search), title: Text('Search')),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: StyleColor.PRIMARY,
