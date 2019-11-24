@@ -3,7 +3,8 @@ import 'package:tv_randshow/src/utils/styles.dart';
 
 class InfoBoxWidget extends StatelessWidget {
   final int typeInfo;
-  const InfoBoxWidget({Key key, @required this.typeInfo}) : super(key: key);
+  final int value;
+  const InfoBoxWidget({Key key, this.typeInfo, this.value}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +23,30 @@ class InfoBoxWidget extends StatelessWidget {
               style: TextStyle(color: StyleColor.WHITE, fontSize: 16),
             ),
             Text(
-              '123',
-              style: TextStyle(color: StyleColor.WHITE, fontSize: 26, fontWeight: FontWeight.w700),
+              value.toString(),
+              style: TextStyle(
+                  color: StyleColor.WHITE,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w700),
             ),
-            typeInfo == 2
-                ? Text(
-                    'min/episode',
-                    style: TextStyle(
-                        color: StyleColor.WHITE, fontSize: 12, fontWeight: FontWeight.w300),
-                  )
-                : Text(
-                    'in all',
-                    style: TextStyle(
-                        color: StyleColor.WHITE, fontSize: 12, fontWeight: FontWeight.w300),
-                  ),
+            if (typeInfo > 2)
+              Container()
+            else
+              typeInfo == 2
+                  ? Text(
+                      'min/episode',
+                      style: TextStyle(
+                          color: StyleColor.WHITE,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w300),
+                    )
+                  : Text(
+                      'in all',
+                      style: TextStyle(
+                          color: StyleColor.WHITE,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w300),
+                    ),
           ],
         ),
         decoration: BoxDecoration(
@@ -56,6 +67,12 @@ class InfoBoxWidget extends StatelessWidget {
         break;
       case 2:
         return 'Duration';
+        break;
+      case 3:
+        return 'Season';
+        break;
+      case 4:
+        return 'Episode';
         break;
       default:
         return 'Undefined';

@@ -51,7 +51,7 @@ class _ResultViewState extends State<ResultView> {
   Widget _renderBody() {
     return Expanded(
       flex: 6,
-      child: Stack(children: <Widget>[
+      child: Stack(overflow: Overflow.visible, children: <Widget>[
         Container(
           padding: DEFAULT_INSESTS,
           decoration:
@@ -78,20 +78,24 @@ class _ResultViewState extends State<ResultView> {
                       textAlign: TextAlign.left)),
               Expanded(
                   flex: 3,
-                  child: Text(widget.tvshowResult.episodeDescription,
-                      textAlign: TextAlign.left)),
+                  child: SingleChildScrollView(
+                    child: Text(widget.tvshowResult.episodeDescription,
+                        textAlign: TextAlign.left),
+                  )),
             ],
           ),
         ),
-        Align(
-          alignment: Alignment.bottomCenter,
+        Positioned(
+          left: 50.0,
+          bottom: -18.0,
           child: RaisedButton.icon(
-            icon: Icon(Icons.local_play, color: StyleColor.WHITE),
+            icon: const Icon(Icons.local_play, color: StyleColor.WHITE),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0)),
             color: StyleColor.PRIMARY,
-            label: Text('Pick a new random episode',
+            label: const Text('Pick a new random episode',
                 style: TextStyle(color: StyleColor.WHITE)),
+            onPressed: () => {},
             // onPressed: () => Navigator.push(
             //     context,
             //     MaterialPageRoute(
@@ -105,9 +109,10 @@ class _ResultViewState extends State<ResultView> {
 
   Widget _renderFooter() {
     return Container(
+      padding: EdgeInsets.only(top: 16.0),
       child: FlatButton.icon(
-        label: Text('Home'),
-        icon: Icon(Icons.home),
+        label: const Text('Home'),
+        icon: const Icon(Icons.home),
         onPressed: () => Navigator.push(
             context,
             MaterialPageRoute(
