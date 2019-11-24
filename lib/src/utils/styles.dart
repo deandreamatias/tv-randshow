@@ -10,5 +10,11 @@ class StyleColor {
   // static const Color SECONDARY = Color(0xFFE40505);
 }
 
-const BorderRadiusGeometry BORDER_RADIUS = BorderRadius.all(Radius.circular(8.0));
+class StyleText {
+  static const TextStyle title = TextStyle(fontSize: 20);
+}
+
+const BorderRadiusGeometry BORDER_RADIUS =
+    BorderRadius.all(Radius.circular(8.0));
 const EdgeInsets SMALL_INSESTS = EdgeInsets.all(8.0);
+const EdgeInsets DEFAULT_INSESTS = EdgeInsets.all(16.0);
