@@ -35,14 +35,21 @@ class _FavViewState extends State<FavView> {
       if (model.listTvShow == null || model.listTvShow.isEmpty) {
         return Center(child: Text('Empty list'));
       } else {
-        return GridView.builder(
-          semanticChildCount: model.listTvShow.length,
-          padding: EdgeInsets.all(16.0),
-          itemCount: model.listTvShow.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          itemBuilder: (context, index) {
-            return model.listTvShow[index];
-          },
+        return Column(
+          children: <Widget>[
+            Text('Choose a random episode form your favorites'),
+            Expanded(
+              child: GridView.builder(
+                semanticChildCount: model.listTvShow.length,
+                padding: EdgeInsets.all(16.0),
+                itemCount: model.listTvShow.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                itemBuilder: (context, index) {
+                  return model.listTvShow[index];
+                },
+              ),
+            ),
+          ],
         );
       }
     } else {
