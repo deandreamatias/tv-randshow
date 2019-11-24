@@ -11,7 +11,7 @@ class LoadingModel extends BaseModel {
     setLoading();
     final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
     var queryParameters = {'api_key': apiKey};
-    var randomSeason = getRandomNumber(tvshowDetails.numberOfSeasons);
+    var randomSeason = _getRandomNumber(tvshowDetails.numberOfSeasons, true);
     var data = await fetchData(
         Url.TVSHOW_DETAILS +
             tvshowDetails.id.toString() +
@@ -19,8 +19,8 @@ class LoadingModel extends BaseModel {
             randomSeason.toString(),
         queryParameters);
     var tvshowSeasonDetails = TvshowSeasonsDetails.fromRawJson(data);
-    var episode = tvshowSeasonDetails.episodes
-        .elementAt(getRandomNumber(tvshowSeasonDetails.episodes.length));
+    var episode = tvshowSeasonDetails.episodes.elementAt(
+        _getRandomNumber(tvshowSeasonDetails.episodes.length, false));
     setInit();
     final tvshowResult = TvshowResult(
         tvshowDetails: tvshowDetails,
@@ -31,11 +31,12 @@ class LoadingModel extends BaseModel {
     return tvshowResult;
   }
 
-  int getRandomNumber(int total) {
+  /// If total is a number from 1, add + 1 to result.
+  /// If else a length of list, get normal random
+  int _getRandomNumber(int total, bool isSeason) {
     var random = Random();
-    var randomNumber = random.nextInt(total) + 1;
+    var randomNumber = random.nextInt(total);
     print('Random number nº: $randomNumber');
-
-    return randomNumber;
+    return isSeason ? randomNumber + 1 : randomNumber;
   }
 }
