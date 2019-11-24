@@ -11,10 +11,6 @@ Episode _$EpisodeFromJson(Map<String, dynamic> json) {
     airDate: json['air_date'] == null
         ? null
         : DateTime.parse(json['air_date'] as String),
-    crew: (json['crew'] as List)
-        ?.map(
-            (e) => e == null ? null : Crew.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
     episodeNumber: json['episode_number'] as int,
     guestStars: (json['guest_starts'] as List)
         ?.map((e) =>
@@ -41,7 +37,6 @@ Map<String, dynamic> _$EpisodeToJson(Episode instance) {
   }
 
   writeNotNull('air_date', instance.airDate?.toIso8601String());
-  writeNotNull('crew', instance.crew);
   writeNotNull('episode_number', instance.episodeNumber);
   writeNotNull('guest_starts', instance.guestStars);
   writeNotNull('name', instance.name);
