@@ -5,6 +5,7 @@ import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/views/fav_view.dart';
 import 'package:tv_randshow/src/ui/views/search_view.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
+import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class AppView extends StatefulWidget {
   AppView({Key key}) : super(key: key);
@@ -35,9 +36,9 @@ class _AppViewState extends State<AppView> {
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.star), title: Text('Favorites')),
+                icon: Icon(Unicons.favourite), title: Text('Favorites')),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search), title: Text('Search')),
+                icon: Icon(Unicons.search), title: Text('Search')),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: StyleColor.PRIMARY,

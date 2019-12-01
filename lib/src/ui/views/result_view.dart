@@ -6,6 +6,7 @@ import 'package:tv_randshow/src/ui/views/app_view.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
+import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class ResultView extends StatefulWidget {
   final TvshowResult tvshowResult;
@@ -89,7 +90,7 @@ class _ResultViewState extends State<ResultView> {
           left: 50.0,
           bottom: -18.0,
           child: RaisedButton.icon(
-            icon: const Icon(Icons.local_play, color: StyleColor.WHITE),
+            icon: const Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0)),
             color: StyleColor.PRIMARY,
@@ -112,7 +113,7 @@ class _ResultViewState extends State<ResultView> {
       padding: EdgeInsets.only(top: 16.0),
       child: FlatButton.icon(
         label: const Text('Home'),
-        icon: const Icon(Icons.home),
+        icon: const Icon(Unicons.home),
         onPressed: () => Navigator.push(
             context,
             MaterialPageRoute(
