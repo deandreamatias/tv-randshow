@@ -48,8 +48,9 @@ class Database {
     print('updated $rowsAffected row(s)');
   }
 
-  void delete(int id) async {
+  Future<int> delete(int id) async {
     final rowsDeleted = await dbHelper.delete(id);
     print('deleted $rowsDeleted row: $id');
+    return id;
   }
 }

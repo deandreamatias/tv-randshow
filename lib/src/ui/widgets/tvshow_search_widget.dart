@@ -6,9 +6,21 @@ import 'package:tv_randshow/src/data/result.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
-class TvshowSearchWidget extends StatelessWidget {
+class TvshowSearchWidget extends StatefulWidget {
   final Result result;
   TvshowSearchWidget({Key key, this.result}) : super(key: key);
+
+  @override
+  _TvshowSearchWidgetState createState() => _TvshowSearchWidgetState();
+}
+
+class _TvshowSearchWidgetState extends State<TvshowSearchWidget> {
+  bool changeButton;
+  @override
+  void initState() {
+    changeButton = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,12 @@ class TvshowSearchWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: _actionButton(context),
+              child: AnimatedSwitcher(
+                duration: Duration(milliseconds: 500),
+                child: !changeButton
+                    ? _actionButton(context)
+                    : _removeButton(context),
+              ),
             ),
           ],
         ),
@@ -50,7 +67,7 @@ class TvshowSearchWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BORDER_RADIUS, color: Colors.black38),
             child: Text(
-              result.name,
+              widget.result.name,
               style: TextStyle(
                   color: StyleColor.WHITE, fontWeight: FontWeight.w600),
             ),
@@ -68,22 +85,44 @@ class TvshowSearchWidget extends StatelessWidget {
   }
 
   ImageProvider checkImage() {
-    if (result.posterPath == null) {
+    if (widget.result.posterPath == null) {
       return AssetImage(ImagePath.emptyTvShow);
     } else {
-      return NetworkImage(Url.BASE_IMAGE + result.posterPath);
+      return NetworkImage(Url.BASE_IMAGE + widget.result.posterPath);
     }
+  }
+
+  Widget _removeButton(BuildContext context) {
+    return RaisedButton.icon(
+      key: ValueKey('remove'),
+      icon: Icon(Icons.close, color: StyleColor.WHITE),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+      color: StyleColor.PRIMARY,
+      label: Text('Remove', style: TextStyle(color: StyleColor.WHITE)),
+      onPressed: () {
+        setState(() {
+          changeButton = false;
+        });
+        ScopedModel.of<SearchModel>(context).deleteFav(widget.result.id);
+      },
+    );
   }
 
   Widget _actionButton(BuildContext context) {
     return RaisedButton.icon(
+      key: ValueKey('action'),
       icon: Icon(Icons.star_border, color: StyleColor.PRIMARY),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
           side: BorderSide(color: StyleColor.PRIMARY)),
       color: StyleColor.WHITE,
       label: Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
-      onPressed: () => ScopedModel.of<SearchModel>(context).addToFav(result.id),
+      onPressed: () {
+        setState(() {
+          changeButton = true;
+        });
+        ScopedModel.of<SearchModel>(context).addToFav(widget.result.id);
+      },
     );
   }
 }
