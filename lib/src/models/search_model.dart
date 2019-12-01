@@ -38,6 +38,15 @@ class SearchModel extends BaseModel {
     setInit();
   }
 
+  deleteFav(int id) async {
+    setLoading();
+    final list = await database.queryList();
+    final item = list.firstWhere((tvshowDetails) => tvshowDetails.id == id);
+    database.delete(item.rowId).then((_id) {
+      _id != item.rowId ? setError() : setInit();
+    }).catchError((onError) => print('Error $onError to deleted row $id'));
+  }
+
   toggleDetails() {
     _tvShowDetails.value = !_tvShowDetails.value;
   }
