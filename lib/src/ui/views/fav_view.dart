@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:tv_randshow/src/models/home_model.dart';
+import 'package:tv_randshow/src/models/fav_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
@@ -15,7 +15,7 @@ class FavView extends StatefulWidget {
 class _FavViewState extends State<FavView> {
   @override
   Widget build(BuildContext context) {
-    return BaseView<HomeModel>(onModelReady: (model) {
+    return BaseView<FavModel>(onModelReady: (model) {
       model.getFavs();
     }, builder: (context, child, model) {
       return SafeArea(
@@ -30,7 +30,7 @@ class _FavViewState extends State<FavView> {
     });
   }
 
-  Widget _renderData(HomeModel model) {
+  Widget _renderData(FavModel model) {
     if (model.state != ViewState.loading) {
       if (model.listTvShow == null || model.listTvShow.isEmpty) {
         return Center(child: Text('Empty list'));
@@ -43,7 +43,8 @@ class _FavViewState extends State<FavView> {
                 semanticChildCount: model.listTvShow.length,
                 padding: EdgeInsets.all(16.0),
                 itemCount: model.listTvShow.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
                 itemBuilder: (context, index) {
                   return model.listTvShow[index];
                 },
