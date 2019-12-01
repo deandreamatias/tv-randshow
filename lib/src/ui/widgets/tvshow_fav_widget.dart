@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:tv_randshow/src/models/home_model.dart';
+import 'package:tv_randshow/src/models/fav_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/views/loading_view.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
@@ -44,7 +44,7 @@ class TvshowFavWidget extends StatelessWidget {
 
   Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () => ScopedModel.of<HomeModel>(context).toggleDetails(),
+      onTap: () => ScopedModel.of<FavModel>(context).toggleDetails(),
       child: Container(
         height: 128.0,
         width: 144.0,
@@ -82,8 +82,8 @@ class TvshowFavWidget extends StatelessWidget {
 
   Widget _closeButton(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          ScopedModel.of<HomeModel>(context).deleteFav(tvshowDetails.rowId),
+      onTap: () => ScopedModel.of<FavModel>(context, rebuildOnChange: true)
+          .deleteFav(tvshowDetails.rowId),
       child: Container(
         height: 20.0,
         width: 20.0,

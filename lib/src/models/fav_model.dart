@@ -4,7 +4,7 @@ import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/services/database.dart';
 import 'package:tv_randshow/src/ui/widgets/tvshow_fav_widget.dart';
 
-class HomeModel extends BaseModel {
+class FavModel extends BaseModel {
   final Database database = Database();
   List<TvshowFavWidget> _listTvShow;
   ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);
@@ -24,8 +24,9 @@ class HomeModel extends BaseModel {
 
   deleteFav(int id) {
     setLoading();
-    database.delete(id);
-    setInit();
+    database.delete(id).then((_id) {
+      _id != id ? setError() : setInit();
+    }).catchError((onError) => print('Error $onError to deleted row $id'));
   }
 
   getDetails(int index) async {
