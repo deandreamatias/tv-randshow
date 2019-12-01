@@ -23,6 +23,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Nunito',
         primarySwatch: Colors.indigo,
       ),
       home: AppView(),

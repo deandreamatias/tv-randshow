@@ -11,7 +11,8 @@ import 'package:tv_randshow/src/ui/views/loading_view.dart';
 void main() {
   /// Populate a string [apiKey] in [secure_keys.dart], or put below your personal API Key from TMDB
   FlavorConfig(
-      flavor: Flavor.DEV, values: FlavorValues(baseUrl: 'api.themoviedb.org', apiKey: apiKey));
+      flavor: Flavor.DEV,
+      values: FlavorValues(baseUrl: 'api.themoviedb.org', apiKey: apiKey));
   setupLocator();
   runApp(MainApp());
 }
@@ -22,6 +23,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
       theme: ThemeData(
+        fontFamily: 'Nunito',
         primarySwatch: Colors.red,
       ),
       home: AppView(),
