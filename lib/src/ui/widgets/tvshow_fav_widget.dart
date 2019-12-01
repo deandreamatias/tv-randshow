@@ -82,8 +82,12 @@ class TvshowFavWidget extends StatelessWidget {
 
   Widget _closeButton(BuildContext context) {
     return GestureDetector(
-      onTap: () => ScopedModel.of<FavModel>(context, rebuildOnChange: true)
-          .deleteFav(tvshowDetails.rowId),
+      onTap: () => _deleteConfirm(context).then((result) {
+        if (result) {
+          ScopedModel.of<FavModel>(context).deleteFav(tvshowDetails.rowId);
+          ScopedModel.of<FavModel>(context).getFavs();
+        }
+      }),
       child: Container(
         height: 20.0,
         width: 20.0,
@@ -98,6 +102,34 @@ class TvshowFavWidget extends StatelessWidget {
           color: StyleColor.PRIMARY,
         ),
       ),
+    );
+  }
+
+  Future<bool> _deleteConfirm(BuildContext context) async {
+    return showDialog<bool>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete Tv show'),
+          content: Text('Do you want delete this tv show?'),
+          actions: <Widget>[
+            RaisedButton(
+              textColor: StyleColor.WHITE,
+              color: StyleColor.PRIMARY,
+              child: Text('CANCEL'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            FlatButton(
+                child: Text('DELETE'),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                })
+          ],
+        );
+      },
     );
   }
 
