@@ -35,4 +35,10 @@ flutter:
   assets:
    - assets/i18n/
    - assets/img/no_image.png
+  fonts:
+  - family: Nunito
+    fonts:
+      - asset: assets/fonts/nunito-regular.ttf
+      - asset: assets/fonts/nunito-bold.ttf
+      - asset: assets/fonts/nunito-semibold.ttf
   
