@@ -11,7 +11,6 @@ class SearchModel extends BaseModel {
   final Database database = Database();
   List<TvshowSearchWidget> _listTvShow;
   ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);
-  int rowId = 1;
 
   List<TvshowSearchWidget> get listTvShow => _listTvShow;
   ValueNotifier<bool> get tvShowDetails => _tvShowDetails;
@@ -23,9 +22,8 @@ class SearchModel extends BaseModel {
 
     var data = await fetchData(Url.TVSHOW_SEARCH, queryParameters);
     _listTvShow = Search.fromRawJson(data).results.map((result) {
-      return TvshowSearchWidget(result: result, rowId: rowId);
+      return TvshowSearchWidget(result: result);
     }).toList();
-    rowId++;
     setInit();
   }
 
@@ -34,7 +32,8 @@ class SearchModel extends BaseModel {
     final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
     var queryParameters = {'api_key': apiKey};
 
-    var data = await fetchData(Url.TVSHOW_DETAILS + id.toString(), queryParameters);
+    var data =
+        await fetchData(Url.TVSHOW_DETAILS + id.toString(), queryParameters);
     database.insert(TvshowDetails.fromRawJson(data));
     setInit();
   }

@@ -7,7 +7,6 @@ import 'package:tv_randshow/src/ui/widgets/tvshow_fav_widget.dart';
 class HomeModel extends BaseModel {
   final Database database = Database();
   List<TvshowFavWidget> _listTvShow;
-  int rowId = 1;
   ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);
 
   List<TvshowFavWidget> get listTvShow => _listTvShow;
@@ -17,9 +16,8 @@ class HomeModel extends BaseModel {
     setLoading();
     database.queryList().then((list) {
       _listTvShow = list.map((tvshow) {
-        return TvshowFavWidget(tvshowDetails: tvshow, rowId: rowId);
+        return TvshowFavWidget(tvshowDetails: tvshow);
       }).toList();
-      rowId++;
       setInit();
     }).catchError((onError) => print('Error get favs $onError'));
   }
@@ -30,7 +28,9 @@ class HomeModel extends BaseModel {
     setInit();
   }
 
-  getDetails(int id) async {}
+  getDetails(int index) async {
+    _listTvShow.elementAt(index);
+  }
 
   toggleDetails() {
     _tvShowDetails.value = !_tvShowDetails.value;

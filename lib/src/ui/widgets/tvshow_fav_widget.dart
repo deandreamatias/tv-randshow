@@ -9,8 +9,7 @@ import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowFavWidget extends StatelessWidget {
   final TvshowDetails tvshowDetails;
-  final int rowId;
-  TvshowFavWidget({Key key, this.rowId, @required this.tvshowDetails}) : super(key: key);
+  TvshowFavWidget({Key key, @required this.tvshowDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,10 +52,12 @@ class TvshowFavWidget extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Container(
             padding: SMALL_INSESTS,
-            decoration: BoxDecoration(borderRadius: BORDER_RADIUS, color: Colors.black38),
+            decoration: BoxDecoration(
+                borderRadius: BORDER_RADIUS, color: Colors.black38),
             child: Text(
               tvshowDetails.name,
-              style: TextStyle(color: StyleColor.WHITE, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: StyleColor.WHITE, fontWeight: FontWeight.w600),
             ),
           ),
         ),
@@ -81,7 +82,8 @@ class TvshowFavWidget extends StatelessWidget {
 
   Widget _closeButton(BuildContext context) {
     return GestureDetector(
-      onTap: () => ScopedModel.of<HomeModel>(context).deleteFav(rowId),
+      onTap: () =>
+          ScopedModel.of<HomeModel>(context).deleteFav(tvshowDetails.rowId),
       child: Container(
         height: 20.0,
         width: 20.0,

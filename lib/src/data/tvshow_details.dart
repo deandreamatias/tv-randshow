@@ -8,6 +8,7 @@ part 'tvshow_details.g.dart';
 
 @JsonSerializable(nullable: true, includeIfNull: false)
 class TvshowDetails {
+  int rowId;
   @JsonKey(name: 'episode_run_time')
   List<int> episodeRunTime;
   int id;
@@ -24,6 +25,7 @@ class TvshowDetails {
   List<Season> seasons;
 
   TvshowDetails({
+    this.rowId,
     this.episodeRunTime,
     this.id,
     this.inProduction,
@@ -35,8 +37,10 @@ class TvshowDetails {
     this.seasons,
   });
 
-  factory TvshowDetails.fromRawJson(String str) => _$TvshowDetailsFromJson(json.decode(str));
-  factory TvshowDetails.fromJson(Map<String, dynamic> json) => _$TvshowDetailsFromJson(json);
+  factory TvshowDetails.fromRawJson(String str) =>
+      _$TvshowDetailsFromJson(json.decode(str));
+  factory TvshowDetails.fromJson(Map<String, dynamic> json) =>
+      _$TvshowDetailsFromJson(json);
   Map<String, dynamic> toJson() => _$TvshowDetailsToJson(this);
   String toRawJson() => json.encode(_$TvshowDetailsToJson(this));
 }

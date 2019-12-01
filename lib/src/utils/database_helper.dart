@@ -11,7 +11,7 @@ class DatabaseHelper {
   static final _databaseVersion = 1;
   static final table = 'tvshowfav';
 
-  static final columnId = '_id';
+  static final columnId = 'rowId';
   static final columnIdTvshow = 'id';
   static final columnName = 'name';
   static final columnPosterPath = 'poster_path';
@@ -52,7 +52,8 @@ class DatabaseHelper {
       _databaseName = "tvshowfav.db";
     }
     String path = join(documentsDirectory.path, _databaseName);
-    return await openDatabase(path, version: _databaseVersion, onCreate: _onCreate);
+    return await openDatabase(path,
+        version: _databaseVersion, onCreate: _onCreate);
   }
 
   // SQL code to create the database table
@@ -111,7 +112,8 @@ class DatabaseHelper {
   // raw SQL commands. This method uses a raw query to give the row count.
   Future<int> queryRowCount() async {
     Database db = await instance.database;
-    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $table'));
+    return Sqflite.firstIntValue(
+        await db.rawQuery('SELECT COUNT(*) FROM $table'));
   }
 
   // We are assuming here that the id column in the map is set. The other
