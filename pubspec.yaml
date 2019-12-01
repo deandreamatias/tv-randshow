@@ -41,4 +41,7 @@ flutter:
       - asset: assets/fonts/nunito-regular.ttf
       - asset: assets/fonts/nunito-bold.ttf
       - asset: assets/fonts/nunito-semibold.ttf
+  - family:  Unicons
+    fonts:
+      - asset: assets/fonts/unicons.ttf
   

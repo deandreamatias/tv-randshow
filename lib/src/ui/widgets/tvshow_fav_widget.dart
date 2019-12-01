@@ -6,6 +6,7 @@ import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/views/loading_view.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
+import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class TvshowFavWidget extends StatelessWidget {
   final TvshowDetails tvshowDetails;
@@ -97,7 +98,7 @@ class TvshowFavWidget extends StatelessWidget {
           border: Border.all(),
         ),
         child: Icon(
-          Icons.close,
+          Unicons.close,
           size: 12.0,
           color: StyleColor.PRIMARY,
         ),
@@ -135,7 +136,7 @@ class TvshowFavWidget extends StatelessWidget {
 
   Widget _actionButton(BuildContext context) {
     return RaisedButton.icon(
-      icon: Icon(Icons.local_play, color: StyleColor.WHITE),
+      icon: Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
       label: Text('Random', style: TextStyle(color: StyleColor.WHITE)),

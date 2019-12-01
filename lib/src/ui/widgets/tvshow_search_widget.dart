@@ -5,6 +5,7 @@ import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/data/result.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
+import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class TvshowSearchWidget extends StatefulWidget {
   final Result result;
@@ -18,7 +19,8 @@ class _TvshowSearchWidgetState extends State<TvshowSearchWidget> {
   bool changeButton;
   @override
   void initState() {
-    changeButton = false;
+    changeButton =
+        false; // TODO: Reset state to false when search twice in search view
     super.initState();
   }
 
@@ -95,7 +97,7 @@ class _TvshowSearchWidgetState extends State<TvshowSearchWidget> {
   Widget _removeButton(BuildContext context) {
     return RaisedButton.icon(
       key: ValueKey('remove'),
-      icon: Icon(Icons.close, color: StyleColor.WHITE),
+      icon: Icon(Unicons.close, color: StyleColor.WHITE),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
       label: Text('Remove', style: TextStyle(color: StyleColor.WHITE)),
@@ -111,7 +113,7 @@ class _TvshowSearchWidgetState extends State<TvshowSearchWidget> {
   Widget _actionButton(BuildContext context) {
     return RaisedButton.icon(
       key: ValueKey('action'),
-      icon: Icon(Icons.star_border, color: StyleColor.PRIMARY),
+      icon: Icon(Unicons.favourite, color: StyleColor.PRIMARY),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
           side: BorderSide(color: StyleColor.PRIMARY)),
