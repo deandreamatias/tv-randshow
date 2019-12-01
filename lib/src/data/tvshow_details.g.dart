@@ -8,6 +8,7 @@ part of 'tvshow_details.dart';
 
 TvshowDetails _$TvshowDetailsFromJson(Map<String, dynamic> json) {
   return TvshowDetails(
+    rowId: json['rowId'] as int,
     episodeRunTime:
         (json['episode_run_time'] as List)?.map((e) => e as int)?.toList(),
     id: json['id'] as int,
@@ -33,6 +34,7 @@ Map<String, dynamic> _$TvshowDetailsToJson(TvshowDetails instance) {
     }
   }
 
+  writeNotNull('rowId', instance.rowId);
   writeNotNull('episode_run_time', instance.episodeRunTime);
   writeNotNull('id', instance.id);
   writeNotNull('in_production', instance.inProduction);

@@ -8,8 +8,7 @@ import 'package:tv_randshow/src/utils/styles.dart';
 
 class TvshowSearchWidget extends StatelessWidget {
   final Result result;
-  final int rowId;
-  TvshowSearchWidget({Key key, this.rowId, this.result}) : super(key: key);
+  TvshowSearchWidget({Key key, this.result}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +47,12 @@ class TvshowSearchWidget extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Container(
             padding: SMALL_INSESTS,
-            decoration: BoxDecoration(borderRadius: BORDER_RADIUS, color: Colors.black38),
+            decoration: BoxDecoration(
+                borderRadius: BORDER_RADIUS, color: Colors.black38),
             child: Text(
               result.name,
-              style: TextStyle(color: StyleColor.WHITE, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  color: StyleColor.WHITE, fontWeight: FontWeight.w600),
             ),
           ),
         ),
@@ -78,7 +79,8 @@ class TvshowSearchWidget extends StatelessWidget {
     return RaisedButton.icon(
       icon: Icon(Icons.star_border, color: StyleColor.PRIMARY),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0), side: BorderSide(color: StyleColor.PRIMARY)),
+          borderRadius: BorderRadius.circular(8.0),
+          side: BorderSide(color: StyleColor.PRIMARY)),
       color: StyleColor.WHITE,
       label: Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
       onPressed: () => ScopedModel.of<SearchModel>(context).addToFav(result.id),
