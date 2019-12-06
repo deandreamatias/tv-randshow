@@ -4,6 +4,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:tv_randshow/src/models/fav_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/views/loading_view.dart';
+import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
@@ -31,7 +32,7 @@ class FavWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topRight,
-              child: _closeButton(context),
+              child: _deleteButton(context),
             ),
             Align(
               alignment: Alignment.bottomCenter,
@@ -45,7 +46,7 @@ class FavWidget extends StatelessWidget {
 
   Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () => ScopedModel.of<FavModel>(context).toggleDetails(),
+      onTap: () => _showModalSheet(context),
       child: Container(
         height: 128.0,
         width: 144.0,
@@ -73,6 +74,19 @@ class FavWidget extends StatelessWidget {
     );
   }
 
+  _showModalSheet(BuildContext context) {
+    showModalBottomSheet(
+        isScrollControlled: false,
+        elevation: 16.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusDirectional.circular(16.0),
+        ),
+        context: context,
+        builder: (builder) {
+          return MenuPanelWidget(tvshowDetails);
+        });
+  }
+
   ImageProvider checkImage() {
     if (tvshowDetails.posterPath == null) {
       return AssetImage(ImagePath.emptyTvShow);
@@ -81,7 +95,7 @@ class FavWidget extends StatelessWidget {
     }
   }
 
-  Widget _closeButton(BuildContext context) {
+  Widget _deleteButton(BuildContext context) {
     return GestureDetector(
       onTap: () => _deleteConfirm(context).then((result) {
         if (result) {
@@ -109,7 +123,7 @@ class FavWidget extends StatelessWidget {
   Future<bool> _deleteConfirm(BuildContext context) async {
     return showDialog<bool>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Delete Tv show'),

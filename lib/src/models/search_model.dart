@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/data/search.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
@@ -10,10 +8,10 @@ import 'package:tv_randshow/src/utils/constants.dart';
 class SearchModel extends BaseModel {
   final Database database = Database();
   List<SearchWidget> _listTvShow;
-  ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);
+  TvshowDetails _tvshowDetails;
 
   List<SearchWidget> get listTvShow => _listTvShow;
-  ValueNotifier<bool> get tvShowDetails => _tvShowDetails;
+  TvshowDetails get tvShowDetails => _tvshowDetails;
 
   getSearch(String query) async {
     setLoading();
@@ -47,7 +45,12 @@ class SearchModel extends BaseModel {
     }).catchError((onError) => print('Error $onError to deleted row $id'));
   }
 
-  toggleDetails() {
-    _tvShowDetails.value = !_tvShowDetails.value;
+  getDetails(int id) async {
+    final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
+    var queryParameters = {'api_key': apiKey};
+
+    var data =
+        await fetchData(Url.TVSHOW_DETAILS + id.toString(), queryParameters);
+    _tvshowDetails = TvshowDetails.fromRawJson(data);
   }
 }
