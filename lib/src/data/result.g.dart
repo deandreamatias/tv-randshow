@@ -14,9 +14,9 @@ Result _$ResultFromJson(Map<String, dynamic> json) {
     backdropPath: json['backdrop_path'] as String,
     voteAverage: (json['voter_average'] as num)?.toDouble(),
     overview: json['overview'] as String,
-    firstAirDate: json['first_ari_date'] == null
+    firstAirDate: json['first_air_date'] == null
         ? null
-        : DateTime.parse(json['first_ari_date'] as String),
+        : DateTime.parse(json['first_air_date'] as String),
     originCountry:
         (json['origin_country'] as List)?.map((e) => e as String)?.toList(),
     genreIds: (json['genre_ids'] as List)?.map((e) => e as int)?.toList(),
@@ -42,7 +42,7 @@ Map<String, dynamic> _$ResultToJson(Result instance) {
   writeNotNull('backdrop_path', instance.backdropPath);
   writeNotNull('voter_average', instance.voteAverage);
   writeNotNull('overview', instance.overview);
-  writeNotNull('first_ari_date', instance.firstAirDate?.toIso8601String());
+  writeNotNull('first_air_date', instance.firstAirDate?.toIso8601String());
   writeNotNull('origin_country', instance.originCountry);
   writeNotNull('genre_ids', instance.genreIds);
   writeNotNull('original_language', instance.originalLanguage);

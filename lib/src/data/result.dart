@@ -15,7 +15,7 @@ class Result {
   @JsonKey(name: 'voter_average')
   double voteAverage;
   String overview;
-  @JsonKey(name: 'first_ari_date')
+  @JsonKey(name: 'first_air_date')
   DateTime firstAirDate;
   @JsonKey(name: 'origin_country')
   List<String> originCountry;
