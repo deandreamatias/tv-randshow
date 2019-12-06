@@ -4,7 +4,7 @@ import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
-import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/search_bar_widget.dart';
 import 'package:tv_randshow/src/utils/states.dart';
 
 class SearchView extends StatefulWidget {
@@ -33,7 +33,9 @@ class _SearchViewState extends State<SearchView> {
             backLayer: Container(
               child: Column(
                 children: <Widget>[
-                  SearchWidget(editingController: textEditingController, searchModel: model),
+                  SearchBarWidget(
+                      editingController: textEditingController,
+                      searchModel: model),
                   Expanded(child: _renderData(model))
                 ],
               ),
@@ -57,7 +59,8 @@ class _SearchViewState extends State<SearchView> {
         semanticChildCount: model.listTvShow.length,
         padding: EdgeInsets.all(16.0),
         itemCount: model.listTvShow.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (context, index) {
           return model.listTvShow[index];
         },

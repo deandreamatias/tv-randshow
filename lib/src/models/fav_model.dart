@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/services/database.dart';
-import 'package:tv_randshow/src/ui/widgets/tvshow_fav_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/fav_widget.dart';
 
 class FavModel extends BaseModel {
   final Database database = Database();
-  List<TvshowFavWidget> _listTvShow;
+  List<FavWidget> _listTvShow;
   ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);
 
-  List<TvshowFavWidget> get listTvShow => _listTvShow;
+  List<FavWidget> get listTvShow => _listTvShow;
   ValueNotifier<bool> get tvShowDetails => _tvShowDetails;
 
   getFavs() async {
     setLoading();
     database.queryList().then((list) {
       _listTvShow = list.map((tvshow) {
-        return TvshowFavWidget(tvshowDetails: tvshow);
+        return FavWidget(tvshowDetails: tvshow);
       }).toList();
       setInit();
     }).catchError((onError) => print('Error get favs $onError'));

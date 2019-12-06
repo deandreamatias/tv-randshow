@@ -8,9 +8,9 @@ import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
-class TvshowFavWidget extends StatelessWidget {
+class FavWidget extends StatelessWidget {
   final TvshowDetails tvshowDetails;
-  TvshowFavWidget({Key key, @required this.tvshowDetails}) : super(key: key);
+  FavWidget({Key key, @required this.tvshowDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
