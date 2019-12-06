@@ -16,9 +16,11 @@ class TvshowSearchWidget extends StatefulWidget {
 }
 
 class _TvshowSearchWidgetState extends State<TvshowSearchWidget> {
+  bool enable;
   bool changeButton;
   @override
   void initState() {
+    widget.result.firstAirDate == null ? enable = false : enable = true;
     changeButton =
         false; // TODO: Reset state to false when search twice in search view
     super.initState();
@@ -26,31 +28,36 @@ class _TvshowSearchWidgetState extends State<TvshowSearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: 8.0, left: 8.0),
-      child: Container(
-        height: 154.0,
-        width: 144.0,
-        decoration: BoxDecoration(borderRadius: BORDER_RADIUS),
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              right: 6.0,
-              left: 0.0,
-              top: 6.0,
-              bottom: 18.0,
-              child: _image(context),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: AnimatedSwitcher(
-                duration: Duration(milliseconds: 500),
-                child: !changeButton
-                    ? _actionButton(context)
-                    : _removeButton(context),
+    return Opacity(
+      opacity: enable ? 1.0 : 0.3,
+      child: Padding(
+        padding: EdgeInsets.only(right: 8.0, left: 8.0),
+        child: Container(
+          height: 154.0,
+          width: 144.0,
+          decoration: BoxDecoration(borderRadius: BORDER_RADIUS),
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                right: 6.0,
+                left: 0.0,
+                top: 6.0,
+                bottom: 18.0,
+                child: _image(context),
               ),
-            ),
-          ],
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: AnimatedSwitcher(
+                  duration: Duration(milliseconds: 500),
+                  child: enable
+                      ? !changeButton
+                          ? _actionButton(context)
+                          : _removeButton(context)
+                      : Container(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
