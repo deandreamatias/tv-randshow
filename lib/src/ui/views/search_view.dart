@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
-import 'package:tv_randshow/src/ui/widgets/backdrop_widget.dart';
-import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/search_bar_widget.dart';
 import 'package:tv_randshow/src/utils/states.dart';
 
@@ -28,19 +26,15 @@ class _SearchViewState extends State<SearchView> {
       onModelReady: (model) {},
       builder: (context, child, model) => Scaffold(
         body: SafeArea(
-          child: Backdrop(
-            frontLayer: MenuPanelWidget(),
-            backLayer: Container(
-              child: Column(
-                children: <Widget>[
-                  SearchBarWidget(
-                      editingController: textEditingController,
-                      searchModel: model),
-                  Expanded(child: _renderData(model))
-                ],
-              ),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                SearchBarWidget(
+                    editingController: textEditingController,
+                    searchModel: model),
+                Expanded(child: _renderData(model))
+              ],
             ),
-            panelVisible: model.tvShowDetails,
           ),
         ),
       ),

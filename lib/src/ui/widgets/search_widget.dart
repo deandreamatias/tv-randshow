@@ -3,6 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/data/result.dart';
+import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
@@ -63,9 +64,26 @@ class _SearchWidgetState extends State<SearchWidget> {
     );
   }
 
+  _showModalSheet(BuildContext context) {
+    showModalBottomSheet(
+        isScrollControlled: false,
+        elevation: 16.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusDirectional.circular(16.0),
+        ),
+        context: context,
+        builder: (builder) {
+          return MenuPanelWidget(
+              ScopedModel.of<SearchModel>(context).tvShowDetails);
+        });
+  }
+
   Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () => ScopedModel.of<SearchModel>(context).toggleDetails(),
+      onTap: () async {
+        await ScopedModel.of<SearchModel>(context).getDetails(widget.result.id);
+        return _showModalSheet(context);
+      },
       child: Container(
         height: 128.0,
         width: 144.0,

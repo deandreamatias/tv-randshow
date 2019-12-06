@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class MenuPanelWidget extends StatelessWidget {
+  MenuPanelWidget(this.tvshowDetails, {Key key}) : super(key: key);
+  final TvshowDetails tvshowDetails;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -31,12 +35,12 @@ class MenuPanelWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                        child: Image.asset(ImagePath.emptyTvShow),
+                        child: Image(image: checkImage()),
                         decoration: BoxDecoration(
                           borderRadius: BORDER_RADIUS,
                         ),
@@ -46,7 +50,10 @@ class MenuPanelWidget extends StatelessWidget {
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            'Friends',
+                            tvshowDetails.name,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 20),
                           ),
@@ -56,17 +63,21 @@ class MenuPanelWidget extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
                   child: Row(
                     children: <Widget>[
-                      InfoBoxWidget(typeInfo: 0),
-                      InfoBoxWidget(typeInfo: 1),
-                      InfoBoxWidget(typeInfo: 2)
+                      InfoBoxWidget(
+                          typeInfo: 0, value: tvshowDetails.numberOfSeasons),
+                      InfoBoxWidget(
+                          typeInfo: 1, value: tvshowDetails.numberOfEpisodes),
+                      InfoBoxWidget(
+                          typeInfo: 2,
+                          value: tvshowDetails.episodeRunTime.first)
                     ],
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -74,7 +85,7 @@ class MenuPanelWidget extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 20)),
                       SizedBox(height: 4.0),
-                      Text('Descripción .....')
+                      Text(tvshowDetails.overview)
                     ],
                   ),
                 ),
@@ -82,5 +93,13 @@ class MenuPanelWidget extends StatelessWidget {
             ),
           ),
         ]);
+  }
+
+  ImageProvider checkImage() {
+    if (tvshowDetails.posterPath == null) {
+      return AssetImage(ImagePath.emptyTvShow);
+    } else {
+      return NetworkImage(Url.BASE_IMAGE + tvshowDetails.posterPath);
+    }
   }
 }
