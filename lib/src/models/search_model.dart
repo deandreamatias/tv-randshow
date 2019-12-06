@@ -4,15 +4,15 @@ import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/data/search.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/services/database.dart';
-import 'package:tv_randshow/src/ui/widgets/tvshow_search_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 
 class SearchModel extends BaseModel {
   final Database database = Database();
-  List<TvshowSearchWidget> _listTvShow;
+  List<SearchWidget> _listTvShow;
   ValueNotifier<bool> _tvShowDetails = ValueNotifier<bool>(false);
 
-  List<TvshowSearchWidget> get listTvShow => _listTvShow;
+  List<SearchWidget> get listTvShow => _listTvShow;
   ValueNotifier<bool> get tvShowDetails => _tvShowDetails;
 
   getSearch(String query) async {
@@ -22,7 +22,7 @@ class SearchModel extends BaseModel {
 
     var data = await fetchData(Url.TVSHOW_SEARCH, queryParameters);
     _listTvShow = Search.fromRawJson(data).results.map((result) {
-      return TvshowSearchWidget(result: result);
+      return SearchWidget(result: result);
     }).toList();
     setInit();
   }
