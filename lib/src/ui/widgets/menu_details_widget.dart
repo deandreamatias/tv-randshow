@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
+import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class MenuPanelWidget extends StatelessWidget {
-  MenuPanelWidget(this.tvshowDetails, {Key key}) : super(key: key);
+  MenuPanelWidget(this.tvshowDetails, this.inDatabase, {Key key})
+      : super(key: key);
   final TvshowDetails tvshowDetails;
+  final bool inDatabase;
 
   @override
   Widget build(BuildContext context) {
@@ -15,19 +19,25 @@ class MenuPanelWidget extends StatelessWidget {
         alignment: Alignment.topCenter,
         overflow: Overflow.visible,
         children: <Widget>[
-          Positioned(
-            top: -22.5,
-            child: RaisedButton.icon(
-              icon: Icon(Unicons.favourite, color: StyleColor.PRIMARY),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                  side: BorderSide(color: StyleColor.PRIMARY)),
-              color: StyleColor.WHITE,
-              label: Text('Add to fav',
-                  style: TextStyle(color: StyleColor.PRIMARY)),
-              onPressed: () {},
-            ),
-          ),
+          // Positioned(
+          //   top: -22.5,
+          //   child: RaisedButton.icon(
+          //     icon: Icon(Unicons.favourite, color: StyleColor.PRIMARY),
+          //     shape: RoundedRectangleBorder(
+          //         borderRadius: BorderRadius.circular(8.0),
+          //         side: BorderSide(color: StyleColor.PRIMARY)),
+          //     color: StyleColor.WHITE,
+          //     label: Text('Add to fav',
+          //         style: TextStyle(color: StyleColor.PRIMARY)),
+          //     onPressed: () {
+          //       if (inDatabase) {
+          //       } else {
+          //         ScopedModel.of<SearchModel>(context)
+          //             .insertDatabase(tvshowDetails);
+          //       }
+          //     },
+          //   ),
+          // ),
           Container(
             margin: EdgeInsets.only(top: 20),
             padding: EdgeInsets.all(16.0),
@@ -35,25 +45,32 @@ class MenuPanelWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Expanded(
-                  flex: 2,
+                  flex: 4,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(
-                        child: Image(image: checkImage()),
-                        decoration: BoxDecoration(
-                          borderRadius: BORDER_RADIUS,
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          margin: SMALL_INSESTS,
+                          decoration: BoxDecoration(
+                            borderRadius: BORDER_RADIUS,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: checkImage(),
+                            ),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
+                      Expanded(
+                        flex: 3,
                         child: Align(
                           alignment: Alignment.topLeft,
                           child: Text(
                             tvshowDetails.name,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
+                            maxLines: 3,
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 20),
                           ),
@@ -63,7 +80,7 @@ class MenuPanelWidget extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 2,
+                  flex: 5,
                   child: Row(
                     children: <Widget>[
                       InfoBoxWidget(
@@ -76,17 +93,14 @@ class MenuPanelWidget extends StatelessWidget {
                     ],
                   ),
                 ),
+                const Text('Sinopse',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
                 Expanded(
-                  flex: 4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text('Sinopse',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 20)),
-                      SizedBox(height: 4.0),
-                      Text(tvshowDetails.overview)
-                    ],
+                  flex: 6,
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.only(top: 4.0),
+                    child: Text(tvshowDetails.overview),
                   ),
                 ),
               ],

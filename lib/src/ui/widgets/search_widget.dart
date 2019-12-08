@@ -66,15 +66,19 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   _showModalSheet(BuildContext context) {
     showModalBottomSheet(
-        isScrollControlled: false,
+        isScrollControlled: true,
         elevation: 16.0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusDirectional.circular(16.0),
+          borderRadius:
+              BorderRadiusDirectional.vertical(top: Radius.circular(16.0)),
         ),
         context: context,
         builder: (builder) {
-          return MenuPanelWidget(
-              ScopedModel.of<SearchModel>(context).tvShowDetails);
+          return Container(
+            height: 400,
+            child: MenuPanelWidget(
+                ScopedModel.of<SearchModel>(context).tvShowDetails, false),
+          );
         });
   }
 
