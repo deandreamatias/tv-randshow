@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:tv_randshow/src/models/loading_model.dart';
+import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/data/tvshow_result.dart';
 import 'package:tv_randshow/src/ui/views/app_view.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
+import 'package:tv_randshow/src/ui/views/loading_view.dart';
 import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class ResultView extends StatefulWidget {
+  final TvshowDetails tvshowDetails;
   final TvshowResult tvshowResult;
-  ResultView({Key key, this.tvshowResult}) : super(key: key);
+  ResultView({Key key, this.tvshowDetails, this.tvshowResult})
+      : super(key: key);
 
   _ResultViewState createState() => _ResultViewState();
 }
@@ -52,59 +56,70 @@ class _ResultViewState extends State<ResultView> {
   Widget _renderBody() {
     return Expanded(
       flex: 6,
-      child: Stack(overflow: Overflow.visible, children: <Widget>[
-        Container(
-          padding: DEFAULT_INSESTS,
-          decoration:
-              BoxDecoration(borderRadius: BORDER_RADIUS, border: Border.all()),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                  flex: 1, child: Text(widget.tvshowResult.tvshowDetails.name)),
-              Expanded(
-                flex: 2,
-                child: Row(
-                  children: <Widget>[
-                    InfoBoxWidget(
-                        typeInfo: 3, value: widget.tvshowResult.randomSeason),
-                    InfoBoxWidget(
-                        typeInfo: 4, value: widget.tvshowResult.randomEpisode),
-                  ],
-                ),
+      child: Stack(
+          overflow: Overflow.visible,
+          alignment: Alignment.center,
+          children: <Widget>[
+            Container(
+              padding: DEFAULT_INSESTS,
+              decoration: BoxDecoration(
+                  borderRadius: BORDER_RADIUS, border: Border.all()),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Flexible(
+                      fit: FlexFit.loose,
+                      flex: 1,
+                      child: Text(widget.tvshowResult.tvshowDetails.name)),
+                  Flexible(
+                    fit: FlexFit.loose,
+                    flex: 2,
+                    child: Row(
+                      children: <Widget>[
+                        InfoBoxWidget(
+                            typeInfo: 3,
+                            value: widget.tvshowResult.randomSeason),
+                        InfoBoxWidget(
+                            typeInfo: 4,
+                            value: widget.tvshowResult.randomEpisode),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                      fit: FlexFit.loose,
+                      flex: 1,
+                      child: Text(widget.tvshowResult.episodeName,
+                          textAlign: TextAlign.left)),
+                  Flexible(
+                      fit: FlexFit.tight,
+                      flex: 3,
+                      child: SingleChildScrollView(
+                        child: Text(widget.tvshowResult.episodeDescription,
+                            textAlign: TextAlign.left),
+                      )),
+                ],
               ),
-              Expanded(
-                  flex: 1,
-                  child: Text(widget.tvshowResult.episodeName,
-                      textAlign: TextAlign.left)),
-              Expanded(
-                  flex: 3,
-                  child: SingleChildScrollView(
-                    child: Text(widget.tvshowResult.episodeDescription,
-                        textAlign: TextAlign.left),
-                  )),
-            ],
-          ),
-        ),
-        Positioned(
-          left: 50.0,
-          bottom: -18.0,
-          child: RaisedButton.icon(
-            icon: const Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0)),
-            color: StyleColor.PRIMARY,
-            label: const Text('Pick a new random episode',
-                style: TextStyle(color: StyleColor.WHITE)),
-            onPressed: () => {},
-            // onPressed: () => Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //       builder: (context) => AppView(),
-            //     )),
-          ),
-        )
-      ]),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: RaisedButton.icon(
+                icon:
+                    const Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0)),
+                color: StyleColor.PRIMARY,
+                label: const Text('Pick a new random episode',
+                    style: TextStyle(color: StyleColor.WHITE)),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          LoadingView(tvshowDetails: widget.tvshowDetails),
+                    )),
+              ),
+            )
+          ]),
     );
   }
 
