@@ -14,9 +14,10 @@ Result _$ResultFromJson(Map<String, dynamic> json) {
     backdropPath: json['backdrop_path'] as String,
     voteAverage: (json['voter_average'] as num)?.toDouble(),
     overview: json['overview'] as String,
-    firstAirDate: json['first_air_date'] == null
-        ? null
-        : DateTime.parse(json['first_air_date'] as String),
+    firstAirDate:
+        json['first_air_date'] == null || json['first_air_date'].isEmpty
+            ? null
+            : DateTime.parse(json['first_air_date'] as String),
     originCountry:
         (json['origin_country'] as List)?.map((e) => e as String)?.toList(),
     genreIds: (json['genre_ids'] as List)?.map((e) => e as int)?.toList(),
