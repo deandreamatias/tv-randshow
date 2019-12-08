@@ -15,7 +15,9 @@ class Result {
   @JsonKey(name: 'voter_average')
   double voteAverage;
   String overview;
-  @JsonKey(name: 'first_air_date')
+  @JsonKey(
+      name: 'first_air_date',
+      disallowNullValue: true) // TODO: Verify use of disallow null value
   DateTime firstAirDate;
   @JsonKey(name: 'origin_country')
   List<String> originCountry;
