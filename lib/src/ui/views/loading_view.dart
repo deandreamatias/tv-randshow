@@ -22,7 +22,9 @@ class _LoadingViewState extends State<LoadingView> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ResultView(tvshowResult: tvshowResult),
+                builder: (context) => ResultView(
+                    tvshowResult: tvshowResult,
+                    tvshowDetails: widget.tvshowDetails),
               ));
         }
       });
