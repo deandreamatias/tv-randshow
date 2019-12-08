@@ -76,14 +76,16 @@ class FavWidget extends StatelessWidget {
 
   _showModalSheet(BuildContext context) {
     showModalBottomSheet(
-        isScrollControlled: false,
+        isScrollControlled: true,
         elevation: 16.0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadiusDirectional.circular(16.0),
+          borderRadius:
+              BorderRadiusDirectional.vertical(top: Radius.circular(16.0)),
         ),
         context: context,
         builder: (builder) {
-          return MenuPanelWidget(tvshowDetails);
+          return Container(
+              height: 400, child: MenuPanelWidget(tvshowDetails, true));
         });
   }
 
@@ -154,11 +156,15 @@ class FavWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
       label: Text('Random', style: TextStyle(color: StyleColor.WHITE)),
-      onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoadingView(tvshowDetails: tvshowDetails),
-          )),
+      onPressed: () => navigateRandom(context),
     );
+  }
+
+  void navigateRandom(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoadingView(tvshowDetails: tvshowDetails),
+        ));
   }
 }
