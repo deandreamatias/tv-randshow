@@ -13,43 +13,43 @@ class SearchModel extends BaseModel {
   List<SearchWidget> get listTvShow => _listTvShow;
   TvshowDetails get tvShowDetails => _tvshowDetails;
 
-  getSearch(String query) async {
+  Future<void> getSearch(String query) async {
     setLoading();
     final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
     var queryParameters = {'query': query, 'page': '1', 'api_key': apiKey};
 
-    var data = await fetchData(Url.TVSHOW_SEARCH, queryParameters);
+    final dynamic data = await fetchData(Url.TVSHOW_SEARCH, queryParameters);
     _listTvShow = Search.fromRawJson(data).results.map((result) {
       return SearchWidget(result: result);
     }).toList();
     setInit();
   }
 
-  addToFav(int id) async {
+  Future<void> addToFav(int id) async {
     setLoading();
     final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
     var queryParameters = {'api_key': apiKey};
 
-    var data =
+    final dynamic data =
         await fetchData(Url.TVSHOW_DETAILS + id.toString(), queryParameters);
     database.insert(TvshowDetails.fromRawJson(data));
     setInit();
   }
 
-  deleteFav(int id) async {
+  Future<void> deleteFav(int id) async {
     setLoading();
     final list = await database.queryList();
     final item = list.firstWhere((tvshowDetails) => tvshowDetails.id == id);
     database.delete(item.rowId).then((_id) {
       _id != item.rowId ? setError() : setInit();
-    }).catchError((onError) => print('Error $onError to deleted row $id'));
+    }).catchError((dynamic onError) => print('Error $onError to deleted row $id'));
   }
 
-  getDetails(int id) async {
+  Future<void> getDetails(int id) async {
     final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
     var queryParameters = {'api_key': apiKey};
 
-    var data =
+    final dynamic data =
         await fetchData(Url.TVSHOW_DETAILS + id.toString(), queryParameters);
     _tvshowDetails = TvshowDetails.fromRawJson(data);
   }

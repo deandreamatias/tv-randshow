@@ -19,7 +19,7 @@ class _LoadingViewState extends State<LoadingView> {
     return BaseView<LoadingModel>(onModelReady: (model) {
       model.getEpisode(widget.tvshowDetails).then((tvshowResult) {
         if (model.state == ViewState.init) {
-          Navigator.push(
+          Navigator.push<ResultView>(
               context,
               MaterialPageRoute(
                 builder: (context) => ResultView(
