@@ -64,8 +64,8 @@ class _SearchWidgetState extends State<SearchWidget> {
     );
   }
 
-  _showModalSheet(BuildContext context) {
-    showModalBottomSheet(
+  void _showModalSheet(BuildContext context) {
+    showModalBottomSheet<Container>(
         isScrollControlled: true,
         elevation: 16.0,
         shape: RoundedRectangleBorder(

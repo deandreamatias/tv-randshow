@@ -11,20 +11,20 @@ class FavModel extends BaseModel {
   List<FavWidget> get listTvShow => _listTvShow;
   TvshowDetails get tvshowDetails => _tvshowDetails;
 
-  getFavs() async {
+  Future<void> getFavs() async {
     setLoading();
     database.queryList().then((list) {
       _listTvShow = list.map((tvshow) {
         return FavWidget(tvshowDetails: tvshow);
       }).toList();
       setInit();
-    }).catchError((onError) => print('Error get favs $onError'));
+    }).catchError((dynamic onError) => print('Error get favs $onError'));
   }
 
-  deleteFav(int id) {
+  void deleteFav(int id) {
     setLoading();
     database.delete(id).then((_id) {
       _id != id ? setError() : setInit();
-    }).catchError((onError) => print('Error $onError to deleted row $id'));
+    }).catchError((dynamic onError) => print('Error $onError to deleted row $id'));
   }
 }

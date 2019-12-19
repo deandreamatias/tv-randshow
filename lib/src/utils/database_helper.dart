@@ -34,7 +34,7 @@ class DatabaseHelper {
   }
 
   // this opens the database (and creates it if it doesn't exist)
-  _initDatabase() async {
+  Future<Database> _initDatabase() async {
     Directory documentsDirectory;
     try {
       if (Platform.isAndroid) {
@@ -121,13 +121,13 @@ class DatabaseHelper {
   Future<int> update(Map<String, dynamic> row) async {
     Database db = await instance.database;
     int id = row[columnId];
-    return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
+    return await db.update(table, row, where: '$columnId = ?', whereArgs: <int>[id]);
   }
 
   // Deletes the row specified by the id. The number of affected rows is
   // returned. This should be 1 as long as the row exists.
   Future<int> delete(int id) async {
     Database db = await instance.database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
+    return await db.delete(table, where: '$columnId = ?', whereArgs: <int>[id]);
   }
 }

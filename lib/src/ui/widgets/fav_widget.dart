@@ -74,8 +74,8 @@ class FavWidget extends StatelessWidget {
     );
   }
 
-  _showModalSheet(BuildContext context) {
-    showModalBottomSheet(
+  void _showModalSheet(BuildContext context) {
+    showModalBottomSheet<Container>(
         isScrollControlled: true,
         elevation: 16.0,
         shape: RoundedRectangleBorder(
@@ -161,7 +161,7 @@ class FavWidget extends StatelessWidget {
   }
 
   void navigateRandom(BuildContext context) {
-    Navigator.push(
+    Navigator.push<LoadingView>(
         context,
         MaterialPageRoute(
           builder: (context) => LoadingView(tvshowDetails: tvshowDetails),

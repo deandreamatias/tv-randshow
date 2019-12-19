@@ -111,7 +111,7 @@ class _ResultViewState extends State<ResultView> {
                 color: StyleColor.PRIMARY,
                 label: const Text('Pick a new random episode',
                     style: TextStyle(color: StyleColor.WHITE)),
-                onPressed: () => Navigator.push(
+                onPressed: () => Navigator.push<LoadingView>(
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
@@ -129,7 +129,7 @@ class _ResultViewState extends State<ResultView> {
       child: FlatButton.icon(
         label: const Text('Home'),
         icon: const Icon(Unicons.home),
-        onPressed: () => Navigator.push(
+        onPressed: () => Navigator.push<AppView>(
             context,
             MaterialPageRoute(
               builder: (context) => AppView(),

@@ -6,7 +6,7 @@ class Database {
 
   void insert(TvshowDetails tvshowDetails) async {
     // row to insert
-    Map<String, dynamic> row = {
+    Map<String, dynamic> row = <String, dynamic>{
       DatabaseHelper.columnId: tvshowDetails.rowId,
       DatabaseHelper.columnIdTvshow: tvshowDetails.id,
       DatabaseHelper.columnName: tvshowDetails.name,
@@ -33,7 +33,7 @@ class Database {
 
   void update(TvshowDetails tvshowDetails) async {
     // row to update
-    Map<String, dynamic> row = {
+    Map<String, dynamic> row = <String, dynamic>{
       DatabaseHelper.columnId: tvshowDetails.rowId,
       DatabaseHelper.columnIdTvshow: tvshowDetails.id,
       DatabaseHelper.columnName: tvshowDetails.name,

@@ -20,19 +20,19 @@ abstract class BaseModel extends Model {
     return response.body;
   }
 
-  setInit() {
+  void setInit() {
     _setState(ViewState.init);
   }
 
-  setLoading() {
+  void setLoading() {
     _setState(ViewState.loading);
   }
 
-  setError() {
+  void setError() {
     _setState(ViewState.error);
   }
 
-  _setState(ViewState viewState) {
+  void _setState(ViewState viewState) {
     _state = viewState;
     log('${DateFormat('HH:mm:ss:mmm').format(DateTime.now())} # $viewState',
         name: runtimeType.toString());

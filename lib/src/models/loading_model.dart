@@ -12,7 +12,7 @@ class LoadingModel extends BaseModel {
     final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
     var queryParameters = {'api_key': apiKey};
     var randomSeason = _getRandomNumber(tvshowDetails.numberOfSeasons, true);
-    var data = await fetchData(
+    final dynamic data = await fetchData(
         Url.TVSHOW_DETAILS +
             tvshowDetails.id.toString() +
             Url.TVSHOW_DETAILS_SEASON +
