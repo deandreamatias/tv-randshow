@@ -11,7 +11,7 @@ dependencies:
   http: ^0.12.0+2                   # [Package] HTTP requests
   meta: ^1.1.7                      # [Package] Annotations for semantic information
   json_annotation: ^3.0.0           # [Package] Helpers to JSON code generation
-  intl: ^0.16.0                    # [Package] Internationalized/localized messages and formatters
+  intl: ^0.16.0                     # [Package] Internationalized/localized messages and formatters
   # Official Flutter
   flutter:
     sdk: flutter
@@ -22,7 +22,7 @@ dependencies:
   get_it: ^3.0.3                    # [Package] Service locator
   scoped_model: ^1.0.1              # [Package] Scoped model architecture
   flutter_i18n: ^0.6.4              # [Package] Internationalization strings
-  cached_network_image: ^1.1.2+1    # [Package] Load and cached network images
+  cached_network_image: ^2.0.0-rc   # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
   sqflite: ^1.1.7+2                 # [Plugin] SQLite
 

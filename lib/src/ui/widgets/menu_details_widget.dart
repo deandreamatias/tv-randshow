@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/models/search_model.dart';
+import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
@@ -51,17 +52,10 @@ class MenuPanelWidget extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         flex: 1,
-                        child: Container(
-                          margin: SMALL_INSESTS,
-                          decoration: BoxDecoration(
-                            borderRadius: BORDER_RADIUS,
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: checkImage(),
-                            ),
-                          ),
-                        ),
+                        child: ImageWidget(
+                            url: tvshowDetails.posterPath, isModal: true),
                       ),
+                      const SizedBox(width: 8.0),
                       Expanded(
                         flex: 3,
                         child: Align(
@@ -84,11 +78,14 @@ class MenuPanelWidget extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       InfoBoxWidget(
-                          typeInfo: 0, value: tvshowDetails.numberOfSeasons),
+                          typeInfo: 0,
+                          value: tvshowDetails.numberOfSeasons ?? '--'),
                       InfoBoxWidget(
-                          typeInfo: 1, value: tvshowDetails.numberOfEpisodes),
+                          typeInfo: 1,
+                          value: tvshowDetails.numberOfEpisodes ?? '--'),
                       InfoBoxWidget(
                           typeInfo: 2,
+                          // TODO(deandreamatias): Bad state: no element error
                           value: tvshowDetails.episodeRunTime.first)
                     ],
                   ),
@@ -107,13 +104,5 @@ class MenuPanelWidget extends StatelessWidget {
             ),
           ),
         ]);
-  }
-
-  ImageProvider checkImage() {
-    if (tvshowDetails.posterPath == null) {
-      return AssetImage(ImagePath.emptyTvShow);
-    } else {
-      return NetworkImage(BASE_IMAGE + tvshowDetails.posterPath);
-    }
   }
 }
