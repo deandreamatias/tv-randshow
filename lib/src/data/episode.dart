@@ -6,6 +6,26 @@ part 'episode.g.dart';
 
 @JsonSerializable(nullable: true, includeIfNull: false)
 class Episode {
+  Episode({
+    this.airDate,
+    this.crew,
+    this.episodeNumber,
+    this.guestStars,
+    this.name,
+    this.overview,
+    this.id,
+    this.productionCode,
+    this.seasonNumber,
+    this.stillPath,
+    this.voteAverage,
+    this.voteCount,
+  });
+
+  factory Episode.fromRawJson(String str) =>
+      _$EpisodeFromJson(json.decode(str));
+  factory Episode.fromJson(Map<String, dynamic> json) =>
+      _$EpisodeFromJson(json);
+
   @JsonKey(name: 'air_date')
   DateTime airDate;
   @JsonKey(ignore: true)
@@ -28,38 +48,12 @@ class Episode {
   @JsonKey(name: 'vote_count')
   int voteCount;
 
-  Episode({
-    this.airDate,
-    this.crew,
-    this.episodeNumber,
-    this.guestStars,
-    this.name,
-    this.overview,
-    this.id,
-    this.productionCode,
-    this.seasonNumber,
-    this.stillPath,
-    this.voteAverage,
-    this.voteCount,
-  });
-
-  factory Episode.fromRawJson(String str) =>
-      _$EpisodeFromJson(json.decode(str));
-  factory Episode.fromJson(Map<String, dynamic> json) =>
-      _$EpisodeFromJson(json);
   Map<String, dynamic> toJson() => _$EpisodeToJson(this);
   String toRawJson() => json.encode(_$EpisodeToJson(this));
 }
 
 @JsonSerializable(nullable: true, includeIfNull: false)
 class Crew {
-  int id;
-  String creditId;
-  String name;
-  Department department;
-  Job job;
-  String profilePath;
-
   Crew({
     this.id,
     this.creditId,
@@ -71,37 +65,38 @@ class Crew {
 
   factory Crew.fromRawJson(String str) => _$CrewFromJson(json.decode(str));
   factory Crew.fromJson(Map<String, dynamic> json) => _$CrewFromJson(json);
+  
+  int id;
+  String creditId;
+  String name;
+  Department department;
+  Job job;
+  String profilePath;
+
   Map<String, dynamic> toJson() => _$CrewToJson(this);
   String toRawJson() => json.encode(_$CrewToJson(this));
 }
 
 enum Department { Directing, Camera, Editing, Writing }
 
-final departmentValues = EnumValues({
-  "Camera": Department.Camera,
-  "Directing": Department.Directing,
-  "Editing": Department.Editing,
-  "Writing": Department.Writing
+final EnumValues<Department> departmentValues = EnumValues<Department>(<String, Department>{
+  'Camera': Department.Camera,
+  'Directing': Department.Directing,
+  'Editing': Department.Editing,
+  'Writing': Department.Writing
 });
 
 enum Job { Director, Director_of_photography, Editor, Writer }
 
-final jobValues = EnumValues({
-  "Director": Job.Director,
-  "Director of Photography": Job.Director_of_photography,
-  "Editor": Job.Editor,
-  "Writer": Job.Writer
+final EnumValues<Job> jobValues = EnumValues<Job>(<String, Job>{
+  'Director': Job.Director,
+  'Director of Photography': Job.Director_of_photography,
+  'Editor': Job.Editor,
+  'Writer': Job.Writer
 });
 
 @JsonSerializable(nullable: true, includeIfNull: false)
 class GuestStar {
-  int id;
-  String name;
-  String creditId;
-  String character;
-  int order;
-  String profilePath;
-
   GuestStar({
     this.id,
     this.name,
@@ -115,20 +110,26 @@ class GuestStar {
       _$GuestStarFromJson(json.decode(str));
   factory GuestStar.fromJson(Map<String, dynamic> json) =>
       _$GuestStarFromJson(json);
+  
+  int id;
+  String name;
+  String creditId;
+  String character;
+  int order;
+  String profilePath;
+
   Map<String, dynamic> toJson() => _$GuestStarToJson(this);
   String toRawJson() => json.encode(_$GuestStarToJson(this));
 }
 
 class EnumValues<T> {
+  EnumValues(this.map);
+
   Map<String, T> map;
   Map<T, String> reverseMap;
 
-  EnumValues(this.map);
-
   Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((k, v) => MapEntry(v, k));
-    }
+    reverseMap ??= map.map((String k, T v) => MapEntry<T, String>(v, k));
     return reverseMap;
   }
 }

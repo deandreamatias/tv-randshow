@@ -7,22 +7,23 @@ import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 
 class DatabaseHelper {
-  String _databaseName;
-  static final _databaseVersion = 1;
-  static final table = 'tvshowfav';
+  DatabaseHelper._privateConstructor();
 
-  static final columnId = 'rowId';
-  static final columnIdTvshow = 'id';
-  static final columnName = 'name';
-  static final columnPosterPath = 'poster_path';
-  static final columnEpisodes = 'number_of_episodes';
-  static final columnSeasons = 'number_of_seasons';
-  static final columnRunTime = 'episode_run_time';
-  static final columnOverview = 'overview';
-  static final columnInProduction = 'in_production';
+  String _databaseName;
+  static const int _databaseVersion = 1;
+  static const String table = 'tvshowfav';
+
+  static const String columnId = 'rowId';
+  static const String columnIdTvshow = 'id';
+  static const String columnName = 'name';
+  static const String columnPosterPath = 'poster_path';
+  static const String columnEpisodes = 'number_of_episodes';
+  static const String columnSeasons = 'number_of_seasons';
+  static const String columnRunTime = 'episode_run_time';
+  static const String columnOverview = 'overview';
+  static const String columnInProduction = 'in_production';
 
   // make this a singleton class
-  DatabaseHelper._privateConstructor();
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   // only have a single app-wide reference to the database
@@ -47,17 +48,17 @@ class DatabaseHelper {
     }
 
     if (FlavorConfig.isDevelopment()) {
-      _databaseName = "tvshowfavdev.db";
+      _databaseName = 'tvshowfavdev.db';
     } else {
-      _databaseName = "tvshowfav.db";
+      _databaseName = 'tvshowfav.db';
     }
-    String path = join(documentsDirectory.path, _databaseName);
+    final String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }
 
   // SQL code to create the database table
-  Future _onCreate(Database db, int version) async {
+  Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
           CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY,
@@ -79,21 +80,22 @@ class DatabaseHelper {
   // and the value is the column value. The return value is the id of the
   // inserted row.
   Future<int> insert(Map<String, dynamic> row) async {
-    Database db = await instance.database;
+    final Database db = await instance.database;
     return await db.insert(table, row);
   }
 
   // All of the rows are returned as a list of maps, where each map is
   // a key-value list of columns.
   Future<List<Map<String, dynamic>>> queryAllRows() async {
-    Database db = await instance.database;
+    final Database db = await instance.database;
     return await db.query(table);
   }
 
   Future<List<TvshowDetails>> queryList() async {
-    Database db = await instance.database;
+    final Database db = await instance.database;
 
-    List<Map> maps = await db.query(table, columns: [
+    final List<Map<dynamic, dynamic>> maps =
+        await db.query(table, columns: <String>[
       columnId,
       columnIdTvshow,
       columnName,
@@ -105,13 +107,15 @@ class DatabaseHelper {
       columnInProduction,
     ]);
 
-    return maps.map((i) => TvshowDetails.fromJson(i)).toList();
+    return maps
+        .map((Map<dynamic, dynamic> i) => TvshowDetails.fromJson(i))
+        .toList();
   }
 
   // All of the methods (insert, query, update, delete) can also be done using
   // raw SQL commands. This method uses a raw query to give the row count.
   Future<int> queryRowCount() async {
-    Database db = await instance.database;
+    final Database db = await instance.database;
     return Sqflite.firstIntValue(
         await db.rawQuery('SELECT COUNT(*) FROM $table'));
   }
@@ -119,15 +123,16 @@ class DatabaseHelper {
   // We are assuming here that the id column in the map is set. The other
   // column values will be used to update the row.
   Future<int> update(Map<String, dynamic> row) async {
-    Database db = await instance.database;
-    int id = row[columnId];
-    return await db.update(table, row, where: '$columnId = ?', whereArgs: <int>[id]);
+    final Database db = await instance.database;
+    final int id = row[columnId];
+    return await db
+        .update(table, row, where: '$columnId = ?', whereArgs: <int>[id]);
   }
 
   // Deletes the row specified by the id. The number of affected rows is
   // returned. This should be 1 as long as the row exists.
   Future<int> delete(int id) async {
-    Database db = await instance.database;
+    final Database db = await instance.database;
     return await db.delete(table, where: '$columnId = ?', whereArgs: <int>[id]);
   }
 }

@@ -11,11 +11,12 @@ import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class ResultView extends StatefulWidget {
+  const ResultView({Key key, this.tvshowDetails, this.tvshowResult})
+      : super(key: key);
   final TvshowDetails tvshowDetails;
   final TvshowResult tvshowResult;
-  ResultView({Key key, this.tvshowDetails, this.tvshowResult})
-      : super(key: key);
 
+  @override
   _ResultViewState createState() => _ResultViewState();
 }
 
@@ -23,8 +24,8 @@ class _ResultViewState extends State<ResultView> {
   @override
   Widget build(BuildContext context) {
     return BaseView<LoadingModel>(
-        onModelReady: (model) {},
-        builder: (context, child, model) {
+        onModelReady: (LoadingModel model) {},
+        builder: (BuildContext context, Widget child, LoadingModel model) {
           return Scaffold(
             body: SafeArea(
                 child: Padding(
@@ -47,7 +48,7 @@ class _ResultViewState extends State<ResultView> {
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          child: Text('TV show random result!'),
+          child: const Text('TV show random result!'),
         ),
       ),
     );
@@ -113,8 +114,8 @@ class _ResultViewState extends State<ResultView> {
                     style: TextStyle(color: StyleColor.WHITE)),
                 onPressed: () => Navigator.push<LoadingView>(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) =>
+                    MaterialPageRoute<LoadingView>(
+                      builder: (BuildContext context) =>
                           LoadingView(tvshowDetails: widget.tvshowDetails),
                     )),
               ),
@@ -125,14 +126,14 @@ class _ResultViewState extends State<ResultView> {
 
   Widget _renderFooter() {
     return Container(
-      padding: EdgeInsets.only(top: 16.0),
+      padding: const EdgeInsets.only(top: 16.0),
       child: FlatButton.icon(
         label: const Text('Home'),
         icon: const Icon(Unicons.home),
         onPressed: () => Navigator.push<AppView>(
             context,
-            MaterialPageRoute(
-              builder: (context) => AppView(),
+            MaterialPageRoute<AppView>(
+              builder: (BuildContext context) => const AppView(),
             )),
       ),
     );

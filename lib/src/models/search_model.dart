@@ -1,3 +1,4 @@
+import 'package:tv_randshow/src/data/result.dart';
 import 'package:tv_randshow/src/models/base_model.dart';
 import 'package:tv_randshow/src/data/search.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
@@ -15,11 +16,11 @@ class SearchModel extends BaseModel {
 
   Future<void> getSearch(String query) async {
     setLoading();
-    final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
-    var queryParameters = {'query': query, 'page': '1', 'api_key': apiKey};
+    final String apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
+    final Map<String, String> queryParameters = <String, String>{'query': query, 'page': '1', 'api_key': apiKey};
 
-    final dynamic data = await fetchData(Url.TVSHOW_SEARCH, queryParameters);
-    _listTvShow = Search.fromRawJson(data).results.map((result) {
+    final dynamic data = await fetchData(TVSHOW_SEARCH, queryParameters);
+    _listTvShow = Search.fromRawJson(data).results.map((Result result) {
       return SearchWidget(result: result);
     }).toList();
     setInit();
@@ -27,30 +28,30 @@ class SearchModel extends BaseModel {
 
   Future<void> addToFav(int id) async {
     setLoading();
-    final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
-    var queryParameters = {'api_key': apiKey};
+    final String apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
+    final Map<String, String> queryParameters = <String, String>{'api_key': apiKey};
 
     final dynamic data =
-        await fetchData(Url.TVSHOW_DETAILS + id.toString(), queryParameters);
+        await fetchData(TVSHOW_DETAILS + id.toString(), queryParameters);
     database.insert(TvshowDetails.fromRawJson(data));
     setInit();
   }
 
   Future<void> deleteFav(int id) async {
     setLoading();
-    final list = await database.queryList();
-    final item = list.firstWhere((tvshowDetails) => tvshowDetails.id == id);
-    database.delete(item.rowId).then((_id) {
+    final List<TvshowDetails> list = await database.queryList();
+    final TvshowDetails item = list.firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
+    database.delete(item.rowId).then((int _id) {
       _id != item.rowId ? setError() : setInit();
     }).catchError((dynamic onError) => print('Error $onError to deleted row $id'));
   }
 
   Future<void> getDetails(int id) async {
-    final apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
-    var queryParameters = {'api_key': apiKey};
+    final String apiKey = await secureStorage.readStorage(KeyStorate.API_KEY);
+    final Map<String, String> queryParameters = <String, String>{'api_key': apiKey};
 
     final dynamic data =
-        await fetchData(Url.TVSHOW_DETAILS + id.toString(), queryParameters);
+        await fetchData(TVSHOW_DETAILS + id.toString(), queryParameters);
     _tvshowDetails = TvshowDetails.fromRawJson(data);
   }
 }

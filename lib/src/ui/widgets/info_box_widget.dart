@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class InfoBoxWidget extends StatelessWidget {
+  const InfoBoxWidget({Key key, this.typeInfo, this.value}) : super(key: key);
   final int typeInfo;
   final int value;
-  const InfoBoxWidget({Key key, this.typeInfo, this.value}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class InfoBoxWidget extends StatelessWidget {
         alignment: Alignment.topCenter,
         margin: SMALL_INSESTS,
         padding: SMALL_INSESTS,
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[

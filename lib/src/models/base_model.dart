@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -13,9 +14,9 @@ abstract class BaseModel extends Model {
   ViewState _state = ViewState.init;
   ViewState get state => _state;
 
-  Future fetchData(String url, Map<String, dynamic> queryParameters) async {
-    var uri = Uri.https(Url.apiUrl, url, queryParameters);
-    final response = await ApiProvider().requestGet(uri.toString());
+  Future<String> fetchData(String url, Map<String, dynamic> queryParameters) async {
+    final Uri uri = Uri.https(apiUrl, url, queryParameters);
+    final Response response = await ApiProvider().requestGet(uri.toString());
 
     return response.body;
   }
