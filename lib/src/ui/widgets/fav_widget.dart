@@ -4,8 +4,8 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:tv_randshow/src/models/fav_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/views/loading_view.dart';
+import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
@@ -46,32 +46,11 @@ class FavWidget extends StatelessWidget {
 
   Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () => _showModalSheet(context),
-      child: Container(
-        height: 128.0,
-        width: 144.0,
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Container(
-            padding: SMALL_INSESTS,
-            decoration: BoxDecoration(
-                borderRadius: BORDER_RADIUS, color: Colors.black38),
-            child: Text(
-              tvshowDetails.name,
-              style: TextStyle(
-                  color: StyleColor.WHITE, fontWeight: FontWeight.w600),
-            ),
-          ),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BORDER_RADIUS,
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: checkImage(),
-          ),
-        ),
-      ),
-    );
+        onTap: () => _showModalSheet(context),
+        child: ImageWidget(
+            name: tvshowDetails.name,
+            url: tvshowDetails.posterPath,
+            isModal: false));
   }
 
   void _showModalSheet(BuildContext context) {
@@ -87,14 +66,6 @@ class FavWidget extends StatelessWidget {
           return Container(
               height: 400, child: MenuPanelWidget(tvshowDetails, true));
         });
-  }
-
-  ImageProvider checkImage() {
-    if (tvshowDetails.posterPath == null) {
-      return AssetImage(ImagePath.emptyTvShow);
-    } else {
-      return NetworkImage(BASE_IMAGE + tvshowDetails.posterPath);
-    }
   }
 
   Widget _deleteButton(BuildContext context) {
@@ -152,7 +123,7 @@ class FavWidget extends StatelessWidget {
 
   Widget _actionButton(BuildContext context) {
     return RaisedButton.icon(
-      icon: Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
+      icon: const Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
       label: const Text('Random', style: TextStyle(color: StyleColor.WHITE)),

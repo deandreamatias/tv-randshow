@@ -12,6 +12,7 @@ const String TVSHOW_SEARCH = '$API_VERSION/search/tv';
 const String TVSHOW_DETAILS = '$API_VERSION/tv/';
 const String TVSHOW_DETAILS_SEASON = '/season/';
 
-class ImagePath {
-  static const String emptyTvShow = 'assets/img/no_image.png';
+class Images {
+  static const String EMPTY_IMAGE = 'assets/img/no_image.png';
+  static const String PLACE_HOLDER = 'https://via.placeholder.com/344';
 }

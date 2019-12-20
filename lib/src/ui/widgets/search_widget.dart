@@ -3,8 +3,8 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/data/result.dart';
+import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
@@ -84,43 +84,17 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   Widget _image(BuildContext context) {
     return GestureDetector(
-      onTap: () async {
-        await ScopedModel.of<SearchModel>(context).getDetails(widget.result.id);
-        return _showModalSheet(context);
-      },
-      child: Container(
-        height: 128.0,
-        width: 144.0,
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Container(
-            padding: SMALL_INSESTS,
-            decoration: BoxDecoration(
-                borderRadius: BORDER_RADIUS, color: Colors.black38),
-            child: Text(
-              widget.result.name,
-              style: TextStyle(
-                  color: StyleColor.WHITE, fontWeight: FontWeight.w600),
-            ),
-          ),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BORDER_RADIUS,
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: checkImage(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  ImageProvider checkImage() {
-    if (widget.result.posterPath == null) {
-      return AssetImage(ImagePath.emptyTvShow);
-    } else {
-      return NetworkImage(BASE_IMAGE + widget.result.posterPath);
-    }
+        onTap: () async {
+          if (enable) {
+            await ScopedModel.of<SearchModel>(context)
+                .getDetails(widget.result.id);
+            return _showModalSheet(context);
+          }
+        },
+        child: ImageWidget(
+            name: widget.result.name,
+            url: widget.result.posterPath,
+            isModal: false));
   }
 
   Widget _removeButton(BuildContext context) {
@@ -147,7 +121,8 @@ class _SearchWidgetState extends State<SearchWidget> {
           borderRadius: BorderRadius.circular(8.0),
           side: const BorderSide(color: StyleColor.PRIMARY)),
       color: StyleColor.WHITE,
-      label: const Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
+      label:
+          const Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
       onPressed: () {
         setState(() {
           changeButton = true;
