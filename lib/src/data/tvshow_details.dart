@@ -8,22 +8,6 @@ part 'tvshow_details.g.dart';
 
 @JsonSerializable(nullable: true, includeIfNull: false)
 class TvshowDetails {
-  int rowId;
-  @JsonKey(name: 'episode_run_time')
-  List<int> episodeRunTime;
-  int id;
-  @JsonKey(name: 'in_production')
-  dynamic inProduction;
-  String name;
-  @JsonKey(name: 'number_of_episodes')
-  int numberOfEpisodes;
-  @JsonKey(name: 'number_of_seasons')
-  int numberOfSeasons;
-  String overview;
-  @JsonKey(name: 'poster_path')
-  String posterPath;
-  List<Season> seasons;
-
   TvshowDetails({
     this.rowId,
     this.episodeRunTime,
@@ -41,6 +25,23 @@ class TvshowDetails {
       _$TvshowDetailsFromJson(json.decode(str));
   factory TvshowDetails.fromJson(Map<String, dynamic> json) =>
       _$TvshowDetailsFromJson(json);
+      
+  int rowId;
+  @JsonKey(name: 'episode_run_time')
+  List<int> episodeRunTime;
+  int id;
+  @JsonKey(name: 'in_production')
+  dynamic inProduction;
+  String name;
+  @JsonKey(name: 'number_of_episodes')
+  int numberOfEpisodes;
+  @JsonKey(name: 'number_of_seasons')
+  int numberOfSeasons;
+  String overview;
+  @JsonKey(name: 'poster_path')
+  String posterPath;
+  List<Season> seasons;
+
   Map<String, dynamic> toJson() => _$TvshowDetailsToJson(this);
   String toRawJson() => json.encode(_$TvshowDetailsToJson(this));
 }

@@ -9,8 +9,8 @@ import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class SearchWidget extends StatefulWidget {
+  const SearchWidget({Key key, this.result}) : super(key: key);
   final Result result;
-  SearchWidget({Key key, this.result}) : super(key: key);
 
   @override
   _SearchWidgetState createState() => _SearchWidgetState();
@@ -23,7 +23,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   void initState() {
     widget.result.firstAirDate == null ? enable = false : enable = true;
     changeButton =
-        false; // TODO: Reset state to false when search twice in search view
+        false; // TODO(deandreamatias): Reset state to false when search twice in search view
     super.initState();
   }
 
@@ -32,7 +32,7 @@ class _SearchWidgetState extends State<SearchWidget> {
     return Opacity(
       opacity: enable ? 1.0 : 0.3,
       child: Padding(
-        padding: EdgeInsets.only(right: 8.0, left: 8.0),
+        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
         child: Container(
           height: 154.0,
           width: 144.0,
@@ -49,7 +49,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   child: enable
                       ? !changeButton
                           ? _actionButton(context)
@@ -68,12 +68,12 @@ class _SearchWidgetState extends State<SearchWidget> {
     showModalBottomSheet<Container>(
         isScrollControlled: true,
         elevation: 16.0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius:
               BorderRadiusDirectional.vertical(top: Radius.circular(16.0)),
         ),
         context: context,
-        builder: (builder) {
+        builder: (BuildContext builder) {
           return Container(
             height: 400,
             child: MenuPanelWidget(
@@ -119,17 +119,17 @@ class _SearchWidgetState extends State<SearchWidget> {
     if (widget.result.posterPath == null) {
       return AssetImage(ImagePath.emptyTvShow);
     } else {
-      return NetworkImage(Url.BASE_IMAGE + widget.result.posterPath);
+      return NetworkImage(BASE_IMAGE + widget.result.posterPath);
     }
   }
 
   Widget _removeButton(BuildContext context) {
     return RaisedButton.icon(
-      key: ValueKey('remove'),
+      key: const ValueKey<String>('remove'),
       icon: Icon(Unicons.close, color: StyleColor.WHITE),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
-      label: Text('Remove', style: TextStyle(color: StyleColor.WHITE)),
+      label: const Text('Remove', style: TextStyle(color: StyleColor.WHITE)),
       onPressed: () {
         setState(() {
           changeButton = false;
@@ -141,13 +141,13 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   Widget _actionButton(BuildContext context) {
     return RaisedButton.icon(
-      key: ValueKey('action'),
+      key: const ValueKey<String>('action'),
       icon: Icon(Unicons.favourite, color: StyleColor.PRIMARY),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
-          side: BorderSide(color: StyleColor.PRIMARY)),
+          side: const BorderSide(color: StyleColor.PRIMARY)),
       color: StyleColor.WHITE,
-      label: Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
+      label: const Text('Add to fav', style: TextStyle(color: StyleColor.PRIMARY)),
       onPressed: () {
         setState(() {
           changeButton = true;

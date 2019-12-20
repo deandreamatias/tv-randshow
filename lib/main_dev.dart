@@ -26,9 +26,9 @@ class MainApp extends StatelessWidget {
         fontFamily: 'Nunito',
         primarySwatch: Colors.red,
       ),
-      home: AppView(),
-      routes: <String, WidgetBuilder>{'/loading': (context) => LoadingView()},
-      localizationsDelegates: [
+      home: const AppView(),
+      routes: <String, WidgetBuilder>{'/loading': (BuildContext context) => const LoadingView()},
+      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
         FlutterI18nDelegate(useCountryCode: false, fallbackFile: 'en'),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate

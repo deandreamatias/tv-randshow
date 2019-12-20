@@ -8,7 +8,7 @@ import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class MenuPanelWidget extends StatelessWidget {
-  MenuPanelWidget(this.tvshowDetails, this.inDatabase, {Key key})
+  const MenuPanelWidget(this.tvshowDetails, this.inDatabase, {Key key})
       : super(key: key);
   final TvshowDetails tvshowDetails;
   final bool inDatabase;
@@ -39,8 +39,8 @@ class MenuPanelWidget extends StatelessWidget {
           //   ),
           // ),
           Container(
-            margin: EdgeInsets.only(top: 20),
-            padding: EdgeInsets.all(16.0),
+            margin: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -113,7 +113,7 @@ class MenuPanelWidget extends StatelessWidget {
     if (tvshowDetails.posterPath == null) {
       return AssetImage(ImagePath.emptyTvShow);
     } else {
-      return NetworkImage(Url.BASE_IMAGE + tvshowDetails.posterPath);
+      return NetworkImage(BASE_IMAGE + tvshowDetails.posterPath);
     }
   }
 }

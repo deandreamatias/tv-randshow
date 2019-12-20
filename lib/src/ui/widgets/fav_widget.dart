@@ -10,13 +10,13 @@ import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 class FavWidget extends StatelessWidget {
+  const FavWidget({Key key, @required this.tvshowDetails}) : super(key: key);
   final TvshowDetails tvshowDetails;
-  FavWidget({Key key, @required this.tvshowDetails}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 8.0, left: 8.0),
+      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
       child: Container(
         height: 154.0,
         width: 144.0,
@@ -78,12 +78,12 @@ class FavWidget extends StatelessWidget {
     showModalBottomSheet<Container>(
         isScrollControlled: true,
         elevation: 16.0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius:
               BorderRadiusDirectional.vertical(top: Radius.circular(16.0)),
         ),
         context: context,
-        builder: (builder) {
+        builder: (BuildContext builder) {
           return Container(
               height: 400, child: MenuPanelWidget(tvshowDetails, true));
         });
@@ -93,13 +93,13 @@ class FavWidget extends StatelessWidget {
     if (tvshowDetails.posterPath == null) {
       return AssetImage(ImagePath.emptyTvShow);
     } else {
-      return NetworkImage(Url.BASE_IMAGE + tvshowDetails.posterPath);
+      return NetworkImage(BASE_IMAGE + tvshowDetails.posterPath);
     }
   }
 
   Widget _deleteButton(BuildContext context) {
     return GestureDetector(
-      onTap: () => _deleteConfirm(context).then((result) {
+      onTap: () => _deleteConfirm(context).then((bool result) {
         if (result) {
           ScopedModel.of<FavModel>(context).deleteFav(tvshowDetails.rowId);
           ScopedModel.of<FavModel>(context).getFavs();
@@ -110,7 +110,7 @@ class FavWidget extends StatelessWidget {
         width: 20.0,
         decoration: BoxDecoration(
           color: StyleColor.WHITE,
-          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(4.0)),
           border: Border.all(),
         ),
         child: Icon(
@@ -128,19 +128,19 @@ class FavWidget extends StatelessWidget {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Tv show'),
-          content: Text('Do you want delete this tv show?'),
+          title: const Text('Delete Tv show'),
+          content: const Text('Do you want delete this tv show?'),
           actions: <Widget>[
             RaisedButton(
               textColor: StyleColor.WHITE,
               color: StyleColor.PRIMARY,
-              child: Text('CANCEL'),
+              child: const Text('CANCEL'),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
             FlatButton(
-                child: Text('DELETE'),
+                child: const Text('DELETE'),
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 })
@@ -155,7 +155,7 @@ class FavWidget extends StatelessWidget {
       icon: Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
-      label: Text('Random', style: TextStyle(color: StyleColor.WHITE)),
+      label: const Text('Random', style: TextStyle(color: StyleColor.WHITE)),
       onPressed: () => navigateRandom(context),
     );
   }
@@ -163,8 +163,9 @@ class FavWidget extends StatelessWidget {
   void navigateRandom(BuildContext context) {
     Navigator.push<LoadingView>(
         context,
-        MaterialPageRoute(
-          builder: (context) => LoadingView(tvshowDetails: tvshowDetails),
+        MaterialPageRoute<LoadingView>(
+          builder: (BuildContext context) =>
+              LoadingView(tvshowDetails: tvshowDetails),
         ));
   }
 }
