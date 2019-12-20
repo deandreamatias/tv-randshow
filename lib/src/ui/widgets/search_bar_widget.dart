@@ -17,8 +17,10 @@ class SearchBarWidget extends StatelessWidget {
       child: TextField(
         controller: editingController,
         textInputAction: TextInputAction.search,
+        onChanged: (String text) =>
+            searchModel.searched ? searchModel.onSearch() : null,
         onSubmitted: (String value) => editingController.text.isNotEmpty
-            ? searchModel.getSearch(editingController.text)
+            ? searchModel.getSearch()
             : print(editingController.text),
         autofocus: true,
         autocorrect: true,
