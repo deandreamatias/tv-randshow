@@ -45,7 +45,7 @@ class ImageWidget extends StatelessWidget {
         ),
       ),
       placeholder: (BuildContext context, String url) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 36.0),
+        padding: const EdgeInsets.all(36.0),
         child: const CircularProgressIndicator(),
       ),
       errorWidget: (BuildContext context, String url, Object error) =>
