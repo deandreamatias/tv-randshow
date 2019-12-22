@@ -3,9 +3,9 @@ import 'package:scoped_model/scoped_model.dart';
 
 import 'package:tv_randshow/src/models/fav_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/ui/views/loading_view.dart';
 import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/random_button_widget.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
@@ -36,7 +36,7 @@ class FavWidget extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: _actionButton(context),
+              child: RandomButtonWidget(tvshowDetails: tvshowDetails),
             ),
           ],
         ),
@@ -51,21 +51,6 @@ class FavWidget extends StatelessWidget {
             name: tvshowDetails.name,
             url: tvshowDetails.posterPath,
             isModal: false));
-  }
-
-  void _showModalSheet(BuildContext context) {
-    showModalBottomSheet<Container>(
-        isScrollControlled: true,
-        elevation: 16.0,
-        shape: const RoundedRectangleBorder(
-          borderRadius:
-              BorderRadiusDirectional.vertical(top: Radius.circular(16.0)),
-        ),
-        context: context,
-        builder: (BuildContext builder) {
-          return Container(
-              height: 400, child: MenuPanelWidget(tvshowDetails, true));
-        });
   }
 
   Widget _deleteButton(BuildContext context) {
@@ -121,22 +106,22 @@ class FavWidget extends StatelessWidget {
     );
   }
 
-  Widget _actionButton(BuildContext context) {
-    return RaisedButton.icon(
-      icon: const Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      color: StyleColor.PRIMARY,
-      label: const Text('Random', style: TextStyle(color: StyleColor.WHITE)),
-      onPressed: () => navigateRandom(context),
-    );
-  }
-
-  void navigateRandom(BuildContext context) {
-    Navigator.push<LoadingView>(
-        context,
-        MaterialPageRoute<LoadingView>(
-          builder: (BuildContext context) =>
-              LoadingView(tvshowDetails: tvshowDetails),
-        ));
+  void _showModalSheet(BuildContext context) {
+    showModalBottomSheet<Container>(
+        isScrollControlled: true,
+        elevation: 16.0,
+        shape: const RoundedRectangleBorder(
+          borderRadius:
+              BorderRadiusDirectional.vertical(top: Radius.circular(16.0)),
+        ),
+        context: context,
+        builder: (BuildContext builder) {
+          return Container(
+              height: 400,
+              child: MenuPanelWidget(
+                tvshowDetails: tvshowDetails,
+                inDatabase: true,
+              ));
+        });
   }
 }

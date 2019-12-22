@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
+
 import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/models/search_model.dart';
+import 'package:tv_randshow/src/ui/widgets/fav_button_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
-import 'package:tv_randshow/src/utils/unicons_icons.dart';
+import 'package:tv_randshow/src/ui/widgets/random_button_widget.dart';
 
 class MenuPanelWidget extends StatelessWidget {
-  const MenuPanelWidget(this.tvshowDetails, this.inDatabase, {Key key})
-      : super(key: key);
+  const MenuPanelWidget({this.tvshowDetails, this.inDatabase});
   final TvshowDetails tvshowDetails;
   final bool inDatabase;
 
@@ -20,25 +17,11 @@ class MenuPanelWidget extends StatelessWidget {
         alignment: Alignment.topCenter,
         overflow: Overflow.visible,
         children: <Widget>[
-          // Positioned(
-          //   top: -22.5,
-          //   child: RaisedButton.icon(
-          //     icon: Icon(Unicons.favourite, color: StyleColor.PRIMARY),
-          //     shape: RoundedRectangleBorder(
-          //         borderRadius: BorderRadius.circular(8.0),
-          //         side: BorderSide(color: StyleColor.PRIMARY)),
-          //     color: StyleColor.WHITE,
-          //     label: Text('Add to fav',
-          //         style: TextStyle(color: StyleColor.PRIMARY)),
-          //     onPressed: () {
-          //       if (inDatabase) {
-          //       } else {
-          //         ScopedModel.of<SearchModel>(context)
-          //             .insertDatabase(tvshowDetails);
-          //       }
-          //     },
-          //   ),
-          // ),
+          Positioned(
+              top: -22.5,
+              child: inDatabase
+                  ? RandomButtonWidget(tvshowDetails: tvshowDetails)
+                  : FavButtonWidget(id: tvshowDetails.id)),
           Container(
             margin: const EdgeInsets.only(top: 20),
             padding: const EdgeInsets.all(16.0),
