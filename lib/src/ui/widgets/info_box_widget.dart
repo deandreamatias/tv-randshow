@@ -23,7 +23,7 @@ class InfoBoxWidget extends StatelessWidget {
               style: TextStyle(color: StyleColor.WHITE, fontSize: 16),
             ),
             Text(
-              value.toString(),
+              value > 0 ? value.toString() : '--',
               style: TextStyle(
                   color: StyleColor.WHITE,
                   fontSize: 26,

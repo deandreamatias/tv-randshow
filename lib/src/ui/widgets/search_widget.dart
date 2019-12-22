@@ -46,14 +46,11 @@ class _SearchWidgetState extends State<SearchWidget> {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  child: enable
-                      ? FavButtonWidget(
-                          id: widget.result.id,
-                        )
-                      : Container(),
-                ),
+                child: enable
+                    ? FavButtonWidget(
+                        id: widget.result.id,
+                      )
+                    : Container(),
               ),
             ],
           ),
