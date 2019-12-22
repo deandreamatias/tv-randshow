@@ -10,6 +10,7 @@ class MenuPanelWidget extends StatelessWidget {
   const MenuPanelWidget({this.tvshowDetails, this.inDatabase});
   final TvshowDetails tvshowDetails;
   final bool inDatabase;
+  // TODO(deandreamatias): Persist state of button on search and fav widgets
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +69,9 @@ class MenuPanelWidget extends StatelessWidget {
                           value: tvshowDetails.numberOfEpisodes ?? '--'),
                       InfoBoxWidget(
                           typeInfo: 2,
-                          // TODO(deandreamatias): Bad state: no element error
-                          value: tvshowDetails.episodeRunTime.first)
+                          value: tvshowDetails.episodeRunTime.isNotEmpty
+                              ? tvshowDetails.episodeRunTime.first
+                              : 0)
                     ],
                   ),
                 ),
