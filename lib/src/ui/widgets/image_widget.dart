@@ -10,7 +10,6 @@ class ImageWidget extends StatelessWidget {
   final String url;
   final bool isModal;
 
-  // TODO(deandreamatias): Change text color when no image
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
@@ -45,10 +44,9 @@ class ImageWidget extends StatelessWidget {
           ),
         ),
       ),
-      placeholder: (BuildContext context, String url) => const SizedBox(
-        width: 50,
-        height: 50,
-        child: CircularProgressIndicator(),
+      placeholder: (BuildContext context, String url) => Container(
+        padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 36.0),
+        child: const CircularProgressIndicator(),
       ),
       errorWidget: (BuildContext context, String url, Object error) =>
           Image.asset(Images.EMPTY_IMAGE),
