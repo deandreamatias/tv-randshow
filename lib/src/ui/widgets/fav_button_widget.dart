@@ -41,7 +41,7 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                         label: Text(
                             FlutterI18n.translate(
                                 context, 'app.search.button_fav'),
-                            style: const TextStyle(color: StyleColor.PRIMARY)),
+                            style: StyleText.PRIMARY),
                         onPressed: () {
                           setState(() {
                             fav = false;
@@ -51,14 +51,15 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                       )
                     : RaisedButton.icon(
                         key: const ValueKey<String>('delete'),
-                        icon: Icon(Unicons.close, color: StyleColor.WHITE),
+                        icon: Icon(Unicons.close, color: StyleColor.PRIMARY),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0)),
-                        color: StyleColor.PRIMARY,
+                            borderRadius: BorderRadius.circular(8.0),
+                            side: const BorderSide(color: StyleColor.PRIMARY)),
+                        color: StyleColor.WHITE,
                         label: Text(
                             FlutterI18n.translate(
                                 context, 'app.search.button_delete'),
-                            style: const TextStyle(color: StyleColor.WHITE)),
+                            style: StyleText.PRIMARY),
                         onPressed: () {
                           setState(() {
                             fav = true;

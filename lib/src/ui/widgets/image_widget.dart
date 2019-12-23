@@ -28,11 +28,10 @@ class ImageWidget extends StatelessWidget {
                 child: Container(
                   padding: SMALL_INSESTS,
                   decoration: BoxDecoration(
-                      borderRadius: BORDER_RADIUS, color: Colors.black38),
+                      borderRadius: BORDER_RADIUS, color: Colors.black54),
                   child: Text(
                     name,
-                    style: TextStyle(
-                        color: StyleColor.WHITE, fontWeight: FontWeight.w600),
+                    style: StyleText.NAME,
                   ),
                 ),
               ),
@@ -45,7 +44,7 @@ class ImageWidget extends StatelessWidget {
         ),
       ),
       placeholder: (BuildContext context, String url) => Container(
-        padding: const EdgeInsets.all(36.0),
+        padding: const EdgeInsets.symmetric(horizontal: 48.0, vertical: 36.0),
         child: const CircularProgressIndicator(),
       ),
       errorWidget: (BuildContext context, String url, Object error) =>

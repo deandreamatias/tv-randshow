@@ -6,6 +6,7 @@ import 'package:tv_randshow/src/ui/widgets/fav_button_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/random_button_widget.dart';
+import 'package:tv_randshow/src/utils/styles.dart';
 
 class MenuPanelWidget extends StatelessWidget {
   const MenuPanelWidget({this.tvshowDetails, this.inDatabase});
@@ -50,8 +51,7 @@ class MenuPanelWidget extends StatelessWidget {
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 20),
+                            style: StyleText.TITLE,
                           ),
                         ),
                       ),
@@ -77,12 +77,11 @@ class MenuPanelWidget extends StatelessWidget {
                   ),
                 ),
                 Text(FlutterI18n.translate(context, 'app.modal.overview'),
-                    style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
+                    style: StyleText.MESSAGES),
+                const SizedBox(height: 8.0),
                 Expanded(
                   flex: 6,
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.only(top: 8.0),
                     child: Text(tvshowDetails.overview),
                   ),
                 ),

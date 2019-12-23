@@ -7,11 +7,23 @@ class StyleColor {
   static const Color TEXT_MEDIUM = Color(0x99000000);
   static const Color TEXT_DISABLE = Color(0x61000000);
   static const Color WHITE = Color(0xFFFFFFFF);
-  // static const Color SECONDARY = Color(0xFFE40505);
 }
 
 class StyleText {
-  static const TextStyle title = TextStyle(fontSize: 20);
+  static const TextStyle MESSAGES =
+      TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+  static const TextStyle TITLE =
+      TextStyle(fontSize: 20, fontWeight: FontWeight.w600);
+  static const TextStyle INFO_BOX_NUMBER = TextStyle(
+      color: StyleColor.WHITE, fontSize: 26, fontWeight: FontWeight.w700);
+  static const TextStyle INFO_BOX_TITLE =
+      TextStyle(color: StyleColor.WHITE, fontSize: 16);
+  static const TextStyle DESCRIPTION = TextStyle(
+      color: StyleColor.WHITE, fontSize: 12, fontWeight: FontWeight.w300);
+  static const TextStyle NAME =
+      TextStyle(color: StyleColor.WHITE, fontWeight: FontWeight.w600);
+  static const TextStyle PRIMARY = TextStyle(color: StyleColor.PRIMARY);
+  static const TextStyle WHITE = TextStyle(color: StyleColor.WHITE);
 }
 
 const BorderRadiusGeometry BORDER_RADIUS =
