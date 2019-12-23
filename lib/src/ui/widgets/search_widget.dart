@@ -29,31 +29,27 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget build(BuildContext context) {
     return Opacity(
       opacity: enable ? 1.0 : 0.38,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-        child: Container(
-          height: 154.0,
-          width: 144.0,
-          decoration: const BoxDecoration(borderRadius: BORDER_RADIUS),
-          child: Stack(
-            children: <Widget>[
-              Positioned(
-                right: 6.0,
-                left: 0.0,
-                top: 6.0,
-                bottom: 18.0,
-                child: _image(context),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: enable
-                    ? FavButtonWidget(
-                        id: widget.result.id,
-                      )
-                    : Container(),
-              ),
-            ],
-          ),
+      child: Container(
+        decoration: const BoxDecoration(borderRadius: BORDER_RADIUS),
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            Positioned(
+              right: 0.0,
+              left: 0.0,
+              top: 0.0,
+              bottom: 24.0,
+              child: _image(context),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: enable
+                  ? FavButtonWidget(
+                      id: widget.result.id,
+                    )
+                  : Container(),
+            ),
+          ],
         ),
       ),
     );
