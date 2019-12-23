@@ -17,7 +17,6 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^0.1.2           # [Package] Icons for iOS
   path_provider: ^1.4.0             # [Plugin] Locations on the Android & iOS file systems
-  flutter_secure_storage: ^3.2.1+1  # [Plugin] Store data in secure storage
   # Others
   get_it: ^3.0.3                    # [Package] Service locator
   scoped_model: ^1.0.1              # [Package] Scoped model architecture
@@ -26,6 +25,7 @@ dependencies:
   flutter_pagewise: ^1.2.3          # [Package] List pagination
   flare_loading: ^2.1.0             # [Package] Loading animation with flare
   logger: ^0.8.0                    # [Package] Logger for debug
+  flutter_secure_storage: ^3.2.1+1  # [Plugin] Store data in secure storage
   sqflite: ^1.1.7+2                 # [Plugin] SQLite
 
 dev_dependencies:
