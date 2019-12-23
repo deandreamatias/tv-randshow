@@ -4,29 +4,29 @@
         "fav": {
             "tab": "Favorites",
             "title": "Roll a random episode from your favorites",
-            "empty_message": "Search TV show to add in your favorites",
-            "button_random": "Random"
+            "empty_message": "Search TV show to add in your favorites TV shows",
+            "button_random": "RANDOM"
         },
         "search": {
             "tab": "Search",
             "search_bar": "Write a TV show name",
-            "init_message": "Search a TV show in this top bar",
+            "init_message": "Search a TV show in top bar",
             "error_message": "Oops! Have a error. \nTry verify your internet connection",
             "empty_message": "Don't have results for this search",
-            "button_fav": "Add to fav",
-            "button_delete": "Delete"
+            "button_fav": "ADD TO FAV",
+            "button_delete": "DELETE"
         },
         "loading": {
             "title": "Choosing a random TV show"
         },
         "result": {
-            "title": "This is your random TV show!",
-            "button_random": "Choose new random episode",
+            "title": "This is your random TV show episode!",
+            "button_random": "NEW RANDOM EPISODE",
             "button_home": "HOME"
         },
         "modal": {
             "description": "Description",
-            "sinopse": "Sinopse",
+            "overview": "Overview",
             "seasons": "Seasons",
             "season": "Season",
             "episodes": "Episodes",
