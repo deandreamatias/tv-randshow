@@ -16,31 +16,27 @@ class FavWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-      child: Container(
-        height: 154.0,
-        width: 144.0,
-        decoration: const BoxDecoration(borderRadius: BORDER_RADIUS),
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              right: 6.0,
-              left: 0.0,
-              top: 6.0,
-              bottom: 18.0,
-              child: _image(context),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: _deleteButton(context),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: RandomButtonWidget(tvshowDetails: tvshowDetails),
-            ),
-          ],
-        ),
+    return Container(
+      decoration: const BoxDecoration(borderRadius: BORDER_RADIUS),
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Positioned(
+            right: 8.0,
+            left: 8.0,
+            top: 8.0,
+            bottom: 24.0,
+            child: _image(context),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: _deleteButton(context),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: RandomButtonWidget(tvshowDetails: tvshowDetails),
+          ),
+        ],
       ),
     );
   }

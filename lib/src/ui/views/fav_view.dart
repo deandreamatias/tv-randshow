@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/models/fav_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
+import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
 import 'package:tv_randshow/src/utils/states.dart';
 
 class FavView extends StatefulWidget {
@@ -29,19 +29,21 @@ class _FavViewState extends State<FavView> {
   Widget _renderData(FavModel model) {
     if (model.state != ViewState.loading) {
       if (model.listTvShow == null || model.listTvShow.isEmpty) {
-        return Center(
-            child:
-                Text(FlutterI18n.translate(context, 'app.fav.empty_message')));
+        return const Center(
+          child: TextWidget('app.fav.empty_message'),
+        );
       } else {
         return Column(
           children: <Widget>[
-            Text(FlutterI18n.translate(context, 'app.fav.title')),
+            const TextWidget('app.fav.title'),
             Expanded(
               child: GridView.builder(
                 semanticChildCount: model.listTvShow.length,
                 padding: const EdgeInsets.all(16.0),
                 itemCount: model.listTvShow.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 8.0,
+                    crossAxisSpacing: 8.0,
                     crossAxisCount: 2),
                 itemBuilder: (BuildContext context, int index) {
                   return model.listTvShow[index];
