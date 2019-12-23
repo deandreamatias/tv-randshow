@@ -4,11 +4,13 @@ import 'package:flare_loading/flare_loading.dart';
 
 import 'package:tv_randshow/src/models/loading_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/ui/views/base_view.dart';
-import 'package:tv_randshow/src/ui/views/result_view.dart';
 import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/states.dart';
+
+import 'app_view.dart';
+import 'base_view.dart';
+import 'result_view.dart';
 
 class LoadingView extends StatefulWidget {
   const LoadingView({Key key, this.tvshowDetails}) : super(key: key);
@@ -31,6 +33,13 @@ class _LoadingViewState extends State<LoadingView> {
                     tvshowResult: tvshowResult,
                     tvshowDetails: widget.tvshowDetails),
               ));
+        } else if (model.state == ViewState.error) {
+          // TODO(deandreamatias): Show message error
+          Navigator.push<AppView>(
+              context,
+              MaterialPageRoute<AppView>(
+                builder: (BuildContext context) => const AppView(),
+              ));
         }
       });
     }, builder: (BuildContext context, Widget child, LoadingModel model) {
@@ -44,12 +53,8 @@ class _LoadingViewState extends State<LoadingView> {
                 name: Images.LOADING,
                 startAnimation: 'Loading',
                 loopAnimation: 'Loading',
-                onSuccess: (dynamic _) {
-                  print('Finished');
-                },
-                onError: (dynamic err, dynamic stack) {
-                  print(err);
-                },
+                onSuccess: (dynamic _) {},
+                onError: (dynamic err, dynamic stack) {},
               ),
             ),
           ],
