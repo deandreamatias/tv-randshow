@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/models/loading_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
@@ -48,7 +49,7 @@ class _ResultViewState extends State<ResultView> {
       child: Align(
         alignment: Alignment.center,
         child: Container(
-          child: const Text('TV show random result!'),
+          child: Text(FlutterI18n.translate(context, 'app.result.title')),
         ),
       ),
     );
@@ -110,8 +111,9 @@ class _ResultViewState extends State<ResultView> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0)),
                 color: StyleColor.PRIMARY,
-                label: const Text('Pick a new random episode',
-                    style: TextStyle(color: StyleColor.WHITE)),
+                label: Text(
+                    FlutterI18n.translate(context, 'app.result.button_random'),
+                    style: const TextStyle(color: StyleColor.WHITE)),
                 onPressed: () => Navigator.push<LoadingView>(
                     context,
                     MaterialPageRoute<LoadingView>(
@@ -128,7 +130,7 @@ class _ResultViewState extends State<ResultView> {
     return Container(
       padding: const EdgeInsets.only(top: 16.0),
       child: FlatButton.icon(
-        label: const Text('Home'),
+        label: Text(FlutterI18n.translate(context, 'app.result.button_home')),
         icon: const Icon(Unicons.home),
         onPressed: () => Navigator.push<AppView>(
             context,

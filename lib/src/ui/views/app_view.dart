@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/models/app_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
@@ -36,9 +37,11 @@ class _AppViewState extends State<AppView> {
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Unicons.favourite), title: const Text('Favorites')),
+                icon: Icon(Unicons.favourite),
+                title: Text(FlutterI18n.translate(context, 'app.fav.tab'))),
             BottomNavigationBarItem(
-                icon: Icon(Unicons.search), title: const Text('Search')),
+                icon: Icon(Unicons.search),
+                title: Text(FlutterI18n.translate(context, 'app.search.tab'))),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: StyleColor.PRIMARY,

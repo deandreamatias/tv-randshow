@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import 'package:tv_randshow/src/models/fav_model.dart';
@@ -84,19 +85,23 @@ class FavWidget extends StatelessWidget {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Delete Tv show'),
-          content: const Text('Do you want delete this tv show?'),
+          title:
+              Text(FlutterI18n.translate(context, 'app.delete_dialog.title')),
+          content: Text(
+              FlutterI18n.translate(context, 'app.delete_dialog.subtitle')),
           actions: <Widget>[
             RaisedButton(
               textColor: StyleColor.WHITE,
               color: StyleColor.PRIMARY,
-              child: const Text('CANCEL'),
+              child: Text(FlutterI18n.translate(
+                  context, 'app.delete_dialog.button_cancel')),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
             FlatButton(
-                child: const Text('DELETE'),
+                child: Text(FlutterI18n.translate(
+                    context, 'app.delete_dialog.button_delete')),
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 })
