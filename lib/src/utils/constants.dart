@@ -1,6 +1,6 @@
 import 'package:tv_randshow/config/flavor_config.dart';
 
-class KeyStorate {
+class KeyStore {
   static const String API_KEY = 'apiKey';
 }
 
