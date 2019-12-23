@@ -3,11 +3,15 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
+
 import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
+import 'package:tv_randshow/src/services/log_service.dart';
+import 'package:tv_randshow/src/services/service_locator.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
+  final LogService _logger = locator<LogService>();
 
   String _databaseName;
   static const int _databaseVersion = 1;
@@ -38,13 +42,9 @@ class DatabaseHelper {
   Future<Database> _initDatabase() async {
     Directory documentsDirectory;
     try {
-      if (Platform.isAndroid) {
-        documentsDirectory = await getExternalStorageDirectory();
-      } else if (Platform.isIOS) {
-        documentsDirectory = await getExternalStorageDirectory();
-      }
+      documentsDirectory = await getExternalStorageDirectory();
     } catch (e) {
-      print(e);
+      _logger.printError('Open directory', e);
     }
 
     if (FlavorConfig.isDevelopment()) {
@@ -54,7 +54,9 @@ class DatabaseHelper {
     }
     final String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path,
-        version: _databaseVersion, onCreate: _onCreate);
+            version: _databaseVersion, onCreate: _onCreate)
+        .catchError(
+            (dynamic onError) => _logger.printError('Open database', onError));
   }
 
   // SQL code to create the database table
@@ -71,7 +73,9 @@ class DatabaseHelper {
             $columnOverview TEXT NOT NULL,
             $columnInProduction INTEGER NOT NULL
           )
-          ''');
+          ''').catchError((dynamic
+            onError) =>
+        _logger.printError('Create database', onError));
   }
 
   // Helper methods

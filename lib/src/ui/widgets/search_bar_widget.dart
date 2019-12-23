@@ -20,9 +20,8 @@ class SearchBarWidget extends StatelessWidget {
         textInputAction: TextInputAction.search,
         onChanged: (String text) =>
             searchModel.searched ? searchModel.onSearch() : null,
-        onSubmitted: (String value) => editingController.text.isNotEmpty
-            ? searchModel.getSearch()
-            : print(editingController.text),
+        onSubmitted: (String value) =>
+            editingController.text.isNotEmpty ? searchModel.getSearch() : null,
         autofocus: true,
         autocorrect: true,
         decoration: InputDecoration(

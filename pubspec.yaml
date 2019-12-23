@@ -25,6 +25,7 @@ dependencies:
   cached_network_image: ^2.0.0-rc   # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
   flare_loading: ^2.1.0             # [Package] Loading animation with flare
+  logger: ^0.8.0                    # [Package] Logger for debug
   sqflite: ^1.1.7+2                 # [Plugin] SQLite
 
 dev_dependencies:
