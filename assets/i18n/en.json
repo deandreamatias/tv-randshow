@@ -1,9 +1,45 @@
 {
     "app": {
         "name": "TV Randshow",
-        "title": "TV Randshow"
-    },
-    "tvshow_search": {
-        "fab" : "Add TV Show"
+        "fav": {
+            "tab": "Favorites",
+            "title": "Roll a random episode from your favorites",
+            "button_random": "Random"
+        },
+        "search": {
+            "tab": "Search",
+            "search_bar": "Write a TV show name",
+            "init_message": "Search a TV show in this top bar",
+            "error_message": "Oops! Have a error. \nTry verify your internet connection",
+            "empty_message": "Don't have results for this search",
+            "button_fav": "Add to fav",
+            "button_delete": "Delete"
+        },
+        "loading": {
+            "title": "Choosing a random TV show"
+        },
+        "result": {
+            "title": "This is your random TV show!",
+            "button_random": "Choose new random episode",
+            "button_home": "HOME"
+        },
+        "modal": {
+            "description": "Description",
+            "sinopse": "Sinopse",
+            "seasons": "Seasons",
+            "season": "Season",
+            "episodes": "Episodes",
+            "episode": "Episode",
+            "duration": "Duration",
+            "undefined": "Undefined",
+            "episode_season_metric": "in all",
+            "duration_metric": "min/episode"
+        },
+        "delete_dialog": {
+            "title": "Delete TV show",
+            "subtitle": "Do you want delete this TV show from your favorites?",
+            "button_cancel": "CANCEL",
+            "button_delete": "DELETE"
+        }
     }
 }

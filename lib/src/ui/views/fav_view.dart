@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/models/fav_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
@@ -28,11 +29,13 @@ class _FavViewState extends State<FavView> {
   Widget _renderData(FavModel model) {
     if (model.state != ViewState.loading) {
       if (model.listTvShow == null || model.listTvShow.isEmpty) {
-        return const Center(child: Text('Empty list'));
+        return Center(
+            child:
+                Text(FlutterI18n.translate(context, 'app.fav.empty_message')));
       } else {
         return Column(
           children: <Widget>[
-            const Text('Choose a random episode form your favorites'),
+            Text(FlutterI18n.translate(context, 'app.fav.title')),
             Expanded(
               child: GridView.builder(
                 semanticChildCount: model.listTvShow.length,

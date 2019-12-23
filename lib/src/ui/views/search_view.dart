@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 
 import 'package:tv_randshow/src/models/search_model.dart';
@@ -52,10 +53,14 @@ class _SearchViewState extends State<SearchView> {
         showRetry: false,
         padding: const EdgeInsets.all(16.0),
         errorBuilder: (BuildContext context, Object dyna) {
-          return const Center(child: Text('Error to load'));
+          return Center(
+              child: Text(
+                  FlutterI18n.translate(context, 'app.search.error_message')));
         },
         noItemsFoundBuilder: (BuildContext context) {
-          return const Center(child: Text('No items'));
+          return Center(
+              child: Text(
+                  FlutterI18n.translate(context, 'app.search.empty_message')));
         },
         itemBuilder: (BuildContext context, dynamic item, int index) {
           return item;
@@ -64,7 +69,9 @@ class _SearchViewState extends State<SearchView> {
             model.loadList(textEditingController.text, pageIndex + 1),
       );
     } else {
-      return const Center(child: Text('Search data'));
+      return Center(
+          child:
+              Text(FlutterI18n.translate(context, 'app.search.init_message')));
     }
   }
 }

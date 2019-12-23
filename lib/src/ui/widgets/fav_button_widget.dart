@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
@@ -37,8 +38,10 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                             side: const BorderSide(color: StyleColor.PRIMARY)),
                         color: StyleColor.WHITE,
-                        label: const Text('Add to fav',
-                            style: TextStyle(color: StyleColor.PRIMARY)),
+                        label: Text(
+                            FlutterI18n.translate(
+                                context, 'app.search.button_fav'),
+                            style: const TextStyle(color: StyleColor.PRIMARY)),
                         onPressed: () {
                           setState(() {
                             fav = false;
@@ -47,13 +50,15 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                         },
                       )
                     : RaisedButton.icon(
-                        key: const ValueKey<String>('remove'),
+                        key: const ValueKey<String>('delete'),
                         icon: Icon(Unicons.close, color: StyleColor.WHITE),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
                         color: StyleColor.PRIMARY,
-                        label: const Text('Remove',
-                            style: TextStyle(color: StyleColor.WHITE)),
+                        label: Text(
+                            FlutterI18n.translate(
+                                context, 'app.search.button_delete'),
+                            style: const TextStyle(color: StyleColor.WHITE)),
                         onPressed: () {
                           setState(() {
                             fav = true;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 
 class InfoBoxWidget extends StatelessWidget {
@@ -19,8 +20,8 @@ class InfoBoxWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Text(
-              selectTitle(typeInfo),
-              style: TextStyle(color: StyleColor.WHITE, fontSize: 16),
+              selectTitle(typeInfo, context),
+              style: const TextStyle(color: StyleColor.WHITE, fontSize: 16),
             ),
             Text(
               value > 0 ? value.toString() : '--',
@@ -29,19 +30,19 @@ class InfoBoxWidget extends StatelessWidget {
                   fontSize: 26,
                   fontWeight: FontWeight.w700),
             ),
-            if (typeInfo > 2)
-              Container()
-            else
+            if (typeInfo <= 2)
               typeInfo == 2
                   ? Text(
-                      'min/episode',
+                      FlutterI18n.translate(
+                          context, 'app.modal.duration_metric'),
                       style: TextStyle(
                           color: StyleColor.WHITE,
                           fontSize: 12,
                           fontWeight: FontWeight.w300),
                     )
                   : Text(
-                      'in all',
+                      FlutterI18n.translate(
+                          context, 'app.modal.episode_season_metric'),
                       style: TextStyle(
                           color: StyleColor.WHITE,
                           fontSize: 12,
@@ -57,25 +58,25 @@ class InfoBoxWidget extends StatelessWidget {
     );
   }
 
-  String selectTitle(int typeInfo) {
+  String selectTitle(int typeInfo, BuildContext context) {
     switch (typeInfo) {
       case 0:
-        return 'Seasons';
+        return FlutterI18n.translate(context, 'app.modal.seasons');
         break;
       case 1:
-        return 'Episodes';
+        return FlutterI18n.translate(context, 'app.modal.episodes');
         break;
       case 2:
-        return 'Duration';
+        return FlutterI18n.translate(context, 'app.modal.duration');
         break;
       case 3:
-        return 'Season';
+        return FlutterI18n.translate(context, 'app.modal.season');
         break;
       case 4:
-        return 'Episode';
+        return FlutterI18n.translate(context, 'app.modal.episode');
         break;
       default:
-        return 'Undefined';
+        return FlutterI18n.translate(context, 'app.modal.undefined');
     }
   }
 }
