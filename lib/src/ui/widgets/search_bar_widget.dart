@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/models/search_model.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
@@ -25,14 +26,14 @@ class SearchBarWidget extends StatelessWidget {
         autofocus: true,
         autocorrect: true,
         decoration: InputDecoration(
-            hintText: 'Search',
+            hintText: FlutterI18n.translate(context, 'app.search.search_bar'),
             contentPadding: const EdgeInsets.all(0.0),
             //suffixIcon: Icon(Icons.close),
             prefixIcon: Icon(Unicons.search, color: StyleColor.SECONDARY),
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: StyleColor.SECONDARY),
                 borderRadius: BORDER_RADIUS),
-            border: OutlineInputBorder(borderRadius: BORDER_RADIUS)),
+            border: const OutlineInputBorder(borderRadius: BORDER_RADIUS)),
       ),
     );
   }

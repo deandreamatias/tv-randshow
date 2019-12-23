@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/widgets/fav_button_widget.dart';
@@ -75,13 +76,13 @@ class MenuPanelWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Text('Sinopse',
+                Text(FlutterI18n.translate(context, 'app.modal.overview'),
                     style:
                         TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
                 Expanded(
                   flex: 6,
                   child: SingleChildScrollView(
-                    padding: const EdgeInsets.only(top: 4.0),
+                    padding: const EdgeInsets.only(top: 8.0),
                     child: Text(tvshowDetails.overview),
                   ),
                 ),
