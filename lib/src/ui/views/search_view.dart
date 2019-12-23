@@ -33,6 +33,7 @@ class _SearchViewState extends State<SearchView> {
           child: Container(
             child: Column(
               children: <Widget>[
+                const SizedBox(height: 16.0),
                 SearchBarWidget(
                     editingController: textEditingController,
                     searchModel: model),
