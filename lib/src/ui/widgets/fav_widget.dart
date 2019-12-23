@@ -5,7 +5,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:tv_randshow/src/models/fav_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
-import 'package:tv_randshow/src/ui/widgets/menu_details_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/modal_sheet_widget.dart';
 import 'package:tv_randshow/src/ui/widgets/random_button_widget.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
@@ -21,7 +21,7 @@ class FavWidget extends StatelessWidget {
       child: Container(
         height: 154.0,
         width: 144.0,
-        decoration: BoxDecoration(borderRadius: BORDER_RADIUS),
+        decoration: const BoxDecoration(borderRadius: BORDER_RADIUS),
         child: Stack(
           children: <Widget>[
             Positioned(
