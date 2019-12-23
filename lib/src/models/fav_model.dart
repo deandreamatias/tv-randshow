@@ -18,13 +18,14 @@ class FavModel extends BaseModel {
         return FavWidget(tvshowDetails: tvshow);
       }).toList();
       setInit();
-    }).catchError((dynamic onError) => print('Error get favs $onError'));
+    }).catchError((dynamic onError) => logger.printError('Get favs', onError));
   }
 
   void deleteFav(int id) {
     setLoading();
     database.delete(id).then((int _id) {
       _id != id ? setError() : setInit();
-    }).catchError((dynamic onError) => print('Error $onError to deleted row $id'));
+    }).catchError(
+        (dynamic onError) => logger.printError('Delete fav', onError));
   }
 }
