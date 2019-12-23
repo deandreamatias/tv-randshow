@@ -4,6 +4,7 @@
         "fav": {
             "tab": "Favorites",
             "title": "Roll a random episode from your favorites",
+            "empty_message": "Search TV show to add in your favorites",
             "button_random": "Random"
         },
         "search": {
