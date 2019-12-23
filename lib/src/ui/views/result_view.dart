@@ -8,6 +8,7 @@ import 'package:tv_randshow/src/ui/views/app_view.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/views/loading_view.dart';
 import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
+import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
 import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
@@ -32,8 +33,10 @@ class _ResultViewState extends State<ResultView> {
                 child: Padding(
               padding: DEFAULT_INSESTS,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  _renderHeader(),
+                  const TextWidget('app.result.title'),
+                  const SizedBox(height: 8),
                   _renderBody(),
                   _renderFooter()
                 ],
@@ -43,64 +46,54 @@ class _ResultViewState extends State<ResultView> {
         });
   }
 
-  Widget _renderHeader() {
-    return Expanded(
-      flex: 1,
-      child: Align(
-        alignment: Alignment.center,
-        child: Container(
-          child: Text(FlutterI18n.translate(context, 'app.result.title')),
-        ),
-      ),
-    );
-  }
-
   Widget _renderBody() {
     return Expanded(
-      flex: 6,
       child: Stack(
           overflow: Overflow.visible,
           alignment: Alignment.center,
           children: <Widget>[
-            Container(
-              padding: DEFAULT_INSESTS,
-              decoration: BoxDecoration(
-                  borderRadius: BORDER_RADIUS, border: Border.all()),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Flexible(
-                      fit: FlexFit.loose,
-                      flex: 1,
-                      child: Text(widget.tvshowResult.tvshowDetails.name)),
-                  Flexible(
-                    fit: FlexFit.loose,
-                    flex: 2,
-                    child: Row(
-                      children: <Widget>[
-                        InfoBoxWidget(
-                            typeInfo: 3,
-                            value: widget.tvshowResult.randomSeason),
-                        InfoBoxWidget(
-                            typeInfo: 4,
-                            value: widget.tvshowResult.randomEpisode),
-                      ],
+            Positioned(
+              right: 0.0,
+              left: 0.0,
+              top: 0.0,
+              bottom: 24.0,
+              child: Container(
+                padding: DEFAULT_INSESTS,
+                decoration: BoxDecoration(
+                    borderRadius: BORDER_RADIUS, border: Border.all()),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      widget.tvshowResult.tvshowDetails.name,
+                      style: StyleText.TITLE,
                     ),
-                  ),
-                  Flexible(
+                    Flexible(
                       fit: FlexFit.loose,
                       flex: 1,
-                      child: Text(widget.tvshowResult.episodeName,
-                          textAlign: TextAlign.left)),
-                  Flexible(
-                      fit: FlexFit.tight,
-                      flex: 3,
-                      child: SingleChildScrollView(
-                        child: Text(widget.tvshowResult.episodeDescription,
-                            textAlign: TextAlign.left),
-                      )),
-                ],
+                      child: Row(
+                        children: <Widget>[
+                          InfoBoxWidget(
+                              typeInfo: 3,
+                              value: widget.tvshowResult.randomSeason),
+                          InfoBoxWidget(
+                              typeInfo: 4,
+                              value: widget.tvshowResult.randomEpisode),
+                        ],
+                      ),
+                    ),
+                    Text(widget.tvshowResult.episodeName,
+                        style: StyleText.MESSAGES),
+                    const SizedBox(height: 8),
+                    Flexible(
+                        fit: FlexFit.loose,
+                        flex: 2,
+                        child: SingleChildScrollView(
+                          child: Text(widget.tvshowResult.episodeDescription),
+                        )),
+                  ],
+                ),
               ),
             ),
             Align(
