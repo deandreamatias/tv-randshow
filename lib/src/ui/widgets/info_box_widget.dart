@@ -19,38 +19,27 @@ class InfoBoxWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text(
-              selectTitle(typeInfo, context),
-              style: const TextStyle(color: StyleColor.WHITE, fontSize: 16),
-            ),
+            Text(selectTitle(typeInfo, context),
+                style: StyleText.INFO_BOX_TITLE),
             Text(
               value > 0 ? value.toString() : '--',
-              style: TextStyle(
-                  color: StyleColor.WHITE,
-                  fontSize: 26,
-                  fontWeight: FontWeight.w700),
+              style: StyleText.INFO_BOX_NUMBER,
             ),
             if (typeInfo <= 2)
               typeInfo == 2
                   ? Text(
                       FlutterI18n.translate(
                           context, 'app.modal.duration_metric'),
-                      style: TextStyle(
-                          color: StyleColor.WHITE,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300),
+                      style: StyleText.DESCRIPTION,
                     )
                   : Text(
                       FlutterI18n.translate(
                           context, 'app.modal.episode_season_metric'),
-                      style: TextStyle(
-                          color: StyleColor.WHITE,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300),
+                      style: StyleText.DESCRIPTION,
                     ),
           ],
         ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: StyleColor.PRIMARY,
           borderRadius: BORDER_RADIUS,
         ),

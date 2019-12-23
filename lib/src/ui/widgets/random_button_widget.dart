@@ -16,7 +16,8 @@ class RandomButtonWidget extends StatelessWidget {
       icon: const Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
-      label: Text(FlutterI18n.translate(context, 'app.fav.button_random'), style: const TextStyle(color: StyleColor.WHITE)),
+      label: Text(FlutterI18n.translate(context, 'app.fav.button_random'),
+          style: StyleText.WHITE),
       onPressed: () => Navigator.push<LoadingView>(
           context,
           MaterialPageRoute<LoadingView>(

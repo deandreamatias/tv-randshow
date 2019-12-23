@@ -6,6 +6,7 @@ import 'package:tv_randshow/src/models/loading_model.dart';
 import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/views/base_view.dart';
 import 'package:tv_randshow/src/ui/views/result_view.dart';
+import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/states.dart';
 
@@ -35,18 +36,23 @@ class _LoadingViewState extends State<LoadingView> {
     }, builder: (BuildContext context, Widget child, LoadingModel model) {
       return Scaffold(
         body: SafeArea(
-            child: Center(
-          child: FlareLoading(
-            name: Images.LOADING,
-            startAnimation: 'Loading',
-            loopAnimation: 'Loading',
-            onSuccess: (dynamic _) {
-              print('Finished');
-            },
-            onError: (dynamic err, dynamic stack) {
-              print(err);
-            },
-          ),
+            child: Column(
+          children: <Widget>[
+            const TextWidget('app.loading.title'),
+            Expanded(
+              child: FlareLoading(
+                name: Images.LOADING,
+                startAnimation: 'Loading',
+                loopAnimation: 'Loading',
+                onSuccess: (dynamic _) {
+                  print('Finished');
+                },
+                onError: (dynamic err, dynamic stack) {
+                  print(err);
+                },
+              ),
+            ),
+          ],
         )),
       );
     });

@@ -106,7 +106,7 @@ class _ResultViewState extends State<ResultView> {
                 color: StyleColor.PRIMARY,
                 label: Text(
                     FlutterI18n.translate(context, 'app.result.button_random'),
-                    style: const TextStyle(color: StyleColor.WHITE)),
+                    style: StyleText.WHITE),
                 onPressed: () => Navigator.push<LoadingView>(
                     context,
                     MaterialPageRoute<LoadingView>(
