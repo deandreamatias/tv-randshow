@@ -14,5 +14,6 @@ const String TVSHOW_DETAILS_SEASON = '/season/';
 
 class Images {
   static const String EMPTY_IMAGE = 'assets/img/no_image.png';
+  static const String LOADING = 'assets/img/loading.flr';
   static const String PLACE_HOLDER = 'https://via.placeholder.com/344';
 }
