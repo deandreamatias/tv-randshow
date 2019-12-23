@@ -35,6 +35,7 @@ class _FavViewState extends State<FavView> {
       } else {
         return Column(
           children: <Widget>[
+            const SizedBox(height: 16.0),
             const TextWidget('app.fav.title'),
             Expanded(
               child: GridView.builder(
