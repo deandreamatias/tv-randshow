@@ -24,6 +24,7 @@ dependencies:
   flutter_i18n: ^0.6.4              # [Package] Internationalization strings
   cached_network_image: ^2.0.0-rc   # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
+  flare_loading: ^2.1.0             # [Package] Loading animation with flare
   sqflite: ^1.1.7+2                 # [Plugin] SQLite
 
 dev_dependencies:
@@ -36,6 +37,7 @@ flutter:
   assets:
     - assets/i18n/
     - assets/img/no_image.png
+    - assets/img/loading.flr
   fonts:
     - family: Nunito
       fonts:
