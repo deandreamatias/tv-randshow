@@ -24,6 +24,8 @@ class SearchBarWidget extends StatelessWidget {
             editingController.text.isNotEmpty ? searchModel.getSearch() : null,
         autofocus: true,
         autocorrect: true,
+        enableSuggestions: true,
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
             hintText: FlutterI18n.translate(context, 'app.search.search_bar'),
             contentPadding: const EdgeInsets.all(0.0),
