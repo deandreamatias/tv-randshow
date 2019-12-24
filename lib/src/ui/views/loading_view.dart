@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:tv_randshow/src/data/tvshow_result.dart';
 import 'package:flare_loading/flare_loading.dart';
 
@@ -7,6 +8,7 @@ import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/states.dart';
+import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 import 'app_view.dart';
 import 'base_view.dart';
@@ -57,6 +59,19 @@ class _LoadingViewState extends State<LoadingView> {
                 onError: (dynamic err, dynamic stack) {},
               ),
             ),
+            Container(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: FlatButton.icon(
+                label: Text(
+                    FlutterI18n.translate(context, 'app.loading.button_home')),
+                icon: const Icon(Unicons.home),
+                onPressed: () => Navigator.push<AppView>(
+                    context,
+                    MaterialPageRoute<AppView>(
+                      builder: (BuildContext context) => const AppView(),
+                    )),
+              ),
+            )
           ],
         )),
       );

@@ -17,7 +17,8 @@
             "button_delete": "DELETE"
         },
         "loading": {
-            "title": "Choosing a random TV show"
+            "title": "Choosing a random TV show",
+            "button_home": "HOME"
         },
         "result": {
             "title": "This is your random TV show episode!",
