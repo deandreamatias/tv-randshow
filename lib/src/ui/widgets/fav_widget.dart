@@ -78,24 +78,30 @@ class FavWidget extends StatelessWidget {
   Future<bool> _deleteConfirm(BuildContext context) async {
     return showDialog<bool>(
       context: context,
-      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
           title:
               Text(FlutterI18n.translate(context, 'app.delete_dialog.title')),
           content: Text(
               FlutterI18n.translate(context, 'app.delete_dialog.subtitle')),
           actions: <Widget>[
-            RaisedButton(
-              textColor: StyleColor.WHITE,
-              color: StyleColor.PRIMARY,
+            FlatButton(
+              textColor: StyleColor.PRIMARY,
+              color: StyleColor.WHITE,
               child: Text(FlutterI18n.translate(
                   context, 'app.delete_dialog.button_cancel')),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
-            FlatButton(
+            RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    side: const BorderSide(color: StyleColor.PRIMARY)),
+                textColor: StyleColor.PRIMARY,
+                color: StyleColor.WHITE,
                 child: Text(FlutterI18n.translate(
                     context, 'app.delete_dialog.button_delete')),
                 onPressed: () {
