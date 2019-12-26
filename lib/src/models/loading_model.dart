@@ -10,32 +10,38 @@ import 'package:tv_randshow/src/utils/constants.dart';
 class LoadingModel extends BaseModel {
   Future<TvshowResult> getEpisode(TvshowDetails tvshowDetails) async {
     setLoading();
-    final String apiKey = await secureStorage.readStorage(KeyStore.API_KEY);
-    final Map<String, String> queryParameters = <String, String>{
-      'api_key': apiKey
-    };
-    final int randomSeason =
-        _getRandomNumber(tvshowDetails.numberOfSeasons, true);
-    final String data = await fetchData(
-        TVSHOW_DETAILS +
-            tvshowDetails.id.toString() +
-            TVSHOW_DETAILS_SEASON +
-            randomSeason.toString(),
-        queryParameters);
-    if (data != null && data.isNotEmpty) {
-      final TvshowSeasonsDetails tvshowSeasonDetails =
-          TvshowSeasonsDetails.fromRawJson(data);
-      final Episode episode = tvshowSeasonDetails.episodes.elementAt(
-          _getRandomNumber(tvshowSeasonDetails.episodes.length, false));
+    await checkConnection();
+    if (hasConnection) {
+      final String apiKey = await secureStorage.readStorage(KeyStore.API_KEY);
+      final Map<String, String> queryParameters = <String, String>{
+        'api_key': apiKey
+      };
+      final int randomSeason =
+          _getRandomNumber(tvshowDetails.numberOfSeasons, true);
+      final String data = await fetchData(
+          TVSHOW_DETAILS +
+              tvshowDetails.id.toString() +
+              TVSHOW_DETAILS_SEASON +
+              randomSeason.toString(),
+          queryParameters);
+      if (data != null && data.isNotEmpty) {
+        final TvshowSeasonsDetails tvshowSeasonDetails =
+            TvshowSeasonsDetails.fromRawJson(data);
+        final Episode episode = tvshowSeasonDetails.episodes.elementAt(
+            _getRandomNumber(tvshowSeasonDetails.episodes.length, false));
 
-      final TvshowResult tvshowResult = TvshowResult(
-          tvshowDetails: tvshowDetails,
-          randomSeason: episode.seasonNumber,
-          randomEpisode: episode.episodeNumber,
-          episodeName: episode.name,
-          episodeDescription: episode.overview);
-      setInit();
-      return tvshowResult;
+        final TvshowResult tvshowResult = TvshowResult(
+            tvshowDetails: tvshowDetails,
+            randomSeason: episode.seasonNumber,
+            randomEpisode: episode.episodeNumber,
+            episodeName: episode.name,
+            episodeDescription: episode.overview);
+        setInit();
+        return tvshowResult;
+      } else {
+        setError();
+        return null;
+      }
     } else {
       setError();
       return null;

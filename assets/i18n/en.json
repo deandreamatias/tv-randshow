@@ -18,6 +18,8 @@
         },
         "loading": {
             "title": "Choosing a random TV show",
+            "general_error": "Error to get episode",
+            "connection_error": "Fail connection. Connect and try again",
             "button_home": "HOME"
         },
         "result": {

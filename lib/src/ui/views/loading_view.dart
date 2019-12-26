@@ -1,3 +1,4 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:tv_randshow/src/data/tvshow_result.dart';
@@ -8,6 +9,7 @@ import 'package:tv_randshow/src/data/tvshow_details.dart';
 import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
 import 'package:tv_randshow/src/utils/constants.dart';
 import 'package:tv_randshow/src/utils/states.dart';
+import 'package:tv_randshow/src/utils/styles.dart';
 import 'package:tv_randshow/src/utils/unicons_icons.dart';
 
 import 'app_view.dart';
@@ -36,12 +38,24 @@ class _LoadingViewState extends State<LoadingView> {
                     tvshowDetails: widget.tvshowDetails),
               ));
         } else if (model.state == ViewState.error) {
-          // TODO(deandreamatias): Show message error
-          Navigator.push<AppView>(
-              context,
-              MaterialPageRoute<AppView>(
-                builder: (BuildContext context) => const AppView(),
-              ));
+          if (model.hasConnection) {
+            Flushbar<Object>(
+              message:
+                  FlutterI18n.translate(context, 'app.loading.general_error'),
+              backgroundColor: StyleColor.PRIMARY,
+              flushbarPosition: FlushbarPosition.TOP,
+              duration: const Duration(seconds: 3),
+            )..show(context);
+          } else {
+            Flushbar<Object>(
+              message: FlutterI18n.translate(
+                  context, 'app.loading.connection_error'),
+              backgroundColor: StyleColor.PRIMARY,
+              flushbarPosition: FlushbarPosition.TOP,
+              flushbarStyle: FlushbarStyle.GROUNDED,
+              isDismissible: false,
+            )..show(context);
+          }
         }
       });
     }, builder: (BuildContext context, Widget child, LoadingModel model) {

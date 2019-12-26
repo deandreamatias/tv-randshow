@@ -3,14 +3,14 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:tv_randshow/src/services/service_locator.dart';
 
 class BaseView<T extends Model> extends StatefulWidget {
-  const BaseView({ScopedModelDescendantBuilder<T> builder, this.onModelReady}) : _builder = builder;
+  const BaseView({ScopedModelDescendantBuilder<T> builder, this.onModelReady})
+      : _builder = builder;
   final ScopedModelDescendantBuilder<T> _builder;
 
-  /// Function will be called as soon as the widget is initialised.
+  /// Function will be called as soon as the widget is initialized.
   ///
   /// Callback will reive the model that was created and supplied to the ScopedModel
   final Function(T) onModelReady;
-
 
   @override
   _BaseViewState<T> createState() => _BaseViewState<T>();
