@@ -72,8 +72,9 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   void _showModalSheet(BuildContext context) {
     showModalBottomSheet<Container>(
+        backgroundColor: Colors.transparent,
         isScrollControlled: true,
-        elevation: 16.0,
+        elevation: 0.0,
         shape: const RoundedRectangleBorder(
           borderRadius:
               BorderRadiusDirectional.vertical(top: Radius.circular(16.0)),
@@ -81,7 +82,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         context: context,
         builder: (BuildContext builder) {
           return Container(
-            height: 400,
+            height: 424,
             child: MenuPanelWidget(
               tvshowDetails: ScopedModel.of<SearchModel>(context).tvShowDetails,
               inDatabase: false,
