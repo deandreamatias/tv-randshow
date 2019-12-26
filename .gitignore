@@ -9,6 +9,7 @@
 .buildlog/
 .history
 .svn/
+lib/config/env.dart
 
 # IntelliJ related
 *.iml
@@ -86,6 +87,3 @@ unlinked_spec.ds
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 **/ios/Flutter/flutter_export_environment.sh
-
-# Personal files
-lib/config/secure_keys.dart

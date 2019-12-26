@@ -4,9 +4,16 @@ import 'package:meta/meta.dart';
 enum Flavor { DEV, PROD }
 
 class FlavorValues {
-  FlavorValues({@required this.baseUrl, this.apiKey});
+  FlavorValues({this.baseUrl, this.apiKey});
   final String baseUrl;
   final String apiKey;
+
+  static FlavorValues fromJson(Map<String, dynamic> json) {
+    return FlavorValues(
+      baseUrl: json['baseUrl'] as String,
+      apiKey: json['apiKey'] as String,
+    );
+  }
 }
 
 class FlavorConfig {
