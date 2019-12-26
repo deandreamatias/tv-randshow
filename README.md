@@ -52,7 +52,8 @@ Install dependencies from pubspec.yaml by running `flutter packages get` from th
 
 Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details).
 
-There you go, you can now open & edit the project. Enjoy!
+Run with CLI:
+`flutter run --flavor dev -t lib/main_dev.dart `
 
 ## Built with
 
