@@ -1,4 +1,4 @@
-name: Test
+name: Test 
 on: push
 jobs: 
   build-and-test: 
@@ -10,10 +10,7 @@ jobs:
         java-version: '12.x'
     - uses: subosito/flutter-action@v1
       with:
-        channel: 'stable' 
+        flutter-version: '1.12.13+hotfix.5'
     - run: flutter pub get
     - run: flutter build aot -t lib/main_dev.dart
-    # Analyze our Dart code
     - run: flutter analyze
-    # Run our tests
-    - run: flutter test

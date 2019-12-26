@@ -1,5 +1,10 @@
 name: Release APK
-on: push
+on:
+  push:
+    branches:    
+      - master
+    tags:        
+      - v*
 jobs:
   build:
     name: Build APK
@@ -11,13 +16,13 @@ jobs:
         java-version: '12.x'
     - uses: subosito/flutter-action@v1
       with:
-        flutter-version: '1.12.13+hotfix.6'
+        flutter-version: '1.12.13+hotfix.5'
     - run: flutter analyze
     - run: flutter pub get
-    - run: flutter build apk -- --flavor prod -t lib/main_prod.dart
+    - run: flutter build apk --flavor prod -t lib/main_prod.dart
     - name: Create a Release APK
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "build/app/outputs/apk/debug/*.apk"
+        artifacts: "build/app/outputs/apk/release/*.apk"
         token: ${{ secrets.TOKEN_REPO }}
         
