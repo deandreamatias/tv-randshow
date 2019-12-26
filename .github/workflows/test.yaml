@@ -11,12 +11,14 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         flutter-version: '1.12.13+hotfix.5'
+    # Get Dart VM SDK
     - run: sudo apt-get update
     - run: sudo apt-get install apt-transport-https
     - run: sudo sh -c 'wget -qO- https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
     - run: sudo sh -c 'wget -qO- https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
     - run: sudo apt-get update
     - run: sudo apt-get install dart
+    # Generate env.dart with Dart SDK
     - run: dart .tool/env.dart
     - run: flutter pub get
     - run: flutter build aot -t lib/main_dev.dart
