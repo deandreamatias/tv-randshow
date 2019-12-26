@@ -114,17 +114,18 @@ class FavWidget extends StatelessWidget {
   }
 
   void _showModalSheet(BuildContext context) {
-    showModalBottomSheet<Container>(
+    showModalBottomSheet<Column>(
+        backgroundColor: Colors.transparent,
         isScrollControlled: true,
-        elevation: 16.0,
+        elevation: 0.0,
         shape: const RoundedRectangleBorder(
           borderRadius:
               BorderRadiusDirectional.vertical(top: Radius.circular(16.0)),
         ),
         context: context,
-        builder: (BuildContext builder) {
+        builder: (BuildContext context) {
           return Container(
-              height: 400,
+              height: 424,
               child: MenuPanelWidget(
                 tvshowDetails: tvshowDetails,
                 inDatabase: true,
