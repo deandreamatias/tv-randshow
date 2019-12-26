@@ -7,7 +7,6 @@ on:
       - v*
 jobs:
   build:
-    name: Build APK
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -17,6 +16,8 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         flutter-version: '1.12.13+hotfix.5'
+    - env: 
+        API_KEY_TMDB: ${{ secrets.API_KEY_TMDB }}
     # Get Dart VM SDK
     - run: sudo apt-get update
     - run: sudo apt-get install apt-transport-https
@@ -25,8 +26,6 @@ jobs:
     - run: sudo apt-get update
     - run: sudo apt-get install dart
     # Generate env.dart with Dart SDK
-    - env: 
-        API_KEY_TMDB: ${{ secrets.API_KEY_TMDB }}
     - run: dart .tool/env.dart
     - run: flutter analyze
     - run: flutter pub get
@@ -35,5 +34,4 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "build/app/outputs/apk/release/*.apk"
-        token: ${{ secrets.TOKEN_REPO }}
-        
+        token: ${{ secrets.TOKEN_REPO }} 
