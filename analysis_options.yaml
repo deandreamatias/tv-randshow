@@ -35,6 +35,7 @@ analyzer:
   exclude:
     - "bin/cache/**"
     - "lib/src/data/*.g.dart"
+    - "lib/config/env.dart"
     # the following two are relative to the stocks example and the flutter package respectively
     # see https://github.com/dart-lang/sdk/issues/28463
     - "lib/i18n/messages_*.dart"
