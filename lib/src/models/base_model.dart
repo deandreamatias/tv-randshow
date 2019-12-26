@@ -1,3 +1,4 @@
+import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:http/http.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -12,6 +13,7 @@ abstract class BaseModel extends Model {
   final LogService logger = locator<LogService>();
   final SecureStorage secureStorage = SecureStorage();
   ViewState _state = ViewState.init;
+  bool hasConnection;
   ViewState get state => _state;
 
   Future<String> fetchData(
@@ -23,6 +25,10 @@ abstract class BaseModel extends Model {
             (dynamic onError) => logger.printError('Get request', onError));
 
     return response?.body;
+  }
+
+  Future<void> checkConnection() async {
+    hasConnection = await DataConnectionChecker().hasConnection;
   }
 
   void setInit() {
