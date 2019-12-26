@@ -10,7 +10,7 @@ jobs:
         java-version: '12.x'
     - uses: axel-op/dart-package-analyzer/with-full-sdk@stable
       with:
-        githubToken: ${{ secrets.TOKEN_REPO }}
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
     - run: dart .tool/env.dart
     - uses: subosito/flutter-action@v1
       with:
