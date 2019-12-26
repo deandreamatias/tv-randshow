@@ -25,8 +25,8 @@ jobs:
     - run: sudo apt-get install dart
     # Generate env.dart with Dart SDK
     - run: dart .tool/env.dart
-    env: 
-      API_KEY_TMDB: ${{ secrets.API_KEY_TMDB }}
+      env: 
+        API_KEY_TMDB: ${{ secrets.API_KEY_TMDB }}
     - run: flutter analyze
     - run: flutter pub get
     - run: flutter build apk --flavor prod -t lib/main_prod.dart
