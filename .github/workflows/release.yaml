@@ -6,7 +6,7 @@ on:
     tags:        
       - v*
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -30,8 +30,8 @@ jobs:
     - run: flutter analyze
     - run: flutter pub get
     - run: flutter build apk --flavor prod -t lib/main_prod.dart
-    - name: Create a Release APK
-      uses: ncipollo/release-action@v1
+    - uses: ncipollo/release-action@v1.4.0
       with:
-        artifacts: "build/app/outputs/apk/release/*.apk"
-        token: ${{ secrets.TOKEN_REPO }} 
+        artifacts: "build/app/outputs/apk/prod/release/*.apk"
+        token: ${{ secrets.GITHUB_TOKEN }} 
+        prerelease: true
