@@ -29,6 +29,9 @@ abstract class BaseModel extends Model {
 
   Future<void> checkConnection() async {
     hasConnection = await DataConnectionChecker().hasConnection;
+    if (!hasConnection)
+      logger.printError(
+          'No connection', DataConnectionChecker().lastTryResults);
   }
 
   void setInit() {
