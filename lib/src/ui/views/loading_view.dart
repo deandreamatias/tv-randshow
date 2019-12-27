@@ -30,13 +30,14 @@ class _LoadingViewState extends State<LoadingView> {
     return BaseView<LoadingModel>(onModelReady: (LoadingModel model) {
       model.getEpisode(widget.tvshowDetails).then((TvshowResult tvshowResult) {
         if (model.state == ViewState.init) {
-          Navigator.push<ResultView>(
+          Navigator.pushAndRemoveUntil<ResultView>(
               context,
               MaterialPageRoute<ResultView>(
                 builder: (BuildContext context) => ResultView(
                     tvshowResult: tvshowResult,
                     tvshowDetails: widget.tvshowDetails),
-              ));
+              ),
+              ModalRoute.withName('/'));
         } else if (model.state == ViewState.error) {
           if (model.hasConnection) {
             Flushbar<Object>(
@@ -79,11 +80,12 @@ class _LoadingViewState extends State<LoadingView> {
                 label: Text(
                     FlutterI18n.translate(context, 'app.loading.button_home')),
                 icon: const Icon(Unicons.home),
-                onPressed: () => Navigator.push<AppView>(
-                    context,
-                    MaterialPageRoute<AppView>(
-                      builder: (BuildContext context) => const AppView(),
-                    )),
+                onPressed: () => Navigator.pushAndRemoveUntil<AppView>(
+                  context,
+                  MaterialPageRoute<AppView>(
+                      builder: (BuildContext context) => const AppView()),
+                  ModalRoute.withName('/'),
+                ),
               ),
             )
           ],

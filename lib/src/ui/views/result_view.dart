@@ -125,11 +125,12 @@ class _ResultViewState extends State<ResultView> {
       child: FlatButton.icon(
         label: Text(FlutterI18n.translate(context, 'app.result.button_home')),
         icon: const Icon(Unicons.home),
-        onPressed: () => Navigator.push<AppView>(
+        onPressed: () => Navigator.pushAndRemoveUntil<AppView>(
             context,
             MaterialPageRoute<AppView>(
               builder: (BuildContext context) => const AppView(),
-            )),
+            ),
+            ModalRoute.withName('/')),
       ),
     );
   }
