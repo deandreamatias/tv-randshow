@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:tv_randshow/src/data/result.dart';
+import 'result.dart';
 
 part 'search.g.dart';
 
@@ -17,7 +17,7 @@ class Search {
 
   factory Search.fromRawJson(String str) => _$SearchFromJson(json.decode(str));
   factory Search.fromJson(Map<String, dynamic> json) => _$SearchFromJson(json);
-  
+
   int page;
   List<Result> results;
   @JsonKey(name: 'total_results')

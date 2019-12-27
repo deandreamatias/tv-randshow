@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:tv_randshow/src/models/search_model.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
-import 'package:tv_randshow/src/utils/unicons_icons.dart';
+import '../../models/search_model.dart';
+import '../../utils/styles.dart';
+import '../../utils/unicons_icons.dart';
 
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({Key key, this.editingController, this.searchModel})

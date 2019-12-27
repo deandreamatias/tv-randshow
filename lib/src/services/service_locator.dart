@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
 
-import 'package:tv_randshow/src/models/app_model.dart';
-import 'package:tv_randshow/src/models/fav_model.dart';
-import 'package:tv_randshow/src/models/loading_model.dart';
-import 'package:tv_randshow/src/models/search_model.dart';
-import 'package:tv_randshow/src/services/log_service.dart';
+import '../models/app_model.dart';
+import '../models/fav_model.dart';
+import '../models/loading_model.dart';
+import '../models/search_model.dart';
+import 'log_service.dart';
 
 GetIt locator = GetIt.instance;
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:tv_randshow/src/models/fav_model.dart';
-import 'package:tv_randshow/src/ui/views/base_view.dart';
-import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
-import 'package:tv_randshow/src/utils/states.dart';
+import '../../models/fav_model.dart';
+import '../../utils/states.dart';
+import '../widgets/text_widget.dart';
+import 'base_view.dart';
 
 class FavView extends StatefulWidget {
   const FavView({Key key}) : super(key: key);

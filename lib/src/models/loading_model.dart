@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:tv_randshow/src/data/episode.dart';
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/data/tvshow_result.dart';
-import 'package:tv_randshow/src/data/tvshow_seasons_details.dart';
-import 'package:tv_randshow/src/models/base_model.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
+import '../data/episode.dart';
+import '../data/tvshow_details.dart';
+import '../data/tvshow_result.dart';
+import '../data/tvshow_seasons_details.dart';
+import '../utils/constants.dart';
+import 'base_model.dart';
 
 class LoadingModel extends BaseModel {
   Future<TvshowResult> getEpisode(TvshowDetails tvshowDetails) async {

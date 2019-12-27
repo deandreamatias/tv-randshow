@@ -1,17 +1,16 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:tv_randshow/src/data/tvshow_result.dart';
 import 'package:flare_loading/flare_loading.dart';
 
-import 'package:tv_randshow/src/models/loading_model.dart';
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
-import 'package:tv_randshow/src/utils/states.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
-import 'package:tv_randshow/src/utils/unicons_icons.dart';
-
+import '../../data/tvshow_details.dart';
+import '../../data/tvshow_result.dart';
+import '../../models/loading_model.dart';
+import '../../utils/constants.dart';
+import '../../utils/states.dart';
+import '../../utils/styles.dart';
+import '../../utils/unicons_icons.dart';
+import '../widgets/text_widget.dart';
 import 'app_view.dart';
 import 'base_view.dart';
 import 'result_view.dart';

@@ -1,6 +1,6 @@
-import 'package:tv_randshow/config/flavor_config.dart';
-import 'package:tv_randshow/src/models/base_model.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
+import '../../config/flavor_config.dart';
+import '../utils/constants.dart';
+import 'base_model.dart';
 
 class AppModel extends BaseModel {
   void init() {

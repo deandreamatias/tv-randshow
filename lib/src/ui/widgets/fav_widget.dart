@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:tv_randshow/src/models/fav_model.dart';
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
-import 'package:tv_randshow/src/ui/widgets/modal_sheet_widget.dart';
-import 'package:tv_randshow/src/ui/widgets/random_button_widget.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
-import 'package:tv_randshow/src/utils/unicons_icons.dart';
+import '../../data/tvshow_details.dart';
+import '../../models/fav_model.dart';
+import '../../utils/styles.dart';
+import '../../utils/unicons_icons.dart';
+import 'image_widget.dart';
+import 'modal_sheet_widget.dart';
+import 'random_button_widget.dart';
 
 class FavWidget extends StatelessWidget {
   const FavWidget({Key key, @required this.tvshowDetails}) : super(key: key);

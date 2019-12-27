@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
+
+import '../../utils/styles.dart';
 
 class TextWidget extends StatelessWidget {
   const TextWidget(this.text);

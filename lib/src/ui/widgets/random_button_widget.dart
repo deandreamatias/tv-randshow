@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/ui/views/loading_view.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
-import 'package:tv_randshow/src/utils/unicons_icons.dart';
+import '../../data/tvshow_details.dart';
+import '../../utils/styles.dart';
+import '../../utils/unicons_icons.dart';
+import '../views/loading_view.dart';
 
 class RandomButtonWidget extends StatelessWidget {
   const RandomButtonWidget({Key key, this.tvshowDetails}) : super(key: key);

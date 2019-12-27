@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:tv_randshow/src/services/service_locator.dart';
+
+import '../../services/service_locator.dart';
 
 class BaseView<T extends Model> extends StatefulWidget {
   const BaseView({ScopedModelDescendantBuilder<T> builder, this.onModelReady})

@@ -1,13 +1,11 @@
-import 'package:tv_randshow/src/data/result.dart';
-import 'package:tv_randshow/src/models/base_model.dart';
-import 'package:tv_randshow/src/data/search.dart';
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/services/database.dart';
-import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
+import '../data/result.dart';
+import '../data/search.dart';
+import '../data/tvshow_details.dart';
+import '../ui/widgets/search_widget.dart';
+import '../utils/constants.dart';
+import 'base_model.dart';
 
 class SearchModel extends BaseModel {
-  final Database database = Database();
   List<SearchWidget> _listTvShow;
   TvshowDetails _tvshowDetails;
   bool searched = false;
