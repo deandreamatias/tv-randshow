@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:tv_randshow/src/models/search_model.dart';
-import 'package:tv_randshow/src/data/result.dart';
-import 'package:tv_randshow/src/ui/widgets/fav_button_widget.dart';
-import 'package:tv_randshow/src/ui/widgets/image_widget.dart';
-import 'package:tv_randshow/src/ui/widgets/modal_sheet_widget.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
+import '../../data/result.dart';
+import '../../models/search_model.dart';
+import '../../utils/styles.dart';
+import 'fav_button_widget.dart';
+import 'image_widget.dart';
+import 'modal_sheet_widget.dart';
 
 class SearchWidget extends StatefulWidget {
   const SearchWidget({Key key, this.result}) : super(key: key);

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:tv_randshow/src/models/app_model.dart';
-import 'package:tv_randshow/src/ui/views/base_view.dart';
-import 'package:tv_randshow/src/ui/views/fav_view.dart';
-import 'package:tv_randshow/src/ui/views/search_view.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
-import 'package:tv_randshow/src/utils/unicons_icons.dart';
+import '../../models/app_model.dart';
+import '../../utils/styles.dart';
+import '../../utils/unicons_icons.dart';
+import 'base_view.dart';
+import 'fav_view.dart';
+import 'search_view.dart';
 
 class AppView extends StatefulWidget {
   const AppView({Key key}) : super(key: key);

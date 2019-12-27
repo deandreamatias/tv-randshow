@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:tv_randshow/src/data/episode.dart';
+import 'episode.dart';
 
 part 'tvshow_seasons_details.g.dart';
 

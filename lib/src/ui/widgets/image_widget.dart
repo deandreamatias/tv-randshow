@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
 
-import 'package:tv_randshow/src/utils/styles.dart';
+import '../../utils/constants.dart';
+import '../../utils/styles.dart';
 
 class ImageWidget extends StatelessWidget {
   const ImageWidget({this.name, this.url, this.isModal});

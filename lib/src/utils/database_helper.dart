@@ -4,10 +4,10 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'package:tv_randshow/config/flavor_config.dart';
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/services/log_service.dart';
-import 'package:tv_randshow/src/services/service_locator.dart';
+import '../../config/flavor_config.dart';
+import '../data/tvshow_details.dart';
+import '../services/log_service.dart';
+import '../services/service_locator.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();

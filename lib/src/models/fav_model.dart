@@ -1,10 +1,8 @@
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/models/base_model.dart';
-import 'package:tv_randshow/src/services/database.dart';
-import 'package:tv_randshow/src/ui/widgets/fav_widget.dart';
+import '../data/tvshow_details.dart';
+import '../ui/widgets/fav_widget.dart';
+import 'base_model.dart';
 
 class FavModel extends BaseModel {
-  final Database database = Database();
   List<FavWidget> _listTvShow;
   TvshowDetails _tvshowDetails;
 

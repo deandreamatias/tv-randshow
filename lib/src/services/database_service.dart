@@ -1,5 +1,5 @@
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/utils/database_helper.dart';
+import '../data/tvshow_details.dart';
+import '../utils/database_helper.dart';
 import 'log_service.dart';
 import 'service_locator.dart';
 

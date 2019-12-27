@@ -1,4 +1,4 @@
-import 'package:tv_randshow/src/data/tvshow_details.dart';
+import 'tvshow_details.dart';
 
 class TvshowResult {
   TvshowResult(

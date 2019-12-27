@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:tv_randshow/src/data/season.dart';
+import 'season.dart';
 
 part 'tvshow_details.g.dart';
 
@@ -25,7 +25,7 @@ class TvshowDetails {
       _$TvshowDetailsFromJson(json.decode(str));
   factory TvshowDetails.fromJson(Map<String, dynamic> json) =>
       _$TvshowDetailsFromJson(json);
-      
+
   int rowId;
   @JsonKey(name: 'episode_run_time')
   List<int> episodeRunTime;

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:tv_randshow/src/models/loading_model.dart';
-import 'package:tv_randshow/src/data/tvshow_details.dart';
-import 'package:tv_randshow/src/data/tvshow_result.dart';
-import 'package:tv_randshow/src/ui/views/app_view.dart';
-import 'package:tv_randshow/src/ui/views/base_view.dart';
-import 'package:tv_randshow/src/ui/views/loading_view.dart';
-import 'package:tv_randshow/src/ui/widgets/info_box_widget.dart';
-import 'package:tv_randshow/src/ui/widgets/text_widget.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
-import 'package:tv_randshow/src/utils/unicons_icons.dart';
+import '../../data/tvshow_details.dart';
+import '../../data/tvshow_result.dart';
+import '../../models/loading_model.dart';
+import '../../utils/styles.dart';
+import '../../utils/unicons_icons.dart';
+import '../widgets/info_box_widget.dart';
+import '../widgets/text_widget.dart';
+import 'app_view.dart';
+import 'base_view.dart';
+import 'loading_view.dart';
 
 class ResultView extends StatefulWidget {
   const ResultView({Key key, this.tvshowDetails, this.tvshowResult})

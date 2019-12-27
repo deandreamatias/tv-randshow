@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'package:tv_randshow/src/models/search_model.dart';
-import 'package:tv_randshow/src/ui/views/base_view.dart';
-import 'package:tv_randshow/src/utils/styles.dart';
-import 'package:tv_randshow/src/utils/unicons_icons.dart';
+import '../../models/search_model.dart';
+import '../../utils/styles.dart';
+import '../../utils/unicons_icons.dart';
+import '../views/base_view.dart';
 
 class FavButtonWidget extends StatefulWidget {
   const FavButtonWidget({Key key, this.id}) : super(key: key);
