@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/fav_model.dart';
 import '../../utils/states.dart';
+import '../../utils/styles.dart';
 import '../widgets/text_widget.dart';
 import 'base_view.dart';
 
@@ -40,7 +41,7 @@ class _FavViewState extends State<FavView> {
             Expanded(
               child: GridView.builder(
                 semanticChildCount: model.listTvShow.length,
-                padding: const EdgeInsets.all(16.0),
+                padding: DEFAULT_INSESTS,
                 itemCount: model.listTvShow.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: 8.0,

@@ -19,7 +19,7 @@ class MenuPanelWidget extends StatelessWidget {
     return Stack(alignment: Alignment.topCenter, children: <Widget>[
       Container(
         margin: const EdgeInsets.only(top: 24),
-        padding: const EdgeInsets.all(16.0),
+        padding: DEFAULT_INSESTS,
         decoration: const BoxDecoration(
           borderRadius: BorderRadiusDirectional.vertical(
             top: Radius.circular(16.0),

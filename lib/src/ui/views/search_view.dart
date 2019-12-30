@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 
 import '../../models/search_model.dart';
+import '../../utils/styles.dart';
 import '../widgets/search_bar_widget.dart';
 import '../widgets/search_widget.dart';
 import '../widgets/text_widget.dart';
@@ -52,7 +53,7 @@ class _SearchViewState extends State<SearchView> {
         pageSize: 20,
         crossAxisCount: 2,
         showRetry: false,
-        padding: const EdgeInsets.all(16.0),
+        padding: DEFAULT_INSESTS,
         crossAxisSpacing: 8.0,
         mainAxisSpacing: 8.0,
         errorBuilder: (BuildContext context, Object dyna) {
