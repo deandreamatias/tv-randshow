@@ -71,7 +71,7 @@ class _ResultViewState extends State<ResultView> {
                     ),
                     Flexible(
                       fit: FlexFit.loose,
-                      flex: 1,
+                      flex: 2,
                       child: Row(
                         children: <Widget>[
                           InfoBoxWidget(
@@ -88,7 +88,7 @@ class _ResultViewState extends State<ResultView> {
                     const SizedBox(height: 8),
                     Flexible(
                         fit: FlexFit.loose,
-                        flex: 2,
+                        flex: 3,
                         child: SingleChildScrollView(
                           child: Text(widget.tvshowResult.episodeDescription),
                         )),
