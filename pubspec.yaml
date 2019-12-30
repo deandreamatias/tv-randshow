@@ -37,22 +37,22 @@ dev_dependencies:
   
 flutter_icons:
   android: "ic_launcher" 
+  adaptive_icon_background: "#E40505"
   ios: true
-  image_path: "assets/img/icon_launcher.png"
+  image_path: "assets/img/icon_launcher.webp"
+  
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/i18n/
-    - assets/img/no_image.png
+    - assets/img/no_image.webp
     - assets/img/loading.flr
   fonts:
     - family: Nunito
       fonts:
         - asset: assets/fonts/nunito-regular.ttf
-        - asset: assets/fonts/nunito-bold.ttf
-        - asset: assets/fonts/nunito-semibold.ttf
     - family:  Unicons
       fonts:
         - asset: assets/fonts/unicons.ttf
