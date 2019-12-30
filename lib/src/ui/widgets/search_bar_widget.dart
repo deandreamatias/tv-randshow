@@ -30,9 +30,9 @@ class SearchBarWidget extends StatelessWidget {
             hintText: FlutterI18n.translate(context, 'app.search.search_bar'),
             contentPadding: const EdgeInsets.all(0.0),
             //suffixIcon: Icon(Icons.close),
-            prefixIcon: Icon(Unicons.search, color: StyleColor.SECONDARY),
+            prefixIcon: Icon(Unicons.search, color: StyleColor.PRIMARY),
             focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: StyleColor.SECONDARY),
+                borderSide: BorderSide(color: StyleColor.PRIMARY),
                 borderRadius: BORDER_RADIUS),
             border: const OutlineInputBorder(borderRadius: BORDER_RADIUS)),
       ),
