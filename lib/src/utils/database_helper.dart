@@ -66,12 +66,12 @@ class DatabaseHelper {
             $columnId INTEGER PRIMARY KEY,
             $columnIdTvshow INTEGER NOT NULL,
             $columnName TEXT NOT NULL,
-            $columnPosterPath TEXT NOT NULL,
-            $columnEpisodes INTEGER NOT NULL,
+            $columnPosterPath TEXT,
+            $columnEpisodes INTEGER,
             $columnSeasons INTEGER NOT NULL,
-            $columnRunTime INTEGER NOT NULL,
-            $columnOverview TEXT NOT NULL,
-            $columnInProduction INTEGER NOT NULL
+            $columnRunTime INTEGER,
+            $columnOverview TEXT,
+            $columnInProduction INTEGER
           )
           ''').catchError((dynamic
             onError) =>
