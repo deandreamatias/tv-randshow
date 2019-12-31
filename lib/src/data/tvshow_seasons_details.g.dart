@@ -9,7 +9,7 @@ part of 'tvshow_seasons_details.dart';
 TvshowSeasonsDetails _$TvshowSeasonsDetailsFromJson(Map<String, dynamic> json) {
   return TvshowSeasonsDetails(
     id: json['id'] as int,
-    airDate: json['air_date'] == null
+    airDate: json['air_date'] == null || json['air_date'].isEmpty
         ? null
         : DateTime.parse(json['air_date'] as String),
     episodes: (json['episodes'] as List)
