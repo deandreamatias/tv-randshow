@@ -33,21 +33,27 @@ class SearchModel extends BaseModel {
       'api_key': apiKey
     };
 
-    final Search data =
-        Search.fromRawJson(await fetchData(TVSHOW_SEARCH, queryParameters));
-    if (page == 1) {
-      setLoading();
-      _listTvShow = data.results
-          .map((Result result) => SearchWidget(result: result))
-          .toList();
-      setInit();
+    final dynamic data = await fetchData(TVSHOW_SEARCH, queryParameters);
+
+    if (data != null && data.isNotEmpty) {
+      final Search search = Search.fromRawJson(data);
+      if (page == 1) {
+        setLoading();
+        _listTvShow = search.results
+            .map((Result result) => SearchWidget(result: result))
+            .toList();
+        setInit();
+      } else {
+        _listTvShow = search.results
+            .map((Result result) => SearchWidget(result: result))
+            .toList();
+        setInit();
+      }
+      return _listTvShow;
     } else {
-      _listTvShow = data.results
-          .map((Result result) => SearchWidget(result: result))
-          .toList();
-      setInit();
+      setError();
+      return null;
     }
-    return _listTvShow;
   }
 
   Future<void> addToFav(int id) async {
@@ -59,8 +65,12 @@ class SearchModel extends BaseModel {
 
     final dynamic data =
         await fetchData(TVSHOW_DETAILS + id.toString(), queryParameters);
-    database.insert(TvshowDetails.fromRawJson(data));
-    setInit();
+    if (data != null && data.isNotEmpty) {
+      database.insert(TvshowDetails.fromRawJson(data));
+      setInit();
+    } else {
+      setError();
+    }
   }
 
   Future<void> deleteFav(int id) async {
@@ -82,6 +92,8 @@ class SearchModel extends BaseModel {
 
     final dynamic data =
         await fetchData(TVSHOW_DETAILS + id.toString(), queryParameters);
-    _tvshowDetails = TvshowDetails.fromRawJson(data);
+    if (data != null && data.isNotEmpty) {
+      _tvshowDetails = TvshowDetails.fromRawJson(data);
+    }
   }
 }
