@@ -44,7 +44,8 @@ class _LoadingViewState extends State<LoadingView> {
                   FlutterI18n.translate(context, 'app.loading.general_error'),
               backgroundColor: StyleColor.PRIMARY,
               flushbarPosition: FlushbarPosition.TOP,
-              duration: const Duration(seconds: 3),
+              flushbarStyle: FlushbarStyle.GROUNDED,
+              isDismissible: true,
             )..show(context);
           } else {
             Flushbar<Object>(

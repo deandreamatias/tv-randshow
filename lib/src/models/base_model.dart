@@ -25,8 +25,14 @@ abstract class BaseModel extends Model {
         .requestGet(uri.toString())
         .catchError(
             (dynamic onError) => logger.printError('Get request', onError));
-
-    return response?.body;
+    if (response.statusCode == 200) {
+      return response?.body;
+    } else {
+      logger.printError(
+          'Error to fetch data: ${response.reasonPhrase}', response.statusCode);
+      setError();
+      return null;
+    }
   }
 
   Future<void> checkConnection() async {

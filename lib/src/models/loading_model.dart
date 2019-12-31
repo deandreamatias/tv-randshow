@@ -53,7 +53,8 @@ class LoadingModel extends BaseModel {
   int _getRandomNumber(int total, bool isSeason) {
     final Random random = Random();
     final int randomNumber = random.nextInt(total);
-    logger.printDebug('Random number nº: $randomNumber');
+    logger.printInfo(
+        'Random ${isSeason ? 'season' : 'episode'} nº: ${isSeason ? randomNumber + 1 : randomNumber + 1}');
     return isSeason ? randomNumber + 1 : randomNumber;
   }
 }
