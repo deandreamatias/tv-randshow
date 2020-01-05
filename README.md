@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/assets/img/icon_launcher.png" width="100">
+  <img src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/iamges/icon.png" width="200">
 </p>
 <h1 align="center">TV Randshow</h1>
 <h3 align="center">App to choose a random TV show episode</h3>
@@ -18,10 +18,10 @@ The TV shows database comes from the TMDB and the app partially saves them in a 
 This project has been built using the [Flutter](https://flutter.dev/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
 <p align="center">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/screenshots/search.jpg" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/screenshots/favs.jpg" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/screenshots/details.jpg" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/screenshots/result.jpg" width="180" hspace="4">
+  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/search.jpg" width="180" hspace="4">
+  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/favs.jpg" width="180" hspace="4">
+  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/details.jpg" width="180" hspace="4">
+  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/result.jpg" width="180" hspace="4">
 </p>
 
 ## Features
