@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/iamges/icon.png" width="200">
+  <img src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/images/icon.png" width="200">
 </p>
 <h1 align="center">TV Randshow</h1>
 <h3 align="center">App to choose a random TV show episode</h3>
