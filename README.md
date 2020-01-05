@@ -1,19 +1,16 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/images/icon.png" width="200">
-</p>
-<h1 align="center">TV Randshow</h1>
-<h3 align="center">App to choose a random TV show episode</h3>
+<a>
+  <img src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/images/icon.png" width="250" alt="TV Randshow logo">
+</a>
 
-<p align="center">
-  <a>
-    <img src="https://img.shields.io/github/v/release/deandreamatias/tv-randshow">
-  </a>
-</p>
+## TV Randshow - App to choose a random TV show episode
+
+[![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
+[![Google Play](https://img.shields.io/badge/google--play-Google--Play-green)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
 
 ### About the project
 
-TV Randshow was created to help choose a random episode from a user's favorite TV shows.
-The TV shows database comes from the TMDB and the app partially saves them in a database on the device. With the list of favorites, you can roll the dice of a TV shows to get a random episode.
+TV Randshow was created to help choose a random episode from your favorites TV shows.
+The TV shows database comes from the TMDB and the app saves them in a database on the device. With the list of favorites, you can roll the dice of a TV shows to get a random episode.
 
 This project has been built using the [Flutter](https://flutter.dev/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
@@ -58,7 +55,7 @@ Run with CLI:
 ## Built with
 
 - [Flutter](https://flutter.dev/) - Beautiful native apps in record time.
-- [Android Studio](https://developer.android.com/studio/index.html/) - Tools for building apps on every type of Android device.
+- [Android Studio](https://developer.android.com/studio/index.html/) - Tools for building apps for Android devices.
 - [Visual Studio Code](https://code.visualstudio.com/) - Code editing. Redefined.
 
 ## Author
@@ -67,7 +64,7 @@ Run with CLI:
 
 ## Contributing
 
-If you want to take the time to make this project better, please read the [contributing guides](https://github.com/jesusrp98/spacex-go/blob/master/CONTRIBUTING.md) first. Then, you can open an new [issue](https://github.com/deandreamatias/tv-randshow/issues/new/choose), of a [pull request](https://github.com/deandreamatias/tv-randshow/compare).
+If you want to take the time to make this project better, please read the [contributing guides](https://github.com/deandreamatias/tv-randshow/blob/master/CONTRIBUTING.md) first. Then, you can open an new [issue](https://github.com/deandreamatias/tv-randshow/issues/new/choose), of a [pull request](https://github.com/deandreamatias/tv-randshow/compare).
 
 ## License
 
