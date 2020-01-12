@@ -37,10 +37,10 @@ class _AppViewState extends State<AppView> {
         bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Unicons.favourite),
+                icon: const Icon(Unicons.favourite),
                 title: Text(FlutterI18n.translate(context, 'app.fav.tab'))),
             BottomNavigationBarItem(
-                icon: Icon(Unicons.search),
+                icon: const Icon(Unicons.search),
                 title: Text(FlutterI18n.translate(context, 'app.search.tab'))),
           ],
           currentIndex: _selectedIndex,

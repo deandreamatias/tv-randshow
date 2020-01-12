@@ -33,7 +33,7 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                     ? RaisedButton.icon(
                         key: const ValueKey<String>('add'),
                         icon:
-                            Icon(Unicons.favourite, color: StyleColor.PRIMARY),
+                            const Icon(Unicons.favourite, color: StyleColor.PRIMARY),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             side: const BorderSide(color: StyleColor.PRIMARY)),
@@ -51,7 +51,7 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                       )
                     : RaisedButton.icon(
                         key: const ValueKey<String>('delete'),
-                        icon: Icon(Unicons.close, color: StyleColor.PRIMARY),
+                        icon: const Icon(Unicons.close, color: StyleColor.PRIMARY),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             side: const BorderSide(color: StyleColor.PRIMARY)),
