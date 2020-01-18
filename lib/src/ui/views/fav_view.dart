@@ -40,6 +40,7 @@ class _FavViewState extends State<FavView> {
             const TextWidget('app.fav.title'),
             Expanded(
               child: GridView.builder(
+                physics: const BouncingScrollPhysics(),
                 semanticChildCount: model.listTvShow.length,
                 padding: DEFAULT_INSESTS,
                 itemCount: model.listTvShow.length,

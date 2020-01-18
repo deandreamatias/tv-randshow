@@ -56,7 +56,7 @@ class _ResultViewState extends State<ResultView> {
               right: 0.0,
               left: 0.0,
               top: 0.0,
-              bottom: 24.0,
+              bottom: 36.0,
               child: Container(
                 padding: DEFAULT_INSESTS,
                 decoration: BoxDecoration(
@@ -90,6 +90,7 @@ class _ResultViewState extends State<ResultView> {
                         fit: FlexFit.loose,
                         flex: 3,
                         child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
                           child: Text(widget.tvshowResult.episodeDescription),
                         )),
                   ],
