@@ -36,6 +36,8 @@ analyzer:
     - "bin/cache/**"
     - "lib/src/data/*.g.dart"
     - "lib/config/env.dart"
+    - ".dart_tool/**"
+    - ".vscode/**"
     - "android/**"
     - "ios/**"
     - "build/**"
