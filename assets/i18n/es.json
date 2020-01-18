@@ -1,0 +1,49 @@
+{
+    "app": {
+        "name": "TV Randshow",
+        "fav": {
+            "tab": "Favoritos",
+            "title": "Tus series favoritas para elegir al azar un episodio",
+            "empty_message": "Busca una serie para añadir en tu lista de favoritos",
+            "button_random": "AL AZAR"
+        },
+        "search": {
+            "tab": "Búsqueda",
+            "search_bar": "Escriba el nombre de la serie",
+            "init_message": "Busca una serie escribiendo en la barra superior",
+            "error_message": "Oops! Ha habido un error. \nComprueba tu conexión de internet",
+            "empty_message": "No hay resultados para esta búsqueda",
+            "button_fav": "AÑADIR",
+            "button_delete": "ELIMINAR"
+        },
+        "loading": {
+            "title": "Eligiendo un episodio aleatorio",
+            "general_error": "Hubo un error al elegir el episodio. Por favor intenta de nuevo",
+            "connection_error": "Falló en la conexión. Conéctate e intenta de nuevo",
+            "button_home": "FAVORITOS"
+        },
+        "result": {
+            "title": "¡Este es el episodio de la serie elegido!",
+            "button_random": "OTRO EPISODIO AL AZAR",
+            "button_home": "FAVORITOS"
+        },
+        "modal": {
+            "description": "Descripción",
+            "overview": "Resumen",
+            "seasons": "Temporadas",
+            "season": "Temporada",
+            "episodes": "Episodios",
+            "episode": "Episodio",
+            "duration": "Duración",
+            "undefined": "Indefinido",
+            "episode_season_metric": "en total",
+            "duration_metric": "min/episodio"
+        },
+        "delete_dialog": {
+            "title": "Eliminar serie",
+            "subtitle": "¿Quieres eliminar esta serie de tus favoritos?",
+            "button_cancel": "CANCELAR",
+            "button_delete": "ELIMINAR"
+        }
+    }
+}
