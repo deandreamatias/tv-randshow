@@ -25,7 +25,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 
 - **Save your favorites TV shows**
 - **Choose a random episode from a single TV show**
-- Coming soon...
+- [Coming soon...](https://trello.com/b/ib0jdUzK)
 
 ## Tools
 
