@@ -20,8 +20,11 @@ class InfoBoxWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            Text(selectTitle(typeInfo, context),
-                style: StyleText.INFO_BOX_TITLE),
+            FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(selectTitle(typeInfo, context),
+                  style: StyleText.INFO_BOX_TITLE),
+            ),
             Text(
               value > 0 ? value.toString() : '--',
               style: StyleText.INFO_BOX_NUMBER,
