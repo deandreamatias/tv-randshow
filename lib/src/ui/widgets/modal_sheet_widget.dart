@@ -83,6 +83,7 @@ class MenuPanelWidget extends StatelessWidget {
             Expanded(
               flex: 6,
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Text(tvshowDetails.overview),
               ),
             ),

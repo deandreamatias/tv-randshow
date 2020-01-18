@@ -51,6 +51,7 @@ class _SearchViewState extends State<SearchView> {
   Widget _renderData(SearchModel model) {
     if (model.searched) {
       return PagewiseGridView<SearchWidget>.count(
+        physics: const BouncingScrollPhysics(),
         pageSize: 20,
         crossAxisCount: 2,
         showRetry: false,
