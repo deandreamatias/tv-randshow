@@ -8,12 +8,14 @@ import '../utils/constants.dart';
 import 'base_model.dart';
 
 class LoadingModel extends BaseModel {
-  Future<TvshowResult> getEpisode(TvshowDetails tvshowDetails) async {
+  Future<TvshowResult> getEpisode(
+      TvshowDetails tvshowDetails, String language) async {
     setLoading();
     await checkConnection();
     if (hasConnection) {
       final String apiKey = await secureStorage.readStorage(KeyStore.API_KEY);
       final Map<String, String> queryParameters = <String, String>{
+        'language': language,
         'api_key': apiKey
       };
       final int randomSeason =

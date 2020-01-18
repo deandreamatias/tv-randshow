@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 import '../../data/result.dart';
@@ -59,8 +60,10 @@ class _SearchWidgetState extends State<SearchWidget> {
     return GestureDetector(
         onTap: () async {
           if (enable) {
-            await ScopedModel.of<SearchModel>(context)
-                .getDetails(widget.result.id);
+            await ScopedModel.of<SearchModel>(context).getDetails(
+              widget.result.id,
+              FlutterI18n.currentLocale(context).toString(),
+            );
             return _showModalSheet(context);
           }
         },

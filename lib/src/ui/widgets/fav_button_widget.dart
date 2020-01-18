@@ -32,8 +32,10 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                 child: fav
                     ? RaisedButton.icon(
                         key: const ValueKey<String>('add'),
-                        icon:
-                            const Icon(Unicons.favourite, color: StyleColor.PRIMARY),
+                        icon: const Icon(
+                          Unicons.favourite,
+                          color: StyleColor.PRIMARY,
+                        ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             side: const BorderSide(color: StyleColor.PRIMARY)),
@@ -46,12 +48,16 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                           setState(() {
                             fav = false;
                           });
-                          model.addToFav(widget.id);
+                          model.addToFav(widget.id,
+                              FlutterI18n.currentLocale(context).toString());
                         },
                       )
                     : RaisedButton.icon(
                         key: const ValueKey<String>('delete'),
-                        icon: const Icon(Unicons.close, color: StyleColor.PRIMARY),
+                        icon: const Icon(
+                          Unicons.close,
+                          color: StyleColor.PRIMARY,
+                        ),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             side: const BorderSide(color: StyleColor.PRIMARY)),

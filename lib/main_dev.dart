@@ -30,9 +30,17 @@ class MainApp extends StatelessWidget {
       },
       localizationsDelegates: <LocalizationsDelegate<dynamic>>[
         FlutterI18nDelegate(
-            useCountryCode: false, fallbackFile: 'en', path: 'assets/i18n'),
+          useCountryCode: false,
+          fallbackFile: 'en',
+          path: 'assets/i18n',
+        ),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: const <Locale>[
+        Locale('en'),
+        Locale('es'),
+        Locale('pt'),
       ],
     );
   }
