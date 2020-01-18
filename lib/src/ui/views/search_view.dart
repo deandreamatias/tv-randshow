@@ -67,9 +67,10 @@ class _SearchViewState extends State<SearchView> {
           return item;
         },
         pageFuture: (int pageIndex) => model.loadList(
-            textEditingController.text,
-            pageIndex + 1,
-            FlutterI18n.currentLocale(context).toString()),
+          textEditingController.text,
+          pageIndex + 1,
+          FlutterI18n.currentLocale(context).languageCode.toString(),
+        ),
       );
     } else {
       return const Center(child: TextWidget('app.search.init_message'));
