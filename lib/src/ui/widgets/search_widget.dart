@@ -62,7 +62,7 @@ class _SearchWidgetState extends State<SearchWidget> {
           if (enable) {
             await ScopedModel.of<SearchModel>(context).getDetails(
               widget.result.id,
-              FlutterI18n.currentLocale(context).toString(),
+              FlutterI18n.currentLocale(context).languageCode.toString(),
             );
             return _showModalSheet(context);
           }

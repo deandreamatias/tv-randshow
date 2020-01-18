@@ -29,7 +29,7 @@ class _LoadingViewState extends State<LoadingView> {
     return BaseView<LoadingModel>(onModelReady: (LoadingModel model) {
       model
           .getEpisode(widget.tvshowDetails,
-              FlutterI18n.currentLocale(context).toString())
+              FlutterI18n.currentLocale(context).languageCode.toString())
           .then((TvshowResult tvshowResult) {
         if (model.state == ViewState.init) {
           Navigator.pushAndRemoveUntil<ResultView>(

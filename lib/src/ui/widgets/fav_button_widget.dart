@@ -48,8 +48,12 @@ class _FavButtonWidgetState extends State<FavButtonWidget> {
                           setState(() {
                             fav = false;
                           });
-                          model.addToFav(widget.id,
-                              FlutterI18n.currentLocale(context).toString());
+                          model.addToFav(
+                            widget.id,
+                            FlutterI18n.currentLocale(context)
+                                .languageCode
+                                .toString(),
+                          );
                         },
                       )
                     : RaisedButton.icon(
