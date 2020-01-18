@@ -3,7 +3,7 @@
         "name": "TV Randshow",
         "fav": {
             "tab": "Favorites",
-            "title": "Roll a random episode from your favorites",
+            "title": "Your favorite TV shows to get a random episode",
             "empty_message": "Search TV show to add in your favorites TV shows",
             "button_random": "RANDOM"
         },
@@ -20,12 +20,12 @@
             "title": "Choosing a random TV show",
             "general_error": "Error to get episode. Please try again",
             "connection_error": "Fail connection. Connect and try again",
-            "button_home": "HOME"
+            "button_home": "FAVORITES"
         },
         "result": {
-            "title": "This is your random TV show episode!",
-            "button_random": "NEW RANDOM EPISODE",
-            "button_home": "HOME"
+            "title": "This is the TV show episode chosen at random!",
+            "button_random": "ANOTHER RANDOM EPISODE",
+            "button_home": "FAVORITES"
         },
         "modal": {
             "description": "Description",
