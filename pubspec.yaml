@@ -14,13 +14,13 @@ dependencies:
   intl: ^0.16.0                     # [Package] Internationalized/localized messages and formatters
   # Official Flutter
   flutter:
-    sdk: flutter
+    sdk: flutter  
   cupertino_icons: ^0.1.2           # [Package] Icons for iOS
   path_provider: ^1.4.0             # [Plugin] Locations on the Android & iOS file systems
   # Others
   get_it: ^3.0.3                    # [Package] Service locator
   scoped_model: ^1.0.1              # [Package] Scoped model architecture
-  flutter_i18n: ^0.8.2              # [Package] Internationalization strings
+  flutter_i18n: ^0.8.3              # [Package] Internationalization strings
   cached_network_image: ^2.0.0-rc   # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
   flare_loading: ^2.1.0             # [Package] Loading animation with flare
