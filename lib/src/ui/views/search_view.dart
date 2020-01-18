@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 
 import '../../models/search_model.dart';
@@ -65,8 +66,10 @@ class _SearchViewState extends State<SearchView> {
         itemBuilder: (BuildContext context, dynamic item, int index) {
           return item;
         },
-        pageFuture: (int pageIndex) =>
-            model.loadList(textEditingController.text, pageIndex + 1),
+        pageFuture: (int pageIndex) => model.loadList(
+            textEditingController.text,
+            pageIndex + 1,
+            FlutterI18n.currentLocale(context).toString()),
       );
     } else {
       return const Center(child: TextWidget('app.search.init_message'));

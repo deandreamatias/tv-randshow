@@ -31,7 +31,10 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return BaseView<AppModel>(
-      onModelReady: (AppModel model) => model.init(),
+      onModelReady: (AppModel model) {
+        selectLocale();
+        model.init();
+      },
       builder: (BuildContext context, Widget child, AppModel model) => Scaffold(
         body: _widgetOptions.elementAt(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
@@ -49,5 +52,16 @@ class _AppViewState extends State<AppView> {
         ),
       ),
     );
+  }
+
+  void selectLocale() {
+    switch (FlutterI18n.currentLocale(context).languageCode) {
+      case 'en':
+      case 'es':
+      case 'pt':
+        break;
+      default:
+        FlutterI18n.refresh(context, const Locale('en'));
+    }
   }
 }

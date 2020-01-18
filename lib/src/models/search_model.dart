@@ -25,11 +25,13 @@ class SearchModel extends BaseModel {
     setInit();
   }
 
-  Future<List<SearchWidget>> loadList(String query, int page) async {
+  Future<List<SearchWidget>> loadList(
+      String query, int page, String language) async {
     final String apiKey = await secureStorage.readStorage(KeyStore.API_KEY);
     final Map<String, String> queryParameters = <String, String>{
       'query': query,
       'page': page.toString(),
+      'language': language,
       'api_key': apiKey
     };
 
@@ -56,10 +58,11 @@ class SearchModel extends BaseModel {
     }
   }
 
-  Future<void> addToFav(int id) async {
+  Future<void> addToFav(int id, String language) async {
     setLoading();
     final String apiKey = await secureStorage.readStorage(KeyStore.API_KEY);
     final Map<String, String> queryParameters = <String, String>{
+      'language': language,
       'api_key': apiKey
     };
 
@@ -84,9 +87,10 @@ class SearchModel extends BaseModel {
         (dynamic onError) => logger.printError('Delete row $id', onError));
   }
 
-  Future<void> getDetails(int id) async {
+  Future<void> getDetails(int id, String language) async {
     final String apiKey = await secureStorage.readStorage(KeyStore.API_KEY);
     final Map<String, String> queryParameters = <String, String>{
+      'language': language,
       'api_key': apiKey
     };
 
