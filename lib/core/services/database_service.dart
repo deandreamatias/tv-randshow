@@ -1,11 +1,11 @@
-import '../data/tvshow_details.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+
 import '../utils/database_helper.dart';
 import 'log_service.dart';
-import 'service_locator.dart';
 
-class Database {
+class DatabaseService {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
-  final LogService _logger = locator<LogService>();
+  final LogService _logger = LogService.instance;
 
   Future<void> insert(TvshowDetails tvshowDetails) async {
     // row to insert
@@ -21,7 +21,7 @@ class Database {
       DatabaseHelper.columnInProduction: tvshowDetails.inProduction,
     };
     final int id = await dbHelper.insert(row);
-    _logger.printInfo('Inserted row: $id');
+    _logger.logger.i('Inserted row: $id');
   }
 
   Future<List<TvshowDetails>> queryList() async {
@@ -43,12 +43,12 @@ class Database {
       DatabaseHelper.columnInProduction: tvshowDetails.inProduction,
     };
     final int rowsAffected = await dbHelper.update(row);
-    _logger.printInfo('Updated $rowsAffected row(s)');
+    _logger.logger.i('Updated $rowsAffected row(s)');
   }
 
   Future<int> delete(int id) async {
     final int rowsDeleted = await dbHelper.delete(id);
-    _logger.printInfo('Deleted $rowsDeleted row: $id');
+    _logger.logger.i('Deleted $rowsDeleted row: $id');
     return id;
   }
 }
