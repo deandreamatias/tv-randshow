@@ -35,7 +35,7 @@ class _SaveButtonState extends State<SaveButton> {
       builder: (BuildContext context, SaveModel model, Widget child) =>
           AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
-        child: fav
+        child: model.tvshowInDb
             ? RaisedButton.icon(
                 key: const ValueKey<String>('add'),
                 icon: const Icon(
@@ -49,15 +49,10 @@ class _SaveButtonState extends State<SaveButton> {
                 label: Text(
                     FlutterI18n.translate(context, 'app.search.button_fav'),
                     style: StyleText.PRIMARY),
-                onPressed: () {
-                  setState(() {
-                    fav = false;
-                  });
-                  model.addFav(
-                    widget.id,
-                    FlutterI18n.currentLocale(context).languageCode.toString(),
-                  );
-                },
+                onPressed: () => model.addFav(
+                  widget.id,
+                  FlutterI18n.currentLocale(context).languageCode.toString(),
+                ),
               )
             : RaisedButton.icon(
                 key: const ValueKey<String>('delete'),
@@ -72,12 +67,7 @@ class _SaveButtonState extends State<SaveButton> {
                 label: Text(
                     FlutterI18n.translate(context, 'app.search.button_delete'),
                     style: StyleText.PRIMARY),
-                onPressed: () {
-                  setState(() {
-                    fav = true;
-                  });
-                  model.deleteFav(widget.id);
-                },
+                onPressed: () => model.deleteFav(widget.id),
               ),
       ),
     );
