@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:provider/provider.dart';
-import 'package:tv_randshow/core/models/result.dart';
 
-import 'package:tv_randshow/core/viewmodels/views/search_view_model.dart';
-import 'package:tv_randshow/src/ui/widgets/search_widget.dart';
-import 'package:tv_randshow/ui/shared/styles.dart';
-import 'package:tv_randshow/ui/shared/unicons_icons.dart';
+import '../../core/models/result.dart';
+import '../../core/viewmodels/views/search_view_model.dart';
 import '../base_widget.dart';
+import '../shared/styles.dart';
+import '../shared/unicons_icons.dart';
+import '../widgets/search_widget.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({Key key}) : super(key: key);
