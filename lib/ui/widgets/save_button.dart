@@ -7,21 +7,9 @@ import '../base_widget.dart';
 import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 
-class SaveButton extends StatefulWidget {
+class SaveButton extends StatelessWidget {
   const SaveButton({Key key, this.id}) : super(key: key);
   final int id;
-  @override
-  _SaveButtonState createState() => _SaveButtonState();
-}
-
-class _SaveButtonState extends State<SaveButton> {
-  bool fav;
-
-  @override
-  void initState() {
-    fav = true;
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +19,9 @@ class _SaveButtonState extends State<SaveButton> {
         databaseService: Provider.of(context),
         secureStorageService: Provider.of(context),
       ),
-      onModelReady: (SaveModel model) {},
+      onModelReady: (SaveModel model) {
+        model.getDatabaseInfo(id);
+      },
       builder: (BuildContext context, SaveModel model, Widget child) =>
           AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
@@ -50,7 +40,7 @@ class _SaveButtonState extends State<SaveButton> {
                     FlutterI18n.translate(context, 'app.search.button_fav'),
                     style: StyleText.PRIMARY),
                 onPressed: () => model.addFav(
-                  widget.id,
+                  id,
                   FlutterI18n.currentLocale(context).languageCode.toString(),
                 ),
               )
@@ -67,7 +57,7 @@ class _SaveButtonState extends State<SaveButton> {
                 label: Text(
                     FlutterI18n.translate(context, 'app.search.button_delete'),
                     style: StyleText.PRIMARY),
-                onPressed: () => model.deleteFav(widget.id),
+                onPressed: () => model.deleteFav(id),
               ),
       ),
     );
