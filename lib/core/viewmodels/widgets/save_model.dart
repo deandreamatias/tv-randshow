@@ -9,6 +9,7 @@ import '../../utils/constants.dart';
 import '../base_model.dart';
 
 class SaveModel extends BaseModel {
+  // TODO: Test with attention this model
   SaveModel({
     @required ApiService apiService,
     @required DatabaseService databaseService,
@@ -20,18 +21,20 @@ class SaveModel extends BaseModel {
   final DatabaseService _databaseService;
   final SecureStorageService _secureStorageService;
 
-  TvshowDetails item;
+  bool tvshowInDb;
+  TvshowDetails tvshowDetails;
+  List<TvshowDetails> list;
 
-  // Future<void> getDatabaseInfo(int id) async {
-  //   final List<TvshowDetails> list = await _databaseService.queryList();
-  //   item = list
-  //       .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
-
-  //   _databaseService.delete(item.rowId).then((int _id) {
-  //     _id != item.rowId ? setError() : setBusy(false);
-  //   }).catchError(
-  //       (dynamic onError) => logger.printError('Delete row $id', onError));
-  // }
+  Future<void> getDatabaseInfo(int id) async {
+    setBusy(true);
+    list = await _databaseService.queryList();
+    // TODO: Monitor this process for each list item
+    tvshowDetails = list
+        .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
+    tvshowInDb = tvshowDetails != null;
+    list.clear();
+    setBusy(false);
+  }
 
   Future<bool> addFav(int id, String language) async {
     setBusy(true);
@@ -42,8 +45,8 @@ class SaveModel extends BaseModel {
     final TvshowDetails tvshowDetails =
         await _apiService.getDetailsTv(query, id);
     if (tvshowDetails != null) {
-      setBusy(false);
       _databaseService.insert(tvshowDetails);
+      setBusy(false);
       return true;
     } else {
       setBusy(false);
@@ -51,14 +54,9 @@ class SaveModel extends BaseModel {
     }
   }
 
-  // Future<void> deleteFav(int id) async {
-  //   setBusy(true);
-  //   final List<TvshowDetails> list = await _databaseService.queryList();
-  //   final TvshowDetails item = list
-  //       .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
-  //   _databaseService.delete(item.rowId).then((int _id) {
-  //     _id != item.rowId ? setError() : setBusy(false);
-  //   }).catchError(
-  //       (dynamic onError) => logger.printError('Delete row $id', onError));
-  // }
+  Future<void> deleteFav(int id) async {
+    setBusy(true);
+    await _databaseService.delete(tvshowDetails?.rowId);
+    setBusy(false);
+  }
 }
