@@ -5,6 +5,7 @@
             "tab": "Favorites",
             "title": "Your favorite TV shows to get a random episode",
             "empty_message": "Search TV show to add in your favorites TV shows",
+            "error_message": "Oops! Have a error to load your favorites",
             "button_random": "RANDOM"
         },
         "search": {
