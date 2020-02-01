@@ -7,6 +7,7 @@ import '../base_widget.dart';
 import '../shared/styles.dart';
 import 'cached_image.dart';
 import 'info_box.dart';
+import 'random_button.dart';
 import 'save_button.dart';
 
 class ModalSheet extends StatelessWidget {
@@ -108,7 +109,7 @@ class ModalSheet extends StatelessWidget {
             ),
           ),
           if (inDatabase)
-            RandomButtonWidget(tvshowDetails: model.tvshowDetails)
+            RandomButton(tvshowDetails: model.tvshowDetails)
           else
             SaveButton(id: idTv),
         ],
