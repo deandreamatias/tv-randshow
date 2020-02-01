@@ -22,17 +22,17 @@ class SaveModel extends BaseModel {
   final SecureStorageService _secureStorageService;
 
   bool tvshowInDb;
-  TvshowDetails tvshowDetails;
-  List<TvshowDetails> list;
+  TvshowDetails _tvshowDetails;
+  List<TvshowDetails> _list;
 
   Future<void> getDatabaseInfo(int id) async {
     setBusy(true);
-    list = await _databaseService.queryList();
+    _list = await _databaseService.queryList();
     // TODO: Monitor this process for each list item
-    tvshowDetails = list
+    _tvshowDetails = _list
         .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
-    tvshowInDb = tvshowDetails != null;
-    list.clear();
+    tvshowInDb = _tvshowDetails != null;
+    _list.clear();
     setBusy(false);
   }
 
@@ -56,7 +56,7 @@ class SaveModel extends BaseModel {
 
   Future<void> deleteFav(int id) async {
     setBusy(true);
-    await _databaseService.delete(tvshowDetails?.rowId);
+    await _databaseService.delete(id);
     setBusy(false);
   }
 }
