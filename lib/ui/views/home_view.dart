@@ -4,14 +4,8 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import '../shared/styles.dart';
 import '../widgets/favorite_list.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
-
-  @override
-  _HomeViewState createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -25,7 +19,7 @@ class _HomeViewState extends State<HomeView> {
               textAlign: TextAlign.center,
             ),
           ),
-          FavoriteList(),
+          Expanded(child: FavoriteList()),
         ],
       ),
     );
