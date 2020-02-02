@@ -4,6 +4,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import '../../core/models/tvshow_details.dart';
 import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
+import '../views/loading_view.dart';
 
 class RandomButton extends StatelessWidget {
   const RandomButton({Key key, this.tvshowDetails}) : super(key: key);
@@ -23,7 +24,7 @@ class RandomButton extends StatelessWidget {
         context,
         MaterialPageRoute<LoadingView>(
           builder: (BuildContext context) =>
-              LoadingView(_tvshowDetails: tvshowDetails),
+              LoadingView(tvshowDetails: tvshowDetails),
         ),
       ),
     );
