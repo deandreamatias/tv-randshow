@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 import '../../core/models/tvshow_details.dart';
+import '../../core/utils/constants.dart';
 import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 import '../views/loading_view.dart';
@@ -20,12 +21,10 @@ class RandomButton extends StatelessWidget {
         FlutterI18n.translate(context, 'app.fav.button_random'),
         style: StyleText.WHITE,
       ),
-      onPressed: () => Navigator.push<LoadingView>(
+      onPressed: () => Navigator.pushNamed<LoadingView>(
         context,
-        MaterialPageRoute<LoadingView>(
-          builder: (BuildContext context) =>
-              LoadingView(tvshowDetails: tvshowDetails),
-        ),
+        RoutePaths.LOADING,
+        arguments: tvshowDetails,
       ),
     );
   }

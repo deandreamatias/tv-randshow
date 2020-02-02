@@ -1,5 +1,12 @@
 import '../../config/flavor_config.dart';
 
+class RoutePaths {
+  static const String TAB = '/';
+  static const String SPLASH = 'splash';
+  static const String LOADING = 'loading';
+  static const String RESULT = 'result';
+}
+
 class KeyStore {
   static const String API_KEY = 'apiKey';
 }
