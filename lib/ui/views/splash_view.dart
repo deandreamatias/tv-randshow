@@ -22,6 +22,12 @@ class SplashView extends StatelessWidget {
               ),
             );
       },
+      builder: (BuildContext context, SplashViewModel model, Widget child) =>
+          const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
       model: SplashViewModel(
         secureStorageService: Provider.of(context),
       ),
