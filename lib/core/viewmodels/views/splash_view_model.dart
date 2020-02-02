@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:tv_randshow/config/flavor_config.dart';
-import 'package:tv_randshow/src/utils/constants.dart';
+import '../../../config/flavor_config.dart';
 import '../../services/secure_storage_service.dart';
+import '../../utils/constants.dart';
 import '../base_model.dart';
 
 class SplashViewModel extends BaseModel {
