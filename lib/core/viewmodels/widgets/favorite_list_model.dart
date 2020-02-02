@@ -11,9 +11,7 @@ class FavoriteListModel extends BaseModel {
   final DatabaseService _databaseService;
 
   Future<List<TvshowDetails>> loadFavs() async {
-    setBusy(true);
     final List<TvshowDetails> list = await _databaseService.queryList();
-    setBusy(false);
     return list;
   }
 }

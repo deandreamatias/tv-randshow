@@ -15,67 +15,44 @@ class FavoriteList extends StatelessWidget {
     return BaseWidget<FavoriteListModel>(
       model: FavoriteListModel(databaseService: Provider.of(context)),
       builder: (BuildContext context, FavoriteListModel model, Widget child) =>
-          SafeArea(
-        child: Container(
-          child: model.busy
-              ? const Center(child: CircularProgressIndicator())
-              : Expanded(
-                  /// TODO: Dynamic load database with [PagewiseGridView]
-                  child: PagewiseGridView<TvshowDetails>.count(
-                    physics: const BouncingScrollPhysics(),
-                    pageSize: 20,
-                    crossAxisCount: 2,
-                    showRetry: false,
-                    padding: DEFAULT_INSESTS,
-                    crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0,
-                    errorBuilder: (BuildContext context, Object dyna) {
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            FlutterI18n.translate(
-                                context, 'app.fav.error_message'),
-                            style: StyleText.MESSAGES,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      );
-                    },
-                    noItemsFoundBuilder: (BuildContext context) {
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            FlutterI18n.translate(
-                                context, 'app.fav.empty_message'),
-                            style: StyleText.MESSAGES,
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      );
-                    },
-                    itemBuilder:
-                        (BuildContext context, dynamic item, int index) =>
-                            FavWidget(tvshowDetails: item),
-                    pageFuture: (int pageIndex) => model.loadFavs(),
-                  ),
-
-                  // GridView.builder(
-                  //   physics: const BouncingScrollPhysics(),
-                  //   semanticChildCount: model.listTvShow.length,
-                  //   padding: DEFAULT_INSESTS,
-                  //   itemCount: model.listTvShow.length,
-                  //   gridDelegate:
-                  //       const SliverGridDelegateWithFixedCrossAxisCount(
-                  //           mainAxisSpacing: 8.0,
-                  //           crossAxisSpacing: 8.0,
-                  //           crossAxisCount: 2),
-                  //   itemBuilder: (BuildContext context, int index) {
-                  //     return model.listTvShow[index];
-                  //   },
-                  // ),
+          Container(
+        child: PagewiseGridView<TvshowDetails>.count(
+          physics: const BouncingScrollPhysics(),
+          pageSize: 20,
+          crossAxisCount: 2,
+          showRetry: false,
+          padding: DEFAULT_INSESTS,
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8.0,
+          errorBuilder: (BuildContext context, Object dyna) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  FlutterI18n.translate(context, 'app.fav.error_message'),
+                  style: StyleText.MESSAGES,
+                  textAlign: TextAlign.center,
                 ),
+              ),
+            );
+          },
+          noItemsFoundBuilder: (BuildContext context) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  FlutterI18n.translate(context, 'app.fav.empty_message'),
+                  style: StyleText.MESSAGES,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          },
+          itemBuilder: (BuildContext context, dynamic item, int index) =>
+              FavWidget(tvshowDetails: item),
+          loadingBuilder: (BuildContext context) =>
+              const Center(child: CircularProgressIndicator()),
+          pageFuture: (int pageIndex) => model.loadFavs(),
         ),
       ),
     );
