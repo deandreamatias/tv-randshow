@@ -10,6 +10,8 @@ import '../../core/viewmodels/views/loading_view_model.dart';
 import '../base_widget.dart';
 import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
+import 'result_view.dart';
+import 'tab_view.dart';
 
 class LoadingView extends StatefulWidget {
   const LoadingView({Key key, this.tvshowDetails}) : super(key: key);
@@ -31,14 +33,11 @@ class _LoadingViewState extends State<LoadingView> {
           .then(
         (TvshowResult tvshowResult) {
           if (tvshowResult != null) {
-            Navigator.pushAndRemoveUntil<ResultView>(
+            Navigator.pushNamedAndRemoveUntil<ResultView>(
               context,
-              MaterialPageRoute<ResultView>(
-                builder: (BuildContext context) => ResultView(
-                    tvshowResult: tvshowResult,
-                    tvshowDetails: widget.tvshowDetails),
-              ),
-              ModalRoute.withName('/'),
+              RoutePaths.RESULT,
+              ModalRoute.withName(RoutePaths.TAB),
+              arguments: tvshowResult,
             );
           } else {
             Flushbar<Object>(
@@ -89,11 +88,10 @@ class _LoadingViewState extends State<LoadingView> {
                 label: Text(
                     FlutterI18n.translate(context, 'app.loading.button_home')),
                 icon: const Icon(Unicons.home),
-                onPressed: () => Navigator.pushAndRemoveUntil<AppView>(
+                onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
                   context,
-                  MaterialPageRoute<AppView>(
-                      builder: (BuildContext context) => const AppView()),
-                  ModalRoute.withName('/'),
+                  RoutePaths.TAB,
+                  ModalRoute.withName(RoutePaths.TAB),
                 ),
               ),
             )

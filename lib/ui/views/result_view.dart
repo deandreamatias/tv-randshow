@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import '../../core/models/tvshow_details.dart';
 import '../../core/models/tvshow_result.dart';
+import '../../core/utils/constants.dart';
 import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 import '../widgets/info_box.dart';
 import 'loading_view.dart';
+import 'tab_view.dart';
 
 class ResultView extends StatelessWidget {
-  const ResultView({Key key, this.tvshowDetails, this.tvshowResult})
-      : super(key: key);
-  final TvshowDetails tvshowDetails;
+  const ResultView({Key key, this.tvshowResult}) : super(key: key);
   final TvshowResult tvshowResult;
   @override
   Widget build(BuildContext context) {
@@ -99,12 +98,10 @@ class ResultView extends StatelessWidget {
                             context, 'app.result.button_random'),
                         style: StyleText.WHITE,
                       ),
-                      onPressed: () => Navigator.push<LoadingView>(
+                      onPressed: () => Navigator.pushNamed<LoadingView>(
                         context,
-                        MaterialPageRoute<LoadingView>(
-                          builder: (BuildContext context) =>
-                              LoadingView(tvshowDetails: tvshowDetails),
-                        ),
+                        RoutePaths.LOADING,
+                        arguments: tvshowResult.tvshowDetails,
                       ),
                     ),
                   )
@@ -117,12 +114,11 @@ class ResultView extends StatelessWidget {
                 label: Text(
                     FlutterI18n.translate(context, 'app.result.button_home')),
                 icon: const Icon(Unicons.home),
-                onPressed: () => Navigator.pushAndRemoveUntil<AppView>(
-                    context,
-                    MaterialPageRoute<AppView>(
-                      builder: (BuildContext context) => const AppView(),
-                    ),
-                    ModalRoute.withName('/')),
+                onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
+                  context,
+                  RoutePaths.TAB,
+                  ModalRoute.withName(RoutePaths.TAB),
+                ),
               ),
             )
           ],
