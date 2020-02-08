@@ -29,10 +29,14 @@ class SaveModel extends BaseModel {
     setBusy(true);
     _list = await _databaseService.queryList();
     // TODO: Monitor this process for each list item
-    _tvshowDetails = _list
-        .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
-    tvshowInDb = _tvshowDetails != null;
-    _list.clear();
+    if (_list != null && _list.isNotEmpty) {
+      _tvshowDetails = _list
+          .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
+      tvshowInDb = _tvshowDetails != null;
+      _list.clear();
+    } else {
+      tvshowInDb = false;
+    }
     setBusy(false);
   }
 
