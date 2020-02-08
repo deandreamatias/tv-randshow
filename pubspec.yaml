@@ -8,7 +8,6 @@ environment:
 
 dependencies:
   # Official Dart
-  http: ^0.12.0+2                   # [Package] HTTP requests
   meta: ^1.1.7                      # [Package] Annotations for semantic information
   json_annotation: ^3.0.0           # [Package] Helpers to JSON code generation
   intl: ^0.16.0                     # [Package] Internationalized/localized messages and formatters
@@ -28,6 +27,7 @@ dependencies:
   logger: ^0.8.0                    # [Package] Logger for debug
   data_connection_checker: ^0.3.4   # [Package] Checks internet connection
   flushbar: ^1.9.1                  # [Package] Customize snackbars and toasts
+  dio: ^3.0.8                       # [Package] HTTP Client manager
   flutter_secure_storage: ^3.2.1+1  # [Plugin] Store data in secure storage
   sqflite: ^1.1.7+2                 # [Plugin] SQLite
 
