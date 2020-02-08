@@ -1,5 +1,4 @@
-import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
+import 'package:dio/dio.dart';
 
 import '../models/query.dart';
 import '../models/search.dart';
@@ -10,47 +9,47 @@ import 'log_service.dart';
 
 class ApiService {
   final LogService _logger = LogService.instance;
+  static BaseOptions options = BaseOptions(
+    baseUrl: 'https://$apiUrl',
+    connectTimeout: 5000,
+    receiveTimeout: 3000,
+  );
+  Dio dio = Dio(options);
 
   Future<Search> getSearch(Query query) async {
-    final Uri uri = Uri.https(apiUrl, TVSHOW_SEARCH, query.toJson());
-    final Response response = await http.get(uri);
-
-    if (response.statusCode == 200) {
-      return Search.fromRawJson(response?.body);
-    } else {
-      _logger.logger.e(
-          'Error to fetch data: ${response.reasonPhrase}', response.statusCode);
+    try {
+      final Response<dynamic> response = await dio.get<dynamic>(TVSHOW_SEARCH,
+          queryParameters: query.toJson());
+      return Search.fromJson(response?.data);
+    } on DioError catch (e) {
+      _logger.logger.e('Error to fetch Search: ${e.message}', e);
       return null;
     }
   }
 
   Future<TvshowDetails> getDetailsTv(Query query, int idTv) async {
-    final Uri uri = Uri.https(apiUrl, '$TVSHOW_DETAILS$idTv', query.toJson());
-    final Response response = await http.get(uri);
-
-    if (response.statusCode == 200) {
-      return TvshowDetails.fromRawJson(response?.body);
-    } else {
-      _logger.logger.e(
-          'Error to fetch data: ${response.reasonPhrase}', response.statusCode);
+    try {
+      final Response<dynamic> response = await dio.get<dynamic>(
+        '$TVSHOW_DETAILS$idTv',
+        queryParameters: query.toJson(),
+      );
+      return TvshowDetails.fromJson(response?.data);
+    } on DioError catch (e) {
+      _logger.logger.e('Error to fetch TvshowDetails: ${e.message}', e);
       return null;
     }
   }
 
   Future<TvshowSeasonsDetails> getDetailsTvSeasons(
       Query query, int idTv, int idSeason) async {
-    final Uri uri = Uri.https(
-      apiUrl,
-      '$TVSHOW_DETAILS$idTv$TVSHOW_DETAILS_SEASON$idSeason',
-      query.toJson(),
-    );
-    final Response response = await http.get(uri);
-
-    if (response.statusCode == 200) {
-      return TvshowSeasonsDetails.fromRawJson(response?.body);
-    } else {
-      _logger.logger.e(
-          'Error to fetch data: ${response.reasonPhrase}', response.statusCode);
+    try {
+      final Response<dynamic> response = await dio.get<dynamic>(
+        '$TVSHOW_DETAILS$idTv$TVSHOW_DETAILS_SEASON$idSeason',
+        queryParameters: query.toJson(),
+      );
+      return TvshowSeasonsDetails.fromJson(response?.data);
+    } on DioError catch (e) {
+      _logger.logger.e('Error to fetch TvshowSeasonsDetails: ${e.message}', e);
       return null;
     }
   }
