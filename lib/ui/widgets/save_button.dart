@@ -22,11 +22,27 @@ class SaveButton extends StatelessWidget {
       onModelReady: (SaveModel model) {
         model.getDatabaseInfo(id);
       },
+      // TODO: Update button when add to fav
       builder: (BuildContext context, SaveModel model, Widget child) =>
           AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
         child: model.tvshowInDb
             ? RaisedButton.icon(
+                key: const ValueKey<String>('delete'),
+                icon: const Icon(
+                  Unicons.close,
+                  color: StyleColor.PRIMARY,
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                    side: const BorderSide(color: StyleColor.PRIMARY)),
+                color: StyleColor.WHITE,
+                label: Text(
+                    FlutterI18n.translate(context, 'app.search.button_delete'),
+                    style: StyleText.PRIMARY),
+                onPressed: () => model.deleteFav(id),
+              )
+            : RaisedButton.icon(
                 key: const ValueKey<String>('add'),
                 icon: const Icon(
                   Unicons.favourite,
@@ -43,21 +59,6 @@ class SaveButton extends StatelessWidget {
                   id,
                   FlutterI18n.currentLocale(context).languageCode.toString(),
                 ),
-              )
-            : RaisedButton.icon(
-                key: const ValueKey<String>('delete'),
-                icon: const Icon(
-                  Unicons.close,
-                  color: StyleColor.PRIMARY,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    side: const BorderSide(color: StyleColor.PRIMARY)),
-                color: StyleColor.WHITE,
-                label: Text(
-                    FlutterI18n.translate(context, 'app.search.button_delete'),
-                    style: StyleText.PRIMARY),
-                onPressed: () => model.deleteFav(id),
               ),
       ),
     );
