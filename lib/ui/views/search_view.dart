@@ -19,6 +19,7 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   TextEditingController textEditingController;
+  PagewiseLoadController<Result> _pageLoadController;
 
   @override
   void initState() {
@@ -29,6 +30,7 @@ class _SearchViewState extends State<SearchView> {
   @override
   void dispose() {
     textEditingController.dispose();
+    _pageLoadController.dispose();
     super.dispose();
   }
 
@@ -39,6 +41,19 @@ class _SearchViewState extends State<SearchView> {
         apiService: Provider.of(context),
         secureStorageService: Provider.of(context),
       ),
+      onModelReady: (SearchViewModel model) {
+        // TODO: First time load first message or popular tv show list
+        _pageLoadController = PagewiseLoadController<Result>(
+          pageSize: 20,
+          pageFuture: (int page) {
+            return model.loadList(
+              textEditingController.text,
+              page + 1,
+              FlutterI18n.currentLocale(context).languageCode.toString(),
+            );
+          },
+        );
+      },
       builder: (BuildContext context, SearchViewModel model, Widget child) =>
           Scaffold(
         body: SafeArea(
@@ -51,11 +66,9 @@ class _SearchViewState extends State<SearchView> {
                   child: TextField(
                     controller: textEditingController,
                     textInputAction: TextInputAction.search,
-                    onChanged: (String text) =>
-                        model.searched ? model.onSearch() : null,
                     onSubmitted: (String value) =>
                         textEditingController.text.isNotEmpty
-                            ? model.getSearch()
+                            ? _pageLoadController.reset()
                             : null,
                     autofocus: true,
                     autocorrect: true,
@@ -77,68 +90,53 @@ class _SearchViewState extends State<SearchView> {
                     ),
                   ),
                 ),
-                Expanded(child: _renderData(model))
+                Expanded(
+                  child: PagewiseGridView<Result>.count(
+                    pageLoadController: _pageLoadController,
+                    physics: const BouncingScrollPhysics(),
+                    crossAxisCount: 2,
+                    showRetry: false,
+                    padding: DEFAULT_INSESTS,
+                    crossAxisSpacing: 8.0,
+                    mainAxisSpacing: 8.0,
+                    errorBuilder: (BuildContext context, Object dyna) {
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            FlutterI18n.translate(
+                                context, 'app.search.error_message'),
+                            style: StyleText.MESSAGES,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    },
+                    noItemsFoundBuilder: (BuildContext context) {
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(
+                            FlutterI18n.translate(
+                                context, 'app.search.empty_message'),
+                            style: StyleText.MESSAGES,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    },
+                    itemBuilder:
+                        (BuildContext context, dynamic item, int index) =>
+                            SearchWidget(result: item),
+                    loadingBuilder: (BuildContext context) =>
+                        const Center(child: CircularProgressIndicator()),
+                  ),
+                )
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  Widget _renderData(SearchViewModel model) {
-    if (model.searched) {
-      return PagewiseGridView<Result>.count(
-        physics: const BouncingScrollPhysics(),
-        pageSize: 20,
-        crossAxisCount: 2,
-        showRetry: false,
-        padding: DEFAULT_INSESTS,
-        crossAxisSpacing: 8.0,
-        mainAxisSpacing: 8.0,
-        errorBuilder: (BuildContext context, Object dyna) {
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                FlutterI18n.translate(context, 'app.search.error_message'),
-                style: StyleText.MESSAGES,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          );
-        },
-        noItemsFoundBuilder: (BuildContext context) {
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                FlutterI18n.translate(context, 'app.search.empty_message'),
-                style: StyleText.MESSAGES,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          );
-        },
-        itemBuilder: (BuildContext context, dynamic item, int index) =>
-            SearchWidget(result: item),
-        pageFuture: (int pageIndex) => model.loadList(
-          textEditingController.text,
-          pageIndex + 1,
-          FlutterI18n.currentLocale(context).languageCode.toString(),
-        ),
-      );
-    } else {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            FlutterI18n.translate(context, 'app.search.init_message'),
-            style: StyleText.MESSAGES,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      );
-    }
   }
 }
