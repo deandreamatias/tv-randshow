@@ -9,7 +9,6 @@ import '../../utils/constants.dart';
 import '../base_model.dart';
 
 class SaveModel extends BaseModel {
-  // TODO: Test with attention this model
   SaveModel({
     @required ApiService apiService,
     @required DatabaseService databaseService,
@@ -21,24 +20,7 @@ class SaveModel extends BaseModel {
   final DatabaseService _databaseService;
   final SecureStorageService _secureStorageService;
 
-  bool tvshowInDb;
-  TvshowDetails _tvshowDetails;
-  List<TvshowDetails> _list;
-
-  Future<void> getDatabaseInfo(int id) async {
-    setBusy(true);
-    _list = await _databaseService.queryList();
-    // TODO: Monitor this process for each list item
-    if (_list != null && _list.isNotEmpty) {
-      _tvshowDetails = _list
-          .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
-      tvshowInDb = _tvshowDetails != null;
-      _list.clear();
-    } else {
-      tvshowInDb = false;
-    }
-    setBusy(false);
-  }
+  bool tvshowInDb = false;
 
   Future<bool> addFav(int id, String language) async {
     setBusy(true);
@@ -49,10 +31,12 @@ class SaveModel extends BaseModel {
     final TvshowDetails tvshowDetails =
         await _apiService.getDetailsTv(query, id);
     if (tvshowDetails != null) {
-      _databaseService.insert(tvshowDetails);
+      await _databaseService.insert(tvshowDetails);
+      tvshowInDb = true;
       setBusy(false);
       return true;
     } else {
+      tvshowInDb = false;
       setBusy(false);
       return false;
     }
@@ -60,7 +44,11 @@ class SaveModel extends BaseModel {
 
   Future<void> deleteFav(int id) async {
     setBusy(true);
-    await _databaseService.delete(id);
+    final List<TvshowDetails> _list = await _databaseService.queryList();
+    final TvshowDetails tvshowDetails = _list
+        .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
+    await _databaseService.delete(tvshowDetails.rowId);
+    tvshowInDb = false;
     setBusy(false);
   }
 }

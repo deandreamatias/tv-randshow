@@ -25,8 +25,13 @@ class DatabaseService {
   }
 
   Future<List<TvshowDetails>> queryList() async {
-    final List<TvshowDetails> list = await dbHelper.queryList();
-    return list;
+    try {
+      final List<TvshowDetails> list = await dbHelper.queryList();
+      return list;
+    } catch (e) {
+      _logger.logger.e('Error to get db list', e);
+      return null;
+    }
   }
 
   Future<void> update(TvshowDetails tvshowDetails) async {
@@ -46,9 +51,12 @@ class DatabaseService {
     _logger.logger.i('Updated $rowsAffected row(s)');
   }
 
-  Future<int> delete(int id) async {
-    final int rowsDeleted = await dbHelper.delete(id);
-    _logger.logger.i('Deleted $rowsDeleted row: $id');
-    return id;
+  Future<void> delete(int id) async {
+    try {
+      final int rowsDeleted = await dbHelper.delete(id);
+      _logger.logger.i('Deleted $rowsDeleted row');
+    } catch (e) {
+      _logger.logger.e('Error to delete row $id: $e');
+    }
   }
 }

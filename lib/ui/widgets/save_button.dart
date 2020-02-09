@@ -19,10 +19,6 @@ class SaveButton extends StatelessWidget {
         databaseService: Provider.of(context),
         secureStorageService: Provider.of(context),
       ),
-      onModelReady: (SaveModel model) {
-        model.getDatabaseInfo(id);
-      },
-      // TODO: Update button when add to fav
       builder: (BuildContext context, SaveModel model, Widget child) =>
           AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
