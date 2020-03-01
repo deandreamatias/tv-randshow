@@ -3,6 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/widgets/delete_model.dart';
+import '../../core/viewmodels/widgets/favorite_list_model.dart';
 import '../base_widget.dart';
 import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
@@ -10,9 +11,9 @@ import '../shared/unicons_icons.dart';
 class DeleteButton extends StatelessWidget {
   const DeleteButton({
     Key key,
-    @required this.idTv,
+    @required this.idRow,
   }) : super(key: key);
-  final int idTv;
+  final int idRow;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,14 @@ class DeleteButton extends StatelessWidget {
       builder: (BuildContext context, DeleteModel model, Widget child) =>
           GestureDetector(
         onTap: () => _deleteConfirm(context).then(
-          (bool result) => model.deleteFav(idTv),
+          (bool result) async {
+            if (result) {
+              print(idRow);
+              await model.deleteFav(idRow);
+              Provider.of<FavoriteListModel>(context, listen: false)
+                  .deleteFav(idRow);
+            }
+          },
         ),
         child: Container(
           height: 20.0,

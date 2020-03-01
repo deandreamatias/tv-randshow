@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import '../../models/tvshow_details.dart';
 import '../../services/database_service.dart';
@@ -10,8 +10,19 @@ class FavoriteListModel extends BaseModel {
   }) : _databaseService = databaseService;
   final DatabaseService _databaseService;
 
-  Future<List<TvshowDetails>> loadFavs() async {
-    final List<TvshowDetails> list = await _databaseService.queryList();
-    return list;
+  List<TvshowDetails> _listFavs;
+
+  List<TvshowDetails> get listFavs => _listFavs;
+
+  Future<void> loadFavs() async {
+    setBusy(true);
+    _listFavs = await _databaseService.queryList();
+    setBusy(false);
+  }
+
+  void deleteFav(int rowId) {
+    setBusy(true);
+    _listFavs.removeWhere((TvshowDetails tvshow) => tvshow.rowId == rowId);
+    setBusy(false);
   }
 }
