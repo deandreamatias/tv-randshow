@@ -9,8 +9,6 @@ class DeleteModel extends BaseModel {
   final DatabaseService _databaseService;
 
   Future<void> deleteFav(int id) async {
-    setBusy(true);
     await _databaseService.delete(id);
-    setBusy(false);
   }
 }
