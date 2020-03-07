@@ -46,7 +46,6 @@ class CachedImage extends StatelessWidget {
         ),
       ),
       placeholder: (BuildContext context, String url) => Container(
-        // TODO: Invert horizontal and vertical padding
         padding: const EdgeInsets.symmetric(horizontal: 48.0, vertical: 36.0),
         child: const CircularProgressIndicator(),
       ),
