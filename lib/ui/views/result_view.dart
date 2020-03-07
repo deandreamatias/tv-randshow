@@ -22,7 +22,7 @@ class ResultView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: DEFAULT_INSESTS,
+              padding: const EdgeInsets.only(bottom: 16.0),
               child: Text(
                 FlutterI18n.translate(context, 'app.result.title'),
                 style: StyleText.MESSAGES,
@@ -38,7 +38,7 @@ class ResultView extends StatelessWidget {
                     right: 0.0,
                     left: 0.0,
                     top: 0.0,
-                    bottom: 36.0,
+                    bottom: 24.0,
                     child: Container(
                       padding: DEFAULT_INSESTS,
                       decoration: BoxDecoration(
@@ -113,7 +113,7 @@ class ResultView extends StatelessWidget {
               child: FlatButton.icon(
                 label: Text(
                     FlutterI18n.translate(context, 'app.result.button_home')),
-                icon: const Icon(Unicons.home),
+                icon: const Icon(Unicons.favourite),
                 onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
                   context,
                   RoutePaths.TAB,
