@@ -11,7 +11,10 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<SplashViewModel>(
-      // TODO: Add conditional first time navigate to search
+      // TODO: Add conditional first time navigate to search (use hive)
+      model: SplashViewModel(
+        secureStorageService: Provider.of(context),
+      ),
       onModelReady: (SplashViewModel model) {
         selectLocale(context);
         model.init().then(
@@ -27,9 +30,6 @@ class SplashView extends StatelessWidget {
         body: Center(
           child: CircularProgressIndicator(),
         ),
-      ),
-      model: SplashViewModel(
-        secureStorageService: Provider.of(context),
       ),
       child: const Scaffold(
         body: Center(

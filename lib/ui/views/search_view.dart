@@ -42,7 +42,6 @@ class _SearchViewState extends State<SearchView> {
         secureStorageService: Provider.of(context),
       ),
       onModelReady: (SearchViewModel model) {
-        // TODO: First time load first message or popular tv show list
         _pageLoadController = PagewiseLoadController<Result>(
           pageSize: 20,
           pageFuture: (int page) {
@@ -60,9 +59,8 @@ class _SearchViewState extends State<SearchView> {
           child: Container(
             child: Column(
               children: <Widget>[
-                const SizedBox(height: 16.0),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: DEFAULT_INSESTS,
                   child: TextField(
                     controller: textEditingController,
                     textInputAction: TextInputAction.search,
@@ -78,8 +76,6 @@ class _SearchViewState extends State<SearchView> {
                       hintText: FlutterI18n.translate(
                           context, 'app.search.search_bar'),
                       contentPadding: const EdgeInsets.all(0.0),
-                      // TODO: Implement clean search when press in suffix icon
-                      //suffixIcon: Icon(Icons.close),
                       prefixIcon:
                           const Icon(Unicons.search, color: StyleColor.PRIMARY),
                       focusedBorder: const OutlineInputBorder(
@@ -118,7 +114,10 @@ class _SearchViewState extends State<SearchView> {
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
                             FlutterI18n.translate(
-                                context, 'app.search.empty_message'),
+                                context,
+                                textEditingController.text.isEmpty
+                                    ? 'app.search.init_message'
+                                    : 'app.search.empty_message'),
                             style: StyleText.MESSAGES,
                             textAlign: TextAlign.center,
                           ),
