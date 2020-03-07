@@ -22,7 +22,7 @@ class ApiService {
           queryParameters: query.toJson());
       return Search.fromJson(response?.data);
     } on DioError catch (e) {
-      _logger.logger.e('Error to fetch Search: ${e.message}', e);
+      _logger.logger.e('Error to fetch search: ${e.message}', e);
       return null;
     }
   }
@@ -35,7 +35,7 @@ class ApiService {
       );
       return TvshowDetails.fromJson(response?.data);
     } on DioError catch (e) {
-      _logger.logger.e('Error to fetch TvshowDetails: ${e.message}', e);
+      _logger.logger.e('Error to fetch Tv show details: ${e.message}', e);
       return null;
     }
   }
@@ -49,7 +49,8 @@ class ApiService {
       );
       return TvshowSeasonsDetails.fromJson(response?.data);
     } on DioError catch (e) {
-      _logger.logger.e('Error to fetch TvshowSeasonsDetails: ${e.message}', e);
+      _logger.logger
+          .e('Error to fetch Tvshow seasons details: ${e.message}', e);
       return null;
     }
   }

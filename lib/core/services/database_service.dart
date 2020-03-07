@@ -1,5 +1,4 @@
-import 'package:tv_randshow/core/models/tvshow_details.dart';
-
+import '../models/tvshow_details.dart';
 import '../utils/database_helper.dart';
 import 'log_service.dart';
 
@@ -54,9 +53,9 @@ class DatabaseService {
   Future<void> delete(int id) async {
     try {
       final int rowsDeleted = await dbHelper.delete(id);
-      _logger.logger.i('Deleted $rowsDeleted row');
+      _logger.logger.i('Deleted $rowsDeleted row with id $id');
     } catch (e) {
-      _logger.logger.e('Error to delete row $id: $e');
+      _logger.logger.e('Error to delete row with id $id: $e');
     }
   }
 }
