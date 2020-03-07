@@ -40,73 +40,78 @@ class ModalSheet extends StatelessWidget {
               ),
               color: StyleColor.WHITE,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  flex: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 6.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Expanded(
-                          flex: 1,
-                          child: CachedImage(
-                              url: model.tvshowDetails.posterPath,
-                              isModal: true),
-                        ),
-                        const SizedBox(width: 8.0),
-                        Expanded(
-                          flex: 3,
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              model.tvshowDetails.name,
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              style: StyleText.TITLE,
-                            ),
+            child: model.busy
+                ? const Center(child: CircularProgressIndicator())
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 4,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 6.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: CachedImage(
+                                    url: model.tvshowDetails?.posterPath,
+                                    isModal: true),
+                              ),
+                              const SizedBox(width: 8.0),
+                              Expanded(
+                                flex: 3,
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    model.tvshowDetails?.name,
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                    style: StyleText.TITLE,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 5,
-                  child: Row(
-                    children: <Widget>[
-                      InfoBox(
-                        typeInfo: 0,
-                        value: model.tvshowDetails.numberOfSeasons ?? '--',
                       ),
-                      InfoBox(
-                        typeInfo: 1,
-                        value: model.tvshowDetails.numberOfEpisodes ?? '--',
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          children: <Widget>[
+                            InfoBox(
+                              typeInfo: 0,
+                              value:
+                                  model.tvshowDetails.numberOfSeasons ?? '--',
+                            ),
+                            InfoBox(
+                              typeInfo: 1,
+                              value:
+                                  model.tvshowDetails.numberOfEpisodes ?? '--',
+                            ),
+                            InfoBox(
+                              typeInfo: 2,
+                              value:
+                                  model.tvshowDetails.episodeRunTime.isNotEmpty
+                                      ? model.tvshowDetails.episodeRunTime.first
+                                      : 0,
+                            )
+                          ],
+                        ),
                       ),
-                      InfoBox(
-                        typeInfo: 2,
-                        value: model.tvshowDetails.episodeRunTime.isNotEmpty
-                            ? model.tvshowDetails.episodeRunTime.first
-                            : 0,
-                      )
+                      Text(FlutterI18n.translate(context, 'app.modal.overview'),
+                          style: StyleText.MESSAGES),
+                      const SizedBox(height: 8.0),
+                      Expanded(
+                        flex: 6,
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Text(model.tvshowDetails.overview),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-                Text(FlutterI18n.translate(context, 'app.modal.overview'),
-                    style: StyleText.MESSAGES),
-                const SizedBox(height: 8.0),
-                Expanded(
-                  flex: 6,
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Text(model.tvshowDetails.overview),
-                  ),
-                ),
-              ],
-            ),
           ),
           if (inDatabase)
             RandomButton(tvshowDetails: model.tvshowDetails)
