@@ -39,7 +39,7 @@ class DeleteButton extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(4.0)),
             border: Border.all(),
           ),
-          child: Icon(
+          child: const Icon(
             Unicons.times,
             size: 16.0,
             color: StyleColor.PRIMARY,
