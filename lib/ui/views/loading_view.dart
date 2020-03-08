@@ -95,7 +95,7 @@ class _LoadingViewState extends State<LoadingView> {
                     child: FlatButton.icon(
                       label: Text(FlutterI18n.translate(
                           context, 'app.loading.button_home')),
-                      icon: const Icon(Unicons.favourite),
+                      icon: const Icon(Unicons.favorite),
                       onPressed: () =>
                           Navigator.pushNamedAndRemoveUntil<TabView>(
                         context,

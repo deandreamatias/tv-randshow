@@ -113,7 +113,7 @@ class ResultView extends StatelessWidget {
               child: FlatButton.icon(
                 label: Text(
                     FlutterI18n.translate(context, 'app.result.button_home')),
-                icon: const Icon(Unicons.favourite),
+                icon: const Icon(Unicons.favorite),
                 onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
                   context,
                   RoutePaths.TAB,
