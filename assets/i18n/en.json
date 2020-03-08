@@ -17,6 +17,14 @@
             "button_fav": "ADD TO FAV",
             "button_delete": "DELETE"
         },
+        "info": {
+            "tab": "Info",
+            "title": "Info about TV Randshow",
+            "rate_title": "Review",
+            "rate_description": "Make your review about this app in Google Play",
+            "feedback_title": "Feedback",
+            "feedback_description": "Send a email with feedback or problem report about this app"
+        },
         "loading": {
             "title": "Choosing a random TV show",
             "general_error": "Error to get episode. Please try again",
