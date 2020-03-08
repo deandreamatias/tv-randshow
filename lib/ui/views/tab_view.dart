@@ -23,11 +23,12 @@ class _TabViewState extends State<TabView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // TODO: Implement menu to get feedback and rate app
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: const Icon(Unicons.favourite),
+            icon: const Icon(Unicons.favorite),
             title: Text(FlutterI18n.translate(context, 'app.fav.tab')),
           ),
           BottomNavigationBarItem(

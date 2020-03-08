@@ -26,7 +26,7 @@ class SaveButton extends StatelessWidget {
             ? RaisedButton.icon(
                 key: const ValueKey<String>('delete'),
                 icon: const Icon(
-                  Unicons.close,
+                  Unicons.times,
                   color: StyleColor.PRIMARY,
                 ),
                 shape: RoundedRectangleBorder(
@@ -41,7 +41,7 @@ class SaveButton extends StatelessWidget {
             : RaisedButton.icon(
                 key: const ValueKey<String>('add'),
                 icon: const Icon(
-                  Unicons.favourite,
+                  Unicons.favorite,
                   color: StyleColor.PRIMARY,
                 ),
                 shape: RoundedRectangleBorder(
