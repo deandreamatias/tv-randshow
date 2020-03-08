@@ -6,6 +6,7 @@
 
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
+[![Build test](https://img.shields.io/github/workflow/status/deandreamatias/tv-randshow/Test/master?label=Build%20test)](https://github.com/deandreamatias/tv-randshow/actions?query=workflow%3ATest+branch%3Amaster)
 
 ### About the project
 
@@ -15,10 +16,10 @@ The TV shows database comes from the TMDB and the app saves them in a database o
 This project has been built using the [Flutter](https://flutter.dev/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
 <p align="center">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/search.jpg" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/favs.jpg" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/details.jpg" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/result.jpg" width="180" hspace="4">
+  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/search.png" width="180" hspace="4">
+  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/favs.png" width="180" hspace="4">
+  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/details.png" width="180" hspace="4">
+  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/result.png" width="180" hspace="4">
 </p>
 
 ## Features
@@ -29,11 +30,13 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 
 ## Tools
 
-- [**Scoped model**](https://pub.dev/packages/scoped_model)
+- [**Provider**](https://pub.dev/packages/provider)
 - [**SQFlite**](https://pub.dev/packages/sqflite)
+- [**Dio**](https://pub.dev/packages/dio)
 - [**TMDB API**](https://developers.themoviedb.org/3/getting-started/introduction)
 - [**Flare animation loading**](https://rive.app/a/deandreamatias/files/flare/loading-tv-randshow/embed)
 - [**Logger**](https://pub.dev/packages/logger)
+- [**Flutter i18n**](https://pub.dev/packages/flutter_i18n) - Translate to english, portuguese and spanish
 
 ## Download & install
 
