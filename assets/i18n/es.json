@@ -16,6 +16,14 @@
             "button_fav": "AÑADIR",
             "button_delete": "ELIMINAR"
         },
+        "info": {
+            "tab": "Info",
+            "title": "Información sobre TV Randshow",
+            "rate_title": "Reseña",
+            "rate_description": "Escribe tu reseña sobre la app en la Google Play",
+            "feedback_title": "Enviar comentario",
+            "feedback_description": "Envia un email con tu opinión o problema sobre la aplicación"
+        },
         "loading": {
             "title": "Eligiendo un episodio aleatorio",
             "general_error": "Hubo un error al elegir el episodio. Por favor intenta de nuevo",

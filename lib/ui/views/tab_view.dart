@@ -4,6 +4,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 import 'home_view.dart';
+import 'info_view.dart';
 import 'search_view.dart';
 
 class TabView extends StatefulWidget {
@@ -18,12 +19,12 @@ class _TabViewState extends State<TabView> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeView(),
     const SearchView(),
+    const InfoView(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO: Implement menu to get feedback and rate app
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -34,6 +35,10 @@ class _TabViewState extends State<TabView> {
           BottomNavigationBarItem(
             icon: const Icon(Unicons.search),
             title: Text(FlutterI18n.translate(context, 'app.search.tab')),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Unicons.info_circle),
+            title: Text(FlutterI18n.translate(context, 'app.info.tab')),
           ),
         ],
         currentIndex: _selectedIndex,
