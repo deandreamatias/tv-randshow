@@ -22,7 +22,6 @@ dependencies:
   flare_loading: ^2.1.1             # [Package] Loading animation with flare
   logger: ^0.8.0                    # [Package] Logger for debug
   data_connection_checker: ^0.3.4   # [Package] Checks internet connection
-  flushbar: ^1.9.1                  # [Package] Customize snackbars and toasts
   dio: ^3.0.9                       # [Package] HTTP Client manager
   launch_review: ^2.0.0             # [Package] Open store to rate app
   flutter_email_sender: ^2.2.2      # [Plugin] Native email sender
