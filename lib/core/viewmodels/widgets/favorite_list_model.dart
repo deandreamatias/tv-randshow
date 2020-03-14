@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../models/tvshow_details.dart';
 import '../../services/database_service.dart';

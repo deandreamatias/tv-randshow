@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class StyleColor {
   static const Color PRIMARY = Color(0xFFE40505);
