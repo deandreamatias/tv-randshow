@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/models/tvshow_result.dart';

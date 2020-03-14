@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/widgets.dart';
 
 enum Flavor { DEV, PROD }
 
