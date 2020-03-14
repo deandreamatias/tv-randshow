@@ -1,4 +1,3 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flare_loading/flare_loading.dart';
@@ -14,62 +13,40 @@ import '../shared/unicons_icons.dart';
 import 'result_view.dart';
 import 'tab_view.dart';
 
-class LoadingView extends StatefulWidget {
+class LoadingView extends StatelessWidget {
   const LoadingView({Key key, this.tvshowDetails}) : super(key: key);
   final TvshowDetails tvshowDetails;
 
   @override
-  _LoadingViewState createState() => _LoadingViewState();
-}
-
-class _LoadingViewState extends State<LoadingView> {
-  @override
   Widget build(BuildContext context) {
     return BaseWidget<LoadingViewModel>(
-        model: LoadingViewModel(
-          randomService: Provider.of(context),
-        ),
-        onModelReady: (LoadingViewModel model) {
-          model
-              .sortRandomEpisode(
-            widget.tvshowDetails,
-            FlutterI18n.currentLocale(context).languageCode.toString(),
-          )
-              .then(
-            (TvshowResult tvshowResult) {
-              if (tvshowResult != null) {
-                Navigator.pushNamedAndRemoveUntil<ResultView>(
-                  context,
-                  RoutePaths.RESULT,
-                  ModalRoute.withName(RoutePaths.TAB),
-                  arguments: tvshowResult,
-                );
-              } else {
-                Flushbar<Object>(
-                  message: FlutterI18n.translate(
-                      context, 'app.loading.general_error'),
-                  backgroundColor: StyleColor.PRIMARY,
-                  flushbarPosition: FlushbarPosition.TOP,
-                  flushbarStyle: FlushbarStyle.GROUNDED,
-                  isDismissible: true,
-                )..show(context);
-                // Flushbar<Object>(
-                //   message: FlutterI18n.translate(
-                //       context, 'app.loading.connection_error'),
-                //   backgroundColor: StyleColor.PRIMARY,
-                //   flushbarPosition: FlushbarPosition.TOP,
-                //   flushbarStyle: FlushbarStyle.GROUNDED,
-                //   isDismissible: false,
-                // )..show(context);
-
-              }
-            },
-          );
-        },
-        builder: (BuildContext context, LoadingViewModel model, Widget child) {
-          return Scaffold(
-            body: SafeArea(
-                child: Padding(
+      model: LoadingViewModel(
+        randomService: Provider.of(context),
+      ),
+      onModelReady: (LoadingViewModel model) {
+        model
+            .sortRandomEpisode(
+          tvshowDetails,
+          FlutterI18n.currentLocale(context).languageCode.toString(),
+        )
+            .then(
+          (TvshowResult tvshowResult) {
+            if (tvshowResult != null) {
+              Navigator.pushNamedAndRemoveUntil<ResultView>(
+                context,
+                RoutePaths.RESULT,
+                ModalRoute.withName(RoutePaths.TAB),
+                arguments: tvshowResult,
+              );
+            }
+            // TODO: Implement get error
+          },
+        );
+      },
+      builder: (BuildContext context, LoadingViewModel model, Widget child) {
+        return Scaffold(
+          body: SafeArea(
+            child: Padding(
               padding: DEFAULT_INSESTS,
               child: Column(
                 children: <Widget>[
@@ -93,8 +70,10 @@ class _LoadingViewState extends State<LoadingView> {
                   Container(
                     padding: const EdgeInsets.only(top: 16.0),
                     child: FlatButton.icon(
-                      label: Text(FlutterI18n.translate(
-                          context, 'app.loading.button_home')),
+                      label: Text(
+                        FlutterI18n.translate(
+                            context, 'app.loading.button_home'),
+                      ),
                       icon: const Icon(Unicons.favorite),
                       onPressed: () =>
                           Navigator.pushNamedAndRemoveUntil<TabView>(
@@ -106,8 +85,10 @@ class _LoadingViewState extends State<LoadingView> {
                   )
                 ],
               ),
-            )),
-          );
-        });
+            ),
+          ),
+        );
+      },
+    );
   }
 }
