@@ -22,7 +22,13 @@
             "rate_title": "Resenha",
             "rate_description": "Escreve tua resenha da app na Google Play",
             "feedback_title": "Enviar feedback",
-            "feedback_description": "Envia um email com a tua opinião ou problema da app"
+            "feedback_description": "Envia um email com a tua opinião ou problema da app",
+            "version": {
+                "title": "Lista de versões",
+                "description": "Veja os detalhes desta versão e das anteriores",
+                "dialog_title": "Versões",
+                "dialog_button": "FECHAR"
+            }
         },
         "loading": {
             "title": "Escolhendo um episódio aleatório",

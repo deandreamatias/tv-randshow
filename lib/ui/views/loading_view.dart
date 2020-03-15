@@ -60,7 +60,7 @@ class LoadingView extends StatelessWidget {
                   ),
                   Expanded(
                     child: FlareLoading(
-                      name: Images.LOADING,
+                      name: Assets.LOADING,
                       startAnimation: 'Loading',
                       loopAnimation: 'Loading',
                       onSuccess: (dynamic _) {},

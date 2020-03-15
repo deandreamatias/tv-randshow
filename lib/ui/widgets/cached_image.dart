@@ -14,8 +14,8 @@ class CachedImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: url != null
-          ? url.isNotEmpty ? BASE_IMAGE + url : Images.PLACE_HOLDER
-          : Images.PLACE_HOLDER,
+          ? url.isNotEmpty ? BASE_IMAGE + url : Assets.PLACE_HOLDER
+          : Assets.PLACE_HOLDER,
       imageBuilder:
           (BuildContext context, ImageProvider<dynamic> imageProvider) =>
               Container(
@@ -50,7 +50,7 @@ class CachedImage extends StatelessWidget {
         child: const CircularProgressIndicator(),
       ),
       errorWidget: (BuildContext context, String url, Object error) =>
-          Image.asset(Images.EMPTY_IMAGE),
+          Image.asset(Assets.EMPTY_IMAGE),
     );
   }
 }
