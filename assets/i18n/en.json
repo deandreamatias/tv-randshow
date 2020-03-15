@@ -23,7 +23,13 @@
             "rate_title": "Review",
             "rate_description": "Make your review about this app in Google Play",
             "feedback_title": "Feedback",
-            "feedback_description": "Send a email with feedback or problem report about this app"
+            "feedback_description": "Send a email with feedback or problem report about this app",
+            "version": {
+                "title": "Version changelog",
+                "description": "See details of this and older versions",
+                "dialog_title": "Changelog",
+                "dialog_button": "CLOSE"
+            }
         },
         "loading": {
             "title": "Choosing a random TV show",

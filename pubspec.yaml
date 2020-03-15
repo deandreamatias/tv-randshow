@@ -24,6 +24,7 @@ dependencies:
   data_connection_checker: ^0.3.4   # [Package] Checks internet connection
   dio: ^3.0.9                       # [Package] HTTP Client manager
   launch_review: ^2.0.0             # [Package] Open store to rate app
+  flutter_markdown: ^0.3.4
   flutter_email_sender: ^2.2.2      # [Plugin] Native email sender
   flutter_secure_storage: ^3.3.1+1  # [Plugin] Store data in secure storage
   sqflite: ^1.2.2                   # [Plugin] SQLite
@@ -50,6 +51,7 @@ flutter:
 
   assets:
     - assets/i18n/
+    - assets/markdown/
     - assets/img/no_image.webp
     - assets/img/loading.flr
   fonts:
