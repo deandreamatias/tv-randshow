@@ -38,9 +38,9 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - [**Logger**](https://pub.dev/packages/logger)
 - [**Flutter i18n**](https://pub.dev/packages/flutter_i18n) - Translate to english, portuguese and spanish
 
-## Download & install
+## Build and run
 
-First, clone the repository with the 'clone' command, or just download the zip.
+First, clone the repository with the 'git clone' command, or just download the zip.
 
 ```
 $ git clone git@github.com:deandreamatias/tv-randshow.git
@@ -50,7 +50,7 @@ Then, download either Android Studio or Visual Studio Code, with their respectiv
 
 Install dependencies from pubspec.yaml by running `flutter packages get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
 
-Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details).
+Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `config/env.dart`
 
 Run with CLI:
 `flutter run --flavor dev -t lib/main_dev.dart `
