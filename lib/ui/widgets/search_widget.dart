@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/models/result.dart';
 import '../shared/styles.dart';
 import 'cached_image.dart';
 import 'modal_sheet.dart';
+import 'random_button.dart';
 import 'save_button.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -71,9 +73,9 @@ class _SearchWidgetState extends State<SearchWidget> {
             Align(
               alignment: Alignment.bottomCenter,
               child: enable
-                  ? SaveButton(
-                      id: widget.result.id,
-                    )
+                  ? kIsWeb
+                      ? RandomButton(id: widget.result.id)
+                      : SaveButton(id: widget.result.id)
                   : Container(),
             ),
           ],

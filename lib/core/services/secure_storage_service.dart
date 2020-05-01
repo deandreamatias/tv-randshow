@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../../config/flavor_config.dart';
 import 'log_service.dart';
 
 class SecureStorageService {
@@ -15,10 +17,14 @@ class SecureStorageService {
   }
 
   Future<String> readStorage(String key) async {
-    final String value = await storage.read(key: key).catchError(
-        (dynamic onError) =>
-            _logService.logger.e('Error to read token', onError));
-    return value;
+    if (!kIsWeb) {
+      final String value = await storage.read(key: key).catchError(
+          (dynamic onError) =>
+              _logService.logger.e('Error to read token', onError));
+      return value;
+    } else {
+      return FlavorConfig.instance.values.apiKey;
+    }
   }
 
   Future<void> deleteStorage(String key) async {

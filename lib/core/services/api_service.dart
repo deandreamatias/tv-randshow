@@ -16,6 +16,7 @@ class ApiService {
   );
   Dio dio = Dio(options);
 
+  // Documentation: https://developers.themoviedb.org/3/search/search-tv-shows
   Future<Search> getSearch(Query query) async {
     try {
       final Response<dynamic> response = await dio.get<dynamic>(TVSHOW_SEARCH,
@@ -27,6 +28,7 @@ class ApiService {
     }
   }
 
+// Documentation: https://developers.themoviedb.org/3/tv/get-tv-details
   Future<TvshowDetails> getDetailsTv(Query query, int idTv) async {
     try {
       final Response<dynamic> response = await dio.get<dynamic>(
@@ -40,6 +42,7 @@ class ApiService {
     }
   }
 
+// Documentation: https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
   Future<TvshowSeasonsDetails> getDetailsTvSeasons(
       Query query, int idTv, int idSeason) async {
     try {
