@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../config/flavor_config.dart';
@@ -13,8 +14,10 @@ class SplashViewModel extends BaseModel {
 
   Future<void> init() async {
     setBusy(true);
-    await _secureStorageService.writeStorage(
-        KeyStore.API_KEY, FlavorConfig.instance.values.apiKey);
+    if (!kIsWeb) {
+      await _secureStorageService.writeStorage(
+          KeyStore.API_KEY, FlavorConfig.instance.values.apiKey);
+    }
     setBusy(false);
   }
 }
