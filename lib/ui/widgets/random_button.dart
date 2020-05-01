@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../core/models/tvshow_details.dart';
 import '../../core/utils/constants.dart';
@@ -18,7 +18,7 @@ class RandomButton extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
       color: StyleColor.PRIMARY,
       label: Text(
-        FlutterI18n.translate(context, 'app.fav.button_random'),
+        translate('app.fav.button_random'),
         style: StyleText.WHITE,
       ),
       onPressed: () => Navigator.pushNamed<LoadingView>(

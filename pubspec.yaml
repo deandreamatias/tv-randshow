@@ -9,14 +9,15 @@ environment:
 dependencies:
   # Official Dart
   json_annotation: ^3.0.0           # [Package] Helpers to JSON code generation
-  intl: ^0.16.0                     # [Package] Internationalized/localized messages and formatters
   # Official Flutter
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   path_provider: ^1.6.5             # [Plugin] Locations on the Android & iOS file systems
   # Others
   provider: ^4.0.4                  # [Package] Dependency injection and state management
-  flutter_i18n: ^0.10.1             # [Package] Internationalization strings
+  flutter_translate: ^1.6.0
   cached_network_image: ^2.0.0      # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
   flare_loading: ^2.1.1             # [Package] Loading animation with flare

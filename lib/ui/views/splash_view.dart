@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:flutter_translate/localized_app.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/utils/constants.dart';
@@ -13,10 +15,9 @@ class SplashView extends StatelessWidget {
     return BaseWidget<SplashViewModel>(
       // TODO: Add conditional first time navigate to search (use hive)
       model: SplashViewModel(
-        secureStorageService: Provider.of(context),
+        secureStorageService: !kIsWeb ? Provider.of(context) : null,
       ),
       onModelReady: (SplashViewModel model) {
-        selectLocale(context);
         model.init().then(
               (void empty) => Navigator.pushNamedAndRemoveUntil<TabView>(
                 context,
@@ -40,13 +41,13 @@ class SplashView extends StatelessWidget {
   }
 
   void selectLocale(BuildContext context) {
-    switch (FlutterI18n.currentLocale(context).languageCode) {
+    switch (LocalizedApp.of(context).delegate.currentLocale?.languageCode) {
       case 'en':
       case 'es':
       case 'pt':
         break;
       default:
-        FlutterI18n.refresh(context, const Locale('en'));
+        changeLocale(context, 'en');
     }
   }
 }

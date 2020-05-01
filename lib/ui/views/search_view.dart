@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/models/result.dart';
@@ -48,7 +48,11 @@ class _SearchViewState extends State<SearchView> {
             return model.loadList(
               textEditingController.text,
               page + 1,
-              FlutterI18n.currentLocale(context).languageCode.toString(),
+              LocalizedApp.of(context)
+                  .delegate
+                  .currentLocale
+                  .languageCode
+                  .toString(),
             );
           },
         );
@@ -73,8 +77,7 @@ class _SearchViewState extends State<SearchView> {
                     enableSuggestions: true,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      hintText: FlutterI18n.translate(
-                          context, 'app.search.search_bar'),
+                      hintText: translate('app.search.search_bar'),
                       contentPadding: const EdgeInsets.all(0.0),
                       prefixIcon:
                           const Icon(Unicons.search, color: StyleColor.PRIMARY),
@@ -100,8 +103,7 @@ class _SearchViewState extends State<SearchView> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            FlutterI18n.translate(
-                                context, 'app.search.error_message'),
+                            translate('app.search.error_message'),
                             style: StyleText.MESSAGES,
                             textAlign: TextAlign.center,
                           ),
@@ -113,11 +115,11 @@ class _SearchViewState extends State<SearchView> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            FlutterI18n.translate(
-                                context,
-                                textEditingController.text.isEmpty
-                                    ? 'app.search.init_message'
-                                    : 'app.search.empty_message'),
+                            translate(
+                              textEditingController.text.isEmpty
+                                  ? 'app.search.init_message'
+                                  : 'app.search.empty_message',
+                            ),
                             style: StyleText.MESSAGES,
                             textAlign: TextAlign.center,
                           ),
