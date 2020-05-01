@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/widgets/delete_model.dart';
@@ -24,7 +24,6 @@ class DeleteButton extends StatelessWidget {
         onTap: () => _deleteConfirm(context).then(
           (bool result) async {
             if (result) {
-              print(idRow);
               await model.deleteFav(idRow);
               Provider.of<FavoriteListModel>(context, listen: false)
                   .deleteFav(idRow);
@@ -57,15 +56,14 @@ class DeleteButton extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
           title:
-              Text(FlutterI18n.translate(context, 'app.delete_dialog.title')),
+              Text(translate('app.delete_dialog.title')),
           content: Text(
-              FlutterI18n.translate(context, 'app.delete_dialog.subtitle')),
+              translate('app.delete_dialog.subtitle')),
           actions: <Widget>[
             FlatButton(
               textColor: StyleColor.PRIMARY,
               color: StyleColor.WHITE,
-              child: Text(FlutterI18n.translate(
-                  context, 'app.delete_dialog.button_cancel')),
+              child: Text(translate( 'app.delete_dialog.button_cancel')),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
@@ -76,8 +74,7 @@ class DeleteButton extends StatelessWidget {
                     side: const BorderSide(color: StyleColor.PRIMARY)),
                 textColor: StyleColor.PRIMARY,
                 color: StyleColor.WHITE,
-                child: Text(FlutterI18n.translate(
-                    context, 'app.delete_dialog.button_delete')),
+                child: Text(translate( 'app.delete_dialog.button_delete')),
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 })

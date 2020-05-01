@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n_delegate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 
 import 'config/env.dart';
@@ -9,14 +9,22 @@ import 'config/provider_setup.dart';
 import 'core/utils/constants.dart';
 import 'ui/router.dart';
 
-void main() {
+Future<void> main() async {
   FlavorConfig(flavor: Flavor.PROD, values: FlavorValues.fromJson(environment));
-  runApp(MainApp());
+  final LocalizationDelegate delegate = await LocalizationDelegate.create(
+    fallbackLocale: 'en',
+    supportedLocales: <String>['en', 'es', 'pt'],
+  );
+
+  runApp(LocalizedApp(delegate, MainApp()));
 }
 
 class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final LocalizationDelegate localizationDelegate =
+        LocalizedApp.of(context).delegate;
+
     return MultiProvider(
       providers: getProviders(),
       child: MaterialApp(
@@ -29,19 +37,12 @@ class MainApp extends StatelessWidget {
         initialRoute: RoutePaths.SPLASH,
         onGenerateRoute: Router.generateRoute,
         localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-          FlutterI18nDelegate(
-            useCountryCode: false,
-            fallbackFile: 'en',
-            path: 'assets/i18n',
-          ),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
+          localizationDelegate,
         ],
-        supportedLocales: const <Locale>[
-          Locale('en'),
-          Locale('es'),
-          Locale('pt'),
-        ],
+        supportedLocales: localizationDelegate.supportedLocales,
+        locale: localizationDelegate.currentLocale,
       ),
     );
   }

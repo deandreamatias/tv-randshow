@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flare_loading/flare_loading.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/models/tvshow_details.dart';
@@ -27,7 +27,7 @@ class LoadingView extends StatelessWidget {
         model
             .sortRandomEpisode(
           tvshowDetails,
-          FlutterI18n.currentLocale(context).languageCode.toString(),
+          LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
         )
             .then(
           (TvshowResult tvshowResult) {
@@ -53,7 +53,7 @@ class LoadingView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Text(
-                      FlutterI18n.translate(context, 'app.loading.title'),
+                      translate('app.loading.title'),
                       style: StyleText.MESSAGES,
                       textAlign: TextAlign.center,
                     ),
@@ -71,8 +71,7 @@ class LoadingView extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 16.0),
                     child: FlatButton.icon(
                       label: Text(
-                        FlutterI18n.translate(
-                            context, 'app.loading.button_home'),
+                        translate('app.loading.button_home'),
                       ),
                       icon: const Icon(Unicons.favorite),
                       onPressed: () =>

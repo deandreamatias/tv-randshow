@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../shared/styles.dart';
 import '../widgets/favorite_list.dart';
@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              FlutterI18n.translate(context, 'app.fav.title'),
+              translate('app.fav.title'),
               style: StyleText.MESSAGES,
               textAlign: TextAlign.center,
             ),

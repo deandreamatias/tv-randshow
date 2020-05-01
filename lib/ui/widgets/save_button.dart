@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/widgets/save_model.dart';
@@ -34,7 +34,7 @@ class SaveButton extends StatelessWidget {
                     side: const BorderSide(color: StyleColor.PRIMARY)),
                 color: StyleColor.WHITE,
                 label: Text(
-                    FlutterI18n.translate(context, 'app.search.button_delete'),
+                    translate('app.search.button_delete'),
                     style: StyleText.PRIMARY),
                 onPressed: () => model.deleteFav(id),
               )
@@ -49,11 +49,11 @@ class SaveButton extends StatelessWidget {
                     side: const BorderSide(color: StyleColor.PRIMARY)),
                 color: StyleColor.WHITE,
                 label: Text(
-                    FlutterI18n.translate(context, 'app.search.button_fav'),
+                    translate('app.search.button_fav'),
                     style: StyleText.PRIMARY),
                 onPressed: () => model.addFav(
                   id,
-                  FlutterI18n.currentLocale(context).languageCode.toString(),
+                  LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
                 ),
               ),
       ),

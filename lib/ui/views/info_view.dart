@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -19,17 +19,17 @@ class InfoView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              FlutterI18n.translate(context, 'app.info.title'),
+              translate('app.info.title'),
               style: StyleText.MESSAGES,
               textAlign: TextAlign.center,
             ),
           ),
           ListTile(
             title: Text(
-              FlutterI18n.translate(context, 'app.info.rate_title'),
+              translate('app.info.rate_title'),
             ),
             subtitle: Text(
-              FlutterI18n.translate(context, 'app.info.rate_description'),
+              translate('app.info.rate_description'),
             ),
             trailing: const Icon(Unicons.feedback),
             onTap: () => LaunchReview.launch(
@@ -37,10 +37,10 @@ class InfoView extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              FlutterI18n.translate(context, 'app.info.feedback_title'),
+              translate('app.info.feedback_title'),
             ),
             subtitle: Text(
-              FlutterI18n.translate(context, 'app.info.feedback_description'),
+              translate('app.info.feedback_description'),
             ),
             trailing: const Icon(Unicons.envelope),
             onTap: () async {
@@ -54,10 +54,10 @@ class InfoView extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              FlutterI18n.translate(context, 'app.info.version.title'),
+              translate('app.info.version.title'),
             ),
             subtitle: Text(
-              FlutterI18n.translate(context, 'app.info.version.description'),
+              translate('app.info.version.description'),
             ),
             trailing: const Icon(Unicons.brackets_curly),
             onTap: () async {
@@ -79,10 +79,7 @@ class InfoView extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.0),
           ),
           title: Text(
-            FlutterI18n.translate(
-              context,
-              'app.info.version.dialog_title',
-            ),
+            translate('app.info.version.dialog_title'),
           ),
           content: Markdown(data: description),
           actions: <Widget>[
@@ -94,10 +91,7 @@ class InfoView extends StatelessWidget {
               textColor: StyleColor.PRIMARY,
               color: StyleColor.WHITE,
               child: Text(
-                FlutterI18n.translate(
-                  context,
-                  'app.info.version.dialog_button',
-                ),
+                translate('app.info.version.dialog_button'),
               ),
               onPressed: () => Navigator.of(context).pop(),
             )
@@ -108,7 +102,7 @@ class InfoView extends StatelessWidget {
   }
 
   Future<String> loadAsset(BuildContext context) async {
-    switch (FlutterI18n.currentLocale(context).languageCode) {
+    switch (LocalizedApp.of(context).delegate.currentLocale.languageCode) {
       case 'es':
         return await rootBundle.loadString(Assets.WHATS_NEW_ES);
         break;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/widgets/details_model.dart';
@@ -25,7 +25,7 @@ class ModalSheet extends StatelessWidget {
       ),
       onModelReady: (DetailsModel model) => model.getDetails(
         idTv,
-        FlutterI18n.currentLocale(context).languageCode.toString(),
+        LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
       ),
       builder: (BuildContext context, DetailsModel model, Widget child) =>
           Stack(
@@ -100,7 +100,7 @@ class ModalSheet extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text(FlutterI18n.translate(context, 'app.modal.overview'),
+                      Text(translate('app.modal.overview'),
                           style: StyleText.MESSAGES),
                       const SizedBox(height: 8.0),
                       Expanded(

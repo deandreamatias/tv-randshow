@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../core/models/tvshow_result.dart';
 import '../../core/utils/constants.dart';
@@ -24,7 +24,7 @@ class ResultView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Text(
-                FlutterI18n.translate(context, 'app.result.title'),
+                translate('app.result.title'),
                 style: StyleText.MESSAGES,
                 textAlign: TextAlign.center,
               ),
@@ -94,8 +94,7 @@ class ResultView extends StatelessWidget {
                       ),
                       color: StyleColor.PRIMARY,
                       label: Text(
-                        FlutterI18n.translate(
-                            context, 'app.result.button_random'),
+                        translate('app.result.button_random'),
                         style: StyleText.WHITE,
                       ),
                       onPressed: () => Navigator.pushNamed<LoadingView>(
@@ -112,7 +111,7 @@ class ResultView extends StatelessWidget {
               padding: const EdgeInsets.only(top: 16.0),
               child: FlatButton.icon(
                 label: Text(
-                    FlutterI18n.translate(context, 'app.result.button_home')),
+                    translate('app.result.button_home')),
                 icon: const Icon(Unicons.favorite),
                 onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
                   context,
