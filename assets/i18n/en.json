@@ -20,6 +20,10 @@
         "info": {
             "tab": "Info",
             "title": "Info about TV Randshow",
+            "app_title": "Android app",
+            "app_description": "Get TV Randshow app in Google Play",
+            "web_title": "Web app",
+            "web_description": "Use the TV Randshow in the web",
             "rate_title": "Review",
             "rate_description": "Make your review about this app in Google Play",
             "feedback_title": "Feedback",

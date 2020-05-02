@@ -19,6 +19,10 @@
         "info": {
             "tab": "Info",
             "title": "Información sobre TV Randshow",
+            "app_title": "Aplicación Android",
+            "app_description": "Instale la app de TV Randshow de la Google Play",
+            "web_title": "Aplicación web",
+            "web_description": "Use la aplicación de TV Randshow en la web",
             "rate_title": "Reseña",
             "rate_description": "Escribe tu reseña sobre la app en la Google Play",
             "feedback_title": "Enviar comentario",
