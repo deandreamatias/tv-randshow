@@ -7,6 +7,7 @@
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
 [![Build test](https://img.shields.io/github/workflow/status/deandreamatias/tv-randshow/Test/master?label=Build%20test)](https://github.com/deandreamatias/tv-randshow/actions?query=workflow%3ATest+branch%3Amaster)
+[![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://paypal.me/deandreamatias?locale.x=es_ES)
 
 ### About the project
 
