@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/utils/constants.dart';
 import '../shared/styles.dart';
@@ -44,12 +46,14 @@ class InfoView extends StatelessWidget {
             ),
             trailing: const Icon(Unicons.envelope),
             onTap: () async {
-              final Email email = Email(
-                subject: 'Tv Randshow feedback',
-                recipients: const <String>['deandreamatias@gmail.com'],
-                isHTML: false,
-              );
-              await FlutterEmailSender.send(email);
+              const String url =
+                  'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
+              try {
+                await launch(url);
+                log('Launched: $url');
+              } catch (e) {
+                throw 'Could not launch $url because $e';
+              }
             },
           ),
           ListTile(

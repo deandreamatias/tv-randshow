@@ -14,6 +14,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  url_launcher: ^5.4.5              # [Plugin] For launching a URL in mobile platforms
+  url_launcher_web: ^0.1.1+2        # [Plugin] For launching a URL in web platform
   path_provider: ^1.6.5             # [Plugin] Locations on the Android & iOS file systems
   # Others
   provider: ^4.0.4                  # [Package] Dependency injection and state management
@@ -26,7 +28,6 @@ dependencies:
   dio: ^3.0.9                       # [Package] HTTP Client manager
   launch_review: ^2.0.0             # [Package] Open store to rate app
   flutter_markdown: ^0.3.4
-  flutter_email_sender: ^2.2.2      # [Plugin] Native email sender
   flutter_secure_storage: ^3.3.1+1  # [Plugin] Store data in secure storage
   sqflite: ^1.2.2                   # [Plugin] SQLite
 
