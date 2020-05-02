@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -28,14 +29,39 @@ class InfoView extends StatelessWidget {
           ),
           ListTile(
             title: Text(
-              translate('app.info.rate_title'),
+              translate(kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
             ),
             subtitle: Text(
-              translate('app.info.rate_description'),
+              translate(kIsWeb
+                  ? 'app.info.app_description'
+                  : 'app.info.web_description'),
             ),
             trailing: const Icon(Unicons.feedback),
-            onTap: () => LaunchReview.launch(
-                androidAppId: 'deandrea.matias.tv_randshow'),
+            onTap: () async {
+              const String url = kIsWeb
+                  ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
+                  : 'https://tvrandshow.com';
+              if (await canLaunch(url)) {
+                await launch(url);
+                log('Launched: $url');
+              } else {
+                throw 'Could not launch $url';
+              }
+            },
+          ),
+          Visibility(
+            visible: !kIsWeb,
+            child: ListTile(
+              title: Text(
+                translate('app.info.rate_title'),
+              ),
+              subtitle: Text(
+                translate('app.info.rate_description'),
+              ),
+              trailing: const Icon(Unicons.feedback),
+              onTap: () => LaunchReview.launch(
+                  androidAppId: 'deandrea.matias.tv_randshow'),
+            ),
           ),
           ListTile(
             title: Text(
