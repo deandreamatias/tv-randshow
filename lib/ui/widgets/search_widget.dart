@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/models/result.dart';
 import '../shared/styles.dart';
-import 'cached_image.dart';
+import 'image_builder.dart';
 import 'modal_sheet.dart';
 import 'random_button.dart';
 import 'save_button.dart';
@@ -64,10 +64,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                     );
                   }
                 },
-                child: CachedImage(
-                    name: widget.result.name,
-                    url: widget.result.posterPath,
-                    isModal: false),
+                child: ImageBuilder(
+                  name: widget.result.name,
+                  url: widget.result.posterPath,
+                  isModal: false,
+                ),
               ),
             ),
             Align(
