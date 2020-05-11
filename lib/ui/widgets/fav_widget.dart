@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../core/models/tvshow_details.dart';
 import '../shared/styles.dart';
-import 'cached_image.dart';
 import 'delete_button.dart';
+import 'image_builder.dart';
 import 'modal_sheet.dart';
 import 'random_button.dart';
 
@@ -43,7 +43,7 @@ class FavWidget extends StatelessWidget {
                   );
                 },
               ),
-              child: CachedImage(
+              child: ImageBuilder(
                   name: tvshowDetails.name,
                   url: tvshowDetails.posterPath,
                   isModal: false),

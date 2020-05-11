@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
@@ -5,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../core/viewmodels/widgets/details_model.dart';
 import '../base_widget.dart';
 import '../shared/styles.dart';
-import 'cached_image.dart';
+import 'image_builder.dart';
 import 'info_box.dart';
 import 'random_button.dart';
 import 'save_button.dart';
@@ -54,8 +55,9 @@ class ModalSheet extends StatelessWidget {
                             children: <Widget>[
                               Expanded(
                                 flex: 1,
-                                child: CachedImage(
+                                child: ImageBuilder(
                                     url: model.tvshowDetails?.posterPath,
+                                    name: model.tvshowDetails?.name,
                                     isModal: true),
                               ),
                               const SizedBox(width: 8.0),
@@ -113,7 +115,7 @@ class ModalSheet extends StatelessWidget {
                     ],
                   ),
           ),
-          if (inDatabase)
+          if (inDatabase || kIsWeb)
             RandomButton(tvshowDetails: model.tvshowDetails)
           else
             SaveButton(id: idTv),
