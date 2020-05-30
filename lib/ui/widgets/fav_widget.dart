@@ -24,24 +24,20 @@ class FavWidget extends StatelessWidget {
             top: 8.0,
             bottom: 24.0,
             child: GestureDetector(
-              onTap: () => showModalBottomSheet<Container>(
+              onTap: () => showModalBottomSheet<void>(
                 backgroundColor: Colors.transparent,
                 isScrollControlled: true,
                 elevation: 0.0,
+                isDismissible: true,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadiusDirectional.vertical(
                       top: Radius.circular(16.0)),
                 ),
                 context: context,
-                builder: (BuildContext context) {
-                  return Container(
-                    height: 424,
-                    child: ModalSheet(
-                      idTv: tvshowDetails.id,
-                      inDatabase: true,
-                    ),
-                  );
-                },
+                builder: (BuildContext context) => ModalSheet(
+                  idTv: tvshowDetails.id,
+                  inDatabase: true,
+                ),
               ),
               child: ImageBuilder(
                   name: tvshowDetails.name,

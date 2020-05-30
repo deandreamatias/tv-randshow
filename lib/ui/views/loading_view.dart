@@ -9,9 +9,8 @@ import '../../core/utils/constants.dart';
 import '../../core/viewmodels/views/loading_view_model.dart';
 import '../base_widget.dart';
 import '../shared/styles.dart';
-import '../shared/unicons_icons.dart';
+import '../widgets/home_button.dart';
 import 'result_view.dart';
-import 'tab_view.dart';
 
 class LoadingView extends StatelessWidget {
   const LoadingView({Key key, this.tvshowDetails}) : super(key: key);
@@ -67,21 +66,7 @@ class LoadingView extends StatelessWidget {
                       onError: (dynamic err, dynamic stack) {},
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: FlatButton.icon(
-                      label: Text(
-                        translate('app.loading.button_home'),
-                      ),
-                      icon: const Icon(Unicons.favorite),
-                      onPressed: () =>
-                          Navigator.pushNamedAndRemoveUntil<TabView>(
-                        context,
-                        RoutePaths.TAB,
-                        ModalRoute.withName(RoutePaths.TAB),
-                      ),
-                    ),
-                  )
+                  const HomeButton()
                 ],
               ),
             ),
