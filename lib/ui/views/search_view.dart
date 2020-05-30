@@ -44,17 +44,15 @@ class _SearchViewState extends State<SearchView> {
       onModelReady: (SearchViewModel model) {
         _pageLoadController = PagewiseLoadController<Result>(
           pageSize: 20,
-          pageFuture: (int page) {
-            return model.loadList(
-              textEditingController.text,
-              page + 1,
-              LocalizedApp.of(context)
-                  .delegate
-                  .currentLocale
-                  .languageCode
-                  .toString(),
-            );
-          },
+          pageFuture: (int page) => model.loadList(
+            textEditingController.text,
+            page + 1,
+            LocalizedApp.of(context)
+                .delegate
+                .currentLocale
+                .languageCode
+                .toString(),
+          ),
         );
       },
       builder: (BuildContext context, SearchViewModel model, Widget child) =>
@@ -90,14 +88,15 @@ class _SearchViewState extends State<SearchView> {
                   ),
                 ),
                 Expanded(
-                  child: PagewiseGridView<Result>.count(
+                  child: PagewiseGridView<Result>.extent(
                     pageLoadController: _pageLoadController,
                     physics: const BouncingScrollPhysics(),
-                    crossAxisCount: 2,
+                    maxCrossAxisExtent: 180.0,
+                    childAspectRatio: 0.8,
                     showRetry: false,
                     padding: DEFAULT_INSESTS,
-                    crossAxisSpacing: 8.0,
-                    mainAxisSpacing: 8.0,
+                    crossAxisSpacing: 16.0,
+                    mainAxisSpacing: 16.0,
                     errorBuilder: (BuildContext context, Object dyna) {
                       return Center(
                         child: Padding(
