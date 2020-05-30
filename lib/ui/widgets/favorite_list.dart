@@ -32,10 +32,11 @@ class FavoriteList extends StatelessWidget {
                   : Container(
                       child: GridView.builder(
                         gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8.0,
-                          mainAxisSpacing: 8.0,
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 180.0,
+                          childAspectRatio: 0.8,
+                          crossAxisSpacing: 16.0,
+                          mainAxisSpacing: 16.0,
                         ),
                         physics: const BouncingScrollPhysics(),
                         padding: DEFAULT_INSESTS,

@@ -42,25 +42,21 @@ class _SearchWidgetState extends State<SearchWidget> {
               child: GestureDetector(
                 onTap: () async {
                   if (enable) {
-                    showModalBottomSheet<Container>(
+                    showModalBottomSheet<void>(
                       backgroundColor: Colors.transparent,
                       isScrollControlled: true,
                       elevation: 0.0,
+                      isDismissible: true,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadiusDirectional.vertical(
                           top: Radius.circular(16.0),
                         ),
                       ),
                       context: context,
-                      builder: (BuildContext builder) {
-                        return Container(
-                          height: 424,
-                          child: ModalSheet(
-                            idTv: widget.result.id,
-                            inDatabase: false,
-                          ),
-                        );
-                      },
+                      builder: (BuildContext builder) => ModalSheet(
+                        idTv: widget.result.id,
+                        inDatabase: false,
+                      ),
                     );
                   }
                 },
