@@ -1,21 +1,21 @@
 {
-    "name": "tv_randshow",
-    "short_name": "tv_randshow",
+    "name": "TV Randshow | App to choose a random TV show episode",
+    "short_name": "TV Randshow",
+    "description": "TV Randshow | Choose a random TV show episode from a The Movie Database",
     "start_url": ".",
     "display": "minimal-ui",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "theme_color": "#e40505",
+    "background_color": "#e40505",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "icons/Icon-192.png",
+            "src": "icons/android-chrome-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-512.png",
+            "src": "icons/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
