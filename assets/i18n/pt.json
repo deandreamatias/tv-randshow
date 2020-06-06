@@ -5,6 +5,7 @@
             "tab": "Favoritos",
             "title": "Tuas series favoritas para escolher aleatoriamente um episódio",
             "empty_message": "Busque uma serie para adicionar na tua lista de favoritos",
+            "error_message": "Oops! Ocorreu um erro ao carregar os favoritos",
             "button_random": "ALEATÓRIO"
         },
         "search": {
@@ -38,12 +39,14 @@
             "title": "Escolhendo um episódio aleatório",
             "general_error": "Ocorreu um erro ao escolher o episódio. Por favor tente novamente",
             "connection_error": "Não há conexão. Conecte-se e tente novamente",
-            "button_home": "FAVORITOS"
+            "button_fav": "FAVORITOS",
+            "button_search": "BUSCA"
         },
         "result": {
             "title": "Este é o episódio escolhido aleatoriamente da serie!",
             "button_random": "OUTRO EPISÓDIO ALEATÓRIO",
-            "button_home": "FAVORITOS"
+            "button_fav": "FAVORITOS",
+            "button_search": "BUSCA"
         },
         "modal": {
             "description": "Descrição",

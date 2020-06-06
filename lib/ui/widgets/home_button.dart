@@ -18,10 +18,10 @@ class HomeButton extends StatelessWidget {
       child: FlatButton.icon(
         label: Text(
           kIsWeb
-              ? translate('app.loading.button_home')
-              : translate('app.loading.button_home'),
+              ? translate('app.loading.button_search')
+              : translate('app.loading.button_fav'),
         ),
-        icon: const Icon(Unicons.favorite),
+        icon: const Icon(kIsWeb ? Unicons.search : Unicons.favorite),
         onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
           context,
           RoutePaths.TAB,
