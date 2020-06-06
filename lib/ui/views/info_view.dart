@@ -104,14 +104,14 @@ class InfoView extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          contentPadding: SMALL_INSESTS,
+          contentPadding: DEFAULT_INSESTS,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
           title: Text(
             translate('app.info.version.dialog_title'),
           ),
-          content: Markdown(data: description),
+          content: MarkdownBody(data: description),
           actions: <Widget>[
             RaisedButton(
               shape: RoundedRectangleBorder(
