@@ -35,7 +35,7 @@ class MainApp extends StatelessWidget {
           fontFamily: 'Nunito',
           primarySwatch: Colors.red,
         ),
-        initialRoute: RoutePaths.SPLASH,
+        initialRoute: RoutePaths.TAB,
         onGenerateRoute: Router.generateRoute,
         localizationsDelegates: <LocalizationsDelegate<dynamic>>[
           GlobalMaterialLocalizations.delegate,

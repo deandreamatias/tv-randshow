@@ -6,7 +6,6 @@ import '../core/models/tvshow_result.dart';
 import '../core/utils/constants.dart';
 import 'views/loading_view.dart';
 import 'views/result_view.dart';
-import 'views/splash_view.dart';
 import 'views/tab_view.dart';
 
 class Router {
@@ -14,8 +13,6 @@ class Router {
     switch (settings.name) {
       case RoutePaths.TAB:
         return MaterialPageRoute<TabView>(builder: (_) => const TabView());
-      case RoutePaths.SPLASH:
-        return MaterialPageRoute<SplashView>(builder: (_) => SplashView());
       case RoutePaths.LOADING:
         return MaterialPageRoute<LoadingView>(
           builder: (_) =>
