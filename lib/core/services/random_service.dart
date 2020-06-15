@@ -1,31 +1,27 @@
 import 'dart:math';
 
 import 'package:meta/meta.dart';
-import 'package:tv_randshow/core/models/episode.dart';
-import 'package:tv_randshow/core/models/query.dart';
-import 'package:tv_randshow/core/models/tvshow_details.dart';
-import 'package:tv_randshow/core/models/tvshow_result.dart';
-import 'package:tv_randshow/core/models/tvshow_seasons_details.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
 
+import '../../config/flavor_config.dart';
+import '../models/episode.dart';
+import '../models/query.dart';
+import '../models/tvshow_details.dart';
+import '../models/tvshow_result.dart';
+import '../models/tvshow_seasons_details.dart';
 import 'api_service.dart';
 import 'log_service.dart';
-import 'secure_storage_service.dart';
 
 class RandomService {
   RandomService({
     @required ApiService apiService,
-    @required SecureStorageService secureStorageService,
-  })  : _apiService = apiService,
-        _secureStorageService = secureStorageService;
+  })  : _apiService = apiService;
   final ApiService _apiService;
-  final SecureStorageService _secureStorageService;
   final LogService _logger = LogService.instance;
 
   Future<TvshowResult> randomEpisode(
       TvshowDetails tvshowDetails, String language) async {
     final Query query = Query(
-      apiKey: await _secureStorageService.readStorage(KeyStore.API_KEY),
+      apiKey: FlavorConfig.instance.values.apiKey,
       language: language,
     );
     final int randomSeason =

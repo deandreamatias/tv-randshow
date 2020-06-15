@@ -17,7 +17,6 @@ class SaveButton extends StatelessWidget {
       model: SaveModel(
         apiService: Provider.of(context),
         databaseService: Provider.of(context),
-        secureStorageService: Provider.of(context),
       ),
       builder: (BuildContext context, SaveModel model, Widget child) =>
           AnimatedSwitcher(

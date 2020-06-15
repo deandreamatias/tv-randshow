@@ -39,7 +39,6 @@ class _SearchViewState extends State<SearchView> {
     return BaseWidget<SearchViewModel>(
       model: SearchViewModel(
         apiService: Provider.of(context),
-        secureStorageService: Provider.of(context),
       ),
       onModelReady: (SearchViewModel model) {
         _pageLoadController = PagewiseLoadController<Result>(
