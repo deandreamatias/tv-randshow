@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 
+import '../../config/flavor_config.dart';
 import '../models/query.dart';
 import '../models/search.dart';
 import '../models/tvshow_details.dart';
@@ -10,7 +11,7 @@ import 'log_service.dart';
 class ApiService {
   final LogService _logger = LogService.instance;
   static BaseOptions options = BaseOptions(
-    baseUrl: 'https://$apiUrl',
+    baseUrl: 'https://${FlavorConfig.instance.values.baseUrl}',
     connectTimeout: 5000,
     receiveTimeout: 3000,
   );

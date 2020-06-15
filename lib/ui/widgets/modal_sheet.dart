@@ -22,7 +22,6 @@ class ModalSheet extends StatelessWidget {
     return BaseWidget<DetailsModel>(
       model: DetailsModel(
         apiService: Provider.of(context),
-        secureStorageService: Provider.of(context),
       ),
       onModelReady: (DetailsModel model) => model.getDetails(
         idTv,

@@ -1,31 +1,27 @@
 import 'package:flutter/widgets.dart';
 
+import '../../../config/flavor_config.dart';
 import '../../models/query.dart';
 import '../../models/tvshow_details.dart';
 import '../../services/api_service.dart';
 import '../../services/database_service.dart';
-import '../../services/secure_storage_service.dart';
-import '../../utils/constants.dart';
 import '../base_model.dart';
 
 class SaveModel extends BaseModel {
   SaveModel({
     @required ApiService apiService,
     @required DatabaseService databaseService,
-    @required SecureStorageService secureStorageService,
   })  : _apiService = apiService,
-        _databaseService = databaseService,
-        _secureStorageService = secureStorageService;
+        _databaseService = databaseService;
   final ApiService _apiService;
   final DatabaseService _databaseService;
-  final SecureStorageService _secureStorageService;
 
   bool tvshowInDb = false;
 
   Future<bool> addFav(int id, String language) async {
     setBusy(true);
     final Query query = Query(
-      apiKey: await _secureStorageService.readStorage(KeyStore.API_KEY),
+      apiKey: FlavorConfig.instance.values.apiKey,
       language: language,
     );
     final TvshowDetails tvshowDetails =

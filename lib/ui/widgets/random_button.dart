@@ -20,7 +20,6 @@ class RandomButton extends StatelessWidget {
     return BaseWidget<RandomModel>(
       model: RandomModel(
         apiService: Provider.of(context),
-        secureStorageService: Provider.of(context),
       ),
       builder: (BuildContext context, RandomModel model, Widget child) =>
           RaisedButton.icon(

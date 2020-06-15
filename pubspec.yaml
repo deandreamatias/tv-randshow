@@ -28,7 +28,6 @@ dependencies:
   dio: ^3.0.9                       # [Package] HTTP Client manager
   launch_review: ^2.0.0             # [Package] Open store to rate app
   flutter_markdown: ^0.4.1          # [Package] I18n translate
-  flutter_secure_storage: ^3.3.1+1  # [Plugin] Store data in secure storage
   sqflite: ^1.2.2                   # [Plugin] SQLite
 
 dev_dependencies:

@@ -1,25 +1,21 @@
 import 'package:flutter/widgets.dart';
 
+import '../../../config/flavor_config.dart';
 import '../../models/query.dart';
 import '../../models/result.dart';
 import '../../models/search.dart';
 import '../../services/api_service.dart';
-import '../../services/secure_storage_service.dart';
-import '../../utils/constants.dart';
 import '../base_model.dart';
 
 class SearchViewModel extends BaseModel {
   SearchViewModel({
     @required ApiService apiService,
-    @required SecureStorageService secureStorageService,
-  })  : _apiService = apiService,
-        _secureStorageService = secureStorageService;
+  })  : _apiService = apiService;
   final ApiService _apiService;
-  final SecureStorageService _secureStorageService;
 
   Future<List<Result>> loadList(String text, int page, String language) async {
     final Query query = Query(
-      apiKey: await _secureStorageService.readStorage(KeyStore.API_KEY),
+      apiKey: FlavorConfig.instance.values.apiKey,
       language: language,
       page: page,
       query: text,
