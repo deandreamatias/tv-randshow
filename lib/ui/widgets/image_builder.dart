@@ -34,7 +34,7 @@ class ImageBuilder extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Container(
               padding: SMALL_INSESTS,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BORDER_RADIUS,
                 color: Colors.black54,
               ),

@@ -21,7 +21,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   bool enable;
   @override
   void initState() {
-    widget.result.firstAirDate == null ? enable = false : enable = true;
+    enable = widget.result.firstAirDate != null;
     super.initState();
   }
 
