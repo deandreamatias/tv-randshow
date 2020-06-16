@@ -1,12 +1,17 @@
-<a>
-  <img src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/images/icon.png" width="250" alt="TV Randshow logo">
-</a>
+<p>
+  <a href="http://tvrandshow.com/">
+    <img alt="TV Randshow website" src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/images/icon.png" height="100">
+  </a>
+  <a href='https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+    <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100" />
+  </a>
+</p>
 
 ## TV Randshow - App to choose a random TV show episode
 
+[![Build test](https://img.shields.io/github/workflow/status/deandreamatias/tv-randshow/Test/master?label=Build%20test)](https://github.com/deandreamatias/tv-randshow/actions?query=workflow%3ATest+branch%3Amaster)
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
-[![Build test](https://img.shields.io/github/workflow/status/deandreamatias/tv-randshow/Test/master?label=Build%20test)](https://github.com/deandreamatias/tv-randshow/actions?query=workflow%3ATest+branch%3Amaster)
 [![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://paypal.me/deandreamatias?locale.x=es_ES)
 
 ### About the project
@@ -27,34 +32,41 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 
 - **Save your favorites TV shows**
 - **Choose a random episode from a single TV show**
+- **Support to Android and Web**
 - [Coming soon...](https://trello.com/b/ib0jdUzK)
 
 ## Tools
 
+- [**TMDB API**](https://developers.themoviedb.org/3/getting-started/introduction)
+- [**Flare animation loading**](https://rive.app/a/deandreamatias/files/flare/loading-tv-randshow/embed)
 - [**Provider**](https://pub.dev/packages/provider)
 - [**SQFlite**](https://pub.dev/packages/sqflite)
 - [**Dio**](https://pub.dev/packages/dio)
-- [**TMDB API**](https://developers.themoviedb.org/3/getting-started/introduction)
-- [**Flare animation loading**](https://rive.app/a/deandreamatias/files/flare/loading-tv-randshow/embed)
 - [**Logger**](https://pub.dev/packages/logger)
-- [**Flutter i18n**](https://pub.dev/packages/flutter_i18n) - Translate to english, portuguese and spanish
+- [**Flutter markdown**](https://pub.dev/packages/flutter_markdown)
+- [**Flutter translate**](https://pub.dev/packages/flutter_translate) - Translate to english, portuguese and spanish
 
-## Download & install
+## Build application
 
-First, clone the repository with the 'clone' command, or just download the zip.
+### Requirements
 
+- First, clone the repository with the 'git clone' command, or just download the zip.
+
+```git
+git clone git@github.com:deandreamatias/tv-randshow.git
 ```
-$ git clone git@github.com:deandreamatias/tv-randshow.git
-```
 
-Then, download either Android Studio or Visual Studio Code, with their respective [Flutter editor plugins](https://flutter.dev/docs/get-started/editor). For more information about Flutter installation procedure, check the [official install guide](https://flutter.dev/docs/get-started/install).
+- Then, download either Android Studio or Visual Studio Code, with their respective [Flutter editor plugins](https://flutter.dev/docs/get-started/editor). For more information about Flutter installation procedure, check the [official install guide](https://flutter.dev/docs/get-started/install).
 
-Install dependencies from pubspec.yaml by running `flutter packages get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
+- Install dependencies from pubspec.yaml by running `flutter packages get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
 
-Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details).
+- Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
 
-Run with CLI:
-`flutter run --flavor dev -t lib/main_dev.dart `
+- (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
+
+### Run
+
+CLI Debug: `flutter run --flavor dev -t lib/main_dev.dart`
 
 ## Built with
 
@@ -64,7 +76,7 @@ Run with CLI:
 
 ## Author
 
-- **Matias de Andrea** - Mobile developer and UI/UX designer: [GitHub](https://github.com/deandreamatias), [Twitter](https://twitter.com/deandreamatias) & [Behance](https://www.behance.net/deandreamatias).
+- **Matias de Andrea** - Mobile developer and UI/UX designer: [Website](https://deandreamatias.com), [GitHub](https://github.com/deandreamatias) & [Twitter](https://twitter.com/deandreamatias).
 
 ## Contributing
 

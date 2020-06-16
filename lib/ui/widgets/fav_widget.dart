@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../core/models/tvshow_details.dart';
 import '../shared/styles.dart';
-import 'cached_image.dart';
 import 'delete_button.dart';
+import 'image_builder.dart';
 import 'modal_sheet.dart';
 import 'random_button.dart';
 
@@ -24,26 +24,22 @@ class FavWidget extends StatelessWidget {
             top: 8.0,
             bottom: 24.0,
             child: GestureDetector(
-              onTap: () => showModalBottomSheet<Container>(
+              onTap: () => showModalBottomSheet<void>(
                 backgroundColor: Colors.transparent,
                 isScrollControlled: true,
                 elevation: 0.0,
+                isDismissible: true,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadiusDirectional.vertical(
                       top: Radius.circular(16.0)),
                 ),
                 context: context,
-                builder: (BuildContext context) {
-                  return Container(
-                    height: 424,
-                    child: ModalSheet(
-                      idTv: tvshowDetails.id,
-                      inDatabase: true,
-                    ),
-                  );
-                },
+                builder: (BuildContext context) => ModalSheet(
+                  idTv: tvshowDetails.id,
+                  inDatabase: true,
+                ),
               ),
-              child: CachedImage(
+              child: ImageBuilder(
                   name: tvshowDetails.name,
                   url: tvshowDetails.posterPath,
                   isModal: false),

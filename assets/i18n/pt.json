@@ -5,6 +5,7 @@
             "tab": "Favoritos",
             "title": "Tuas series favoritas para escolher aleatoriamente um episódio",
             "empty_message": "Busque uma serie para adicionar na tua lista de favoritos",
+            "error_message": "Oops! Ocorreu um erro ao carregar os favoritos",
             "button_random": "ALEATÓRIO"
         },
         "search": {
@@ -19,21 +20,33 @@
         "info": {
             "tab": "Info",
             "title": "Informação sobre TV Randshow",
+            "app_title": "App Android",
+            "app_description": "Instale a app de TV Randshow da Google Play",
+            "web_title": "Aplicação web",
+            "web_description": "Use a app de TV Randshow na web",
             "rate_title": "Resenha",
             "rate_description": "Escreve tua resenha da app na Google Play",
             "feedback_title": "Enviar feedback",
-            "feedback_description": "Envia um email com a tua opinião ou problema da app"
+            "feedback_description": "Envia um email com a tua opinião ou problema da app",
+            "version": {
+                "title": "Lista de versões",
+                "description": "Veja os detalhes desta versão e das anteriores",
+                "dialog_title": "Versões",
+                "dialog_button": "FECHAR"
+            }
         },
         "loading": {
             "title": "Escolhendo um episódio aleatório",
             "general_error": "Ocorreu um erro ao escolher o episódio. Por favor tente novamente",
             "connection_error": "Não há conexão. Conecte-se e tente novamente",
-            "button_home": "FAVORITOS"
+            "button_fav": "FAVORITOS",
+            "button_search": "BUSCA"
         },
         "result": {
             "title": "Este é o episódio escolhido aleatoriamente da serie!",
             "button_random": "OUTRO EPISÓDIO ALEATÓRIO",
-            "button_home": "FAVORITOS"
+            "button_fav": "FAVORITOS",
+            "button_search": "BUSCA"
         },
         "modal": {
             "description": "Descrição",

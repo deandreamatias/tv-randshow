@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta lang="en">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="TV Randshow | Choose a random TV show episode">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="TV Randshow | Get your random episodes">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+  <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#e40505">
+  <meta name="msapplication-TileColor" content="#e40505">
+  <meta name="theme-color" content="#e40505">
+
+  <!-- open protocol graph meta -->
+  <meta property="og:title" content="TV Randshow | Get your random episodes">
+  <meta property="og:description" content="TV Randshow | Choose a random TV show episode">
+  <meta property="og:image" content="https://tvrandshow.com/favicon.png">
+  <meta property="og:site_name" content="tvrandshow.com">
+  <meta property="og:url" content="https://tvrandshow.com">
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:locale:alternate" content="es_ES"/>
+  <meta property="og:locale:alternate" content="pt_BR"/>
+  <meta property="og:type" content="website">
+  <meta property="fb:app_id" content="deandrea.matias.tv_randshow">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+  <title>TV Randshow | Get your random episodes</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+  </script>
+  <script src="main.dart.js" type="application/javascript"></script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "WebSite",
+      "name": "TV Randshow",
+      "url": "https://tvrandshow.com/",
+      "image": "https://tvrandshow.com/favicon.png",
+      "author": {
+        "@type": "Person",
+        "name": "Matias de Andrea",
+        "url": "https://deandreamatias.com",
+        "image": "https://deandreamatias.com/profile.png",
+        "sameAs": [
+          "https://twitter.com/deandreamatias",
+          "https://www.linkedin.com/in/deandreamatias",
+          "https://github.com/deandreamatias"
+        ],
+        "jobTitle": "Flutter developer"  
+      },
+    }
+  </script>
+</body>
+</html>

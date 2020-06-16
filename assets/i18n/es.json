@@ -5,6 +5,7 @@
             "tab": "Favoritos",
             "title": "Tus series favoritas para elegir al azar un episodio",
             "empty_message": "Busca una serie para añadir en tu lista de favoritos",
+            "error_message": "Oops! Ocurrió un error al cargar los favoritos",
             "button_random": "AL AZAR"
         },
         "search": {
@@ -19,21 +20,33 @@
         "info": {
             "tab": "Info",
             "title": "Información sobre TV Randshow",
+            "app_title": "Aplicación Android",
+            "app_description": "Instale la app de TV Randshow de la Google Play",
+            "web_title": "Aplicación web",
+            "web_description": "Use la aplicación de TV Randshow en la web",
             "rate_title": "Reseña",
             "rate_description": "Escribe tu reseña sobre la app en la Google Play",
             "feedback_title": "Enviar comentario",
-            "feedback_description": "Envia un email con tu opinión o problema sobre la aplicación"
+            "feedback_description": "Envia un email con tu opinión o problema sobre la aplicación",
+            "version": {
+                "title": "Lista de versiones",
+                "description": "Vea los detalles de esta versión y anteriores",
+                "dialog_title": "Versiones",
+                "dialog_button": "CERRAR"
+            }
         },
         "loading": {
             "title": "Eligiendo un episodio aleatorio",
             "general_error": "Hubo un error al elegir el episodio. Por favor intenta de nuevo",
             "connection_error": "Falló en la conexión. Conéctate e intenta de nuevo",
-            "button_home": "FAVORITOS"
+            "button_fav": "FAVORITOS",
+            "button_search": "BÚSQUEDA"
         },
         "result": {
             "title": "¡Este es el episodio elegido al azar de la serie!",
             "button_random": "OTRO EPISODIO AL AZAR",
-            "button_home": "FAVORITOS"
+            "button_fav": "FAVORITOS",
+            "button_search": "BÚSQUEDA"
         },
         "modal": {
             "description": "Descripción",
