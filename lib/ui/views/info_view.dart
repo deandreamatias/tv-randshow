@@ -92,8 +92,8 @@ class InfoView extends StatelessWidget {
               translate('app.info.version.description'),
             ),
             trailing: const Icon(Unicons.brackets_curly),
-            onTap: () async {
-              _changelog(context, await loadAsset(context));
+            onTap: () {
+              _changelog(context);
             },
           )
         ],
@@ -101,40 +101,52 @@ class InfoView extends StatelessWidget {
     );
   }
 
-  Future<bool> _changelog(BuildContext context, String description) async {
-    return showDialog<bool>(
+  void _changelog(BuildContext context) {
+    showDialog<bool>(
       context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          contentPadding: DEFAULT_INSESTS,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          title: Text(
-            translate('app.info.version.dialog_title'),
-          ),
-          content: MarkdownBody(data: description),
-          actions: <Widget>[
-            RaisedButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                side: const BorderSide(color: StyleColor.PRIMARY),
-              ),
-              textColor: StyleColor.PRIMARY,
-              color: StyleColor.WHITE,
-              child: Text(
-                translate('app.info.version.dialog_button'),
-              ),
-              onPressed: () => Navigator.of(context).pop(),
-            )
-          ],
-        );
-      },
+      child: AlertDialog(
+        contentPadding: DEFAULT_INSESTS,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        title: Text(
+          translate('app.info.version.dialog_title'),
+        ),
+        content: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: FutureBuilder<Object>(
+              future: loadAsset(
+                  LocalizedApp.of(context).delegate.currentLocale.languageCode),
+              builder: (BuildContext context, AsyncSnapshot<Object> snapshot) {
+                if (snapshot.hasData) {
+                  return MarkdownBody(data: snapshot.data);
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              }),
+        ),
+        actions: <Widget>[
+          RaisedButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              side: const BorderSide(color: StyleColor.PRIMARY),
+            ),
+            textColor: StyleColor.PRIMARY,
+            color: StyleColor.WHITE,
+            child: Text(
+              translate('app.info.version.dialog_button'),
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          )
+        ],
+      ),
     );
   }
 
-  Future<String> loadAsset(BuildContext context) async {
-    switch (LocalizedApp.of(context).delegate.currentLocale.languageCode) {
+  Future<String> loadAsset(String languageCode) async {
+    switch (languageCode) {
       case 'es':
         return await rootBundle.loadString(Assets.WHATS_NEW_ES);
         break;
