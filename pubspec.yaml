@@ -24,10 +24,9 @@ dependencies:
   flutter_pagewise: ^1.2.3          # [Package] List pagination
   flare_loading: ^2.1.1             # [Package] Loading animation with flare
   logger: ^0.8.0                    # [Package] Logger for debug
-  data_connection_checker: ^0.3.4   # [Package] Checks internet connection
   dio: ^3.0.9                       # [Package] HTTP Client manager
   launch_review: ^2.0.0             # [Package] Open store to rate app
-  flutter_markdown: ^0.4.1          # [Package] I18n translate
+  flutter_markdown: ^0.4.1          # [Package] Markdown support
   sqflite: ^1.2.2                   # [Plugin] SQLite
 
 dev_dependencies:
