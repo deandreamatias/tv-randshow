@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tv_randshow/core/models/tvshow_details.dart';
 
 import '../../config/flavor_config.dart';
+import '../models/tvshow_details.dart';
 import '../services/log_service.dart';
 
 class DatabaseHelper {

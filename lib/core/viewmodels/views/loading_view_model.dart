@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:tv_randshow/core/models/tvshow_details.dart';
-import 'package:tv_randshow/core/models/tvshow_result.dart';
-import 'package:tv_randshow/core/services/random_service.dart';
+import '../../models/tvshow_details.dart';
+import '../../models/tvshow_result.dart';
+import '../../services/random_service.dart';
 import '../base_model.dart';
 
 class LoadingViewModel extends BaseModel {
