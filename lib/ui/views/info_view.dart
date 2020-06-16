@@ -104,7 +104,7 @@ class InfoView extends StatelessWidget {
   void _changelog(BuildContext context) {
     showDialog<bool>(
       context: context,
-      child: AlertDialog(
+      builder: (BuildContext context) => AlertDialog(
         contentPadding: DEFAULT_INSESTS,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
