@@ -36,7 +36,8 @@ class InfoView extends StatelessWidget {
                   ? 'app.info.app_description'
                   : 'app.info.web_description'),
             ),
-            trailing: const Icon(Unicons.feedback),
+            trailing: const Icon(
+                kIsWeb ? Unicons.google_play : Unicons.external_link_alt),
             onTap: () async {
               const String url = kIsWeb
                   ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
@@ -60,7 +61,8 @@ class InfoView extends StatelessWidget {
               ),
               trailing: const Icon(Unicons.feedback),
               onTap: () => LaunchReview.launch(
-                  androidAppId: 'deandrea.matias.tv_randshow'),
+                androidAppId: 'deandrea.matias.tv_randshow',
+              ),
             ),
           ),
           ListTile(
