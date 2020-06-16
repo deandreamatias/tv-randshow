@@ -9,24 +9,24 @@ environment:
 dependencies:
   # Official Dart
   json_annotation: ^3.0.0           # [Package] Helpers to JSON code generation
-  intl: ^0.16.0                     # [Package] Internationalized/localized messages and formatters
   # Official Flutter
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  url_launcher: ^5.4.5              # [Plugin] For launching a URL in mobile platforms
+  url_launcher_web: ^0.1.1+2        # [Plugin] For launching a URL in web platform
   path_provider: ^1.6.5             # [Plugin] Locations on the Android & iOS file systems
   # Others
   provider: ^4.0.4                  # [Package] Dependency injection and state management
-  flutter_i18n: ^0.10.1             # [Package] Internationalization strings
+  flutter_translate: ^1.6.0         # [Package] I18n translate
   cached_network_image: ^2.0.0      # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
   flare_loading: ^2.1.1             # [Package] Loading animation with flare
   logger: ^0.8.0                    # [Package] Logger for debug
-  data_connection_checker: ^0.3.4   # [Package] Checks internet connection
-  flushbar: ^1.9.1                  # [Package] Customize snackbars and toasts
   dio: ^3.0.9                       # [Package] HTTP Client manager
   launch_review: ^2.0.0             # [Package] Open store to rate app
-  flutter_email_sender: ^2.2.2      # [Plugin] Native email sender
-  flutter_secure_storage: ^3.3.1+1  # [Plugin] Store data in secure storage
+  flutter_markdown: ^0.4.1          # [Package] Markdown support
   sqflite: ^1.2.2                   # [Plugin] SQLite
 
 dev_dependencies:
@@ -51,6 +51,7 @@ flutter:
 
   assets:
     - assets/i18n/
+    - assets/markdown/
     - assets/img/no_image.webp
     - assets/img/loading.flr
   fonts:

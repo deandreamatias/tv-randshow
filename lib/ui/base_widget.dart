@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
@@ -30,6 +30,11 @@ class _BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
     }
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override

@@ -1,5 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
@@ -17,7 +18,7 @@ class TabView extends StatefulWidget {
 class _TabViewState extends State<TabView> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    const HomeView(),
+    if (!kIsWeb) const HomeView(),
     const SearchView(),
     const InfoView(),
   ];
@@ -28,17 +29,18 @@ class _TabViewState extends State<TabView> {
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: const Icon(Unicons.favorite),
-            title: Text(FlutterI18n.translate(context, 'app.fav.tab')),
-          ),
+          if (!kIsWeb)
+            BottomNavigationBarItem(
+              icon: const Icon(Unicons.favorite),
+              title: Text(translate('app.fav.tab')),
+            ),
           BottomNavigationBarItem(
             icon: const Icon(Unicons.search),
-            title: Text(FlutterI18n.translate(context, 'app.search.tab')),
+            title: Text(translate('app.search.tab')),
           ),
           BottomNavigationBarItem(
             icon: const Icon(Unicons.info_circle),
-            title: Text(FlutterI18n.translate(context, 'app.info.tab')),
+            title: Text(translate('app.info.tab')),
           ),
         ],
         currentIndex: _selectedIndex,

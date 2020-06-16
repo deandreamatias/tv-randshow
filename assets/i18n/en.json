@@ -20,21 +20,33 @@
         "info": {
             "tab": "Info",
             "title": "Info about TV Randshow",
+            "app_title": "Android app",
+            "app_description": "Get TV Randshow app in Google Play",
+            "web_title": "Web app",
+            "web_description": "Use the TV Randshow in the web",
             "rate_title": "Review",
             "rate_description": "Make your review about this app in Google Play",
             "feedback_title": "Feedback",
-            "feedback_description": "Send a email with feedback or problem report about this app"
+            "feedback_description": "Send a email with feedback or problem report about this app",
+            "version": {
+                "title": "Version changelog",
+                "description": "See details of this and older versions",
+                "dialog_title": "Changelog",
+                "dialog_button": "CLOSE"
+            }
         },
         "loading": {
             "title": "Choosing a random TV show",
             "general_error": "Error to get episode. Please try again",
             "connection_error": "Fail connection. Connect and try again",
-            "button_home": "FAVORITES"
+            "button_fav": "FAVORITES",
+            "button_search": "SEARCH"
         },
         "result": {
             "title": "This is the TV show episode chosen at random!",
             "button_random": "ANOTHER RANDOM EPISODE",
-            "button_home": "FAVORITES"
+            "button_fav": "FAVORITES",
+            "button_search": "SEARCH"
         },
         "modal": {
             "description": "Description",

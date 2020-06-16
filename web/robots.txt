@@ -1,0 +1,3 @@
+Sitemap: https://tvrandshow.com/sitemap.xml
+User-agent: *
+Crawl-delay: 60

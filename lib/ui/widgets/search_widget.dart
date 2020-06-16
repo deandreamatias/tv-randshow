@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/models/result.dart';
 import '../shared/styles.dart';
-import 'cached_image.dart';
+import 'image_builder.dart';
 import 'modal_sheet.dart';
+import 'random_button.dart';
 import 'save_button.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -19,7 +21,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   bool enable;
   @override
   void initState() {
-    widget.result.firstAirDate == null ? enable = false : enable = true;
+    enable = widget.result.firstAirDate != null;
     super.initState();
   }
 
@@ -40,40 +42,37 @@ class _SearchWidgetState extends State<SearchWidget> {
               child: GestureDetector(
                 onTap: () async {
                   if (enable) {
-                    showModalBottomSheet<Container>(
+                    showModalBottomSheet<void>(
                       backgroundColor: Colors.transparent,
                       isScrollControlled: true,
                       elevation: 0.0,
+                      isDismissible: true,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadiusDirectional.vertical(
                           top: Radius.circular(16.0),
                         ),
                       ),
                       context: context,
-                      builder: (BuildContext builder) {
-                        return Container(
-                          height: 424,
-                          child: ModalSheet(
-                            idTv: widget.result.id,
-                            inDatabase: false,
-                          ),
-                        );
-                      },
+                      builder: (BuildContext builder) => ModalSheet(
+                        idTv: widget.result.id,
+                        inDatabase: false,
+                      ),
                     );
                   }
                 },
-                child: CachedImage(
-                    name: widget.result.name,
-                    url: widget.result.posterPath,
-                    isModal: false),
+                child: ImageBuilder(
+                  name: widget.result.name,
+                  url: widget.result.posterPath,
+                  isModal: false,
+                ),
               ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: enable
-                  ? SaveButton(
-                      id: widget.result.id,
-                    )
+                  ? kIsWeb
+                      ? RandomButton(id: widget.result.id)
+                      : SaveButton(id: widget.result.id)
                   : Container(),
             ),
           ],

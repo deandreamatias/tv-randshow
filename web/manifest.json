@@ -1,0 +1,23 @@
+{
+    "name": "TV Randshow | App to choose a random TV show episode",
+    "short_name": "TV Randshow",
+    "description": "TV Randshow | Choose a random TV show episode from a The Movie Database",
+    "start_url": ".",
+    "display": "minimal-ui",
+    "theme_color": "#e40505",
+    "background_color": "#e40505",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

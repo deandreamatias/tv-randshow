@@ -1,0 +1,26 @@
+body {
+    background-color: #ffffff;
+}
+.title {
+    color: black;
+    font-family: 'Nunito', sans-serif;
+    font-size: 5em;
+    margin-bottom: 16px;
+}
+a {
+    color: black;
+    font-family: 'Sniglet', cursive;
+    font-size: 2em;
+}
+.container {
+    display: grid;
+    text-align: center;
+}
+.button {
+    background-color: #e40505;
+    border-radius: 30px;
+    color: white;
+    margin: auto;
+    padding: 16px;
+    text-decoration: none;
+}
