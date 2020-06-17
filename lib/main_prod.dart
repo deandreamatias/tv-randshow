@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -29,7 +30,7 @@ class MainApp extends StatelessWidget {
       providers: getProviders(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'TV Randshow',
+        title: kIsWeb ? 'TV Randshow | App to choose a random TV show episode' : 'TV Randshow',
         theme: ThemeData(
           fontFamily: 'Nunito',
           primarySwatch: Colors.red,
