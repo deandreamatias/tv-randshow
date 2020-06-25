@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import '../../core/models/result.dart';
 import '../../core/viewmodels/views/search_view_model.dart';
 import '../base_widget.dart';
-import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 import '../widgets/search_widget.dart';
 
@@ -61,7 +60,7 @@ class _SearchViewState extends State<SearchView> {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: DEFAULT_INSESTS,
+                  padding: const EdgeInsets.all(16.0),
                   child: TextField(
                     controller: textEditingController,
                     textInputAction: TextInputAction.search,
@@ -75,14 +74,7 @@ class _SearchViewState extends State<SearchView> {
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       hintText: translate('app.search.search_bar'),
-                      contentPadding: const EdgeInsets.all(0.0),
-                      prefixIcon:
-                          const Icon(Unicons.search, color: StyleColor.PRIMARY),
-                      focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: StyleColor.PRIMARY),
-                          borderRadius: BORDER_RADIUS),
-                      border:
-                          const OutlineInputBorder(borderRadius: BORDER_RADIUS),
+                      prefixIcon: const Icon(Unicons.search),
                     ),
                   ),
                 ),
@@ -93,7 +85,7 @@ class _SearchViewState extends State<SearchView> {
                     maxCrossAxisExtent: 180.0,
                     childAspectRatio: 0.8,
                     showRetry: false,
-                    padding: DEFAULT_INSESTS,
+                    padding: const EdgeInsets.all(16.0),
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
                     errorBuilder: (BuildContext context, Object dyna) {
@@ -102,7 +94,7 @@ class _SearchViewState extends State<SearchView> {
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
                             translate('app.search.error_message'),
-                            style: StyleText.MESSAGES,
+                            style: Theme.of(context).textTheme.subtitle1,
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -118,7 +110,7 @@ class _SearchViewState extends State<SearchView> {
                                   ? 'app.search.init_message'
                                   : 'app.search.empty_message',
                             ),
-                            style: StyleText.MESSAGES,
+                            style: Theme.of(context).textTheme.subtitle1,
                             textAlign: TextAlign.center,
                           ),
                         ),

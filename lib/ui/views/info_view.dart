@@ -9,7 +9,6 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/utils/constants.dart';
-import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 
 class InfoView extends StatelessWidget {
@@ -23,7 +22,7 @@ class InfoView extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               translate('app.info.title'),
-              style: StyleText.MESSAGES,
+              style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
           ),
@@ -36,7 +35,7 @@ class InfoView extends StatelessWidget {
                   ? 'app.info.app_description'
                   : 'app.info.web_description'),
             ),
-            trailing: const Icon(
+            leading: const Icon(
                 kIsWeb ? Unicons.google_play : Unicons.external_link_alt),
             onTap: () async {
               const String url = kIsWeb
@@ -59,7 +58,7 @@ class InfoView extends StatelessWidget {
               subtitle: Text(
                 translate('app.info.rate_description'),
               ),
-              trailing: const Icon(Unicons.feedback),
+              leading: const Icon(Unicons.feedback),
               onTap: () => LaunchReview.launch(
                 androidAppId: 'deandrea.matias.tv_randshow',
               ),
@@ -72,7 +71,7 @@ class InfoView extends StatelessWidget {
             subtitle: Text(
               translate('app.info.feedback_description'),
             ),
-            trailing: const Icon(Unicons.envelope),
+            leading: const Icon(Unicons.envelope),
             onTap: () async {
               const String url =
                   'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
@@ -91,7 +90,7 @@ class InfoView extends StatelessWidget {
             subtitle: Text(
               translate('app.info.version.description'),
             ),
-            trailing: const Icon(Unicons.brackets_curly),
+            leading: const Icon(Unicons.brackets_curly),
             onTap: () {
               _changelog(context);
             },
@@ -105,10 +104,7 @@ class InfoView extends StatelessWidget {
     showDialog<bool>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        contentPadding: DEFAULT_INSESTS,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
+        contentPadding: const EdgeInsets.all(16.0),
         title: Text(
           translate('app.info.version.dialog_title'),
         ),
@@ -128,13 +124,8 @@ class InfoView extends StatelessWidget {
               }),
         ),
         actions: <Widget>[
-          RaisedButton(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              side: const BorderSide(color: StyleColor.PRIMARY),
-            ),
-            textColor: StyleColor.PRIMARY,
-            color: StyleColor.WHITE,
+          OutlineButton(
+            borderSide: BorderSide(color: Theme.of(context).primaryColor),
             child: Text(
               translate('app.info.version.dialog_button'),
             ),
