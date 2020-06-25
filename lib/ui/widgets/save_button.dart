@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/widgets/save_model.dart';
 import '../base_widget.dart';
-import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 
 class SaveButton extends StatelessWidget {
@@ -24,35 +23,25 @@ class SaveButton extends StatelessWidget {
         child: model.tvshowInDb
             ? RaisedButton.icon(
                 key: const ValueKey<String>('delete'),
-                icon: const Icon(
-                  Unicons.times,
-                  color: StyleColor.PRIMARY,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    side: const BorderSide(color: StyleColor.PRIMARY)),
-                color: StyleColor.WHITE,
-                label: Text(
-                    translate('app.search.button_delete'),
-                    style: StyleText.PRIMARY),
+                icon: const Icon(Unicons.times),
+                label: Text(translate('app.search.button_delete')),
+                color: Theme.of(context).colorScheme.secondary,
                 onPressed: () => model.deleteFav(id),
+                textColor: Theme.of(context).colorScheme.primary,
               )
             : RaisedButton.icon(
                 key: const ValueKey<String>('add'),
-                icon: const Icon(
-                  Unicons.favorite,
-                  color: StyleColor.PRIMARY,
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    side: const BorderSide(color: StyleColor.PRIMARY)),
-                color: StyleColor.WHITE,
-                label: Text(
-                    translate('app.search.button_fav'),
-                    style: StyleText.PRIMARY),
+                icon: const Icon(Unicons.favorite),
+                label: Text(translate('app.search.button_fav')),
+                color: Theme.of(context).colorScheme.secondary,
+                textColor: Theme.of(context).colorScheme.primary,
                 onPressed: () => model.addFav(
                   id,
-                  LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
+                  LocalizedApp.of(context)
+                      .delegate
+                      .currentLocale
+                      .languageCode
+                      .toString(),
                 ),
               ),
       ),

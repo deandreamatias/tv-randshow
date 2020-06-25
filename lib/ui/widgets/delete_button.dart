@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../core/viewmodels/widgets/delete_model.dart';
 import '../../core/viewmodels/widgets/favorite_list_model.dart';
 import '../base_widget.dart';
-import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 
 class DeleteButton extends StatelessWidget {
@@ -34,14 +33,14 @@ class DeleteButton extends StatelessWidget {
           height: 20.0,
           width: 20.0,
           decoration: BoxDecoration(
-            color: StyleColor.WHITE,
+            color: Theme.of(context).colorScheme.secondary,
             borderRadius: const BorderRadius.all(Radius.circular(4.0)),
             border: Border.all(),
           ),
-          child: const Icon(
+          child: Icon(
             Unicons.times,
             size: 16.0,
-            color: StyleColor.PRIMARY,
+            color: Theme.of(context).colorScheme.primary,
           ),
         ),
       ),
@@ -53,31 +52,25 @@ class DeleteButton extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-          title:
-              Text(translate('app.delete_dialog.title')),
-          content: Text(
-              translate('app.delete_dialog.subtitle')),
+          title: Text(translate('app.delete_dialog.title')),
+          content: Text(translate('app.delete_dialog.subtitle')),
           actions: <Widget>[
             FlatButton(
-              textColor: StyleColor.PRIMARY,
-              color: StyleColor.WHITE,
-              child: Text(translate( 'app.delete_dialog.button_cancel')),
+              child: Text(translate('app.delete_dialog.button_cancel')),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
-            RaisedButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    side: const BorderSide(color: StyleColor.PRIMARY)),
-                textColor: StyleColor.PRIMARY,
-                color: StyleColor.WHITE,
-                child: Text(translate( 'app.delete_dialog.button_delete')),
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                })
+            OutlineButton(
+              borderSide: BorderSide(color: Theme.of(context).primaryColor),
+              child: Text(translate('app.delete_dialog.button_delete')),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            )
           ],
         );
       },

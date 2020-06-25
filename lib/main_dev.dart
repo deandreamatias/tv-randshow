@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'config/env.dart';
 import 'config/flavor_config.dart';
 import 'config/provider_setup.dart';
+import 'core/services/theme.dart';
 import 'core/utils/constants.dart';
 import 'ui/router.dart';
 
@@ -31,11 +32,10 @@ class MainApp extends StatelessWidget {
       providers: getProviders(),
       child: MaterialApp(
         debugShowCheckedModeBanner: true,
-        title: kIsWeb ? 'TV Randshow | App to choose a random TV show episode' : 'TV Randshow',
-        theme: ThemeData(
-          fontFamily: 'Nunito',
-          primarySwatch: Colors.red,
-        ),
+        title: kIsWeb
+            ? 'TV Randshow | App to choose a random TV show episode'
+            : 'TV Randshow',
+        theme: ThemeManager().availableThemes[0],
         initialRoute: RoutePaths.TAB,
         onGenerateRoute: Router.generateRoute,
         localizationsDelegates: <LocalizationsDelegate<dynamic>>[

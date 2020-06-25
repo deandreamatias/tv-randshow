@@ -22,6 +22,9 @@ class HomeButton extends StatelessWidget {
               : translate('app.loading.button_fav'),
         ),
         icon: const Icon(kIsWeb ? Unicons.search : Unicons.favorite),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
         onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
           context,
           RoutePaths.TAB,

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/widgets/favorite_list_model.dart';
 import '../base_widget.dart';
-import '../shared/styles.dart';
 import 'fav_widget.dart';
 
 class FavoriteList extends StatelessWidget {
@@ -24,7 +23,7 @@ class FavoriteList extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
                           translate('app.fav.empty_message'),
-                          style: StyleText.MESSAGES,
+                          style: Theme.of(context).textTheme.subtitle1,
                           textAlign: TextAlign.center,
                         ),
                       ),
@@ -39,7 +38,7 @@ class FavoriteList extends StatelessWidget {
                           mainAxisSpacing: 16.0,
                         ),
                         physics: const BouncingScrollPhysics(),
-                        padding: DEFAULT_INSESTS,
+                        padding: const EdgeInsets.all(16.0),
                         itemCount: model.listFavs.length,
                         itemBuilder: (BuildContext context, int index) =>
                             FavWidget(

@@ -6,7 +6,6 @@ import '../../core/models/tvshow_details.dart';
 import '../../core/utils/constants.dart';
 import '../../core/viewmodels/widgets/random_model.dart';
 import '../base_widget.dart';
-import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 import '../views/loading_view.dart';
 
@@ -23,13 +22,8 @@ class RandomButton extends StatelessWidget {
       ),
       builder: (BuildContext context, RandomModel model, Widget child) =>
           RaisedButton.icon(
-        icon: const Icon(Unicons.dice_multiple, color: StyleColor.WHITE),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-        color: StyleColor.PRIMARY,
-        label: Text(
-          translate('app.fav.button_random'),
-          style: StyleText.WHITE,
-        ),
+        icon: const Icon(Unicons.dice_multiple),
+        label: Text(translate('app.fav.button_random')),
         onPressed: () async {
           tvshowDetails ??= await model.getDetails(
             id,

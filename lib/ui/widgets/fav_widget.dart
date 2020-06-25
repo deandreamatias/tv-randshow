@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../core/models/tvshow_details.dart';
-import '../shared/styles.dart';
 import 'delete_button.dart';
 import 'image_builder.dart';
 import 'modal_sheet.dart';
@@ -14,7 +13,9 @@ class FavWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(borderRadius: BORDER_RADIUS),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      ),
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
@@ -25,14 +26,8 @@ class FavWidget extends StatelessWidget {
             bottom: 24.0,
             child: GestureDetector(
               onTap: () => showModalBottomSheet<void>(
-                backgroundColor: Colors.transparent,
                 isScrollControlled: true,
-                elevation: 0.0,
                 isDismissible: true,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadiusDirectional.vertical(
-                      top: Radius.circular(16.0)),
-                ),
                 context: context,
                 builder: (BuildContext context) => ModalSheet(
                   idTv: tvshowDetails.id,

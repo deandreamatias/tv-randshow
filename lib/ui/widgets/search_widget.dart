@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/models/result.dart';
-import '../shared/styles.dart';
 import 'image_builder.dart';
 import 'modal_sheet.dart';
 import 'random_button.dart';
@@ -30,7 +29,9 @@ class _SearchWidgetState extends State<SearchWidget> {
     return Opacity(
       opacity: enable ? 1.0 : 0.38,
       child: Container(
-        decoration: const BoxDecoration(borderRadius: BORDER_RADIUS),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        ),
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -43,15 +44,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                 onTap: () async {
                   if (enable) {
                     showModalBottomSheet<void>(
-                      backgroundColor: Colors.transparent,
                       isScrollControlled: true,
-                      elevation: 0.0,
                       isDismissible: true,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadiusDirectional.vertical(
-                          top: Radius.circular(16.0),
-                        ),
-                      ),
                       context: context,
                       builder: (BuildContext builder) => ModalSheet(
                         idTv: widget.result.id,

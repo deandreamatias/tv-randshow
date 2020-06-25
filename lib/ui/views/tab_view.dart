@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
-import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 import 'home_view.dart';
 import 'info_view.dart';
@@ -26,6 +25,7 @@ class _TabViewState extends State<TabView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -44,7 +44,7 @@ class _TabViewState extends State<TabView> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: StyleColor.PRIMARY,
+        selectedItemColor: Theme.of(context).primaryColor,
         onTap: (int index) {
           setState(() {
             _selectedIndex = index;
