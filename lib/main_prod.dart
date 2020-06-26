@@ -35,6 +35,7 @@ class MainApp extends StatelessWidget {
             ? 'TV Randshow | App to choose a random TV show episode'
             : 'TV Randshow',
         theme: ThemeManager().availableThemes[0],
+        darkTheme: ThemeManager().availableThemes[1],
         initialRoute: RoutePaths.TAB,
         onGenerateRoute: Router.generateRoute,
         localizationsDelegates: <LocalizationsDelegate<dynamic>>[
