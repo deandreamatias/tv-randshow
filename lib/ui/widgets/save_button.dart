@@ -25,16 +25,12 @@ class SaveButton extends StatelessWidget {
                 key: const ValueKey<String>('delete'),
                 icon: const Icon(Unicons.times),
                 label: Text(translate('app.search.button_delete')),
-                color: Theme.of(context).colorScheme.secondary,
                 onPressed: () => model.deleteFav(id),
-                textColor: Theme.of(context).colorScheme.primary,
               )
             : RaisedButton.icon(
                 key: const ValueKey<String>('add'),
                 icon: const Icon(Unicons.favorite),
                 label: Text(translate('app.search.button_fav')),
-                color: Theme.of(context).colorScheme.secondary,
-                textColor: Theme.of(context).colorScheme.primary,
                 onPressed: () => model.addFav(
                   id,
                   LocalizedApp.of(context)

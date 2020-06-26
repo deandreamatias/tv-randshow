@@ -33,14 +33,14 @@ class DeleteButton extends StatelessWidget {
           height: 20.0,
           width: 20.0,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.background,
             borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-            border: Border.all(),
+            border: Border.all(color: Theme.of(context).colorScheme.primary),
           ),
           child: Icon(
             Unicons.times,
             size: 16.0,
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).accentColor,
           ),
         ),
       ),
