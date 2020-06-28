@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 import '../shared/unicons_icons.dart';
@@ -24,32 +25,43 @@ class _TabViewState extends State<TabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: _widgetOptions.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          if (!kIsWeb)
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness:
+            Theme.of(context).colorScheme.brightness == Brightness.dark
+                ? Brightness.light
+                : Brightness.dark,
+        systemNavigationBarIconBrightness:
+            Theme.of(context).colorScheme.brightness,
+      ),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: _widgetOptions.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            if (!kIsWeb)
+              BottomNavigationBarItem(
+                icon: const Icon(Unicons.favorite),
+                title: Text(translate('app.fav.tab')),
+              ),
             BottomNavigationBarItem(
-              icon: const Icon(Unicons.favorite),
-              title: Text(translate('app.fav.tab')),
+              icon: const Icon(Unicons.search),
+              title: Text(translate('app.search.tab')),
             ),
-          BottomNavigationBarItem(
-            icon: const Icon(Unicons.search),
-            title: Text(translate('app.search.tab')),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Unicons.info_circle),
-            title: Text(translate('app.info.tab')),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).primaryColor,
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+            BottomNavigationBarItem(
+              icon: const Icon(Unicons.info_circle),
+              title: Text(translate('app.info.tab')),
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Theme.of(context).primaryColor,
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
