@@ -27,79 +27,87 @@ class InfoView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          ListTile(
-            title: Text(
-              translate(kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
+          Expanded(
+            child: ListView(
+              physics: const BouncingScrollPhysics(),
+              children: <Widget>[
+                ListTile(
+                  title: Text(
+                    translate(
+                        kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
+                  ),
+                  subtitle: Text(
+                    translate(kIsWeb
+                        ? 'app.info.app_description'
+                        : 'app.info.web_description'),
+                  ),
+                  leading: const Icon(
+                      kIsWeb ? Unicons.google_play : Unicons.external_link_alt),
+                  onTap: () async {
+                    const String url = kIsWeb
+                        ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
+                        : 'https://tvrandshow.com';
+                    if (await canLaunch(url)) {
+                      await launch(url);
+                      log('Launched: $url');
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                ),
+                Visibility(
+                  visible: !kIsWeb,
+                  child: ListTile(
+                    title: Text(
+                      translate('app.info.rate_title'),
+                    ),
+                    subtitle: Text(
+                      translate('app.info.rate_description'),
+                    ),
+                    leading: const Icon(Unicons.feedback),
+                    onTap: () => LaunchReview.launch(
+                      androidAppId: 'deandrea.matias.tv_randshow',
+                    ),
+                  ),
+                ),
+                ListTile(
+                  title: Text(
+                    translate('app.info.feedback_title'),
+                  ),
+                  subtitle: Text(
+                    translate('app.info.feedback_description'),
+                  ),
+                  leading: const Icon(Unicons.envelope),
+                  onTap: () async {
+                    const String url =
+                        'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
+                    try {
+                      await launch(url);
+                      log('Launched: $url');
+                    } catch (e) {
+                      throw 'Could not launch $url because $e';
+                    }
+                  },
+                ),
+                ListTile(
+                  title: Text(
+                    translate('app.info.version.title'),
+                  ),
+                  subtitle: Text(
+                    translate('app.info.version.description'),
+                  ),
+                  leading: const Icon(Unicons.brackets_curly),
+                  onTap: () {
+                    _changelog(context);
+                  },
+                ),
+                DarkModeSwitch(
+                  leading: const Icon(Unicons.moon),
+                  title: Text(translate('app.info.dark_title')),
+                  subtitle: Text(translate('app.info.dark_description')),
+                ),
+              ],
             ),
-            subtitle: Text(
-              translate(kIsWeb
-                  ? 'app.info.app_description'
-                  : 'app.info.web_description'),
-            ),
-            leading: const Icon(
-                kIsWeb ? Unicons.google_play : Unicons.external_link_alt),
-            onTap: () async {
-              const String url = kIsWeb
-                  ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
-                  : 'https://tvrandshow.com';
-              if (await canLaunch(url)) {
-                await launch(url);
-                log('Launched: $url');
-              } else {
-                throw 'Could not launch $url';
-              }
-            },
-          ),
-          Visibility(
-            visible: !kIsWeb,
-            child: ListTile(
-              title: Text(
-                translate('app.info.rate_title'),
-              ),
-              subtitle: Text(
-                translate('app.info.rate_description'),
-              ),
-              leading: const Icon(Unicons.feedback),
-              onTap: () => LaunchReview.launch(
-                androidAppId: 'deandrea.matias.tv_randshow',
-              ),
-            ),
-          ),
-          ListTile(
-            title: Text(
-              translate('app.info.feedback_title'),
-            ),
-            subtitle: Text(
-              translate('app.info.feedback_description'),
-            ),
-            leading: const Icon(Unicons.envelope),
-            onTap: () async {
-              const String url =
-                  'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
-              try {
-                await launch(url);
-                log('Launched: $url');
-              } catch (e) {
-                throw 'Could not launch $url because $e';
-              }
-            },
-          ),
-          ListTile(
-            title: Text(
-              translate('app.info.version.title'),
-            ),
-            subtitle: Text(
-              translate('app.info.version.description'),
-            ),
-            leading: const Icon(Unicons.brackets_curly),
-            onTap: () {
-              _changelog(context);
-            },
-          ),
-          DarkModeSwitch(
-            leading: const Icon(Unicons.moon),
-            title: Text(translate('app.info.dark_title')),
-            subtitle: Text(translate('app.info.dark_description')),
           ),
         ],
       ),
