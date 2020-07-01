@@ -22,4 +22,5 @@ class Unicons {
       IconData(0xe809, fontFamily: _kFontFam);
   static const IconData google_play = IconData(0xe80b, fontFamily: _kFontFam);
   static const IconData envelope = IconData(0xe80c, fontFamily: _kFontFam);
+  static const IconData moon = IconData(0xe80d, fontFamily: _kFontFam);
 }

@@ -46,7 +46,9 @@ class ResultView extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(8.0)),
-                            border: Border.all(),
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.onBackground,
+                            ),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
