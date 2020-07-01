@@ -6,20 +6,18 @@ class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              translate('app.fav.title'),
-              style: Theme.of(context).textTheme.headline6,
-              textAlign: TextAlign.center,
-            ),
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            translate('app.fav.title'),
+            style: Theme.of(context).textTheme.headline6,
+            textAlign: TextAlign.center,
           ),
-          Expanded(child: FavoriteList()),
-        ],
-      ),
+        ),
+        Expanded(child: FavoriteList()),
+      ],
     );
   }
 }

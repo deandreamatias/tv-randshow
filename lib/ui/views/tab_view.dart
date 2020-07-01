@@ -37,71 +37,73 @@ class _TabViewState extends State<TabView> {
       ),
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
-        body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) =>
-              constraints.maxWidth > 600
-                  ? Row(
-                      children: <Widget>[
-                        NavigationRail(
-                          labelType: NavigationRailLabelType.all,
-                          onDestinationSelected: (int value) {
-                            setState(() {
-                              _selectedIndex = value;
-                            });
-                          },
-                          destinations: <NavigationRailDestination>[
-                            if (!kIsWeb)
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) =>
+                constraints.maxWidth > 600
+                    ? Row(
+                        children: <Widget>[
+                          NavigationRail(
+                            labelType: NavigationRailLabelType.all,
+                            onDestinationSelected: (int value) {
+                              setState(() {
+                                _selectedIndex = value;
+                              });
+                            },
+                            destinations: <NavigationRailDestination>[
+                              if (!kIsWeb)
+                                NavigationRailDestination(
+                                  icon: const Icon(Unicons.favorite),
+                                  label: Text(translate('app.fav.tab')),
+                                ),
                               NavigationRailDestination(
-                                icon: const Icon(Unicons.favorite),
-                                label: Text(translate('app.fav.tab')),
+                                icon: const Icon(Unicons.search),
+                                label: Text(translate('app.search.tab')),
                               ),
-                            NavigationRailDestination(
-                              icon: const Icon(Unicons.search),
-                              label: Text(translate('app.search.tab')),
-                            ),
-                            NavigationRailDestination(
-                              icon: const Icon(Unicons.info_circle),
-                              label: Text(translate('app.info.tab')),
-                            )
-                          ],
-                          selectedIndex: _selectedIndex,
-                        ),
-                        const VerticalDivider(thickness: 1, width: 1),
-                        Expanded(
-                          child: _widgetOptions.elementAt(_selectedIndex),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: <Widget>[
-                        Expanded(
-                          child: _widgetOptions.elementAt(_selectedIndex),
-                        ),
-                        BottomNavigationBar(
-                          currentIndex: _selectedIndex,
-                          onTap: (int value) {
-                            setState(() {
-                              _selectedIndex = value;
-                            });
-                          },
-                          items: <BottomNavigationBarItem>[
-                            if (!kIsWeb)
+                              NavigationRailDestination(
+                                icon: const Icon(Unicons.info_circle),
+                                label: Text(translate('app.info.tab')),
+                              )
+                            ],
+                            selectedIndex: _selectedIndex,
+                          ),
+                          const VerticalDivider(thickness: 1, width: 1),
+                          Expanded(
+                            child: _widgetOptions.elementAt(_selectedIndex),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: _widgetOptions.elementAt(_selectedIndex),
+                          ),
+                          BottomNavigationBar(
+                            currentIndex: _selectedIndex,
+                            onTap: (int value) {
+                              setState(() {
+                                _selectedIndex = value;
+                              });
+                            },
+                            items: <BottomNavigationBarItem>[
+                              if (!kIsWeb)
+                                BottomNavigationBarItem(
+                                  icon: const Icon(Unicons.favorite),
+                                  title: Text(translate('app.fav.tab')),
+                                ),
                               BottomNavigationBarItem(
-                                icon: const Icon(Unicons.favorite),
-                                title: Text(translate('app.fav.tab')),
+                                icon: const Icon(Unicons.search),
+                                title: Text(translate('app.search.tab')),
                               ),
-                            BottomNavigationBarItem(
-                              icon: const Icon(Unicons.search),
-                              title: Text(translate('app.search.tab')),
-                            ),
-                            BottomNavigationBarItem(
-                              icon: const Icon(Unicons.info_circle),
-                              title: Text(translate('app.info.tab')),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                              BottomNavigationBarItem(
+                                icon: const Icon(Unicons.info_circle),
+                                title: Text(translate('app.info.tab')),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+          ),
         ),
       ),
     );
