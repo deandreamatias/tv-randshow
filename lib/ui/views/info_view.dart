@@ -6,6 +6,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:persist_theme/persist_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/utils/constants.dart';
@@ -94,7 +95,12 @@ class InfoView extends StatelessWidget {
             onTap: () {
               _changelog(context);
             },
-          )
+          ),
+          DarkModeSwitch(
+            leading: const Icon(Unicons.moon),
+            title: Text(translate('app.info.dark_title')),
+            subtitle: Text(translate('app.info.dark_description')),
+          ),
         ],
       ),
     );

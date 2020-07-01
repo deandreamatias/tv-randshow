@@ -28,6 +28,7 @@ dependencies:
   launch_review: ^2.0.0             # [Package] Open store to rate app
   flutter_markdown: ^0.4.1          # [Package] Markdown support
   sqflite: ^1.2.2                   # [Plugin] SQLite
+  persist_theme: ^1.7.0
 
 dev_dependencies:
   build_runner: ^1.0.0              # [Package] Command line JSON code generation
