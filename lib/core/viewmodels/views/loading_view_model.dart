@@ -10,13 +10,19 @@ class LoadingViewModel extends BaseModel {
     @required RandomService randomService,
   }) : _randomService = randomService;
   final RandomService _randomService;
+  TvshowResult _tvshowResult;
+  bool _canNavigate = false;
 
-  Future<TvshowResult> sortRandomEpisode(
+  TvshowResult get tvshowResult => _tvshowResult;
+  bool get canNavigate => _canNavigate;
+
+  Future<void> sortRandomEpisode(
       TvshowDetails tvshowDetails, String language) async {
     setBusy(true);
-    final TvshowResult tvshowResult =
-        await _randomService.randomEpisode(tvshowDetails, language);
+    _tvshowResult = await _randomService.randomEpisode(tvshowDetails, language);
+    _canNavigate = _tvshowResult != null &&
+        _tvshowResult.randomEpisode >= 0 &&
+        _tvshowResult.randomSeason >= 0;
     setBusy(false);
-    return tvshowResult;
   }
 }

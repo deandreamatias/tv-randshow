@@ -22,7 +22,7 @@ dependencies:
   flutter_translate: ^1.6.0         # [Package] I18n translate
   cached_network_image: ^2.0.0      # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
-  flare_loading: ^2.1.1             # [Package] Loading animation with flare
+  flare_flutter: ^2.0.4             # [Package] Runtime flare animation
   logger: ^0.8.0                    # [Package] Logger for debug
   dio: ^3.0.9                       # [Package] HTTP Client manager
   launch_review: ^2.0.0             # [Package] Open store to rate app
