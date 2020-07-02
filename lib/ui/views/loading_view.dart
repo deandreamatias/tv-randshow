@@ -1,10 +1,9 @@
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
-import 'package:flare_loading/flare_loading.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/models/tvshow_details.dart';
-import '../../core/models/tvshow_result.dart';
 import '../../core/utils/constants.dart';
 import '../../core/viewmodels/views/loading_view_model.dart';
 import '../base_widget.dart';
@@ -21,52 +20,57 @@ class LoadingView extends StatelessWidget {
       model: LoadingViewModel(
         randomService: Provider.of(context),
       ),
-      onModelReady: (LoadingViewModel model) {
-        model
-            .sortRandomEpisode(
+      onModelReady: (LoadingViewModel model) async {
+        await model.sortRandomEpisode(
           tvshowDetails,
-          LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
-        )
-            .then(
-          (TvshowResult tvshowResult) {
-            if (tvshowResult != null) {
-              Navigator.pushNamedAndRemoveUntil<ResultView>(
-                context,
-                RoutePaths.RESULT,
-                ModalRoute.withName(RoutePaths.TAB),
-                arguments: tvshowResult,
-              );
-            }
-            // TODO: Implement get error
-          },
+          LocalizedApp.of(context)
+              .delegate
+              .currentLocale
+              .languageCode
+              .toString(),
         );
+        if (model.canNavigate) {
+          Navigator.pushNamedAndRemoveUntil<ResultView>(
+            context,
+            RoutePaths.RESULT,
+            ModalRoute.withName(RoutePaths.TAB),
+            arguments: model.tvshowResult,
+          );
+        }
       },
       builder: (BuildContext context, LoadingViewModel model, Widget child) {
         return Scaffold(
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: Text(
-                      translate('app.loading.title'),
-                      style: Theme.of(context).textTheme.headline6,
-                      textAlign: TextAlign.center,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: Text(
+                        translate('app.loading.title'),
+                        style: Theme.of(context).textTheme.headline6,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: FlareLoading(
-                      name: Assets.LOADING,
-                      startAnimation: 'Loading',
-                      loopAnimation: 'Loading',
-                      onSuccess: (dynamic _) {},
-                      onError: (dynamic err, dynamic stack) {},
+                    Expanded(
+                      child: !model.busy && !model.canNavigate
+                          ? Center(
+                              child: Text(
+                                translate('app.loading.general_error'),
+                                style: Theme.of(context).textTheme.subtitle1,
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          : const FlareActor(
+                              Assets.LOADING,
+                              animation: 'Loading',
+                            ),
                     ),
-                  ),
-                  const HomeButton()
-                ],
+                    const HomeButton()
+                  ],
+                ),
               ),
             ),
           ),
