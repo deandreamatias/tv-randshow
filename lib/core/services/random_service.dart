@@ -14,7 +14,7 @@ import 'log_service.dart';
 class RandomService {
   RandomService({
     @required ApiService apiService,
-  })  : _apiService = apiService;
+  }) : _apiService = apiService;
   final ApiService _apiService;
   final LogService _logger = LogService.instance;
 
@@ -49,13 +49,13 @@ class RandomService {
     }
   }
 
-  /// If total is a number from 1, add + 1 to result.
-  /// If else a length of list, get normal random
+  /// If [total] start with 1, add + 1 to result.
+  /// Else is length of list, get normal random
   int _getRandomNumber(int total, bool isSeason) {
     final Random random = Random();
     final int randomNumber = random.nextInt(total);
     _logger.logger.i(
-      'Random ${isSeason ? 'season' : 'episode'} nº: ${isSeason ? randomNumber + 1 : randomNumber + 1}',
+      'Random ${isSeason ? 'season' : 'episode'} nº: ${randomNumber + 1}',
     );
     return isSeason ? randomNumber + 1 : randomNumber;
   }
