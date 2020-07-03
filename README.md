@@ -1,6 +1,6 @@
 <p>
   <a href="http://tvrandshow.com/">
-    <img alt="TV Randshow website" src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/images/icon.png" height="100">
+    <img alt="TV Randshow website" src="./images/icon.png" height="100">
   </a>
   <a href='https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
     <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100" />
