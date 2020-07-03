@@ -22,10 +22,10 @@ The TV shows database comes from the TMDB and the app saves them in a database o
 This project has been built using the [Flutter](https://flutter.dev/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
 <p align="center">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/search.png" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/favs.png" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/details.png" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/result.png" width="180" hspace="4">
+  <img src="./images/search.png" width="180" hspace="4">
+  <img src="./images/favs.png" width="180" hspace="4">
+  <img src="./images/details.png" width="180" hspace="4">
+  <img src="./images/result.png" width="180" hspace="4">
 </p>
 
 ## Features
