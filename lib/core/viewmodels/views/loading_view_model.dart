@@ -1,15 +1,12 @@
-import 'package:flutter/widgets.dart';
-
+import '../../../config/locator.dart';
 import '../../models/tvshow_details.dart';
 import '../../models/tvshow_result.dart';
 import '../../services/random_service.dart';
 import '../base_model.dart';
 
 class LoadingViewModel extends BaseModel {
-  LoadingViewModel({
-    @required RandomService randomService,
-  }) : _randomService = randomService;
-  final RandomService _randomService;
+  final RandomService _randomService = locator<RandomService>();
+
   TvshowResult _tvshowResult;
   bool _canNavigate = false;
 

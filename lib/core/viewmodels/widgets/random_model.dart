@@ -1,16 +1,12 @@
-import 'package:flutter/widgets.dart';
-
 import '../../../config/flavor_config.dart';
+import '../../../config/locator.dart';
 import '../../models/query.dart';
 import '../../models/tvshow_details.dart';
 import '../../services/api_service.dart';
 import '../base_model.dart';
 
 class RandomModel extends BaseModel {
-  RandomModel({
-    @required ApiService apiService,
-  })  : _apiService = apiService;
-  final ApiService _apiService;
+  final ApiService _apiService = locator<ApiService>();
 
   Future<TvshowDetails> getDetails(int id, String language) async {
     setBusy(true);

@@ -1,16 +1,12 @@
-import 'package:flutter/widgets.dart';
-
 import '../../../config/flavor_config.dart';
+import '../../../config/locator.dart';
 import '../../models/query.dart';
 import '../../models/tvshow_details.dart';
 import '../../services/api_service.dart';
 import '../base_model.dart';
 
 class DetailsModel extends BaseModel {
-  DetailsModel({
-    @required ApiService apiService,
-  })  : _apiService = apiService;
-  final ApiService _apiService;
+  final ApiService _apiService = locator<ApiService>();
 
   TvshowDetails tvshowDetails;
 

@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 import 'dart:math';
 
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 
 import '../../config/flavor_config.dart';
@@ -11,6 +12,7 @@ import '../models/tvshow_result.dart';
 import '../models/tvshow_seasons_details.dart';
 import 'api_service.dart';
 
+@lazySingleton
 class RandomService {
   RandomService({
     @required ApiService apiService,

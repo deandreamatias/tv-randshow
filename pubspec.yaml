@@ -18,7 +18,9 @@ dependencies:
   url_launcher_web: ^0.1.1+2        # [Plugin] For launching a URL in web platform
   path_provider: ^1.6.5             # [Plugin] Locations on the Android & iOS file systems
   # Others
-  provider: ^4.0.4                  # [Package] Dependency injection and state management
+  provider: ^4.0.4                  # [Package] State management
+  get_it: ^4.0.2                    # [Package] Dependency injection
+  injectable: ^0.4.0+1              # [Package] Code generator dependency injection
   flutter_translate: ^1.6.0         # [Package] I18n translate
   cached_network_image: ^2.0.0      # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
@@ -28,7 +30,7 @@ dependencies:
   launch_review: ^2.0.0             # [Package] Open store to rate app
   flutter_markdown: ^0.4.1          # [Package] Markdown support
   sqflite: ^1.2.2                   # [Plugin] SQLite
-  persist_theme: ^1.7.0
+  persist_theme: ^1.7.0             # [Plugin] Manage and persist theme
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +39,7 @@ dev_dependencies:
   json_serializable: ^3.2.0
   flutter_native_splash: ^0.1.9
   flutter_launcher_icons: ^0.7.4
+  injectable_generator: ^0.4.1
 
 flutter_native_splash:
   image: assets/img/icon_launcher.png
@@ -62,4 +65,3 @@ flutter:
     - family:  Unicons
       fonts:
         - asset: assets/fonts/unicons.ttf
-  

@@ -1,7 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:provider/provider.dart';
 
 import '../../core/models/tvshow_details.dart';
 import '../../core/utils/constants.dart';
@@ -17,9 +16,7 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<LoadingViewModel>(
-      model: LoadingViewModel(
-        randomService: Provider.of(context),
-      ),
+      model: LoadingViewModel(),
       onModelReady: (LoadingViewModel model) async {
         await model.sortRandomEpisode(
           tvshowDetails,

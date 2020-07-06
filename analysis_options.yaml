@@ -35,6 +35,7 @@ analyzer:
   exclude:
     - "bin/cache/**"
     - "lib/core/models/*.g.dart"
+    - "lib/config/*.iconfig.dart"
     - "lib/config/env.dart"
     - ".dart_tool/**"
     - ".vscode/**"

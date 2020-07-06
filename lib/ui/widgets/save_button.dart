@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/widgets/save_model.dart';
 import '../base_widget.dart';
@@ -13,10 +12,7 @@ class SaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<SaveModel>(
-      model: SaveModel(
-        apiService: Provider.of(context),
-        databaseService: Provider.of(context),
-      ),
+      model: SaveModel(),
       builder: (BuildContext context, SaveModel model, Widget child) =>
           AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),

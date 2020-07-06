@@ -1,14 +1,10 @@
-import 'package:flutter/widgets.dart';
-
+import '../../../config/locator.dart';
 import '../../models/tvshow_details.dart';
 import '../../services/database_service.dart';
 import '../base_model.dart';
 
 class FavoriteListModel extends BaseModel {
-  FavoriteListModel({
-    @required DatabaseService databaseService,
-  }) : _databaseService = databaseService;
-  final DatabaseService _databaseService;
+  final DatabaseService _databaseService = locator<DatabaseService>();
 
   List<TvshowDetails> _listFavs;
 
