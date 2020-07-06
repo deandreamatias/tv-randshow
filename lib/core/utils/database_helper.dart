@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:path/path.dart';
@@ -6,11 +7,9 @@ import 'package:path_provider/path_provider.dart';
 
 import '../../config/flavor_config.dart';
 import '../models/tvshow_details.dart';
-import '../services/log_service.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
-  final LogService _logger = LogService.instance;
 
   String _databaseName;
   static const int _databaseVersion = 1;
@@ -43,7 +42,7 @@ class DatabaseHelper {
     try {
       documentsDirectory = await getExternalStorageDirectory();
     } catch (e) {
-      _logger.logger.e('Open directory', e);
+      log('Open directory', error: e);
     }
 
     if (FlavorConfig.isDevelopment()) {
@@ -54,8 +53,7 @@ class DatabaseHelper {
     final String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path,
             version: _databaseVersion, onCreate: _onCreate)
-        .catchError(
-            (dynamic onError) => _logger.logger.e('Open database', onError));
+        .catchError((dynamic onError) => log('Open database', error: onError));
   }
 
   // SQL code to create the database table
@@ -74,7 +72,7 @@ class DatabaseHelper {
           )
           ''').catchError((dynamic
             onError) =>
-        _logger.logger.e('Create database', onError));
+        log('Create database', error: onError));
   }
 
   // Helper methods

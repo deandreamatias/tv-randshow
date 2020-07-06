@@ -1,10 +1,10 @@
+import 'dart:developer';
+
 import '../models/tvshow_details.dart';
 import '../utils/database_helper.dart';
-import 'log_service.dart';
 
 class DatabaseService {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
-  final LogService _logger = LogService.instance;
 
   Future<void> insert(TvshowDetails tvshowDetails) async {
     // row to insert
@@ -20,7 +20,7 @@ class DatabaseService {
       DatabaseHelper.columnInProduction: tvshowDetails.inProduction,
     };
     final int id = await dbHelper.insert(row);
-    _logger.logger.i('Inserted row: $id');
+    log('Inserted row: $id');
   }
 
   Future<List<TvshowDetails>> queryList() async {
@@ -28,7 +28,7 @@ class DatabaseService {
       final List<TvshowDetails> list = await dbHelper.queryList();
       return list;
     } catch (e) {
-      _logger.logger.e('Error to get db list', e);
+      log('Error to get db list', error: e);
       return null;
     }
   }
@@ -47,15 +47,15 @@ class DatabaseService {
       DatabaseHelper.columnInProduction: tvshowDetails.inProduction,
     };
     final int rowsAffected = await dbHelper.update(row);
-    _logger.logger.i('Updated $rowsAffected row(s)');
+    log('Updated $rowsAffected row(s)');
   }
 
   Future<void> delete(int id) async {
     try {
       final int rowsDeleted = await dbHelper.delete(id);
-      _logger.logger.i('Deleted $rowsDeleted row with id $id');
+      log('Deleted $rowsDeleted row with id $id');
     } catch (e) {
-      _logger.logger.e('Error to delete row with id $id: $e');
+      log('Error to delete row with id $id', error: e);
     }
   }
 }
