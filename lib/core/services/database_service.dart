@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:injectable/injectable.dart';
+
 import '../models/tvshow_details.dart';
 import '../utils/database_helper.dart';
 
+@lazySingleton
 class DatabaseService {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
 

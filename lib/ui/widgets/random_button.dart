@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:provider/provider.dart';
 
 import '../../core/models/tvshow_details.dart';
 import '../../core/utils/constants.dart';
@@ -17,9 +16,7 @@ class RandomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<RandomModel>(
-      model: RandomModel(
-        apiService: Provider.of(context),
-      ),
+      model: RandomModel(),
       builder: (BuildContext context, RandomModel model, Widget child) =>
           RaisedButton.icon(
         icon: const Icon(Unicons.dice_multiple),

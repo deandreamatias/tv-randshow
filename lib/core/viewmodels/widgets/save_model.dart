@@ -1,6 +1,5 @@
-import 'package:flutter/widgets.dart';
-
 import '../../../config/flavor_config.dart';
+import '../../../config/locator.dart';
 import '../../models/query.dart';
 import '../../models/tvshow_details.dart';
 import '../../services/api_service.dart';
@@ -8,13 +7,8 @@ import '../../services/database_service.dart';
 import '../base_model.dart';
 
 class SaveModel extends BaseModel {
-  SaveModel({
-    @required ApiService apiService,
-    @required DatabaseService databaseService,
-  })  : _apiService = apiService,
-        _databaseService = databaseService;
-  final ApiService _apiService;
-  final DatabaseService _databaseService;
+  final ApiService _apiService = locator<ApiService>();
+  final DatabaseService _databaseService = locator<DatabaseService>();
 
   bool tvshowInDb = false;
 

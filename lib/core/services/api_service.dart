@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../config/flavor_config.dart';
 import '../models/query.dart';
@@ -9,6 +10,7 @@ import '../models/tvshow_details.dart';
 import '../models/tvshow_seasons_details.dart';
 import '../utils/constants.dart';
 
+@lazySingleton
 class ApiService {
   static BaseOptions options = BaseOptions(
     baseUrl: 'https://${FlavorConfig.instance.values.baseUrl}',

@@ -1,12 +1,9 @@
-import 'package:flutter/widgets.dart';
-
+import '../../../config/locator.dart';
 import '../../services/database_service.dart';
 import '../base_model.dart';
 
 class DeleteModel extends BaseModel {
-  DeleteModel({@required DatabaseService databaseService})
-      : _databaseService = databaseService;
-  final DatabaseService _databaseService;
+  final DatabaseService _databaseService = locator<DatabaseService>();
 
   Future<void> deleteFav(int id) async {
     await _databaseService.delete(id);

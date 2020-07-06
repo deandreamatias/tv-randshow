@@ -17,7 +17,7 @@ class DeleteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<DeleteModel>(
-      model: DeleteModel(databaseService: Provider.of(context)),
+      model: DeleteModel(),
       builder: (BuildContext context, DeleteModel model, Widget child) =>
           GestureDetector(
         onTap: () => _deleteConfirm(context).then(

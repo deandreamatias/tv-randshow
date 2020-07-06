@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:provider/provider.dart';
 
 import '../../core/models/result.dart';
 import '../../core/viewmodels/views/search_view_model.dart';
@@ -36,9 +35,7 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<SearchViewModel>(
-      model: SearchViewModel(
-        apiService: Provider.of(context),
-      ),
+      model: SearchViewModel(),
       onModelReady: (SearchViewModel model) {
         _pageLoadController = PagewiseLoadController<Result>(
           pageSize: 20,
