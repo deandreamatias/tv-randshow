@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 
 import '../../config/flavor_config.dart';
@@ -6,10 +8,8 @@ import '../models/search.dart';
 import '../models/tvshow_details.dart';
 import '../models/tvshow_seasons_details.dart';
 import '../utils/constants.dart';
-import 'log_service.dart';
 
 class ApiService {
-  final LogService _logger = LogService.instance;
   static BaseOptions options = BaseOptions(
     baseUrl: 'https://${FlavorConfig.instance.values.baseUrl}',
     connectTimeout: 5000,
@@ -24,7 +24,7 @@ class ApiService {
           queryParameters: query.toJson());
       return Search.fromJson(response?.data);
     } on DioError catch (e) {
-      _logger.logger.e('Error to fetch search: ${e.message}', e);
+      log('Error to fetch search: ${e.message}', error: e);
       return null;
     }
   }
@@ -38,7 +38,7 @@ class ApiService {
       );
       return TvshowDetails.fromJson(response?.data);
     } on DioError catch (e) {
-      _logger.logger.e('Error to fetch Tv show details: ${e.message}', e);
+      log('Error to fetch Tv show details: ${e.message}', error: e);
       return null;
     }
   }
@@ -53,8 +53,7 @@ class ApiService {
       );
       return TvshowSeasonsDetails.fromJson(response?.data);
     } on DioError catch (e) {
-      _logger.logger
-          .e('Error to fetch Tvshow seasons details: ${e.message}', e);
+      log('Error to fetch Tvshow seasons details: ${e.message}', error: e);
       return null;
     }
   }

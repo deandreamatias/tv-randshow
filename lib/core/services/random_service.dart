@@ -1,3 +1,4 @@
+import 'dart:developer' as developer;
 import 'dart:math';
 
 import 'package:meta/meta.dart';
@@ -9,14 +10,12 @@ import '../models/tvshow_details.dart';
 import '../models/tvshow_result.dart';
 import '../models/tvshow_seasons_details.dart';
 import 'api_service.dart';
-import 'log_service.dart';
 
 class RandomService {
   RandomService({
     @required ApiService apiService,
   }) : _apiService = apiService;
   final ApiService _apiService;
-  final LogService _logger = LogService.instance;
 
   Future<TvshowResult> randomEpisode(
       TvshowDetails tvshowDetails, String language) async {
@@ -54,7 +53,7 @@ class RandomService {
   int _getRandomNumber(int total, bool isSeason) {
     final Random random = Random();
     final int randomNumber = random.nextInt(total);
-    _logger.logger.i(
+    developer.log(
       'Random ${isSeason ? 'season' : 'episode'} nº: ${randomNumber + 1}',
     );
     return isSeason ? randomNumber + 1 : randomNumber;
