@@ -8,7 +8,6 @@ import '../../core/models/tvshow_result.dart';
 import '../../core/utils/constants.dart';
 import '../../core/viewmodels/views/loading_view_model.dart';
 import '../base_widget.dart';
-import '../shared/styles.dart';
 import '../widgets/home_button.dart';
 import 'result_view.dart';
 
@@ -46,14 +45,14 @@ class LoadingView extends StatelessWidget {
         return Scaffold(
           body: SafeArea(
             child: Padding(
-              padding: DEFAULT_INSESTS,
+              padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Text(
                       translate('app.loading.title'),
-                      style: StyleText.MESSAGES,
+                      style: Theme.of(context).textTheme.headline6,
                       textAlign: TextAlign.center,
                     ),
                   ),
