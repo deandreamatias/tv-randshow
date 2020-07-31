@@ -1,3 +1,9 @@
+## 1.3.0 - 01/08/20
+
+- ¡Agrega modo oscuro!
+- Implementa navigation rail en la web
+- Corrección de pequeños errores
+
 ## 1.2.0 - 17/06/20
 
 - Lanzamiento de la versión beta para web
