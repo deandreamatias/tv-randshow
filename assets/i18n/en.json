@@ -20,6 +20,8 @@
         "info": {
             "tab": "Info",
             "title": "Info about TV Randshow",
+            "dark_title": "Dark theme",
+            "dark_description": "Choice between light and dark theme",
             "app_title": "Android app",
             "app_description": "Get TV Randshow app in Google Play",
             "web_title": "Web app",

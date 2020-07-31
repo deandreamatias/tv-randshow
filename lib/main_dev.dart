@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter_translate/localization_delegate.dart';
+import 'package:persist_theme/persist_theme.dart';
 import 'package:provider/provider.dart';
 
 import 'config/env.dart';
@@ -28,22 +30,28 @@ class MainApp extends StatelessWidget {
 
     return MultiProvider(
       providers: getProviders(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: true,
-        title: 'TV Randshow',
-        theme: ThemeData(
-          fontFamily: 'Nunito',
-          primarySwatch: Colors.red,
+      child: PersistTheme(
+        model: ThemeModel(
+          customLightTheme: CustomTheme().availableThemes[0],
+          customDarkTheme: CustomTheme().availableThemes[1],
         ),
-        initialRoute: RoutePaths.TAB,
-        onGenerateRoute: Router.generateRoute,
-        localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          localizationDelegate,
-        ],
-        supportedLocales: localizationDelegate.supportedLocales,
-        locale: localizationDelegate.currentLocale,
+        builder: (BuildContext context, ThemeModel model, Widget child) =>
+            MaterialApp(
+          debugShowCheckedModeBanner: true,
+          title: kIsWeb
+              ? 'TV Randshow | App to choose a random TV show episode'
+              : 'TV Randshow',
+          theme: model.theme,
+          initialRoute: RoutePaths.TAB,
+          onGenerateRoute: Router.generateRoute,
+          localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            localizationDelegate,
+          ],
+          supportedLocales: localizationDelegate.supportedLocales,
+          locale: localizationDelegate.currentLocale,
+        ),
       ),
     );
   }

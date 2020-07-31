@@ -1,7 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-
-import '../shared/styles.dart';
 
 class InfoBox extends StatelessWidget {
   const InfoBox({Key key, this.typeInfo, this.value}) : super(key: key);
@@ -17,8 +15,8 @@ class InfoBox extends StatelessWidget {
         aspectRatio: 1,
         child: Container(
           alignment: Alignment.topCenter,
-          margin: SMALL_INSESTS,
-          padding: SMALL_INSESTS,
+          margin: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -26,28 +24,36 @@ class InfoBox extends StatelessWidget {
                 fit: BoxFit.fitWidth,
                 child: Text(
                   _selectTitle(typeInfo),
-                  style: StyleText.INFO_BOX_TITLE,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle1
+                      .copyWith(color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
               Text(
                 value > 0 ? value.toString() : '--',
-                style: StyleText.INFO_BOX_NUMBER,
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
               ),
               if (typeInfo <= 2)
                 typeInfo == 2
                     ? Text(
                         translate('app.modal.duration_metric'),
-                        style: StyleText.DESCRIPTION,
+                        style: Theme.of(context).textTheme.caption.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
                       )
                     : Text(
                         translate('app.modal.episode_season_metric'),
-                        style: StyleText.DESCRIPTION,
+                        style: Theme.of(context).textTheme.caption.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary),
                       ),
             ],
           ),
-          decoration: const BoxDecoration(
-            color: StyleColor.PRIMARY,
-            borderRadius: BORDER_RADIUS,
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           ),
         ),
       ),

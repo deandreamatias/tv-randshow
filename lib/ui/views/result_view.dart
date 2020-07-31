@@ -3,7 +3,6 @@ import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../core/models/tvshow_result.dart';
 import '../../core/utils/constants.dart';
-import '../shared/styles.dart';
 import '../shared/unicons_icons.dart';
 import '../widgets/home_button.dart';
 import '../widgets/info_box.dart';
@@ -17,7 +16,7 @@ class ResultView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
           child: Padding(
-        padding: DEFAULT_INSESTS,
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
@@ -25,7 +24,7 @@ class ResultView extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Text(
                 translate('app.result.title'),
-                style: StyleText.MESSAGES,
+                style: Theme.of(context).textTheme.headline6,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -43,10 +42,13 @@ class ResultView extends StatelessWidget {
                         top: 0.0,
                         bottom: 24.0,
                         child: Container(
-                          padding: DEFAULT_INSESTS,
+                          padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
-                            borderRadius: BORDER_RADIUS,
-                            border: Border.all(),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8.0)),
+                            border: Border.all(
+                              color: Theme.of(context).colorScheme.onBackground,
+                            ),
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +56,7 @@ class ResultView extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 tvshowResult.tvshowDetails.name,
-                                style: StyleText.TITLE,
+                                style: Theme.of(context).textTheme.headline6,
                               ),
                               Flexible(
                                 fit: FlexFit.loose,
@@ -76,7 +78,7 @@ class ResultView extends StatelessWidget {
                               const SizedBox(height: 8),
                               Text(
                                 tvshowResult.episodeName,
-                                style: StyleText.MESSAGES,
+                                style: Theme.of(context).textTheme.subtitle1,
                               ),
                               const SizedBox(height: 8),
                               Flexible(
@@ -94,18 +96,8 @@ class ResultView extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: RaisedButton.icon(
-                          icon: const Icon(
-                            Unicons.dice_multiple,
-                            color: StyleColor.WHITE,
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          color: StyleColor.PRIMARY,
-                          label: Text(
-                            translate('app.result.button_random'),
-                            style: StyleText.WHITE,
-                          ),
+                          icon: const Icon(Unicons.dice_multiple),
+                          label: Text(translate('app.result.button_random')),
                           onPressed: () => Navigator.pushNamed<LoadingView>(
                             context,
                             RoutePaths.LOADING,

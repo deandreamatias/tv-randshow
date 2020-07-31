@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../core/utils/constants.dart';
-import '../shared/styles.dart';
 
 class ImageBuilder extends StatelessWidget {
   const ImageBuilder({
@@ -23,7 +22,7 @@ class ImageBuilder extends StatelessWidget {
       fit: StackFit.expand,
       children: <Widget>[
         ClipRRect(
-          borderRadius: BORDER_RADIUS,
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           child: kIsWeb
               ? OnlineImage(url: _checkUrl(url), name: name)
               : CachedImage(url: _checkUrl(url), name: name),
@@ -33,14 +32,17 @@ class ImageBuilder extends StatelessWidget {
           child: Align(
             alignment: Alignment.topLeft,
             child: Container(
-              padding: SMALL_INSESTS,
+              padding: const EdgeInsets.all(8.0),
               decoration: const BoxDecoration(
-                borderRadius: BORDER_RADIUS,
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 color: Colors.black54,
               ),
               child: Text(
                 name,
-                style: StyleText.NAME,
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle2
+                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
               ),
             ),
           ),

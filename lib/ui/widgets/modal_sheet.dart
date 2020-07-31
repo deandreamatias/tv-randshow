@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import '../../core/viewmodels/widgets/details_model.dart';
 import '../base_widget.dart';
-import '../shared/styles.dart';
 import 'image_builder.dart';
 import 'info_box.dart';
 import 'random_button.dart';
@@ -38,12 +37,12 @@ class ModalSheet extends StatelessWidget {
             ),
             child: Container(
               margin: const EdgeInsets.only(top: 24),
-              padding: DEFAULT_INSESTS,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadiusDirectional.vertical(
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadiusDirectional.vertical(
                   top: Radius.circular(16.0),
                 ),
-                color: StyleColor.WHITE,
+                color: Theme.of(context).backgroundColor,
               ),
               child: model.busy
                   ? const Center(child: CircularProgressIndicator())
@@ -60,9 +59,10 @@ class ModalSheet extends StatelessWidget {
                                 Expanded(
                                   flex: 1,
                                   child: ImageBuilder(
-                                      url: model.tvshowDetails?.posterPath,
-                                      name: model.tvshowDetails?.name,
-                                      isModal: true),
+                                    url: model.tvshowDetails?.posterPath,
+                                    name: model.tvshowDetails?.name,
+                                    isModal: true,
+                                  ),
                                 ),
                                 const SizedBox(width: 8.0),
                                 Expanded(
@@ -74,7 +74,8 @@ class ModalSheet extends StatelessWidget {
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 3,
-                                      style: StyleText.TITLE,
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
                                     ),
                                   ),
                                 ),
@@ -109,7 +110,7 @@ class ModalSheet extends StatelessWidget {
                         ),
                         Text(
                           translate('app.modal.overview'),
-                          style: StyleText.MESSAGES,
+                          style: Theme.of(context).textTheme.subtitle1,
                         ),
                         const SizedBox(height: 8.0),
                         Expanded(
