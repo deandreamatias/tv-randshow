@@ -1,5 +1,5 @@
 <p>
-  <a href="http://tvrandshow.com/">
+  <a href="https://tvrandshow.com/">
     <img alt="TV Randshow website" src="./images/icon.png" height="100">
   </a>
   <a href='https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
@@ -24,8 +24,9 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 <p align="center">
   <img src="./images/search.png" width="180" hspace="4">
   <img src="./images/favs.png" width="180" hspace="4">
-  <img src="./images/details.png" width="180" hspace="4">
   <img src="./images/result.png" width="180" hspace="4">
+  <img src="./images/details.png" width="180" hspace="4">
+  <img src="./images/info.png" width="180" hspace="4">
 </p>
 
 ## Features
@@ -33,6 +34,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Save your favorites TV shows**
 - **Choose a random episode from a single TV show**
 - **Support to Android and Web**
+- **Dark mode**
 - [Coming soon...](https://trello.com/b/ib0jdUzK)
 
 ## Tools
@@ -45,6 +47,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - [**Logger**](https://pub.dev/packages/logger)
 - [**Flutter markdown**](https://pub.dev/packages/flutter_markdown)
 - [**Flutter translate**](https://pub.dev/packages/flutter_translate) - Translate to english, portuguese and spanish
+- [**Persist theme (light and dark)**](https://pub.dev/packages/persist_theme)
 
 ## Build application
 
