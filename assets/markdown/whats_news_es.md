@@ -1,4 +1,4 @@
-## 1.3.0 - 01/08/20
+## 1.3.1 - 01/08/20
 
 - ¡Agrega modo oscuro!
 - Implementa navigation rail en la web
