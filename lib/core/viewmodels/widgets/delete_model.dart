@@ -1,11 +1,12 @@
-import '../../../config/locator.dart';
-import '../../services/database_service.dart';
-import '../base_model.dart';
+import 'package:stacked/stacked.dart';
 
-class DeleteModel extends BaseModel {
-  final DatabaseService _databaseService = locator<DatabaseService>();
+import '../../../config/locator.dart';
+import '../../services/favs_service.dart';
+
+class DeleteModel extends BaseViewModel {
+  final FavsService _favsService = locator<FavsService>();
 
   Future<void> deleteFav(int id) async {
-    await _databaseService.delete(id);
+    await _favsService.deleteFav(id);
   }
 }

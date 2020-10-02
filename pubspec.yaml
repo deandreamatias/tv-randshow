@@ -31,6 +31,7 @@ dependencies:
   flutter_markdown: ^0.4.1          # [Package] Markdown support
   sqflite: ^1.2.2                   # [Plugin] SQLite
   persist_theme: ^1.7.0             # [Plugin] Manage and persist theme
+  stacked: ^1.7.4                   # [Package] Architecture package
 
 dev_dependencies:
   flutter_test:

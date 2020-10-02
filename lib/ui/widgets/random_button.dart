@@ -1,39 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:stacked/stacked.dart';
 
 import '../../core/models/tvshow_details.dart';
 import '../../core/utils/constants.dart';
 import '../../core/viewmodels/widgets/random_model.dart';
-import '../base_widget.dart';
 import '../shared/unicons_icons.dart';
 import '../views/loading_view.dart';
 
 class RandomButton extends StatelessWidget {
-  RandomButton({Key key, this.tvshowDetails, this.id}) : super(key: key);
-  TvshowDetails tvshowDetails;
+  const RandomButton({Key key, this.tvshowDetails, this.id}) : super(key: key);
+  final TvshowDetails tvshowDetails;
   final int id;
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidget<RandomModel>(
-      model: RandomModel(),
+    return ViewModelBuilder<RandomModel>.nonReactive(
+      viewModelBuilder: () => RandomModel(),
       builder: (BuildContext context, RandomModel model, Widget child) =>
           RaisedButton.icon(
         icon: const Icon(Unicons.dice_multiple),
         label: Text(translate('app.fav.button_random')),
         onPressed: () async {
-          tvshowDetails ??= await model.getDetails(
-            id,
-            LocalizedApp.of(context)
-                .delegate
-                .currentLocale
-                .languageCode
-                .toString(),
-          );
+          if (tvshowDetails == null) {
+            await model.getDetails(
+              id,
+              LocalizedApp.of(context)
+                  .delegate
+                  .currentLocale
+                  .languageCode
+                  .toString(),
+            );
+          }
           Navigator.pushNamed<LoadingView>(
             context,
             RoutePaths.LOADING,
-            arguments: tvshowDetails,
+            arguments: tvshowDetails ?? model.tvshowDetails,
           );
         },
       ),

@@ -1,12 +1,13 @@
+import 'package:stacked/stacked.dart';
+
 import '../../../config/flavor_config.dart';
 import '../../../config/locator.dart';
 import '../../models/query.dart';
 import '../../models/tvshow_details.dart';
 import '../../services/api_service.dart';
 import '../../services/database_service.dart';
-import '../base_model.dart';
 
-class SaveModel extends BaseModel {
+class SaveModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
   final DatabaseService _databaseService = locator<DatabaseService>();
 

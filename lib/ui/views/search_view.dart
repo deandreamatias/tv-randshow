@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:stacked/stacked.dart';
 
 import '../../core/models/result.dart';
 import '../../core/viewmodels/views/search_view_model.dart';
-import '../base_widget.dart';
 import '../shared/unicons_icons.dart';
 import '../widgets/search_widget.dart';
 
@@ -34,8 +34,8 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidget<SearchViewModel>(
-      model: SearchViewModel(),
+    return ViewModelBuilder<SearchViewModel>.nonReactive(
+      viewModelBuilder: () => SearchViewModel(),
       onModelReady: (SearchViewModel model) {
         _pageLoadController = PagewiseLoadController<Result>(
           pageSize: 20,

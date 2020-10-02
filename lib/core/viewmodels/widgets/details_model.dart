@@ -1,11 +1,12 @@
+import 'package:stacked/stacked.dart';
+
 import '../../../config/flavor_config.dart';
 import '../../../config/locator.dart';
 import '../../models/query.dart';
 import '../../models/tvshow_details.dart';
 import '../../services/api_service.dart';
-import '../base_model.dart';
 
-class DetailsModel extends BaseModel {
+class DetailsModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
 
   TvshowDetails tvshowDetails;
@@ -20,9 +21,7 @@ class DetailsModel extends BaseModel {
         await _apiService.getDetailsTv(query, id);
     if (_tvshowDetails != null) {
       tvshowDetails = _tvshowDetails;
-      setBusy(false);
-    } else {
-      setBusy(false);
     }
+    setBusy(false);
   }
 }

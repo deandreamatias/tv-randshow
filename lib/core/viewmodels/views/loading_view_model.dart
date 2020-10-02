@@ -1,10 +1,11 @@
+import 'package:stacked/stacked.dart';
+
 import '../../../config/locator.dart';
 import '../../models/tvshow_details.dart';
 import '../../models/tvshow_result.dart';
 import '../../services/random_service.dart';
-import '../base_model.dart';
 
-class LoadingViewModel extends BaseModel {
+class LoadingViewModel extends BaseViewModel {
   final RandomService _randomService = locator<RandomService>();
 
   TvshowResult _tvshowResult;

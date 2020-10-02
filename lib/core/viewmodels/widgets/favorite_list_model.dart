@@ -1,24 +1,18 @@
+import 'package:stacked/stacked.dart';
+
 import '../../../config/locator.dart';
 import '../../models/tvshow_details.dart';
-import '../../services/database_service.dart';
-import '../base_model.dart';
+import '../../services/favs_service.dart';
 
-class FavoriteListModel extends BaseModel {
-  final DatabaseService _databaseService = locator<DatabaseService>();
+class FavoriteListModel extends StreamViewModel<List<TvshowDetails>> {
+  final FavsService _favsService = locator<FavsService>();
 
-  List<TvshowDetails> _listFavs;
+  @override
+  Stream<List<TvshowDetails>> get stream => _favsService.listFavs;
 
-  List<TvshowDetails> get listFavs => _listFavs;
-
-  Future<void> loadFavs() async {
+  Future<void> getFavs() async {
     setBusy(true);
-    _listFavs = await _databaseService.queryList();
-    setBusy(false);
-  }
-
-  void deleteFav(int rowId) {
-    setBusy(true);
-    _listFavs.removeWhere((TvshowDetails tvshow) => tvshow.rowId == rowId);
+    await _favsService.getFavs();
     setBusy(false);
   }
 }
