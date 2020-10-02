@@ -1,12 +1,13 @@
+import 'package:stacked/stacked.dart';
+
 import '../../../config/flavor_config.dart';
 import '../../../config/locator.dart';
 import '../../models/query.dart';
 import '../../models/result.dart';
 import '../../models/search.dart';
 import '../../services/api_service.dart';
-import '../base_model.dart';
 
-class SearchViewModel extends BaseModel {
+class SearchViewModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
 
   Future<List<Result>> loadList(String text, int page, String language) async {

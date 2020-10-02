@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:stacked/stacked.dart';
 
 import '../../core/viewmodels/widgets/details_model.dart';
-import '../base_widget.dart';
 import 'image_builder.dart';
 import 'info_box.dart';
 import 'random_button.dart';
@@ -17,8 +17,8 @@ class ModalSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidget<DetailsModel>(
-      model: DetailsModel(),
+    return ViewModelBuilder<DetailsModel>.reactive(
+      viewModelBuilder: () => DetailsModel(),
       onModelReady: (DetailsModel model) => model.getDetails(
         idTv,
         LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
@@ -41,7 +41,7 @@ class ModalSheet extends StatelessWidget {
                 ),
                 color: Theme.of(context).backgroundColor,
               ),
-              child: model.busy
+              child: model.isBusy
                   ? const Center(child: CircularProgressIndicator())
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

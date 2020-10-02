@@ -1,11 +1,11 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:stacked/stacked.dart';
 
 import '../../core/models/tvshow_details.dart';
 import '../../core/utils/constants.dart';
 import '../../core/viewmodels/views/loading_view_model.dart';
-import '../base_widget.dart';
 import '../widgets/home_button.dart';
 import 'result_view.dart';
 
@@ -15,8 +15,8 @@ class LoadingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidget<LoadingViewModel>(
-      model: LoadingViewModel(),
+    return ViewModelBuilder<LoadingViewModel>.nonReactive(
+      viewModelBuilder: () => LoadingViewModel(),
       onModelReady: (LoadingViewModel model) async {
         await model.sortRandomEpisode(
           tvshowDetails,
@@ -52,7 +52,7 @@ class LoadingView extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: !model.busy && !model.canNavigate
+                      child: !model.isBusy && !model.canNavigate
                           ? Center(
                               child: Text(
                                 translate('app.loading.general_error'),
