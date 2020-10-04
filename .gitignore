@@ -10,7 +10,7 @@
 .history
 .svn/
 lib/config/env.dart
-**/fvm
+.fvm/
 
 # IntelliJ related
 *.iml
