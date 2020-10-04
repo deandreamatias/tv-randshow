@@ -57,12 +57,15 @@ class _SearchViewState extends State<SearchView> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
+                key: const Key('app.search.search_bar'),
                 controller: textEditingController,
                 textInputAction: TextInputAction.search,
                 onSubmitted: (String value) =>
                     textEditingController.text.isNotEmpty
                         ? _pageLoadController.reset()
                         : null,
+                onChanged: (String value) =>
+                    model.searchAutomatic(_pageLoadController),
                 autofocus: true,
                 autocorrect: true,
                 enableSuggestions: true,
@@ -89,6 +92,7 @@ class _SearchViewState extends State<SearchView> {
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
                         translate('app.search.error_message'),
+                        key: const Key('app.search.error_message'),
                         style: Theme.of(context).textTheme.subtitle1,
                         textAlign: TextAlign.center,
                       ),
@@ -105,6 +109,7 @@ class _SearchViewState extends State<SearchView> {
                               ? 'app.search.init_message'
                               : 'app.search.empty_message',
                         ),
+                        key: const Key('app.search.message'),
                         style: Theme.of(context).textTheme.subtitle1,
                         textAlign: TextAlign.center,
                       ),
