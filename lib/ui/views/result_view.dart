@@ -24,6 +24,7 @@ class ResultView extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Text(
                 translate('app.result.title'),
+                key: const Key('app.result.title'),
                 style: Theme.of(context).textTheme.headline6,
                 textAlign: TextAlign.center,
               ),
@@ -97,7 +98,10 @@ class ResultView extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: RaisedButton.icon(
                           icon: const Icon(Unicons.dice_multiple),
-                          label: Text(translate('app.result.button_random')),
+                          label: Text(
+                            translate('app.result.button_random'),
+                            key: const Key('app.result.button_random'),
+                          ),
                           onPressed: () => Navigator.pushNamed<LoadingView>(
                             context,
                             RoutePaths.LOADING,

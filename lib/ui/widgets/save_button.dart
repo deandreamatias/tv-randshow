@@ -20,13 +20,19 @@ class SaveButton extends StatelessWidget {
             ? RaisedButton.icon(
                 key: const ValueKey<String>('delete'),
                 icon: const Icon(Unicons.times),
-                label: Text(translate('app.search.button_delete')),
+                label: Text(
+                  translate('app.search.button_delete'),
+                  key: Key('app.search.button_delete.$id'),
+                ),
                 onPressed: () => model.deleteFav(id),
               )
             : RaisedButton.icon(
                 key: const ValueKey<String>('add'),
                 icon: const Icon(Unicons.favorite),
-                label: Text(translate('app.search.button_fav')),
+                label: Text(
+                  translate('app.search.button_fav'),
+                  key: Key('app.search.button_fav.$id'),
+                ),
                 onPressed: () => model.addFav(
                   id,
                   LocalizedApp.of(context)

@@ -20,6 +20,9 @@ class HomeButton extends StatelessWidget {
           kIsWeb
               ? translate('app.loading.button_search')
               : translate('app.loading.button_fav'),
+          key: const Key(
+            kIsWeb ? 'app.loading.button_search' : 'app.loading.button_fav',
+          ),
         ),
         icon: const Icon(kIsWeb ? Unicons.search : Unicons.favorite),
         shape: RoundedRectangleBorder(

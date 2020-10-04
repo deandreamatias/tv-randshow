@@ -35,9 +35,11 @@ class FavWidget extends StatelessWidget {
                 ),
               ),
               child: ImageBuilder(
-                  name: tvshowDetails.name,
-                  url: tvshowDetails.posterPath,
-                  isModal: false),
+                key: Key('${tvshowDetails.id}'),
+                name: tvshowDetails.name,
+                url: tvshowDetails.posterPath,
+                isModal: false,
+              ),
             ),
           ),
           Align(

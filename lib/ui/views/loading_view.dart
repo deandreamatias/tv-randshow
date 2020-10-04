@@ -47,6 +47,7 @@ class LoadingView extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: Text(
                         translate('app.loading.title'),
+                        key: const Key('app.loading.title'),
                         style: Theme.of(context).textTheme.headline6,
                         textAlign: TextAlign.center,
                       ),

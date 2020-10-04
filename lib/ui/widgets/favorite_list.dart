@@ -13,7 +13,10 @@ class FavoriteList extends StatelessWidget {
       onModelReady: (FavoriteListModel model) async => await model.getFavs(),
       builder: (BuildContext context, FavoriteListModel model, Widget child) =>
           model.isBusy
-              ? const Center(child: CircularProgressIndicator())
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  key: Key('app.fav.loading'),
+                ))
               : model.data != null && model.data.isNotEmpty
                   ? Container(
                       child: GridView.builder(
@@ -39,6 +42,7 @@ class FavoriteList extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
                           translate('app.fav.empty_message'),
+                          key: const Key('app.fav.empty_message'),
                           style: Theme.of(context).textTheme.subtitle1,
                           textAlign: TextAlign.center,
                         ),
