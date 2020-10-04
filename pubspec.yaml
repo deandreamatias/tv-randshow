@@ -25,7 +25,6 @@ dependencies:
   cached_network_image: ^2.0.0      # [Package] Load and cached network images
   flutter_pagewise: ^1.2.3          # [Package] List pagination
   flare_flutter: ^2.0.4             # [Package] Runtime flare animation
-  logger: ^0.8.0                    # [Package] Logger for debug
   dio: ^3.0.9                       # [Package] HTTP Client manager
   launch_review: ^2.0.0             # [Package] Open store to rate app
   flutter_markdown: ^0.4.1          # [Package] Markdown support
@@ -34,14 +33,14 @@ dependencies:
   stacked: ^1.7.4                   # [Package] Architecture package
 
 dev_dependencies:
-  flutter_test:
+  flutter_driver:
     sdk: flutter
+  test: any
   build_runner: ^1.0.0              # Command line JSON code generation
   json_serializable: ^3.2.0         # Json serializable generator
   flutter_native_splash: ^0.1.9     # Splash screen native generator 
   flutter_launcher_icons: ^0.7.4    # Launcher icons native generator
   injectable_generator: ^0.4.1      # DI code generator
-  mockito: ^4.1.1                   # Mock data generator
 
 flutter_native_splash:
   image: assets/img/icon_launcher.png
