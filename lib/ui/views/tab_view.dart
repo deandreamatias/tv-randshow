@@ -89,15 +89,24 @@ class _TabViewState extends State<TabView> {
                               if (!kIsWeb)
                                 BottomNavigationBarItem(
                                   icon: const Icon(Unicons.favorite),
-                                  title: Text(translate('app.fav.tab')),
+                                  title: Text(
+                                    translate('app.fav.tab'),
+                                    key: const Key('app.fav.tab'),
+                                  ),
                                 ),
                               BottomNavigationBarItem(
                                 icon: const Icon(Unicons.search),
-                                title: Text(translate('app.search.tab')),
+                                title: Text(
+                                  translate('app.search.tab'),
+                                  key: const Key('app.search.tab'),
+                                ),
                               ),
                               BottomNavigationBarItem(
                                 icon: const Icon(Unicons.info_circle),
-                                title: Text(translate('app.info.tab')),
+                                title: Text(
+                                  translate('app.info.tab'),
+                                  key: const Key('app.info.tab'),
+                                ),
                               ),
                             ],
                           )

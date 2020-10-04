@@ -12,6 +12,7 @@ class HomeView extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Text(
             translate('app.fav.title'),
+            key: const Key('app.fav.title'),
             style: Theme.of(context).textTheme.headline6,
             textAlign: TextAlign.center,
           ),

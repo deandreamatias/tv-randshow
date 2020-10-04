@@ -20,7 +20,10 @@ class RandomButton extends StatelessWidget {
       builder: (BuildContext context, RandomModel model, Widget child) =>
           RaisedButton.icon(
         icon: const Icon(Unicons.dice_multiple),
-        label: Text(translate('app.fav.button_random')),
+        label: Text(
+          translate('app.fav.button_random'),
+          key: Key('app.fav.button_random.${tvshowDetails?.id ?? id}'),
+        ),
         onPressed: () async {
           if (tvshowDetails == null) {
             await model.getDetails(

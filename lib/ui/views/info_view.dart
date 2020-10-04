@@ -22,6 +22,7 @@ class InfoView extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Text(
             translate('app.info.title'),
+            key: const Key('app.info.title'),
             style: Theme.of(context).textTheme.headline6,
             textAlign: TextAlign.center,
           ),
@@ -34,9 +35,14 @@ class InfoView extends StatelessWidget {
                 title: Text(
                   translate(
                       kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
+                  key: const Key(
+                      kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
                 ),
                 subtitle: Text(
                   translate(kIsWeb
+                      ? 'app.info.app_description'
+                      : 'app.info.web_description'),
+                  key: const Key(kIsWeb
                       ? 'app.info.app_description'
                       : 'app.info.web_description'),
                 ),
@@ -59,9 +65,11 @@ class InfoView extends StatelessWidget {
                 child: ListTile(
                   title: Text(
                     translate('app.info.rate_title'),
+                    key: const Key('app.info.rate_title'),
                   ),
                   subtitle: Text(
                     translate('app.info.rate_description'),
+                    key: const Key('app.info.rate_description'),
                   ),
                   leading: const Icon(Unicons.feedback),
                   onTap: () => LaunchReview.launch(
@@ -72,9 +80,11 @@ class InfoView extends StatelessWidget {
               ListTile(
                 title: Text(
                   translate('app.info.feedback_title'),
+                  key: const Key('app.info.feedback_title'),
                 ),
                 subtitle: Text(
                   translate('app.info.feedback_description'),
+                  key: const Key('app.info.feedback_description'),
                 ),
                 leading: const Icon(Unicons.envelope),
                 onTap: () async {
@@ -91,9 +101,11 @@ class InfoView extends StatelessWidget {
               ListTile(
                 title: Text(
                   translate('app.info.version.title'),
+                  key: const Key('app.info.version.title'),
                 ),
                 subtitle: Text(
                   translate('app.info.version.description'),
+                  key: const Key('app.info.version.description'),
                 ),
                 leading: const Icon(Unicons.brackets_curly),
                 onTap: () {
@@ -102,8 +114,14 @@ class InfoView extends StatelessWidget {
               ),
               DarkModeSwitch(
                 leading: const Icon(Unicons.moon),
-                title: Text(translate('app.info.dark_title')),
-                subtitle: Text(translate('app.info.dark_description')),
+                title: Text(
+                  translate('app.info.dark_title'),
+                  key: const Key('app.info.dark_title'),
+                ),
+                subtitle: Text(
+                  translate('app.info.dark_description'),
+                  key: const Key('app.info.dark_description'),
+                ),
               ),
             ],
           ),
@@ -119,8 +137,10 @@ class InfoView extends StatelessWidget {
         contentPadding: const EdgeInsets.all(16.0),
         title: Text(
           translate('app.info.version.dialog_title'),
+          key: const Key('app.info.version.dialog_title'),
         ),
         content: SingleChildScrollView(
+          key: const Key('app.info.version.scroll'),
           physics: const BouncingScrollPhysics(),
           child: FutureBuilder<Object>(
               future: loadAsset(
@@ -137,6 +157,7 @@ class InfoView extends StatelessWidget {
         ),
         actions: <Widget>[
           OutlineButton(
+            key: const Key('app.info.version.dialog_button'),
             borderSide: BorderSide(color: Theme.of(context).primaryColor),
             child: Text(
               translate('app.info.version.dialog_button'),
