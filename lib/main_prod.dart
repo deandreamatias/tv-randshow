@@ -8,7 +8,7 @@ import 'config/env.dart';
 import 'config/flavor_config.dart';
 import 'config/locator.dart';
 import 'core/utils/constants.dart';
-import 'ui/router.dart';
+import 'ui/router.dart' as router;
 
 Future<void> main() async {
   FlavorConfig(flavor: Flavor.PROD, values: FlavorValues.fromJson(environment));
@@ -40,7 +40,7 @@ class MainApp extends StatelessWidget {
             : 'TV Randshow',
         theme: model.theme,
         initialRoute: RoutePaths.TAB,
-        onGenerateRoute: Router.generateRoute,
+        onGenerateRoute: router.Router.generateRoute,
         localizationsDelegates: <LocalizationsDelegate<dynamic>>[
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
