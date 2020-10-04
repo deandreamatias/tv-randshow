@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../config/flavor_config.dart';
@@ -9,6 +12,7 @@ import '../../services/api_service.dart';
 
 class SearchViewModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
+  Timer _timer;
 
   Future<List<Result>> loadList(String text, int page, String language) async {
     if (text != null && text.isNotEmpty) {
@@ -27,5 +31,12 @@ class SearchViewModel extends BaseViewModel {
     } else {
       return null;
     }
+  }
+
+  void searchAutomatic(PagewiseLoadController<Result> pageLoadController) {
+    if (_timer != null && _timer.isActive) _timer.cancel();
+
+    _timer =
+        Timer(const Duration(seconds: 3), () => pageLoadController.reset());
   }
 }
