@@ -94,4 +94,4 @@ unlinked_spec.ds
 **/.firebaserc
 .runtimeconfig.json
 .firebase/
-**/.well-known/brave-rewards-verification.txt
+**/web/.well-known/

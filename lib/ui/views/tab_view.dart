@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:uni_links/uni_links.dart';
 
 import '../shared/unicons_icons.dart';
 import 'home_view.dart';
@@ -17,11 +20,44 @@ class TabView extends StatefulWidget {
 
 class _TabViewState extends State<TabView> {
   int _selectedIndex = 0;
+  StreamSubscription<String> _sub;
+
   static final List<Widget> _widgetOptions = <Widget>[
     if (!kIsWeb) const HomeView(),
     const SearchView(),
     const InfoView(),
   ];
+
+  @override
+  void initState() {
+    initUniLinks();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _sub.cancel();
+    super.dispose();
+  }
+
+  Future<void> initUniLinks() async {
+    try {
+      final String initialLink = await getInitialLink();
+      if (initialLink == null || initialLink.isEmpty) {
+        debugPrint('$runtimeType Link empty or null');
+      } else {
+        print('Get initial link! $initialLink');
+      }
+    } on PlatformException catch (e) {
+      throw PlatformException(
+          code: e.code, message: e.message, details: e.details);
+    }
+    _sub = getLinksStream().listen((String link) {
+      print('Get link!');
+    }, onError: () {
+      debugPrint('$runtimeType Error to get link in stream');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
