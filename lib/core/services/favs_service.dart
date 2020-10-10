@@ -24,7 +24,6 @@ class FavsService {
   Stream<List<TvshowDetails>> get listFavs => streamController.stream;
 
   Future<void> getFavs() async {
-    print(streamController.stream.isEmpty);
     streamController.add(await _databaseService.queryList());
   }
 
