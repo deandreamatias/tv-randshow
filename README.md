@@ -1,6 +1,6 @@
 <p>
-  <a href="http://tvrandshow.com/">
-    <img alt="TV Randshow website" src="https://raw.githubusercontent.com/deandreamatias/tv-randshow/master/images/icon.png" height="100">
+  <a href="https://tvrandshow.com/">
+    <img alt="TV Randshow website" src="./images/icon.png" height="100">
   </a>
   <a href='https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
     <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="100" />
@@ -9,9 +9,9 @@
 
 ## TV Randshow - App to choose a random TV show episode
 
-[![Build test](https://img.shields.io/github/workflow/status/deandreamatias/tv-randshow/Test/master?label=Build%20test)](https://github.com/deandreamatias/tv-randshow/actions?query=workflow%3ATest+branch%3Amaster)
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
-[![Google Play](https://img.shields.io/badge/google--play-Google--Play-green)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
+[![Google Play](https://img.shields.io/badge/google--play-Google--Play-green?label=App)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
+[![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://paypal.me/deandreamatias)
 
 ### About the project
 
@@ -21,10 +21,11 @@ The TV shows database comes from the TMDB and the app saves them in a database o
 This project has been built using the [Flutter](https://flutter.dev/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
 <p align="center">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/search.png" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/favs.png" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/details.png" width="180" hspace="4">
-  <img src="https://github.com/deandreamatias/tv-randshow/blob/master/images/result.png" width="180" hspace="4">
+  <img src="./images/search.png" width="150" hspace="4">
+  <img src="./images/favs.png" width="150" hspace="4">
+  <img src="./images/result.png" width="150" hspace="4">
+  <img src="./images/details.png" width="150" hspace="4">
+  <img src="./images/info.png" width="150" hspace="4">
 </p>
 
 ## Features
@@ -32,6 +33,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Save your favorites TV shows**
 - **Choose a random episode from a single TV show**
 - **Support to Android and Web**
+- **Dark mode**
 - [Coming soon...](https://trello.com/b/ib0jdUzK)
 
 ## Tools
@@ -44,6 +46,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - [**Logger**](https://pub.dev/packages/logger)
 - [**Flutter markdown**](https://pub.dev/packages/flutter_markdown)
 - [**Flutter translate**](https://pub.dev/packages/flutter_translate) - Translate to english, portuguese and spanish
+- [**Persist theme (light and dark)**](https://pub.dev/packages/persist_theme)
 
 ## Build application
 
