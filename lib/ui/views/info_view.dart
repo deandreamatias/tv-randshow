@@ -7,136 +7,145 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:persist_theme/persist_theme.dart';
+import 'package:stacked/stacked.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/utils/constants.dart';
+import '../../core/viewmodels/views/info_view_model.dart';
 import '../shared/unicons_icons.dart';
 
 class InfoView extends StatelessWidget {
   const InfoView({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            translate('app.info.title'),
-            key: const Key('app.info.title'),
-            style: Theme.of(context).textTheme.headline6,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Expanded(
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: <Widget>[
-              ListTile(
-                title: Text(
-                  translate(
-                      kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
-                  key: const Key(
-                      kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
-                ),
-                subtitle: Text(
-                  translate(kIsWeb
-                      ? 'app.info.app_description'
-                      : 'app.info.web_description'),
-                  key: const Key(kIsWeb
-                      ? 'app.info.app_description'
-                      : 'app.info.web_description'),
-                ),
-                leading: const Icon(
-                    kIsWeb ? Unicons.google_play : Unicons.external_link_alt),
-                onTap: () async {
-                  const String url = kIsWeb
-                      ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
-                      : 'https://tvrandshow.com';
-                  if (await canLaunch(url)) {
-                    await launch(url);
-                    log('Launched: $url');
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                },
+    return ViewModelBuilder<InfoViewModel>.nonReactive(
+      onModelReady: (InfoViewModel model) => model.getVersion(),
+      viewModelBuilder: () => InfoViewModel(),
+      builder: (BuildContext context, InfoViewModel model, Widget child) {
+        return Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                translate('app.info.title'),
+                key: const Key('app.info.title'),
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center,
               ),
-              Visibility(
-                visible: !kIsWeb,
-                child: ListTile(
-                  title: Text(
-                    translate('app.info.rate_title'),
-                    key: const Key('app.info.rate_title'),
+            ),
+            Expanded(
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                children: <Widget>[
+                  ListTile(
+                    title: Text(
+                      translate(
+                          kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
+                      key: const Key(
+                          kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
+                    ),
+                    subtitle: Text(
+                      translate(kIsWeb
+                          ? 'app.info.app_description'
+                          : 'app.info.web_description'),
+                      key: const Key(kIsWeb
+                          ? 'app.info.app_description'
+                          : 'app.info.web_description'),
+                    ),
+                    leading: const Icon(kIsWeb
+                        ? Unicons.google_play
+                        : Unicons.external_link_alt),
+                    onTap: () async {
+                      const String url = kIsWeb
+                          ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
+                          : 'https://tvrandshow.com';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                        log('Launched: $url');
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
                   ),
-                  subtitle: Text(
-                    translate('app.info.rate_description'),
-                    key: const Key('app.info.rate_description'),
+                  Visibility(
+                    visible: !kIsWeb,
+                    child: ListTile(
+                      title: Text(
+                        translate('app.info.rate_title'),
+                        key: const Key('app.info.rate_title'),
+                      ),
+                      subtitle: Text(
+                        translate('app.info.rate_description'),
+                        key: const Key('app.info.rate_description'),
+                      ),
+                      leading: const Icon(Unicons.feedback),
+                      onTap: () => LaunchReview.launch(
+                        androidAppId: 'deandrea.matias.tv_randshow',
+                      ),
+                    ),
                   ),
-                  leading: const Icon(Unicons.feedback),
-                  onTap: () => LaunchReview.launch(
-                    androidAppId: 'deandrea.matias.tv_randshow',
+                  ListTile(
+                    title: Text(
+                      translate('app.info.feedback_title'),
+                      key: const Key('app.info.feedback_title'),
+                    ),
+                    subtitle: Text(
+                      translate('app.info.feedback_description'),
+                      key: const Key('app.info.feedback_description'),
+                    ),
+                    leading: const Icon(Unicons.envelope),
+                    onTap: () async {
+                      const String url =
+                          'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
+                      try {
+                        await launch(url);
+                        log('Launched: $url');
+                      } catch (e) {
+                        throw 'Could not launch $url because $e';
+                      }
+                    },
                   ),
-                ),
+                  ListTile(
+                    title: Text(
+                      translate('app.info.version.title'),
+                      key: const Key('app.info.version.title'),
+                    ),
+                    subtitle: Text(
+                      translate('app.info.version.description'),
+                      key: const Key('app.info.version.description'),
+                    ),
+                    leading: const Icon(Unicons.brackets_curly),
+                    onTap: () {
+                      _changelog(context, model.version);
+                    },
+                  ),
+                  DarkModeSwitch(
+                    leading: const Icon(Unicons.moon),
+                    title: Text(
+                      translate('app.info.dark_title'),
+                      key: const Key('app.info.dark_title'),
+                    ),
+                    subtitle: Text(
+                      translate('app.info.dark_description'),
+                      key: const Key('app.info.dark_description'),
+                    ),
+                  ),
+                ],
               ),
-              ListTile(
-                title: Text(
-                  translate('app.info.feedback_title'),
-                  key: const Key('app.info.feedback_title'),
-                ),
-                subtitle: Text(
-                  translate('app.info.feedback_description'),
-                  key: const Key('app.info.feedback_description'),
-                ),
-                leading: const Icon(Unicons.envelope),
-                onTap: () async {
-                  const String url =
-                      'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
-                  try {
-                    await launch(url);
-                    log('Launched: $url');
-                  } catch (e) {
-                    throw 'Could not launch $url because $e';
-                  }
-                },
-              ),
-              ListTile(
-                title: Text(
-                  translate('app.info.version.title'),
-                  key: const Key('app.info.version.title'),
-                ),
-                subtitle: Text(
-                  translate('app.info.version.description'),
-                  key: const Key('app.info.version.description'),
-                ),
-                leading: const Icon(Unicons.brackets_curly),
-                onTap: () {
-                  _changelog(context);
-                },
-              ),
-              DarkModeSwitch(
-                leading: const Icon(Unicons.moon),
-                title: Text(
-                  translate('app.info.dark_title'),
-                  key: const Key('app.info.dark_title'),
-                ),
-                subtitle: Text(
-                  translate('app.info.dark_description'),
-                  key: const Key('app.info.dark_description'),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
     );
   }
 
-  void _changelog(BuildContext context) {
+  void _changelog(BuildContext context, String version) {
     showDialog<bool>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
         contentPadding: const EdgeInsets.all(16.0),
         title: Text(
-          translate('app.info.version.dialog_title'),
+          '${translate('app.info.version.dialog_title')} ($version)',
           key: const Key('app.info.version.dialog_title'),
         ),
         content: SingleChildScrollView(
