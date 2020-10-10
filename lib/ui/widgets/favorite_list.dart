@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../core/models/tvshow_details.dart';
+import '../../core/utils/constants.dart';
 import '../../core/viewmodels/widgets/favorite_list_model.dart';
+import '../views/loading_view.dart';
 import 'fav_widget.dart';
 
 class FavoriteList extends StatelessWidget {
@@ -10,7 +13,17 @@ class FavoriteList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<FavoriteListModel>.reactive(
       viewModelBuilder: () => FavoriteListModel(),
-      onModelReady: (FavoriteListModel model) async => await model.getFavs(),
+      onModelReady: (FavoriteListModel model) async {
+        await model.getFavs();
+        final TvshowDetails tvshowDetails = await model.verifyAppLink();
+        if (tvshowDetails.id != null) {
+          Navigator.pushNamed<LoadingView>(
+            context,
+            RoutePaths.LOADING,
+            arguments: tvshowDetails,
+          );
+        }
+      },
       builder: (BuildContext context, FavoriteListModel model, Widget child) =>
           model.isBusy
               ? const Center(
