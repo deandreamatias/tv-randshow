@@ -20,6 +20,8 @@
         "info": {
             "tab": "Info",
             "title": "Informação sobre TV Randshow",
+            "dark_title": "Tema escuro",
+            "dark_description": "Escolhe entre o tema claro e o escuro",
             "app_title": "App Android",
             "app_description": "Instale a app de TV Randshow da Google Play",
             "web_title": "Aplicação web",

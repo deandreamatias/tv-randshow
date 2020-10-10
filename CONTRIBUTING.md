@@ -28,20 +28,21 @@ advances
 * Other conduct which could reasonably be considered inappropriate in a
   professional setting
 
-
 ## Download & install
 
-First, clone the repository with the 'clone' command, or just download the zip.
+* First, clone the repository with the 'clone' command, or just download the zip.
 
+```shell
+git clone git@github.com:deandreamatias/tv-randshow.git
 ```
-$ git clone git@github.com:deandreamatias/tv-randshow.git
-```
 
-Then, download either Android Studio or Visual Studio Code, with their respective [Flutter editor plugins](https://flutter.io/get-started/editor/). For more information about Flutter installation procedure, check the [official install guide](https://flutter.io/get-started/install/).
+* Then, download either Android Studio or Visual Studio Code, with their respective [Flutter editor plugins](https://flutter.dev/docs/get-started/editor). For more information about Flutter installation procedure, check the [official install guide](https://flutter.dev/docs/get-started/install).
 
-Install dependencies from pubspec.yaml by running `flutter packages get` from the project root (see [using packages documentation](https://flutter.io/using-packages/#adding-a-package-dependency-to-an-app) for details and how to do this in the editor). 
+* Install dependencies from pubspec.yaml by running `flutter packages get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
 
-There you go, you can now open & edit the project. Enjoy!
+* Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
+
+* (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
 
 ## How to Report Bugs and Request Feature
 
