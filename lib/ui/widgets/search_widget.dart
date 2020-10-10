@@ -17,17 +17,17 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   // TODO(deandreamatias): Verify coincidence between database and search result
-  bool enable;
+  bool _enable;
   @override
   void initState() {
-    enable = widget.result.firstAirDate != null;
+    _enable = widget.result.firstAirDate != null;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: enable ? 1.0 : 0.38,
+      opacity: _enable ? 1.0 : 0.38,
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -42,7 +42,7 @@ class _SearchWidgetState extends State<SearchWidget> {
               bottom: 24.0,
               child: GestureDetector(
                 onTap: () async {
-                  if (enable) {
+                  if (_enable) {
                     showModalBottomSheet<void>(
                       isScrollControlled: true,
                       isDismissible: true,
@@ -63,7 +63,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: enable
+              child: _enable
                   ? kIsWeb
                       ? RandomButton(id: widget.result.id)
                       : SaveButton(id: widget.result.id)
