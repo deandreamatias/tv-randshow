@@ -22,13 +22,27 @@ class AppService {
         debugPrint('$runtimeType Link empty or null');
         return TvshowActions(tvshow: '');
       } else {
-        return initialLink.path.contains('getRandomEpisode')
-            ? TvshowActions.fromMap(initialLink.queryParameters)
-            : TvshowActions(tvshow: '');
+        return _parseLink(initialLink);
       }
     } on PlatformException catch (e) {
       return throw PlatformException(
           code: e.code, message: e.message, details: e.details);
+    }
+  }
+
+  TvshowActions _parseLink(Uri initialLink) {
+    if (initialLink.path.contains('getRandomEpisode')) {
+      final TvshowActions tvshowActions =
+          TvshowActions.fromMap(initialLink.queryParameters);
+      if (tvshowActions.tvshow.contains('\"')) {
+        tvshowActions.tvshow = tvshowActions.tvshow.replaceAll('\"', '');
+        if (tvshowActions.tvshow.contains('+')) {
+          tvshowActions.tvshow = tvshowActions.tvshow.replaceAll('+', ' ');
+        }
+      }
+      return tvshowActions;
+    } else {
+      return TvshowActions(tvshow: '');
     }
   }
 }
