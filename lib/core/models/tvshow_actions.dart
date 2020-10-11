@@ -12,7 +12,7 @@ class TvshowActions {
   factory TvshowActions.fromJson(String source) =>
       TvshowActions.fromMap(json.decode(source));
 
-  final String tvshow;
+  String tvshow;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
