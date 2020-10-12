@@ -33,8 +33,6 @@ class _TabViewState extends State<TabView> {
             Theme.of(context).colorScheme.brightness == Brightness.dark
                 ? Brightness.light
                 : Brightness.dark,
-        systemNavigationBarIconBrightness:
-            Theme.of(context).colorScheme.brightness,
       ),
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
