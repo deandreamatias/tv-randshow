@@ -70,6 +70,10 @@ git clone git@github.com:deandreamatias/tv-randshow.git
 
 CLI Debug: `flutter run --flavor dev -t lib/main_dev.dart`
 
+### Tests
+
+Integration tests: `flutter drive --target=test_driver/app.dart --flavor dev`
+
 ## Built with
 
 - [Flutter](https://flutter.dev/) - Beautiful native apps in record time.
