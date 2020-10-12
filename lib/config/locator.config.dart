@@ -21,7 +21,7 @@ GetIt $initGetIt(
   String environment,
   EnvironmentFilter environmentFilter,
 }) {
-  final gh = GetItHelper(get, environment, environmentFilter);
+  final GetItHelper gh = GetItHelper(get, environment, environmentFilter);
   gh.lazySingleton<ApiService>(() => ApiService());
   gh.lazySingleton<AppService>(() => AppService());
   gh.lazySingleton<DatabaseService>(() => DatabaseService());
