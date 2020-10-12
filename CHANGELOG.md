@@ -1,3 +1,13 @@
+## 1.4.0 - 13/10/20
+
+- Update architecture
+- Add integration tests (75%)
+- Build app with Flutter 1.22.1
+- Implement auto search
+- Add app link Android
+- Preview google actions
+- Fix minor bugs
+
 ## 1.3.1 - 01/08/20
 
 - Fix dark mode (build with Flutter beta)
