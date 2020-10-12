@@ -60,10 +60,12 @@ class _SearchViewState extends State<SearchView> {
                 key: const Key('app.search.search_bar'),
                 controller: textEditingController,
                 textInputAction: TextInputAction.search,
-                onSubmitted: (String value) =>
-                    textEditingController.text.isNotEmpty
-                        ? _pageLoadController.reset()
-                        : null,
+                onSubmitted: (String value) {
+                  if (textEditingController.text.isNotEmpty) {
+                    model.timer.cancel();
+                    _pageLoadController.reset();
+                  }
+                },
                 onChanged: (String value) =>
                     model.searchAutomatic(_pageLoadController),
                 autofocus: true,

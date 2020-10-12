@@ -14,6 +14,8 @@ class SearchViewModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
   Timer _timer;
 
+  Timer get timer => _timer;
+
   Future<List<Result>> loadList(String text, int page, String language) async {
     if (text != null && text.isNotEmpty) {
       final Query query = Query(
