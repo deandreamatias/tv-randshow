@@ -1,3 +1,7 @@
+## 1.4.1 - 29/10/20
+
+- Remove google actions
+
 ## 1.4.0 - 13/10/20
 
 - Update architecture

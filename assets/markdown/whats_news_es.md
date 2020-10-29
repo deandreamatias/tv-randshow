@@ -1,8 +1,7 @@
-## 1.4.0 - 13/10/20
+## 1.4.1 - 29/10/20
 
 - Implementa auto busqueda
 - Agrega applink de Android
-- Lanzamiento previo de google actions
 - Corrección de pequeños errores
 
 ## 1.3.1 - 01/08/20

@@ -1,8 +1,7 @@
-## 1.4.0 - 13/10/20
+## 1.4.1 - 29/10/20
 
 - Implement auto search
 - Add app link Android
-- Preview google actions
 - Fix minor bugs
 
 ## 1.3.1 - 01/08/20
