@@ -39,7 +39,6 @@ jobs:
           profile: "Nexus 6"
           script: |
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
-            ./scripts/setenv.sh
-            cd ./photochatapp
+            ls
             flutter pub get
-            flutter drive --target=test_driver/app.dart
+            flutter drive --target=test_driver/app.dart --flavor dev
