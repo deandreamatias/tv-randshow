@@ -18,6 +18,7 @@ class DeleteButton extends StatelessWidget {
       viewModelBuilder: () => DeleteModel(),
       builder: (BuildContext context, DeleteModel model, Widget child) =>
           InkWell(
+        key: Key('delete:${idRow.toString()}'),
         onTap: () async {
           final bool result = await _deleteConfirm(context);
           if (result) await model.deleteFav(idRow);
@@ -45,10 +46,17 @@ class DeleteButton extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(translate('app.delete_dialog.title')),
-          content: Text(translate('app.delete_dialog.subtitle')),
+          title: Text(
+            translate('app.delete_dialog.title'),
+            key: Key('app.delete_dialog.title'),
+          ),
+          content: Text(
+            translate('app.delete_dialog.subtitle'),
+            key: Key('app.delete_dialog.subtitle'),
+          ),
           actions: <Widget>[
             FlatButton(
+              key: Key('app.delete_dialog.button_cancel'),
               child: Text(translate('app.delete_dialog.button_cancel')),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
@@ -58,6 +66,7 @@ class DeleteButton extends StatelessWidget {
               },
             ),
             OutlineButton(
+              key: Key('app.delete_dialog.button_delete'),
               borderSide: BorderSide(color: Theme.of(context).primaryColor),
               child: Text(translate('app.delete_dialog.button_delete')),
               onPressed: () {
