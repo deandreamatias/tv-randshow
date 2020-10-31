@@ -6,16 +6,17 @@ on:
       - develop
 jobs: 
   build-and-test: 
+    name: run analyze code and build test
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2 
     - uses: actions/setup-java@v1
       with:
         java-version: '12.x'
-    - uses: subosito/flutter-action@v1.4.0
+    - uses: subosito/flutter-action@v1
       with:
-        flutter-version: '1.22.1'
+        flutter-version: 'stable'
     - run: dart .tool/env.dart
     - run: flutter pub get
     - run: flutter analyze
@@ -42,6 +43,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
+      - run: dart .tool/env.dart
       - name: run tests
         timeout-minutes: 30
         env:
