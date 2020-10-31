@@ -8,7 +8,8 @@ jobs:
   build-and-test: 
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1 
+    - name: checkout
+    - uses: actions/checkout@v2
     - uses: actions/setup-java@v1
       with:
         java-version: '12.x'
@@ -22,6 +23,13 @@ jobs:
   android-integration-test:
     name: run integration test on Android emulator
     runs-on: macos-latest
+    strategy:
+      matrix:
+        device:
+          - "pixel"
+          - "pixel_c"
+          - "Nexus 6P"
+      fail-fast: false
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -44,7 +52,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          profile: "Nexus 6"
+          profile: ${{ matrix.device }}
           script: |
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             flutter pub get
