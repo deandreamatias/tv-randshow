@@ -41,4 +41,5 @@ jobs:
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             ls
             flutter pub get
+            flutter clean
             flutter drive --target=test_driver/app.dart --flavor dev
