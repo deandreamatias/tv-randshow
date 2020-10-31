@@ -28,11 +28,19 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '8.x'
+      - run: echo $SIGNING_KEY | base64 -d > android/app/key.jks
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
       - name: run tests
         timeout-minutes: 30
+        env:
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          ALIAS: ${{ secrets.ALIAS }}
+          KEY_PATH: key.jks
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
@@ -41,5 +49,4 @@ jobs:
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             ls
             flutter pub get
-            flutter clean
             flutter drive --target=test_driver/app.dart --flavor dev
