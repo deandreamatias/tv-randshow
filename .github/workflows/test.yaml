@@ -8,25 +8,22 @@ jobs:
   build-and-test: 
     runs-on: ubuntu-latest
     steps:
-      - name: configure enviroment
-        uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1.4.0
-        with:
-          flutter-version: '1.22.1'
-      - run: dart .tool/env.dart
-      - run: flutter pub get
-      - name: analyze code
-      - run: flutter analyze
-      - name: run build test
-      - run: flutter build aot -t lib/main_dev.dart
+    - uses: actions/checkout@v1 
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1.4.0
+      with:
+        flutter-version: '1.22.1'
+    - run: dart .tool/env.dart
+    - run: flutter pub get
+    - run: flutter analyze
+    - run: flutter build aot -t lib/main_dev.dart
   android-integration-test:
     name: run integration test on Android emulator
     runs-on: macos-latest
     steps:
-      - name: configure enviroment
+      - name: checkout
         uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
@@ -37,7 +34,7 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
-      - name: run integration test
+      - name: run tests
         timeout-minutes: 30
         env:
           KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
