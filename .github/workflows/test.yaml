@@ -19,3 +19,27 @@ jobs:
     - run: flutter pub get
     - run: flutter analyze
     - run: flutter build aot -t lib/main_dev.dart
+  android-integration-test:
+    name: run integration test on Android emulator
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '8.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - name: run tests
+        timeout-minutes: 30
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          profile: "Nexus 6"
+          script: |
+            /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
+            ./scripts/setenv.sh
+            cd ./photochatapp
+            flutter pub get
+            flutter drive --target=test_driver/app.dart
