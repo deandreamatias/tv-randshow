@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../core/viewmodels/widgets/delete_model.dart';
-import '../shared/unicons_icons.dart';
 
 class DeleteButton extends StatelessWidget {
   const DeleteButton({
@@ -32,7 +32,7 @@ class DeleteButton extends StatelessWidget {
             border: Border.all(color: Theme.of(context).colorScheme.primary),
           ),
           child: Icon(
-            Unicons.times,
+            UniconsLine.times,
             size: 16.0,
             color: Theme.of(context).accentColor,
           ),
