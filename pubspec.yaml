@@ -18,9 +18,9 @@ dependencies:
   flutter_pagewise: ^1.2.3
   flutter_translate: ^1.6.0
   get_it: ^4.0.2
+  in_app_review: ^1.0.4
   injectable: ^1.0.5
   json_annotation: ^3.1.0
-  launch_review: ^2.0.0
   package_info_plus: ^0.5.0
   path_provider: ^1.6.18
   persist_theme: ^1.7.0
