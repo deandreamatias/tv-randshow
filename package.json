@@ -1,0 +1,32 @@
+{
+  "name": "tv-randshow",
+  "version": "1.4.1",
+  "description": "app to pick a random tv show episode",
+  "main": "build/web/main.dart.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "node-minify": "^3.6.0",
+    "standard-version": "^9.0.0"
+  },
+  "scripts": {
+    "test": "flutter test",
+    "release": "standard-version"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deandreamatias/tv-randshow.git"
+  },
+  "keywords": [
+    "app"
+  ],
+  "author": "Matias de Andrea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deandreamatias/tv-randshow/issues"
+  },
+  "homepage": "https://github.com/deandreamatias/tv-randshow#readme"
+}
