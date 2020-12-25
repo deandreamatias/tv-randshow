@@ -8,11 +8,11 @@ import 'package:launch_review/launch_review.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:persist_theme/persist_theme.dart';
 import 'package:stacked/stacked.dart';
+import 'package:unicons/unicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/utils/constants.dart';
 import '../../core/viewmodels/views/info_view_model.dart';
-import '../shared/unicons_icons.dart';
 
 class InfoView extends StatelessWidget {
   const InfoView({Key key}) : super(key: key);
@@ -37,6 +37,17 @@ class InfoView extends StatelessWidget {
               child: ListView(
                 physics: const BouncingScrollPhysics(),
                 children: <Widget>[
+                  DarkModeSwitch(
+                    leading: const Icon(UniconsLine.moon),
+                    title: Text(
+                      translate('app.info.dark_title'),
+                      key: const Key('app.info.dark_title'),
+                    ),
+                    subtitle: Text(
+                      translate('app.info.dark_description'),
+                      key: const Key('app.info.dark_description'),
+                    ),
+                  ),
                   ListTile(
                     title: Text(
                       translate(
@@ -53,8 +64,8 @@ class InfoView extends StatelessWidget {
                           : 'app.info.web_description'),
                     ),
                     leading: const Icon(kIsWeb
-                        ? Unicons.google_play
-                        : Unicons.external_link_alt),
+                        ? UniconsLine.google_play
+                        : UniconsLine.external_link_alt),
                     onTap: () async {
                       const String url = kIsWeb
                           ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
@@ -78,7 +89,7 @@ class InfoView extends StatelessWidget {
                         translate('app.info.rate_description'),
                         key: const Key('app.info.rate_description'),
                       ),
-                      leading: const Icon(Unicons.feedback),
+                      leading: const Icon(UniconsLine.feedback),
                       onTap: () => LaunchReview.launch(
                         androidAppId: 'deandrea.matias.tv_randshow',
                       ),
@@ -93,7 +104,7 @@ class InfoView extends StatelessWidget {
                       translate('app.info.feedback_description'),
                       key: const Key('app.info.feedback_description'),
                     ),
-                    leading: const Icon(Unicons.envelope),
+                    leading: const Icon(UniconsLine.envelope),
                     onTap: () async {
                       const String url =
                           'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
@@ -114,21 +125,23 @@ class InfoView extends StatelessWidget {
                       translate('app.info.version.description'),
                       key: const Key('app.info.version.description'),
                     ),
-                    leading: const Icon(Unicons.brackets_curly),
+                    leading: const Icon(UniconsLine.brackets_curly),
                     onTap: () {
                       _changelog(context, model.version);
                     },
                   ),
-                  DarkModeSwitch(
-                    leading: const Icon(Unicons.moon),
+                  ListTile(
                     title: Text(
-                      translate('app.info.dark_title'),
-                      key: const Key('app.info.dark_title'),
+                      translate('app.info.privacy_title'),
+                      key: const Key('app.info.privacy_title'),
                     ),
                     subtitle: Text(
-                      translate('app.info.dark_description'),
-                      key: const Key('app.info.dark_description'),
+                      translate('app.info.privacy_description'),
+                      key: const Key('app.info.privacy_description'),
                     ),
+                    leading: const Icon(UniconsLine.file_shield_alt),
+                    onTap: () =>
+                        Navigator.of(context).pushNamed(RoutePaths.PRIVACY),
                   ),
                 ],
               ),
@@ -148,21 +161,20 @@ class InfoView extends StatelessWidget {
           '${translate('app.info.version.dialog_title')} ($version)',
           key: const Key('app.info.version.dialog_title'),
         ),
-        content: SingleChildScrollView(
-          key: const Key('app.info.version.scroll'),
-          physics: const BouncingScrollPhysics(),
-          child: FutureBuilder<Object>(
-              future: loadAsset(
-                  LocalizedApp.of(context).delegate.currentLocale.languageCode),
-              builder: (BuildContext context, AsyncSnapshot<Object> snapshot) {
-                if (snapshot.hasData) {
-                  return MarkdownBody(data: snapshot.data);
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              }),
+        content: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.8,
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: FutureBuilder<String>(
+            future: loadAsset(
+                LocalizedApp.of(context).delegate.currentLocale.languageCode),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              return snapshot.hasData
+                  ? Markdown(data: snapshot.data)
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    );
+            },
+          ),
         ),
         actions: <Widget>[
           OutlineButton(
