@@ -1,0 +1,10 @@
+<?xml version ="1.0" encoding ="utf-8"?>
+<actions>
+    <action intentName="actions.intent.OPEN_APP_FEATURE">
+        <fulfillment urlTemplate="https://tvrandshow.com/getRandomEpisode{?tvshow}">
+            <parameter-mapping
+                intentParameter="feature"
+                urlParameter="tvshow" />
+        </fulfillment>
+    </action>
+</actions>
