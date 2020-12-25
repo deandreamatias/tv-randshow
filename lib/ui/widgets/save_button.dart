@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../core/viewmodels/widgets/save_model.dart';
-import '../shared/unicons_icons.dart';
 
 class SaveButton extends StatelessWidget {
   const SaveButton({Key key, this.id}) : super(key: key);
@@ -19,7 +19,7 @@ class SaveButton extends StatelessWidget {
         child: model.tvshowInDb
             ? RaisedButton.icon(
                 key: const ValueKey<String>('delete'),
-                icon: const Icon(Unicons.times),
+                icon: const Icon(UniconsLine.times),
                 label: Text(
                   translate('app.search.button_delete'),
                   key: Key('app.search.button_delete.$id'),
@@ -28,7 +28,7 @@ class SaveButton extends StatelessWidget {
               )
             : RaisedButton.icon(
                 key: const ValueKey<String>('add'),
-                icon: const Icon(Unicons.favorite),
+                icon: const Icon(UniconsLine.favorite),
                 label: Text(
                   translate('app.search.button_fav'),
                   key: Key('app.search.button_fav.$id'),

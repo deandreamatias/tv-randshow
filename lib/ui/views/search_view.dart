@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../core/models/result.dart';
 import '../../core/viewmodels/views/search_view_model.dart';
-import '../shared/unicons_icons.dart';
 import '../widgets/search_widget.dart';
 
 class SearchView extends StatefulWidget {
@@ -74,7 +74,7 @@ class _SearchViewState extends State<SearchView> {
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   hintText: translate('app.search.search_bar'),
-                  prefixIcon: const Icon(Unicons.search),
+                  prefixIcon: const Icon(UniconsLine.search),
                 ),
               ),
             ),
