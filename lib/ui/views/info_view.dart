@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:launch_review/launch_review.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:persist_theme/persist_theme.dart';
 import 'package:stacked/stacked.dart';
@@ -90,9 +90,7 @@ class InfoView extends StatelessWidget {
                         key: const Key('app.info.rate_description'),
                       ),
                       leading: const Icon(UniconsLine.feedback),
-                      onTap: () => LaunchReview.launch(
-                        androidAppId: 'deandrea.matias.tv_randshow',
-                      ),
+                      onTap: () async => await putReview(),
                     ),
                   ),
                   ListTile(
@@ -150,6 +148,13 @@ class InfoView extends StatelessWidget {
         );
       },
     );
+  }
+
+  Future<void> putReview() async {
+    final InAppReview inAppReview = InAppReview.instance;
+    await inAppReview.isAvailable()
+        ? inAppReview.requestReview()
+        : inAppReview.openStoreListing();
   }
 
   void _changelog(BuildContext context, String version) {
