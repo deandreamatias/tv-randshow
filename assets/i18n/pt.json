@@ -30,12 +30,17 @@
             "rate_description": "Escreve tua resenha da app na Google Play",
             "feedback_title": "Enviar feedback",
             "feedback_description": "Envia um email com a tua opinião ou problema da app",
+            "privacy_title": "Política de privacidade",
+            "privacy_description": "Ver detalhes da política de privacidade",
             "version": {
                 "title": "Lista de versões",
                 "description": "Veja os detalhes desta versão e das anteriores",
                 "dialog_title": "Versões",
                 "dialog_button": "FECHAR"
             }
+        },
+        "privacy": {
+            "button_back": "VOLTAR"
         },
         "loading": {
             "title": "Escolhendo um episódio aleatório",

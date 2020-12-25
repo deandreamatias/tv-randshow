@@ -25,7 +25,7 @@ class ImageBuilder extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           child: kIsWeb
               ? OnlineImage(url: _checkUrl(url), name: name)
-              : CachedImage(url: _checkUrl(url), name: name),
+              : CachedImage(url: _checkUrl(url)),
         ),
         Visibility(
           visible: !isModal,
@@ -88,8 +88,7 @@ class OnlineImage extends StatelessWidget {
 }
 
 class CachedImage extends StatelessWidget {
-  const CachedImage({this.name, this.url});
-  final String name;
+  const CachedImage({this.url});
   final String url;
 
   @override
@@ -107,6 +106,8 @@ class CachedImage extends StatelessWidget {
 
 String _checkUrl(String url) {
   return url != null
-      ? url.isNotEmpty ? BASE_IMAGE + url : Assets.PLACE_HOLDER
+      ? url.isNotEmpty
+          ? BASE_IMAGE + url
+          : Assets.PLACE_HOLDER
       : Assets.PLACE_HOLDER;
 }
