@@ -9,12 +9,17 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "node-minify": "^3.6.0",
+    "@node-minify/babel-minify": "^6.1.0",
+    "@node-minify/clean-css": "^6.1.0",
+    "@node-minify/core": "^6.1.0",
+    "@node-minify/html-minifier": "^6.1.0",
+    "@node-minify/jsonminify": "^6.1.0",
+    "compare-json": "^0.4.0",
     "standard-version": "^9.0.0"
   },
   "scripts": {
-    "test": "flutter test",
-    "release": "standard-version"
+    "release": "standard-version",
+    "minimize": "node .tool/minimize.js"
   },
   "repository": {
     "type": "git",
