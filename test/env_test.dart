@@ -9,9 +9,6 @@ void main() {
       FlavorConfig(
           flavor: Flavor.DEV, values: FlavorValues.fromJson(environment));
 
-      expect(FlavorConfig.instance.values.baseUrl, isNotNull);
-      expect(FlavorConfig.instance.values.apiKey, isNotNull);
-
       expect(
           FlavorConfig.instance.values.baseUrl, equals('api.themoviedb.org'));
       expect(FlavorConfig.instance.values.apiKey.isNotEmpty, true);
