@@ -1,0 +1,46 @@
+name: Deploy app
+on:
+  create:
+    tags:
+      - 
+jobs: 
+  analyze-and-test: 
+    name: run analyze code and basic tests
+    runs-on: ubuntu-latest
+    steps:
+    - name: configure enviroment
+      uses: actions/checkout@v2 
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '12'
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '8.x'
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: 'beta'
+    - run: dart .tool/env.dart
+      env:
+        API_KEY_TMDB: ${{ secrets.API_KEY_TMDB }}
+    - name: get flutter dependencies
+      run: flutter pub get
+    - name: get node dependencies
+      run: npm install
+    - name: enable flutter web
+      run: flutter config --enable-web
+    - name: verify assets
+      run: comparejson -e ./assets/i18n/*.json
+    - name: code analyze 
+      run: flutter analyze
+    - name: unit tests
+      run: flutter test
+    - name: build web app
+      run: flutter build web -t lib/main_prod.dart
+    - name: minimize assets
+      run: npm run minimize
+    - name: deploy to web
+      uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
