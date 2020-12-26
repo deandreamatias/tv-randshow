@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.5.0](https://github.com/deandreamatias/tv-randshow/compare/v1.4.0...v1.5.0) (2020-12-26)
+## [1.5.1](https://github.com/deandreamatias/tv-randshow/compare/v1.4.0...v1.5.1) (2020-12-26)
 
 
 ### Features
@@ -13,7 +13,6 @@ All notable changes to this project will be documented in this file. See [standa
 * Implement in app review ([7ef51be](https://github.com/deandreamatias/tv-randshow/commit/7ef51bed5f257e988a2456189d1b46db4110c52b))
 * Remove google actions ([167c36e](https://github.com/deandreamatias/tv-randshow/commit/167c36e2f274977010d45a775dd57f4a59bd4671))
 * Update plugin to support web ([4c6f754](https://github.com/deandreamatias/tv-randshow/commit/4c6f75493e1af8bbae4f35a0ce801fe152217de5))
-* Update version ([5c33b37](https://github.com/deandreamatias/tv-randshow/commit/5c33b376bb3ce981feab276e57d97c2be4956fde))
 
 ## 1.4.1 - 29/10/20
 
