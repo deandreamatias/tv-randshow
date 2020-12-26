@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:unicons/unicons.dart';
 
 import '../../core/utils/constants.dart';
-import '../shared/unicons_icons.dart';
 import '../views/tab_view.dart';
 
 class HomeButton extends StatelessWidget {
@@ -24,7 +24,7 @@ class HomeButton extends StatelessWidget {
             kIsWeb ? 'app.loading.button_search' : 'app.loading.button_fav',
           ),
         ),
-        icon: const Icon(kIsWeb ? Unicons.search : Unicons.favorite),
+        icon: const Icon(kIsWeb ? UniconsLine.search : UniconsLine.favorite),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
         ),

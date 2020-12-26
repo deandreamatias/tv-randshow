@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class RoutePaths {
   static const String TAB = '/';
+  static const String PRIVACY = 'privacy';
   static const String SPLASH = 'splash';
   static const String LOADING = 'loading';
   static const String RESULT = 'result';
@@ -21,6 +22,7 @@ class Assets {
   static const String WHATS_NEW_EN = 'assets/markdown/whats_news_en.md';
   static const String WHATS_NEW_ES = 'assets/markdown/whats_news_es.md';
   static const String WHATS_NEW_PT = 'assets/markdown/whats_news_pt.md';
+  static const String PRIVACY_POLICY = 'assets/markdown/privacy_policy.md';
 }
 
 class CustomTheme {

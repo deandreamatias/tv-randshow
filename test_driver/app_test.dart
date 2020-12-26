@@ -5,6 +5,7 @@ FlutterDriver driver;
 
 void main() {
   group('TV Randshow app', () {
+    List<String> tvshows = ['The Office'];
     setUpAll(() async {
       driver = await FlutterDriver.connect();
     });
@@ -35,7 +36,7 @@ void main() {
           equals('Write a TV show name'));
 
       await tapKey('app.search.search_bar');
-      await driver.enterText('The office');
+      await driver.enterText(tvshows.first);
       await pause(3500);
 
       await compareTextKey('app.search.button_fav.2316', 'ADD TO FAV');
@@ -48,7 +49,7 @@ void main() {
 
       await driver.waitForAbsent(find.byValueKey('app.fav.loading'));
       await pause(500);
-      await compareText('The Office', 'The Office');
+      await compareText(tvshows.first, tvshows.first);
     });
     test('get random episode', () async {
       await compareTextKey('app.fav.button_random.2316', 'RANDOM');
@@ -67,14 +68,34 @@ void main() {
       await pause(500);
     });
 
-    // TODO: Test delete favorite
     test('delete favorite show', () async {
-      await compareText('The Office', 'The Office');
+      await compareText(tvshows.first, tvshows.first);
+
+      await tapKey('delete:1');
+      await driver.waitFor(find.byValueKey('app.delete_dialog.title'));
+      await tapKey('app.delete_dialog.button_delete');
+      await pause(500);
+      await driver.waitForAbsent(find.text(tvshows.first));
+
+      await pause(500);
     });
 
-    // TODO: Test info labels and changelog
     test('info view', () async {
       await tapKey('app.info.tab');
+
+      await compareTextKey('app.info.title', 'Info about TV Randshow');
+      await compareTextKey('app.info.web_title', 'Web app');
+      await compareTextKey('app.info.rate_title', 'Review');
+      await compareTextKey('app.info.feedback_title', 'Feedback');
+      await compareTextKey('app.info.version.title', 'Version changelog');
+
+      await tapKey('app.info.version.title');
+      await driver.waitFor(find.byValueKey('app.info.version.dialog_title'));
+      await tapKey('app.info.version.dialog_button');
+
+      await compareTextKey('app.info.dark_title', 'Dark theme');
+
+      await pause(500);
     });
   });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tv_randshow/ui/views/privacy_policy_view.dart';
 
 import '../core/models/tvshow_details.dart';
 import '../core/models/tvshow_result.dart';
@@ -22,6 +23,10 @@ class Router {
         return MaterialPageRoute<ResultView>(
           builder: (_) =>
               ResultView(tvshowResult: settings.arguments as TvshowResult),
+        );
+      case RoutePaths.PRIVACY:
+        return MaterialPageRoute<PrivacyPolicyView>(
+          builder: (_) => const PrivacyPolicyView(),
         );
       default:
         return MaterialPageRoute<dynamic>(

@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:unicons/unicons.dart';
 
-import '../shared/unicons_icons.dart';
 import 'home_view.dart';
 import 'info_view.dart';
 import 'search_view.dart';
@@ -52,15 +52,15 @@ class _TabViewState extends State<TabView> {
                             destinations: <NavigationRailDestination>[
                               if (!kIsWeb)
                                 NavigationRailDestination(
-                                  icon: const Icon(Unicons.favorite),
+                                  icon: const Icon(UniconsLine.favorite),
                                   label: Text(translate('app.fav.tab')),
                                 ),
                               NavigationRailDestination(
-                                icon: const Icon(Unicons.search),
+                                icon: const Icon(UniconsLine.search),
                                 label: Text(translate('app.search.tab')),
                               ),
                               NavigationRailDestination(
-                                icon: const Icon(Unicons.info_circle),
+                                icon: const Icon(UniconsLine.info_circle),
                                 label: Text(translate('app.info.tab')),
                               )
                             ],
@@ -88,21 +88,21 @@ class _TabViewState extends State<TabView> {
                               if (!kIsWeb)
                                 BottomNavigationBarItem(
                                   icon: const Icon(
-                                    Unicons.favorite,
+                                    UniconsLine.favorite,
                                     key: const Key('app.fav.tab'),
                                   ),
                                   label: translate('app.fav.tab'),
                                 ),
                               BottomNavigationBarItem(
                                 icon: const Icon(
-                                  Unicons.search,
+                                  UniconsLine.search,
                                   key: const Key('app.search.tab'),
                                 ),
                                 label: translate('app.search.tab'),
                               ),
                               BottomNavigationBarItem(
                                 icon: const Icon(
-                                  Unicons.info_circle,
+                                  UniconsLine.info_circle,
                                   key: const Key('app.info.tab'),
                                 ),
                                 label: translate('app.info.tab'),
