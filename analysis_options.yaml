@@ -1,0 +1,14 @@
+analyzer:
+  exclude:
+    - "bin/cache/**"
+    - "lib/generated_plugin_registrant.dart"
+    - "lib/core/models/*.g.dart"
+    - "lib/config/*.iconfig.dart"
+    - "lib/config/env.dart"
+    - ".dart_tool/**"
+    - "android/**"
+    - "ios/**"
+    - "build/**"
+    - "images/**"
+    - "assets/**"
+    - "github/**"
