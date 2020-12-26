@@ -9,10 +9,11 @@
 
 ## TV Randshow - App to choose a random TV show episode
 
-![Analyze code and basic tests](https://github.com/deandreamatias/tv-randshow/workflows/Analyze%20code%20and%20basic%20tests/badge.svg)
+![Unit tests](https://github.com/deandreamatias/tv-randshow/workflows/Unit%20tests/badge.svg)
 ![Integration test](https://github.com/deandreamatias/tv-randshow/workflows/Integration%20test/badge.svg)
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green?label=App)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
+![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Ftvrandshow.com%2F)
 [![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://paypal.me/deandreamatias)
 
 ### About the project
@@ -36,6 +37,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Choose a random episode from a single TV show**
 - **Support to Android and Web**
 - **Dark mode**
+- **Support to deeplink (https://tvrandshow.com/getRandomEpisode?friends)**
 - [Coming soon...](https://trello.com/b/ib0jdUzK)
 
 ## Tools
@@ -49,6 +51,8 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - [**Flutter markdown**](https://pub.dev/packages/flutter_markdown)
 - [**Flutter translate**](https://pub.dev/packages/flutter_translate) - Translate to english, portuguese and spanish
 - [**Persist theme (light and dark)**](https://pub.dev/packages/persist_theme)
+- [**Deeplink**](https://pub.dev/packages/uni_links)
+- [**In app review**](https://pub.dev/packages/in_app_review)
 
 ## Build application
 
