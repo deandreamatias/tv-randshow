@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 Future<void> main() async {
-  final Map<String?, String?> config = <String?, String?>{
+  final Map<String, dynamic> config = <String, dynamic>{
     'baseUrl': 'api.themoviedb.org',
     'apiKey': Platform.environment['API_KEY_TMDB'],
   };
