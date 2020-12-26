@@ -1,0 +1,46 @@
+name: Integration test 
+on: 
+  push:
+    branches:
+      - "main"
+      - "develop"
+jobs: 
+  android-integration-test:
+    name: run integration test on Android emulator
+    runs-on: macos-latest
+    steps:
+      - name: configure enviroment
+        uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '8.x'
+      - run: echo $SIGNING_KEY | base64 -d > android/app/key.jks
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - run: dart .tool/env.dart
+        env:
+          API_KEY_TMDB: ${{ secrets.API_KEY_TMDB }}
+      - run: flutter pub get
+      - run: flutter pub get
+      - name: code analyze 
+        run: flutter analyze
+      - name: unit tests
+        run: flutter test
+      - name: run tests
+        timeout-minutes: 30
+        env:
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          ALIAS: ${{ secrets.ALIAS }}
+          KEY_PATH: key.jks
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          profile: pixel
+          script: |
+            /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
+            flutter pub get
+            flutter drive --target=test_driver/app.dart --flavor dev

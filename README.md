@@ -9,6 +9,8 @@
 
 ## TV Randshow - App to choose a random TV show episode
 
+![Analyze code and basic tests](https://github.com/deandreamatias/tv-randshow/workflows/Analyze%20code%20and%20basic%20tests/badge.svg)
+![Integration test](https://github.com/deandreamatias/tv-randshow/workflows/Integration%20test/badge.svg)
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green?label=App)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
 [![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://paypal.me/deandreamatias)

@@ -3,7 +3,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../core/models/tvshow_result.dart';
 import '../../core/utils/constants.dart';
-import '../shared/unicons_icons.dart';
+import '../shared/custom_icons.dart';
 import '../widgets/home_button.dart';
 import '../widgets/info_box.dart';
 import 'loading_view.dart';
@@ -34,7 +34,7 @@ class ResultView extends StatelessWidget {
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 500),
                   child: Stack(
-                    overflow: Overflow.visible,
+                    clipBehavior: Clip.none,
                     alignment: Alignment.center,
                     children: <Widget>[
                       Positioned(
@@ -97,7 +97,7 @@ class ResultView extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: RaisedButton.icon(
-                          icon: const Icon(Unicons.dice_multiple),
+                          icon: const Icon(CustomIcons.dice_multiple),
                           label: Text(
                             translate('app.result.button_random'),
                             key: const Key('app.result.button_random'),
