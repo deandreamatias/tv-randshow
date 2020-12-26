@@ -29,7 +29,7 @@ jobs:
     - name: enable flutter web
       run: flutter config --enable-web
     - name: verify assets
-      run: comparejson -e ./assets/i18n/*.json
+      run: npm run compare
     - name: code analyze 
       run: flutter analyze
     - name: unit tests
