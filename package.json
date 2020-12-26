@@ -19,7 +19,8 @@
   },
   "scripts": {
     "release": "standard-version",
-    "minimize": "node .tool/minimize.js"
+    "minimize": "node .tool/minimize.js",
+    "compare": "comparejson -e ./assets/i18n/*.json"
   },  
   "standard-version": {
     "skip": {
