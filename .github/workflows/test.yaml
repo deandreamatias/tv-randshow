@@ -1,4 +1,4 @@
-name: Analyze code and basic tests 
+name: Unit tests 
 on: 
   push:
 jobs: 
