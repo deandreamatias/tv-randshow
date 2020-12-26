@@ -1,6 +1,6 @@
 {
   "name": "tv-randshow",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "app to pick a random tv show episode",
   "main": "build/web/main.dart.js",
   "directories": {
@@ -20,6 +20,12 @@
   "scripts": {
     "release": "standard-version",
     "minimize": "node .tool/minimize.js"
+  },  
+  "standard-version": {
+    "skip": {
+      "commit": true,
+      "tag": true
+    }
   },
   "repository": {
     "type": "git",
