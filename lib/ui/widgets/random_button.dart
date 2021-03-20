@@ -18,7 +18,7 @@ class RandomButton extends StatelessWidget {
     return ViewModelBuilder<RandomModel>.nonReactive(
       viewModelBuilder: () => RandomModel(),
       builder: (BuildContext context, RandomModel model, Widget child) =>
-          RaisedButton.icon(
+          ElevatedButton.icon(
         icon: const Icon(CustomIcons.dice_multiple),
         label: Text(
           translate('app.fav.button_random'),

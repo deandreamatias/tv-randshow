@@ -27,7 +27,7 @@ class DeleteButton extends StatelessWidget {
           height: 20.0,
           width: 20.0,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).backgroundColor,
             borderRadius: const BorderRadius.all(Radius.circular(4.0)),
             border: Border.all(color: Theme.of(context).colorScheme.primary),
           ),
@@ -55,19 +55,15 @@ class DeleteButton extends StatelessWidget {
             key: Key('app.delete_dialog.subtitle'),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               key: Key('app.delete_dialog.button_cancel'),
               child: Text(translate('app.delete_dialog.button_cancel')),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
-            OutlineButton(
+            OutlinedButton(
               key: Key('app.delete_dialog.button_delete'),
-              borderSide: BorderSide(color: Theme.of(context).primaryColor),
               child: Text(translate('app.delete_dialog.button_delete')),
               onPressed: () {
                 Navigator.of(context).pop(true);
