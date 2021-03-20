@@ -3,7 +3,7 @@ on:
   push:
 jobs: 
   analyze-and-test: 
-    name: run analyze code and basic tests
+    name: run unit tests
     runs-on: ubuntu-latest
     steps:
     - name: configure enviroment
@@ -22,5 +22,3 @@ jobs:
       run: flutter analyze
     - name: unit tests
       run: flutter test
-    - name: aot build 
-      run: flutter build aot -t lib/main_dev.dart
