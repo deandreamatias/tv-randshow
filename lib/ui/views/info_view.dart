@@ -182,9 +182,8 @@ class InfoView extends StatelessWidget {
           ),
         ),
         actions: <Widget>[
-          OutlineButton(
+          OutlinedButton(
             key: const Key('app.info.version.dialog_button'),
-            borderSide: BorderSide(color: Theme.of(context).primaryColor),
             child: Text(
               translate('app.info.version.dialog_button'),
             ),

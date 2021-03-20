@@ -96,7 +96,7 @@ class ResultView extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.bottomCenter,
-                        child: RaisedButton.icon(
+                        child: ElevatedButton.icon(
                           icon: const Icon(CustomIcons.dice_multiple),
                           label: Text(
                             translate('app.result.button_random'),
