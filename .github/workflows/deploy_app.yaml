@@ -18,7 +18,7 @@ jobs:
         java-version: '8.x'
     - uses: subosito/flutter-action@v1
       with:
-        channel: 'beta'
+        channel: 'stable'
     - run: dart .tool/env.dart
       env:
         API_KEY_TMDB: ${{ secrets.API_KEY_TMDB }}
@@ -26,8 +26,6 @@ jobs:
       run: flutter pub get
     - name: get node dependencies
       run: npm install
-    - name: enable flutter web
-      run: flutter config --enable-web
     - name: verify assets
       run: npm run compare
     - name: code analyze 
