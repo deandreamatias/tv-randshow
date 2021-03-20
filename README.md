@@ -37,7 +37,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Choose a random episode from a single TV show**
 - **Support to Android and Web**
 - **Dark mode**
-- **Support to deeplink (https://tvrandshow.com/getRandomEpisode?friends)**
+- **Support to deeplink `https://tvrandshow.com/getRandomEpisode?tvshow=friends`**
 - [Coming soon...](https://trello.com/b/ib0jdUzK)
 
 ## Tools
@@ -47,7 +47,6 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - [**Provider**](https://pub.dev/packages/provider)
 - [**SQFlite**](https://pub.dev/packages/sqflite)
 - [**Dio**](https://pub.dev/packages/dio)
-- [**Logger**](https://pub.dev/packages/logger)
 - [**Flutter markdown**](https://pub.dev/packages/flutter_markdown)
 - [**Flutter translate**](https://pub.dev/packages/flutter_translate) - Translate to english, portuguese and spanish
 - [**Persist theme (light and dark)**](https://pub.dev/packages/persist_theme)
@@ -88,7 +87,7 @@ Integration tests: `flutter drive --target=test_driver/app.dart --flavor dev`
 
 ## Author
 
-- **Matias de Andrea** - Mobile developer and UI/UX designer: [Website](https://deandreamatias.com), [GitHub](https://github.com/deandreamatias) & [Twitter](https://twitter.com/deandreamatias).
+- **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com), [GitHub](https://github.com/deandreamatias) & [Twitter](https://twitter.com/deandreamatias).
 
 ## Contributing
 
