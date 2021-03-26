@@ -82,6 +82,23 @@ class InfoView extends StatelessWidget {
                     visible: !kIsWeb,
                     child: ListTile(
                       title: Text(
+                        translate('app.info.export_title'),
+                        key: const Key('app.info.export_title'),
+                      ),
+                      subtitle: Text(
+                        translate('app.info.export_description'),
+                        key: const Key('app.info.export_description'),
+                      ),
+                      leading: const Icon(UniconsLine.file_export),
+                      trailing:
+                          model.isBusy ? CircularProgressIndicator() : null,
+                      onTap: () async => await model.exportTvshows(),
+                    ),
+                  ),
+                  Visibility(
+                    visible: !kIsWeb,
+                    child: ListTile(
+                      title: Text(
                         translate('app.info.rate_title'),
                         key: const Key('app.info.rate_title'),
                       ),
@@ -182,9 +199,8 @@ class InfoView extends StatelessWidget {
           ),
         ),
         actions: <Widget>[
-          OutlineButton(
+          OutlinedButton(
             key: const Key('app.info.version.dialog_button'),
-            borderSide: BorderSide(color: Theme.of(context).primaryColor),
             child: Text(
               translate('app.info.version.dialog_button'),
             ),

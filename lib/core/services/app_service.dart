@@ -8,6 +8,7 @@ import '../models/tvshow_actions.dart';
 
 @lazySingleton
 class AppService {
+  int timesOpenLink = 0;
   PackageInfo _packageInfo;
 
   Future<String> getVersion() async {
@@ -34,12 +35,7 @@ class AppService {
     if (initialLink.path.contains('getRandomEpisode')) {
       final TvshowActions tvshowActions =
           TvshowActions.fromMap(initialLink.queryParameters);
-      if (tvshowActions.tvshow.contains('\"')) {
-        tvshowActions.tvshow = tvshowActions.tvshow.replaceAll('\"', '');
-        if (tvshowActions.tvshow.contains('+')) {
-          tvshowActions.tvshow = tvshowActions.tvshow.replaceAll('+', ' ');
-        }
-      }
+      timesOpenLink = ++timesOpenLink;
       return tvshowActions;
     } else {
       return TvshowActions(tvshow: '');

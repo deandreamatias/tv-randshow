@@ -15,7 +15,7 @@ class HomeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 16.0),
-      child: FlatButton.icon(
+      child: TextButton.icon(
         label: Text(
           kIsWeb
               ? translate('app.loading.button_search')
@@ -25,9 +25,6 @@ class HomeButton extends StatelessWidget {
           ),
         ),
         icon: const Icon(kIsWeb ? UniconsLine.search : UniconsLine.favorite),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
         onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
           context,
           RoutePaths.TAB,

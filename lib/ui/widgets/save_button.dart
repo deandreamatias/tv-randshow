@@ -17,7 +17,7 @@ class SaveButton extends StatelessWidget {
           AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
         child: model.tvshowInDb
-            ? RaisedButton.icon(
+            ? ElevatedButton.icon(
                 key: const ValueKey<String>('delete'),
                 icon: const Icon(UniconsLine.times),
                 label: Text(
@@ -26,7 +26,7 @@ class SaveButton extends StatelessWidget {
                 ),
                 onPressed: () => model.deleteFav(id),
               )
-            : RaisedButton.icon(
+            : ElevatedButton.icon(
                 key: const ValueKey<String>('add'),
                 icon: const Icon(UniconsLine.favorite),
                 label: Text(
