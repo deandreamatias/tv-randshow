@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   cached_network_image: ^2.5.1
   dio: ^4.0.0-prev3
+  file_saver: ^0.0.6
   flare_flutter: ^2.0.6
   flutter_markdown: ^0.5.1
   flutter_pagewise: ^1.2.3
@@ -23,6 +24,7 @@ dependencies:
   json_annotation: ^3.1.1
   package_info_plus: ^1.0.0
   path_provider: ^2.0.1
+  permission_handler: ^6.1.1
   persist_theme: ^1.7.0
   provider: ^4.3.2+2
   sqflite: ^2.0.0+3
