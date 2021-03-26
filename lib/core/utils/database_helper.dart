@@ -52,8 +52,7 @@ class DatabaseHelper {
     }
     final String path = join(documentsDirectory.path, _databaseName);
     return await openDatabase(path,
-            version: _databaseVersion, onCreate: _onCreate)
-        .catchError((dynamic onError) => log('Open database', error: onError));
+        version: _databaseVersion, onCreate: _onCreate);
   }
 
   // SQL code to create the database table

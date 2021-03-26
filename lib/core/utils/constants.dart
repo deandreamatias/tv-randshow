@@ -28,6 +28,7 @@ class Assets {
 class CustomTheme {
   static const Color _PRIMARY = Color(0xFFE40505);
   static const Color _DARK_GREY = Color(0xFF121212);
+  static const Color _LIGHT_GREY = Color(0xFF303030);
   static const Map<int, Color> _PRIMARY_SWATCH = <int, Color>{
     50: Color.fromRGBO(228, 5, 5, .1),
     100: Color.fromRGBO(228, 5, 5, .2),
@@ -87,13 +88,33 @@ class CustomTheme {
           ),
         ),
       ),
-      buttonTheme: ButtonThemeData(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-          side: const BorderSide(color: _PRIMARY),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(_PRIMARY),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            ),
+          ),
         ),
-        buttonColor: _PRIMARY,
-        textTheme: ButtonTextTheme.primary,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+              const EdgeInsets.all(16.0),
+            ),
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.black)),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          side: MaterialStateProperty.all<BorderSide>(
+              BorderSide(color: _PRIMARY)),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            ),
+          ),
+        ),
       ),
     ),
     // Dark theme
@@ -104,8 +125,8 @@ class CustomTheme {
         primaryVariant: _PRIMARY,
         secondary: Colors.white,
         secondaryVariant: Colors.black,
-        surface: _DARK_GREY,
-        background: _DARK_GREY,
+        surface: _LIGHT_GREY,
+        background: _LIGHT_GREY,
         error: Colors.red,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
@@ -115,8 +136,7 @@ class CustomTheme {
         brightness: Brightness.dark,
       ),
       primaryColor: _PRIMARY,
-      accentColor: Colors.white,
-      dialogBackgroundColor: _DARK_GREY,
+      accentColor: _PRIMARY,
       backgroundColor: _DARK_GREY,
       primarySwatch: const MaterialColor(0xFFE40505, _PRIMARY_SWATCH),
       toggleableActiveColor: _PRIMARY,
@@ -143,12 +163,39 @@ class CustomTheme {
           ),
         ),
       ),
-      buttonTheme: ButtonThemeData(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
+      bottomNavigationBarTheme:
+          BottomNavigationBarThemeData(selectedItemColor: Colors.white),
+      navigationRailTheme: NavigationRailThemeData(
+        selectedIconTheme: IconThemeData(color: Colors.white),
+        selectedLabelTextStyle: TextStyle(color: Colors.white),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(_PRIMARY),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            ),
+          ),
         ),
-        buttonColor: _PRIMARY,
-        textTheme: ButtonTextTheme.primary,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+              const EdgeInsets.all(16.0),
+            ),
+            foregroundColor: MaterialStateProperty.all<Color>(Colors.white)),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          side: MaterialStateProperty.all<BorderSide>(
+              BorderSide(color: _PRIMARY)),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            ),
+          ),
+        ),
       ),
     ),
   ];

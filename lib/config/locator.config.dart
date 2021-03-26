@@ -11,6 +11,7 @@ import '../core/services/api_service.dart';
 import '../core/services/app_service.dart';
 import '../core/services/database_service.dart';
 import '../core/services/favs_service.dart';
+import '../core/services/manage_files.dart';
 import '../core/services/random_service.dart';
 
 /// adds generated dependencies
@@ -21,12 +22,14 @@ GetIt $initGetIt(
   String environment,
   EnvironmentFilter environmentFilter,
 }) {
-  final GetItHelper gh = GetItHelper(get, environment, environmentFilter);
+  final gh = GetItHelper(get, environment, environmentFilter);
   gh.lazySingleton<ApiService>(() => ApiService());
   gh.lazySingleton<AppService>(() => AppService());
   gh.lazySingleton<DatabaseService>(() => DatabaseService());
   gh.lazySingleton<FavsService>(() => FavsService(
       apiService: get<ApiService>(), databaseService: get<DatabaseService>()));
+  gh.lazySingleton<ManageFiles>(
+      () => ManageFiles(databaseService: get<DatabaseService>()));
   gh.lazySingleton<RandomService>(
       () => RandomService(apiService: get<ApiService>()));
   return get;
