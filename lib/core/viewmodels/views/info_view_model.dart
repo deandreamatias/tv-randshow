@@ -1,11 +1,11 @@
 import 'package:stacked/stacked.dart';
 import '../../../config/locator.dart';
 import '../../services/app_service.dart';
-import '../../services/manage_files.dart';
+import '../../services/manage_files_service.dart';
 
 class InfoViewModel extends BaseViewModel {
   final AppService _appService = locator<AppService>();
-  final ManageFiles _manageFiles = locator<ManageFiles>();
+  final ManageFilesService _manageFiles = locator<ManageFilesService>();
 
   String _version = '-';
   String get version => _version;
@@ -16,7 +16,7 @@ class InfoViewModel extends BaseViewModel {
 
   Future<void> exportTvshows() async {
     setBusy(true);
-    await _manageFiles.saveFile();
+    await _manageFiles.saveTvshows();
     setBusy(false);
   }
 }

@@ -11,7 +11,7 @@ import '../core/services/api_service.dart';
 import '../core/services/app_service.dart';
 import '../core/services/database_service.dart';
 import '../core/services/favs_service.dart';
-import '../core/services/manage_files.dart';
+import '../core/services/manage_files_service.dart';
 import '../core/services/random_service.dart';
 
 /// adds generated dependencies
@@ -28,8 +28,8 @@ GetIt $initGetIt(
   gh.lazySingleton<DatabaseService>(() => DatabaseService());
   gh.lazySingleton<FavsService>(() => FavsService(
       apiService: get<ApiService>(), databaseService: get<DatabaseService>()));
-  gh.lazySingleton<ManageFiles>(
-      () => ManageFiles(databaseService: get<DatabaseService>()));
+  gh.lazySingleton<ManageFilesService>(
+      () => ManageFilesService(databaseService: get<DatabaseService>()));
   gh.lazySingleton<RandomService>(
       () => RandomService(apiService: get<ApiService>()));
   return get;

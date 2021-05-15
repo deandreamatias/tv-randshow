@@ -7,14 +7,16 @@ import 'tvshow_details.dart';
 part 'file.g.dart';
 
 @JsonSerializable(includeIfNull: false)
-class File {
-  File({this.tvshows});
+class TvshowsFile {
+  TvshowsFile({this.tvshows});
 
-  factory File.fromRawJson(String str) => _$FileFromJson(json.decode(str));
-  factory File.fromJson(Map<String, dynamic> json) => _$FileFromJson(json);
+  factory TvshowsFile.fromRawJson(String str) =>
+      _$FileFromJson(json.decode(str));
+  factory TvshowsFile.fromJson(Map<String, dynamic> json) =>
+      _$FileFromJson(json);
 
   final List<TvshowDetails> tvshows;
 
-  Map<String, dynamic> toJson() => _$FileToJson(this);
-  String toRawJson() => json.encode(_$FileToJson(this));
+  Map<String, dynamic> toJson() => _$TvShowsFileToJson(this);
+  String toRawJson() => json.encode(_$TvShowsFileToJson(this));
 }
