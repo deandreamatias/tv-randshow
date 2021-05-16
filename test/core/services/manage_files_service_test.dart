@@ -44,7 +44,7 @@ void main() {
       final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
       final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
       final fileName = 'tvrandshow-${nowDateTime[0]}';
-      when(databaseService.queryList()).thenAnswer((_) async => tvshows);
+      when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
       when(appService.hasStoragePermission())
           .thenAnswer((_) async => await true);
       when(appService.saveFile(
@@ -57,7 +57,7 @@ void main() {
       final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
       final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
       final fileName = 'tvrandshow-${nowDateTime[0]}';
-      when(databaseService.queryList()).thenAnswer((_) async => tvshows);
+      when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
       when(appService.hasStoragePermission())
           .thenAnswer((_) async => await false);
       when(appService.saveFile(
@@ -69,7 +69,7 @@ void main() {
     test('should dont save tv shows when database is empty', () async {
       final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
       final fileName = 'tvrandshow-${nowDateTime[0]}';
-      when(databaseService.queryList()).thenAnswer((_) async => []);
+      when(databaseService.getTvshows()).thenAnswer((_) async => []);
       when(appService.hasStoragePermission())
           .thenAnswer((_) async => await true);
       when(appService.saveFile(fileName, TvshowsFile(tvshows: []).toRawJson()))
@@ -79,7 +79,7 @@ void main() {
     });
     test('should dont save tv shows when file name is empty', () async {
       final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
-      when(databaseService.queryList()).thenAnswer((_) async => tvshows);
+      when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
       when(appService.hasStoragePermission())
           .thenAnswer((_) async => await true);
       when(appService.saveFile('', TvshowsFile(tvshows: []).toRawJson()))

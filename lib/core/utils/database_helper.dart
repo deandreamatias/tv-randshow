@@ -120,15 +120,6 @@ class DatabaseHelper {
         await db.rawQuery('SELECT COUNT(*) FROM $table'));
   }
 
-  // We are assuming here that the id column in the map is set. The other
-  // column values will be used to update the row.
-  Future<int> update(Map<String, dynamic> row) async {
-    final Database db = await instance.database;
-    final int id = row[columnId];
-    return await db
-        .update(table, row, where: '$columnId = ?', whereArgs: <int>[id]);
-  }
-
   // Deletes the row specified by the id. The number of affected rows is
   // returned. This should be 1 as long as the row exists.
   Future<int> delete(int id) async {

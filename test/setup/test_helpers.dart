@@ -17,11 +17,12 @@ DatabaseMock getAndRegisterDatabaseMock(
     {bool hasItems = false, int deleteItem = 1}) {
   _removeRegistrationIfExists<DatabaseService>();
   final DatabaseMock database = DatabaseMock();
-  when(database.queryList()).thenAnswer((Invocation realInvocation) async {
+  when(database.getTvshows()).thenAnswer((Invocation realInvocation) async {
     await Future<Duration>.delayed(const Duration(milliseconds: 500));
     return hasItems ? database.mockList : null;
   });
-  when(database.delete(deleteItem)).thenAnswer((Invocation realInvocation) {
+  when(database.deleteTvshow(deleteItem))
+      .thenAnswer((Invocation realInvocation) {
     database.mockList.removeAt(deleteItem);
     return;
   });

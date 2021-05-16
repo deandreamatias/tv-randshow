@@ -24,7 +24,7 @@ class FavsService {
   Stream<List<TvshowDetails>> get listFavs => streamController.stream;
 
   Future<void> getFavs() async {
-    streamController.add(await _databaseService.queryList());
+    streamController.add(await _databaseService.getTvshows());
   }
 
   Future<void> addFav(int id, String language) async {
@@ -35,12 +35,12 @@ class FavsService {
     final TvshowDetails _tvshowDetails =
         await _apiService.getDetailsTv(query, id);
     if (_tvshowDetails != null) {
-      await _databaseService.insert(_tvshowDetails);
+      await _databaseService.saveTvshow(_tvshowDetails);
     }
   }
 
   Future<void> deleteFav(int rowId) async {
-    await _databaseService.delete(rowId);
-    streamController.add(await _databaseService.queryList());
+    await _databaseService.deleteTvshow(rowId);
+    streamController.add(await _databaseService.getTvshows());
   }
 }

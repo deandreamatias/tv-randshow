@@ -20,7 +20,7 @@ class ManageFilesService {
   Future<bool> saveTvshows() async {
     if (!(await _appService.hasStoragePermission())) return false;
 
-    final favTvshows = await _databaseService.queryList();
+    final favTvshows = await _databaseService.getTvshows();
     if (favTvshows == null || favTvshows.isEmpty) return false;
 
     final jsonFavTvshows = TvshowsFile(tvshows: favTvshows).toRawJson();
@@ -39,9 +39,9 @@ class ManageFilesService {
         TvshowsFile.fromRawJson(await localFile.readAsString());
 
     for (final tvshow in jsonFavTvshows.tvshows) {
-      await _databaseService.insert(tvshow);
+      await _databaseService.saveTvshow(tvshow);
     }
-    final loadedTvshows = await _databaseService.queryList();
+    final loadedTvshows = await _databaseService.getTvshows();
 
     return jsonFavTvshows.tvshows.length == loadedTvshows.length;
   }
