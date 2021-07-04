@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
@@ -121,7 +120,7 @@ class ModalSheet extends StatelessWidget {
                     ),
             ),
           ),
-          if (inDatabase || kIsWeb)
+          if (inDatabase)
             RandomButton(tvshowDetails: model.tvshowDetails)
           else
             SaveButton(id: idTv),
