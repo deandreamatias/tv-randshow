@@ -4,18 +4,18 @@ import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/services/api_service.dart';
-import 'package:tv_randshow/core/services/database_service.dart';
+import 'package:tv_randshow/core/services/hive_database_service.dart';
 
-class DatabaseMock extends Mock implements DatabaseService {
-  final List<TvshowDetails> mockList = List<TvshowDetails>.generate(
-      10, (int index) => TvshowDetails(rowId: index));
+class DatabaseMock extends Mock implements HiveDatabaseService {
+  final List<TvshowDetails> mockList =
+      List<TvshowDetails>.generate(10, (int index) => TvshowDetails(id: index));
 }
 
 class ApiMock extends Mock implements ApiService {}
 
 DatabaseMock getAndRegisterDatabaseMock(
     {bool hasItems = false, int deleteItem = 1}) {
-  _removeRegistrationIfExists<DatabaseService>();
+  _removeRegistrationIfExists<HiveDatabaseService>();
   final DatabaseMock database = DatabaseMock();
   when(database.getTvshows()).thenAnswer((Invocation realInvocation) async {
     await Future<Duration>.delayed(const Duration(milliseconds: 500));
@@ -26,7 +26,7 @@ DatabaseMock getAndRegisterDatabaseMock(
     database.mockList.removeAt(deleteItem);
     return;
   });
-  locator.registerSingleton<DatabaseService>(database);
+  locator.registerSingleton<HiveDatabaseService>(database);
   return database;
 }
 
@@ -44,7 +44,7 @@ void registerServices() {
 }
 
 void unregisterServices() {
-  locator.unregister<DatabaseService>();
+  locator.unregister<HiveDatabaseService>();
   locator.unregister<ApiService>();
 }
 

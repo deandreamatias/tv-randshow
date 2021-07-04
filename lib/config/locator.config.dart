@@ -26,10 +26,10 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i5.DatabaseService>(() => _i5.DatabaseService());
   gh.lazySingleton<_i6.FavsService>(() => _i6.FavsService(
       apiService: get<_i3.ApiService>(),
-      databaseService: get<_i5.DatabaseService>()));
+      databaseService: get<_i7.HiveDatabaseService>()));
   gh.lazySingleton<_i7.HiveDatabaseService>(() => _i7.HiveDatabaseService());
   gh.lazySingleton<_i8.ManageFilesService>(() => _i8.ManageFilesService(
-      databaseService: get<_i5.DatabaseService>(),
+      databaseService: get<_i7.HiveDatabaseService>(),
       appService: get<_i4.AppService>()));
   gh.lazySingleton<_i9.RandomService>(
       () => _i9.RandomService(apiService: get<_i3.ApiService>()));

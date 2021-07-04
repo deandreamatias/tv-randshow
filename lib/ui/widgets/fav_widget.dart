@@ -44,7 +44,7 @@ class FavWidget extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.topRight,
-            child: DeleteButton(idRow: tvshowDetails.rowId),
+            child: DeleteButton(id: tvshowDetails.id),
           ),
           Align(
             alignment: Alignment.bottomCenter,

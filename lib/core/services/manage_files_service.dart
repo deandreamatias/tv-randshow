@@ -4,16 +4,16 @@ import 'package:injectable/injectable.dart';
 
 import '../models/file.dart';
 import 'app_service.dart';
-import 'database_service.dart';
+import 'hive_database_service.dart';
 
 @lazySingleton
 class ManageFilesService {
   ManageFilesService({
-    DatabaseService databaseService,
+    HiveDatabaseService databaseService,
     AppService appService,
   })  : _databaseService = databaseService,
         _appService = appService;
-  final DatabaseService _databaseService;
+  final HiveDatabaseService _databaseService;
   final AppService _appService;
   String downloadPath = '';
 

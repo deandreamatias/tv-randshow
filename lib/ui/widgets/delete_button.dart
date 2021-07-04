@@ -8,9 +8,9 @@ import '../../core/viewmodels/widgets/delete_model.dart';
 class DeleteButton extends StatelessWidget {
   const DeleteButton({
     Key key,
-    @required this.idRow,
+    @required this.id,
   }) : super(key: key);
-  final int idRow;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +18,10 @@ class DeleteButton extends StatelessWidget {
       viewModelBuilder: () => DeleteModel(),
       builder: (BuildContext context, DeleteModel model, Widget child) =>
           InkWell(
-        key: Key('delete:${idRow.toString()}'),
+        key: Key('delete:${id.toString()}'),
         onTap: () async {
           final bool result = await _deleteConfirm(context);
-          if (result) await model.deleteFav(idRow);
+          if (result) await model.deleteFav(id);
         },
         child: Container(
           height: 20.0,
