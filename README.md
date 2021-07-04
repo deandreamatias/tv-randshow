@@ -77,7 +77,8 @@ CLI Debug: `flutter run --flavor dev -t lib/main_dev.dart`
 
 ### Tests
 
-Integration tests: `flutter drive --target=test_driver/app.dart --flavor dev`
+Integration tests: `flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d [DEVICE_ID] --flavor dev`
+Unit tests: `flutter test --flavor dev`
 
 ## Built with
 

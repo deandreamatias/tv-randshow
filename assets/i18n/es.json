@@ -3,6 +3,7 @@
         "name": "TV Randshow",
         "fav": {
             "tab": "Favoritos",
+            "save": "Guarda tus series en un archivo",
             "title": "Tus series favoritas para elegir al azar un episodio",
             "empty_message": "Busca una serie para añadir en tu lista de favoritos",
             "error_message": "Oops! Ocurrió un error al cargar los favoritos",

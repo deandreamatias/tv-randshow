@@ -1,6 +1,6 @@
 import 'package:faker/faker.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:test/test.dart';
 import 'package:tv_randshow/core/models/file.dart';
 import 'package:tv_randshow/core/models/season.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';

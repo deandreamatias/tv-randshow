@@ -36,6 +36,8 @@ class _HomeViewState extends State<HomeView> {
               loading
                   ? Center(child: CircularProgressIndicator(strokeWidth: 2))
                   : IconButton(
+                      key: const Key('app.fav.save'),
+                      tooltip: translate('app.fav.save'),
                       icon: Icon(
                         UniconsLine.file_export,
                         color: Theme.of(context).primaryColor,
