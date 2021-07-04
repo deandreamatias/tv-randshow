@@ -6,8 +6,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:persist_theme/persist_theme.dart';
 import 'package:stacked/stacked.dart';
+import 'package:theme_provider/theme_provider.dart';
 import 'package:unicons/unicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,8 +37,13 @@ class InfoView extends StatelessWidget {
               child: ListView(
                 physics: const BouncingScrollPhysics(),
                 children: <Widget>[
-                  DarkModeSwitch(
-                    leading: const Icon(UniconsLine.moon),
+                  SwitchListTile(
+                    value: ThemeProvider.themeOf(context)
+                            .id
+                            .compareTo('dark_theme') ==
+                        0,
+                    onChanged: (changed) =>
+                        ThemeProvider.controllerOf(context).nextTheme(),
                     title: Text(
                       translate('app.info.dark_title'),
                       key: const Key('app.info.dark_title'),

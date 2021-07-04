@@ -7,7 +7,7 @@ import 'season.dart';
 
 part 'tvshow_details.g.dart';
 
-@JsonSerializable(nullable: true, includeIfNull: false)
+@JsonSerializable(includeIfNull: false)
 @HiveType(typeId: 1)
 class TvshowDetails extends HiveObject {
   TvshowDetails({

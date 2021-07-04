@@ -11,12 +11,12 @@ class TvshowsFile {
   TvshowsFile({this.tvshows});
 
   factory TvshowsFile.fromRawJson(String str) =>
-      _$FileFromJson(json.decode(str));
+      _$TvshowsFileFromJson(json.decode(str));
   factory TvshowsFile.fromJson(Map<String, dynamic> json) =>
-      _$FileFromJson(json);
+      _$TvshowsFileFromJson(json);
 
   final List<TvshowDetails> tvshows;
 
-  Map<String, dynamic> toJson() => _$TvShowsFileToJson(this);
-  String toRawJson() => json.encode(_$TvShowsFileToJson(this));
+  Map<String, dynamic> toJson() => _$TvshowsFileToJson(this);
+  String toRawJson() => json.encode(_$TvshowsFileToJson(this));
 }

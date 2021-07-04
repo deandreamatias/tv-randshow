@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'query.g.dart';
 
-@JsonSerializable(nullable: true, includeIfNull: false)
+@JsonSerializable(includeIfNull: false)
 class Query {
   Query({
     this.apiKey,
