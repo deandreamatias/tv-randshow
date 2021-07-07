@@ -92,12 +92,7 @@ Future<void> main() async {
 
     // Delete tv show
     await tester.tap(find.byKey(Key('app.loading.button_fav')));
-    await waitUntil(
-        tester: tester,
-        conditionMet: () => find
-            .byKey(Key('app.fav.button_random.2316'))
-            .evaluate()
-            .isNotEmpty);
+    await tester.pumpAndSettle();
     expect(find.byKey(Key('app.fav.button_random.2316')), findsOneWidget);
 
     await tester.tap(find.byKey(Key('delete:2316')));
