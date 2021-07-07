@@ -16,7 +16,6 @@ dependencies:
   file_saver: ^0.0.8
   flare_flutter: ^3.0.1
   flutter_markdown: ^0.6.2
-  flutter_pagewise: ^2.0.1
   flutter_translate: ^3.0.1
   get_it: ^7.0.0
   hive: ^2.0.4

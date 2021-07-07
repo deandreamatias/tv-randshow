@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../config/flavor_config.dart';
 import '../../../config/locator.dart';
+import '../../../ui/widgets/page_pagination.dart';
 import '../../models/query.dart';
 import '../../models/result.dart';
 import '../../models/search.dart';
