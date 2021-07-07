@@ -56,7 +56,12 @@ Future<void> main() async {
     // Search tv show
     expect(find.byKey(Key('app.search.search_bar')), findsOneWidget);
     await tester.enterText(find.byType(TextField), tvshows.first);
-    await tester.pumpAndSettle(Duration(milliseconds: 3500));
+    await waitUntil(
+        tester: tester,
+        conditionMet: () => find
+            .byKey(Key('app.search.button_fav.2316'))
+            .evaluate()
+            .isNotEmpty);
 
     // Save tv show
     expect(find.byKey(Key('app.search.button_fav.2316')), findsOneWidget);
@@ -71,23 +76,66 @@ Future<void> main() async {
 
     // Get random episode
     await tester.tap(find.byKey(Key('app.fav.button_random.2316')));
-    await tester.pumpAndSettle(Duration(milliseconds: 1000));
-    expect(find.byKey(Key('app.result.title')), findsOneWidget);
+    await waitUntil(
+        tester: tester,
+        conditionMet: () =>
+            find.byKey(Key('app.result.title')).evaluate().isNotEmpty);
+    await expect(find.byKey(Key('app.result.title')), findsOneWidget);
 
     await tester.tap(find.byKey(Key('app.result.button_random')));
-    await tester.pumpAndSettle(Duration(milliseconds: 1000));
+    await waitUntil(
+        tester: tester,
+        conditionMet: () =>
+            find.byKey(Key('app.result.title')).evaluate().isNotEmpty);
     expect(find.byKey(Key('app.result.title')), findsOneWidget);
+    await tester.pumpAndSettle();
 
     // Delete tv show
     await tester.tap(find.byKey(Key('app.loading.button_fav')));
-    await tester.pumpAndSettle();
+    await waitUntil(
+        tester: tester,
+        conditionMet: () => find
+            .byKey(Key('app.fav.button_random.2316'))
+            .evaluate()
+            .isNotEmpty);
     expect(find.byKey(Key('app.fav.button_random.2316')), findsOneWidget);
 
     await tester.tap(find.byKey(Key('delete:2316')));
     await tester.pumpAndSettle();
     expect(find.byKey(Key('app.delete_dialog.title')), findsOneWidget);
     await tester.tap(find.byKey(Key('app.delete_dialog.button_delete')));
-    await tester.pumpAndSettle(Duration(milliseconds: 500));
+    await waitUntil(
+        tester: tester,
+        conditionMet: () =>
+            find.byKey(Key('app.fav.button_random.2316')).evaluate().isEmpty);
     expect(find.byKey(Key('app.fav.button_random.2316')), findsNothing);
+  });
+}
+
+// This function is from this article
+// https://vini2001.medium.com/the-ultimate-guide-to-flutter-integration-testing-8aabb7749476
+Future waitUntil({
+  WidgetTester tester,
+  bool Function() conditionMet,
+  Duration timeout,
+}) async {
+  final binding = tester.binding;
+  return TestAsyncUtils.guard<int>(() async {
+    final endTime = binding.clock.fromNowBy(timeout ?? Duration(seconds: 30));
+    var count = 0;
+    while (true) {
+      // stop loop if it has timed out or if condition is reached
+      if ((binding.clock.now().isAfter(endTime) &&
+              !binding.hasScheduledFrame) ||
+          conditionMet()) {
+        break;
+      }
+      // triggers ui frames
+      await binding.pump(
+        const Duration(milliseconds: 100),
+      );
+      count += 1;
+    }
+    return count;
   });
 }
