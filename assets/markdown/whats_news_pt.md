@@ -1,3 +1,15 @@
+## 1.7.0 - 2021/07/08
+
+### Features
+
+* Agora se permite guardar os seriados na web!
+* Melhora os tests de intregraçao
+* Contruído com Flutter 2.2
+
+### Bug Fixes
+
+* Corrige a exportaçao em Android 10 ou superior
+
 ## 1.6.0 - 2021/03/26
 
 ### Features

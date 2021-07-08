@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/deandreamatias/tv-randshow/compare/v1.6.0...v1.7.0) (2021-07-08)
+
+### Features
+
+* Add 404 page ([475644d](https://github.com/deandreamatias/tv-randshow/commit/475644d0e4a73a6d67bdd99dddea818d17c5795e))
+* Add hive database ([8deb0a7](https://github.com/deandreamatias/tv-randshow/commit/8deb0a7680029d195fc69e5690dbc4b053c310fb))
+* Add keys to integration tests ([536abdb](https://github.com/deandreamatias/tv-randshow/commit/536abdb1c9a2c79d23c7bfb2238e5e0c00ba3056))
+* Add new icons ([bd6ced8](https://github.com/deandreamatias/tv-randshow/commit/bd6ced83db7b0ef785c7c9e283ec8bb0eb61e99f))
+* Add pagination widget to main code ([3e3a755](https://github.com/deandreamatias/tv-randshow/commit/3e3a755f06e6c51630c5dac25823fcb08d8e12c4))
+* Create hive database service ([e128291](https://github.com/deandreamatias/tv-randshow/commit/e128291247e0f45e937eaae2a95f2d88b8b51336))
+* Implement persist theme setting ([5b8e66a](https://github.com/deandreamatias/tv-randshow/commit/5b8e66afe4870662b9f57baca26dcdfe5e1923cc))
+* Implement web files and config ([54b8aa1](https://github.com/deandreamatias/tv-randshow/commit/54b8aa1ea4b79062d1ab9d299382ee655c01e7dd))
+* Improve home button ([ac19b6b](https://github.com/deandreamatias/tv-randshow/commit/ac19b6b4777f82a0b277133fa0accfc5caa1b432))
+* Improve version dialog ([fb62baa](https://github.com/deandreamatias/tv-randshow/commit/fb62baaa9d874191f8bf0e469c008258fbdf3727))
+* Remove api key secure storage ([77268e5](https://github.com/deandreamatias/tv-randshow/commit/77268e5064c0b1f103759b2438b273e46c0f3f9b))
+* Remove deprecated proprieties ([4e8c012](https://github.com/deandreamatias/tv-randshow/commit/4e8c0128f5d175d01978f98230c2bb990accb4e9))
+* Remove web conditional ([9f05904](https://github.com/deandreamatias/tv-randshow/commit/9f059043c92f8ba885b5807536a4923f6882fc07))
+* Show fav tab in web platform ([2fbb032](https://github.com/deandreamatias/tv-randshow/commit/2fbb0325a7f7d6f62a08dffc70941bb8ecacc961))
+* Upgrade architecture ([fecadbd](https://github.com/deandreamatias/tv-randshow/commit/fecadbd4b73ba7b714d9603ad39c6f9c1c77b849))
+
+### Bug Fixes
+
+* Add miss string in other languages ([e14b49f](https://github.com/deandreamatias/tv-randshow/commit/e14b49fe38e4d8bfccc00b81d07001c5a08291cb))
+* Apply config to export file ([a92320f](https://github.com/deandreamatias/tv-randshow/commit/a92320ff9fcb5f0116839c014bfce92c65a982cd))
+* Duplicated router ([dbd35c7](https://github.com/deandreamatias/tv-randshow/commit/dbd35c753e949e86d24fe26a0612a67f80ff0a79))
+* First search with empty text ([6cc459b](https://github.com/deandreamatias/tv-randshow/commit/6cc459b520dccc518d140efb6da210fb6f2ce2bc))
+* Improve SEO ([6dfb5b0](https://github.com/deandreamatias/tv-randshow/commit/6dfb5b0431ef1cdee7f53d64cf09304a688237c5))
+* Improve web SEO ([8e16980](https://github.com/deandreamatias/tv-randshow/commit/8e1698045e7741ca9822b2f4c2a72c21fef5d72c))
+* Minor UI fixes ([97d1d9f](https://github.com/deandreamatias/tv-randshow/commit/97d1d9f95ea849816c2f63f58c255bb602c9c83e))
+* Replace deprecated argument ([4a8d15a](https://github.com/deandreamatias/tv-randshow/commit/4a8d15aed038486f6085fcc4340697de41e9f8f3))
+
 ## [1.6.0](https://github.com/deandreamatias/tv-randshow/compare/v1.5.1...v1.6.0) (2021-03-26)
 
 ### Features
