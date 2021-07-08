@@ -13,9 +13,9 @@ class HomeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: Key(text),
       padding: const EdgeInsets.only(top: 16.0),
       child: TextButton.icon(
-        key: Key(text),
         label: Text(
           translate(text),
         ),
