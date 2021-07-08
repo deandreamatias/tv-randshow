@@ -1,6 +1,6 @@
 {
   "name": "tv-randshow",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "app to pick a random tv show episode",
   "main": "build/web/main.dart.js",
   "directories": {
