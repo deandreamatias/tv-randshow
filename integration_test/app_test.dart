@@ -86,13 +86,19 @@ Future<void> main() async {
     await waitUntil(
         tester: tester,
         conditionMet: () =>
-            find.byKey(Key('app.result.title')).evaluate().isNotEmpty);
+            find.byKey(Key('app.result.button_fav')).evaluate().isNotEmpty);
     expect(find.byKey(Key('app.result.title')), findsOneWidget);
+    expect(find.byKey(Key('app.result.button_fav')), findsOneWidget);
     await tester.pumpAndSettle();
 
     // Delete tv show
-    await tester.tap(find.byKey(Key('app.loading.button_fav')));
-    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(Key('app.result.button_fav')));
+    await waitUntil(
+        tester: tester,
+        conditionMet: () => find
+            .byKey(Key('app.fav.button_random.2316'))
+            .evaluate()
+            .isNotEmpty);
     expect(find.byKey(Key('app.fav.button_random.2316')), findsOneWidget);
 
     await tester.tap(find.byKey(Key('delete:2316')));
