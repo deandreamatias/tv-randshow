@@ -20,16 +20,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
-      - run: dart .tool/env.dart
-        env:
-          API_KEY_TMDB: ${{ secrets.API_KEY_TMDB }}
-      - run: flutter pub get
       - run: flutter pub get
       - name: code analyze 
         run: flutter analyze
       - name: unit tests
         run: flutter test
-      - name: run tests
+      - name: integration tests
         timeout-minutes: 30
         env:
           KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -43,4 +39,4 @@ jobs:
           script: |
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             flutter pub get
-            flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --flavor dev
+            flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --flavor dev --dart-define=API_KEY=${{ secrets.API_KEY_TMDB }}
