@@ -83,22 +83,18 @@ class InfoView extends StatelessWidget {
                       }
                     },
                   ),
-                  Visibility(
-                    visible: !kIsWeb,
-                    child: ListTile(
-                      title: Text(
-                        translate('app.info.export_title'),
-                        key: const Key('app.info.export_title'),
-                      ),
-                      subtitle: Text(
-                        translate('app.info.export_description'),
-                        key: const Key('app.info.export_description'),
-                      ),
-                      leading: const Icon(UniconsLine.file_export),
-                      trailing:
-                          model.isBusy ? CircularProgressIndicator() : null,
-                      onTap: () async => await model.exportTvshows(),
+                  ListTile(
+                    title: Text(
+                      translate('app.info.export_title'),
+                      key: const Key('app.info.export_title'),
                     ),
+                    subtitle: Text(
+                      translate('app.info.export_description'),
+                      key: const Key('app.info.export_description'),
+                    ),
+                    leading: const Icon(UniconsLine.file_export),
+                    trailing: model.isBusy ? CircularProgressIndicator() : null,
+                    onTap: () async => await model.exportTvshows(),
                   ),
                   Visibility(
                     visible: !kIsWeb,

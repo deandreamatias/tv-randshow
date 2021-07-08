@@ -84,14 +84,13 @@ class _TabViewState extends State<TabView> {
                               });
                             },
                             items: <BottomNavigationBarItem>[
-                              if (!kIsWeb)
-                                BottomNavigationBarItem(
-                                  icon: const Icon(
-                                    UniconsLine.favorite,
-                                    key: const Key('app.fav.tab'),
-                                  ),
-                                  label: translate('app.fav.tab'),
+                              BottomNavigationBarItem(
+                                icon: const Icon(
+                                  UniconsLine.favorite,
+                                  key: const Key('app.fav.tab'),
                                 ),
+                                label: translate('app.fav.tab'),
+                              ),
                               BottomNavigationBarItem(
                                 icon: const Icon(
                                   UniconsLine.search,
