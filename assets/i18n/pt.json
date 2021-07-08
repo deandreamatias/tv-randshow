@@ -49,14 +49,12 @@
             "title": "Escolhendo um episódio aleatório",
             "general_error": "Ocorreu um erro ao escolher o episódio. Por favor tente novamente",
             "connection_error": "Não há conexão. Conecte-se e tente novamente",
-            "button_fav": "FAVORITOS",
-            "button_search": "BUSCA"
+            "button_fav": "FAVORITOS"
         },
         "result": {
             "title": "Este é o episódio escolhido aleatoriamente da serie!",
             "button_random": "OUTRO EPISÓDIO ALEATÓRIO",
-            "button_fav": "FAVORITOS",
-            "button_search": "BUSCA"
+            "button_fav": "FAVORITOS"
         },
         "modal": {
             "description": "Descrição",

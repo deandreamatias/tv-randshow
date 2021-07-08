@@ -49,14 +49,12 @@
             "title": "Choosing a random TV show",
             "general_error": "Error to get episode. Please try again",
             "connection_error": "Fail connection. Connect and try again",
-            "button_fav": "FAVORITES",
-            "button_search": "SEARCH"
+            "button_fav": "FAVORITES"
         },
         "result": {
             "title": "This is the TV show episode chosen at random!",
             "button_random": "ANOTHER RANDOM EPISODE",
-            "button_fav": "FAVORITES",
-            "button_search": "SEARCH"
+            "button_fav": "FAVORITES"
         },
         "modal": {
             "description": "Description",

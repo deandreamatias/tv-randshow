@@ -7,24 +7,19 @@ import '../../core/utils/constants.dart';
 import '../views/tab_view.dart';
 
 class HomeButton extends StatelessWidget {
-  const HomeButton({
-    Key key,
-  }) : super(key: key);
+  const HomeButton({Key key, this.text}) : super(key: key);
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 16.0),
       child: TextButton.icon(
+        key: Key(text),
         label: Text(
-          kIsWeb
-              ? translate('app.loading.button_search')
-              : translate('app.loading.button_fav'),
-          key: const Key(
-            kIsWeb ? 'app.loading.button_search' : 'app.loading.button_fav',
-          ),
+          translate(text),
         ),
-        icon: const Icon(kIsWeb ? UniconsLine.search : UniconsLine.favorite),
+        icon: const Icon(UniconsLine.favorite),
         onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
           context,
           RoutePaths.TAB,

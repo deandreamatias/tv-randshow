@@ -114,7 +114,7 @@ class ResultView extends StatelessWidget {
                 ),
               ),
             ),
-            const HomeButton(),
+            const HomeButton(text: 'app.result.button_fav'),
           ],
         ),
       )),
