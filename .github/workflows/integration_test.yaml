@@ -1,10 +1,10 @@
-name: Integration test 
-on: 
+name: Integration test
+on:
   push:
     branches:
       - "main"
       - "develop"
-jobs: 
+jobs:
   android-integration-test:
     name: run integration test on Android emulator
     runs-on: macos-latest
@@ -13,18 +13,18 @@ jobs:
         uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: '8.x'
+          java-version: "8.x"
       - run: echo $SIGNING_KEY | base64 -d > android/app/key.jks
         env:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'stable'
+          channel: "stable"
       - run: flutter pub get
-      - name: code analyze 
+      - name: code analyze
         run: flutter analyze
       - name: unit tests
-        run: flutter test
+        run: flutter test --dart-define=API_KEY=${{ secrets.API_KEY_TMDB }}
       - name: integration tests
         timeout-minutes: 30
         env:

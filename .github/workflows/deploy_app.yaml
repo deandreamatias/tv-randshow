@@ -28,7 +28,7 @@ jobs:
       - name: code analyze
         run: flutter analyze
       - name: unit tests
-        run: flutter test
+        run: flutter test --dart-define=API_KEY=${{ secrets.API_KEY_TMDB }}
       - name: build web app
         run: flutter build web -t lib/main_prod.dart --dart-define=API_KEY=${{ secrets.API_KEY_TMDB }}
       - name: minimize assets
