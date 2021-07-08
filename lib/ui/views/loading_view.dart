@@ -66,7 +66,7 @@ class LoadingView extends StatelessWidget {
                               animation: 'Loading',
                             ),
                     ),
-                    const HomeButton()
+                    const HomeButton(text: 'app.loading.button_fav')
                   ],
                 ),
               ),

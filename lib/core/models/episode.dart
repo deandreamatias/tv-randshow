@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'episode.g.dart';
 
-@JsonSerializable(nullable: true, includeIfNull: false)
+@JsonSerializable(includeIfNull: false)
 class Episode {
   Episode({
     this.airDate,
@@ -52,7 +52,7 @@ class Episode {
   String toRawJson() => json.encode(_$EpisodeToJson(this));
 }
 
-@JsonSerializable(nullable: true, includeIfNull: false)
+@JsonSerializable(includeIfNull: false)
 class Crew {
   Crew({
     this.id,
@@ -65,7 +65,6 @@ class Crew {
 
   factory Crew.fromRawJson(String str) => _$CrewFromJson(json.decode(str));
   factory Crew.fromJson(Map<String, dynamic> json) => _$CrewFromJson(json);
-  
   int id;
   String creditId;
   String name;
@@ -79,7 +78,8 @@ class Crew {
 
 enum Department { Directing, Camera, Editing, Writing }
 
-final EnumValues<Department> departmentValues = EnumValues<Department>(<String, Department>{
+final EnumValues<Department> departmentValues =
+    EnumValues<Department>(<String, Department>{
   'Camera': Department.Camera,
   'Directing': Department.Directing,
   'Editing': Department.Editing,
@@ -95,7 +95,7 @@ final EnumValues<Job> jobValues = EnumValues<Job>(<String, Job>{
   'Writer': Job.Writer
 });
 
-@JsonSerializable(nullable: true, includeIfNull: false)
+@JsonSerializable(includeIfNull: false)
 class GuestStar {
   GuestStar({
     this.id,
@@ -110,7 +110,6 @@ class GuestStar {
       _$GuestStarFromJson(json.decode(str));
   factory GuestStar.fromJson(Map<String, dynamic> json) =>
       _$GuestStarFromJson(json);
-  
   int id;
   String name;
   String creditId;

@@ -1,7 +1,7 @@
 name: tv_randshow
 description: App to pick a random TV show episode
 
-version: 1.6.0+17
+version: 1.7.0+18
 
 environment:
   sdk: ">=2.10.0 <3.0.0"
@@ -11,37 +11,41 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cached_network_image: ^2.5.1
-  dio: ^4.0.0-prev3
-  file_saver: ^0.0.6
-  flare_flutter: ^2.0.6
-  flutter_markdown: ^0.5.1
-  flutter_pagewise: ^1.2.3
-  flutter_translate: ^2.0.0
-  get_it: ^6.0.0
-  in_app_review: ^2.0.1
-  injectable: ^1.2.2
-  json_annotation: ^3.1.1
-  package_info_plus: ^1.0.0
-  path_provider: ^2.0.1
-  permission_handler: ^6.1.1
-  persist_theme: ^1.7.0
-  provider: ^4.3.2+2
+  cached_network_image: ^3.0.0
+  dio: ^4.0.0
+  file_saver: ^0.0.8
+  flare_flutter: ^3.0.1
+  flutter_markdown: ^0.6.2
+  flutter_translate: ^3.0.1
+  get_it: ^7.0.0
+  hive: ^2.0.4
+  hive_flutter: ^1.1.0
+  in_app_review: ^2.0.2
+  injectable: ^1.4.1
+  json_annotation: ^4.0.1
+  package_info_plus: ^1.0.3
+  path_provider: ^2.0.2
+  permission_handler: ^8.1.2
+  provider: ^5.0.0
   sqflite: ^2.0.0+3
-  stacked: ^1.7.6
-  uni_links: ^0.4.0
-  unicons: ^1.0.2
-  url_launcher: ^6.0.2
+  stacked: ^2.2.1
+  theme_provider: ^0.5.0
+  uni_links: ^0.5.1
+  unicons: ^2.0.1
+  url_launcher: ^6.0.8
 
 dev_dependencies:
-  flutter_driver:
+  integration_test:
     sdk: flutter
-  build_runner: ^1.9.0
-  flutter_launcher_icons: ^0.8.1
-  injectable_generator: ^1.0.4
-  json_serializable: ^3.5.1
-  mockito: ^4.1.3
-  test: ^1.15.8
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.0.5
+  faker: ^2.0.0
+  flutter_launcher_icons: ^0.9.0
+  hive_generator: ^1.1.0
+  injectable_generator: ^1.4.1
+  json_serializable: ^4.1.3
+  mockito: ^5.0.10
 
 flutter_native_splash:
   image: assets/img/icon_launcher.png

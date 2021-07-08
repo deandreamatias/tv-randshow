@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'season.g.dart';
 
-@JsonSerializable(nullable: true, includeIfNull: false)
+@JsonSerializable(includeIfNull: false)
 class Season {
   Season({
     this.episodeCount,
@@ -17,7 +17,6 @@ class Season {
 
   factory Season.fromRawJson(String str) => _$SeasonFromJson(json.decode(str));
   factory Season.fromJson(Map<String, dynamic> json) => _$SeasonFromJson(json);
-  
   @JsonKey(name: 'episode_count')
   int episodeCount;
   int id;

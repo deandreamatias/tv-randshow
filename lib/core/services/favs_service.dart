@@ -6,17 +6,17 @@ import '../../config/flavor_config.dart';
 import '../models/query.dart';
 import '../models/tvshow_details.dart';
 import 'api_service.dart';
-import 'database_service.dart';
+import 'hive_database_service.dart';
 
 @lazySingleton
 class FavsService {
   FavsService({
     ApiService apiService,
-    DatabaseService databaseService,
+    HiveDatabaseService databaseService,
   })  : _apiService = apiService,
         _databaseService = databaseService;
   final ApiService _apiService;
-  final DatabaseService _databaseService;
+  final HiveDatabaseService _databaseService;
 
   StreamController<List<TvshowDetails>> streamController =
       StreamController<List<TvshowDetails>>.broadcast();
@@ -24,7 +24,7 @@ class FavsService {
   Stream<List<TvshowDetails>> get listFavs => streamController.stream;
 
   Future<void> getFavs() async {
-    streamController.add(await _databaseService.queryList());
+    streamController.add(await _databaseService.getTvshows());
   }
 
   Future<void> addFav(int id, String language) async {
@@ -35,12 +35,12 @@ class FavsService {
     final TvshowDetails _tvshowDetails =
         await _apiService.getDetailsTv(query, id);
     if (_tvshowDetails != null) {
-      await _databaseService.insert(_tvshowDetails);
+      await _databaseService.saveTvshow(_tvshowDetails);
     }
   }
 
-  Future<void> deleteFav(int rowId) async {
-    await _databaseService.delete(rowId);
-    streamController.add(await _databaseService.queryList());
+  Future<void> deleteFav(int id) async {
+    await _databaseService.deleteTvshow(id);
+    streamController.add(await _databaseService.getTvshows());
   }
 }

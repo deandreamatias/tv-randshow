@@ -3,7 +3,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../config/locator.dart';
-import '../../core/services/manage_files.dart';
+import '../../core/services/manage_files_service.dart';
 import '../widgets/favorite_list.dart';
 
 class HomeView extends StatefulWidget {
@@ -14,7 +14,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final ManageFiles _manageFiles = locator<ManageFiles>();
+  final ManageFilesService _manageFiles = locator<ManageFilesService>();
   bool loading = false;
 
   @override
@@ -36,13 +36,15 @@ class _HomeViewState extends State<HomeView> {
               loading
                   ? Center(child: CircularProgressIndicator(strokeWidth: 2))
                   : IconButton(
+                      key: const Key('app.fav.save'),
+                      tooltip: translate('app.fav.save'),
                       icon: Icon(
                         UniconsLine.file_export,
                         color: Theme.of(context).primaryColor,
                       ),
                       onPressed: () async {
                         setState(() => loading = true);
-                        await _manageFiles.saveFile();
+                        await _manageFiles.saveTvshows();
                         setState(() => loading = false);
                       },
                     )

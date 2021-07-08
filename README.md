@@ -19,7 +19,7 @@
 ### About the project
 
 TV Randshow was created to help choose a random episode from your favorites TV shows.
-The TV shows database comes from the TMDB and the app saves them in a database on the device. With the list of favorites, you can roll the dice of a TV shows to get a random episode.
+The TV shows database comes from the TMDB and the app saves them in a database on the device. With the list of favorites, you can roll the dice of a TV show to get a random episode.
 
 This project has been built using the [Flutter](https://flutter.dev/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
 
@@ -40,20 +40,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Support to deeplink `https://tvrandshow.com/getRandomEpisode?tvshow=friends`**
 - [Coming soon...](https://trello.com/b/ib0jdUzK)
 
-## Tools
-
-- [**TMDB API**](https://developers.themoviedb.org/3/getting-started/introduction)
-- [**Flare animation loading**](https://rive.app/a/deandreamatias/files/flare/loading-tv-randshow/embed)
-- [**Provider**](https://pub.dev/packages/provider)
-- [**SQFlite**](https://pub.dev/packages/sqflite)
-- [**Dio**](https://pub.dev/packages/dio)
-- [**Flutter markdown**](https://pub.dev/packages/flutter_markdown)
-- [**Flutter translate**](https://pub.dev/packages/flutter_translate) - Translate to english, portuguese and spanish
-- [**Persist theme (light and dark)**](https://pub.dev/packages/persist_theme)
-- [**Deeplink**](https://pub.dev/packages/uni_links)
-- [**In app review**](https://pub.dev/packages/in_app_review)
-
-## Build application
+## Build & run
 
 ### Requirements
 
@@ -77,13 +64,8 @@ CLI Debug: `flutter run --flavor dev -t lib/main_dev.dart`
 
 ### Tests
 
-Integration tests: `flutter drive --target=test_driver/app.dart --flavor dev`
-
-## Built with
-
-- [Flutter](https://flutter.dev/) - Beautiful native apps in record time.
-- [Android Studio](https://developer.android.com/studio/index.html/) - Tools for building apps for Android devices.
-- [Visual Studio Code](https://code.visualstudio.com/) - Code editing. Redefined.
+Integration tests (only mobile): `flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d [DEVICE_ID] --flavor dev`
+Unit tests: `flutter test --flavor dev`
 
 ## Author
 

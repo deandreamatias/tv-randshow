@@ -7,6 +7,7 @@ part of 'result.dart';
 // **************************************************************************
 
 Result _$ResultFromJson(Map<String, dynamic> json) {
+  $checkKeys(json, disallowNullValues: const ['first_air_date']);
   return Result(
     posterPath: json['poster_path'] as String,
     popularity: (json['popularity'] as num)?.toDouble(),

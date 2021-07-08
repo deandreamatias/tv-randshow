@@ -1,3 +1,15 @@
+## 1.7.0 - 2021/07/08
+
+### Features
+
+* Now can save favorites tv shows in web!
+* Improve integration tests
+* Build with Flutter 2.2
+
+### Bug Fixes
+
+* Fix export tv shows in Android 10 or above
+
 ## 1.6.0 - 2021/03/26
 
 ### Features

@@ -3,6 +3,7 @@
         "name": "TV Randshow",
         "fav": {
             "tab": "Favoritos",
+            "save": "Guarda tus series en un archivo",
             "title": "Tus series favoritas para elegir al azar un episodio",
             "empty_message": "Busca una serie para añadir en tu lista de favoritos",
             "error_message": "Oops! Ocurrió un error al cargar los favoritos",
@@ -48,14 +49,12 @@
             "title": "Eligiendo un episodio aleatorio",
             "general_error": "Hubo un error al elegir el episodio. Por favor intenta de nuevo",
             "connection_error": "Falló en la conexión. Conéctate e intenta de nuevo",
-            "button_fav": "FAVORITOS",
-            "button_search": "BÚSQUEDA"
+            "button_fav": "FAVORITOS"
         },
         "result": {
             "title": "¡Este es el episodio elegido al azar de la serie!",
             "button_random": "OTRO EPISODIO AL AZAR",
-            "button_fav": "FAVORITOS",
-            "button_search": "BÚSQUEDA"
+            "button_fav": "FAVORITOS"
         },
         "modal": {
             "description": "Descripción",

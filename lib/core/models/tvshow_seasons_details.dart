@@ -6,7 +6,7 @@ import 'episode.dart';
 
 part 'tvshow_seasons_details.g.dart';
 
-@JsonSerializable(nullable: true, includeIfNull: false)
+@JsonSerializable(includeIfNull: false)
 class TvshowSeasonsDetails {
   TvshowSeasonsDetails({
     this.id,

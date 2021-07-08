@@ -6,8 +6,8 @@ part of 'file.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-File _$FileFromJson(Map<String, dynamic> json) {
-  return File(
+TvshowsFile _$TvshowsFileFromJson(Map<String, dynamic> json) {
+  return TvshowsFile(
     tvshows: (json['tvshows'] as List)
         ?.map((e) => e == null
             ? null
@@ -16,7 +16,7 @@ File _$FileFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$FileToJson(File instance) {
+Map<String, dynamic> _$TvshowsFileToJson(TvshowsFile instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

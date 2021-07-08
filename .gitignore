@@ -9,7 +9,6 @@
 .buildlog/
 .history
 .svn/
-lib/config/env.dart
 .fvm/
 package-lock.json
 

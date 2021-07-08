@@ -5,11 +5,11 @@ import '../../../config/locator.dart';
 import '../../models/query.dart';
 import '../../models/tvshow_details.dart';
 import '../../services/api_service.dart';
-import '../../services/database_service.dart';
+import '../../services/hive_database_service.dart';
 
 class SaveModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
-  final DatabaseService _databaseService = locator<DatabaseService>();
+  final HiveDatabaseService _databaseService = locator<HiveDatabaseService>();
 
   bool tvshowInDb = false;
 
@@ -22,7 +22,7 @@ class SaveModel extends BaseViewModel {
     final TvshowDetails tvshowDetails =
         await _apiService.getDetailsTv(query, id);
     if (tvshowDetails != null) {
-      await _databaseService.insert(tvshowDetails);
+      await _databaseService.saveTvshow(tvshowDetails);
       tvshowInDb = true;
       setBusy(false);
       return true;
@@ -35,10 +35,10 @@ class SaveModel extends BaseViewModel {
 
   Future<void> deleteFav(int id) async {
     setBusy(true);
-    final List<TvshowDetails> _list = await _databaseService.queryList();
+    final List<TvshowDetails> _list = await _databaseService.getTvshows();
     final TvshowDetails tvshowDetails = _list
         .firstWhere((TvshowDetails tvshowDetails) => tvshowDetails.id == id);
-    await _databaseService.delete(tvshowDetails.rowId);
+    await _databaseService.deleteTvshow(tvshowDetails.id);
     tvshowInDb = false;
     setBusy(false);
   }

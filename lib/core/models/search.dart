@@ -6,7 +6,7 @@ import 'result.dart';
 
 part 'search.g.dart';
 
-@JsonSerializable(nullable: true, includeIfNull: false)
+@JsonSerializable(includeIfNull: false)
 class Search {
   Search({
     this.page,

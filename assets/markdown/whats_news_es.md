@@ -1,3 +1,15 @@
+## 1.7.0 - 2021/07/08
+
+### Features
+
+* Ahora se pueden guardar las series en la web!
+* Mejora los tests de intregración
+* Contruido con Flutter 2.2
+
+### Bug Fixes
+
+* Corrige la exportación de series en Android 10 o superior
+
 ## 1.6.0 - 2021/03/26
 
 ### Features
@@ -5,11 +17,11 @@
 * Actualiza fuente de iconos
 * Implementa exportación de series
 * Actualiza splash screen
-* Construido con Flutter 2.0
+* Construido con Flustter 2.0
 
 ### Bug Fixes
 
-* Evita loop al escoger un episodio aleatorio con deeplink
+* Evita loop al elegir un episodio aleatorio con deeplink
 
 ## 1.5.0 - 2020/12/26
 

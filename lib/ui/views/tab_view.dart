@@ -19,7 +19,7 @@ class _TabViewState extends State<TabView> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    if (!kIsWeb) const HomeView(),
+    const HomeView(),
     const SearchView(),
     const InfoView(),
   ];
@@ -50,11 +50,10 @@ class _TabViewState extends State<TabView> {
                               });
                             },
                             destinations: <NavigationRailDestination>[
-                              if (!kIsWeb)
-                                NavigationRailDestination(
-                                  icon: const Icon(UniconsLine.favorite),
-                                  label: Text(translate('app.fav.tab')),
-                                ),
+                              NavigationRailDestination(
+                                icon: const Icon(UniconsLine.favorite),
+                                label: Text(translate('app.fav.tab')),
+                              ),
                               NavigationRailDestination(
                                 icon: const Icon(UniconsLine.search),
                                 label: Text(translate('app.search.tab')),
@@ -85,14 +84,13 @@ class _TabViewState extends State<TabView> {
                               });
                             },
                             items: <BottomNavigationBarItem>[
-                              if (!kIsWeb)
-                                BottomNavigationBarItem(
-                                  icon: const Icon(
-                                    UniconsLine.favorite,
-                                    key: const Key('app.fav.tab'),
-                                  ),
-                                  label: translate('app.fav.tab'),
+                              BottomNavigationBarItem(
+                                icon: const Icon(
+                                  UniconsLine.favorite,
+                                  key: const Key('app.fav.tab'),
                                 ),
+                                label: translate('app.fav.tab'),
+                              ),
                               BottomNavigationBarItem(
                                 icon: const Icon(
                                   UniconsLine.search,
