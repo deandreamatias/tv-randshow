@@ -5,6 +5,7 @@ analyzer:
     - "lib/generated_plugin_registrant.dart"
     - "lib/core/models/*.g.dart"
     - "lib/config/*.config.dart"
+    - "**/*.mocks.dart"
     - "lib/config/env.dart"
     - ".dart_tool/**"
     - "android/**"
