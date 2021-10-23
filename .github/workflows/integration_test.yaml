@@ -11,9 +11,9 @@ jobs:
     steps:
       - name: configure enviroment
         uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
-          java-version: "8.x"
+          java-version: "11.x"
       - run: echo $SIGNING_KEY | base64 -d > android/app/key.jks
         env:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
