@@ -1,12 +1,13 @@
 import 'tvshow_details.dart';
 
 class TvshowResult {
-  TvshowResult(
-      {this.tvshowDetails,
-      this.randomSeason,
-      this.randomEpisode,
-      this.episodeName,
-      this.episodeDescription});
+  TvshowResult({
+    required this.tvshowDetails,
+    required this.randomSeason,
+    required this.randomEpisode,
+    required this.episodeName,
+    required this.episodeDescription,
+  });
 
   TvshowDetails tvshowDetails;
   int randomSeason;

@@ -10,15 +10,15 @@ part 'search.g.dart';
 class Search {
   Search({
     this.page,
-    this.results,
-    this.totalResults,
-    this.totalPages,
+    this.results = const [],
+    this.totalResults = 0,
+    this.totalPages = 0,
   });
 
   factory Search.fromRawJson(String str) => _$SearchFromJson(json.decode(str));
   factory Search.fromJson(Map<String, dynamic> json) => _$SearchFromJson(json);
 
-  int page;
+  int? page;
   List<Result> results;
   @JsonKey(name: 'total_results')
   int totalResults;

@@ -6,14 +6,14 @@ import 'package:unicons/unicons.dart';
 import '../../core/viewmodels/widgets/save_model.dart';
 
 class SaveButton extends StatelessWidget {
-  const SaveButton({Key key, this.id}) : super(key: key);
+  const SaveButton({Key? key, required this.id}) : super(key: key);
   final int id;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SaveModel>.reactive(
       viewModelBuilder: () => SaveModel(),
-      builder: (BuildContext context, SaveModel model, Widget child) =>
+      builder: (BuildContext context, SaveModel model, Widget? child) =>
           AnimatedSwitcher(
         duration: const Duration(milliseconds: 500),
         child: model.tvshowInDb

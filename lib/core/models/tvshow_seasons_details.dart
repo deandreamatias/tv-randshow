@@ -9,14 +9,14 @@ part 'tvshow_seasons_details.g.dart';
 @JsonSerializable(includeIfNull: false)
 class TvshowSeasonsDetails {
   TvshowSeasonsDetails({
-    this.id,
+    required this.id,
     this.airDate,
-    this.episodes,
-    this.name,
-    this.overview,
+    this.episodes = const [],
+    this.name = '',
+    this.overview = '',
     this.tvshowSeasonsDetailsId,
-    this.posterPath,
-    this.seasonNumber,
+    this.posterPath = '',
+    required this.seasonNumber,
   });
 
   factory TvshowSeasonsDetails.fromRawJson(String str) =>
@@ -26,11 +26,11 @@ class TvshowSeasonsDetails {
 
   int id;
   @JsonKey(name: 'air_date')
-  DateTime airDate;
+  DateTime? airDate;
   List<Episode> episodes;
   String name;
   String overview;
-  int tvshowSeasonsDetailsId;
+  int? tvshowSeasonsDetailsId;
   @JsonKey(name: 'poster_path')
   String posterPath;
   @JsonKey(name: 'season_number')

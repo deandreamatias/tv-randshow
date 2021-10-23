@@ -9,7 +9,7 @@ import '../../services/api_service.dart';
 class DetailsModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
 
-  TvshowDetails tvshowDetails;
+  TvshowDetails? tvshowDetails;
 
   Future<void> getDetails(int id, String language) async {
     setBusy(true);
@@ -19,9 +19,7 @@ class DetailsModel extends BaseViewModel {
     );
     final TvshowDetails _tvshowDetails =
         await _apiService.getDetailsTv(query, id);
-    if (_tvshowDetails != null) {
-      tvshowDetails = _tvshowDetails;
-    }
+    tvshowDetails = _tvshowDetails;
     setBusy(false);
   }
 }

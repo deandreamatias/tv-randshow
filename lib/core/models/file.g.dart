@@ -6,25 +6,13 @@ part of 'file.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TvshowsFile _$TvshowsFileFromJson(Map<String, dynamic> json) {
-  return TvshowsFile(
-    tvshows: (json['tvshows'] as List)
-        ?.map((e) => e == null
-            ? null
-            : TvshowDetails.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
+TvshowsFile _$TvshowsFileFromJson(Map<String, dynamic> json) => TvshowsFile(
+      tvshows: (json['tvshows'] as List<dynamic>)
+          .map((e) => TvshowDetails.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
-Map<String, dynamic> _$TvshowsFileToJson(TvshowsFile instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('tvshows', instance.tvshows);
-  return val;
-}
+Map<String, dynamic> _$TvshowsFileToJson(TvshowsFile instance) =>
+    <String, dynamic>{
+      'tvshows': instance.tvshows,
+    };

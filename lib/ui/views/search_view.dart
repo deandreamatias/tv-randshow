@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
 import 'package:unicons/unicons.dart';
 
 import '../../core/models/result.dart';
 import '../../core/viewmodels/views/search_view_model.dart';
-import '../widgets/page_pagination.dart';
 import '../widgets/search_widget.dart';
 
 class SearchView extends StatefulWidget {
-  const SearchView({Key key}) : super(key: key);
+  const SearchView({Key? key}) : super(key: key);
 
   @override
   _SearchViewState createState() => _SearchViewState();
 }
 
 class _SearchViewState extends State<SearchView> {
-  TextEditingController textEditingController;
-  PagewiseLoadController<Result> _pageLoadController;
-
-  @override
-  void initState() {
-    textEditingController = TextEditingController(text: '');
-    super.initState();
-  }
+  TextEditingController textEditingController = TextEditingController(text: '');
+  late PagewiseLoadController<Result> _pageLoadController;
 
   @override
   void dispose() {
@@ -39,9 +33,9 @@ class _SearchViewState extends State<SearchView> {
       onModelReady: (SearchViewModel model) {
         _pageLoadController = PagewiseLoadController<Result>(
           pageSize: 20,
-          pageFuture: (int page) => model.loadList(
+          pageFuture: (int? page) => model.loadList(
             textEditingController.text,
-            page + 1,
+            (page ?? 0) + 1,
             LocalizedApp.of(context)
                 .delegate
                 .currentLocale
@@ -50,7 +44,7 @@ class _SearchViewState extends State<SearchView> {
           ),
         );
       },
-      builder: (BuildContext context, SearchViewModel model, Widget child) =>
+      builder: (BuildContext context, SearchViewModel model, Widget? child) =>
           Container(
         child: Column(
           children: <Widget>[
@@ -62,7 +56,9 @@ class _SearchViewState extends State<SearchView> {
                 textInputAction: TextInputAction.search,
                 onSubmitted: (String value) {
                   if (textEditingController.text.isNotEmpty) {
-                    model.timer.cancel();
+                    if (model.timer != null) {
+                      model.timer!.cancel();
+                    }
                     _pageLoadController.reset();
                   }
                 },
@@ -88,12 +84,13 @@ class _SearchViewState extends State<SearchView> {
                 padding: const EdgeInsets.all(16.0),
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
-                errorBuilder: (BuildContext context, Object dyna) {
+                errorBuilder: (BuildContext context, Object? error) {
                   return Center(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
-                        translate('app.search.error_message'),
+                        translate('app.search.error_message') +
+                            error.toString(),
                         key: const Key('app.search.error_message'),
                         style: Theme.of(context).textTheme.subtitle1,
                         textAlign: TextAlign.center,

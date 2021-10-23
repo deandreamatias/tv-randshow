@@ -3,7 +3,7 @@ analyzer:
     - "bin/cache/**"
     - "lib/generated_plugin_registrant.dart"
     - "lib/core/models/*.g.dart"
-    - "lib/config/*.iconfig.dart"
+    - "lib/config/*.config.dart"
     - "lib/config/env.dart"
     - ".dart_tool/**"
     - "android/**"

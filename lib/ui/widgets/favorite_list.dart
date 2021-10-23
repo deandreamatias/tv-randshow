@@ -15,8 +15,8 @@ class FavoriteList extends StatelessWidget {
       viewModelBuilder: () => FavoriteListModel(),
       onModelReady: (FavoriteListModel model) async {
         await model.getFavs();
-        final TvshowDetails tvshowDetails = await model.verifyAppLink();
-        if (tvshowDetails.id != null) {
+        final TvshowDetails? tvshowDetails = await model.verifyAppLink();
+        if (tvshowDetails?.id != null) {
           Navigator.pushNamed<LoadingView>(
             context,
             RoutePaths.LOADING,
@@ -24,13 +24,13 @@ class FavoriteList extends StatelessWidget {
           );
         }
       },
-      builder: (BuildContext context, FavoriteListModel model, Widget child) =>
+      builder: (BuildContext context, FavoriteListModel model, Widget? child) =>
           model.isBusy
               ? const Center(
                   child: CircularProgressIndicator(
                   key: Key('app.fav.loading'),
                 ))
-              : model.data != null && model.data.isNotEmpty
+              : model.data != null && model.data!.isNotEmpty
                   ? Container(
                       child: GridView.builder(
                         gridDelegate:
@@ -42,11 +42,11 @@ class FavoriteList extends StatelessWidget {
                         ),
                         physics: const BouncingScrollPhysics(),
                         padding: const EdgeInsets.all(16.0),
-                        itemCount: model.data.length,
+                        itemCount: model.data!.length,
                         itemBuilder: (BuildContext context, int index) =>
                             FavWidget(
-                          key: Key(model.data[index].id.toString()),
-                          tvshowDetails: model.data[index],
+                          key: Key(model.data![index].id.toString()),
+                          tvshowDetails: model.data![index],
                         ),
                       ),
                     )

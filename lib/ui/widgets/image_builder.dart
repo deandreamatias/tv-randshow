@@ -6,10 +6,10 @@ import '../../core/utils/constants.dart';
 
 class ImageBuilder extends StatelessWidget {
   const ImageBuilder({
-    Key key,
-    @required this.isModal,
-    @required this.url,
-    this.name,
+    Key? key,
+    required this.isModal,
+    required this.url,
+    this.name = '',
   }) : super(key: key);
 
   final bool isModal;
@@ -42,7 +42,7 @@ class ImageBuilder extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .subtitle2
-                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
               ),
             ),
           ),
@@ -54,9 +54,9 @@ class ImageBuilder extends StatelessWidget {
 
 class OnlineImage extends StatelessWidget {
   const OnlineImage({
-    Key key,
-    @required this.url,
-    @required this.name,
+    Key? key,
+    required this.url,
+    required this.name,
   }) : super(key: key);
 
   final String url;
@@ -69,16 +69,16 @@ class OnlineImage extends StatelessWidget {
       fit: BoxFit.cover,
       semanticLabel: name,
       errorBuilder:
-          (BuildContext context, Object error, StackTrace stackTrace) =>
+          (BuildContext context, Object error, StackTrace? stackTrace) =>
               Image.asset(Assets.EMPTY_IMAGE),
       loadingBuilder: (BuildContext context, Widget child,
-          ImageChunkEvent loadingProgress) {
+          ImageChunkEvent? loadingProgress) {
         if (loadingProgress == null) return child;
         return Center(
           child: CircularProgressIndicator(
             value: loadingProgress.expectedTotalBytes != null
                 ? loadingProgress.cumulativeBytesLoaded /
-                    loadingProgress.expectedTotalBytes
+                    (loadingProgress.expectedTotalBytes ?? 1)
                 : null,
           ),
         );
@@ -88,7 +88,7 @@ class OnlineImage extends StatelessWidget {
 }
 
 class CachedImage extends StatelessWidget {
-  const CachedImage({this.url});
+  const CachedImage({required this.url});
   final String url;
 
   @override
@@ -98,16 +98,12 @@ class CachedImage extends StatelessWidget {
       fit: BoxFit.cover,
       placeholder: (BuildContext context, String url) =>
           const Center(child: CircularProgressIndicator()),
-      errorWidget: (BuildContext context, String url, Object error) =>
+      errorWidget: (BuildContext context, String url, Object? error) =>
           Image.asset(Assets.EMPTY_IMAGE),
     );
   }
 }
 
 String _checkUrl(String url) {
-  return url != null
-      ? url.isNotEmpty
-          ? BASE_IMAGE + url
-          : Assets.PLACE_HOLDER
-      : Assets.PLACE_HOLDER;
+  return url.isNotEmpty ? BASE_IMAGE + url : Assets.PLACE_HOLDER;
 }

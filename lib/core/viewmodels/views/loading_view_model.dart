@@ -8,10 +8,10 @@ import '../../services/random_service.dart';
 class LoadingViewModel extends BaseViewModel {
   final RandomService _randomService = locator<RandomService>();
 
-  TvshowResult _tvshowResult;
+  TvshowResult? _tvshowResult;
   bool _canNavigate = false;
 
-  TvshowResult get tvshowResult => _tvshowResult;
+  TvshowResult? get tvshowResult => _tvshowResult;
   bool get canNavigate => _canNavigate;
 
   Future<void> sortRandomEpisode(
@@ -19,8 +19,8 @@ class LoadingViewModel extends BaseViewModel {
     setBusy(true);
     _tvshowResult = await _randomService.randomEpisode(tvshowDetails, language);
     _canNavigate = _tvshowResult != null &&
-        _tvshowResult.randomEpisode >= 0 &&
-        _tvshowResult.randomSeason >= 0;
+        _tvshowResult!.randomEpisode >= 0 &&
+        _tvshowResult!.randomSeason >= 0;
     setBusy(false);
   }
 }

@@ -7,19 +7,19 @@ part 'result.g.dart';
 @JsonSerializable(includeIfNull: false)
 class Result {
   Result({
-    this.posterPath,
+    this.posterPath = '',
     this.popularity,
-    this.id,
-    this.backdropPath,
+    required this.id,
+    this.backdropPath = '',
     this.voteAverage,
-    this.overview,
+    this.overview = '',
     this.firstAirDate,
-    this.originCountry,
-    this.genreIds,
-    this.originalLanguage,
+    this.originCountry = const [],
+    this.genreIds = const [],
+    this.originalLanguage = '',
     this.voteCount,
-    this.name,
-    this.originalName,
+    this.name = '',
+    this.originalName = '',
   });
 
   factory Result.fromRawJson(String str) => _$ResultFromJson(json.decode(str));
@@ -27,15 +27,15 @@ class Result {
 
   @JsonKey(name: 'poster_path')
   String posterPath;
-  double popularity;
+  double? popularity;
   int id;
   @JsonKey(name: 'backdrop_path')
   String backdropPath;
   @JsonKey(name: 'voter_average')
-  double voteAverage;
+  double? voteAverage;
   String overview;
   @JsonKey(name: 'first_air_date', disallowNullValue: true)
-  DateTime firstAirDate;
+  DateTime? firstAirDate;
   @JsonKey(name: 'origin_country')
   List<String> originCountry;
   @JsonKey(name: 'genre_ids')
@@ -43,7 +43,7 @@ class Result {
   @JsonKey(name: 'original_language')
   String originalLanguage;
   @JsonKey(name: 'vote_count')
-  int voteCount;
+  int? voteCount;
   String name;
   @JsonKey(name: 'original_name')
   String originalName;

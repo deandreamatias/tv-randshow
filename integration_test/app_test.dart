@@ -80,7 +80,7 @@ Future<void> main() async {
         tester: tester,
         conditionMet: () =>
             find.byKey(Key('app.result.title')).evaluate().isNotEmpty);
-    await expect(find.byKey(Key('app.result.title')), findsOneWidget);
+    expect(find.byKey(Key('app.result.title')), findsOneWidget);
 
     await tester.tap(find.byKey(Key('app.result.button_random')));
     await waitUntil(
@@ -116,13 +116,13 @@ Future<void> main() async {
 // This function is from this article
 // https://vini2001.medium.com/the-ultimate-guide-to-flutter-integration-testing-8aabb7749476
 Future waitUntil({
-  WidgetTester tester,
-  bool Function() conditionMet,
-  Duration timeout,
+  required WidgetTester tester,
+  required bool Function() conditionMet,
+  Duration timeout = const Duration(seconds: 30),
 }) async {
   final binding = tester.binding;
   return TestAsyncUtils.guard<int>(() async {
-    final endTime = binding.clock.fromNowBy(timeout ?? Duration(seconds: 30));
+    final endTime = binding.clock.fromNowBy(timeout);
     var count = 0;
     while (true) {
       // stop loop if it has timed out or if condition is reached

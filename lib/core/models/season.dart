@@ -7,12 +7,12 @@ part 'season.g.dart';
 @JsonSerializable(includeIfNull: false)
 class Season {
   Season({
-    this.episodeCount,
-    this.id,
-    this.name,
-    this.overview,
-    this.posterPath,
-    this.seasonNumber,
+    this.episodeCount = 0,
+    required this.id,
+    this.name = '',
+    this.overview = '',
+    this.posterPath = '',
+    this.seasonNumber = 0,
   });
 
   factory Season.fromRawJson(String str) => _$SeasonFromJson(json.decode(str));

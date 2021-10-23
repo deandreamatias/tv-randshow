@@ -8,17 +8,17 @@ part 'episode.g.dart';
 class Episode {
   Episode({
     this.airDate,
-    this.crew,
-    this.episodeNumber,
-    this.guestStars,
-    this.name,
-    this.overview,
-    this.id,
-    this.productionCode,
-    this.seasonNumber,
-    this.stillPath,
-    this.voteAverage,
-    this.voteCount,
+    this.crew = const [],
+    required this.episodeNumber,
+    this.guestStars = const [],
+    required this.name,
+    this.overview = '',
+    required this.id,
+    this.productionCode = '',
+    required this.seasonNumber,
+    this.stillPath = '',
+    this.voteAverage = 0.0,
+    this.voteCount = 0,
   });
 
   factory Episode.fromRawJson(String str) =>
@@ -27,7 +27,7 @@ class Episode {
       _$EpisodeFromJson(json);
 
   @JsonKey(name: 'air_date')
-  DateTime airDate;
+  DateTime? airDate;
   @JsonKey(ignore: true)
   List<Crew> crew;
   @JsonKey(name: 'episode_number')
@@ -55,12 +55,12 @@ class Episode {
 @JsonSerializable(includeIfNull: false)
 class Crew {
   Crew({
-    this.id,
-    this.creditId,
-    this.name,
+    required this.id,
+    this.creditId = '',
+    this.name = '',
     this.department,
     this.job,
-    this.profilePath,
+    this.profilePath = '',
   });
 
   factory Crew.fromRawJson(String str) => _$CrewFromJson(json.decode(str));
@@ -68,8 +68,8 @@ class Crew {
   int id;
   String creditId;
   String name;
-  Department department;
-  Job job;
+  Department? department;
+  Job? job;
   String profilePath;
 
   Map<String, dynamic> toJson() => _$CrewToJson(this);
@@ -98,12 +98,12 @@ final EnumValues<Job> jobValues = EnumValues<Job>(<String, Job>{
 @JsonSerializable(includeIfNull: false)
 class GuestStar {
   GuestStar({
-    this.id,
-    this.name,
-    this.creditId,
-    this.character,
+    required this.id,
+    this.name = '',
+    this.creditId = '',
+    this.character = '',
     this.order,
-    this.profilePath,
+    this.profilePath = '',
   });
 
   factory GuestStar.fromRawJson(String str) =>
@@ -114,7 +114,7 @@ class GuestStar {
   String name;
   String creditId;
   String character;
-  int order;
+  int? order;
   String profilePath;
 
   Map<String, dynamic> toJson() => _$GuestStarToJson(this);
@@ -125,10 +125,12 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<String, T> map;
-  Map<T, String> reverseMap;
+  Map<T, String>? reverseMap;
 
   Map<T, String> get reverse {
-    reverseMap ??= map.map((String k, T v) => MapEntry<T, String>(v, k));
-    return reverseMap;
+    if (reverseMap == null) {
+      reverseMap = map.map((String k, T v) => MapEntry<T, String>(v, k));
+    }
+    return reverseMap!;
   }
 }

@@ -9,9 +9,9 @@ import '../../services/api_service.dart';
 class RandomModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
 
-  TvshowDetails _tvshowDetails;
+  TvshowDetails? _tvshowDetails;
 
-  TvshowDetails get tvshowDetails => _tvshowDetails;
+  TvshowDetails? get tvshowDetails => _tvshowDetails;
 
   Future<void> getDetails(int id, String language) async {
     setBusy(true);

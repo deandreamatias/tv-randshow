@@ -1,15 +1,16 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:tv_randshow/ui/widgets/image_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../core/utils/constants.dart';
+import '../widgets/image_builder.dart';
+
 class PrivacyPolicyView extends StatelessWidget {
-  const PrivacyPolicyView({Key key}) : super(key: key);
+  const PrivacyPolicyView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +34,14 @@ class PrivacyPolicyView extends StatelessWidget {
                           ),
                         ),
                         MarkdownBody(
-                          data: snapshot.data,
+                          data: snapshot.data ?? '',
                           imageBuilder: (uri, title, alt) => OnlineImage(
                             url: uri.toString(),
                             name: title ?? 'No name',
                           ),
                           onTapLink: (text, href, title) async {
                             try {
-                              await launch(href);
+                              await launch(href ?? '');
                               log('Launched: $href');
                             } catch (e) {
                               throw 'Could not launch $href because $e';

@@ -15,13 +15,13 @@ import '../../core/utils/constants.dart';
 import '../../core/viewmodels/views/info_view_model.dart';
 
 class InfoView extends StatelessWidget {
-  const InfoView({Key key}) : super(key: key);
+  const InfoView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<InfoViewModel>.nonReactive(
       onModelReady: (InfoViewModel model) => model.getVersion(),
       viewModelBuilder: () => InfoViewModel(),
-      builder: (BuildContext context, InfoViewModel model, Widget child) {
+      builder: (BuildContext context, InfoViewModel model, Widget? child) {
         return Column(
           children: <Widget>[
             Padding(
@@ -192,7 +192,7 @@ class InfoView extends StatelessWidget {
                 LocalizedApp.of(context).delegate.currentLocale.languageCode),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               return snapshot.hasData
-                  ? Markdown(data: snapshot.data)
+                  ? Markdown(data: snapshot.data ?? '')
                   : const Center(
                       child: CircularProgressIndicator(),
                     );
@@ -216,10 +216,8 @@ class InfoView extends StatelessWidget {
     switch (languageCode) {
       case 'es':
         return await rootBundle.loadString(Assets.WHATS_NEW_ES);
-        break;
       case 'pt':
         return await rootBundle.loadString(Assets.WHATS_NEW_PT);
-        break;
       case 'en':
       default:
         return await rootBundle.loadString(Assets.WHATS_NEW_EN);

@@ -10,7 +10,7 @@ import '../widgets/home_button.dart';
 import 'result_view.dart';
 
 class LoadingView extends StatelessWidget {
-  const LoadingView({Key key, this.tvshowDetails}) : super(key: key);
+  const LoadingView({Key? key, required this.tvshowDetails}) : super(key: key);
   final TvshowDetails tvshowDetails;
 
   @override
@@ -35,7 +35,7 @@ class LoadingView extends StatelessWidget {
           );
         }
       },
-      builder: (BuildContext context, LoadingViewModel model, Widget child) {
+      builder: (BuildContext context, LoadingViewModel model, Widget? child) {
         return Scaffold(
           body: SafeArea(
             child: Padding(
