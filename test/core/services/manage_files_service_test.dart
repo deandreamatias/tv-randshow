@@ -5,10 +5,10 @@ import 'package:tv_randshow/core/models/file.dart';
 import 'package:tv_randshow/core/models/season.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/services/app_service.dart';
-import 'package:tv_randshow/core/services/hive_database_service.dart';
+import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/services/manage_files_service.dart';
 
-class DatabaseServiceMock extends Mock implements HiveDatabaseService {}
+class DatabaseServiceMock extends Mock implements IDatabaseService {}
 
 class AppServiceMock extends Mock implements AppService {}
 
@@ -26,8 +26,8 @@ void main() {
         posterPath: faker.internet.uri('http'),
         rowId:
             faker.randomGenerator.integer(faker.randomGenerator.integer(999)),
-        seasons: List.generate(
-            faker.randomGenerator.integer(50), (index) => Season()),
+        seasons: List.generate(faker.randomGenerator.integer(50),
+            (index) => Season(id: faker.randomGenerator.integer(9999))),
       );
   final databaseService = DatabaseServiceMock();
   final appService = AppServiceMock();

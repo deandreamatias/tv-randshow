@@ -1,32 +1,39 @@
+import 'package:faker/faker.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv_randshow/config/env.dart';
 import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/services/api_service.dart';
-import 'package:tv_randshow/core/services/hive_database_service.dart';
+import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 
-class DatabaseMock extends Mock implements HiveDatabaseService {
-  final List<TvshowDetails> mockList =
-      List<TvshowDetails>.generate(10, (int index) => TvshowDetails(id: index));
+class DatabaseMock extends Mock implements IDatabaseService {
+  final List<TvshowDetails> mockList = List<TvshowDetails>.generate(
+      10,
+      (int index) => TvshowDetails(
+            id: index,
+            name: faker.lorem.sentence(),
+            numberOfEpisodes: faker.randomGenerator.integer(999),
+            numberOfSeasons: faker.randomGenerator.integer(50),
+          ));
 }
 
 class ApiMock extends Mock implements ApiService {}
 
 DatabaseMock getAndRegisterDatabaseMock(
     {bool hasItems = false, int deleteItem = 1}) {
-  _removeRegistrationIfExists<HiveDatabaseService>();
+  _removeRegistrationIfExists<IDatabaseService>();
   final DatabaseMock database = DatabaseMock();
   when(database.getTvshows()).thenAnswer((Invocation realInvocation) async {
     await Future<Duration>.delayed(const Duration(milliseconds: 500));
-    return hasItems ? database.mockList : null;
+    return hasItems ? database.mockList : [];
   });
   when(database.deleteTvshow(deleteItem))
-      .thenAnswer((Invocation realInvocation) {
+      .thenAnswer((Invocation realInvocation) async {
     database.mockList.removeAt(deleteItem);
-    return;
+    return true;
   });
-  locator.registerSingleton<HiveDatabaseService>(database);
+  locator.registerSingleton<IDatabaseService>(database);
   return database;
 }
 
@@ -44,11 +51,11 @@ void registerServices() {
 }
 
 void unregisterServices() {
-  locator.unregister<HiveDatabaseService>();
+  locator.unregister<IDatabaseService>();
   locator.unregister<ApiService>();
 }
 
-void _removeRegistrationIfExists<T>() {
+void _removeRegistrationIfExists<T extends Object>() {
   if (locator.isRegistered<T>()) {
     locator.unregister<T>();
   }
