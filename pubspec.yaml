@@ -45,8 +45,9 @@ dev_dependencies:
   flutter_launcher_icons: ^0.9.2
   hive_generator: ^1.1.1
   injectable_generator: ^1.5.2
-  json_serializable: ^6.0.0
+  json_serializable: ^6.0.1
   mockito: ^5.0.16
+  flutter_lints: ^1.0.4
 
 flutter_native_splash:
   image: assets/img/icon_launcher.png

@@ -1,3 +1,4 @@
+linter: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
     - "bin/cache/**"
