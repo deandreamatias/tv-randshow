@@ -35,7 +35,6 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
-          profile: pixel
           script: |
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             flutter pub get
