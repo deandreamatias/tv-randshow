@@ -11,10 +11,9 @@ jobs:
     steps:
       - name: configure enviroment
         uses: actions/checkout@v2
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v1
         with:
-          distribution: 'adopt'
-          java-version: '11'
+          java-version: '8'
       - run: echo $SIGNING_KEY | base64 -d > android/app/key.jks
         env:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
@@ -37,7 +36,8 @@ jobs:
         with:
           api-level: 30
           target: google_apis
-          arch: x86_64
+          profile: pixel_3a
+          arch: x86
           script: |
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             flutter pub get
