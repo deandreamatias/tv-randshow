@@ -1,3 +1,11 @@
+## 1.8.0 - 2021/10/30
+
+### Features
+
+* Migrate to null safety
+* Dynamic database (web and mobile)
+* Build with Flutter 2.5
+
 ## 1.7.0 - 2021/07/08
 
 ### Features
