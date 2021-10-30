@@ -9,7 +9,7 @@ import '../widgets/info_box.dart';
 import 'loading_view.dart';
 
 class ResultView extends StatelessWidget {
-  const ResultView({Key key, this.tvshowResult}) : super(key: key);
+  const ResultView({Key? key, required this.tvshowResult}) : super(key: key);
   final TvshowResult tvshowResult;
   @override
   Widget build(BuildContext context) {

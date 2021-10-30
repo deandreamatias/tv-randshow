@@ -6,31 +6,20 @@ part of 'season.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Season _$SeasonFromJson(Map<String, dynamic> json) {
-  return Season(
-    episodeCount: json['episode_count'] as int,
-    id: json['id'] as int,
-    name: json['name'] as String,
-    overview: json['overview'] as String,
-    posterPath: json['poster_path'] as String,
-    seasonNumber: json['season_number'] as int,
-  );
-}
+Season _$SeasonFromJson(Map<String, dynamic> json) => Season(
+      episodeCount: json['episode_count'] as int? ?? 0,
+      id: json['id'] as int,
+      name: json['name'] as String? ?? '',
+      overview: json['overview'] as String? ?? '',
+      posterPath: json['poster_path'] as String? ?? '',
+      seasonNumber: json['season_number'] as int? ?? 0,
+    );
 
-Map<String, dynamic> _$SeasonToJson(Season instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('episode_count', instance.episodeCount);
-  writeNotNull('id', instance.id);
-  writeNotNull('name', instance.name);
-  writeNotNull('overview', instance.overview);
-  writeNotNull('poster_path', instance.posterPath);
-  writeNotNull('season_number', instance.seasonNumber);
-  return val;
-}
+Map<String, dynamic> _$SeasonToJson(Season instance) => <String, dynamic>{
+      'episode_count': instance.episodeCount,
+      'id': instance.id,
+      'name': instance.name,
+      'overview': instance.overview,
+      'poster_path': instance.posterPath,
+      'season_number': instance.seasonNumber,
+    };

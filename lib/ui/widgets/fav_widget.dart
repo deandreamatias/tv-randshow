@@ -7,7 +7,7 @@ import 'modal_sheet.dart';
 import 'random_button.dart';
 
 class FavWidget extends StatelessWidget {
-  const FavWidget({Key key, @required this.tvshowDetails}) : super(key: key);
+  const FavWidget({Key? key, required this.tvshowDetails}) : super(key: key);
   final TvshowDetails tvshowDetails;
 
   @override

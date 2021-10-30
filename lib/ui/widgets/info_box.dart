@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 class InfoBox extends StatelessWidget {
-  const InfoBox({Key key, this.typeInfo, this.value}) : super(key: key);
+  const InfoBox({Key? key, required this.typeInfo, required this.value})
+      : super(key: key);
   final int typeInfo;
   final int value;
 
@@ -24,10 +25,8 @@ class InfoBox extends StatelessWidget {
                 fit: BoxFit.fitWidth,
                 child: Text(
                   _selectTitle(typeInfo),
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle1
-                      .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary),
                 ),
               ),
               Text(
@@ -35,18 +34,18 @@ class InfoBox extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headline5
-                    .copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
               ),
               if (typeInfo <= 2)
                 typeInfo == 2
                     ? Text(
                         translate('app.modal.duration_metric'),
-                        style: Theme.of(context).textTheme.caption.copyWith(
+                        style: Theme.of(context).textTheme.caption?.copyWith(
                             color: Theme.of(context).colorScheme.onPrimary),
                       )
                     : Text(
                         translate('app.modal.episode_season_metric'),
-                        style: Theme.of(context).textTheme.caption.copyWith(
+                        style: Theme.of(context).textTheme.caption?.copyWith(
                             color: Theme.of(context).colorScheme.onPrimary),
                       ),
             ],
@@ -64,19 +63,14 @@ class InfoBox extends StatelessWidget {
     switch (typeInfo) {
       case 0:
         return translate('app.modal.seasons');
-        break;
       case 1:
         return translate('app.modal.episodes');
-        break;
       case 2:
         return translate('app.modal.duration');
-        break;
       case 3:
         return translate('app.modal.season');
-        break;
       case 4:
         return translate('app.modal.episode');
-        break;
       default:
         return translate('app.modal.undefined');
     }

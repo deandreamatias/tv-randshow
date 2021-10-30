@@ -8,7 +8,7 @@ part 'file.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class TvshowsFile {
-  TvshowsFile({this.tvshows});
+  TvshowsFile({required this.tvshows});
 
   factory TvshowsFile.fromRawJson(String str) =>
       _$TvshowsFileFromJson(json.decode(str));

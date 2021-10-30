@@ -7,7 +7,7 @@ import 'modal_sheet.dart';
 import 'save_button.dart';
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({Key key, this.result}) : super(key: key);
+  const SearchWidget({Key? key, required this.result}) : super(key: key);
   final Result result;
 
   @override
@@ -16,7 +16,7 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   // TODO(deandreamatias): Verify coincidence between database and search result
-  bool _enable;
+  late bool _enable;
   @override
   void initState() {
     _enable = widget.result.firstAirDate != null;

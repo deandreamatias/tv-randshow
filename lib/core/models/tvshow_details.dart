@@ -12,15 +12,15 @@ part 'tvshow_details.g.dart';
 class TvshowDetails extends HiveObject {
   TvshowDetails({
     this.rowId,
-    this.episodeRunTime,
-    this.id,
+    this.episodeRunTime = const [],
+    required this.id,
     this.inProduction,
-    this.name,
-    this.numberOfEpisodes,
-    this.numberOfSeasons,
-    this.overview,
-    this.posterPath,
-    this.seasons,
+    required this.name,
+    required this.numberOfEpisodes,
+    required this.numberOfSeasons,
+    this.overview = '',
+    this.posterPath = '',
+    this.seasons = const [],
   });
 
   factory TvshowDetails.fromRawJson(String str) =>
@@ -29,7 +29,7 @@ class TvshowDetails extends HiveObject {
       _$TvshowDetailsFromJson(json);
 
   @HiveField(0)
-  int rowId;
+  int? rowId;
   @JsonKey(name: 'episode_run_time')
   @HiveField(1)
   List<int> episodeRunTime;

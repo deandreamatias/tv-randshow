@@ -1,9 +1,11 @@
+linter: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
     - "bin/cache/**"
     - "lib/generated_plugin_registrant.dart"
     - "lib/core/models/*.g.dart"
-    - "lib/config/*.iconfig.dart"
+    - "lib/config/*.config.dart"
+    - "**/*.mocks.dart"
     - "lib/config/env.dart"
     - ".dart_tool/**"
     - "android/**"

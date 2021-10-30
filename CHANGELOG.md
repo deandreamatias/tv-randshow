@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/deandreamatias/tv-randshow/compare/v1.7.0...v1.8.0) (2021-10-30)
+
+### Features
+
+* Migrate to null safety ([efa683f](https://github.com/deandreamatias/tv-randshow/commit/efa683f53fc058b2a8099dcb553131e4cf451add))
+* Implement dynamic database ([b58f9cc](https://github.com/deandreamatias/tv-randshow/commit/b58f9cc278c5bf66932947d83db11d981d48a41c))
+
 ## [1.7.0](https://github.com/deandreamatias/tv-randshow/compare/v1.6.0...v1.7.0) (2021-07-08)
 
 ### Features

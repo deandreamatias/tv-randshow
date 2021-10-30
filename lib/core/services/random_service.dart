@@ -2,7 +2,6 @@ import 'dart:developer' as developer;
 import 'dart:math';
 
 import 'package:injectable/injectable.dart';
-import 'package:meta/meta.dart';
 
 import '../../config/flavor_config.dart';
 import '../models/episode.dart';
@@ -15,7 +14,7 @@ import 'api_service.dart';
 @lazySingleton
 class RandomService {
   RandomService({
-    @required ApiService apiService,
+    required ApiService apiService,
   }) : _apiService = apiService;
   final ApiService _apiService;
 
@@ -33,21 +32,17 @@ class RandomService {
       tvshowDetails.id,
       randomSeason,
     );
-    if (_seasonsDetails != null) {
-      final Episode episode = _seasonsDetails.episodes.elementAt(
-        _getRandomNumber(_seasonsDetails.episodes.length, false),
-      );
-      final TvshowResult tvshowResult = TvshowResult(
-        tvshowDetails: tvshowDetails,
-        randomSeason: episode.seasonNumber,
-        randomEpisode: episode.episodeNumber,
-        episodeName: episode.name,
-        episodeDescription: episode.overview,
-      );
-      return tvshowResult;
-    } else {
-      return null;
-    }
+    final Episode episode = _seasonsDetails.episodes.elementAt(
+      _getRandomNumber(_seasonsDetails.episodes.length, false),
+    );
+    final TvshowResult tvshowResult = TvshowResult(
+      tvshowDetails: tvshowDetails,
+      randomSeason: episode.seasonNumber,
+      randomEpisode: episode.episodeNumber,
+      episodeName: episode.name,
+      episodeDescription: episode.overview,
+    );
+    return tvshowResult;
   }
 
   /// If [total] start with 1, add + 1 to result.

@@ -7,7 +7,7 @@ import '../../core/services/manage_files_service.dart';
 import '../widgets/favorite_list.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key key}) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();

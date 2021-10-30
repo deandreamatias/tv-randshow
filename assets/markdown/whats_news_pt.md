@@ -1,3 +1,11 @@
+## 1.8.0 - 2021/10/30
+
+### Features
+
+* Aplicado o null safety
+* Base de datos dinamica (web and mobile)
+* Construido con Flutter 2.5
+
 ## 1.7.0 - 2021/07/08
 
 ### Features

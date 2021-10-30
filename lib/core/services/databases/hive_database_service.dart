@@ -6,18 +6,14 @@ import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../config/flavor_config.dart';
-import '../models/tvshow_details.dart';
+import '../../../config/flavor_config.dart';
+import '../../models/tvshow_details.dart';
+import 'i_database_service.dart';
 
-abstract class IDatabaseService {
-  Future<bool> saveTvshow(TvshowDetails tvshowDetails);
-  Future<List<TvshowDetails>> getTvshows();
-  Future<bool> deleteTvshow(int id);
-}
-
-@lazySingleton
+@Environment("web")
+@LazySingleton(as: IDatabaseService)
 class HiveDatabaseService extends IDatabaseService {
-  Box<TvshowDetails> tvshowBox;
+  Box<TvshowDetails>? tvshowBox;
   final tvshowBoxName =
       FlavorConfig.isDevelopment() ? 'tvshowfavdev' : 'tvshowfav';
 
@@ -25,14 +21,14 @@ class HiveDatabaseService extends IDatabaseService {
     if (kIsWeb) {
       Hive..registerAdapter(TvshowDetailsAdapter());
     } else {
-      Directory documentsDirectory;
+      Directory? documentsDirectory;
       try {
         documentsDirectory = await getExternalStorageDirectory();
       } catch (e) {
         log('Can\'t open directory', error: e);
       }
       Hive
-        ..init(documentsDirectory.path)
+        ..init(documentsDirectory?.path ?? '')
         ..registerAdapter(TvshowDetailsAdapter());
     }
   }
@@ -51,7 +47,7 @@ class HiveDatabaseService extends IDatabaseService {
     }
     await loadBoxes();
     try {
-      tvshowBox.delete(id);
+      tvshowBox!.delete(id);
       log('Tvshow deleted: $id');
       return true;
     } catch (e) {
@@ -67,10 +63,10 @@ class HiveDatabaseService extends IDatabaseService {
     }
     await loadBoxes();
     try {
-      return (await tvshowBox.values).toList();
+      return (await tvshowBox!.values).toList();
     } catch (e) {
       log('Error to get tv shows', error: e);
-      return null;
+      return [];
     }
   }
 
@@ -80,9 +76,9 @@ class HiveDatabaseService extends IDatabaseService {
       await init();
     }
     await loadBoxes();
-    if (!tvshowBox.containsKey(tvshowDetails.id)) {
+    if (!tvshowBox!.containsKey(tvshowDetails.id)) {
       try {
-        await tvshowBox.put(tvshowDetails.id, tvshowDetails);
+        await tvshowBox!.put(tvshowDetails.id, tvshowDetails);
         log('Tvshow saved: ${tvshowDetails.id}');
         return true;
       } catch (e) {

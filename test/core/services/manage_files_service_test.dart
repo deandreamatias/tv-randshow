@@ -1,17 +1,17 @@
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv_randshow/core/models/file.dart';
 import 'package:tv_randshow/core/models/season.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/services/app_service.dart';
-import 'package:tv_randshow/core/services/hive_database_service.dart';
+import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/services/manage_files_service.dart';
 
-class DatabaseServiceMock extends Mock implements HiveDatabaseService {}
+import 'manage_files_service_test.mocks.dart';
 
-class AppServiceMock extends Mock implements AppService {}
-
+@GenerateMocks([IDatabaseService, AppService])
 void main() {
   final faker = Faker();
   final tvshowDetails = () => TvshowDetails(
@@ -26,11 +26,11 @@ void main() {
         posterPath: faker.internet.uri('http'),
         rowId:
             faker.randomGenerator.integer(faker.randomGenerator.integer(999)),
-        seasons: List.generate(
-            faker.randomGenerator.integer(50), (index) => Season()),
+        seasons: List.generate(faker.randomGenerator.integer(50),
+            (index) => Season(id: faker.randomGenerator.integer(9999))),
       );
-  final databaseService = DatabaseServiceMock();
-  final appService = AppServiceMock();
+  final databaseService = MockIDatabaseService();
+  final appService = MockAppService();
   final manageFiles = ManageFilesService(
     databaseService: databaseService,
     appService: appService,
@@ -79,10 +79,13 @@ void main() {
     });
     test('should dont save tv shows when file name is empty', () async {
       final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
+      final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
+      final fileName = 'tvrandshow-${nowDateTime[0]}';
       when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
       when(appService.hasStoragePermission())
           .thenAnswer((_) async => await true);
-      when(appService.saveFile('', TvshowsFile(tvshows: []).toRawJson()))
+      when(appService.saveFile(
+              fileName, TvshowsFile(tvshows: tvshows).toRawJson()))
           .thenAnswer((_) async => '');
 
       expect(await manageFiles.saveTvshows(), isFalse);

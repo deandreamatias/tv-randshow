@@ -1,3 +1,11 @@
+## 1.8.0 - 2021/10/30
+
+### Features
+
+* Aplicado el null safety
+* Base de datos dinámica (web and mobile)
+* Construído con Flutter 2.5
+
 ## 1.7.0 - 2021/07/08
 
 ### Features
@@ -17,7 +25,7 @@
 * Actualiza fuente de iconos
 * Implementa exportación de series
 * Actualiza splash screen
-* Construido con Flustter 2.0
+* Construido con Flutter 2.0
 
 ### Bug Fixes
 

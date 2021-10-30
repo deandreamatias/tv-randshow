@@ -19,17 +19,14 @@ class FavoriteListModel extends StreamViewModel<List<TvshowDetails>> {
     setBusy(false);
   }
 
-  Future<TvshowDetails> verifyAppLink() async {
+  Future<TvshowDetails?> verifyAppLink() async {
     final TvshowActions tvshowActions = await _appService.initUniLinks();
     if (tvshowActions.tvshow.isEmpty ||
         isBusy ||
         data == null ||
-        data.isEmpty ||
-        _appService.timesOpenLink > 1) return TvshowDetails();
-    return data.singleWhere(
-      (TvshowDetails tvshowDetails) =>
-          tvshowDetails.name.toLowerCase().contains(tvshowActions.tvshow),
-      orElse: () => TvshowDetails(),
-    );
+        data!.isEmpty ||
+        _appService.timesOpenLink > 1) return null;
+    return data!.singleWhere((TvshowDetails tvshowDetails) =>
+        tvshowDetails.name.toLowerCase().contains(tvshowActions.tvshow));
   }
 }

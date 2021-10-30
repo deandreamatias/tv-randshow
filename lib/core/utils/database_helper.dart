@@ -11,7 +11,7 @@ import '../models/tvshow_details.dart';
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
 
-  String _databaseName;
+  String _databaseName = '';
   static const int _databaseVersion = 1;
   static const String table = 'tvshowfav';
 
@@ -29,16 +29,16 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
 
   // only have a single app-wide reference to the database
-  static Database _database;
+  static Database? _database;
   Future<Database> get database async {
-    if (_database != null) return _database;
+    if (_database != null) return _database!;
     _database = await _initDatabase();
-    return _database;
+    return _database!;
   }
 
   // this opens the database (and creates it if it doesn't exist)
   Future<Database> _initDatabase() async {
-    Directory documentsDirectory;
+    Directory? documentsDirectory;
     try {
       documentsDirectory = await getExternalStorageDirectory();
     } catch (e) {
@@ -50,7 +50,7 @@ class DatabaseHelper {
     } else {
       _databaseName = 'tvshowfav.db';
     }
-    final String path = join(documentsDirectory.path, _databaseName);
+    final String path = join(documentsDirectory?.path ?? '', _databaseName);
     return await openDatabase(path,
         version: _databaseVersion, onCreate: _onCreate);
   }
@@ -94,7 +94,7 @@ class DatabaseHelper {
   Future<List<TvshowDetails>> queryList() async {
     final Database db = await instance.database;
 
-    final List<Map<dynamic, dynamic>> maps =
+    final List<Map<String, dynamic>> maps =
         await db.query(table, columns: <String>[
       columnId,
       columnIdTvshow,
@@ -107,23 +107,14 @@ class DatabaseHelper {
       columnInProduction,
     ]);
 
-    return maps
-        .map((Map<dynamic, dynamic> i) => TvshowDetails.fromJson(i))
-        .toList();
-  }
-
-  // All of the methods (insert, query, update, delete) can also be done using
-  // raw SQL commands. This method uses a raw query to give the row count.
-  Future<int> queryRowCount() async {
-    final Database db = await instance.database;
-    return Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $table'));
+    return maps.map((i) => TvshowDetails.fromJson(i)).toList();
   }
 
   // Deletes the row specified by the id. The number of affected rows is
   // returned. This should be 1 as long as the row exists.
   Future<int> delete(int id) async {
     final Database db = await instance.database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: <int>[id]);
+    return await db
+        .delete(table, where: '$columnIdTvshow = ?', whereArgs: <int>[id]);
   }
 }

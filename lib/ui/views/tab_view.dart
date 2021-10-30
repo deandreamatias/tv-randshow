@@ -9,7 +9,7 @@ import 'info_view.dart';
 import 'search_view.dart';
 
 class TabView extends StatefulWidget {
-  const TabView({Key key}) : super(key: key);
+  const TabView({Key? key}) : super(key: key);
 
   @override
   _TabViewState createState() => _TabViewState();

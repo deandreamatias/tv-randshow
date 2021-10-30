@@ -7,30 +7,39 @@ part of 'result.dart';
 // **************************************************************************
 
 Result _$ResultFromJson(Map<String, dynamic> json) {
-  $checkKeys(json, disallowNullValues: const ['first_air_date']);
+  $checkKeys(
+    json,
+    disallowNullValues: const ['first_air_date'],
+  );
   return Result(
-    posterPath: json['poster_path'] as String,
-    popularity: (json['popularity'] as num)?.toDouble(),
+    posterPath: json['poster_path'] as String? ?? '',
+    popularity: (json['popularity'] as num?)?.toDouble(),
     id: json['id'] as int,
-    backdropPath: json['backdrop_path'] as String,
-    voteAverage: (json['voter_average'] as num)?.toDouble(),
-    overview: json['overview'] as String,
+    backdropPath: json['backdrop_path'] as String? ?? '',
+    voteAverage: (json['voter_average'] as num?)?.toDouble(),
+    overview: json['overview'] as String? ?? '',
     firstAirDate:
         json['first_air_date'] == null || json['first_air_date'].isEmpty
             ? null
             : DateTime.parse(json['first_air_date'] as String),
-    originCountry:
-        (json['origin_country'] as List)?.map((e) => e as String)?.toList(),
-    genreIds: (json['genre_ids'] as List)?.map((e) => e as int)?.toList(),
-    originalLanguage: json['original_language'] as String,
-    voteCount: json['vote_count'] as int,
-    name: json['name'] as String,
-    originalName: json['original_name'] as String,
+    originCountry: (json['origin_country'] as List<dynamic>?)
+            ?.map((e) => e as String)
+            .toList() ??
+        const [],
+    genreIds:
+        (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList() ??
+            const [],
+    originalLanguage: json['original_language'] as String? ?? '',
+    voteCount: json['vote_count'] as int?,
+    name: json['name'] as String? ?? '',
+    originalName: json['original_name'] as String? ?? '',
   );
 }
 
 Map<String, dynamic> _$ResultToJson(Result instance) {
-  final val = <String, dynamic>{};
+  final val = <String, dynamic>{
+    'poster_path': instance.posterPath,
+  };
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -38,18 +47,17 @@ Map<String, dynamic> _$ResultToJson(Result instance) {
     }
   }
 
-  writeNotNull('poster_path', instance.posterPath);
   writeNotNull('popularity', instance.popularity);
-  writeNotNull('id', instance.id);
-  writeNotNull('backdrop_path', instance.backdropPath);
+  val['id'] = instance.id;
+  val['backdrop_path'] = instance.backdropPath;
   writeNotNull('voter_average', instance.voteAverage);
-  writeNotNull('overview', instance.overview);
+  val['overview'] = instance.overview;
   writeNotNull('first_air_date', instance.firstAirDate?.toIso8601String());
-  writeNotNull('origin_country', instance.originCountry);
-  writeNotNull('genre_ids', instance.genreIds);
-  writeNotNull('original_language', instance.originalLanguage);
+  val['origin_country'] = instance.originCountry;
+  val['genre_ids'] = instance.genreIds;
+  val['original_language'] = instance.originalLanguage;
   writeNotNull('vote_count', instance.voteCount);
-  writeNotNull('name', instance.name);
-  writeNotNull('original_name', instance.originalName);
+  val['name'] = instance.name;
+  val['original_name'] = instance.originalName;
   return val;
 }

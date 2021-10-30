@@ -17,8 +17,8 @@ class TvshowDetailsAdapter extends TypeAdapter<TvshowDetails> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TvshowDetails(
-      rowId: fields[0] as int,
-      episodeRunTime: (fields[1] as List)?.cast<int>(),
+      rowId: fields[0] as int?,
+      episodeRunTime: (fields[1] as List).cast<int>(),
       id: fields[2] as int,
       inProduction: fields[3] as dynamic,
       name: fields[4] as String,
@@ -68,24 +68,25 @@ class TvshowDetailsAdapter extends TypeAdapter<TvshowDetails> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-TvshowDetails _$TvshowDetailsFromJson(Map<String, dynamic> json) {
-  return TvshowDetails(
-    rowId: json['rowId'] as int,
-    episodeRunTime:
-        (json['episode_run_time'] as List)?.map((e) => e as int)?.toList(),
-    id: json['id'] as int,
-    inProduction: json['in_production'],
-    name: json['name'] as String,
-    numberOfEpisodes: json['number_of_episodes'] as int,
-    numberOfSeasons: json['number_of_seasons'] as int,
-    overview: json['overview'] as String,
-    posterPath: json['poster_path'] as String,
-    seasons: (json['seasons'] as List)
-        ?.map((e) =>
-            e == null ? null : Season.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
+TvshowDetails _$TvshowDetailsFromJson(Map<String, dynamic> json) =>
+    TvshowDetails(
+      rowId: json['rowId'] as int?,
+      episodeRunTime: (json['episode_run_time'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          const [],
+      id: json['id'] as int,
+      inProduction: json['in_production'],
+      name: json['name'] as String,
+      numberOfEpisodes: json['number_of_episodes'] as int,
+      numberOfSeasons: json['number_of_seasons'] as int,
+      overview: json['overview'] as String? ?? '',
+      posterPath: json['poster_path'] as String? ?? '',
+      seasons: (json['seasons'] as List<dynamic>?)
+              ?.map((e) => Season.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
 
 Map<String, dynamic> _$TvshowDetailsToJson(TvshowDetails instance) {
   final val = <String, dynamic>{};
@@ -97,14 +98,14 @@ Map<String, dynamic> _$TvshowDetailsToJson(TvshowDetails instance) {
   }
 
   writeNotNull('rowId', instance.rowId);
-  writeNotNull('episode_run_time', instance.episodeRunTime);
-  writeNotNull('id', instance.id);
+  val['episode_run_time'] = instance.episodeRunTime;
+  val['id'] = instance.id;
   writeNotNull('in_production', instance.inProduction);
-  writeNotNull('name', instance.name);
-  writeNotNull('number_of_episodes', instance.numberOfEpisodes);
-  writeNotNull('number_of_seasons', instance.numberOfSeasons);
-  writeNotNull('overview', instance.overview);
-  writeNotNull('poster_path', instance.posterPath);
-  writeNotNull('seasons', instance.seasons);
+  val['name'] = instance.name;
+  val['number_of_episodes'] = instance.numberOfEpisodes;
+  val['number_of_seasons'] = instance.numberOfSeasons;
+  val['overview'] = instance.overview;
+  val['poster_path'] = instance.posterPath;
+  val['seasons'] = instance.seasons;
   return val;
 }

@@ -9,7 +9,7 @@ import 'random_button.dart';
 import 'save_button.dart';
 
 class ModalSheet extends StatelessWidget {
-  const ModalSheet({this.idTv, this.inDatabase});
+  const ModalSheet({required this.idTv, this.inDatabase = false});
   final int idTv;
   final bool inDatabase;
   // TODO(deandreamatias): Persist state of button on search and fav widgets
@@ -22,7 +22,7 @@ class ModalSheet extends StatelessWidget {
         idTv,
         LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
       ),
-      builder: (BuildContext context, DetailsModel model, Widget child) =>
+      builder: (BuildContext context, DetailsModel model, Widget? child) =>
           Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
@@ -55,8 +55,8 @@ class ModalSheet extends StatelessWidget {
                                 Expanded(
                                   flex: 1,
                                   child: ImageBuilder(
-                                    url: model.tvshowDetails?.posterPath,
-                                    name: model.tvshowDetails?.name,
+                                    url: model.tvshowDetails!.posterPath,
+                                    name: model.tvshowDetails!.name,
                                     isModal: true,
                                   ),
                                 ),
@@ -66,7 +66,7 @@ class ModalSheet extends StatelessWidget {
                                   child: Align(
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      model.tvshowDetails?.name,
+                                      model.tvshowDetails!.name,
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 3,
@@ -86,19 +86,17 @@ class ModalSheet extends StatelessWidget {
                             children: <Widget>[
                               InfoBox(
                                 typeInfo: 0,
-                                value:
-                                    model.tvshowDetails.numberOfSeasons ?? '--',
+                                value: model.tvshowDetails!.numberOfSeasons,
                               ),
                               InfoBox(
                                 typeInfo: 1,
-                                value: model.tvshowDetails.numberOfEpisodes ??
-                                    '--',
+                                value: model.tvshowDetails!.numberOfEpisodes,
                               ),
                               InfoBox(
                                 typeInfo: 2,
-                                value: model
-                                        .tvshowDetails.episodeRunTime.isNotEmpty
-                                    ? model.tvshowDetails.episodeRunTime.first
+                                value: model.tvshowDetails!.episodeRunTime
+                                        .isNotEmpty
+                                    ? model.tvshowDetails!.episodeRunTime.first
                                     : 0,
                               )
                             ],
@@ -113,7 +111,7 @@ class ModalSheet extends StatelessWidget {
                           flex: 6,
                           child: SingleChildScrollView(
                             physics: const BouncingScrollPhysics(),
-                            child: Text(model.tvshowDetails.overview),
+                            child: Text(model.tvshowDetails!.overview),
                           ),
                         ),
                       ],
@@ -121,7 +119,9 @@ class ModalSheet extends StatelessWidget {
             ),
           ),
           if (inDatabase)
-            RandomButton(tvshowDetails: model.tvshowDetails)
+            model.isBusy
+                ? const Center(child: CircularProgressIndicator())
+                : RandomButton(tvshowDetails: model.tvshowDetails!)
           else
             SaveButton(id: idTv),
         ],

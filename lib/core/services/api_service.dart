@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../config/flavor_config.dart';
@@ -24,10 +25,10 @@ class ApiService {
     try {
       final Response<dynamic> response = await dio.get<dynamic>(TVSHOW_SEARCH,
           queryParameters: query.toJson());
-      return Search.fromJson(response?.data);
+      return Search.fromJson(response.data);
     } on DioError catch (e) {
       log('Error to fetch search: ${e.message}', error: e);
-      return null;
+      return Search();
     }
   }
 
@@ -38,10 +39,10 @@ class ApiService {
         '$TVSHOW_DETAILS$idTv',
         queryParameters: query.toJson(),
       );
-      return TvshowDetails.fromJson(response?.data);
+      return TvshowDetails.fromJson(response.data);
     } on DioError catch (e) {
       log('Error to fetch Tv show details: ${e.message}', error: e);
-      return null;
+      throw ErrorDescription(e.toString());
     }
   }
 
@@ -53,10 +54,10 @@ class ApiService {
         '$TVSHOW_DETAILS$idTv$TVSHOW_DETAILS_SEASON$idSeason',
         queryParameters: query.toJson(),
       );
-      return TvshowSeasonsDetails.fromJson(response?.data);
+      return TvshowSeasonsDetails.fromJson(response.data);
     } on DioError catch (e) {
       log('Error to fetch Tvshow seasons details: ${e.message}', error: e);
-      return null;
+      throw ErrorDescription(e.toString());
     }
   }
 }

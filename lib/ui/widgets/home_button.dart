@@ -7,7 +7,7 @@ import '../../core/utils/constants.dart';
 import '../views/tab_view.dart';
 
 class HomeButton extends StatelessWidget {
-  const HomeButton({Key key, this.text}) : super(key: key);
+  const HomeButton({Key? key, required this.text}) : super(key: key);
   final String text;
 
   @override

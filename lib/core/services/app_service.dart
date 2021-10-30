@@ -13,16 +13,16 @@ import '../models/tvshow_actions.dart';
 @lazySingleton
 class AppService {
   int timesOpenLink = 0;
-  PackageInfo _packageInfo;
+  PackageInfo? _packageInfo;
 
   Future<String> getVersion() async {
     _packageInfo ??= await PackageInfo.fromPlatform();
-    return _packageInfo.version;
+    return _packageInfo!.version;
   }
 
   Future<TvshowActions> initUniLinks() async {
     try {
-      final Uri initialLink = await getInitialUri();
+      final Uri? initialLink = await getInitialUri();
       if (initialLink == null || initialLink.path.isEmpty) {
         debugPrint('$runtimeType Link empty or null');
         return TvshowActions(tvshow: '');

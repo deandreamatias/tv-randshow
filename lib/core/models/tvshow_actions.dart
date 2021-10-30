@@ -1,10 +1,8 @@
 import 'dart:convert';
 
 class TvshowActions {
-  TvshowActions({this.tvshow});
+  TvshowActions({required this.tvshow});
   factory TvshowActions.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
     return TvshowActions(
       tvshow: map['tvshow'],
     );
