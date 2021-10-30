@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: '8'
+          java-version: "8"
       - run: echo $SIGNING_KEY | base64 -d > android/app/key.jks
         env:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
@@ -35,9 +35,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
-          target: google_apis
-          profile: pixel_3a
-          arch: x86
+          profile: pixel
           script: |
             /Users/runner/Library/Android/sdk/tools/bin/avdmanager list
             flutter pub get
