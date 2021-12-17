@@ -21,7 +21,7 @@
 TV Randshow was created to help choose a random episode from your favorites TV shows.
 The TV shows database comes from the TMDB and the app saves them in a database on the device. With the list of favorites, you can roll the dice of a TV show to get a random episode.
 
-This project has been built using the [Flutter](https://flutter.dev/) framework, which allows to build an app for mobile, desktop & web, from a single codebase.
+This project has been built using the [Flutter](https://flutter.dev/) framework, which allows to build an multiplatform app from a single codebase.
 
 <p align="center">
   <img src="./images/search.png" width="150" hspace="4">
@@ -40,23 +40,15 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Support to deeplink `https://tvrandshow.com/getRandomEpisode?tvshow=friends`**
 - [Coming soon...](https://trello.com/b/ib0jdUzK)
 
-## Build & run
+## Build and run
 
 ### Requirements
 
-- First, clone the repository with the 'git clone' command, or just download the zip.
-
-```git
-git clone git@github.com:deandreamatias/tv-randshow.git
-```
-
-- Then, download either Android Studio or Visual Studio Code, with their respective [Flutter editor plugins](https://flutter.dev/docs/get-started/editor). For more information about Flutter installation procedure, check the [official install guide](https://flutter.dev/docs/get-started/install).
-
-- Install dependencies from pubspec.yaml by running `flutter packages get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
-
-- Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
-
-- (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
+1. Clone repository with 'git clone' command or just download the zip. `git clone git@github.com:deandreamatias/tv-randshow.git`
+2. Then, download either Android Studio or Visual Studio Code, with their respective [Flutter editor plugins](https://flutter.dev/docs/get-started/editor). For more information about Flutter installation procedure, check the [official install guide](https://flutter.dev/docs/get-started/install).
+3. Install dependencies from pubspec.yaml by running `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
+4. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
+5. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
 
 ### Run
 
@@ -69,7 +61,7 @@ Unit tests: `flutter test --flavor dev`
 
 ## Author
 
-- **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com), [GitHub](https://github.com/deandreamatias) & [Twitter](https://twitter.com/deandreamatias).
+- **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com), [GitHub](https://github.com/deandreamatias) and [Twitter](https://twitter.com/deandreamatias).
 
 ## Contributing
 
