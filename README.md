@@ -38,7 +38,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Support to Android and Web**
 - **Dark mode**
 - **Support to deeplink `https://tvrandshow.com/getRandomEpisode?tvshow=friends`**
-- [Coming soon...](https://trello.com/b/ib0jdUzK)
+- **Roadmap in [public Trello](https://trello.com/b/ib0jdUzK)**
 
 ## Build and run
 
