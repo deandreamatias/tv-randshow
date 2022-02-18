@@ -9,7 +9,7 @@
 .buildlog/
 .history
 .svn/
-.fvm/
+.fvm/flutter_sdk
 package-lock.json
 
 # IntelliJ related
