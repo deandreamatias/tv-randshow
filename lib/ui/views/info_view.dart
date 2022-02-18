@@ -57,14 +57,14 @@ class InfoView extends StatelessWidget {
                     title: Text(
                       translate(
                           kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
-                      key: const Key(
+                      key: Key(
                           kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
                     ),
                     subtitle: Text(
                       translate(kIsWeb
                           ? 'app.info.app_description'
                           : 'app.info.web_description'),
-                      key: const Key(kIsWeb
+                      key: Key(kIsWeb
                           ? 'app.info.app_description'
                           : 'app.info.web_description'),
                     ),
