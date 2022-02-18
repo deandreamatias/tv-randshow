@@ -56,8 +56,8 @@ CLI Debug: `flutter run --flavor dev -t lib/main_dev.dart`
 
 ### Tests
 
-Integration tests (only mobile): `flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d [DEVICE_ID] --flavor dev`
-Unit tests: `flutter test --flavor dev`
+Integration tests (only mobile): `flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d [DEVICE_ID] --flavor dev --dart-define API_KEY=xxxxxxxxxxxxx`
+Unit tests: `flutter test --dart-define API_KEY=xxxxxxxxxxxxx`
 
 ## Author
 
