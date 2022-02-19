@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../core/models/tvshow_details.dart';
 import '../core/models/tvshow_result.dart';
