@@ -1,10 +1,17 @@
+## 1.9.0 - 2022/02/20
+
+### Features
+
+* Soporte a Android 12
+* Construido com Flutter 2.8
+
 ## 1.8.0 - 2021/10/30
 
 ### Features
 
 * Aplicado o null safety
 * Base de datos dinamica (web and mobile)
-* Construido con Flutter 2.5
+* Construido com Flutter 2.5
 
 ## 1.7.0 - 2021/07/08
 

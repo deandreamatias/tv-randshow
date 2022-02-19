@@ -1,3 +1,10 @@
+## 1.9.0 - 2022/02/20
+
+### Features
+
+* Suporte a Android 12
+* Construído con Flutter 2.8
+
 ## 1.8.0 - 2021/10/30
 
 ### Features
