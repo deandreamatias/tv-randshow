@@ -10,9 +10,8 @@ TvshowSeasonsDetails _$TvshowSeasonsDetailsFromJson(
         Map<String, dynamic> json) =>
     TvshowSeasonsDetails(
       id: json['id'] as int,
-      airDate: json['air_date'] == null || json['air_date'].isEmpty
-          ? null
-          : DateTime.parse(json['air_date'] as String),
+      airDate: TvshowSeasonsDetails._fromJsonAirDate(
+          json['air_date'] as Map<String, dynamic>),
       episodes: (json['episodes'] as List<dynamic>?)
               ?.map((e) => Episode.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -40,7 +39,7 @@ Map<String, dynamic> _$TvshowSeasonsDetailsToJson(
   val['episodes'] = instance.episodes;
   val['name'] = instance.name;
   val['overview'] = instance.overview;
-  val['tvshowSeasonsDetailsId'] = instance.tvshowSeasonsDetailsId;
+  writeNotNull('tvshowSeasonsDetailsId', instance.tvshowSeasonsDetailsId);
   val['poster_path'] = instance.posterPath;
   val['season_number'] = instance.seasonNumber;
   return val;
