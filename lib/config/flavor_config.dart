@@ -1,14 +1,23 @@
 enum Flavor { DEV, PROD }
 
 class FlavorValues {
-  FlavorValues({this.baseUrl = '', this.apiKey = ''});
+  FlavorValues({
+    required this.baseUrl,
+    required this.apiKey,
+    required this.streamingApiKey,
+    required this.streamingBaseUrl,
+  });
   final String baseUrl;
   final String apiKey;
+  final String streamingBaseUrl;
+  final String streamingApiKey;
 
   static FlavorValues fromJson(Map<String, dynamic> json) {
     return FlavorValues(
       baseUrl: json['baseUrl'] as String,
       apiKey: json['apiKey'] as String,
+      streamingBaseUrl: json['streamingBaseUrl'] as String,
+      streamingApiKey: json['streamingApiKey'] as String,
     );
   }
 }
