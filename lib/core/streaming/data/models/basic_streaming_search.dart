@@ -20,6 +20,5 @@ class BasicStreamingSearch extends StreamingSearch {
   factory BasicStreamingSearch.fromJson(Map<String, dynamic> json) =>
       _$BasicStreamingSearchFromJson(json);
 
-  /// Connect the generated [_$PersonToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$BasicStreamingSearchToJson(this);
 }

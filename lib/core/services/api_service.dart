@@ -14,7 +14,7 @@ import '../utils/constants.dart';
 @lazySingleton
 class ApiService {
   static BaseOptions options = BaseOptions(
-    baseUrl: 'https://${FlavorConfig.instance.values.baseUrl}',
+    baseUrl: FlavorConfig.instance.values.baseUrl,
     connectTimeout: 5000,
     receiveTimeout: 3000,
   );
