@@ -81,34 +81,6 @@ class StreamingOutput extends Streaming {
       _$StreamingOutputFromJson(json);
 
   /// Simplify json streaming
-  ///
-  /// From:
-  ///
-  /// "netflix":{
-  ///    "es":{
-  ///       "link":"https://www.netflix.com/title/70136120/",
-  ///       "added":1635734674,
-  ///       "leaving":0
-  ///    },
-  ///    "en":{
-  ///       "link":"https://www.netflix.com/title/70136120/",
-  ///       "added":1635734674,
-  ///       "leaving":0
-  ///    }
-  /// },
-  /// "prime":{
-  ///    "es":{
-  ///       "link":"https://www.primevideo.com/detail/0H7JFOPK2QO9WVZ8D9D0J5ZRQN/",
-  ///       "added":1608336558,
-  ///       "leaving":0
-  ///    }
-  /// }
-  ///
-  /// To:
-  ///
-  /// [
-  ///
-  /// ]
   static List<StreamingDetailOutput> _streamingsFromJson(
       Map<String, dynamic> json) {
     if (json.entries.isEmpty) {
