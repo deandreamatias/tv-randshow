@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 
 import '../interfaces/i_streamings_repository.dart';
 import '../models/streaming_search.dart';
@@ -9,7 +10,8 @@ class GetTvshowStreamingsUseCase {
 
   GetTvshowStreamingsUseCase(this._streamingsRepository);
 
-  Future<void> call(StreamingSearch streamingSearch) async {
-    await _streamingsRepository.searchTvShow(streamingSearch);
+  Future<List<StreamingDetail>> call(StreamingSearch streamingSearch) async {
+    final tvshow = await _streamingsRepository.searchTvShow(streamingSearch);
+    return tvshow.streamings;
   }
 }

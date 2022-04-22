@@ -1,6 +1,6 @@
-import 'dart:developer';
-
 import 'package:injectable/injectable.dart';
+import 'package:tv_randshow/core/streaming/data/models/streaming_output.dart';
+import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 
 import '../../../app/data/services/http_service.dart';
 import '../../domain/interfaces/i_streamings_repository.dart';
@@ -13,14 +13,13 @@ class StreamingsRepository implements IStreamingsRepository {
   StreamingsRepository(this._httpService);
 
   @override
-  Future<void> searchTvShow(StreamingSearch streamingSearch) async {
+  Future<Streaming> searchTvShow(StreamingSearch streamingSearch) async {
     final String path = '/get/basic';
     final data = BasicStreamingSearch(
       country: streamingSearch.country,
       tmdbId: 'tv/${streamingSearch.tmdbId}',
     );
     final response = await _httpService.get(path, data.toJson());
-    log(response.toString());
-    log(response['streamingInfo'].toString());
+    return StreamingOutput.fromJson(response);
   }
 }
