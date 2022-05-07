@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../streaming/domain/models/streaming.dart';
 import 'season.dart';
 
 part 'tvshow_details.g.dart';
@@ -21,6 +22,7 @@ class TvshowDetails extends HiveObject {
     this.overview = '',
     this.posterPath = '',
     this.seasons = const [],
+    this.streamings = const [],
   });
 
   factory TvshowDetails.fromRawJson(String str) =>
@@ -52,6 +54,11 @@ class TvshowDetails extends HiveObject {
   @HiveField(8)
   String posterPath;
   List<Season> seasons;
+  @HiveField(9)
+  @JsonKey(ignore: true)
+
+  /// TODO: Add register type to Hive
+  List<StreamingDetail> streamings;
 
   Map<String, dynamic> toJson() => _$TvshowDetailsToJson(this);
   String toRawJson() => json.encode(_$TvshowDetailsToJson(this));
