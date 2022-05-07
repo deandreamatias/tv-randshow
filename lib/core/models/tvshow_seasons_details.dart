@@ -39,9 +39,7 @@ class TvshowSeasonsDetails {
   Map<String, dynamic> toJson() => _$TvshowSeasonsDetailsToJson(this);
   String toRawJson() => json.encode(_$TvshowSeasonsDetailsToJson(this));
 
-  static DateTime? _fromJsonAirDate(Map<String, dynamic> json) {
-    json['air_date'] == null || (json['air_date'] as String).isEmpty
-        ? null
-        : DateTime.parse(json['air_date'] as String);
+  static DateTime? _fromJsonAirDate(String? airDate) {
+    airDate == null || airDate.isEmpty ? null : DateTime.parse(airDate);
   }
 }

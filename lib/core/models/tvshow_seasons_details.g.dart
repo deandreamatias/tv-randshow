@@ -10,8 +10,8 @@ TvshowSeasonsDetails _$TvshowSeasonsDetailsFromJson(
         Map<String, dynamic> json) =>
     TvshowSeasonsDetails(
       id: json['id'] as int,
-      airDate: TvshowSeasonsDetails._fromJsonAirDate(
-          json['air_date'] as Map<String, dynamic>),
+      airDate:
+          TvshowSeasonsDetails._fromJsonAirDate(json['air_date'] as String?),
       episodes: (json['episodes'] as List<dynamic>?)
               ?.map((e) => Episode.fromJson(e as Map<String, dynamic>))
               .toList() ??
