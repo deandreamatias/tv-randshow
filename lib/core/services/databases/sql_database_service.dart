@@ -26,7 +26,7 @@ class SqlDatabaseService extends IDatabaseService {
   @override
   Future<List<TvshowDetails>> getTvshows() async {
     try {
-      final List<TvshowDetails> list = await dbHelper.queryList();
+      final List<TvshowDetails> list = await dbHelper.queryTvshowsDetails();
       return list;
     } catch (e) {
       log('Error to get db list', error: e);
@@ -36,19 +36,7 @@ class SqlDatabaseService extends IDatabaseService {
 
   @override
   Future<bool> saveTvshow(TvshowDetails tvshowDetails) async {
-    // row to insert
-    final Map<String, dynamic> row = <String, dynamic>{
-      DatabaseHelper.columnId: tvshowDetails.rowId,
-      DatabaseHelper.columnIdTvshow: tvshowDetails.id,
-      DatabaseHelper.columnName: tvshowDetails.name,
-      DatabaseHelper.columnPosterPath: tvshowDetails.posterPath,
-      DatabaseHelper.columnEpisodes: tvshowDetails.numberOfEpisodes,
-      DatabaseHelper.columnSeasons: tvshowDetails.numberOfSeasons,
-      DatabaseHelper.columnRunTime: tvshowDetails.episodeRunTime,
-      DatabaseHelper.columnOverview: tvshowDetails.overview,
-      DatabaseHelper.columnInProduction: tvshowDetails.inProduction,
-    };
-    final int id = await dbHelper.insert(row);
+    final int id = await dbHelper.insert(tvshowDetails);
     log('Inserted row: $id');
     return id.isFinite;
   }

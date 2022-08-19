@@ -6,12 +6,16 @@ part 'streaming_detail_output.g.dart';
 @JsonSerializable(createToJson: false)
 class StreamingDetailOutput extends StreamingDetail {
   StreamingDetailOutput({
+    int? rowId,
     required String streamingName,
     required String country,
     required String link,
     required int added,
     required int leaving,
+    int? tvshowId,
   }) : super(
+          tvshowId: tvshowId,
+          rowId: rowId,
           streamingName: streamingName,
           added: added,
           country: country,

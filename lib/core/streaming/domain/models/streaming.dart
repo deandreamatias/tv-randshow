@@ -101,6 +101,8 @@ class PosterUrLs {
 @HiveType(typeId: 2)
 class StreamingDetail extends HiveObject {
   StreamingDetail({
+    this.rowId,
+    this.tvshowId,
     required this.streamingName,
     this.link = '',
     required this.added,
@@ -118,4 +120,8 @@ class StreamingDetail extends HiveObject {
   final int added;
   @HiveField(4)
   final int leaving;
+  @HiveField(5)
+  int? rowId;
+  @HiveField(6)
+  int? tvshowId;
 }
