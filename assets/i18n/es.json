@@ -54,7 +54,8 @@
         "result": {
             "title": "¡Este es el episodio elegido al azar de la serie!",
             "button_random": "OTRO EPISODIO AL AZAR",
-            "button_fav": "FAVORITOS"
+            "button_fav": "FAVORITOS",
+            "streaming_title": "Ver en streamings:"
         },
         "modal": {
             "description": "Descripción",

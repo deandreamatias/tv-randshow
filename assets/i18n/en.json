@@ -54,7 +54,8 @@
         "result": {
             "title": "This is the TV show episode chosen at random!",
             "button_random": "ANOTHER RANDOM EPISODE",
-            "button_fav": "FAVORITES"
+            "button_fav": "FAVORITES",
+            "streaming_title": "See on streamings:"
         },
         "modal": {
             "description": "Description",

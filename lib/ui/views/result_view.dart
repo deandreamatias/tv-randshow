@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/ui/widgets/streaming_button.dart';
 
 import '../../core/models/tvshow_result.dart';
 import '../../core/utils/constants.dart';
@@ -90,6 +91,20 @@ class ResultView extends StatelessWidget {
                                   child: Text(tvshowResult.episodeDescription),
                                 ),
                               ),
+                              const SizedBox(height: 8),
+                              Text(
+                                translate('app.result.streaming_title'),
+                                style: Theme.of(context).textTheme.subtitle1,
+                              ),
+                              const SizedBox(height: 4),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: tvshowResult.tvshowDetails.streamings
+                                    .map((streaming) => StreamingButton(
+                                        streamingDetail: streaming))
+                                    .toList(),
+                              )
                             ],
                           ),
                         ),
