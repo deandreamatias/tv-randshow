@@ -32,14 +32,18 @@ class TvshowDetails extends HiveObject {
 
   @HiveField(0)
   int? rowId;
+
   @JsonKey(name: 'episode_run_time')
   @HiveField(1)
   List<int> episodeRunTime;
+
   @HiveField(2)
   int id;
+
   @JsonKey(name: 'in_production')
   @HiveField(3)
   dynamic inProduction;
+
   @HiveField(4)
   String name;
   @JsonKey(name: 'number_of_episodes')
@@ -48,16 +52,18 @@ class TvshowDetails extends HiveObject {
   @JsonKey(name: 'number_of_seasons')
   @HiveField(6)
   int numberOfSeasons;
+
   @HiveField(7)
   String overview;
+
   @JsonKey(name: 'poster_path')
   @HiveField(8)
   String posterPath;
+
   List<Season> seasons;
+
   @HiveField(9)
   @JsonKey(ignore: true)
-
-  /// TODO: Add register type to Hive
   List<StreamingDetail> streamings;
 
   Map<String, dynamic> toJson() => _$TvshowDetailsToJson(this);

@@ -1,3 +1,7 @@
+import 'package:hive/hive.dart';
+
+part 'streaming.g.dart';
+
 class Streaming {
   Streaming({
     this.imdbId = '',
@@ -94,7 +98,8 @@ class PosterUrLs {
   final String original;
 }
 
-class StreamingDetail {
+@HiveType(typeId: 2)
+class StreamingDetail extends HiveObject {
   StreamingDetail({
     required this.streamingName,
     this.link = '',
@@ -103,9 +108,14 @@ class StreamingDetail {
     required this.country,
   });
 
+  @HiveField(0)
   final String streamingName;
+  @HiveField(1)
   final String country;
+  @HiveField(2)
   final String link;
+  @HiveField(3)
   final int added;
+  @HiveField(4)
   final int leaving;
 }
