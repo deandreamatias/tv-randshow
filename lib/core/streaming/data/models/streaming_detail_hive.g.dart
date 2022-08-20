@@ -1,24 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'streaming.dart';
+part of 'streaming_detail_hive.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class StreamingDetailAdapter extends TypeAdapter<StreamingDetail> {
+class StreamingDetailHiveAdapter extends TypeAdapter<StreamingDetailHive> {
   @override
   final int typeId = 2;
 
   @override
-  StreamingDetail read(BinaryReader reader) {
+  StreamingDetailHive read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return StreamingDetail(
-      rowId: fields[5] as int?,
-      tvshowId: fields[6] as int?,
+    return StreamingDetailHive(
       streamingName: fields[0] as String,
       link: fields[2] as String,
       added: fields[3] as int,
@@ -28,9 +26,9 @@ class StreamingDetailAdapter extends TypeAdapter<StreamingDetail> {
   }
 
   @override
-  void write(BinaryWriter writer, StreamingDetail obj) {
+  void write(BinaryWriter writer, StreamingDetailHive obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.streamingName)
       ..writeByte(1)
@@ -40,11 +38,7 @@ class StreamingDetailAdapter extends TypeAdapter<StreamingDetail> {
       ..writeByte(3)
       ..write(obj.added)
       ..writeByte(4)
-      ..write(obj.leaving)
-      ..writeByte(5)
-      ..write(obj.rowId)
-      ..writeByte(6)
-      ..write(obj.tvshowId);
+      ..write(obj.leaving);
   }
 
   @override
@@ -53,7 +47,7 @@ class StreamingDetailAdapter extends TypeAdapter<StreamingDetail> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is StreamingDetailAdapter &&
+      other is StreamingDetailHiveAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -109,6 +109,6 @@ Map<String, dynamic> _$TvshowDetailsToJson(TvshowDetails instance) {
   val['number_of_seasons'] = instance.numberOfSeasons;
   val['overview'] = instance.overview;
   val['poster_path'] = instance.posterPath;
-  val['seasons'] = instance.seasons;
+  writeNotNull('seasons', TvshowDetails._seasonsToJson(instance.seasons));
   return val;
 }

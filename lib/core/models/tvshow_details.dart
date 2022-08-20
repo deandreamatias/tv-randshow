@@ -60,6 +60,7 @@ class TvshowDetails extends HiveObject {
   @HiveField(8)
   String posterPath;
 
+  @JsonKey(toJson: _seasonsToJson)
   List<Season> seasons;
 
   @HiveField(9)
@@ -95,4 +96,7 @@ class TvshowDetails extends HiveObject {
 
   Map<String, dynamic> toJson() => _$TvshowDetailsToJson(this);
   String toRawJson() => json.encode(_$TvshowDetailsToJson(this));
+
+  /// Disable toJson to seasons property
+  static List<Season>? _seasonsToJson(List<Season> seasons) => null;
 }

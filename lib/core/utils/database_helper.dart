@@ -1,13 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tv_randshow/core/streaming/data/models/streaming_detail_output.dart';
 
 import '../../config/flavor_config.dart';
-import '../models/tvshow_details.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
@@ -75,6 +74,7 @@ class DatabaseHelper {
         var batch = db.batch();
         if (oldVersion == 1) {
           _createStreamingsTable(batch);
+          _addAutoincrementToTvshowTable(batch);
         }
         await batch.commit();
       },
@@ -98,10 +98,11 @@ class DatabaseHelper {
   }
 
   // SQL code to create the database tvshows table
-  void _createTvshowTable(Batch batch) {
+  void _createTvshowTable(Batch batch, {String auxiliar = ''}) {
     batch.execute('DROP TABLE IF EXISTS $tvshowTable');
+    final table = auxiliar.isNotEmpty ? auxiliar : tvshowTable;
     batch.execute('''
-          CREATE TABLE $tvshowTable (
+          CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
             $columnIdTvshow INTEGER NOT NULL,
             $columnName TEXT NOT NULL,
@@ -115,6 +116,78 @@ class DatabaseHelper {
           ''');
   }
 
+  void _addAutoincrementToTvshowTable(Batch batch) async {
+    // Create auxiliar table
+    const String tvshowAuxiliarTable = 'tvshowfav_autoincrement';
+    _createTvshowTable(batch, auxiliar: tvshowAuxiliarTable);
+
+    // Verify tvshows on original table
+    final List<Map<String, dynamic>> tvshowsMaps = await queryList(
+      table: DatabaseHelper.tvshowTable,
+      columns: <String>[
+        DatabaseHelper.columnId,
+        DatabaseHelper.columnIdTvshow,
+        DatabaseHelper.columnName,
+        DatabaseHelper.columnPosterPath,
+        DatabaseHelper.columnEpisodes,
+        DatabaseHelper.columnSeasons,
+        DatabaseHelper.columnRunTime,
+        DatabaseHelper.columnOverview,
+        DatabaseHelper.columnInProduction,
+      ],
+    );
+
+    // Execute table migration
+    batch.execute('''
+          INSERT INTO $tvshowAuxiliarTable (
+            $columnIdTvshow,
+            $columnName,
+            $columnPosterPath,
+            $columnEpisodes,
+            $columnSeasons,
+            $columnRunTime,
+            $columnOverview,
+            $columnInProduction
+          )
+          SELECT $columnIdTvshow,$columnName,$columnPosterPath,$columnEpisodes,$columnSeasons,$columnRunTime,$columnOverview,$columnInProduction
+          FROM $tvshowTable;
+          ''');
+
+    // Verify tvshows on new table
+    final List<Map<String, dynamic>> newTvshowsMaps = await queryList(
+      table: tvshowAuxiliarTable,
+      columns: <String>[
+        DatabaseHelper.columnId,
+        DatabaseHelper.columnIdTvshow,
+        DatabaseHelper.columnName,
+        DatabaseHelper.columnPosterPath,
+        DatabaseHelper.columnEpisodes,
+        DatabaseHelper.columnSeasons,
+        DatabaseHelper.columnRunTime,
+        DatabaseHelper.columnOverview,
+        DatabaseHelper.columnInProduction,
+      ],
+    );
+
+    // Comparare original and old tvshows tables
+    if (tvshowsMaps.length != newTvshowsMaps.length) {
+      log('Error to migrate autoincrement tvshow table: Length original ${tvshowsMaps.length} and new ${newTvshowsMaps.length}');
+      return;
+    }
+    for (var i = 0; i < tvshowsMaps.length; i++) {
+      if (!mapEquals(tvshowsMaps[i], newTvshowsMaps[i])) {
+        log('Error to migrate autoincrement tvshow table: Map different on row $i');
+        return;
+      }
+    }
+
+    // Clean auxiliar table
+    batch.execute('''
+          DROP TABLE $tvshowTable;
+          ALTER TABLE $tvshowAuxiliarTable RENAME TO $tvshowTable;
+          ''');
+  }
+
   Future onConfigure(Database db) async {
     await db.execute('PRAGMA foreign_keys = ON');
   }
@@ -124,100 +197,42 @@ class DatabaseHelper {
   // Inserts a row in the database where each key in the Map is a column name
   // and the value is the column value. The return value is the id of the
   // inserted row.
-  Future<int> insert(TvshowDetails tvshowDetails) async {
+  Future<int> insert({
+    required Map<String, dynamic> row,
+    required String table,
+  }) async {
     final Database db = await instance.database;
 
-    final Map<String, dynamic> row = <String, dynamic>{
-      DatabaseHelper.columnIdTvshow: tvshowDetails.id,
-      DatabaseHelper.columnName: tvshowDetails.name,
-      DatabaseHelper.columnPosterPath: tvshowDetails.posterPath,
-      DatabaseHelper.columnEpisodes: tvshowDetails.numberOfEpisodes,
-      DatabaseHelper.columnSeasons: tvshowDetails.numberOfSeasons,
-      DatabaseHelper.columnRunTime: tvshowDetails.episodeRunTime,
-      DatabaseHelper.columnOverview: tvshowDetails.overview,
-      DatabaseHelper.columnInProduction: tvshowDetails.inProduction,
-    };
-
-    final rowId = await db.insert(tvshowTable, row);
-    if (tvshowDetails.streamings.isNotEmpty) {
-      for (final streaming in tvshowDetails.streamings) {
-        final map = {
-          DatabaseHelper.columnStreamingTvshowId: rowId,
-          DatabaseHelper.columnStreamingName: streaming.streamingName,
-          DatabaseHelper.columnStreamingLink: streaming.link,
-          DatabaseHelper.columnStreamingAdded: streaming.added,
-          DatabaseHelper.columnStreamingCountry: streaming.country,
-          DatabaseHelper.columnStreamingLeaving: streaming.leaving,
-        };
-        await db.insert(streamingsTable, map);
-      }
-    }
-    return rowId;
+    return await db.insert(table, row);
   }
 
-  Future<List<TvshowDetails>> queryTvshowsDetails() async {
+  /// Get list from `table` on database by selected `columns`
+  Future<List<Map<String, dynamic>>> queryList({
+    required String table,
+    required List<String> columns,
+    MapEntry? filter,
+  }) async {
     final Database db = await instance.database;
-
-    final List<Map<String, dynamic>> tvshows =
-        await db.query(tvshowTable, columns: <String>[
-      columnId,
-      columnIdTvshow,
-      columnName,
-      columnPosterPath,
-      columnEpisodes,
-      columnSeasons,
-      columnRunTime,
-      columnOverview,
-      columnInProduction,
-    ]);
-
-    final streamings = await _queryStreamings();
-
-    return tvshows.map((i) {
-      TvshowDetails tvshow = TvshowDetails.fromJson(i);
-      tvshow = tvshow.copyWith(
-          streamings: streamings
-              .where((streaming) => streaming.tvshowId == tvshow.rowId)
-              .toList());
-      return tvshow;
-    }).toList();
-  }
-
-  Future<List<StreamingDetailOutput>> _queryStreamings({int? tvshowId}) async {
-    final Database db = await instance.database;
-
-    final List<Map<String, dynamic>> mapStreamings = await db.query(
-      streamingsTable,
-      where: tvshowId != null ? '$columnStreamingTvshowId = ?' : null,
-      whereArgs: tvshowId != null ? <int?>[tvshowId] : null,
-      columns: <String>[
-        columnStreamingId,
-        columnStreamingName,
-        columnStreamingLink,
-        columnStreamingCountry,
-        columnStreamingLeaving,
-        columnStreamingAdded,
-        columnStreamingTvshowId,
-      ],
+    return await db.query(
+      table,
+      columns: columns,
+      where: filter != null ? '${filter.key} = ?' : null,
+      whereArgs: filter != null ? <int?>[filter.value] : null,
     );
-
-    return mapStreamings.map((e) => StreamingDetailOutput.fromJson(e)).toList();
   }
 
   // Deletes the row specified by the id. The number of affected rows is
   // returned. This should be 1 as long as the row exists.
-  Future<int> delete(int id) async {
+  Future<int> delete({
+    required String table,
+    required MapEntry deletefilter,
+  }) async {
     final Database db = await instance.database;
-    final streamings = await _queryStreamings(tvshowId: id);
-    if (streamings.isNotEmpty) {
-      await db.delete(
-        streamingsTable,
-        where: '$columnStreamingTvshowId = ?',
-        whereArgs: <int>[id],
-      );
-    }
-    final idDeleted = await db.delete(tvshowTable,
-        where: '$columnIdTvshow = ?', whereArgs: <int>[id]);
+    final idDeleted = await db.delete(
+      table,
+      where: '${deletefilter.key} = ?',
+      whereArgs: <int>[deletefilter.value],
+    );
     return idDeleted;
   }
 }

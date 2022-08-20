@@ -5,10 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 
 import '../../../config/flavor_config.dart';
 import '../../models/tvshow_details.dart';
+import '../../streaming/data/models/streaming_detail_hive.dart';
 import 'i_database_service.dart';
 
 @Environment("web")
@@ -22,7 +22,7 @@ class HiveDatabaseService extends IDatabaseService {
     if (kIsWeb) {
       Hive
         ..registerAdapter(TvshowDetailsAdapter())
-        ..registerAdapter(StreamingDetailAdapter());
+        ..registerAdapter(StreamingDetailHiveAdapter());
     } else {
       Directory? documentsDirectory;
       try {
@@ -33,7 +33,7 @@ class HiveDatabaseService extends IDatabaseService {
       Hive
         ..init(documentsDirectory?.path ?? '')
         ..registerAdapter(TvshowDetailsAdapter())
-        ..registerAdapter(StreamingDetailAdapter());
+        ..registerAdapter(StreamingDetailHiveAdapter());
     }
   }
 
