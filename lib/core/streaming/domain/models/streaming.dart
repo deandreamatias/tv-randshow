@@ -96,6 +96,7 @@ class PosterUrLs {
 
 class StreamingDetail {
   StreamingDetail({
+    this.id,
     required this.streamingName,
     this.link = '',
     required this.added,
@@ -103,6 +104,7 @@ class StreamingDetail {
     required this.country,
   });
 
+  final String? id;
   final String streamingName;
   final String country;
   final String link;

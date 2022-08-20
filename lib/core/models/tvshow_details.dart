@@ -63,7 +63,6 @@ class TvshowDetails extends HiveObject {
   @JsonKey(toJson: _seasonsToJson)
   List<Season> seasons;
 
-  @HiveField(9)
   @JsonKey(ignore: true)
   List<StreamingDetail> streamings;
 

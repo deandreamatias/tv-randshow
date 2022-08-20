@@ -17,18 +17,20 @@ class StreamingDetailHiveAdapter extends TypeAdapter<StreamingDetailHive> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return StreamingDetailHive(
+      id: fields[6] as String,
       streamingName: fields[0] as String,
       link: fields[2] as String,
       added: fields[3] as int,
       leaving: fields[4] as int,
       country: fields[1] as String,
+      tvshowId: fields[5] as int,
     );
   }
 
   @override
   void write(BinaryWriter writer, StreamingDetailHive obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.streamingName)
       ..writeByte(1)
@@ -38,7 +40,11 @@ class StreamingDetailHiveAdapter extends TypeAdapter<StreamingDetailHive> {
       ..writeByte(3)
       ..write(obj.added)
       ..writeByte(4)
-      ..write(obj.leaving);
+      ..write(obj.leaving)
+      ..writeByte(5)
+      ..write(obj.tvshowId)
+      ..writeByte(6)
+      ..write(obj.id);
   }
 
   @override

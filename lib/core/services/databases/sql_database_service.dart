@@ -87,10 +87,12 @@ class SqlDatabaseService extends IDatabaseService {
 
       return tvShowsMaps.map((i) {
         TvshowDetails tvshow = TvshowDetails.fromJson(i);
-        tvshow = tvshow.copyWith(
-            streamings: streamings
-                .where((streaming) => streaming.tvshowId == tvshow.rowId)
-                .toList());
+        if (streamings.isNotEmpty) {
+          tvshow = tvshow.copyWith(
+              streamings: streamings
+                  .where((streaming) => streaming.tvshowId == tvshow.rowId)
+                  .toList());
+        }
         return tvshow;
       }).toList();
     } catch (e) {
@@ -123,7 +125,7 @@ class SqlDatabaseService extends IDatabaseService {
         );
       }
     }
-    log('Inserted row: $tvshowRowId');
+    log('Tvshow saved: row $tvshowRowId with ${tvshowDetails.streamings.length} streamings');
     return tvshowRowId.isFinite;
   }
 }

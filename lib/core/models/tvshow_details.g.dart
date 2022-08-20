@@ -26,14 +26,13 @@ class TvshowDetailsAdapter extends TypeAdapter<TvshowDetails> {
       numberOfSeasons: fields[6] as int,
       overview: fields[7] as String,
       posterPath: fields[8] as String,
-      streamings: (fields[9] as List).cast<StreamingDetail>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, TvshowDetails obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.rowId)
       ..writeByte(1)
@@ -51,9 +50,7 @@ class TvshowDetailsAdapter extends TypeAdapter<TvshowDetails> {
       ..writeByte(7)
       ..write(obj.overview)
       ..writeByte(8)
-      ..write(obj.posterPath)
-      ..writeByte(9)
-      ..write(obj.streamings);
+      ..write(obj.posterPath);
   }
 
   @override

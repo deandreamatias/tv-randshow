@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 
 import '../../../config/flavor_config.dart';
 import '../../models/tvshow_details.dart';
@@ -15,10 +16,16 @@ import 'i_database_service.dart';
 @LazySingleton(as: IDatabaseService)
 class HiveDatabaseService extends IDatabaseService {
   Box<TvshowDetails>? tvshowBox;
+  Box<StreamingDetailHive>? streamingsBox;
   final tvshowBoxName =
       FlavorConfig.isDevelopment() ? 'tvshowfavdev' : 'tvshowfav';
+  final streamingsBoxName =
+      FlavorConfig.isDevelopment() ? 'streamingsdev' : 'streamings';
 
-  Future<void> init() async {
+  Future<void> _init() async {
+    if (tvshowBox != null && streamingsBox != null) {
+      return;
+    }
     if (kIsWeb) {
       Hive
         ..registerAdapter(TvshowDetailsAdapter())
@@ -37,21 +44,31 @@ class HiveDatabaseService extends IDatabaseService {
     }
   }
 
-  Future<void> loadBoxes() async {
+  Future<void> _loadBoxes() async {
     if (!await Hive.isBoxOpen(tvshowBoxName)) {
       await Hive.openBox<TvshowDetails>(tvshowBoxName);
     }
-    tvshowBox = Hive.box<TvshowDetails>(tvshowBoxName);
+    if (!await Hive.isBoxOpen(streamingsBoxName)) {
+      await Hive.openBox<StreamingDetailHive>(streamingsBoxName);
+    }
+    tvshowBox ??= Hive.box<TvshowDetails>(tvshowBoxName);
+    streamingsBox ??= Hive.box<StreamingDetailHive>(streamingsBoxName);
   }
 
   @override
   Future<bool> deleteTvshow(int id) async {
-    if (tvshowBox == null) {
-      await init();
-    }
-    await loadBoxes();
+    await _init();
+    await _loadBoxes();
     try {
-      tvshowBox!.delete(id);
+      await tvshowBox!.delete(id);
+      final streamings = await streamingsBox!.values
+          .where((streaming) => streaming.tvshowId == id);
+      if (streamings.isNotEmpty) {
+        for (var streaming in streamings) {
+          await streamingsBox!.delete(streaming.id);
+          log('Streaming of tvshow $id deleted: ${streaming.id}');
+        }
+      }
       log('Tvshow deleted: $id');
       return true;
     } catch (e) {
@@ -62,28 +79,62 @@ class HiveDatabaseService extends IDatabaseService {
 
   @override
   Future<List<TvshowDetails>> getTvshows() async {
-    if (tvshowBox == null) {
-      await init();
-    }
-    await loadBoxes();
+    await _init();
+    await _loadBoxes();
     try {
-      return (await tvshowBox!.values).toList();
+      final tvshows = await tvshowBox!.values;
+      final streamings = await streamingsBox!.values;
+      final List<TvshowDetails> list = [];
+      for (TvshowDetails tvshow in tvshows) {
+        if (streamings.isNotEmpty) {
+          tvshow = tvshow.copyWith(
+              streamings: streamings
+                  .where((streaming) => streaming.tvshowId == tvshow.id)
+                  .map(
+                    (streaming) => StreamingDetail(
+                      id: streaming.id,
+                      streamingName: streaming.streamingName,
+                      link: streaming.link,
+                      added: streaming.added,
+                      leaving: streaming.leaving,
+                      country: streaming.country,
+                    ),
+                  )
+                  .toList());
+        }
+        list.add(tvshow);
+      }
+      return list;
     } catch (e) {
-      log('Error to get tv shows', error: e);
+      log('Error to get tv shows: $e', error: e);
       return [];
     }
   }
 
   @override
   Future<bool> saveTvshow(TvshowDetails tvshowDetails) async {
-    if (tvshowBox == null) {
-      await init();
-    }
-    await loadBoxes();
+    await _init();
+    await _loadBoxes();
     if (!tvshowBox!.containsKey(tvshowDetails.id)) {
       try {
         await tvshowBox!.put(tvshowDetails.id, tvshowDetails);
-        log('Tvshow saved: ${tvshowDetails.id}');
+
+        if (tvshowDetails.streamings.isNotEmpty) {
+          for (int i = 0; i < tvshowDetails.streamings.length; i++) {
+            final streamingHive = StreamingDetailHive(
+              id: '${tvshowDetails.id}_$i', // Custom unique id
+              streamingName: tvshowDetails.streamings[i].streamingName,
+              country: tvshowDetails.streamings[i].country,
+              link: tvshowDetails.streamings[i].link,
+              added: tvshowDetails.streamings[i].added,
+              leaving: tvshowDetails.streamings[i].leaving,
+              tvshowId: tvshowDetails.id,
+            );
+
+            await streamingsBox!.put(streamingHive.id, streamingHive);
+          }
+        }
+        log('Tvshow saved: ${tvshowDetails.id} with ${tvshowDetails.streamings.length} streamings');
         return true;
       } catch (e) {
         log('Error to save tvshow: ${tvshowDetails.id}', error: e);
