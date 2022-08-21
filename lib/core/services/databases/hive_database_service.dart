@@ -121,8 +121,7 @@ class HiveDatabaseService extends IDatabaseService {
 
         log('Tvshow ${tvshowDetails.id} saved');
 
-        final savedStreamings =
-            await saveStreamings(tvshowDetails.streamings, tvshowDetails.id);
+        final savedStreamings = await saveStreamings(tvshowDetails);
 
         return savedStreamings;
       } catch (e) {
@@ -134,8 +133,9 @@ class HiveDatabaseService extends IDatabaseService {
   }
 
   @override
-  Future<bool> saveStreamings(
-      List<StreamingDetail> streamings, int tvshowId) async {
+  Future<bool> saveStreamings(TvshowDetails tvshowDetails) async {
+    final streamings = tvshowDetails.streamings;
+    final tvshowId = tvshowDetails.id;
     try {
       if (streamings.isNotEmpty) {
         for (int i = 0; i < streamings.length; i++) {

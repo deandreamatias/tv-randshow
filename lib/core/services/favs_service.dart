@@ -47,7 +47,7 @@ class FavsService {
         country: ui.window.locale.countryCode ?? '',
       ),
     );
-    _tvshowDetails..streamings = streamings;
+    _tvshowDetails = _tvshowDetails.copyWith(streamings: streamings);
 
     return await _databaseService.saveTvshow(_tvshowDetails);
   }

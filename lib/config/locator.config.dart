@@ -13,14 +13,16 @@ import '../core/services/app_service.dart' as _i4;
 import '../core/services/databases/hive_database_service.dart' as _i7;
 import '../core/services/databases/i_database_service.dart' as _i6;
 import '../core/services/databases/sql_database_service.dart' as _i8;
-import '../core/services/favs_service.dart' as _i13;
+import '../core/services/favs_service.dart' as _i14;
 import '../core/services/manage_files_service.dart' as _i11;
 import '../core/services/random_service.dart' as _i12;
 import '../core/streaming/data/repositories/streamings_repository.dart' as _i10;
 import '../core/streaming/domain/interfaces/i_streamings_repository.dart'
     as _i9;
 import '../core/streaming/domain/use_cases/get_tvshow_streamings_use_case.dart'
-    as _i14;
+    as _i15;
+import '../core/tvshow/domain/use_cases/add_streamings_migration_use_case.dart'
+    as _i13;
 
 const String _web = 'web';
 const String _mobile = 'mobile';
@@ -44,10 +46,12 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       appService: get<_i4.AppService>()));
   gh.lazySingleton<_i12.RandomService>(
       () => _i12.RandomService(apiService: get<_i3.ApiService>()));
-  gh.lazySingleton<_i13.FavsService>(() => _i13.FavsService(
+  gh.factory<_i13.AddStreamingsMigrationUseCase>(
+      () => _i13.AddStreamingsMigrationUseCase(get<_i6.IDatabaseService>()));
+  gh.lazySingleton<_i14.FavsService>(() => _i14.FavsService(
       apiService: get<_i3.ApiService>(),
       databaseService: get<_i6.IDatabaseService>()));
-  gh.factory<_i14.GetTvshowStreamingsUseCase>(
-      () => _i14.GetTvshowStreamingsUseCase(get<_i9.IStreamingsRepository>()));
+  gh.factory<_i15.GetTvshowStreamingsUseCase>(
+      () => _i15.GetTvshowStreamingsUseCase(get<_i9.IStreamingsRepository>()));
   return get;
 }

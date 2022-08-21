@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 import '../../models/tvshow_details.dart';
 import '../../streaming/data/models/streaming_detail_input.dart';
 import '../../streaming/data/models/streaming_detail_output.dart';
-import '../../streaming/domain/models/streaming.dart';
 import '../../utils/database_helper.dart';
 import 'i_database_service.dart';
 
@@ -115,17 +114,16 @@ class SqlDatabaseService extends IDatabaseService {
     }
     log('Tvshow ${tvshowDetails.id} saved');
 
-    final savedStreamings =
-        await saveStreamings(tvshowDetails.streamings, tvshowRowId);
+    tvshowDetails = tvshowDetails.copyWith(rowId: tvshowRowId);
+    final savedStreamings = await saveStreamings(tvshowDetails);
 
     return tvshowRowId.isFinite && savedStreamings;
   }
 
   @override
-  Future<bool> saveStreamings(
-    List<StreamingDetail> streamings,
-    int tvshowRowId,
-  ) async {
+  Future<bool> saveStreamings(TvshowDetails tvshowDetails) async {
+    final streamings = tvshowDetails.streamings;
+    final tvshowRowId = tvshowDetails.rowId!;
     List<int> rowIdAdded = [];
     if (streamings.isNotEmpty) {
       for (final streaming in streamings) {
