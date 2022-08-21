@@ -119,28 +119,44 @@ class HiveDatabaseService extends IDatabaseService {
       try {
         await tvshowBox!.put(tvshowDetails.id, tvshowDetails);
 
-        if (tvshowDetails.streamings.isNotEmpty) {
-          for (int i = 0; i < tvshowDetails.streamings.length; i++) {
-            final streamingHive = StreamingDetailHive(
-              id: '${tvshowDetails.id}_$i', // Custom unique id
-              streamingName: tvshowDetails.streamings[i].streamingName,
-              country: tvshowDetails.streamings[i].country,
-              link: tvshowDetails.streamings[i].link,
-              added: tvshowDetails.streamings[i].added,
-              leaving: tvshowDetails.streamings[i].leaving,
-              tvshowId: tvshowDetails.id,
-            );
+        log('Tvshow ${tvshowDetails.id} saved');
 
-            await streamingsBox!.put(streamingHive.id, streamingHive);
-          }
-        }
-        log('Tvshow saved: ${tvshowDetails.id} with ${tvshowDetails.streamings.length} streamings');
-        return true;
+        final savedStreamings =
+            await saveStreamings(tvshowDetails.streamings, tvshowDetails.id);
+
+        return savedStreamings;
       } catch (e) {
-        log('Error to save tvshow: ${tvshowDetails.id}', error: e);
+        log('Error to save tvshow ${tvshowDetails.id}', error: e);
         return false;
       }
     }
     return false;
+  }
+
+  @override
+  Future<bool> saveStreamings(
+      List<StreamingDetail> streamings, int tvshowId) async {
+    try {
+      if (streamings.isNotEmpty) {
+        for (int i = 0; i < streamings.length; i++) {
+          final streamingHive = StreamingDetailHive(
+            id: '${tvshowId}_$i', // Custom unique id
+            streamingName: streamings[i].streamingName,
+            country: streamings[i].country,
+            link: streamings[i].link,
+            added: streamings[i].added,
+            leaving: streamings[i].leaving,
+            tvshowId: tvshowId,
+          );
+
+          await streamingsBox!.put(streamingHive.id, streamingHive);
+        }
+      }
+      log('Streamings saved on tvshow ${tvshowId}: ${streamings.length} streamings');
+      return true;
+    } catch (e) {
+      log('Error to save streamings on tv show: ${tvshowId}', error: e);
+      return false;
+    }
   }
 }

@@ -7,9 +7,10 @@ import 'dart:async' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:tv_randshow/core/models/tvshow_actions.dart' as _i2;
 import 'package:tv_randshow/core/models/tvshow_details.dart' as _i5;
-import 'package:tv_randshow/core/services/app_service.dart' as _i6;
+import 'package:tv_randshow/core/services/app_service.dart' as _i7;
 import 'package:tv_randshow/core/services/databases/i_database_service.dart'
     as _i3;
+import 'package:tv_randshow/core/streaming/domain/models/streaming.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -36,6 +37,12 @@ class MockIDatabaseService extends _i1.Mock implements _i3.IDatabaseService {
       (super.noSuchMethod(Invocation.method(#saveTvshow, [tvshowDetails]),
           returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
+  _i4.Future<bool> saveStreamings(
+          List<_i6.StreamingDetail>? streamings, int? tvshowId) =>
+      (super.noSuchMethod(
+          Invocation.method(#saveStreamings, [streamings, tvshowId]),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+  @override
   _i4.Future<List<_i5.TvshowDetails>> getTvshows() =>
       (super.noSuchMethod(Invocation.method(#getTvshows, []),
               returnValue:
@@ -50,7 +57,7 @@ class MockIDatabaseService extends _i1.Mock implements _i3.IDatabaseService {
 /// A class which mocks [AppService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAppService extends _i1.Mock implements _i6.AppService {
+class MockAppService extends _i1.Mock implements _i7.AppService {
   MockAppService() {
     _i1.throwOnMissingStub(this);
   }

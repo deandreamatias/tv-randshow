@@ -6,6 +6,8 @@ part 'streaming_detail_input.g.dart';
 @JsonSerializable(createFactory: false)
 class StreamingDetailInput extends StreamingDetail {
   final int tvshowId;
+  @JsonKey(ignore: true)
+  final String? id;
   StreamingDetailInput({
     required String streamingName,
     required String country,
@@ -13,6 +15,7 @@ class StreamingDetailInput extends StreamingDetail {
     required int added,
     required int leaving,
     required this.tvshowId,
+    this.id,
   }) : super(
           streamingName: streamingName,
           added: added,

@@ -194,9 +194,10 @@ class DatabaseHelper {
 
   // Helper methods
 
-  // Inserts a row in the database where each key in the Map is a column name
-  // and the value is the column value. The return value is the id of the
-  // inserted row.
+  /// Inserts a row in the database where each key in the Map is a column name
+  /// and the value is the column value.
+  ///
+  /// The return value is the id of the inserted row.
   Future<int> insert({
     required Map<String, dynamic> row,
     required String table,
@@ -221,8 +222,8 @@ class DatabaseHelper {
     );
   }
 
-  // Deletes the row specified by the id. The number of affected rows is
-  // returned. This should be 1 as long as the row exists.
+  /// Deletes the row specified by the id. The number of affected rows is
+  /// returned. This should be 1 as long as the row exists.
   Future<int> delete({
     required String table,
     required MapEntry deletefilter,

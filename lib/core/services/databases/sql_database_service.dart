@@ -1,10 +1,11 @@
 import 'dart:developer';
 
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/streaming/data/models/streaming_detail_input.dart';
-import 'package:tv_randshow/core/streaming/data/models/streaming_detail_output.dart';
 
 import '../../models/tvshow_details.dart';
+import '../../streaming/data/models/streaming_detail_input.dart';
+import '../../streaming/data/models/streaming_detail_output.dart';
+import '../../streaming/domain/models/streaming.dart';
 import '../../utils/database_helper.dart';
 import 'i_database_service.dart';
 
@@ -108,8 +109,26 @@ class SqlDatabaseService extends IDatabaseService {
       row: tvshowRow,
       table: DatabaseHelper.tvshowTable,
     );
-    if (tvshowDetails.streamings.isNotEmpty) {
-      for (final streaming in tvshowDetails.streamings) {
+    if (tvshowRowId == 0) {
+      log('Error to save tvshow ${tvshowDetails.id}');
+      return false;
+    }
+    log('Tvshow ${tvshowDetails.id} saved');
+
+    final savedStreamings =
+        await saveStreamings(tvshowDetails.streamings, tvshowRowId);
+
+    return tvshowRowId.isFinite && savedStreamings;
+  }
+
+  @override
+  Future<bool> saveStreamings(
+    List<StreamingDetail> streamings,
+    int tvshowRowId,
+  ) async {
+    List<int> rowIdAdded = [];
+    if (streamings.isNotEmpty) {
+      for (final streaming in streamings) {
         final streamingRow = StreamingDetailInput(
           streamingName: streaming.streamingName,
           country: streaming.country,
@@ -119,13 +138,20 @@ class SqlDatabaseService extends IDatabaseService {
           tvshowId: tvshowRowId,
         ).toJson();
 
-        await dbHelper.insert(
+        final rowId = await dbHelper.insert(
           row: streamingRow,
           table: DatabaseHelper.streamingsTable,
         );
+        rowIdAdded.add(rowId);
       }
+
+      final success = !rowIdAdded.any((rowId) => rowId == 0);
+      success
+          ? log(
+              'Streamings saved on tvshow ${tvshowRowId}: ${streamings.length} streamings')
+          : log('Error to save streamings on tv show ${tvshowRowId}');
+      return success;
     }
-    log('Tvshow saved: row $tvshowRowId with ${tvshowDetails.streamings.length} streamings');
-    return tvshowRowId.isFinite;
+    return true;
   }
 }

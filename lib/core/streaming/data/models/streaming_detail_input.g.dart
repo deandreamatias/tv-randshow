@@ -9,7 +9,6 @@ part of 'streaming_detail_input.dart';
 Map<String, dynamic> _$StreamingDetailInputToJson(
         StreamingDetailInput instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'streamingName': instance.streamingName,
       'country': instance.country,
       'link': instance.link,
