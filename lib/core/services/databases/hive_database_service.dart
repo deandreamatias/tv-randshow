@@ -12,7 +12,6 @@ import '../../models/tvshow_details.dart';
 import '../../streaming/data/models/streaming_detail_hive.dart';
 import 'i_database_service.dart';
 
-@Environment("web")
 @LazySingleton(as: IDatabaseService)
 class HiveDatabaseService extends IDatabaseService {
   Box<TvshowDetails>? tvshowBox;

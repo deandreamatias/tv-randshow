@@ -236,4 +236,13 @@ class DatabaseHelper {
     );
     return idDeleted;
   }
+
+  /// Deletes the row specified by the id. The number of affected rows is
+  /// returned. This should be 1 as long as the row exists.
+  Future<bool> deleteAll() async {
+    final Database db = await instance.database;
+    final idDeleted = await db.delete(tvshowTable);
+    await db.delete(streamingsTable);
+    return idDeleted > 0;
+  }
 }
