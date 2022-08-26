@@ -1,6 +1,17 @@
 {
     "app": {
         "name": "TV Randshow",
+        "migration": {
+            "title": "Migración",
+            "subtitle": "A continuación se hará un pequeño proceso de migración para mejorar la aplicación",
+            "loaded_old": "Base de datos antigua cargada",
+            "empty_old": "Base de datos antigua vacía",
+            "saved_to_new": "Guardado en nueva base de datos",
+            "verify_data": "Verificación de datos",
+            "deleted_old": "Borrando base de datos antigua",
+            "error": "Error al hacer la migración",
+            "home_button": "IR AL INICIO"
+        },
         "fav": {
             "tab": "Favoritos",
             "save": "Guarda tus series en un archivo",

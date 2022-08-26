@@ -22,28 +22,35 @@ class MobileDatabaseMigrationUseCase {
   Stream<MigrationStatus> call() async* {
     final List<TvshowDetails> tvshows =
         await _secondaryDatabaseService.getTvshows();
-    yield MigrationStatus.getFromOld;
+    yield MigrationStatus.loadedOld;
 
     if (tvshows.isNotEmpty) {
       for (TvshowDetails tvshow in tvshows) {
         final success = await _databaseService.saveTvshow(tvshow);
-        if (!success) yield MigrationStatus.error;
+        if (!success) {
+          yield MigrationStatus.error;
+          return;
+        }
       }
-      yield MigrationStatus.saveToNew;
+      yield MigrationStatus.savedToNew;
 
       final newTvshows = await _databaseService.getTvshows();
 
       if (!listEquals(tvshows, newTvshows)) {
         log('Error to migrate tvshows: Lists different');
+        log(tvshows.toString());
+        log(newTvshows.toString());
         yield MigrationStatus.error;
+        return;
       }
-      yield MigrationStatus.verifyNew;
+      yield MigrationStatus.verifyData;
 
       final result = await _secondaryDatabaseService.deleteAll();
       if (result) {
         yield MigrationStatus.emptyOld;
       } else {
         yield MigrationStatus.error;
+        return;
       }
     }
     yield MigrationStatus.emptyOld;

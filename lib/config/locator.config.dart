@@ -14,18 +14,20 @@ import '../core/services/databases/hive_database_service.dart' as _i7;
 import '../core/services/databases/i_database_service.dart' as _i6;
 import '../core/services/databases/i_secondary_database_service.dart' as _i8;
 import '../core/services/databases/sql_database_service.dart' as _i9;
-import '../core/services/favs_service.dart' as _i16;
+import '../core/services/favs_service.dart' as _i17;
 import '../core/services/manage_files_service.dart' as _i12;
 import '../core/services/random_service.dart' as _i14;
 import '../core/streaming/data/repositories/streamings_repository.dart' as _i11;
 import '../core/streaming/domain/interfaces/i_streamings_repository.dart'
     as _i10;
 import '../core/streaming/domain/use_cases/get_tvshow_streamings_use_case.dart'
-    as _i17;
+    as _i18;
 import '../core/tvshow/domain/use_cases/add_streamings_migration_use_case.dart'
-    as _i15;
+    as _i16;
 import '../core/tvshow/domain/use_cases/mobile_database_migration_use_case.dart'
     as _i13;
+import '../core/tvshow/domain/use_cases/verify_old_database_use_case.dart'
+    as _i15;
 
 const String _mobile = 'mobile';
 // ignore_for_file: unnecessary_lambdas
@@ -52,12 +54,15 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       registerFor: {_mobile});
   gh.lazySingleton<_i14.RandomService>(
       () => _i14.RandomService(apiService: get<_i3.ApiService>()));
-  gh.factory<_i15.AddStreamingsMigrationUseCase>(
-      () => _i15.AddStreamingsMigrationUseCase(get<_i6.IDatabaseService>()));
-  gh.lazySingleton<_i16.FavsService>(() => _i16.FavsService(
+  gh.factory<_i15.VerifyOldDatabaseUseCase>(
+      () => _i15.VerifyOldDatabaseUseCase(get<_i8.ISecondaryDatabaseService>()),
+      registerFor: {_mobile});
+  gh.factory<_i16.AddStreamingsMigrationUseCase>(
+      () => _i16.AddStreamingsMigrationUseCase(get<_i6.IDatabaseService>()));
+  gh.lazySingleton<_i17.FavsService>(() => _i17.FavsService(
       apiService: get<_i3.ApiService>(),
       databaseService: get<_i6.IDatabaseService>()));
-  gh.factory<_i17.GetTvshowStreamingsUseCase>(
-      () => _i17.GetTvshowStreamingsUseCase(get<_i10.IStreamingsRepository>()));
+  gh.factory<_i18.GetTvshowStreamingsUseCase>(
+      () => _i18.GetTvshowStreamingsUseCase(get<_i10.IStreamingsRepository>()));
   return get;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RoutePaths {
+  static const String MIGRATION = '/migration';
   static const String TAB = '/';
   static const String PRIVACY = 'privacy';
   static const String SPLASH = 'splash';
