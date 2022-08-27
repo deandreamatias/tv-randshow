@@ -10,8 +10,6 @@ import '../core/utils/constants.dart';
 import '../ui/router.dart' as router;
 
 class App extends StatelessWidget {
-  final VerifyOldDatabaseUseCase _hasOldDatabaseUseCase =
-      locator<VerifyOldDatabaseUseCase>();
   @override
   Widget build(BuildContext context) {
     final LocalizationDelegate localizationDelegate =
@@ -34,32 +32,63 @@ class App extends StatelessWidget {
       ],
       child: ThemeConsumer(
         child: Builder(
-          builder: (themeContext) => FutureBuilder<bool>(
-              future: _hasOldDatabaseUseCase(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState != ConnectionState.done)
-                  return CircularProgressIndicator();
-                return MaterialApp(
-                  debugShowCheckedModeBanner: kDebugMode,
-                  title: kIsWeb
-                      ? 'TV Randshow | App to choose a random TV show episode'
-                      : 'TV Randshow',
-                  theme: ThemeProvider.themeOf(themeContext).data,
-                  initialRoute: !kIsWeb && snapshot.data!
-                      ? RoutePaths.MIGRATION
-                      : RoutePaths.TAB,
-                  onGenerateRoute: router.Router.generateRoute,
-                  localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    localizationDelegate,
-                  ],
-                  supportedLocales: localizationDelegate.supportedLocales,
-                  locale: localizationDelegate.currentLocale,
-                );
-              }),
+          builder: (themeContext) => kIsWeb
+              ? _MaterialApp(
+                  localizationDelegate: localizationDelegate,
+                  themeContext: themeContext,
+                )
+              : FutureBuilder<bool>(
+                  future: locator<VerifyOldDatabaseUseCase>()(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState != ConnectionState.done)
+                      return Container(
+                        child: CircularProgressIndicator(),
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        color: Colors.white,
+                      );
+                    return _MaterialApp(
+                      localizationDelegate: localizationDelegate,
+                      themeContext: themeContext,
+                      showMigrationView: snapshot.data!,
+                    );
+                  },
+                ),
         ),
       ),
+    );
+  }
+}
+
+class _MaterialApp extends StatelessWidget {
+  final bool showMigrationView;
+  final BuildContext themeContext;
+  const _MaterialApp({
+    Key? key,
+    this.showMigrationView = false,
+    required this.themeContext,
+    required this.localizationDelegate,
+  }) : super(key: key);
+
+  final LocalizationDelegate localizationDelegate;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: kDebugMode,
+      title: kIsWeb
+          ? 'TV Randshow | App to choose a random TV show episode'
+          : 'TV Randshow',
+      theme: ThemeProvider.themeOf(themeContext).data,
+      initialRoute: showMigrationView ? RoutePaths.MIGRATION : RoutePaths.TAB,
+      onGenerateRoute: router.Router.generateRoute,
+      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        localizationDelegate,
+      ],
+      supportedLocales: localizationDelegate.supportedLocales,
+      locale: localizationDelegate.currentLocale,
     );
   }
 }

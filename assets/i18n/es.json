@@ -8,7 +8,7 @@
             "empty_old": "Base de datos antigua vacía",
             "saved_to_new": "Guardado en nueva base de datos",
             "verify_data": "Verificación de datos",
-            "deleted_old": "Borrando base de datos antigua",
+            "deleted_old": "Base de datos antigua borrada",
             "error": "Error al hacer la migración",
             "home_button": "IR AL INICIO"
         },

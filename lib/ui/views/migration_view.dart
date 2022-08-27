@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/migration_model.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/mobile_database_migration_use_case.dart';
 import 'package:tv_randshow/core/utils/constants.dart';
@@ -20,10 +21,10 @@ class MigrationView extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: StreamBuilder<MigrationStatus>(
+          child: StreamBuilder<MigrationModel>(
             stream: _migrationUseCase(),
             builder: (context, snapshot) {
-              final order = snapshot.data?.getOrder() ?? 0;
+              final order = snapshot.data?.status.getOrder() ?? 0;
               return Column(
                 children: [
                   Text(
@@ -47,25 +48,29 @@ class MigrationView extends StatelessWidget {
                     const SizedBox(height: 8),
                     _Checkpoint(
                         label: 'app.migration.empty_old', checked: true),
+                  ] else ...[
+                    const SizedBox(height: 8),
+                    _Checkpoint(
+                      label: 'app.migration.saved_to_new',
+                      checked: order >= MigrationStatus.savedToNew.getOrder(),
+                    ),
+                    const SizedBox(height: 8),
+                    _Checkpoint(
+                      label: 'app.migration.verify_data',
+                      checked: order >= MigrationStatus.verifyData.getOrder(),
+                    ),
+                    const SizedBox(height: 8),
+                    _Checkpoint(
+                      label: 'app.migration.deleted_old',
+                      checked: order >= MigrationStatus.deletedOld.getOrder(),
+                    ),
+                    const SizedBox(height: 8),
                   ],
+                  if (snapshot.data?.error.isNotEmpty ?? false)
+                    Text(
+                        '${translate('app.migration.error')}:\n ${snapshot.data?.error}'),
                   const SizedBox(height: 8),
-                  _Checkpoint(
-                    label: 'app.migration.saved_to_new',
-                    checked: order >= MigrationStatus.savedToNew.getOrder(),
-                  ),
-                  const SizedBox(height: 8),
-                  _Checkpoint(
-                    label: 'app.migration.verify_data',
-                    checked: order >= MigrationStatus.verifyData.getOrder(),
-                  ),
-                  const SizedBox(height: 8),
-                  _Checkpoint(
-                    label: 'app.migration.deleted_old',
-                    checked: order >= MigrationStatus.deletedOld.getOrder(),
-                  ),
-                  const SizedBox(height: 8),
-                  if (order == MigrationStatus.error.getOrder())
-                    Text(translate('app.migration.error')),
+                  if (snapshot.hasError) Text(snapshot.error.toString()),
                   const SizedBox(height: 24),
                   OutlinedButton.icon(
                     label: Text(translate('app.migration.home_button')),

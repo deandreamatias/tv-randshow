@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -12,7 +11,7 @@ class DatabaseHelper {
   DatabaseHelper._privateConstructor();
 
   String _databaseName = '';
-  static const int _databaseVersion = 2;
+  static const int _databaseVersion = 1;
   static const String tvshowTable = 'tvshowfav';
   static const String streamingsTable = 'tvshowstreaming';
 
@@ -63,47 +62,20 @@ class DatabaseHelper {
     return await openDatabase(
       path,
       version: _databaseVersion,
-      onConfigure: onConfigure,
       onCreate: (db, version) async {
         final batch = db.batch();
         _createTvshowTable(batch);
-        _createStreamingsTable(batch);
-        await batch.commit();
-      },
-      onUpgrade: (db, oldVersion, version) async {
-        var batch = db.batch();
-        if (oldVersion == 1) {
-          _createStreamingsTable(batch);
-          _addAutoincrementToTvshowTable(batch);
-        }
         await batch.commit();
       },
     );
   }
 
-  // SQL code to create the database streamings table
-  void _createStreamingsTable(Batch batch) {
-    batch.execute('DROP TABLE IF EXISTS $streamingsTable');
-    batch.execute('''
-          CREATE TABLE $streamingsTable (
-            $columnStreamingId INTEGER PRIMARY KEY AUTOINCREMENT,
-            $columnStreamingName TEXT,
-            $columnStreamingLink TEXT,
-            $columnStreamingCountry TEXT,
-            $columnStreamingLeaving INTEGER,
-            $columnStreamingAdded INTEGER,
-            $columnStreamingTvshowId INTEGER,
-            FOREIGN KEY ($columnStreamingTvshowId) REFERENCES $tvshowTable($columnId) ON DELETE CASCADE
-          )''');
-  }
-
   // SQL code to create the database tvshows table
   void _createTvshowTable(Batch batch, {String auxiliar = ''}) {
-    batch.execute('DROP TABLE IF EXISTS $tvshowTable');
     final table = auxiliar.isNotEmpty ? auxiliar : tvshowTable;
     batch.execute('''
           CREATE TABLE $table (
-            $columnId INTEGER PRIMARY KEY AUTOINCREMENT,
+            $columnId INTEGER PRIMARY KEY,
             $columnIdTvshow INTEGER NOT NULL,
             $columnName TEXT NOT NULL,
             $columnPosterPath TEXT,
@@ -114,82 +86,6 @@ class DatabaseHelper {
             $columnInProduction INTEGER
           )
           ''');
-  }
-
-  void _addAutoincrementToTvshowTable(Batch batch) async {
-    // Create auxiliar table
-    const String tvshowAuxiliarTable = 'tvshowfav_autoincrement';
-    _createTvshowTable(batch, auxiliar: tvshowAuxiliarTable);
-
-    // Verify tvshows on original table
-    final List<Map<String, dynamic>> tvshowsMaps = await queryList(
-      table: DatabaseHelper.tvshowTable,
-      columns: <String>[
-        DatabaseHelper.columnId,
-        DatabaseHelper.columnIdTvshow,
-        DatabaseHelper.columnName,
-        DatabaseHelper.columnPosterPath,
-        DatabaseHelper.columnEpisodes,
-        DatabaseHelper.columnSeasons,
-        DatabaseHelper.columnRunTime,
-        DatabaseHelper.columnOverview,
-        DatabaseHelper.columnInProduction,
-      ],
-    );
-
-    // Execute table migration
-    batch.execute('''
-          INSERT INTO $tvshowAuxiliarTable (
-            $columnIdTvshow,
-            $columnName,
-            $columnPosterPath,
-            $columnEpisodes,
-            $columnSeasons,
-            $columnRunTime,
-            $columnOverview,
-            $columnInProduction
-          )
-          SELECT $columnIdTvshow,$columnName,$columnPosterPath,$columnEpisodes,$columnSeasons,$columnRunTime,$columnOverview,$columnInProduction
-          FROM $tvshowTable;
-          ''');
-
-    // Verify tvshows on new table
-    final List<Map<String, dynamic>> newTvshowsMaps = await queryList(
-      table: tvshowAuxiliarTable,
-      columns: <String>[
-        DatabaseHelper.columnId,
-        DatabaseHelper.columnIdTvshow,
-        DatabaseHelper.columnName,
-        DatabaseHelper.columnPosterPath,
-        DatabaseHelper.columnEpisodes,
-        DatabaseHelper.columnSeasons,
-        DatabaseHelper.columnRunTime,
-        DatabaseHelper.columnOverview,
-        DatabaseHelper.columnInProduction,
-      ],
-    );
-
-    // Comparare original and old tvshows tables
-    if (tvshowsMaps.length != newTvshowsMaps.length) {
-      log('Error to migrate autoincrement tvshow table: Length original ${tvshowsMaps.length} and new ${newTvshowsMaps.length}');
-      return;
-    }
-    for (var i = 0; i < tvshowsMaps.length; i++) {
-      if (!mapEquals(tvshowsMaps[i], newTvshowsMaps[i])) {
-        log('Error to migrate autoincrement tvshow table: Map different on row $i');
-        return;
-      }
-    }
-
-    // Clean auxiliar table
-    batch.execute('''
-          DROP TABLE $tvshowTable;
-          ALTER TABLE $tvshowAuxiliarTable RENAME TO $tvshowTable;
-          ''');
-  }
-
-  Future onConfigure(Database db) async {
-    await db.execute('PRAGMA foreign_keys = ON');
   }
 
   // Helper methods
@@ -242,7 +138,6 @@ class DatabaseHelper {
   Future<bool> deleteAll() async {
     final Database db = await instance.database;
     final idDeleted = await db.delete(tvshowTable);
-    await db.delete(streamingsTable);
     return idDeleted > 0;
   }
 }

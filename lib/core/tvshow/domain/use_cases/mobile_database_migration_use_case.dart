@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/services/databases/i_secondary_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/migration_model.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 
 @Environment("mobile")
@@ -19,20 +20,23 @@ class MobileDatabaseMigrationUseCase {
     this._secondaryDatabaseService,
   );
 
-  Stream<MigrationStatus> call() async* {
+  Stream<MigrationModel> call() async* {
     final List<TvshowDetails> tvshows =
         await _secondaryDatabaseService.getTvshows();
-    yield MigrationStatus.loadedOld;
+    yield MigrationModel(status: MigrationStatus.loadedOld);
 
     if (tvshows.isNotEmpty) {
       for (TvshowDetails tvshow in tvshows) {
         final success = await _databaseService.saveTvshow(tvshow);
         if (!success) {
-          yield MigrationStatus.error;
+          yield MigrationModel(
+            error: 'Error to save tv show ${tvshow.id}',
+            status: MigrationStatus.loadedOld,
+          );
           return;
         }
       }
-      yield MigrationStatus.savedToNew;
+      yield MigrationModel(status: MigrationStatus.savedToNew);
 
       final newTvshows = await _databaseService.getTvshows();
 
@@ -40,19 +44,25 @@ class MobileDatabaseMigrationUseCase {
         log('Error to migrate tvshows: Lists different');
         log(tvshows.toString());
         log(newTvshows.toString());
-        yield MigrationStatus.error;
+        yield MigrationModel(
+          error: 'Error on database verification',
+          status: MigrationStatus.savedToNew,
+        );
         return;
       }
-      yield MigrationStatus.verifyData;
+      yield MigrationModel(status: MigrationStatus.verifyData);
 
       final result = await _secondaryDatabaseService.deleteAll();
       if (result) {
-        yield MigrationStatus.emptyOld;
+        yield MigrationModel(status: MigrationStatus.deletedOld);
       } else {
-        yield MigrationStatus.error;
-        return;
+        yield MigrationModel(
+          error: 'Error to delete old database',
+          status: MigrationStatus.verifyData,
+        );
       }
+      return;
     }
-    yield MigrationStatus.emptyOld;
+    yield MigrationModel(status: MigrationStatus.emptyOld);
   }
 }

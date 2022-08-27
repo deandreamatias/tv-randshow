@@ -47,4 +47,23 @@ class SqlDatabaseService extends ISecondaryDatabaseService {
       return [];
     }
   }
+
+  @override
+  Future<bool> saveTvshows(List<TvshowDetails> tvshows) async {
+    for (var tvshow in tvshows) {
+      final tvshowRow = tvshow.toJson();
+      final int tvshowRowId = await dbHelper.insert(
+        row: tvshowRow,
+        table: DatabaseHelper.tvshowTable,
+      );
+      if (tvshowRowId == 0) {
+        log('Error to save tvshow ${tvshow.id}');
+        return false;
+      }
+      log('Tvshow ${tvshow.id} saved');
+
+      return tvshowRowId.isFinite;
+    }
+    return true;
+  }
 }
