@@ -6,9 +6,12 @@
             "subtitle": "A continuación se hará un pequeño proceso de migración para mejorar la aplicación",
             "loaded_old": "Base de datos antigua cargada",
             "empty_old": "Base de datos antigua vacía",
-            "saved_to_new": "Guardado en nueva base de datos",
+            "saved_to_new": "Series guardadas en nueva base de datos",
             "verify_data": "Verificación de datos",
             "deleted_old": "Base de datos antigua borrada",
+            "complete_database": "Migración de base de datos completa",
+            "add_streaming": "Enlaces de streaming asociados a series",
+            "complete": "Migración de streamings completa",
             "error": "Error al hacer la migración",
             "home_button": "IR AL INICIO"
         },

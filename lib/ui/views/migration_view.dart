@@ -1,30 +1,53 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_model.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
-import 'package:tv_randshow/core/tvshow/domain/use_cases/mobile_database_migration_use_case.dart';
 import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/ui/states/migration_state.dart';
 import 'package:unicons/unicons.dart';
 
-import 'tab_view.dart';
-
-class MigrationView extends StatelessWidget {
+class MigrationView extends StatefulWidget {
   const MigrationView({Key? key}) : super(key: key);
 
   @override
+  State<MigrationView> createState() => _MigrationViewState();
+}
+
+class _MigrationViewState extends State<MigrationView> {
+  MigrationState migrationState = MigrationState();
+
+  @override
+  void initState() {
+    migrationState.initMigration();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    migrationState.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final MobileDatabaseMigrationUseCase _migrationUseCase =
-        locator<MobileDatabaseMigrationUseCase>();
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: StreamBuilder<MigrationModel>(
-            stream: _migrationUseCase(),
-            builder: (context, snapshot) {
-              final order = snapshot.data?.status.getOrder() ?? 0;
+          child: ValueListenableBuilder<MigrationModel>(
+            valueListenable: migrationState,
+            child: OutlinedButton.icon(
+              label: Text(translate('app.migration.home_button')),
+              icon: const Icon(UniconsLine.home),
+              onPressed: () => Navigator.pushReplacementNamed(
+                context,
+                RoutePaths.TAB,
+              ),
+            ),
+            builder: (context, value, child) {
+              final order = value.status.getOrder();
               return Column(
                 children: [
                   Text(
@@ -38,49 +61,58 @@ class MigrationView extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
-                  if (snapshot.connectionState != ConnectionState.done)
+                  if (order < MigrationStatus.complete.getOrder() &&
+                      value.error.isEmpty)
                     CircularProgressIndicator(),
-                  _Checkpoint(
-                    label: 'app.migration.loaded_old',
-                    checked: order >= MigrationStatus.loadedOld.getOrder(),
-                  ),
-                  if (order == MigrationStatus.emptyOld.getOrder()) ...[
-                    const SizedBox(height: 8),
+                  if (!kIsWeb) ...[
                     _Checkpoint(
-                        label: 'app.migration.empty_old', checked: true),
-                  ] else ...[
-                    const SizedBox(height: 8),
-                    _Checkpoint(
-                      label: 'app.migration.saved_to_new',
-                      checked: order >= MigrationStatus.savedToNew.getOrder(),
+                      label: 'app.migration.loaded_old',
+                      checked: order >= MigrationStatus.loadedOld.getOrder(),
                     ),
-                    const SizedBox(height: 8),
-                    _Checkpoint(
-                      label: 'app.migration.verify_data',
-                      checked: order >= MigrationStatus.verifyData.getOrder(),
-                    ),
-                    const SizedBox(height: 8),
-                    _Checkpoint(
-                      label: 'app.migration.deleted_old',
-                      checked: order >= MigrationStatus.deletedOld.getOrder(),
-                    ),
-                    const SizedBox(height: 8),
+                    if (order == MigrationStatus.emptyOld.getOrder()) ...[
+                      const SizedBox(height: 8),
+                      _Checkpoint(
+                          label: 'app.migration.empty_old', checked: true),
+                    ] else ...[
+                      const SizedBox(height: 8),
+                      _Checkpoint(
+                        label: 'app.migration.saved_to_new',
+                        checked: order >= MigrationStatus.savedToNew.getOrder(),
+                      ),
+                      const SizedBox(height: 8),
+                      _Checkpoint(
+                        label: 'app.migration.verify_data',
+                        checked: order >= MigrationStatus.verifyData.getOrder(),
+                      ),
+                      const SizedBox(height: 8),
+                      _Checkpoint(
+                        label: 'app.migration.deleted_old',
+                        checked: order >= MigrationStatus.deletedOld.getOrder(),
+                      ),
+                      const SizedBox(height: 8),
+                      _Checkpoint(
+                        label: 'app.migration.complete_database',
+                        checked: order >=
+                            MigrationStatus.completeDatabase.getOrder(),
+                      ),
+                    ],
                   ],
-                  if (snapshot.data?.error.isNotEmpty ?? false)
-                    Text(
-                        '${translate('app.migration.error')}:\n ${snapshot.data?.error}'),
                   const SizedBox(height: 8),
-                  if (snapshot.hasError) Text(snapshot.error.toString()),
-                  const SizedBox(height: 24),
-                  OutlinedButton.icon(
-                    label: Text(translate('app.migration.home_button')),
-                    icon: const Icon(UniconsLine.home),
-                    onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
-                      context,
-                      RoutePaths.TAB,
-                      ModalRoute.withName(RoutePaths.TAB),
-                    ),
+                  _Checkpoint(
+                    label: 'app.migration.add_streaming',
+                    checked: order >= MigrationStatus.addStreaming.getOrder(),
                   ),
+                  const SizedBox(height: 8),
+                  _Checkpoint(
+                    label: 'app.migration.complete',
+                    checked: order >= MigrationStatus.complete.getOrder(),
+                  ),
+                  const SizedBox(height: 8),
+                  if (value.error.isNotEmpty)
+                    Text(
+                        '${translate('app.migration.error')}:\n ${value.error}'),
+                  const SizedBox(height: 24),
+                  child!,
                 ],
               );
             },

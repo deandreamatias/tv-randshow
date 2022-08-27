@@ -20,23 +20,20 @@ class MobileDatabaseMigrationUseCase {
     this._secondaryDatabaseService,
   );
 
-  Stream<MigrationModel> call() async* {
+  Future<MigrationModel> call() async {
     final List<TvshowDetails> tvshows =
         await _secondaryDatabaseService.getTvshows();
-    yield MigrationModel(status: MigrationStatus.loadedOld);
 
     if (tvshows.isNotEmpty) {
       for (TvshowDetails tvshow in tvshows) {
         final success = await _databaseService.saveTvshow(tvshow);
         if (!success) {
-          yield MigrationModel(
+          return MigrationModel(
             error: 'Error to save tv show ${tvshow.id}',
             status: MigrationStatus.loadedOld,
           );
-          return;
         }
       }
-      yield MigrationModel(status: MigrationStatus.savedToNew);
 
       final newTvshows = await _databaseService.getTvshows();
 
@@ -44,25 +41,21 @@ class MobileDatabaseMigrationUseCase {
         log('Error to migrate tvshows: Lists different');
         log(tvshows.toString());
         log(newTvshows.toString());
-        yield MigrationModel(
+        return MigrationModel(
           error: 'Error on database verification',
           status: MigrationStatus.savedToNew,
         );
-        return;
       }
-      yield MigrationModel(status: MigrationStatus.verifyData);
 
       final result = await _secondaryDatabaseService.deleteAll();
-      if (result) {
-        yield MigrationModel(status: MigrationStatus.deletedOld);
-      } else {
-        yield MigrationModel(
+      if (!result) {
+        return MigrationModel(
           error: 'Error to delete old database',
           status: MigrationStatus.verifyData,
         );
       }
-      return;
+      return MigrationModel(status: MigrationStatus.completeDatabase);
     }
-    yield MigrationModel(status: MigrationStatus.emptyOld);
+    return MigrationModel(status: MigrationStatus.emptyOld);
   }
 }

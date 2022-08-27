@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class RoutePaths {
-  static const String MIGRATION = '/migration';
-  static const String TAB = '/';
+  static const String MIGRATION = 'migration';
+  static const String TAB = '/tab';
   static const String PRIVACY = 'privacy';
-  static const String SPLASH = 'splash';
+  static const String SPLASH = '/';
   static const String LOADING = 'loading';
   static const String RESULT = 'result';
 }
