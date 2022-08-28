@@ -39,8 +39,6 @@ class MobileDatabaseMigrationUseCase {
 
       if (!listEquals(tvshows, newTvshows)) {
         log('Error to migrate tvshows: Lists different');
-        log(tvshows.toString());
-        log(newTvshows.toString());
         return MigrationModel(
           error: 'Error on database verification',
           status: MigrationStatus.savedToNew,
