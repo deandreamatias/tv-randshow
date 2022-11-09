@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/migration_model.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/utils/constants.dart';
 import 'package:tv_randshow/ui/states/migration_state.dart';
@@ -25,7 +24,7 @@ class _MigrationViewState extends State<MigrationView> {
 
   @override
   void dispose() {
-    migrationState.dispose();
+    migrationState.close();
     super.dispose();
   }
 
@@ -36,18 +35,11 @@ class _MigrationViewState extends State<MigrationView> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: ValueListenableBuilder<MigrationModel>(
-            valueListenable: migrationState,
-            child: OutlinedButton.icon(
-              label: Text(translate('app.migration.home_button')),
-              icon: const Icon(UniconsLine.home),
-              onPressed: () => Navigator.pushReplacementNamed(
-                context,
-                RoutePaths.TAB,
-              ),
-            ),
-            builder: (context, value, child) {
-              final order = value.status.getOrder();
+          child: StreamBuilder<MigrationStatus>(
+            stream: migrationState.stream,
+            builder: (context, snapshot) {
+              final error = snapshot.error;
+              final order = snapshot.data?.getOrder() ?? 0;
               return Column(
                 children: [
                   Text(
@@ -61,9 +53,6 @@ class _MigrationViewState extends State<MigrationView> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
-                  if (order < MigrationStatus.complete.getOrder() &&
-                      value.error.isEmpty)
-                    CircularProgressIndicator(),
                   if (!kIsWeb) ...[
                     _Checkpoint(
                       label: 'app.migration.loaded_old',
@@ -107,12 +96,25 @@ class _MigrationViewState extends State<MigrationView> {
                     label: 'app.migration.complete',
                     checked: order >= MigrationStatus.complete.getOrder(),
                   ),
-                  const SizedBox(height: 8),
-                  if (value.error.isNotEmpty)
-                    Text(
-                        '${translate('app.migration.error')}:\n ${value.error}'),
+                  if (snapshot.connectionState != ConnectionState.done &&
+                      !snapshot.hasError) ...[
+                    const SizedBox(height: 8),
+                    CircularProgressIndicator(),
+                    const SizedBox(height: 8),
+                  ],
+                  if (snapshot.hasError) ...[
+                    Divider(thickness: 2),
+                    Text('${translate('app.migration.error')}: ${error ?? ''}'),
+                  ],
                   const SizedBox(height: 24),
-                  child!,
+                  OutlinedButton.icon(
+                    label: Text(translate('app.migration.home_button')),
+                    icon: const Icon(UniconsLine.home),
+                    onPressed: () => Navigator.pushReplacementNamed(
+                      context,
+                      RoutePaths.TAB,
+                    ),
+                  ),
                 ],
               );
             },

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:tv_randshow/config/locator.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/migration_model.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/add_streamings_migration_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/get_migration_status_use_case.dart';
@@ -10,7 +9,7 @@ import 'package:tv_randshow/core/tvshow/domain/use_cases/mobile_database_migrati
 import 'package:tv_randshow/core/tvshow/domain/use_cases/save_migration_status_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/verify_old_database_use_case.dart';
 
-class MigrationState extends ValueNotifier<MigrationModel> {
+class MigrationState {
   final AddStreamingsMigrationUseCase _addStreamingsMigrationUseCase =
       locator<AddStreamingsMigrationUseCase>();
   final GetMigrationStatusUseCase _getMigrationStatusUseCase =
@@ -20,29 +19,33 @@ class MigrationState extends ValueNotifier<MigrationModel> {
   final VerifyOldDatabaseUseCase _verifyOldDatabaseUseCase =
       locator<VerifyOldDatabaseUseCase>();
 
-  MigrationState({MigrationModel? value})
-      : super(value ?? MigrationModel(status: MigrationStatus.init)) {
+  StreamController<MigrationStatus> _streamController =
+      StreamController.broadcast();
+  MigrationStatus _migration = MigrationStatus.init;
+
+  MigrationStatus get migration => _migration;
+  Stream<MigrationStatus> get stream => _streamController.stream
+      .takeWhile((model) => model != MigrationStatus.complete);
+  Future<dynamic> Function() get close => _streamController.close;
+
+  MigrationState() {
     loadStatus();
   }
 
   void loadStatus() async {
-    if (!kIsWeb) {
-      await _verifyOldDatabaseUseCase();
-    }
-    value = MigrationModel(status: await _getMigrationStatusUseCase());
-    notifyListeners();
+    if (!kIsWeb) await _verifyOldDatabaseUseCase();
+
+    _migration = await _getMigrationStatusUseCase();
   }
 
   Future<void> initMigration() async {
+    _streamController.add(migration);
     if (!kIsWeb) {
       final MobileDatabaseMigrationUseCase _databaseMigrationUseCase =
           locator<MobileDatabaseMigrationUseCase>();
-      value = await _databaseMigrationUseCase();
-      notifyListeners();
-      await _saveMigrationStatusUseCase(value.status);
+      _streamController.addStream(_databaseMigrationUseCase());
     }
-    value = await _addStreamingsMigrationUseCase();
-    notifyListeners();
-    await _saveMigrationStatusUseCase(value.status);
+    _streamController.addStream(_addStreamingsMigrationUseCase());
+    // await _saveMigrationStatusUseCase(await _streamController.stream);
   }
 }

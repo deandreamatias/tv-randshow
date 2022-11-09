@@ -16,7 +16,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Future.delayed(Duration(milliseconds: 300)).then((value) {
-      migrationState.value.status == MigrationStatus.complete
+      migrationState.migration == MigrationStatus.complete
           ? Navigator.of(context).pushNamed(RoutePaths.TAB)
           : Navigator.of(context).pushNamed(RoutePaths.MIGRATION);
     });

@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/services/databases/i_secondary_database_service.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/migration_model.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 
 @Environment("mobile")
@@ -20,40 +19,32 @@ class MobileDatabaseMigrationUseCase {
     this._secondaryDatabaseService,
   );
 
-  Future<MigrationModel> call() async {
+  Stream<MigrationStatus> call() async* {
     final List<TvshowDetails> tvshows =
         await _secondaryDatabaseService.getTvshows();
+    yield MigrationStatus.loadedOld;
 
     if (tvshows.isNotEmpty) {
       for (TvshowDetails tvshow in tvshows) {
-        final success = await _databaseService.saveTvshow(tvshow);
-        if (!success) {
-          return MigrationModel(
-            error: 'Error to save tv show ${tvshow.id}',
-            status: MigrationStatus.loadedOld,
-          );
-        }
+        await _databaseService.saveTvshow(tvshow);
       }
+      yield MigrationStatus.savedToNew;
 
       final newTvshows = await _databaseService.getTvshows();
 
       if (!listEquals(tvshows, newTvshows)) {
-        log('Error to migrate tvshows: Lists different');
-        return MigrationModel(
-          error: 'Error on database verification',
-          status: MigrationStatus.savedToNew,
-        );
+        throw Exception('Differences between old and new database');
       }
+      yield MigrationStatus.verifyData;
 
       final result = await _secondaryDatabaseService.deleteAll();
       if (!result) {
-        return MigrationModel(
-          error: 'Error to delete old database',
-          status: MigrationStatus.verifyData,
-        );
+        throw Exception('Can not delete old database');
       }
-      return MigrationModel(status: MigrationStatus.completeDatabase);
+      yield MigrationStatus.deletedOld;
+      yield MigrationStatus.completeDatabase;
+      return;
     }
-    return MigrationModel(status: MigrationStatus.emptyOld);
+    yield MigrationStatus.emptyOld;
   }
 }
