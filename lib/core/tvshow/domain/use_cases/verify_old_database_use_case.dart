@@ -15,7 +15,9 @@ class VerifyOldDatabaseUseCase {
 
   /// Return if old database has data
   Future<bool> call() async {
-    if (kDebugMode) {
+    final List<TvshowDetails> tvshows =
+        await _secondaryDatabaseService.getTvshows();
+    if (kDebugMode && tvshows.isEmpty) {
       final faker = Faker();
       await _secondaryDatabaseService.saveTvshows(
         List.generate(
@@ -38,8 +40,6 @@ class VerifyOldDatabaseUseCase {
         ),
       );
     }
-    final List<TvshowDetails> tvshows =
-        await _secondaryDatabaseService.getTvshows();
     return tvshows.isNotEmpty;
   }
 }
