@@ -33,7 +33,7 @@ class FavsService {
     streamController.add(await _databaseService.getTvshows());
   }
 
-  Future<bool> addFav(int tmdbId, String language) async {
+  Future<void> addFav(int tmdbId, String language) async {
     final Query query = Query(
       apiKey: FlavorConfig.instance.values.apiKey,
       language: language,
@@ -49,7 +49,7 @@ class FavsService {
     );
     _tvshowDetails = _tvshowDetails.copyWith(streamings: streamings);
 
-    return await _databaseService.saveTvshow(_tvshowDetails);
+    await _databaseService.saveTvshow(_tvshowDetails);
   }
 
   Future<void> deleteFav(int id) async {

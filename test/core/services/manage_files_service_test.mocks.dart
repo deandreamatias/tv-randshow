@@ -32,13 +32,15 @@ class MockIDatabaseService extends _i1.Mock implements _i3.IDatabaseService {
   }
 
   @override
-  _i4.Future<bool> saveTvshow(_i5.TvshowDetails? tvshowDetails) =>
+  _i4.Future<void> saveTvshow(_i5.TvshowDetails? tvshowDetails) =>
       (super.noSuchMethod(Invocation.method(#saveTvshow, [tvshowDetails]),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  _i4.Future<bool> saveStreamings(_i5.TvshowDetails? tvshowDetails) =>
+  _i4.Future<void> saveStreamings(_i5.TvshowDetails? tvshowDetails) =>
       (super.noSuchMethod(Invocation.method(#saveStreamings, [tvshowDetails]),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
   _i4.Future<List<_i5.TvshowDetails>> getTvshows() =>
       (super.noSuchMethod(Invocation.method(#getTvshows, []),

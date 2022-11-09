@@ -111,7 +111,7 @@ class HiveDatabaseService extends IDatabaseService {
   }
 
   @override
-  Future<bool> saveTvshow(TvshowDetails tvshowDetails) async {
+  Future<void> saveTvshow(TvshowDetails tvshowDetails) async {
     await _init();
     await _loadBoxes();
     if (!tvshowBox!.containsKey(tvshowDetails.id)) {
@@ -120,19 +120,16 @@ class HiveDatabaseService extends IDatabaseService {
 
         log('Tvshow ${tvshowDetails.id} saved');
 
-        final savedStreamings = await saveStreamings(tvshowDetails);
-
-        return savedStreamings;
+        await saveStreamings(tvshowDetails);
       } catch (e) {
         log('Error to save tvshow ${tvshowDetails.id}', error: e);
-        return false;
+        throw Exception('Can not save tvshow ${tvshowDetails.id}');
       }
     }
-    return false;
   }
 
   @override
-  Future<bool> saveStreamings(TvshowDetails tvshowDetails) async {
+  Future<void> saveStreamings(TvshowDetails tvshowDetails) async {
     final streamings = tvshowDetails.streamings;
     final tvshowId = tvshowDetails.id;
     try {
@@ -152,10 +149,8 @@ class HiveDatabaseService extends IDatabaseService {
         }
       }
       log('Streamings saved on tvshow ${tvshowId}: ${streamings.length} streamings');
-      return true;
     } catch (e) {
-      log('Error to save streamings on tv show: ${tvshowId}', error: e);
-      return false;
+      throw Exception('Error to save streamings on tv show: ${tvshowId}');
     }
   }
 }
