@@ -32,7 +32,10 @@ class MobileDatabaseMigrationUseCase {
 
       final newTvshows = await _databaseService.getTvshows();
 
-      if (!listEquals(tvshows, newTvshows)) {
+      newTvshows.sort((a, b) => a.id.compareTo(b.id));
+      tvshows.sort((a, b) => a.id.compareTo(b.id));
+
+      if (!listEquals(newTvshows, tvshows)) {
         throw Exception('Differences between old and new database');
       }
       yield MigrationStatus.verifyData;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/utils/constants.dart';
 import 'package:tv_randshow/ui/states/migration_state.dart';
 
@@ -15,8 +14,8 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   void initState() {
-    Future.delayed(Duration(milliseconds: 300)).then((value) {
-      migrationState.migration == MigrationStatus.complete
+    migrationState.loadStatus().whenComplete(() {
+      migrationState.completeMigration
           ? Navigator.of(context).pushNamed(RoutePaths.TAB)
           : Navigator.of(context).pushNamed(RoutePaths.MIGRATION);
     });

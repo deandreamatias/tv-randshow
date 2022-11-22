@@ -39,7 +39,11 @@ class _MigrationViewState extends State<MigrationView> {
             stream: migrationState.stream,
             builder: (context, snapshot) {
               final error = snapshot.error;
-              final order = snapshot.data?.getOrder() ?? 0;
+              final order = snapshot.data?.getOrder() ??
+                  migrationState.migration.getOrder();
+              if ((snapshot.data?.getOrder() ?? 0) > 0) {
+                migrationState.saveStatus(snapshot.requireData);
+              }
               return Column(
                 children: [
                   Text(
@@ -53,49 +57,38 @@ class _MigrationViewState extends State<MigrationView> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
-                  if (!kIsWeb) ...[
+                  _Checkpoint(
+                    label: 'app.migration.loaded_old',
+                    checked: order >= MigrationStatus.loadedOld.getOrder(),
+                  ),
+                  if (order <= MigrationStatus.emptyOld.getOrder()) ...[
+                    const SizedBox(height: 8),
                     _Checkpoint(
-                      label: 'app.migration.loaded_old',
-                      checked: order >= MigrationStatus.loadedOld.getOrder(),
+                        label: 'app.migration.empty_old',
+                        checked: order >= MigrationStatus.emptyOld.getOrder()),
+                  ] else ...[
+                    const SizedBox(height: 8),
+                    _Checkpoint(
+                      label: 'app.migration.saved_to_new',
+                      checked: order >= MigrationStatus.savedToNew.getOrder(),
                     ),
-                    if (order == MigrationStatus.emptyOld.getOrder()) ...[
-                      const SizedBox(height: 8),
-                      _Checkpoint(
-                          label: 'app.migration.empty_old', checked: true),
-                    ] else ...[
-                      const SizedBox(height: 8),
-                      _Checkpoint(
-                        label: 'app.migration.saved_to_new',
-                        checked: order >= MigrationStatus.savedToNew.getOrder(),
-                      ),
-                      const SizedBox(height: 8),
-                      _Checkpoint(
-                        label: 'app.migration.verify_data',
-                        checked: order >= MigrationStatus.verifyData.getOrder(),
-                      ),
-                      const SizedBox(height: 8),
-                      _Checkpoint(
-                        label: 'app.migration.deleted_old',
-                        checked: order >= MigrationStatus.deletedOld.getOrder(),
-                      ),
-                      const SizedBox(height: 8),
-                      _Checkpoint(
-                        label: 'app.migration.complete_database',
-                        checked: order >=
-                            MigrationStatus.completeDatabase.getOrder(),
-                      ),
-                    ],
+                    const SizedBox(height: 8),
+                    _Checkpoint(
+                      label: 'app.migration.verify_data',
+                      checked: order >= MigrationStatus.verifyData.getOrder(),
+                    ),
+                    const SizedBox(height: 8),
+                    _Checkpoint(
+                      label: 'app.migration.deleted_old',
+                      checked: order >= MigrationStatus.deletedOld.getOrder(),
+                    ),
+                    const SizedBox(height: 8),
+                    _Checkpoint(
+                      label: 'app.migration.complete_database',
+                      checked:
+                          order >= MigrationStatus.completeDatabase.getOrder(),
+                    ),
                   ],
-                  const SizedBox(height: 8),
-                  _Checkpoint(
-                    label: 'app.migration.add_streaming',
-                    checked: order >= MigrationStatus.addStreaming.getOrder(),
-                  ),
-                  const SizedBox(height: 8),
-                  _Checkpoint(
-                    label: 'app.migration.complete',
-                    checked: order >= MigrationStatus.complete.getOrder(),
-                  ),
                   if (snapshot.connectionState != ConnectionState.done &&
                       !snapshot.hasError) ...[
                     const SizedBox(height: 8),
