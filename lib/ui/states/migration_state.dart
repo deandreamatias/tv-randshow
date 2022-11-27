@@ -9,8 +9,6 @@ import 'package:tv_randshow/core/tvshow/domain/use_cases/mobile_database_migrati
 import 'migration_status_state.dart';
 
 class MigrationState {
-  final MobileDatabaseMigrationUseCase _databaseMigrationUseCase =
-      locator<MobileDatabaseMigrationUseCase>();
   final AddStreamingsMigrationUseCase _addStreamingsMigrationUseCase =
       locator<AddStreamingsMigrationUseCase>();
 
@@ -23,6 +21,8 @@ class MigrationState {
   void initMigration() {
     _streamController.add(_migrationStatusState.migration);
     if (!kIsWeb) {
+      final MobileDatabaseMigrationUseCase _databaseMigrationUseCase =
+          locator<MobileDatabaseMigrationUseCase>();
       _streamController.addStream(_databaseMigrationUseCase()).then(
           (_) => _streamController.addStream(_addStreamingsMigrationUseCase()));
     } else {

@@ -3,27 +3,38 @@ import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/get_migration_status_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/save_migration_status_use_case.dart';
+import 'package:tv_randshow/core/tvshow/domain/use_cases/verify_database_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/verify_old_database_use_case.dart';
 
 class MigrationStatusState {
+  final VerifyDatabaseUseCase _verifyDatabaseUseCase =
+      locator<VerifyDatabaseUseCase>();
   final GetMigrationStatusUseCase _getMigrationStatusUseCase =
       locator<GetMigrationStatusUseCase>();
   final SaveMigrationStatusUseCase _saveMigrationStatusUseCase =
       locator<SaveMigrationStatusUseCase>();
-  final VerifyOldDatabaseUseCase _verifyOldDatabaseUseCase =
-      locator<VerifyOldDatabaseUseCase>();
   MigrationStatus _migration = MigrationStatus.init;
 
   MigrationStatus get migration => _migration;
   bool get completeMigration =>
-      [MigrationStatus.complete, MigrationStatus.emptyOld].contains(_migration);
+      [MigrationStatus.complete, MigrationStatus.empty].contains(_migration);
 
   Future<void> loadStatus() async {
-    final isEmpty = kIsWeb ? false : await _verifyOldDatabaseUseCase();
+    bool isEmpty = await _verifyDatabaseUseCase();
+    bool isEmptyOldDatabase = true;
+    if (!kIsWeb && !isEmpty) {
+      final VerifyOldDatabaseUseCase _verifyOldDatabaseUseCase =
+          locator<VerifyOldDatabaseUseCase>();
+      isEmptyOldDatabase = await _verifyOldDatabaseUseCase();
+    }
 
-    if (isEmpty) {
-      _migration = MigrationStatus.emptyOld;
-      await _saveMigrationStatusUseCase(MigrationStatus.completeDatabase);
+    if (isEmpty && isEmptyOldDatabase) {
+      _migration = MigrationStatus.empty;
+      await _saveMigrationStatusUseCase(
+        isEmptyOldDatabase
+            ? MigrationStatus.completeDatabase
+            : MigrationStatus.complete,
+      );
       return;
     }
     _migration = await _getMigrationStatusUseCase();

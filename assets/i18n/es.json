@@ -5,7 +5,7 @@
             "title": "Migración",
             "subtitle": "A continuación se hará un pequeño proceso de migración para mejorar la aplicación",
             "loaded_old": "Base de datos antigua cargada",
-            "empty_old": "Base de datos antigua vacía",
+            "empty": "Base de datos vacía",
             "saved_to_new": "Series guardadas en nueva base de datos",
             "verify_data": "Verificación de datos",
             "deleted_old": "Base de datos antigua borrada",

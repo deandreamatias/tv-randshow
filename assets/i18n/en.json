@@ -5,7 +5,7 @@
             "title": "Migration",
             "subtitle": "The following is a small migration process to improve the application",
             "loaded_old": "Loaded old database",
-            "empty_old": "Empty old database",
+            "empty": "Empty database",
             "saved_to_new": "Saved tv shows on new database",
             "verify_data": "Verify data",
             "deleted_old": "Old database deleted",

@@ -41,13 +41,11 @@ class App extends StatelessWidget {
 }
 
 class _MaterialApp extends StatelessWidget {
-  final bool showMigrationView;
   final BuildContext themeContext;
   final LocalizationDelegate localizationDelegate;
 
   const _MaterialApp({
     Key? key,
-    this.showMigrationView = false,
     required this.themeContext,
     required this.localizationDelegate,
   }) : super(key: key);

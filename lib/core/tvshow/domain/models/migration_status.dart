@@ -1,6 +1,6 @@
 enum MigrationStatus {
   init,
-  emptyOld,
+  empty,
   loadedOld,
   savedToNew,
   verifyData,
@@ -16,7 +16,7 @@ extension MigrationStatusExtenstion on MigrationStatus {
     switch (this) {
       case MigrationStatus.loadedOld:
         return 1;
-      case MigrationStatus.emptyOld:
+      case MigrationStatus.empty:
         return 2;
       case MigrationStatus.savedToNew:
         return 3;
@@ -45,7 +45,7 @@ extension MigrationStatusIntExtenstion on int {
       case 1:
         return MigrationStatus.loadedOld;
       case 2:
-        return MigrationStatus.emptyOld;
+        return MigrationStatus.empty;
       case 3:
         return MigrationStatus.savedToNew;
       case 4:

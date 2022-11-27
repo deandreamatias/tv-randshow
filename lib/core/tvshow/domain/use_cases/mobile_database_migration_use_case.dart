@@ -8,8 +8,7 @@ import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/services/databases/i_secondary_database_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 
-@Environment("mobile")
-@injectable
+@Injectable(env: ['mobile'])
 class MobileDatabaseMigrationUseCase {
   final IDatabaseService _databaseService;
   final ISecondaryDatabaseService _secondaryDatabaseService;
@@ -48,6 +47,6 @@ class MobileDatabaseMigrationUseCase {
       yield MigrationStatus.completeDatabase;
       return;
     }
-    yield MigrationStatus.emptyOld;
+    yield MigrationStatus.empty;
   }
 }

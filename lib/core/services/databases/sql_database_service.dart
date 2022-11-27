@@ -6,8 +6,7 @@ import '../../models/tvshow_details.dart';
 import '../../utils/database_helper.dart';
 import 'i_secondary_database_service.dart';
 
-@Environment("mobile")
-@LazySingleton(as: ISecondaryDatabaseService)
+@LazySingleton(as: ISecondaryDatabaseService, env: ['mobile'])
 class SqlDatabaseService extends ISecondaryDatabaseService {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
 

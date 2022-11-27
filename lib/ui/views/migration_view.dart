@@ -54,12 +54,11 @@ class _MigrationViewState extends State<MigrationView> {
                       label: 'app.migration.loaded_old',
                       checked: order >= MigrationStatus.loadedOld.getOrder(),
                     ),
-                  if (!kIsWeb &&
-                      order <= MigrationStatus.emptyOld.getOrder()) ...[
+                  if (order <= MigrationStatus.empty.getOrder()) ...[
                     const SizedBox(height: 8),
                     _Checkpoint(
-                        label: 'app.migration.empty_old',
-                        checked: order >= MigrationStatus.emptyOld.getOrder()),
+                        label: 'app.migration.empty',
+                        checked: order >= MigrationStatus.empty.getOrder()),
                   ] else ...[
                     if (!kIsWeb) ...databaseMigration(order, isLoading),
                     ...streamMigration(order, isLoading),

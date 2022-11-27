@@ -50,7 +50,7 @@ void main() {
           usecase(),
           emitsInOrder([
             MigrationStatus.loadedOld,
-            MigrationStatus.emptyOld,
+            MigrationStatus.empty,
           ]));
       expect(
         usecase(),

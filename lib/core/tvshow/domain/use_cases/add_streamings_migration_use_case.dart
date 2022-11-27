@@ -22,8 +22,12 @@ class AddStreamingsMigrationUseCase {
   Stream<MigrationStatus> call() async* {
     final List<TvshowDetails> tvshows = await _databaseService.getTvshows();
 
-    if (tvshows.isNotEmpty &&
-        tvshows.every((tvshow) => tvshow.streamings.isEmpty)) {
+    if (tvshows.isEmpty) {
+      yield MigrationStatus.empty;
+      return;
+    }
+
+    if (tvshows.every((tvshow) => tvshow.streamings.isEmpty)) {
       for (TvshowDetails tvshow in tvshows) {
         List<StreamingDetail> streamings = [];
         final search = StreamingSearch(
