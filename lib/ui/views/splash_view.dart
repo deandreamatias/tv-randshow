@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tv_randshow/core/utils/constants.dart';
-import 'package:tv_randshow/ui/states/migration_state.dart';
+import 'package:tv_randshow/ui/states/migration_status_state.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -10,12 +10,12 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  MigrationState migrationState = MigrationState();
+  MigrationStatusState _migrationStatusState = MigrationStatusState();
 
   @override
   void initState() {
-    migrationState.loadStatus().whenComplete(() {
-      migrationState.completeMigration
+    _migrationStatusState.loadStatus().whenComplete(() {
+      _migrationStatusState.completeMigration
           ? Navigator.of(context).pushNamed(RoutePaths.TAB)
           : Navigator.of(context).pushNamed(RoutePaths.MIGRATION);
     });
