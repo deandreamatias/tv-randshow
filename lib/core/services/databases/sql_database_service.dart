@@ -14,9 +14,7 @@ class SqlDatabaseService extends ISecondaryDatabaseService {
   @override
   Future<bool> deleteAll() async {
     try {
-      await dbHelper.deleteAll();
-      log('All rows deleted');
-      return true;
+      return await dbHelper.deleteAll();
     } catch (e) {
       log('Error to delete tvshow rows', error: e);
       return false;
