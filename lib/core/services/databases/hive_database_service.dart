@@ -26,12 +26,7 @@ class HiveDatabaseService extends IDatabaseService {
       return;
     }
     if (kIsWeb) {
-      if (!Hive.isAdapterRegistered(1)) {
-        Hive..registerAdapter(TvshowDetailsAdapter());
-      }
-      if (!Hive.isAdapterRegistered(2)) {
-        Hive..registerAdapter(StreamingDetailHiveAdapter());
-      }
+      _registerAdapters();
     } else {
       Directory? documentsDirectory;
       try {
@@ -39,10 +34,17 @@ class HiveDatabaseService extends IDatabaseService {
       } catch (e) {
         log('Can\'t open directory', error: e);
       }
-      Hive
-        ..init(documentsDirectory?.path ?? '')
-        ..registerAdapter(TvshowDetailsAdapter())
-        ..registerAdapter(StreamingDetailHiveAdapter());
+      Hive..init(documentsDirectory?.path ?? '');
+      _registerAdapters();
+    }
+  }
+
+  void _registerAdapters() {
+    if (!Hive.isAdapterRegistered(1)) {
+      Hive.registerAdapter(TvshowDetailsAdapter());
+    }
+    if (!Hive.isAdapterRegistered(2)) {
+      Hive.registerAdapter(StreamingDetailHiveAdapter());
     }
   }
 
