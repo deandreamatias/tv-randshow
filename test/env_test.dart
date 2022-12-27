@@ -8,8 +8,8 @@ void main() {
       FlavorConfig(
           flavor: Flavor.DEV, values: FlavorValues.fromJson(environment));
 
-      expect(
-          FlavorConfig.instance.values.baseUrl, equals('api.themoviedb.org'));
+      expect(FlavorConfig.instance.values.baseUrl,
+          equals('https://api.themoviedb.org'));
       expect(FlavorConfig.instance.values.apiKey.isNotEmpty, true);
     });
   });

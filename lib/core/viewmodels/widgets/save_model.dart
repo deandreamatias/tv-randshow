@@ -10,10 +10,15 @@ class SaveModel extends BaseViewModel {
 
   Future<bool> addFav(int id, String language) async {
     setBusy(true);
-    final result = await _favsService.addFav(id, language);
-    tvshowInDb = result;
-    setBusy(false);
-    return result;
+    try {
+      await _favsService.addFav(id, language);
+      tvshowInDb = true;
+      setBusy(false);
+      return true;
+    } catch (e) {
+      setBusy(false);
+      return false;
+    }
   }
 
   Future<void> deleteFav(int id) async {

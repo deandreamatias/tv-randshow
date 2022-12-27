@@ -17,9 +17,7 @@ class DetailsModel extends BaseViewModel {
       apiKey: FlavorConfig.instance.values.apiKey,
       language: language,
     );
-    final TvshowDetails _tvshowDetails =
-        await _apiService.getDetailsTv(query, id);
-    tvshowDetails = _tvshowDetails;
+    tvshowDetails = await _apiService.getDetailsTv(query, id);
     setBusy(false);
   }
 }

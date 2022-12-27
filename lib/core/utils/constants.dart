@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class RoutePaths {
-  static const String TAB = '/';
+  static const String MIGRATION = 'migration';
+  static const String TAB = '/tab';
   static const String PRIVACY = 'privacy';
-  static const String SPLASH = 'splash';
+  static const String SPLASH = '/';
   static const String LOADING = 'loading';
   static const String RESULT = 'result';
 }
@@ -48,9 +49,9 @@ class CustomTheme {
       fontFamily: 'Nunito',
       colorScheme: const ColorScheme(
         primary: _PRIMARY,
-        primaryVariant: _PRIMARY,
+        primaryContainer: _PRIMARY,
         secondary: Colors.white,
-        secondaryVariant: Colors.black,
+        secondaryContainer: Colors.black,
         surface: Colors.white,
         background: Colors.white,
         error: Colors.red,
@@ -121,9 +122,9 @@ class CustomTheme {
       fontFamily: 'Nunito',
       colorScheme: const ColorScheme(
         primary: _PRIMARY,
-        primaryVariant: _PRIMARY,
+        primaryContainer: _PRIMARY,
         secondary: Colors.white,
-        secondaryVariant: Colors.black,
+        secondaryContainer: Colors.black,
         surface: _LIGHT_GREY,
         background: _LIGHT_GREY,
         error: Colors.red,

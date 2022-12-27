@@ -4,21 +4,18 @@ import 'package:injectable/injectable.dart';
 
 import '../../models/tvshow_details.dart';
 import '../../utils/database_helper.dart';
-import 'i_database_service.dart';
+import 'i_secondary_database_service.dart';
 
-@Environment("mobile")
-@LazySingleton(as: IDatabaseService)
-class SqlDatabaseService extends IDatabaseService {
+@LazySingleton(as: ISecondaryDatabaseService, env: ['mobile'])
+class SqlDatabaseService extends ISecondaryDatabaseService {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
 
   @override
-  Future<bool> deleteTvshow(int id) async {
+  Future<bool> deleteAll() async {
     try {
-      final int rowsDeleted = await dbHelper.delete(id);
-      log('Deleted $rowsDeleted row with tvshow id $id');
-      return rowsDeleted.isFinite;
+      return await dbHelper.deleteAll();
     } catch (e) {
-      log('Error to delete row with tvshow id $id', error: e);
+      log('Error to delete tvshow rows', error: e);
       return false;
     }
   }
@@ -26,8 +23,22 @@ class SqlDatabaseService extends IDatabaseService {
   @override
   Future<List<TvshowDetails>> getTvshows() async {
     try {
-      final List<TvshowDetails> list = await dbHelper.queryList();
-      return list;
+      final List<Map<String, dynamic>> tvShowsMaps = await dbHelper.queryList(
+        table: DatabaseHelper.tvshowTable,
+        columns: <String>[
+          DatabaseHelper.columnId,
+          DatabaseHelper.columnIdTvshow,
+          DatabaseHelper.columnName,
+          DatabaseHelper.columnPosterPath,
+          DatabaseHelper.columnEpisodes,
+          DatabaseHelper.columnSeasons,
+          DatabaseHelper.columnRunTime,
+          DatabaseHelper.columnOverview,
+          DatabaseHelper.columnInProduction,
+        ],
+      );
+
+      return tvShowsMaps.map((i) => TvshowDetails.fromJson(i)).toList();
     } catch (e) {
       log('Error to get db list', error: e);
       return [];
@@ -35,21 +46,21 @@ class SqlDatabaseService extends IDatabaseService {
   }
 
   @override
-  Future<bool> saveTvshow(TvshowDetails tvshowDetails) async {
-    // row to insert
-    final Map<String, dynamic> row = <String, dynamic>{
-      DatabaseHelper.columnId: tvshowDetails.rowId,
-      DatabaseHelper.columnIdTvshow: tvshowDetails.id,
-      DatabaseHelper.columnName: tvshowDetails.name,
-      DatabaseHelper.columnPosterPath: tvshowDetails.posterPath,
-      DatabaseHelper.columnEpisodes: tvshowDetails.numberOfEpisodes,
-      DatabaseHelper.columnSeasons: tvshowDetails.numberOfSeasons,
-      DatabaseHelper.columnRunTime: tvshowDetails.episodeRunTime,
-      DatabaseHelper.columnOverview: tvshowDetails.overview,
-      DatabaseHelper.columnInProduction: tvshowDetails.inProduction,
-    };
-    final int id = await dbHelper.insert(row);
-    log('Inserted row: $id');
-    return id.isFinite;
+  Future<bool> saveTvshows(List<TvshowDetails> tvshows) async {
+    for (var tvshow in tvshows) {
+      final tvshowRow = tvshow.toJson();
+      final int tvshowRowId = await dbHelper.insert(
+        row: tvshowRow,
+        table: DatabaseHelper.tvshowTable,
+      );
+      if (tvshowRowId == 0) {
+        log('Error to save tvshow ${tvshow.id}');
+        return false;
+      }
+      log('Tvshow ${tvshow.id} saved');
+
+      return tvshowRowId.isFinite;
+    }
+    return true;
   }
 }

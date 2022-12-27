@@ -1,6 +1,20 @@
 {
     "app": {
         "name": "TV Randshow",
+        "migration": {
+            "title": "Migration",
+            "subtitle": "The following is a small migration process to improve the application",
+            "loaded_old": "Loaded old database",
+            "empty": "Empty database",
+            "saved_to_new": "Saved tv shows on new database",
+            "verify_data": "Verify data",
+            "deleted_old": "Old database deleted",
+            "complete_database": "Database migration complete",
+            "add_streaming": "Streamings links related to tv shows",
+            "complete": "Streamings migration complete",
+            "error": "Migration error",
+            "home_button": "GO TO HOME"
+        },
         "fav": {
             "tab": "Favorites",
             "save": "Save your tv show to file",
@@ -54,7 +68,9 @@
         "result": {
             "title": "This is the TV show episode chosen at random!",
             "button_random": "ANOTHER RANDOM EPISODE",
-            "button_fav": "FAVORITES"
+            "button_fav": "FAVORITES",
+            "streaming_title": "See on streamings:",
+            "no_streaming_title": "No available on streamings"
         },
         "modal": {
             "description": "Description",
