@@ -41,7 +41,7 @@ class PrivacyPolicyView extends StatelessWidget {
                           ),
                           onTapLink: (text, href, title) async {
                             try {
-                              await launch(href ?? '');
+                              await launchUrl(Uri.parse(href ?? ''));
                               log('Launched: $href');
                             } catch (e) {
                               throw 'Could not launch $href because $e';

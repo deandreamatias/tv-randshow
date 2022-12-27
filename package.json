@@ -1,6 +1,6 @@
 {
   "name": "tv-randshow",
-  "version": "1.9.1",
+  "version": "1.10.0",
   "description": "app to pick a random tv show episode",
   "main": "build/web/main.dart.js",
   "directories": {
@@ -9,13 +9,12 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@node-minify/babel-minify": "^6.2.0",
-    "@node-minify/clean-css": "^6.2.0",
-    "@node-minify/core": "^6.2.0",
-    "@node-minify/html-minifier": "^6.2.0",
-    "@node-minify/jsonminify": "^6.2.0",
-    "compare-json": "^0.4.0",
-    "standard-version": "^9.3.2"
+    "@node-minify/babel-minify": "^7.1.0",
+    "@node-minify/clean-css": "^7.1.0",
+    "@node-minify/core": "^7.1.0",
+    "@node-minify/html-minifier": "^7.1.0",
+    "@node-minify/jsonminify": "^7.1.0",
+    "compare-json": "^0.4.0"
   },
   "scripts": {
     "release": "standard-version",
@@ -25,7 +24,8 @@
   "standard-version": {
     "skip": {
       "commit": true,
-      "tag": true
+      "tag": true,
+      "changelog": true
     }
   },
   "repository": {

@@ -75,8 +75,8 @@ class InfoView extends StatelessWidget {
                       const String url = kIsWeb
                           ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
                           : 'https://tvrandshow.com';
-                      if (await canLaunch(url)) {
-                        await launch(url);
+                      if (await canLaunchUrl(Uri.parse(url))) {
+                        await launchUrl(Uri.parse(url));
                         log('Launched: $url');
                       } else {
                         throw 'Could not launch $url';
@@ -125,7 +125,7 @@ class InfoView extends StatelessWidget {
                       const String url =
                           'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
                       try {
-                        await launch(url);
+                        await launchUrl(Uri.parse(url));
                         log('Launched: $url');
                       } catch (e) {
                         throw 'Could not launch $url because $e';
