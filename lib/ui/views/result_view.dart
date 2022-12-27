@@ -110,7 +110,7 @@ class ResultView extends StatelessWidget {
                                       .toList(),
                                 ),
                               ],
-                              if (streamings.isNotEmpty)
+                              if (streamings.isEmpty)
                                 Text(
                                   translate('app.result.no_streaming_title'),
                                   style: Theme.of(context).textTheme.subtitle1,
