@@ -9,7 +9,7 @@ class VerifyDatabaseUseCase {
 
   const VerifyDatabaseUseCase(this._databaseService);
 
-  /// Return if old database has data
+  /// Return if actual database has data
   Future<bool> call() async {
     final List<TvshowDetails> tvshows = await _databaseService.getTvshows();
     return tvshows.isEmpty;

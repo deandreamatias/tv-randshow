@@ -14,7 +14,7 @@ class MigrationView extends StatefulWidget {
 }
 
 class _MigrationViewState extends State<MigrationView> {
-  MigrationState migrationState = MigrationState();
+  MigrationState migrationState = MigrationState(isWeb: kIsWeb);
 
   @override
   void initState() {
@@ -164,6 +164,7 @@ class _Checkpoint extends StatelessWidget {
     return Row(
       children: [
         Text(translate(label)),
+        const SizedBox(width: 4),
         isLoading
             ? SizedBox(
                 width: 12,
