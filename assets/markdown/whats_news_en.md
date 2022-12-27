@@ -1,3 +1,11 @@
+## 1.10.0 - 2022/12/27
+
+### Features
+
+* **Add streamig link on random episode result**
+* Migrate Android database (from sqlite to hive)
+* Build with Flutter 2.10
+
 ## 1.9.0 - 2022/02/20
 
 ### Features

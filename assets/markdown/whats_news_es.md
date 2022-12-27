@@ -1,3 +1,11 @@
+## 1.10.0 - 2022/12/27
+
+### Features
+
+* **Añade enlace a streaming en el resultado de episodio aleatorio**
+* Migración de base de datos en Android (de sqlite a hive)
+* Construído con Flutter 2.10
+
 ## 1.9.0 - 2022/02/20
 
 ### Features
