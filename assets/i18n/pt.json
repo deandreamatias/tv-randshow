@@ -69,7 +69,8 @@
             "title": "Este é o episódio escolhido aleatoriamente da serie!",
             "button_random": "OUTRO EPISÓDIO ALEATÓRIO",
             "button_fav": "FAVORITOS",
-            "streaming_title": "Ver em streamings:"
+            "streaming_title": "Ver em streamings:",
+            "no_streaming_title": "Não disponível em streamings"
         },
         "modal": {
             "description": "Descrição",
