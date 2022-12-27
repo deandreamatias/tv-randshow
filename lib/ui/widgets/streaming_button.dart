@@ -13,8 +13,8 @@ class StreamingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: () async {
-        if (await canLaunch(streamingDetail.link)) {
-          await launch(streamingDetail.link);
+        if (await canLaunchUrl(Uri.parse(streamingDetail.link))) {
+          await launchUrl(Uri.parse(streamingDetail.link));
           log('Launched: ${streamingDetail.link}');
         } else {
           throw 'Could not launch ${streamingDetail.link}';
