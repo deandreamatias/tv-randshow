@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/add_streamings_migration_use_case.dart';
