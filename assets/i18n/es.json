@@ -1,6 +1,20 @@
 {
     "app": {
         "name": "TV Randshow",
+        "migration": {
+            "title": "Migración",
+            "subtitle": "A continuación se hará un pequeño proceso de migración para mejorar la aplicación",
+            "loaded_old": "Base de datos antigua cargada",
+            "empty": "Base de datos vacía",
+            "saved_to_new": "Series guardadas en nueva base de datos",
+            "verify_data": "Verificación de datos",
+            "deleted_old": "Base de datos antigua borrada",
+            "complete_database": "Migración de base de datos completa",
+            "add_streaming": "Enlaces de streaming asociados a series",
+            "complete": "Migración de streamings completa",
+            "error": "Error al hacer la migración",
+            "home_button": "IR AL INICIO"
+        },
         "fav": {
             "tab": "Favoritos",
             "save": "Guarda tus series en un archivo",
@@ -54,7 +68,9 @@
         "result": {
             "title": "¡Este es el episodio elegido al azar de la serie!",
             "button_random": "OTRO EPISODIO AL AZAR",
-            "button_fav": "FAVORITOS"
+            "button_fav": "FAVORITOS",
+            "streaming_title": "Ver en streamings:",
+            "no_streaming_title": "No disponible en streamings"
         },
         "modal": {
             "description": "Descripción",

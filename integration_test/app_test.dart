@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:tv_randshow/main_prod.dart' as app;
+import 'package:tv_randshow/main_prod.dart' as mainProd;
+import 'package:tv_randshow/ui/app.dart' as app;
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   final List<String> tvshows = ['The Office'];
 
   testWidgets('initial app', (WidgetTester tester) async {
-    await app.main();
+    await mainProd.main();
     await tester.pumpAndSettle();
 
     expect(find.byKey(Key('app.fav.title')), findsOneWidget);
@@ -42,7 +43,7 @@ Future<void> main() async {
       fallbackLocale: 'en',
       supportedLocales: <String>['en', 'es', 'pt'],
     );
-    await tester.pumpWidget(LocalizedApp(delegate, app.MainApp()));
+    await tester.pumpWidget(LocalizedApp(delegate, app.App()));
     await tester.pumpAndSettle();
 
     // Navigate to search tab

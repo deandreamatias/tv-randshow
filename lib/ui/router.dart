@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tv_randshow/ui/views/migration_view.dart';
+import 'package:tv_randshow/ui/views/splash_view.dart';
 
 import '../core/models/tvshow_details.dart';
 import '../core/models/tvshow_result.dart';
@@ -11,6 +13,12 @@ import 'views/tab_view.dart';
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RoutePaths.SPLASH:
+        return MaterialPageRoute<SplashView>(
+            builder: (_) => const SplashView());
+      case RoutePaths.MIGRATION:
+        return MaterialPageRoute<MigrationView>(
+            builder: (_) => const MigrationView());
       case RoutePaths.TAB:
         return MaterialPageRoute<TabView>(builder: (_) => const TabView());
       case RoutePaths.LOADING:

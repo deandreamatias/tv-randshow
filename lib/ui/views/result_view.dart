@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
+import 'package:tv_randshow/ui/widgets/streaming_button.dart';
 
 import '../../core/models/tvshow_result.dart';
 import '../../core/utils/constants.dart';
@@ -13,6 +15,8 @@ class ResultView extends StatelessWidget {
   final TvshowResult tvshowResult;
   @override
   Widget build(BuildContext context) {
+    final List<StreamingDetail> streamings =
+        tvshowResult.tvshowDetails.streamings;
     return Scaffold(
       body: SafeArea(
           child: Padding(
@@ -90,6 +94,27 @@ class ResultView extends StatelessWidget {
                                   child: Text(tvshowResult.episodeDescription),
                                 ),
                               ),
+                              const SizedBox(height: 8),
+                              if (streamings.isNotEmpty) ...[
+                                Text(
+                                  translate('app.result.streaming_title'),
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
+                                const SizedBox(height: 4),
+                                Wrap(
+                                  spacing: 8,
+                                  runSpacing: 8,
+                                  children: streamings
+                                      .map((streaming) => StreamingButton(
+                                          streamingDetail: streaming))
+                                      .toList(),
+                                ),
+                              ],
+                              if (streamings.isNotEmpty)
+                                Text(
+                                  translate('app.result.no_streaming_title'),
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
                             ],
                           ),
                         ),
