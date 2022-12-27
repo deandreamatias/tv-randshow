@@ -72,7 +72,7 @@ void main() {
     test('Should return complete status when has empty database', () async {
       when(_databaseService.getTvshows()).thenAnswer((_) async => []);
 
-      expect(usecase(), emits(MigrationStatus.complete));
+      expect(usecase(), emits(MigrationStatus.empty));
       expect(
         usecase(),
         neverEmits(isA<Exception>()),
