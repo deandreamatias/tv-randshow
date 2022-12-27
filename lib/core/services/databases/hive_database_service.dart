@@ -26,9 +26,12 @@ class HiveDatabaseService extends IDatabaseService {
       return;
     }
     if (kIsWeb) {
-      Hive
-        ..registerAdapter(TvshowDetailsAdapter())
-        ..registerAdapter(StreamingDetailHiveAdapter());
+      if (!Hive.isAdapterRegistered(1)) {
+        Hive..registerAdapter(TvshowDetailsAdapter());
+      }
+      if (!Hive.isAdapterRegistered(2)) {
+        Hive..registerAdapter(StreamingDetailHiveAdapter());
+      }
     } else {
       Directory? documentsDirectory;
       try {
