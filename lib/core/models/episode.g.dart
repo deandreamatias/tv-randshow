@@ -7,9 +7,7 @@ part of 'episode.dart';
 // **************************************************************************
 
 Episode _$EpisodeFromJson(Map<String, dynamic> json) => Episode(
-      airDate: json['air_date'] == null
-          ? null
-          : DateTime.parse(json['air_date'] as String),
+      airDate: Episode._fromJsonAirDate(json['air_date'] as String?),
       episodeNumber: json['episode_number'] as int,
       guestStars: (json['guest_starts'] as List<dynamic>?)
               ?.map((e) => GuestStar.fromJson(e as Map<String, dynamic>))

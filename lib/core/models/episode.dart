@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../utils/converters.dart';
+
 part 'episode.g.dart';
 
 @JsonSerializable(includeIfNull: false)
@@ -26,7 +28,7 @@ class Episode {
   factory Episode.fromJson(Map<String, dynamic> json) =>
       _$EpisodeFromJson(json);
 
-  @JsonKey(name: 'air_date')
+  @JsonKey(name: 'air_date', fromJson: _fromJsonAirDate)
   DateTime? airDate;
   @JsonKey(ignore: true)
   List<Crew> crew;
@@ -50,6 +52,10 @@ class Episode {
 
   Map<String, dynamic> toJson() => _$EpisodeToJson(this);
   String toRawJson() => json.encode(_$EpisodeToJson(this));
+
+  static DateTime? _fromJsonAirDate(String? airDate) {
+    return Converters.fromJsonDate(airDate);
+  }
 }
 
 @JsonSerializable(includeIfNull: false)

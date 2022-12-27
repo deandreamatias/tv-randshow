@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../utils/converters.dart';
 import 'episode.dart';
 
 part 'tvshow_seasons_details.g.dart';
@@ -40,6 +41,6 @@ class TvshowSeasonsDetails {
   String toRawJson() => json.encode(_$TvshowSeasonsDetailsToJson(this));
 
   static DateTime? _fromJsonAirDate(String? airDate) {
-    airDate == null || airDate.isEmpty ? null : DateTime.parse(airDate);
+    return Converters.fromJsonDate(airDate);
   }
 }

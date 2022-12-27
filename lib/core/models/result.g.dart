@@ -6,35 +6,28 @@ part of 'result.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Result _$ResultFromJson(Map<String, dynamic> json) {
-  $checkKeys(
-    json,
-    disallowNullValues: const ['first_air_date'],
-  );
-  return Result(
-    posterPath: json['poster_path'] as String? ?? '',
-    popularity: (json['popularity'] as num?)?.toDouble(),
-    id: json['id'] as int,
-    backdropPath: json['backdrop_path'] as String? ?? '',
-    voteAverage: (json['voter_average'] as num?)?.toDouble(),
-    overview: json['overview'] as String? ?? '',
-    firstAirDate:
-        json['first_air_date'] == null || json['first_air_date'].isEmpty
-            ? null
-            : DateTime.parse(json['first_air_date'] as String),
-    originCountry: (json['origin_country'] as List<dynamic>?)
-            ?.map((e) => e as String)
-            .toList() ??
-        const [],
-    genreIds:
-        (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList() ??
-            const [],
-    originalLanguage: json['original_language'] as String? ?? '',
-    voteCount: json['vote_count'] as int?,
-    name: json['name'] as String? ?? '',
-    originalName: json['original_name'] as String? ?? '',
-  );
-}
+Result _$ResultFromJson(Map<String, dynamic> json) => Result(
+      posterPath: json['poster_path'] as String? ?? '',
+      popularity: (json['popularity'] as num?)?.toDouble(),
+      id: json['id'] as int,
+      backdropPath: json['backdrop_path'] as String? ?? '',
+      voteAverage: (json['voter_average'] as num?)?.toDouble(),
+      overview: json['overview'] as String? ?? '',
+      firstAirDate:
+          Result._fromJsonFirstAirDate(json['first_air_date'] as String?),
+      originCountry: (json['origin_country'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      genreIds: (json['genre_ids'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          const [],
+      originalLanguage: json['original_language'] as String? ?? '',
+      voteCount: json['vote_count'] as int?,
+      name: json['name'] as String? ?? '',
+      originalName: json['original_name'] as String? ?? '',
+    );
 
 Map<String, dynamic> _$ResultToJson(Result instance) {
   final val = <String, dynamic>{
