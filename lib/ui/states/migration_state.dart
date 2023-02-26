@@ -29,9 +29,9 @@ class MigrationState {
           locator<MobileDatabaseMigrationUseCase>();
       _streamController.addStream(_databaseMigrationUseCase()).then(
           (_) => _streamController.addStream(_addStreamingsMigrationUseCase()));
-    } else {
-      _streamController.addStream(_addStreamingsMigrationUseCase());
+      return;
     }
+    _streamController.addStream(_addStreamingsMigrationUseCase());
   }
 
   void updateStatus(MigrationStatus status) async {
