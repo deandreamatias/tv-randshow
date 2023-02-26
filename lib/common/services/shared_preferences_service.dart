@@ -13,6 +13,7 @@ class SharedPreferencesService {
 
   Future<T?> read<T>({required String key}) async {
     final _prefs = await _localPrefs;
+    if (!_prefs.containsKey(key)) null;
     switch (T) {
       case String:
         return (_prefs.getString(key) ?? '') as T;
