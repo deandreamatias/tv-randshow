@@ -61,7 +61,7 @@ class _MaterialApp extends StatelessWidget {
       initialRoute: RoutePaths.SPLASH,
       onGenerateRoute: router.Router.generateRoute,
       localizationsDelegates: <LocalizationsDelegate<dynamic>>[
-        GlobalMaterialLocalizations.delegate,
+        ...GlobalMaterialLocalizations.delegates,
         GlobalWidgetsLocalizations.delegate,
         localizationDelegate,
       ],
