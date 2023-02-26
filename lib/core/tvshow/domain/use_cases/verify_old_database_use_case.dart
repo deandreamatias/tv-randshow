@@ -9,10 +9,9 @@ class VerifyOldDatabaseUseCase {
 
   VerifyOldDatabaseUseCase(this._secondaryDatabaseService);
 
-  /// Return if old database has data
   Future<bool> call() async {
     final List<TvshowDetails> tvshows =
         await _secondaryDatabaseService.getTvshows();
-    return tvshows.isNotEmpty;
+    return tvshows.isEmpty;
   }
 }
