@@ -2,7 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.9.0](https://github.com/deandreamatias/tv-randshow/compare/v1.9.0...v1.9.0) (2022-02-19)
+## [1.10.1](https://github.com/deandreamatias/tv-randshow/compare/v1.9.0...v1.10.1) (2023-02-26)
+
+* **Add streamig link on random episode result**
+* Migrate Android database (from sqlite to hive)
+* Build with Flutter 2.10
+
+## [1.9.0](https://github.com/deandreamatias/tv-randshow/compare/v1.8.0...v1.9.0) (2022-02-19)
 
 ## [1.8.0](https://github.com/deandreamatias/tv-randshow/compare/v1.7.0...v1.8.0) (2021-10-30)
 
