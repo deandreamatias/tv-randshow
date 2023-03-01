@@ -30,7 +30,12 @@ class HiveDatabaseService extends IDatabaseService {
     } else {
       Directory? documentsDirectory;
       try {
-        documentsDirectory = await getExternalStorageDirectory();
+        if (Platform.isIOS) {
+          documentsDirectory = await getApplicationDocumentsDirectory();
+        }
+        if (Platform.isAndroid) {
+          documentsDirectory = await getExternalStorageDirectory();
+        }
       } catch (e) {
         log('Can\'t open directory', error: e);
       }
