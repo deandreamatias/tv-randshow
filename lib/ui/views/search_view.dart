@@ -30,7 +30,7 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchViewModel>.nonReactive(
       viewModelBuilder: () => SearchViewModel(),
-      onModelReady: (SearchViewModel model) {
+      onViewModelReady: (SearchViewModel model) {
         _pageLoadController = PagewiseLoadController<Result>(
           pageSize: 20,
           pageFuture: (int? page) => model.loadList(

@@ -13,7 +13,7 @@ class FavoriteList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<FavoriteListModel>.reactive(
       viewModelBuilder: () => FavoriteListModel(),
-      onModelReady: (FavoriteListModel model) async {
+      onViewModelReady: (FavoriteListModel model) async {
         await model.getFavs();
         final TvshowDetails? tvshowDetails = await model.verifyAppLink();
         if (tvshowDetails?.id != null) {

@@ -19,7 +19,7 @@ class InfoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<InfoViewModel>.nonReactive(
-      onModelReady: (InfoViewModel model) => model.getVersion(),
+      onViewModelReady: (InfoViewModel model) => model.getVersion(),
       viewModelBuilder: () => InfoViewModel(),
       builder: (BuildContext context, InfoViewModel model, Widget? child) {
         return Column(

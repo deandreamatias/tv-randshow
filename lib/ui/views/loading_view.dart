@@ -17,7 +17,7 @@ class LoadingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoadingViewModel>.nonReactive(
       viewModelBuilder: () => LoadingViewModel(),
-      onModelReady: (LoadingViewModel model) async {
+      onViewModelReady: (LoadingViewModel model) async {
         await model.sortRandomEpisode(
           tvshowDetails,
           LocalizedApp.of(context)

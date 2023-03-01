@@ -18,7 +18,7 @@ class ModalSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<DetailsModel>.reactive(
       viewModelBuilder: () => DetailsModel(),
-      onModelReady: (DetailsModel model) => model.getDetails(
+      onViewModelReady: (DetailsModel model) => model.getDetails(
         idTv,
         LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
       ),
