@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/app/data/services/local_storage_service.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_migration_repository.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
+import 'package:tv_randshow/core/migration/domain/interfaces/i_migration_repository.dart';
+import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 
 @Injectable(as: IMigrationRepository)
 class MigrationRepository implements IMigrationRepository {
