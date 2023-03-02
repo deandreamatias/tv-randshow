@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/core/models/tvshow_result.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
+import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/custom_icons.dart';
 import 'package:tv_randshow/ui/views/loading_view.dart';
 import 'package:tv_randshow/ui/widgets/home_button.dart';

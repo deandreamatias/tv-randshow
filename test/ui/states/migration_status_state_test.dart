@@ -2,11 +2,11 @@ import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
-import 'package:tv_randshow/core/tvshow/domain/use_cases/get_migration_status_use_case.dart';
-import 'package:tv_randshow/core/tvshow/domain/use_cases/save_migration_status_use_case.dart';
-import 'package:tv_randshow/core/tvshow/domain/use_cases/verify_database_use_case.dart';
-import 'package:tv_randshow/core/tvshow/domain/use_cases/verify_old_database_use_case.dart';
+import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
+import 'package:tv_randshow/core/migration/domain/use_cases/get_migration_status_use_case.dart';
+import 'package:tv_randshow/core/migration/domain/use_cases/save_migration_status_use_case.dart';
+import 'package:tv_randshow/core/migration/domain/use_cases/verify_database_use_case.dart';
+import 'package:tv_randshow/core/migration/domain/use_cases/verify_old_database_use_case.dart';
 import 'package:tv_randshow/ui/states/migration_status_state.dart';
 
 import 'migration_status_state_test.mocks.dart';

@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:tv_randshow/core/models/tvshow_details.dart';
-import 'package:tv_randshow/core/models/tvshow_result.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
 import 'package:tv_randshow/ui/views/loading_view.dart';
 import 'package:tv_randshow/ui/views/migration_view.dart';
 import 'package:tv_randshow/ui/views/privacy_policy_view.dart';
 import 'package:tv_randshow/ui/views/result_view.dart';
 import 'package:tv_randshow/ui/views/splash_view.dart';
 import 'package:tv_randshow/ui/views/tab_view.dart';
+
+class RoutePaths {
+  static const String migraiton = 'migration';
+  static const String tab = '/tab';
+  static const String privacy = 'privacy';
+  static const String splash = '/';
+  static const String loading = 'loading';
+  static const String result = 'result';
+}
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {

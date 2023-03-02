@@ -2,12 +2,12 @@ import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:tv_randshow/core/models/file.dart';
-import 'package:tv_randshow/core/models/season.dart';
-import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/services/app_service.dart';
 import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/services/manage_files_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/file.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/season.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 import 'manage_files_service_test.mocks.dart';
 

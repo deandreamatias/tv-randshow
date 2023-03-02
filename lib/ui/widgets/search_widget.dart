@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:tv_randshow/core/models/result.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
 import 'package:tv_randshow/ui/widgets/modal_sheet.dart';
 import 'package:tv_randshow/ui/widgets/save_button.dart';

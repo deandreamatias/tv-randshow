@@ -2,9 +2,10 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tv_randshow/core/models/tvshow_details.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/viewmodels/views/loading_view_model.dart';
+import 'package:tv_randshow/ui/router.dart';
+import 'package:tv_randshow/ui/shared/assets.dart';
 import 'package:tv_randshow/ui/views/result_view.dart';
 import 'package:tv_randshow/ui/widgets/home_button.dart';
 

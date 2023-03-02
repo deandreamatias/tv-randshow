@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tv_randshow/core/models/result.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/core/viewmodels/views/search_view_model.dart';
 import 'package:tv_randshow/ui/widgets/search_widget.dart';
 import 'package:unicons/unicons.dart';
