@@ -7,5 +7,4 @@ import 'package:tv_randshow/config/locator.config.dart';
 final GetIt locator = GetIt.instance;
 
 @injectableInit
-void setupLocator() =>
-    $initGetIt(locator, environment: kIsWeb ? 'web' : 'mobile');
+void setupLocator() => locator.init(environment: kIsWeb ? 'web' : 'mobile');
