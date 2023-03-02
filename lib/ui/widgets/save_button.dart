@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
+import 'package:tv_randshow/core/viewmodels/widgets/save_model.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../core/viewmodels/widgets/save_model.dart';
-
 class SaveButton extends StatelessWidget {
-  const SaveButton({Key? key, required this.id}) : super(key: key);
+  const SaveButton({super.key, required this.id});
   final int id;
 
   @override

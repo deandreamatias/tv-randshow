@@ -6,8 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class StreamingButton extends StatelessWidget {
   final StreamingDetail streamingDetail;
-  const StreamingButton({Key? key, required this.streamingDetail})
-      : super(key: key);
+  const StreamingButton({super.key, required this.streamingDetail});
 
   @override
   Widget build(BuildContext context) {

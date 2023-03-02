@@ -2,24 +2,23 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:in_app_review/in_app_review.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:stacked/stacked.dart';
 import 'package:theme_provider/theme_provider.dart';
+import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/core/viewmodels/views/info_view_model.dart';
 import 'package:unicons/unicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../core/utils/constants.dart';
-import '../../core/viewmodels/views/info_view_model.dart';
-
 class InfoView extends StatelessWidget {
-  const InfoView({Key? key}) : super(key: key);
+  const InfoView({super.key});
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<InfoViewModel>.nonReactive(
-      onModelReady: (InfoViewModel model) => model.getVersion(),
+      onViewModelReady: (InfoViewModel model) => model.getVersion(),
       viewModelBuilder: () => InfoViewModel(),
       builder: (BuildContext context, InfoViewModel model, Widget? child) {
         return Column(
@@ -29,7 +28,7 @@ class InfoView extends StatelessWidget {
               child: Text(
                 translate('app.info.title'),
                 key: const Key('app.info.title'),
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -56,21 +55,29 @@ class InfoView extends StatelessWidget {
                   ListTile(
                     title: Text(
                       translate(
-                          kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
-                      key: Key(
-                          kIsWeb ? 'app.info.app_title' : 'app.info.web_title'),
+                        kIsWeb ? 'app.info.app_title' : 'app.info.web_title',
+                      ),
+                      key: const Key(
+                        kIsWeb ? 'app.info.app_title' : 'app.info.web_title',
+                      ),
                     ),
                     subtitle: Text(
-                      translate(kIsWeb
-                          ? 'app.info.app_description'
-                          : 'app.info.web_description'),
-                      key: Key(kIsWeb
-                          ? 'app.info.app_description'
-                          : 'app.info.web_description'),
+                      translate(
+                        kIsWeb
+                            ? 'app.info.app_description'
+                            : 'app.info.web_description',
+                      ),
+                      key: const Key(
+                        kIsWeb
+                            ? 'app.info.app_description'
+                            : 'app.info.web_description',
+                      ),
                     ),
-                    leading: const Icon(kIsWeb
-                        ? UniconsLine.google_play
-                        : UniconsLine.external_link_alt),
+                    leading: const Icon(
+                      kIsWeb
+                          ? UniconsLine.google_play
+                          : UniconsLine.external_link_alt,
+                    ),
                     onTap: () async {
                       const String url = kIsWeb
                           ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
@@ -93,8 +100,9 @@ class InfoView extends StatelessWidget {
                       key: const Key('app.info.export_description'),
                     ),
                     leading: const Icon(UniconsLine.file_export),
-                    trailing: model.isBusy ? CircularProgressIndicator() : null,
-                    onTap: () async => await model.exportTvshows(),
+                    trailing:
+                        model.isBusy ? const CircularProgressIndicator() : null,
+                    onTap: () async => model.exportTvshows(),
                   ),
                   Visibility(
                     visible: !kIsWeb,
@@ -108,7 +116,7 @@ class InfoView extends StatelessWidget {
                         key: const Key('app.info.rate_description'),
                       ),
                       leading: const Icon(UniconsLine.feedback),
-                      onTap: () async => await putReview(),
+                      onTap: () async => putReview(),
                     ),
                   ),
                   ListTile(
@@ -157,7 +165,7 @@ class InfoView extends StatelessWidget {
                     ),
                     leading: const Icon(UniconsLine.file_shield_alt),
                     onTap: () =>
-                        Navigator.of(context).pushNamed(RoutePaths.PRIVACY),
+                        Navigator.of(context).pushNamed(RoutePaths.privacy),
                   ),
                 ],
               ),
@@ -189,7 +197,8 @@ class InfoView extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.5,
           child: FutureBuilder<String>(
             future: loadAsset(
-                LocalizedApp.of(context).delegate.currentLocale.languageCode),
+              LocalizedApp.of(context).delegate.currentLocale.languageCode,
+            ),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               return snapshot.hasData
                   ? Markdown(data: snapshot.data ?? '')
@@ -215,12 +224,12 @@ class InfoView extends StatelessWidget {
   Future<String> loadAsset(String languageCode) async {
     switch (languageCode) {
       case 'es':
-        return await rootBundle.loadString(Assets.WHATS_NEW_ES);
+        return rootBundle.loadString(Assets.whatsNewEs);
       case 'pt':
-        return await rootBundle.loadString(Assets.WHATS_NEW_PT);
+        return rootBundle.loadString(Assets.whatsNewPt);
       case 'en':
       default:
-        return await rootBundle.loadString(Assets.WHATS_NEW_EN);
+        return rootBundle.loadString(Assets.whatsNewEn);
     }
   }
 }

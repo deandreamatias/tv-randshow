@@ -14,7 +14,7 @@ import 'manage_files_service_test.mocks.dart';
 @GenerateMocks([IDatabaseService, AppService])
 void main() {
   final faker = Faker();
-  final tvshowDetails = () => TvshowDetails(
+  TvshowDetails tvshowDetails() => TvshowDetails(
         episodeRunTime: faker.randomGenerator
             .numbers(1000, faker.randomGenerator.integer(999)),
         id: faker.randomGenerator.integer(9999),
@@ -26,8 +26,10 @@ void main() {
         posterPath: faker.internet.uri('http'),
         rowId:
             faker.randomGenerator.integer(faker.randomGenerator.integer(999)),
-        seasons: List.generate(faker.randomGenerator.integer(50),
-            (index) => Season(id: faker.randomGenerator.integer(9999))),
+        seasons: List.generate(
+          faker.randomGenerator.integer(50),
+          (index) => Season(id: faker.randomGenerator.integer(9999)),
+        ),
       );
   final databaseService = MockIDatabaseService();
   final appService = MockAppService();
@@ -45,11 +47,13 @@ void main() {
       final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
       final fileName = 'tvrandshow-${nowDateTime[0]}';
       when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
-      when(appService.hasStoragePermission())
-          .thenAnswer((_) async => await true);
-      when(appService.saveFile(
-              fileName, TvshowsFile(tvshows: tvshows).toRawJson()))
-          .thenAnswer((_) async => fileName);
+      when(appService.hasStoragePermission()).thenAnswer((_) async => true);
+      when(
+        appService.saveFile(
+          fileName,
+          TvshowsFile(tvshows: tvshows).toRawJson(),
+        ),
+      ).thenAnswer((_) async => fileName);
 
       expect(await manageFiles.saveTvshows(), isTrue);
     });
@@ -58,11 +62,13 @@ void main() {
       final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
       final fileName = 'tvrandshow-${nowDateTime[0]}';
       when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
-      when(appService.hasStoragePermission())
-          .thenAnswer((_) async => await false);
-      when(appService.saveFile(
-              fileName, TvshowsFile(tvshows: tvshows).toRawJson()))
-          .thenAnswer((_) async => fileName);
+      when(appService.hasStoragePermission()).thenAnswer((_) async => false);
+      when(
+        appService.saveFile(
+          fileName,
+          TvshowsFile(tvshows: tvshows).toRawJson(),
+        ),
+      ).thenAnswer((_) async => fileName);
 
       expect(await manageFiles.saveTvshows(), isFalse);
     });
@@ -70,8 +76,7 @@ void main() {
       final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
       final fileName = 'tvrandshow-${nowDateTime[0]}';
       when(databaseService.getTvshows()).thenAnswer((_) async => []);
-      when(appService.hasStoragePermission())
-          .thenAnswer((_) async => await true);
+      when(appService.hasStoragePermission()).thenAnswer((_) async => true);
       when(appService.saveFile(fileName, TvshowsFile(tvshows: []).toRawJson()))
           .thenAnswer((_) async => fileName);
 
@@ -82,11 +87,13 @@ void main() {
       final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
       final fileName = 'tvrandshow-${nowDateTime[0]}';
       when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
-      when(appService.hasStoragePermission())
-          .thenAnswer((_) async => await true);
-      when(appService.saveFile(
-              fileName, TvshowsFile(tvshows: tvshows).toRawJson()))
-          .thenAnswer((_) async => '');
+      when(appService.hasStoragePermission()).thenAnswer((_) async => true);
+      when(
+        appService.saveFile(
+          fileName,
+          TvshowsFile(tvshows: tvshows).toRawJson(),
+        ),
+      ).thenAnswer((_) async => '');
 
       expect(await manageFiles.saveTvshows(), isFalse);
     });

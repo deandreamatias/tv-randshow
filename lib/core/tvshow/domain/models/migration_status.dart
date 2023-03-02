@@ -8,7 +8,6 @@ enum MigrationStatus {
   completeDatabase,
   addStreaming,
   complete,
-  error,
 }
 
 extension MigrationStatusExtenstion on MigrationStatus {
@@ -30,8 +29,6 @@ extension MigrationStatusExtenstion on MigrationStatus {
         return 7;
       case MigrationStatus.complete:
         return 8;
-      case MigrationStatus.error:
-        return -1;
       case MigrationStatus.init:
       default:
         return 0;
@@ -58,8 +55,6 @@ extension MigrationStatusIntExtenstion on int {
         return MigrationStatus.addStreaming;
       case 8:
         return MigrationStatus.complete;
-      case -1:
-        return MigrationStatus.error;
       case 0:
       default:
         return MigrationStatus.init;

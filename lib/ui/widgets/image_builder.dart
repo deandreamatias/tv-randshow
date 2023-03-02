@@ -1,16 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-
-import '../../core/utils/constants.dart';
+import 'package:tv_randshow/core/utils/constants.dart';
 
 class ImageBuilder extends StatelessWidget {
   const ImageBuilder({
-    Key? key,
+    super.key,
     required this.isModal,
     required this.url,
     this.name = '',
-  }) : super(key: key);
+  });
 
   final bool isModal;
   final String name;
@@ -33,16 +32,15 @@ class ImageBuilder extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Container(
               padding: const EdgeInsets.all(8.0),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                color: Colors.black54,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                color: Theme.of(context).colorScheme.surface.withOpacity(.8),
               ),
               child: Text(
                 name,
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle2
-                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
               ),
             ),
           ),
@@ -54,10 +52,10 @@ class ImageBuilder extends StatelessWidget {
 
 class OnlineImage extends StatelessWidget {
   const OnlineImage({
-    Key? key,
+    super.key,
     required this.url,
     required this.name,
-  }) : super(key: key);
+  });
 
   final String url;
   final String name;
@@ -70,9 +68,12 @@ class OnlineImage extends StatelessWidget {
       semanticLabel: name,
       errorBuilder:
           (BuildContext context, Object error, StackTrace? stackTrace) =>
-              Image.asset(Assets.EMPTY_IMAGE),
-      loadingBuilder: (BuildContext context, Widget child,
-          ImageChunkEvent? loadingProgress) {
+              Image.asset(Assets.emptyImage),
+      loadingBuilder: (
+        BuildContext context,
+        Widget child,
+        ImageChunkEvent? loadingProgress,
+      ) {
         if (loadingProgress == null) return child;
         return Center(
           child: CircularProgressIndicator(
@@ -88,7 +89,7 @@ class OnlineImage extends StatelessWidget {
 }
 
 class CachedImage extends StatelessWidget {
-  const CachedImage({required this.url});
+  const CachedImage({super.key, required this.url});
   final String url;
 
   @override
@@ -99,11 +100,11 @@ class CachedImage extends StatelessWidget {
       placeholder: (BuildContext context, String url) =>
           const Center(child: CircularProgressIndicator()),
       errorWidget: (BuildContext context, String url, Object? error) =>
-          Image.asset(Assets.EMPTY_IMAGE),
+          Image.asset(Assets.emptyImage),
     );
   }
 }
 
 String _checkUrl(String url) {
-  return url.isNotEmpty ? BASE_IMAGE + url : Assets.PLACE_HOLDER;
+  return url.isNotEmpty ? baseImage + url : Assets.placeHolder;
 }

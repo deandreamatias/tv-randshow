@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/services/manage_files_service.dart';
+import 'package:tv_randshow/ui/widgets/favorite_list.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../config/locator.dart';
-import '../../core/services/manage_files_service.dart';
-import '../widgets/favorite_list.dart';
-
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  const HomeView({super.key});
 
   @override
-  _HomeViewState createState() => _HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class HomeViewState extends State<HomeView> {
   final ManageFilesService _manageFiles = locator<ManageFilesService>();
   bool loading = false;
 
@@ -29,18 +28,20 @@ class _HomeViewState extends State<HomeView> {
                 child: Text(
                   translate('app.fav.title'),
                   key: const Key('app.fav.title'),
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
               ),
               loading
-                  ? Center(child: CircularProgressIndicator(strokeWidth: 2))
+                  ? const Center(
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
                   : IconButton(
                       key: const Key('app.fav.save'),
                       tooltip: translate('app.fav.save'),
                       icon: Icon(
                         UniconsLine.file_export,
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       onPressed: () async {
                         setState(() => loading = true);
@@ -51,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
             ],
           ),
         ),
-        Expanded(child: FavoriteList()),
+        const Expanded(child: FavoriteList()),
       ],
     );
   }

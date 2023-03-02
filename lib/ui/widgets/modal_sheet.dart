@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../core/viewmodels/widgets/details_model.dart';
-import 'image_builder.dart';
-import 'info_box.dart';
-import 'random_button.dart';
-import 'save_button.dart';
+import 'package:tv_randshow/core/viewmodels/widgets/details_model.dart';
+import 'package:tv_randshow/ui/widgets/image_builder.dart';
+import 'package:tv_randshow/ui/widgets/info_box.dart';
+import 'package:tv_randshow/ui/widgets/random_button.dart';
+import 'package:tv_randshow/ui/widgets/save_button.dart';
 
 class ModalSheet extends StatelessWidget {
-  const ModalSheet({required this.idTv, this.inDatabase = false});
+  const ModalSheet({super.key, required this.idTv, this.inDatabase = false});
   final int idTv;
   final bool inDatabase;
   // TODO(deandreamatias): Persist state of button on search and fav widgets
@@ -18,7 +18,7 @@ class ModalSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<DetailsModel>.reactive(
       viewModelBuilder: () => DetailsModel(),
-      onModelReady: (DetailsModel model) => model.getDetails(
+      onViewModelReady: (DetailsModel model) => model.getDetails(
         idTv,
         LocalizedApp.of(context).delegate.currentLocale.languageCode.toString(),
       ),
@@ -38,7 +38,7 @@ class ModalSheet extends StatelessWidget {
                 borderRadius: const BorderRadiusDirectional.vertical(
                   top: Radius.circular(16.0),
                 ),
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.background,
               ),
               child: model.isBusy
                   ? const Center(child: CircularProgressIndicator())
@@ -53,7 +53,6 @@ class ModalSheet extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Expanded(
-                                  flex: 1,
                                   child: ImageBuilder(
                                     url: model.tvshowDetails!.posterPath,
                                     name: model.tvshowDetails!.name,
@@ -70,8 +69,9 @@ class ModalSheet extends StatelessWidget {
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 3,
-                                      style:
-                                          Theme.of(context).textTheme.headline6,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
                                     ),
                                   ),
                                 ),
@@ -104,7 +104,7 @@ class ModalSheet extends StatelessWidget {
                         ),
                         Text(
                           translate('app.modal.overview'),
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 8.0),
                         Expanded(

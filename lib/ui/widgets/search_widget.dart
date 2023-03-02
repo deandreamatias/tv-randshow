@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../core/models/result.dart';
-import 'image_builder.dart';
-import 'modal_sheet.dart';
-import 'save_button.dart';
+import 'package:tv_randshow/core/models/result.dart';
+import 'package:tv_randshow/ui/widgets/image_builder.dart';
+import 'package:tv_randshow/ui/widgets/modal_sheet.dart';
+import 'package:tv_randshow/ui/widgets/save_button.dart';
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({Key? key, required this.result}) : super(key: key);
+  const SearchWidget({super.key, required this.result});
   final Result result;
 
   @override
-  _SearchWidgetState createState() => _SearchWidgetState();
+  SearchWidgetState createState() => SearchWidgetState();
 }
 
-class _SearchWidgetState extends State<SearchWidget> {
+class SearchWidgetState extends State<SearchWidget> {
   // TODO(deandreamatias): Verify coincidence between database and search result
   late bool _enable;
   @override
@@ -26,7 +26,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget build(BuildContext context) {
     return Opacity(
       opacity: _enable ? 1.0 : 0.38,
-      child: Container(
+      child: DecoratedBox(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),
@@ -43,11 +43,9 @@ class _SearchWidgetState extends State<SearchWidget> {
                   if (_enable) {
                     showModalBottomSheet<void>(
                       isScrollControlled: true,
-                      isDismissible: true,
                       context: context,
                       builder: (BuildContext builder) => ModalSheet(
                         idTv: widget.result.id,
-                        inDatabase: false,
                       ),
                     );
                   }

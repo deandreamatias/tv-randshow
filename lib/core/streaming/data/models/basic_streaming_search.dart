@@ -6,15 +6,13 @@ part 'basic_streaming_search.g.dart';
 @JsonSerializable()
 class BasicStreamingSearch extends StreamingSearch {
   @JsonKey(name: 'tmdb_id')
-  final String tmdbId;
-  final String country;
+  final String tmdbIdOutput;
 
   BasicStreamingSearch({
-    required this.tmdbId,
-    required this.country,
+    required this.tmdbIdOutput,
+    required super.country,
   }) : super(
-          country: country,
-          tmdbId: tmdbId,
+          tmdbId: tmdbIdOutput,
         );
 
   factory BasicStreamingSearch.fromJson(Map<String, dynamic> json) =>
