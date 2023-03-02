@@ -1,4 +1,4 @@
-enum Flavor { DEV, PROD }
+enum Flavor { dev, prod }
 
 class FlavorValues {
   FlavorValues({
@@ -27,10 +27,8 @@ class FlavorConfig {
     required Flavor flavor,
     required FlavorValues values,
   }) {
-    if (_instance == null) {
-      _instance =
-          FlavorConfig._internal(flavor, enumName(flavor.toString()), values);
-    }
+    _instance ??=
+        FlavorConfig._internal(flavor, enumName(flavor.toString()), values);
     return _instance!;
   }
   FlavorConfig._internal(this.flavor, this.name, this.values);
@@ -48,6 +46,6 @@ class FlavorConfig {
     return paths[paths.length - 1];
   }
 
-  static bool isProduction() => _instance!.flavor == Flavor.PROD;
-  static bool isDevelopment() => _instance!.flavor == Flavor.DEV;
+  static bool isProduction() => _instance!.flavor == Flavor.prod;
+  static bool isDevelopment() => _instance!.flavor == Flavor.dev;
 }

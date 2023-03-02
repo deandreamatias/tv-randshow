@@ -1,10 +1,10 @@
 import 'package:stacked/stacked.dart';
 
-import '../../../config/locator.dart';
-import '../../models/tvshow_actions.dart';
-import '../../models/tvshow_details.dart';
-import '../../services/app_service.dart';
-import '../../services/favs_service.dart';
+import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/models/tvshow_actions.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/services/app_service.dart';
+import 'package:tv_randshow/core/services/favs_service.dart';
 
 class FavoriteListModel extends StreamViewModel<List<TvshowDetails>> {
   final FavsService _favsService = locator<FavsService>();
@@ -26,7 +26,9 @@ class FavoriteListModel extends StreamViewModel<List<TvshowDetails>> {
         data == null ||
         data!.isEmpty ||
         _appService.timesOpenLink > 1) return null;
-    return data!.singleWhere((TvshowDetails tvshowDetails) =>
-        tvshowDetails.name.toLowerCase().contains(tvshowActions.tvshow));
+    return data!.singleWhere(
+      (TvshowDetails tvshowDetails) =>
+          tvshowDetails.name.toLowerCase().contains(tvshowActions.tvshow),
+    );
   }
 }

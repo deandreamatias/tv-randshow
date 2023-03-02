@@ -10,6 +10,6 @@ class GetMigrationStatusUseCase {
   GetMigrationStatusUseCase(this._migrationRepository);
 
   Future<MigrationStatus> call() async {
-    return await _migrationRepository.getStatus();
+    return _migrationRepository.getStatus();
   }
 }

@@ -7,16 +7,11 @@ part 'backdrop_urls_output.g.dart';
 @JsonSerializable()
 class BackdropUrlsOutput extends BackdropUrLs {
   BackdropUrlsOutput({
-    String the300 = '',
-    String the780 = '',
-    String the1280 = '',
-    String original = '',
-  }) : super(
-          the300: the300,
-          the780: the780,
-          the1280: the1280,
-          original: original,
-        );
+    super.the300,
+    super.the780,
+    super.the1280,
+    super.original,
+  });
 
   factory BackdropUrlsOutput.fromJson(Map<String, dynamic> json) =>
       _$BackdropUrlsOutputFromJson(json);

@@ -4,9 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:tv_randshow/core/models/tvshow_actions.dart';
 import 'package:uni_links/uni_links.dart';
-
-import '../models/tvshow_actions.dart';
 
 @lazySingleton
 class AppService {
@@ -29,7 +28,10 @@ class AppService {
       }
     } on PlatformException catch (e) {
       return throw PlatformException(
-          code: e.code, message: e.message, details: e.details);
+        code: e.code,
+        message: e.message,
+        details: e.details,
+      );
     }
   }
 
@@ -55,7 +57,7 @@ class AppService {
   }
 
   Future<String> saveFile(String fileName, String json) async {
-    return await FileSaver.instance.saveFile(
+    return FileSaver.instance.saveFile(
       fileName,
       Uint8List.fromList(json.codeUnits),
       'json',

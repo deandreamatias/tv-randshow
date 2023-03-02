@@ -1,8 +1,7 @@
 import 'package:injectable/injectable.dart';
+import 'package:tv_randshow/core/streaming/domain/interfaces/i_streamings_repository.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
-
-import '../interfaces/i_streamings_repository.dart';
-import '../models/streaming_search.dart';
+import 'package:tv_randshow/core/streaming/domain/models/streaming_search.dart';
 
 @injectable
 class GetTvshowStreamingsUseCase {

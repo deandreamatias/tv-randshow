@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-typedef Widget ItemBuilder<T>(BuildContext context, T entry, int index);
-typedef Future<List<T>> PageFuture<T>(int pageIndex);
-typedef Widget ErrorBuilder(BuildContext context, Object error);
-typedef Widget LoadingBuilder(BuildContext context);
-typedef Widget NoItemsFoundBuilder(BuildContext context);
-typedef Widget RetryBuilder(BuildContext context, RetryCallback retryCallback);
-typedef void RetryCallback();
-typedef Widget PagewiseBuilder<T>(PagewiseState<T> state);
+typedef ItemBuilder<T> = Widget Function(
+  BuildContext context,
+  T entry,
+  int index,
+);
+typedef PageFuture<T> = Future<List<T>> Function(int pageIndex);
+typedef ErrorBuilder = Widget Function(BuildContext context, Object error);
+typedef LoadingBuilder = Widget Function(BuildContext context);
+typedef NoItemsFoundBuilder = Widget Function(BuildContext context);
+typedef RetryBuilder = Widget Function(
+  BuildContext context,
+  RetryCallback retryCallback,
+);
+typedef RetryCallback = void Function();
+typedef PagewiseBuilder<T> = Widget Function(PagewiseState<T> state);
 
 /// An abstract base class for widgets that fetch their content one page at a
 /// time.
@@ -148,10 +155,10 @@ abstract class Pagewise<T> extends StatefulWidget {
   ///
   /// This is an abstract class, this constructor should only be called from
   /// constructors of widgets that extend this class
-  Pagewise({
+  const Pagewise({
     this.pageSize,
     this.pageFuture,
-    Key? key,
+    super.key,
     this.pageLoadController,
     this.loadingBuilder,
     this.retryBuilder,
@@ -160,17 +167,23 @@ abstract class Pagewise<T> extends StatefulWidget {
     this.itemBuilder,
     this.errorBuilder,
     this.builder,
-  })  : assert((pageLoadController == null &&
-                pageSize != null &&
-                pageFuture != null) ||
-            (pageLoadController != null &&
-                pageSize == null &&
-                pageFuture == null)),
-        assert(showRetry == false || errorBuilder == null,
-            'Cannot specify showRetry and errorBuilder at the same time'),
-        assert(showRetry == true || retryBuilder == null,
-            "Cannot specify retryBuilder when showRetry is set to false"),
-        super(key: key);
+  })  : assert(
+          (pageLoadController == null &&
+                  pageSize != null &&
+                  pageFuture != null) ||
+              (pageLoadController != null &&
+                  pageSize == null &&
+                  pageFuture == null),
+          'Required pageLoadController or pageSize and pageFuture',
+        ),
+        assert(
+          showRetry == false || errorBuilder == null,
+          'Cannot specify showRetry and errorBuilder at the same time',
+        ),
+        assert(
+          showRetry == true || retryBuilder == null,
+          'Cannot specify retryBuilder when showRetry is set to false',
+        );
 
   @override
   PagewiseState<T> createState() => PagewiseState<T>();
@@ -190,7 +203,9 @@ class PagewiseState<T> extends State<Pagewise<T>> {
 
     if (widget.pageLoadController == null) {
       _controller = PagewiseLoadController<T>(
-          pageFuture: widget.pageFuture!, pageSize: widget.pageSize!);
+        pageFuture: widget.pageFuture!,
+        pageSize: widget.pageSize!,
+      );
     }
 
     _effectiveController.init();
@@ -215,8 +230,9 @@ class PagewiseState<T> extends State<Pagewise<T>> {
         oldWidget.pageLoadController != null) {
       oldWidget.pageLoadController!.removeListener(_controllerListener!);
       _controller = PagewiseLoadController<T>(
-          pageFuture: oldWidget.pageLoadController!.pageFuture,
-          pageSize: oldWidget.pageLoadController!.pageSize);
+        pageFuture: oldWidget.pageLoadController!.pageFuture,
+        pageSize: oldWidget.pageLoadController!.pageSize,
+      );
       _effectiveController.addListener(_controllerListener!);
       _effectiveController.init();
     } else if (widget.pageLoadController != null &&
@@ -248,7 +264,7 @@ class PagewiseState<T> extends State<Pagewise<T>> {
         _effectiveController._appendedItems.length +
         1;
 
-    if (index >= total) return SizedBox.shrink();
+    if (index >= total) return const SizedBox.shrink();
 
     if (index == total - 1) {
       if (_effectiveController.noItemsFound) {
@@ -277,22 +293,27 @@ class PagewiseState<T> extends State<Pagewise<T>> {
       }
       // Otherwise, we return the actual item
       return widget.itemBuilder!(
-          context, _effectiveController.loadedItems[index], index);
+        context,
+        _effectiveController.loadedItems[index],
+        index,
+      );
     }
   }
 
   Widget _getLoadingWidget() {
     return _getStandardContainer(
-        child: widget.loadingBuilder != null
-            ? widget.loadingBuilder!(context)
-            : CircularProgressIndicator());
+      child: widget.loadingBuilder != null
+          ? widget.loadingBuilder!(context)
+          : const CircularProgressIndicator(),
+    );
   }
 
   Widget _getNoItemsFoundWidget() {
     return _getStandardContainer(
-        child: widget.noItemsFoundBuilder != null
-            ? widget.noItemsFoundBuilder!(context)
-            : Container());
+      child: widget.noItemsFoundBuilder != null
+          ? widget.noItemsFoundBuilder!(context)
+          : Container(),
+    );
   }
 
   Widget _getErrorWidget(Object error) {
@@ -308,17 +329,18 @@ class PagewiseState<T> extends State<Pagewise<T>> {
 
   Widget _getRetryWidget() {
     var defaultRetryButton = TextButton(
-      child: Icon(
+      onPressed: _effectiveController.retry,
+      child: const Icon(
         Icons.refresh,
         color: Colors.white,
       ),
-      onPressed: _effectiveController.retry,
     );
 
     return _getStandardContainer(
-        child: widget.retryBuilder != null
-            ? widget.retryBuilder!(context, _effectiveController.retry)
-            : defaultRetryButton);
+      child: widget.retryBuilder != null
+          ? widget.retryBuilder!(context, _effectiveController.retry)
+          : defaultRetryButton,
+    );
   }
 
   Widget _getStandardContainer({required Widget child}) {
@@ -435,7 +457,7 @@ class PagewiseLoadController<T> extends ChangeNotifier {
 
   /// set to true if no data was found
   bool get noItemsFound =>
-      this._loadedItems.length == 0 && this.hasMoreItems == false;
+      this._loadedItems.isEmpty && this.hasMoreItems == false;
 
   /// Called to initialize the controller. Same as [reset]
   void init() {
@@ -450,7 +472,7 @@ class PagewiseLoadController<T> extends ChangeNotifier {
     this._hasMoreItems = true;
     this._error = null;
     this._isFetching = false;
-    this.notifyListeners();
+    notifyListeners();
   }
 
   /// Fetches a new page by calling [pageFuture]
@@ -465,16 +487,16 @@ class PagewiseLoadController<T> extends ChangeNotifier {
       } catch (error) {
         this._error = error;
         this._isFetching = false;
-        this.notifyListeners();
+        notifyListeners();
         return;
       }
 
       // Get length accounting for possible null Future return. We'l treat a null Future as an empty return
-      final int length = (page.length);
+      final int length = page.length;
 
       if (length > this.pageSize) {
         this._isFetching = false;
-        throw ('Page length ($length) is greater than the maximum size (${this.pageSize})');
+        throw 'Page length ($length) is greater than the maximum size (${this.pageSize})';
       }
 
       if (length > 0 && length < this.pageSize) {
@@ -498,7 +520,7 @@ class PagewiseLoadController<T> extends ChangeNotifier {
   /// Attempts to retry in case an error occurred
   void retry() {
     this._error = null;
-    this.notifyListeners();
+    notifyListeners();
   }
 }
 
@@ -508,9 +530,9 @@ class PagewiseGridView<T> extends Pagewise<T> {
   /// All the properties are either those documented for normal [GridViews](https://docs.flutter.io/flutter/widgets/GridView-class.html)
   /// or those inherited from [Pagewise]
   PagewiseGridView.extent({
-    Key? key,
+    super.key,
     EdgeInsetsGeometry? padding,
-    double? maxCrossAxisExtent,
+    required double maxCrossAxisExtent,
     double childAspectRatio = 1.0,
     double crossAxisSpacing = 0.0,
     double mainAxisSpacing = 0.0,
@@ -519,32 +541,22 @@ class PagewiseGridView<T> extends Pagewise<T> {
     bool primary = true,
     bool shrinkWrap = false,
     ScrollController? controller,
-    PagewiseLoadController<T>? pageLoadController,
+    super.pageLoadController,
     bool addAutomaticKeepAlives = true,
     Axis scrollDirection = Axis.vertical,
     bool addRepaintBoundaries = true,
     double? cacheExtent,
     ScrollPhysics? physics,
     bool reverse = false,
-    int? pageSize,
-    PageFuture<T>? pageFuture,
-    LoadingBuilder? loadingBuilder,
-    RetryBuilder? retryBuilder,
-    NoItemsFoundBuilder? noItemsFoundBuilder,
-    bool showRetry = true,
-    ItemBuilder<T>? itemBuilder,
-    ErrorBuilder? errorBuilder,
+    super.pageSize,
+    super.pageFuture,
+    super.loadingBuilder,
+    super.retryBuilder,
+    super.noItemsFoundBuilder,
+    super.showRetry,
+    super.itemBuilder,
+    super.errorBuilder,
   }) : super(
-          pageSize: pageSize,
-          pageFuture: pageFuture,
-          pageLoadController: pageLoadController,
-          key: key,
-          loadingBuilder: loadingBuilder,
-          retryBuilder: retryBuilder,
-          showRetry: showRetry,
-          itemBuilder: itemBuilder,
-          errorBuilder: errorBuilder,
-          noItemsFoundBuilder: noItemsFoundBuilder,
           builder: (PagewiseState<T> state) {
             return GridView.builder(
               reverse: reverse,
@@ -560,11 +572,12 @@ class PagewiseGridView<T> extends Pagewise<T> {
               shrinkWrap: shrinkWrap,
               padding: padding,
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtentAndLoading(
-                  maxCrossAxisExtent: maxCrossAxisExtent,
-                  childAspectRatio: childAspectRatio,
-                  crossAxisSpacing: crossAxisSpacing,
-                  mainAxisSpacing: mainAxisSpacing,
-                  itemCount: state._itemCount),
+                maxCrossAxisExtent: maxCrossAxisExtent,
+                childAspectRatio: childAspectRatio,
+                crossAxisSpacing: crossAxisSpacing,
+                mainAxisSpacing: mainAxisSpacing,
+                itemCount: state._itemCount,
+              ),
               itemCount: state._itemCount,
               itemBuilder: state._itemBuilder,
             );
@@ -577,16 +590,12 @@ class SliverGridDelegateWithMaxCrossAxisExtentAndLoading
   final int itemCount;
 
   const SliverGridDelegateWithMaxCrossAxisExtentAndLoading({
-    maxCrossAxisExtent,
+    required super.maxCrossAxisExtent,
     required this.itemCount,
-    mainAxisSpacing = 0.0,
-    crossAxisSpacing = 0.0,
-    childAspectRatio = 1.0,
-  }) : super(
-            maxCrossAxisExtent: maxCrossAxisExtent,
-            mainAxisSpacing: mainAxisSpacing,
-            crossAxisSpacing: crossAxisSpacing,
-            childAspectRatio: childAspectRatio);
+    super.mainAxisSpacing = 0.0,
+    super.crossAxisSpacing = 0.0,
+    super.childAspectRatio = 1.0,
+  });
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) {
@@ -598,7 +607,7 @@ class SliverGridDelegateWithMaxCrossAxisExtentAndLoading
     final double childCrossAxisExtent = usableCrossAxisExtent / crossAxisCount;
     final double childMainAxisExtent = childCrossAxisExtent / childAspectRatio;
     return SliverGridRegularTileLayoutAndLoading(
-      itemCount: this.itemCount,
+      itemCount: itemCount,
       fullCrossAccessExtent: usableCrossAxisExtent,
       crossAxisCount: crossAxisCount,
       mainAxisStride: childMainAxisExtent + mainAxisSpacing,
@@ -616,30 +625,25 @@ class SliverGridRegularTileLayoutAndLoading
   final double fullCrossAccessExtent;
 
   const SliverGridRegularTileLayoutAndLoading({
-    crossAxisCount,
-    mainAxisStride,
-    crossAxisStride,
-    childMainAxisExtent,
-    childCrossAxisExtent,
-    reverseCrossAxis,
+    required super.crossAxisCount,
+    required super.mainAxisStride,
+    required super.crossAxisStride,
+    required super.childMainAxisExtent,
+    required super.childCrossAxisExtent,
+    required super.reverseCrossAxis,
     required this.fullCrossAccessExtent,
     required this.itemCount,
-  }) : super(
-            crossAxisCount: crossAxisCount,
-            mainAxisStride: mainAxisStride,
-            crossAxisStride: crossAxisStride,
-            childMainAxisExtent: childMainAxisExtent,
-            childCrossAxisExtent: childCrossAxisExtent,
-            reverseCrossAxis: reverseCrossAxis);
+  });
 
   @override
   SliverGridGeometry getGeometryForChildIndex(int index) {
-    if (index == this.itemCount - 1) {
+    if (index == itemCount - 1) {
       return SliverGridGeometry(
-          scrollOffset: (index ~/ crossAxisCount) * mainAxisStride,
-          crossAxisOffset: 0.0,
-          mainAxisExtent: childMainAxisExtent,
-          crossAxisExtent: fullCrossAccessExtent);
+        scrollOffset: (index ~/ crossAxisCount) * mainAxisStride,
+        crossAxisOffset: 0.0,
+        mainAxisExtent: childMainAxisExtent,
+        crossAxisExtent: fullCrossAccessExtent,
+      );
     }
 
     return super.getGeometryForChildIndex(index);

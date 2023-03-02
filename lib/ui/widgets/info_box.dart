@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 class InfoBox extends StatelessWidget {
-  const InfoBox({Key? key, required this.typeInfo, required this.value})
-      : super(key: key);
+  const InfoBox({super.key, required this.typeInfo, required this.value});
   final int typeInfo;
   final int value;
 
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      flex: 1,
-      fit: FlexFit.loose,
       child: AspectRatio(
         aspectRatio: 1,
         child: Container(
@@ -30,7 +27,8 @@ class InfoBox extends StatelessWidget {
                 child: Text(
                   _selectTitle(typeInfo),
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary),
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
                 ),
               ),
               Text(
@@ -45,12 +43,14 @@ class InfoBox extends StatelessWidget {
                     ? Text(
                         translate('app.modal.duration_metric'),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary),
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
                       )
                     : Text(
                         translate('app.modal.episode_season_metric'),
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary),
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
                       ),
             ],
           ),

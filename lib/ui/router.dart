@@ -1,37 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/models/tvshow_result.dart';
+import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/ui/views/loading_view.dart';
 import 'package:tv_randshow/ui/views/migration_view.dart';
+import 'package:tv_randshow/ui/views/privacy_policy_view.dart';
+import 'package:tv_randshow/ui/views/result_view.dart';
 import 'package:tv_randshow/ui/views/splash_view.dart';
-
-import '../core/models/tvshow_details.dart';
-import '../core/models/tvshow_result.dart';
-import '../core/utils/constants.dart';
-import 'views/loading_view.dart';
-import 'views/privacy_policy_view.dart';
-import 'views/result_view.dart';
-import 'views/tab_view.dart';
+import 'package:tv_randshow/ui/views/tab_view.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case RoutePaths.SPLASH:
+      case RoutePaths.splash:
         return MaterialPageRoute<SplashView>(
-            builder: (_) => const SplashView());
-      case RoutePaths.MIGRATION:
+          builder: (_) => const SplashView(),
+        );
+      case RoutePaths.migraiton:
         return MaterialPageRoute<MigrationView>(
-            builder: (_) => const MigrationView());
-      case RoutePaths.TAB:
+          builder: (_) => const MigrationView(),
+        );
+      case RoutePaths.tab:
         return MaterialPageRoute<TabView>(builder: (_) => const TabView());
-      case RoutePaths.LOADING:
+      case RoutePaths.loading:
         return MaterialPageRoute<LoadingView>(
           builder: (_) =>
               LoadingView(tvshowDetails: settings.arguments as TvshowDetails),
         );
-      case RoutePaths.RESULT:
+      case RoutePaths.result:
         return MaterialPageRoute<ResultView>(
           builder: (_) =>
               ResultView(tvshowResult: settings.arguments as TvshowResult),
         );
-      case RoutePaths.PRIVACY:
+      case RoutePaths.privacy:
         return MaterialPageRoute<PrivacyPolicyView>(
           builder: (_) => const PrivacyPolicyView(),
         );

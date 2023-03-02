@@ -1,8 +1,10 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import '../utils/converters.dart';
+import 'package:tv_randshow/core/utils/converters.dart';
 
 part 'episode.g.dart';
 
@@ -134,9 +136,7 @@ class EnumValues<T> {
   Map<T, String>? reverseMap;
 
   Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map.map((String k, T v) => MapEntry<T, String>(v, k));
-    }
+    reverseMap ??= map.map((String k, T v) => MapEntry<T, String>(v, k));
     return reverseMap!;
   }
 }

@@ -3,13 +3,13 @@ import 'dart:math';
 
 import 'package:injectable/injectable.dart';
 
-import '../../config/flavor_config.dart';
-import '../models/episode.dart';
-import '../models/query.dart';
-import '../models/tvshow_details.dart';
-import '../models/tvshow_result.dart';
-import '../models/tvshow_seasons_details.dart';
-import 'api_service.dart';
+import 'package:tv_randshow/config/flavor_config.dart';
+import 'package:tv_randshow/core/models/episode.dart';
+import 'package:tv_randshow/core/models/query.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/models/tvshow_result.dart';
+import 'package:tv_randshow/core/models/tvshow_seasons_details.dart';
+import 'package:tv_randshow/core/services/api_service.dart';
 
 @lazySingleton
 class RandomService {
@@ -19,21 +19,23 @@ class RandomService {
   final ApiService _apiService;
 
   Future<TvshowResult> randomEpisode(
-      TvshowDetails tvshowDetails, String language) async {
+    TvshowDetails tvshowDetails,
+    String language,
+  ) async {
     final Query query = Query(
       apiKey: FlavorConfig.instance.values.apiKey,
       language: language,
     );
     final int randomSeason =
         _getRandomNumber(tvshowDetails.numberOfSeasons, true);
-    final TvshowSeasonsDetails _seasonsDetails =
+    final TvshowSeasonsDetails seasonsDetails =
         await _apiService.getDetailsTvSeasons(
       query,
       tvshowDetails.id,
       randomSeason,
     );
-    final Episode episode = _seasonsDetails.episodes.elementAt(
-      _getRandomNumber(_seasonsDetails.episodes.length, false),
+    final Episode episode = seasonsDetails.episodes.elementAt(
+      _getRandomNumber(seasonsDetails.episodes.length, false),
     );
     final TvshowResult tvshowResult = TvshowResult(
       tvshowDetails: tvshowDetails,

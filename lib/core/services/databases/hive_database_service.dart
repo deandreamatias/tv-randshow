@@ -5,12 +5,11 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tv_randshow/config/flavor_config.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/services/databases/i_database_service.dart';
+import 'package:tv_randshow/core/streaming/data/models/streaming_detail_hive.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
-
-import '../../../config/flavor_config.dart';
-import '../../models/tvshow_details.dart';
-import '../../streaming/data/models/streaming_detail_hive.dart';
-import 'i_database_service.dart';
 
 @LazySingleton(as: IDatabaseService)
 class HiveDatabaseService extends IDatabaseService {
@@ -39,7 +38,7 @@ class HiveDatabaseService extends IDatabaseService {
       } catch (e) {
         log('Can\'t open directory', error: e);
       }
-      Hive..init(documentsDirectory?.path ?? '');
+      Hive.init(documentsDirectory?.path ?? '');
       _registerAdapters();
     }
   }
@@ -54,10 +53,10 @@ class HiveDatabaseService extends IDatabaseService {
   }
 
   Future<void> _loadBoxes() async {
-    if (!await Hive.isBoxOpen(tvshowBoxName)) {
+    if (!Hive.isBoxOpen(tvshowBoxName)) {
       await Hive.openBox<TvshowDetails>(tvshowBoxName);
     }
-    if (!await Hive.isBoxOpen(streamingsBoxName)) {
+    if (!Hive.isBoxOpen(streamingsBoxName)) {
       await Hive.openBox<StreamingDetailHive>(streamingsBoxName);
     }
     tvshowBox ??= Hive.box<TvshowDetails>(tvshowBoxName);
@@ -70,8 +69,8 @@ class HiveDatabaseService extends IDatabaseService {
     await _loadBoxes();
     try {
       await tvshowBox!.delete(id);
-      final streamings = await streamingsBox!.values
-          .where((streaming) => streaming.tvshowId == id);
+      final streamings =
+          streamingsBox!.values.where((streaming) => streaming.tvshowId == id);
       if (streamings.isNotEmpty) {
         for (var streaming in streamings) {
           await streamingsBox!.delete(streaming.id);
@@ -91,25 +90,26 @@ class HiveDatabaseService extends IDatabaseService {
     await _init();
     await _loadBoxes();
     try {
-      final tvshows = await tvshowBox!.values;
-      final streamings = await streamingsBox!.values;
+      final tvshows = tvshowBox!.values;
+      final streamings = streamingsBox!.values;
       final List<TvshowDetails> list = [];
       for (TvshowDetails tvshow in tvshows) {
         if (streamings.isNotEmpty) {
           tvshow = tvshow.copyWith(
-              streamings: streamings
-                  .where((streaming) => streaming.tvshowId == tvshow.id)
-                  .map(
-                    (streaming) => StreamingDetail(
-                      id: streaming.id,
-                      streamingName: streaming.streamingName,
-                      link: streaming.link,
-                      added: streaming.added,
-                      leaving: streaming.leaving,
-                      country: streaming.country,
-                    ),
-                  )
-                  .toList());
+            streamings: streamings
+                .where((streaming) => streaming.tvshowId == tvshow.id)
+                .map(
+                  (streaming) => StreamingDetail(
+                    id: streaming.id,
+                    streamingName: streaming.streamingName,
+                    link: streaming.link,
+                    added: streaming.added,
+                    leaving: streaming.leaving,
+                    country: streaming.country,
+                  ),
+                )
+                .toList(),
+          );
         }
         list.add(tvshow);
       }
@@ -158,9 +158,9 @@ class HiveDatabaseService extends IDatabaseService {
           await streamingsBox!.put(streamingHive.id, streamingHive);
         }
       }
-      log('Streamings saved on tvshow ${tvshowId}: ${streamings.length} streamings');
+      log('Streamings saved on tvshow $tvshowId: ${streamings.length} streamings');
     } catch (e) {
-      throw Exception('Error to save streamings on tv show: ${tvshowId}');
+      throw Exception('Error to save streamings on tv show: $tvshowId');
     }
   }
 }

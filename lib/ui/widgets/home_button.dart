@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/ui/views/tab_view.dart';
 import 'package:unicons/unicons.dart';
 
-import '../../core/utils/constants.dart';
-import '../views/tab_view.dart';
-
 class HomeButton extends StatelessWidget {
-  const HomeButton({Key? key, required this.text}) : super(key: key);
+  const HomeButton({super.key, required this.text});
   final String text;
 
   @override
@@ -21,8 +20,8 @@ class HomeButton extends StatelessWidget {
         icon: const Icon(UniconsLine.favorite),
         onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
           context,
-          RoutePaths.TAB,
-          ModalRoute.withName(RoutePaths.TAB),
+          RoutePaths.tab,
+          ModalRoute.withName(RoutePaths.tab),
         ),
       ),
     );

@@ -7,7 +7,7 @@ import 'package:tv_randshow/ui/states/migration_state.dart';
 import 'package:unicons/unicons.dart';
 
 class MigrationView extends StatefulWidget {
-  const MigrationView({Key? key}) : super(key: key);
+  const MigrationView({super.key});
 
   @override
   State<MigrationView> createState() => _MigrationViewState();
@@ -57,14 +57,16 @@ class _MigrationViewState extends State<MigrationView> {
                   if (order <= MigrationStatus.empty.getOrder()) ...[
                     const SizedBox(height: 8),
                     _Checkpoint(
-                        label: 'app.migration.empty',
-                        checked: order >= MigrationStatus.empty.getOrder()),
+                      label: 'app.migration.empty',
+                      checked: order >= MigrationStatus.empty.getOrder(),
+                    ),
                   ] else ...[
-                    if (!kIsWeb) ...databaseMigration(order, isLoading),
-                    ...streamMigration(order, isLoading),
+                    if (!kIsWeb)
+                      ...databaseMigration(order, isLoading: isLoading),
+                    ...streamMigration(order, isLoading: isLoading),
                   ],
                   if (snapshot.hasError) ...[
-                    Divider(thickness: 2),
+                    const Divider(thickness: 2),
                     Text('${translate('app.migration.error')}: ${error ?? ''}'),
                   ],
                   const SizedBox(height: 24),
@@ -73,7 +75,7 @@ class _MigrationViewState extends State<MigrationView> {
                     icon: const Icon(UniconsLine.home),
                     onPressed: () => Navigator.pushReplacementNamed(
                       context,
-                      RoutePaths.TAB,
+                      RoutePaths.tab,
                     ),
                   ),
                 ],
@@ -101,7 +103,7 @@ class _MigrationViewState extends State<MigrationView> {
     ];
   }
 
-  List<Widget> databaseMigration(int order, bool isLoading) {
+  List<Widget> databaseMigration(int order, {bool isLoading = false}) {
     return [
       const SizedBox(height: 8),
       _Checkpoint(
@@ -130,7 +132,7 @@ class _MigrationViewState extends State<MigrationView> {
     ];
   }
 
-  List<Widget> streamMigration(int order, bool isLoading) {
+  List<Widget> streamMigration(int order, {bool isLoading = false}) {
     return [
       const SizedBox(height: 8),
       _Checkpoint(
@@ -153,11 +155,10 @@ class _Checkpoint extends StatelessWidget {
   final String label;
   final bool isLoading;
   const _Checkpoint({
-    Key? key,
     this.checked = false,
     this.isLoading = false,
     required this.label,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -166,14 +167,14 @@ class _Checkpoint extends StatelessWidget {
         Text(translate(label)),
         const SizedBox(width: 4),
         isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 width: 12,
                 height: 12,
                 child: CircularProgressIndicator(),
               )
             : checked
-                ? Icon(UniconsLine.check, color: Colors.green)
-                : Icon(UniconsLine.times, color: Colors.red),
+                ? const Icon(UniconsLine.check, color: Colors.green)
+                : const Icon(UniconsLine.times, color: Colors.red),
       ],
     );
   }

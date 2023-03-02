@@ -8,5 +8,5 @@ class CustomIcons {
 
   static const String _kFontFam = 'CustomIcons';
 
-  static const IconData dice_multiple = IconData(0xe800, fontFamily: _kFontFam);
+  static const IconData diceMultiple = IconData(0xe800, fontFamily: _kFontFam);
 }

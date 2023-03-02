@@ -4,12 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../config/flavor_config.dart';
-import '../models/query.dart';
-import '../models/search.dart';
-import '../models/tvshow_details.dart';
-import '../models/tvshow_seasons_details.dart';
-import '../utils/constants.dart';
+import 'package:tv_randshow/config/flavor_config.dart';
+import 'package:tv_randshow/core/models/query.dart';
+import 'package:tv_randshow/core/models/search.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/models/tvshow_seasons_details.dart';
+import 'package:tv_randshow/core/utils/constants.dart';
 
 @lazySingleton
 class ApiService {
@@ -23,8 +23,10 @@ class ApiService {
   // Documentation: https://developers.themoviedb.org/3/search/search-tv-shows
   Future<Search> getSearch(Query query) async {
     try {
-      final Response<dynamic> response = await dio.get<dynamic>(TVSHOW_SEARCH,
-          queryParameters: query.toJson());
+      final Response<dynamic> response = await dio.get<dynamic>(
+        tvshowSearch,
+        queryParameters: query.toJson(),
+      );
       return Search.fromJson(response.data);
     } on DioError catch (e) {
       log('Error to fetch search: ${e.message}', error: e);
@@ -36,7 +38,7 @@ class ApiService {
   Future<TvshowDetails> getDetailsTv(Query query, int idTv) async {
     try {
       final Response<dynamic> response = await dio.get<dynamic>(
-        '$TVSHOW_DETAILS$idTv',
+        '$tvshowDetails$idTv',
         queryParameters: query.toJson(),
       );
       return TvshowDetails.fromJson(response.data);
@@ -48,10 +50,13 @@ class ApiService {
 
 // Documentation: https://developers.themoviedb.org/3/tv-seasons/get-tv-season-details
   Future<TvshowSeasonsDetails> getDetailsTvSeasons(
-      Query query, int idTv, int idSeason) async {
+    Query query,
+    int idTv,
+    int idSeason,
+  ) async {
     try {
       final Response<dynamic> response = await dio.get<dynamic>(
-        '$TVSHOW_DETAILS$idTv$TVSHOW_DETAILS_SEASON$idSeason',
+        '$tvshowDetails$idTv$tvshowDetailsSeason$idSeason',
         queryParameters: query.toJson(),
       );
       return TvshowSeasonsDetails.fromJson(response.data);

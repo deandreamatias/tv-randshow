@@ -11,8 +11,10 @@ class MigrationRepository implements IMigrationRepository {
 
   @override
   Future<bool> saveStatus(MigrationStatus status) async {
-    return await _localStorageService.write<int>(
-        key: keyStatus, value: status.getOrder());
+    return _localStorageService.write<int>(
+      key: keyStatus,
+      value: status.getOrder(),
+    );
   }
 
   @override

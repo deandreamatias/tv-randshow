@@ -1,10 +1,10 @@
 import 'package:stacked/stacked.dart';
 
-import '../../../config/flavor_config.dart';
-import '../../../config/locator.dart';
-import '../../models/query.dart';
-import '../../models/tvshow_details.dart';
-import '../../services/api_service.dart';
+import 'package:tv_randshow/config/flavor_config.dart';
+import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/models/query.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/services/api_service.dart';
 
 class DetailsModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();

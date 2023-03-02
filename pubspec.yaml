@@ -4,18 +4,18 @@ description: App to pick a random TV show episode
 version: 1.10.2+26
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
-  flutter: ">=3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=3.3.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
   cached_network_image: 3.2.3
   dio: 4.0.4
   file_saver: 0.1.1
   flare_flutter: 3.0.2
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_markdown: 0.6.14
   flutter_pagewise: 2.0.4
   flutter_translate: 4.0.3
@@ -26,6 +26,7 @@ dependencies:
   injectable: 2.1.0
   json_annotation: 4.7.0
   package_info_plus: 3.0.3
+  path: 1.8.2
   path_provider: 2.0.13
   permission_handler: 10.2.0
   provider: 6.0.5
@@ -38,18 +39,18 @@ dependencies:
   url_launcher: 6.1.10
 
 dev_dependencies:
-  integration_test:
-    sdk: flutter
-  flutter_test:
-    sdk: flutter
   build_runner: 2.3.3
   faker: 2.1.0
   flutter_launcher_icons: 0.11.0
+  flutter_lints: 2.0.1
+  flutter_test:
+    sdk: flutter
   hive_generator: 2.0.0
   injectable_generator: 2.1.4
+  integration_test:
+    sdk: flutter
   json_serializable: 6.5.4
   mockito: 5.3.2
-  flutter_lints: 2.0.1
 
 flutter_native_splash:
   image: assets/img/icon_launcher.png

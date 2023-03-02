@@ -4,24 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/ui/widgets/image_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../core/utils/constants.dart';
-import '../widgets/image_builder.dart';
-
 class PrivacyPolicyView extends StatelessWidget {
-  const PrivacyPolicyView({Key? key}) : super(key: key);
+  const PrivacyPolicyView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           key: const Key('app.privacy.scroll'),
           physics: const BouncingScrollPhysics(),
           child: FutureBuilder<String>(
-            future: rootBundle.loadString(Assets.PRIVACY_POLICY),
+            future: rootBundle.loadString(Assets.privacyPolicy),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               return snapshot.hasData
                   ? Column(

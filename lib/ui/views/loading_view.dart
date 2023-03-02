@@ -2,15 +2,14 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
-
-import '../../core/models/tvshow_details.dart';
-import '../../core/utils/constants.dart';
-import '../../core/viewmodels/views/loading_view_model.dart';
-import '../widgets/home_button.dart';
-import 'result_view.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/core/viewmodels/views/loading_view_model.dart';
+import 'package:tv_randshow/ui/views/result_view.dart';
+import 'package:tv_randshow/ui/widgets/home_button.dart';
 
 class LoadingView extends StatelessWidget {
-  const LoadingView({Key? key, required this.tvshowDetails}) : super(key: key);
+  const LoadingView({super.key, required this.tvshowDetails});
   final TvshowDetails tvshowDetails;
 
   @override
@@ -18,22 +17,25 @@ class LoadingView extends StatelessWidget {
     return ViewModelBuilder<LoadingViewModel>.nonReactive(
       viewModelBuilder: () => LoadingViewModel(),
       onViewModelReady: (LoadingViewModel model) async {
-        await model.sortRandomEpisode(
+        await model
+            .sortRandomEpisode(
           tvshowDetails,
           LocalizedApp.of(context)
               .delegate
               .currentLocale
               .languageCode
               .toString(),
-        );
-        if (model.canNavigate) {
-          Navigator.pushNamedAndRemoveUntil<ResultView>(
-            context,
-            RoutePaths.RESULT,
-            ModalRoute.withName(RoutePaths.TAB),
-            arguments: model.tvshowResult,
-          );
-        }
+        )
+            .then((value) {
+          if (model.canNavigate) {
+            Navigator.pushNamedAndRemoveUntil<ResultView>(
+              context,
+              RoutePaths.result,
+              ModalRoute.withName(RoutePaths.tab),
+              arguments: model.tvshowResult,
+            );
+          }
+        });
       },
       builder: (BuildContext context, LoadingViewModel model, Widget? child) {
         return Scaffold(
@@ -62,7 +64,7 @@ class LoadingView extends StatelessWidget {
                               ),
                             )
                           : const FlareActor(
-                              Assets.LOADING,
+                              Assets.loading,
                               animation: 'Loading',
                             ),
                     ),

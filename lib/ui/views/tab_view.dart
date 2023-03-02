@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/ui/views/home_view.dart';
+import 'package:tv_randshow/ui/views/info_view.dart';
+import 'package:tv_randshow/ui/views/search_view.dart';
 import 'package:unicons/unicons.dart';
 
-import 'home_view.dart';
-import 'info_view.dart';
-import 'search_view.dart';
-
 class TabView extends StatefulWidget {
-  const TabView({Key? key}) : super(key: key);
+  const TabView({super.key});
 
   @override
-  _TabViewState createState() => _TabViewState();
+  TabViewState createState() => TabViewState();
 }
 
-class _TabViewState extends State<TabView> {
+class TabViewState extends State<TabView> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
@@ -66,8 +65,9 @@ class _TabViewState extends State<TabView> {
                         const VerticalDivider(thickness: 1, width: 1),
                         Expanded(
                           child: SafeArea(
-                              left: false,
-                              child: _widgetOptions.elementAt(_selectedIndex)),
+                            left: false,
+                            child: _widgetOptions.elementAt(_selectedIndex),
+                          ),
                         ),
                       ],
                     )
@@ -75,7 +75,8 @@ class _TabViewState extends State<TabView> {
                       children: <Widget>[
                         Expanded(
                           child: SafeArea(
-                              child: _widgetOptions.elementAt(_selectedIndex)),
+                            child: _widgetOptions.elementAt(_selectedIndex),
+                          ),
                         ),
                         BottomNavigationBar(
                           currentIndex: _selectedIndex,
@@ -88,21 +89,21 @@ class _TabViewState extends State<TabView> {
                             BottomNavigationBarItem(
                               icon: const Icon(
                                 UniconsLine.favorite,
-                                key: const Key('app.fav.tab'),
+                                key: Key('app.fav.tab'),
                               ),
                               label: translate('app.fav.tab'),
                             ),
                             BottomNavigationBarItem(
                               icon: const Icon(
                                 UniconsLine.search,
-                                key: const Key('app.search.tab'),
+                                key: Key('app.search.tab'),
                               ),
                               label: translate('app.search.tab'),
                             ),
                             BottomNavigationBarItem(
                               icon: const Icon(
                                 UniconsLine.info_circle,
-                                key: const Key('app.info.tab'),
+                                key: Key('app.info.tab'),
                               ),
                               label: translate('app.info.tab'),
                             ),
