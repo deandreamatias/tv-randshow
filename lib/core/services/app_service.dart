@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:tv_randshow/core/models/tvshow_actions.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_actions.dart';
 import 'package:uni_links/uni_links.dart';
 
 @lazySingleton

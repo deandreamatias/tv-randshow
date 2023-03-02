@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:tv_randshow/core/utils/converters.dart';
+import 'package:tv_randshow/core/tvshow/data/transformers/converters.dart';
 
 part 'episode.g.dart';
 

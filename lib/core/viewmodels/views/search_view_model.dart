@@ -4,9 +4,9 @@ import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:tv_randshow/config/locator.dart';
-import 'package:tv_randshow/core/models/query.dart';
-import 'package:tv_randshow/core/models/result.dart';
-import 'package:tv_randshow/core/models/search.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/search.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/search_tvshow_use_case.dart';
 
 class SearchViewModel extends BaseViewModel {

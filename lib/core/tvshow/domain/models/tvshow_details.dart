@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tv_randshow/core/models/season.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/season.dart';
 
 part 'tvshow_details.g.dart';
 

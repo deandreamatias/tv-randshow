@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/models/query.dart';
-import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_tvshow_repository.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @injectable
 class GetTvshowDetailsUseCase {

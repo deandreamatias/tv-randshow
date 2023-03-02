@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:injectable/injectable.dart';
-
-import 'package:tv_randshow/core/models/file.dart';
 import 'package:tv_randshow/core/services/app_service.dart';
 import 'package:tv_randshow/core/services/databases/i_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/file.dart';
 
 @lazySingleton
 class ManageFilesService {

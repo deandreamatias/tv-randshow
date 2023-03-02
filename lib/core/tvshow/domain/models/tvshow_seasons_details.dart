@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:tv_randshow/core/models/episode.dart';
-import 'package:tv_randshow/core/utils/converters.dart';
+import 'package:tv_randshow/core/tvshow/data/transformers/converters.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/episode.dart';
 
 part 'tvshow_seasons_details.g.dart';
 

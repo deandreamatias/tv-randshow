@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-
-import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/services/databases/i_secondary_database_service.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @Injectable(env: ['mobile'])
 class MobileDatabaseMigrationUseCase {
