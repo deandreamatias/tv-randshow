@@ -3,33 +3,29 @@ import 'dart:math';
 
 import 'package:injectable/injectable.dart';
 
-import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/core/models/episode.dart';
 import 'package:tv_randshow/core/models/query.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
 import 'package:tv_randshow/core/models/tvshow_result.dart';
 import 'package:tv_randshow/core/models/tvshow_seasons_details.dart';
-import 'package:tv_randshow/core/services/api_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_tvshow_repository.dart';
 
 @lazySingleton
 class RandomService {
   RandomService({
-    required ApiService apiService,
-  }) : _apiService = apiService;
-  final ApiService _apiService;
+    required ITvshowRepository tvshowRepository,
+  }) : _tvshowRepository = tvshowRepository;
+  final ITvshowRepository _tvshowRepository;
 
   Future<TvshowResult> randomEpisode(
     TvshowDetails tvshowDetails,
     String language,
   ) async {
-    final Query query = Query(
-      apiKey: FlavorConfig.instance.values.apiKey,
-      language: language,
-    );
+    final Query query = Query(language: language);
     final int randomSeason =
         _getRandomNumber(tvshowDetails.numberOfSeasons, true);
     final TvshowSeasonsDetails seasonsDetails =
-        await _apiService.getDetailsTvSeasons(
+        await _tvshowRepository.getDetailsTvSeasons(
       query,
       tvshowDetails.id,
       randomSeason,

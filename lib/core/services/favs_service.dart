@@ -2,23 +2,22 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/models/query.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
-import 'package:tv_randshow/core/services/api_service.dart';
 import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming_search.dart';
 import 'package:tv_randshow/core/streaming/domain/use_cases/get_tvshow_streamings_use_case.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_tvshow_repository.dart';
 
 @lazySingleton
 class FavsService {
   FavsService({
-    required ApiService apiService,
+    required ITvshowRepository tvshowRepository,
     required IDatabaseService databaseService,
-  })  : _apiService = apiService,
+  })  : _tvshowRepository = tvshowRepository,
         _databaseService = databaseService;
-  final ApiService _apiService;
+  final ITvshowRepository _tvshowRepository;
   final IDatabaseService _databaseService;
   final GetTvshowStreamingsUseCase _getTvshowStreamingsUseCase =
       locator<GetTvshowStreamingsUseCase>();
@@ -33,11 +32,9 @@ class FavsService {
   }
 
   Future<void> addFav(int tmdbId, String language) async {
-    final Query query = Query(
-      apiKey: FlavorConfig.instance.values.apiKey,
-      language: language,
-    );
-    TvshowDetails tvshowDetails = await _apiService.getDetailsTv(query, tmdbId);
+    final Query query = Query(language: language);
+    TvshowDetails tvshowDetails =
+        await _tvshowRepository.getDetailsTv(query, tmdbId);
 
     final streamings = await _getTvshowStreamingsUseCase(
       StreamingSearch(

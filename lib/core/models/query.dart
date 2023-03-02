@@ -7,7 +7,6 @@ part 'query.g.dart';
 @JsonSerializable(includeIfNull: false)
 class Query {
   Query({
-    required this.apiKey,
     required this.language,
     this.query,
     this.page,
@@ -16,8 +15,6 @@ class Query {
   factory Query.fromRawJson(String str) => _$QueryFromJson(json.decode(str));
   factory Query.fromJson(Map<String, dynamic> json) => _$QueryFromJson(json);
 
-  @JsonKey(name: 'api_key')
-  String apiKey;
   String language;
   String? query;
   int? page;

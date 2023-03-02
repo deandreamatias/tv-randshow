@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/models/query.dart';
 import 'package:tv_randshow/core/models/result.dart';
 import 'package:tv_randshow/core/models/search.dart';
-import 'package:tv_randshow/core/services/api_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/use_cases/search_tvshow_use_case.dart';
 
 class SearchViewModel extends BaseViewModel {
-  final ApiService _apiService = locator<ApiService>();
+  final SearchTvShowUseCase _searchTvShowUseCase =
+      locator<SearchTvShowUseCase>();
   Timer? _timer;
 
   Timer? get timer => _timer;
@@ -19,12 +19,11 @@ class SearchViewModel extends BaseViewModel {
   Future<List<Result>> loadList(String text, int page, String language) async {
     if (text.isNotEmpty) {
       final Query query = Query(
-        apiKey: FlavorConfig.instance.values.apiKey,
         language: language,
         page: page,
         query: text,
       );
-      final Search search = await _apiService.getSearch(query);
+      final Search search = await _searchTvShowUseCase(query);
       if (search.results.isNotEmpty) {
         return search.results;
       }

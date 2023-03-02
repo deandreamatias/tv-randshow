@@ -1,13 +1,13 @@
 import 'package:stacked/stacked.dart';
 
-import 'package:tv_randshow/config/flavor_config.dart';
 import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/models/query.dart';
 import 'package:tv_randshow/core/models/tvshow_details.dart';
-import 'package:tv_randshow/core/services/api_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/use_cases/get_tvshow_details_use_case.dart';
 
 class RandomModel extends BaseViewModel {
-  final ApiService _apiService = locator<ApiService>();
+  final GetTvshowDetailsUseCase _getTvshowDetailsUseCase =
+      locator<GetTvshowDetailsUseCase>();
 
   TvshowDetails? _tvshowDetails;
 
@@ -15,11 +15,8 @@ class RandomModel extends BaseViewModel {
 
   Future<void> getDetails(int id, String language) async {
     setBusy(true);
-    final Query query = Query(
-      apiKey: FlavorConfig.instance.values.apiKey,
-      language: language,
-    );
-    _tvshowDetails = await _apiService.getDetailsTv(query, id);
+    final Query query = Query(language: language);
+    _tvshowDetails = await _getTvshowDetailsUseCase(query, id);
     setBusy(false);
   }
 }

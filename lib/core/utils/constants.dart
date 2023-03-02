@@ -10,10 +10,6 @@ class RoutePaths {
 }
 
 const String baseImage = 'https://image.tmdb.org/t/p/w342/';
-const String apiVersion = '/3';
-const String tvshowSearch = '$apiVersion/search/tv';
-const String tvshowDetails = '$apiVersion/tv/';
-const String tvshowDetailsSeason = '/season/';
 
 class Assets {
   static const String emptyImage = 'assets/img/no_image.webp';
