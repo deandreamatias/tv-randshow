@@ -11,7 +11,7 @@ run flavor device:
     fvm flutter run --flavor {{flavor}} -t lib/main_{{flavor}}.dart -d {{device}}
 
 # Generate all auto generate code
-codegen-build:
+codegen:
     fvm flutter pub run build_runner build --delete-conflicting-outputs
 
 # Clean project

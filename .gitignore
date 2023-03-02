@@ -51,6 +51,9 @@ unlinked.ds
 unlinked_spec.ds
 .flutter-plugins-dependencies
 lib/generated_plugin_registrant.dart
+*.g.dart
+*.config.dart
+*.mocks.dart
 
 ### Firebase ###
 **/node_modules/*
