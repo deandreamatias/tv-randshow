@@ -50,11 +50,14 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
    2. When build to iOS, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-xcode)
    3. When build to Android, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-android-studio)
    4. (Recommended) [Just](https://github.com/casey/just) to use commands
-3. Install dependencies from pubspec.yaml using `just get` or running `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
-4. Generate auto generate files with `just codegen` or copy the command from `./justfile`
-5. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
-6. Get your APi Key from Streaming Availabilty (on [RapidApi](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability)) and paste in file `lib/config/env.dart`
-7. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
+3. Install dependencies and generate code
+   1. Only use `just setup`
+   2. If don't have just, can do manual proccess
+      1. Run `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
+      2. Run `flutter pub run build_runner build`
+4. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
+5. Get your APi Key from Streaming Availabilty (on [RapidApi](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability)) and paste in file `lib/config/env.dart`
+6. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
 
 ### Run
 
