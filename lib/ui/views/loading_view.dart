@@ -2,38 +2,40 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
-
-import '../../core/models/tvshow_details.dart';
-import '../../core/utils/constants.dart';
-import '../../core/viewmodels/views/loading_view_model.dart';
-import '../widgets/home_button.dart';
-import 'result_view.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/core/viewmodels/views/loading_view_model.dart';
+import 'package:tv_randshow/ui/views/result_view.dart';
+import 'package:tv_randshow/ui/widgets/home_button.dart';
 
 class LoadingView extends StatelessWidget {
-  const LoadingView({Key? key, required this.tvshowDetails}) : super(key: key);
+  const LoadingView({super.key, required this.tvshowDetails});
   final TvshowDetails tvshowDetails;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoadingViewModel>.nonReactive(
       viewModelBuilder: () => LoadingViewModel(),
-      onModelReady: (LoadingViewModel model) async {
-        await model.sortRandomEpisode(
+      onViewModelReady: (LoadingViewModel model) async {
+        await model
+            .sortRandomEpisode(
           tvshowDetails,
           LocalizedApp.of(context)
               .delegate
               .currentLocale
               .languageCode
               .toString(),
-        );
-        if (model.canNavigate) {
-          Navigator.pushNamedAndRemoveUntil<ResultView>(
-            context,
-            RoutePaths.RESULT,
-            ModalRoute.withName(RoutePaths.TAB),
-            arguments: model.tvshowResult,
-          );
-        }
+        )
+            .then((value) {
+          if (model.canNavigate) {
+            Navigator.pushNamedAndRemoveUntil<ResultView>(
+              context,
+              RoutePaths.result,
+              ModalRoute.withName(RoutePaths.tab),
+              arguments: model.tvshowResult,
+            );
+          }
+        });
       },
       builder: (BuildContext context, LoadingViewModel model, Widget? child) {
         return Scaffold(
@@ -48,7 +50,7 @@ class LoadingView extends StatelessWidget {
                       child: Text(
                         translate('app.loading.title'),
                         key: const Key('app.loading.title'),
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -57,12 +59,12 @@ class LoadingView extends StatelessWidget {
                           ? Center(
                               child: Text(
                                 translate('app.loading.general_error'),
-                                style: Theme.of(context).textTheme.subtitle1,
+                                style: Theme.of(context).textTheme.titleMedium,
                                 textAlign: TextAlign.center,
                               ),
                             )
                           : const FlareActor(
-                              Assets.LOADING,
+                              Assets.loading,
                               animation: 'Loading',
                             ),
                     ),

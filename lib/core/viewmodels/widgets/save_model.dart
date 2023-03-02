@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 
-import '../../../config/locator.dart';
-import '../../services/favs_service.dart';
+import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/services/favs_service.dart';
 
 class SaveModel extends BaseViewModel {
   final FavsService _favsService = locator<FavsService>();

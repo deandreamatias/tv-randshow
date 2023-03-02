@@ -10,11 +10,6 @@ def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-} else {
-    keystoreProperties.setProperty('keyPassword', System.getenv('KEY_PASSWORD'));
-    keystoreProperties.setProperty('keyAlias', System.getenv('ALIAS'));
-    keystoreProperties.setProperty('storeFile', System.getenv('KEY_PATH'));
-    keystoreProperties.setProperty('storePassword', System.getenv('KEY_STORE_PASSWORD'));
 }
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
@@ -37,7 +32,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -59,7 +54,7 @@ android {
     defaultConfig {
         applicationId "deandrea.matias.tv_randshow"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

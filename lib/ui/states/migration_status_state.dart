@@ -13,13 +13,13 @@ class MigrationStatusState {
     SaveMigrationStatusUseCase? saveMigrationStatusUseCase,
     VerifyOldDatabaseUseCase? verifyOldDatabaseUseCase,
   }) {
-    this._verifyDatabaseUseCase =
+    _verifyDatabaseUseCase =
         verifyDatabaseUseCase ?? locator<VerifyDatabaseUseCase>();
-    this._getMigrationStatusUseCase =
+    _getMigrationStatusUseCase =
         getMigrationStatusUseCase ?? locator<GetMigrationStatusUseCase>();
-    this._saveMigrationStatusUseCase =
+    _saveMigrationStatusUseCase =
         saveMigrationStatusUseCase ?? locator<SaveMigrationStatusUseCase>();
-    this._verifyOldDatabaseUseCase = verifyOldDatabaseUseCase;
+    _verifyOldDatabaseUseCase = verifyOldDatabaseUseCase;
   }
 
   final bool isWeb;

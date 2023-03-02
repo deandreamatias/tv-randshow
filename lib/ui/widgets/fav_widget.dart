@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../core/models/tvshow_details.dart';
-import 'delete_button.dart';
-import 'image_builder.dart';
-import 'modal_sheet.dart';
-import 'random_button.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/ui/widgets/delete_button.dart';
+import 'package:tv_randshow/ui/widgets/image_builder.dart';
+import 'package:tv_randshow/ui/widgets/modal_sheet.dart';
+import 'package:tv_randshow/ui/widgets/random_button.dart';
 
 class FavWidget extends StatelessWidget {
-  const FavWidget({Key? key, required this.tvshowDetails}) : super(key: key);
+  const FavWidget({super.key, required this.tvshowDetails});
   final TvshowDetails tvshowDetails;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return DecoratedBox(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8.0)),
       ),
@@ -27,7 +27,6 @@ class FavWidget extends StatelessWidget {
             child: GestureDetector(
               onTap: () => showModalBottomSheet<void>(
                 isScrollControlled: true,
-                isDismissible: true,
                 context: context,
                 builder: (BuildContext context) => ModalSheet(
                   idTv: tvshowDetails.id,

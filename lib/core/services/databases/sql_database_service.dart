@@ -1,10 +1,9 @@
 import 'dart:developer';
 
 import 'package:injectable/injectable.dart';
-
-import '../../models/tvshow_details.dart';
-import '../../utils/database_helper.dart';
-import 'i_secondary_database_service.dart';
+import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/services/databases/i_secondary_database_service.dart';
+import 'package:tv_randshow/core/utils/database_helper.dart';
 
 @LazySingleton(as: ISecondaryDatabaseService, env: ['mobile'])
 class SqlDatabaseService extends ISecondaryDatabaseService {

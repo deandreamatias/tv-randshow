@@ -1,10 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-
+import 'package:tv_randshow/core/streaming/data/models/backdrop_urls_output.dart';
+import 'package:tv_randshow/core/streaming/data/models/poster_url_output.dart';
+import 'package:tv_randshow/core/streaming/data/models/streaming_detail_output.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
-
-import 'backdrop_urls_output.dart';
-import 'poster_url_output.dart';
-import 'streaming_detail_output.dart';
 
 part 'streaming_output.g.dart';
 
@@ -18,63 +16,38 @@ class StreamingOutput extends Streaming {
   final PosterUrlsOutput? posterUrLsOutput;
 
   StreamingOutput({
-    String imdbId = '',
-    String tmdbId = '',
-    required int imdbRating,
-    required int imdbVoteCount,
-    required int tmdbRating,
-    String backdropPath = '',
+    super.imdbId,
+    super.tmdbId,
+    required super.imdbRating,
+    required super.imdbVoteCount,
+    required super.tmdbRating,
+    super.backdropPath,
     this.backdropUrLsOutput,
-    String originalTitle = '',
-    List<int> genres = const [],
-    List<String> countries = const [],
-    required int year,
-    required int firstAirYear,
-    required int lastAirYear,
-    List<int> episodeRuntimes = const [],
-    List<String> cast = const [],
-    List<String> significants = const [],
-    String title = '',
-    String overview = '',
-    String video = '',
-    String posterPath = '',
+    super.originalTitle,
+    super.genres,
+    super.countries,
+    required super.year,
+    required super.firstAirYear,
+    required super.lastAirYear,
+    super.episodeRuntimes,
+    super.cast,
+    super.significants,
+    super.title,
+    super.overview,
+    super.video,
+    super.posterPath,
     this.posterUrLsOutput,
-    required int seasons,
-    required int episodes,
-    required int age,
-    required int status,
-    String tagline = '',
+    required super.seasons,
+    required super.episodes,
+    required super.age,
+    required super.status,
+    super.tagline,
     this.streamingInfoOutput = const [],
-    String originalLanguage = '',
+    super.originalLanguage,
   }) : super(
-          age: age,
           backdropUrLs: backdropUrLsOutput,
-          episodes: episodes,
-          firstAirYear: firstAirYear,
-          imdbRating: imdbRating,
-          imdbVoteCount: imdbVoteCount,
-          lastAirYear: lastAirYear,
           posterUrLs: posterUrLsOutput,
-          seasons: seasons,
-          status: status,
           streamings: streamingInfoOutput,
-          tmdbRating: tmdbRating,
-          year: year,
-          backdropPath: backdropPath,
-          cast: cast,
-          countries: countries,
-          episodeRuntimes: episodeRuntimes,
-          genres: genres,
-          imdbId: imdbId,
-          originalLanguage: originalLanguage,
-          originalTitle: originalTitle,
-          overview: overview,
-          posterPath: posterPath,
-          significants: significants,
-          tagline: tagline,
-          title: title,
-          tmdbId: tmdbId,
-          video: video,
         );
 
   factory StreamingOutput.fromJson(Map<String, dynamic> json) =>
@@ -82,7 +55,8 @@ class StreamingOutput extends Streaming {
 
   /// Simplify json streaming
   static List<StreamingDetailOutput> _streamingsFromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     if (json.entries.isEmpty) {
       return [];
     }

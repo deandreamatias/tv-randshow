@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../../config/flavor_config.dart';
-import '../../../config/locator.dart';
-import '../../models/query.dart';
-import '../../models/result.dart';
-import '../../models/search.dart';
-import '../../services/api_service.dart';
+import 'package:tv_randshow/config/flavor_config.dart';
+import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/models/query.dart';
+import 'package:tv_randshow/core/models/result.dart';
+import 'package:tv_randshow/core/models/search.dart';
+import 'package:tv_randshow/core/services/api_service.dart';
 
 class SearchViewModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();

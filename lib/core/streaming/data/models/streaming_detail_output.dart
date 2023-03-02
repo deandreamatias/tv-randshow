@@ -10,18 +10,12 @@ class StreamingDetailOutput extends StreamingDetail {
   StreamingDetailOutput({
     this.rowId,
     this.tvshowId,
-    required String streamingName,
-    required String country,
-    required String link,
-    required int added,
-    required int leaving,
-  }) : super(
-          streamingName: streamingName,
-          added: added,
-          country: country,
-          leaving: leaving,
-          link: link,
-        );
+    required super.streamingName,
+    required super.country,
+    required super.link,
+    required super.added,
+    required super.leaving,
+  });
 
   factory StreamingDetailOutput.fromJson(Map<String, dynamic> json) =>
       _$StreamingDetailOutputFromJson(json);

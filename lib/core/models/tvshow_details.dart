@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import '../streaming/domain/models/streaming.dart';
-import 'season.dart';
+import 'package:tv_randshow/core/models/season.dart';
+import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 
 part 'tvshow_details.g.dart';
 
@@ -70,7 +69,7 @@ class TvshowDetails extends HiveObject {
     int? rowId,
     List<int>? episodeRunTime,
     int? id,
-    dynamic inProduction,
+    inProduction,
     String? name,
     int? numberOfEpisodes,
     int? numberOfSeasons,

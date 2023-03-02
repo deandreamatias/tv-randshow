@@ -10,7 +10,6 @@
 ## TV Randshow - App to choose a random TV show episode
 
 [![Tests](https://api.codemagic.io/apps/5ea04fef2173e4001d6d6c75/6210143b0b28f63215deee7d/status_badge.svg)](https://codemagic.io/apps/5ea04fef2173e4001d6d6c75/6210143b0b28f63215deee7d/latest_build)
-[![Deploy](https://api.codemagic.io/apps/5ea04fef2173e4001d6d6c75/5ea04fef2173e4001d6d6c74/status_badge.svg)](https://codemagic.io/apps/5ea04fef2173e4001d6d6c75/5ea04fef2173e4001d6d6c74/latest_build)
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green?label=App)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
 [![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Ftvrandshow.com%2F)](https://tvrandshow.com/)
@@ -33,10 +32,11 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 
 ## Features
 
-- **Save your favorites TV shows**
+- **Save your favorites TV shows with available streamings links**
 - **Choose a random episode from a single TV show**
 - **Support to Android and Web**
 - **Dark mode**
+- **Material 3**
 - **Support to deeplink `https://tvrandshow.com/getRandomEpisode?tvshow=friends`**
 - **Roadmap in [public Trello](https://trello.com/b/ib0jdUzK)**
 
@@ -45,23 +45,31 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 ### Requirements
 
 1. Clone repository with 'git clone' command or just download the zip. `git clone git@github.com:deandreamatias/tv-randshow.git`
-2. Then, download either Android Studio or Visual Studio Code, with their respective [Flutter editor plugins](https://flutter.dev/docs/get-started/editor). For more information about Flutter installation procedure, check the [official install guide](https://flutter.dev/docs/get-started/install).
-3. Install dependencies from pubspec.yaml by running `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
-4. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
-5. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
+2. Prepare your develop enviroment
+   1. Flutter (see version in ./fvm/fvm_config.json). Use [FVM](https://fvm.app/docs/getting_started/installation) to install Flutter versions
+   2. When build to iOS, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-xcode)
+   3. When build to Android, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-android-studio)
+   4. (Recommended) [Just](https://github.com/casey/just) to use commands
+3. Install dependencies from pubspec.yaml using `just get` or running `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
+4. Generate auto generate files with `just codegen` or copy the command from `./justfile`
+5. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
+6. Get your APi Key from Streaming Availabilty (on [RapidApi](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability)) and paste in file `lib/config/env.dart`
+7. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
 
 ### Run
 
-CLI Debug: `flutter run --flavor dev -t lib/main_dev.dart`
+Run `just run dev DEVICE_ID` command or copy the command from `./justfile`
 
 ### Tests
 
-Integration tests (only mobile): `flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart -d [DEVICE_ID] --flavor dev --dart-define API_KEY=xxxxxxxxxxxxx`
-Unit tests: `flutter test --dart-define API_KEY=xxxxxxxxxxxxx`
+Integration tests (only mobile): run `just integration-test TMDB_API_KEY STREAMING_API_KEY DEVICE_ID` command or copy the command from `./justfile`
+Unit tests: run `just unit-test TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
+
+> Replace screaming snake case with your values
 
 ## Author
 
-- **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com), [GitHub](https://github.com/deandreamatias) and [Twitter](https://twitter.com/deandreamatias).
+- **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com) and [GitHub](https://github.com/deandreamatias)
 
 ## Contributing
 

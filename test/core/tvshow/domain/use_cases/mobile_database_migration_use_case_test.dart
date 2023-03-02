@@ -14,7 +14,7 @@ import 'mobile_database_migration_use_case_test.mocks.dart';
 @GenerateMocks([IDatabaseService, ISecondaryDatabaseService])
 void main() {
   final faker = Faker();
-  final tvshowDetails = () => TvshowDetails(
+  TvshowDetails tvshowDetails() => TvshowDetails(
         episodeRunTime: faker.randomGenerator
             .numbers(1000, faker.randomGenerator.integer(999)),
         id: faker.randomGenerator.integer(9999),
@@ -26,32 +26,35 @@ void main() {
         posterPath: faker.internet.httpsUrl(),
         rowId:
             faker.randomGenerator.integer(faker.randomGenerator.integer(999)),
-        seasons: List.generate(faker.randomGenerator.integer(50),
-            (index) => Season(id: faker.randomGenerator.integer(9999))),
+        seasons: List.generate(
+          faker.randomGenerator.integer(50),
+          (index) => Season(id: faker.randomGenerator.integer(9999)),
+        ),
       );
 
-  final _databaseService = MockIDatabaseService();
-  final _secondaryDatabaseService = MockISecondaryDatabaseService();
+  final databaseService = MockIDatabaseService();
+  final secondaryDatabaseService = MockISecondaryDatabaseService();
   final usecase = MobileDatabaseMigrationUseCase(
-    _databaseService,
-    _secondaryDatabaseService,
+    databaseService,
+    secondaryDatabaseService,
   );
 
   setUp(() {
-    reset(_databaseService);
-    reset(_secondaryDatabaseService);
+    reset(databaseService);
+    reset(secondaryDatabaseService);
   });
 
   group('emptyOld -', () {
     test('Should return emptyOld status when has empty database', () async {
-      when(_secondaryDatabaseService.getTvshows()).thenAnswer((_) async => []);
+      when(secondaryDatabaseService.getTvshows()).thenAnswer((_) async => []);
 
       expect(
-          usecase(),
-          emitsInOrder([
-            MigrationStatus.loadedOld,
-            MigrationStatus.empty,
-          ]));
+        usecase(),
+        emitsInOrder([
+          MigrationStatus.loadedOld,
+          MigrationStatus.empty,
+        ]),
+      );
       expect(
         usecase(),
         neverEmits(isA<Exception>()),
@@ -63,23 +66,24 @@ void main() {
         () async {
       final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
 
-      when(_secondaryDatabaseService.getTvshows())
+      when(secondaryDatabaseService.getTvshows())
           .thenAnswer((_) async => tvshows);
-      when(_databaseService.getTvshows()).thenAnswer((_) async => tvshows);
-      tvshows.forEach((tvshow) {
-        when(_databaseService.saveTvshow(tvshow)).thenAnswer((_) async => true);
-      });
-      when(_secondaryDatabaseService.deleteAll()).thenAnswer((_) async => true);
+      when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+      for (var tvshow in tvshows) {
+        when(databaseService.saveTvshow(tvshow)).thenAnswer((_) async => true);
+      }
+      when(secondaryDatabaseService.deleteAll()).thenAnswer((_) async => true);
 
       expect(
-          usecase(),
-          emitsInOrder([
-            MigrationStatus.loadedOld,
-            MigrationStatus.savedToNew,
-            MigrationStatus.verifyData,
-            MigrationStatus.deletedOld,
-            MigrationStatus.completeDatabase,
-          ]));
+        usecase(),
+        emitsInOrder([
+          MigrationStatus.loadedOld,
+          MigrationStatus.savedToNew,
+          MigrationStatus.verifyData,
+          MigrationStatus.deletedOld,
+          MigrationStatus.completeDatabase,
+        ]),
+      );
       expect(
         usecase(),
         neverEmits(isA<Exception>()),
@@ -94,17 +98,17 @@ void main() {
       final errorTvshow = tvshows[index];
       final exception = Exception('Error to save tvshow ${errorTvshow.id}');
 
-      when(_secondaryDatabaseService.getTvshows())
+      when(secondaryDatabaseService.getTvshows())
           .thenAnswer((_) async => tvshows);
 
-      tvshows.forEach((tvshow) {
+      for (var tvshow in tvshows) {
         if (tvshow.id != errorTvshow.id) {
-          when(_databaseService.saveTvshow(tvshow))
+          when(databaseService.saveTvshow(tvshow))
               .thenAnswer((_) async => Future.value());
         } else {
-          when(_databaseService.saveTvshow(tvshow)).thenThrow(exception);
+          when(databaseService.saveTvshow(tvshow)).thenThrow(exception);
         }
-      });
+      }
       usecase().listen(
         expectAsync1(
           (value) => expect(value, MigrationStatus.loadedOld),
@@ -113,8 +117,8 @@ void main() {
           (value) => expect(value, exception),
         ),
         onDone: () {
-          verify(_secondaryDatabaseService.getTvshows()).called(1);
-          verify(_databaseService.saveTvshow(errorTvshow)).called(1);
+          verify(secondaryDatabaseService.getTvshows()).called(1);
+          verify(databaseService.saveTvshow(errorTvshow)).called(1);
         },
       );
     });
@@ -126,29 +130,30 @@ void main() {
           random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
       final exception = Exception('Differences between old and new database');
 
-      when(_secondaryDatabaseService.getTvshows())
+      when(secondaryDatabaseService.getTvshows())
           .thenAnswer((_) async => tvshows);
-      when(_databaseService.getTvshows()).thenAnswer((_) async => newTvshows);
-      tvshows.forEach((tvshow) {
-        when(_databaseService.saveTvshow(tvshow))
+      when(databaseService.getTvshows()).thenAnswer((_) async => newTvshows);
+      for (var tvshow in tvshows) {
+        when(databaseService.saveTvshow(tvshow))
             .thenAnswer((_) async => Future.value());
-      });
+      }
 
       usecase().listen(
         expectAsync1(
           (value) => expect(
-              [MigrationStatus.loadedOld, MigrationStatus.savedToNew]
-                  .contains(value),
-              true),
+            [MigrationStatus.loadedOld, MigrationStatus.savedToNew]
+                .contains(value),
+            true,
+          ),
           count: 2,
         ),
         onError: expectAsync1(
           (value) => expect(value.toString(), exception.toString()),
         ),
         onDone: () {
-          verify(_secondaryDatabaseService.getTvshows()).called(1);
-          verify(_databaseService.saveTvshow(tvshows.first)).called(1);
-          verify(_databaseService.getTvshows()).called(1);
+          verify(secondaryDatabaseService.getTvshows()).called(1);
+          verify(databaseService.saveTvshow(tvshows.first)).called(1);
+          verify(databaseService.getTvshows()).called(1);
         },
       );
     });
@@ -158,34 +163,34 @@ void main() {
       final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
       final exception = Exception('Can not delete old database');
 
-      when(_secondaryDatabaseService.getTvshows())
+      when(secondaryDatabaseService.getTvshows())
           .thenAnswer((_) async => tvshows);
-      when(_databaseService.getTvshows()).thenAnswer((_) async => tvshows);
-      tvshows.forEach((tvshow) {
-        when(_databaseService.saveTvshow(tvshow)).thenAnswer((_) async => true);
-      });
-      when(_secondaryDatabaseService.deleteAll())
-          .thenAnswer((_) async => false);
+      when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+      for (var tvshow in tvshows) {
+        when(databaseService.saveTvshow(tvshow)).thenAnswer((_) async => true);
+      }
+      when(secondaryDatabaseService.deleteAll()).thenAnswer((_) async => false);
 
       usecase().listen(
         expectAsync1(
           (value) => expect(
-              [
-                MigrationStatus.loadedOld,
-                MigrationStatus.savedToNew,
-                MigrationStatus.verifyData,
-              ].contains(value),
-              true),
+            [
+              MigrationStatus.loadedOld,
+              MigrationStatus.savedToNew,
+              MigrationStatus.verifyData,
+            ].contains(value),
+            true,
+          ),
           count: 3,
         ),
         onError: expectAsync1(
           (value) => expect(value.toString(), exception.toString()),
         ),
         onDone: () {
-          verify(_secondaryDatabaseService.getTvshows()).called(1);
-          verify(_databaseService.saveTvshow(tvshows.first)).called(1);
-          verify(_databaseService.getTvshows()).called(1);
-          verify(_secondaryDatabaseService.deleteAll()).called(1);
+          verify(secondaryDatabaseService.getTvshows()).called(1);
+          verify(databaseService.saveTvshow(tvshows.first)).called(1);
+          verify(databaseService.getTvshows()).called(1);
+          verify(secondaryDatabaseService.deleteAll()).called(1);
         },
       );
     });

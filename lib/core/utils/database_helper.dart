@@ -2,10 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
-
-import '../../config/flavor_config.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:tv_randshow/config/flavor_config.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();
@@ -59,7 +58,7 @@ class DatabaseHelper {
       _databaseName = 'tvshowfav.db';
     }
     final String path = join(documentsDirectory?.path ?? '', _databaseName);
-    return await openDatabase(
+    return openDatabase(
       path,
       version: _databaseVersion,
       onCreate: (db, version) async {
@@ -100,7 +99,7 @@ class DatabaseHelper {
   }) async {
     final Database db = await instance.database;
 
-    return await db.insert(table, row);
+    return db.insert(table, row);
   }
 
   /// Get list from `table` on database by selected `columns`
@@ -110,7 +109,7 @@ class DatabaseHelper {
     MapEntry? filter,
   }) async {
     final Database db = await instance.database;
-    return await db.query(
+    return db.query(
       table,
       columns: columns,
       where: filter != null ? '${filter.key} = ?' : null,

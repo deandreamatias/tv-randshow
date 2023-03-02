@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import '../utils/converters.dart';
+import 'package:tv_randshow/core/utils/converters.dart';
 
 part 'result.g.dart';
 

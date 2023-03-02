@@ -4,22 +4,22 @@ import 'package:tv_randshow/core/utils/constants.dart';
 import 'package:tv_randshow/ui/states/migration_status_state.dart';
 
 class SplashView extends StatefulWidget {
-  const SplashView({Key? key}) : super(key: key);
+  const SplashView({super.key});
 
   @override
   State<SplashView> createState() => _SplashViewState();
 }
 
 class _SplashViewState extends State<SplashView> {
-  MigrationStatusState _migrationStatusState =
+  final MigrationStatusState _migrationStatusState =
       MigrationStatusState(isWeb: kIsWeb);
 
   @override
   void initState() {
     _migrationStatusState.loadStatus().whenComplete(() {
       _migrationStatusState.completeMigration
-          ? Navigator.of(context).pushNamed(RoutePaths.TAB)
-          : Navigator.of(context).pushNamed(RoutePaths.MIGRATION);
+          ? Navigator.of(context).pushNamed(RoutePaths.tab)
+          : Navigator.of(context).pushNamed(RoutePaths.migraiton);
     });
 
     super.initState();
@@ -27,7 +27,7 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
