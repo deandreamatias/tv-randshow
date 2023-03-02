@@ -38,7 +38,7 @@ class ModalSheet extends StatelessWidget {
                 borderRadius: const BorderRadiusDirectional.vertical(
                   top: Radius.circular(16.0),
                 ),
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.background,
               ),
               child: model.isBusy
                   ? const Center(child: CircularProgressIndicator())
@@ -71,7 +71,7 @@ class ModalSheet extends StatelessWidget {
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 3,
                                       style:
-                                          Theme.of(context).textTheme.headline6,
+                                          Theme.of(context).textTheme.titleLarge,
                                     ),
                                   ),
                                 ),
@@ -104,7 +104,7 @@ class ModalSheet extends StatelessWidget {
                         ),
                         Text(
                           translate('app.modal.overview'),
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: 8.0),
                         Expanded(

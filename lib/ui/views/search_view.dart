@@ -92,7 +92,7 @@ class _SearchViewState extends State<SearchView> {
                         translate('app.search.error_message') +
                             error.toString(),
                         key: const Key('app.search.error_message'),
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.titleMedium,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -109,7 +109,7 @@ class _SearchViewState extends State<SearchView> {
                               : 'app.search.empty_message',
                         ),
                         key: const Key('app.search.message'),
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.titleMedium,
                         textAlign: TextAlign.center,
                       ),
                     ),

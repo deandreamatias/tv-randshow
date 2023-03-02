@@ -29,7 +29,7 @@ class _HomeViewState extends State<HomeView> {
                 child: Text(
                   translate('app.fav.title'),
                   key: const Key('app.fav.title'),
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -40,7 +40,7 @@ class _HomeViewState extends State<HomeView> {
                       tooltip: translate('app.fav.save'),
                       icon: Icon(
                         UniconsLine.file_export,
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                       onPressed: () async {
                         setState(() => loading = true);

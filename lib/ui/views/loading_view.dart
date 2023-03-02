@@ -48,7 +48,7 @@ class LoadingView extends StatelessWidget {
                       child: Text(
                         translate('app.loading.title'),
                         key: const Key('app.loading.title'),
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -57,7 +57,7 @@ class LoadingView extends StatelessWidget {
                           ? Center(
                               child: Text(
                                 translate('app.loading.general_error'),
-                                style: Theme.of(context).textTheme.subtitle1,
+                                style: Theme.of(context).textTheme.titleMedium,
                                 textAlign: TextAlign.center,
                               ),
                             )

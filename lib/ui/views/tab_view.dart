@@ -34,7 +34,7 @@ class _TabViewState extends State<TabView> {
                 : Brightness.dark,
       ),
       child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) =>
               constraints.maxWidth > 600

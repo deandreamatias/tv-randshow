@@ -156,7 +156,7 @@ abstract class Pagewise<T> extends StatefulWidget {
     this.loadingBuilder,
     this.retryBuilder,
     this.noItemsFoundBuilder,
-    this.showRetry: true,
+    this.showRetry = true,
     this.itemBuilder,
     this.errorBuilder,
     this.builder,
@@ -301,9 +301,7 @@ class PagewiseState<T> extends State<Pagewise<T>> {
           ? widget.errorBuilder!(context, _effectiveController.error!)
           : Text(
               'Error: $error',
-              style: TextStyle(
-                  color: Theme.of(context).disabledColor,
-                  fontStyle: FontStyle.italic),
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
     );
   }
@@ -519,21 +517,21 @@ class PagewiseGridView<T> extends Pagewise<T> {
     bool addSemanticIndexes = true,
     int? semanticChildCount,
     bool primary = true,
-    bool shrinkWrap: false,
+    bool shrinkWrap = false,
     ScrollController? controller,
     PagewiseLoadController<T>? pageLoadController,
-    bool addAutomaticKeepAlives: true,
-    Axis scrollDirection: Axis.vertical,
-    bool addRepaintBoundaries: true,
+    bool addAutomaticKeepAlives = true,
+    Axis scrollDirection = Axis.vertical,
+    bool addRepaintBoundaries = true,
     double? cacheExtent,
     ScrollPhysics? physics,
-    bool reverse: false,
+    bool reverse = false,
     int? pageSize,
     PageFuture<T>? pageFuture,
     LoadingBuilder? loadingBuilder,
     RetryBuilder? retryBuilder,
     NoItemsFoundBuilder? noItemsFoundBuilder,
-    bool showRetry: true,
+    bool showRetry = true,
     ItemBuilder<T>? itemBuilder,
     ErrorBuilder? errorBuilder,
   }) : super(

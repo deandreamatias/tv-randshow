@@ -33,16 +33,15 @@ class ImageBuilder extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Container(
               padding: const EdgeInsets.all(8.0),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                color: Colors.black54,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                color: Theme.of(context).colorScheme.surface.withOpacity(.8),
               ),
               child: Text(
                 name,
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle2
-                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
               ),
             ),
           ),

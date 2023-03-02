@@ -56,7 +56,7 @@ class FavoriteList extends StatelessWidget {
                         child: Text(
                           translate('app.fav.empty_message'),
                           key: const Key('app.fav.empty_message'),
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                           textAlign: TextAlign.center,
                         ),
                       ),

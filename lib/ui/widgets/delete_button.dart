@@ -27,7 +27,7 @@ class DeleteButton extends StatelessWidget {
           height: 20.0,
           width: 20.0,
           decoration: BoxDecoration(
-            color: Theme.of(context).backgroundColor,
+            color: Theme.of(context).colorScheme.background,
             borderRadius: const BorderRadius.all(Radius.circular(4.0)),
             border: Border.all(color: Theme.of(context).colorScheme.primary),
           ),

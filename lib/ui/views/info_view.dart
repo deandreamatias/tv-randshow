@@ -29,7 +29,7 @@ class InfoView extends StatelessWidget {
               child: Text(
                 translate('app.info.title'),
                 key: const Key('app.info.title'),
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
             ),

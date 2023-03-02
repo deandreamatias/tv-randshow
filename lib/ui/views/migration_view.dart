@@ -31,7 +31,7 @@ class _MigrationViewState extends State<MigrationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -89,12 +89,12 @@ class _MigrationViewState extends State<MigrationView> {
     return [
       Text(
         translate('app.migration.title'),
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
       const SizedBox(height: 8),
       Text(
         translate('app.migration.subtitle'),
-        style: Theme.of(context).textTheme.subtitle2,
+        style: Theme.of(context).textTheme.titleSmall,
         textAlign: TextAlign.center,
       ),
       const SizedBox(height: 16),

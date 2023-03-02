@@ -29,7 +29,7 @@ class ResultView extends StatelessWidget {
               child: Text(
                 translate('app.result.title'),
                 key: const Key('app.result.title'),
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -61,7 +61,7 @@ class ResultView extends StatelessWidget {
                             children: <Widget>[
                               Text(
                                 tvshowResult.tvshowDetails.name,
-                                style: Theme.of(context).textTheme.headline6,
+                                style: Theme.of(context).textTheme.titleLarge,
                               ),
                               Flexible(
                                 fit: FlexFit.loose,
@@ -83,7 +83,7 @@ class ResultView extends StatelessWidget {
                               const SizedBox(height: 8),
                               Text(
                                 tvshowResult.episodeName,
-                                style: Theme.of(context).textTheme.subtitle1,
+                                style: Theme.of(context).textTheme.titleMedium,
                               ),
                               const SizedBox(height: 8),
                               Flexible(
@@ -98,7 +98,7 @@ class ResultView extends StatelessWidget {
                               if (streamings.isNotEmpty) ...[
                                 Text(
                                   translate('app.result.streaming_title'),
-                                  style: Theme.of(context).textTheme.subtitle1,
+                                  style: Theme.of(context).textTheme.titleMedium,
                                 ),
                                 const SizedBox(height: 4),
                                 Wrap(
@@ -113,7 +113,7 @@ class ResultView extends StatelessWidget {
                               if (streamings.isEmpty)
                                 Text(
                                   translate('app.result.no_streaming_title'),
-                                  style: Theme.of(context).textTheme.subtitle1,
+                                  style: Theme.of(context).textTheme.titleMedium,
                                 ),
                             ],
                           ),
