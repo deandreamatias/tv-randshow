@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/config/locator.dart';
-import 'package:tv_randshow/core/services/manage_files_service.dart';
+import 'package:tv_randshow/core/app/domain/services/manage_files_service.dart';
 import 'package:tv_randshow/ui/widgets/favorite_list.dart';
 import 'package:unicons/unicons.dart';
 

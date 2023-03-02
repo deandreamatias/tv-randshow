@@ -6,9 +6,9 @@ import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tv_randshow/config/flavor_config.dart';
-import 'package:tv_randshow/core/services/databases/i_database_service.dart';
 import 'package:tv_randshow/core/streaming/data/models/streaming_detail_hive.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @LazySingleton(as: IDatabaseService)

@@ -8,9 +8,9 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:stacked/stacked.dart';
 import 'package:theme_provider/theme_provider.dart';
-import 'package:tv_randshow/core/viewmodels/views/info_view_model.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
+import 'package:tv_randshow/ui/viewmodels/views/info_view_model.dart';
 import 'package:unicons/unicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 

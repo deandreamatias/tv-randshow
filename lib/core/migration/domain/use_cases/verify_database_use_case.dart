@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/services/databases/i_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @Injectable()

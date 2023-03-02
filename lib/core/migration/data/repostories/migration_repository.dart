@@ -1,11 +1,11 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/app/data/services/local_storage_service.dart';
+import 'package:tv_randshow/common/interfaces/local_preferences_service.dart';
 import 'package:tv_randshow/core/migration/domain/interfaces/i_migration_repository.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 
 @Injectable(as: IMigrationRepository)
 class MigrationRepository implements IMigrationRepository {
-  final LocalStorageService _localStorageService;
+  final ILocalPreferencesService _localStorageService;
   final String keyStatus = 'status';
   MigrationRepository(this._localStorageService);
 

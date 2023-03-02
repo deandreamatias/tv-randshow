@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:tv_randshow/core/viewmodels/widgets/details_model.dart';
+import 'package:tv_randshow/ui/viewmodels/widgets/details_model.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
 import 'package:tv_randshow/ui/widgets/info_box.dart';
 import 'package:tv_randshow/ui/widgets/random_button.dart';

@@ -4,8 +4,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/migration/domain/use_cases/mobile_database_migration_use_case.dart';
-import 'package:tv_randshow/core/services/databases/i_database_service.dart';
-import 'package:tv_randshow/core/services/databases/i_secondary_database_service.dart';
+import 'package:tv_randshow/core/tvshow/data/repositories/i_secondary_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/season.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 

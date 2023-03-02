@@ -1,7 +1,7 @@
 import 'package:stacked/stacked.dart';
 import 'package:tv_randshow/config/locator.dart';
-import 'package:tv_randshow/core/services/app_service.dart';
-import 'package:tv_randshow/core/services/manage_files_service.dart';
+import 'package:tv_randshow/core/app/data/services/app_service.dart';
+import 'package:tv_randshow/core/app/domain/services/manage_files_service.dart';
 
 class InfoViewModel extends BaseViewModel {
   final AppService _appService = locator<AppService>();

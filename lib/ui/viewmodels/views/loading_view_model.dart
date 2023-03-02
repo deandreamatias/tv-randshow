@@ -1,6 +1,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:tv_randshow/config/locator.dart';
-import 'package:tv_randshow/core/services/random_service.dart';
+import 'package:tv_randshow/core/app/domain/services/random_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
 
