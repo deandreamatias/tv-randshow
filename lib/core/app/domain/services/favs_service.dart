@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming_search.dart';
 import 'package:tv_randshow/core/streaming/domain/use_cases/get_tvshow_streamings_use_case.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_tvshow_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
@@ -14,11 +14,11 @@ import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 class FavsService {
   FavsService({
     required ITvshowRepository tvshowRepository,
-    required IDatabaseService databaseService,
+    required IDatabaseRepository databaseService,
   })  : _tvshowRepository = tvshowRepository,
         _databaseService = databaseService;
   final ITvshowRepository _tvshowRepository;
-  final IDatabaseService _databaseService;
+  final IDatabaseRepository _databaseService;
   final GetTvshowStreamingsUseCase _getTvshowStreamingsUseCase =
       locator<GetTvshowStreamingsUseCase>();
 

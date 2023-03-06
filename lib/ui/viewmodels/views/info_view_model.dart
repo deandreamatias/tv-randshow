@@ -1,11 +1,12 @@
 import 'package:stacked/stacked.dart';
 import 'package:tv_randshow/config/locator.dart';
 import 'package:tv_randshow/core/app/data/services/app_service.dart';
-import 'package:tv_randshow/core/app/domain/services/manage_files_service.dart';
+import 'package:tv_randshow/core/io/domain/use_cases/export_tvshows_use_case.dart';
 
 class InfoViewModel extends BaseViewModel {
   final AppService _appService = locator<AppService>();
-  final ManageFilesService _manageFiles = locator<ManageFilesService>();
+  final ExportTvShowsUseCase _exportTvShowsUseCase =
+      locator<ExportTvShowsUseCase>();
 
   String _version = '-';
   String get version => _version;
@@ -16,7 +17,7 @@ class InfoViewModel extends BaseViewModel {
 
   Future<void> exportTvshows() async {
     setBusy(true);
-    await _manageFiles.saveTvshows();
+    await _exportTvShowsUseCase();
     setBusy(false);
   }
 }

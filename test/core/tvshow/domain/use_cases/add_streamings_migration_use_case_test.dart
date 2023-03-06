@@ -7,13 +7,13 @@ import 'package:tv_randshow/core/migration/domain/use_cases/add_streamings_migra
 import 'package:tv_randshow/core/streaming/domain/interfaces/i_streamings_repository.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming_search.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/season.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 import 'add_streamings_migration_use_case_test.mocks.dart';
 
-@GenerateMocks([IDatabaseService, IStreamingsRepository])
+@GenerateMocks([IDatabaseRepository, IStreamingsRepository])
 void main() {
   final faker = Faker();
   List<StreamingDetail> streamings() => List.generate(
@@ -58,7 +58,7 @@ void main() {
         ),
       );
 
-  final databaseService = MockIDatabaseService();
+  final databaseService = MockIDatabaseRepository();
   final streamingsRepository = MockIStreamingsRepository();
 
   final usecase = AddStreamingsMigrationUseCase(

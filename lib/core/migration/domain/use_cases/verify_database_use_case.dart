@@ -1,10 +1,10 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @Injectable()
 class VerifyDatabaseUseCase {
-  final IDatabaseService _databaseService;
+  final IDatabaseRepository _databaseService;
 
   const VerifyDatabaseUseCase(this._databaseService);
 

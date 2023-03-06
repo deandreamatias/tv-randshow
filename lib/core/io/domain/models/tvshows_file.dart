@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
-part 'file.g.dart';
+part 'tvshows_file.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class TvshowsFile {

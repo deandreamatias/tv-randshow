@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/config/locator.dart';
-import 'package:tv_randshow/core/app/domain/services/manage_files_service.dart';
+import 'package:tv_randshow/core/io/domain/use_cases/export_tvshows_use_case.dart';
 import 'package:tv_randshow/ui/widgets/favorite_list.dart';
 import 'package:unicons/unicons.dart';
 
@@ -13,7 +13,8 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
-  final ManageFilesService _manageFiles = locator<ManageFilesService>();
+  final ExportTvShowsUseCase _exportTvShowsUseCase =
+      locator<ExportTvShowsUseCase>();
   bool loading = false;
 
   @override
@@ -45,7 +46,7 @@ class HomeViewState extends State<HomeView> {
                       ),
                       onPressed: () async {
                         setState(() => loading = true);
-                        await _manageFiles.saveTvshows();
+                        await _exportTvShowsUseCase();
                         setState(() => loading = false);
                       },
                     )
