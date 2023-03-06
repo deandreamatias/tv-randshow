@@ -2,18 +2,18 @@ import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:tv_randshow/core/app/domain/interfaces/permissions_service.dart';
-import 'package:tv_randshow/core/io/domain/interfaces/manage_files_service.dart';
+import 'package:tv_randshow/core/io/domain/interfaces/i_manage_files_service.dart';
+import 'package:tv_randshow/core/io/domain/interfaces/i_permissions_service.dart';
 import 'package:tv_randshow/core/io/domain/models/tvshows_file.dart';
 import 'package:tv_randshow/core/io/domain/use_cases/export_tvshows_use_case.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/season.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 import 'export_tvshows_use_case_test.mocks.dart';
 
-@GenerateMocks([IDatabaseRepository, IManageFilesService, IPermissionsService])
-void main() {
+@GenerateMocks([ILocalRepository, IManageFilesService, IPermissionsService])
+Future<void> main() async {
   final faker = Faker();
   TvshowDetails tvshowDetails() => TvshowDetails(
         episodeRunTime: faker.randomGenerator
@@ -32,7 +32,7 @@ void main() {
           (index) => Season(id: faker.randomGenerator.integer(9999)),
         ),
       );
-  final databaseService = MockIDatabaseRepository();
+  final databaseService = MockILocalRepository();
   final manageFiles = MockIManageFilesService();
   final permissions = MockIPermissionsService();
   final useCase = ExportTvShowsUseCase(

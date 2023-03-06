@@ -1,10 +1,9 @@
 import 'package:stacked/stacked.dart';
-
 import 'package:tv_randshow/core/app/domain/interfaces/i_app_service.dart';
 import 'package:tv_randshow/core/app/domain/models/tvshow_actions.dart';
-import 'package:tv_randshow/core/app/domain/services/favs_service.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
+import 'package:tv_randshow/ui/viewmodels/services/favs_service.dart';
 
 class FavoriteListModel extends StreamViewModel<List<TvshowDetails>> {
   final FavsService _favsService = locator<FavsService>();

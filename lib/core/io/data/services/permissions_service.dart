@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:tv_randshow/core/io/domain/interfaces/permissions_service.dart';
+import 'package:tv_randshow/core/io/domain/interfaces/i_permissions_service.dart';
 
 @LazySingleton(as: IPermissionsService)
 class PermissionsService implements IPermissionsService {

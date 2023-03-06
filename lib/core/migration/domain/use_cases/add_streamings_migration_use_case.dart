@@ -5,21 +5,21 @@ import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/streaming/domain/interfaces/i_streamings_repository.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming_search.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @injectable
 class AddStreamingsMigrationUseCase {
-  final IDatabaseRepository _databaseService;
+  final ILocalRepository _localRepository;
   final IStreamingsRepository _streamingsRepository;
 
   AddStreamingsMigrationUseCase(
-    this._databaseService,
+    this._localRepository,
     this._streamingsRepository,
   );
 
   Stream<MigrationStatus> call() async* {
-    final List<TvshowDetails> tvshows = await _databaseService.getTvshows();
+    final List<TvshowDetails> tvshows = await _localRepository.getTvshows();
 
     if (tvshows.isEmpty) {
       yield MigrationStatus.empty;
@@ -40,7 +40,7 @@ class AddStreamingsMigrationUseCase {
 
         if (streamings.isNotEmpty) {
           tvshow = tvshow.copyWith(streamings: streamings, rowId: tvshow.rowId);
-          await _databaseService.saveStreamings(tvshow);
+          await _localRepository.saveStreamings(tvshow);
         }
         yield MigrationStatus.addStreaming;
       }

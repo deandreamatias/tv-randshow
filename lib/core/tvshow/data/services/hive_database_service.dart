@@ -8,11 +8,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
 import 'package:tv_randshow/core/streaming/data/models/streaming_detail_hive.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
-@LazySingleton(as: IDatabaseRepository)
-class HiveDatabaseService implements IDatabaseRepository {
+@LazySingleton(as: ILocalRepository)
+class HiveDatabaseService implements ILocalRepository {
   Box<TvshowDetails>? tvshowBox;
   Box<StreamingDetailHive>? streamingsBox;
   final tvshowBoxName =

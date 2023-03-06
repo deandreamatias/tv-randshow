@@ -1,13 +1,13 @@
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/tvshow/data/services/tmdb_http_service.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_tvshow_repository.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_online_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/search.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_seasons_details.dart';
 
-@Injectable(as: ITvshowRepository)
-class TvshowRepository implements ITvshowRepository {
+@Injectable(as: IOnlineRepository)
+class TvshowRepository implements IOnlineRepository {
   final TmdbHttpService _httpService;
   final String apiVersion = '/3';
   TvshowRepository(this._httpService);

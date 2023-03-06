@@ -3,17 +3,17 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @Injectable(env: ['mobile'])
 class MobileDatabaseMigrationUseCase {
-  final IDatabaseRepository _databaseService;
+  final ILocalRepository _localRepository;
   final ISecondaryDatabaseService _secondaryDatabaseService;
 
   MobileDatabaseMigrationUseCase(
-    this._databaseService,
+    this._localRepository,
     this._secondaryDatabaseService,
   );
 
@@ -24,11 +24,11 @@ class MobileDatabaseMigrationUseCase {
 
     if (tvshows.isNotEmpty) {
       for (TvshowDetails tvshow in tvshows) {
-        await _databaseService.saveTvshow(tvshow);
+        await _localRepository.saveTvshow(tvshow);
       }
       yield MigrationStatus.savedToNew;
 
-      final newTvshows = await _databaseService.getTvshows();
+      final newTvshows = await _localRepository.getTvshows();
 
       newTvshows.sort((a, b) => a.id.compareTo(b.id));
       tvshows.sort((a, b) => a.id.compareTo(b.id));
