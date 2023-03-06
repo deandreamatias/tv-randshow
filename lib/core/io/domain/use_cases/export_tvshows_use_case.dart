@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/io/domain/interfaces/manage_files_service.dart';
-import 'package:tv_randshow/core/io/domain/interfaces/permissions_service.dart';
+import 'package:tv_randshow/core/io/domain/interfaces/i_manage_files_service.dart';
+import 'package:tv_randshow/core/io/domain/interfaces/i_permissions_service.dart';
 import 'package:tv_randshow/core/io/domain/models/tvshows_file.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';
 

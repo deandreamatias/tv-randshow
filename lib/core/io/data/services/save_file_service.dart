@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:file_saver/file_saver.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/io/domain/interfaces/manage_files_service.dart';
+import 'package:tv_randshow/core/io/domain/interfaces/i_manage_files_service.dart';
 
 @LazySingleton(as: IManageFilesService)
 class SaveFileService implements IManageFilesService {
