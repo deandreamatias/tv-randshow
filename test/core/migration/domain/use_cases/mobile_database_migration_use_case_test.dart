@@ -6,31 +6,13 @@ import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/migration/domain/use_cases/mobile_database_migration_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_service.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/season.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
+import '../../../../helpers/generate_tvshow.dart';
 import 'mobile_database_migration_use_case_test.mocks.dart';
 
 @GenerateMocks([ILocalRepository, ISecondaryDatabaseService])
 void main() {
-  final faker = Faker();
-  TvshowDetails tvshowDetails() => TvshowDetails(
-        episodeRunTime: faker.randomGenerator
-            .numbers(1000, faker.randomGenerator.integer(999)),
-        id: faker.randomGenerator.integer(9999),
-        inProduction: faker.randomGenerator.boolean() ? 1 : 0,
-        name: faker.lorem.sentence(),
-        numberOfEpisodes: faker.randomGenerator.integer(999),
-        numberOfSeasons: faker.randomGenerator.integer(50),
-        overview: faker.lorem.sentence(),
-        posterPath: faker.internet.httpsUrl(),
-        rowId:
-            faker.randomGenerator.integer(faker.randomGenerator.integer(999)),
-        seasons: List.generate(
-          faker.randomGenerator.integer(50),
-          (index) => Season(id: faker.randomGenerator.integer(9999)),
-        ),
-      );
+  final generateTvshow = GenerateTvshow();
 
   final databaseService = MockILocalRepository();
   final secondaryDatabaseService = MockISecondaryDatabaseService();
@@ -64,7 +46,7 @@ void main() {
   group('completeDatabase -', () {
     test('Should return completeDatabase status when dont has errors',
         () async {
-      final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
+      final tvshows = generateTvshow.tvshows;
 
       when(secondaryDatabaseService.getTvshows())
           .thenAnswer((_) async => tvshows);
@@ -93,7 +75,7 @@ void main() {
   group('errors -', () {
     test('Should return loadedOld status and error when can save a one tv show',
         () async {
-      final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
+      final tvshows = generateTvshow.tvshows;
       final index = random.integer(tvshows.length - 1);
       final errorTvshow = tvshows[index];
       final exception = Exception('Error to save tvshow ${errorTvshow.id}');
@@ -125,9 +107,8 @@ void main() {
     test(
         'Should return savedToNew status and error when has not equal database lists',
         () async {
-      final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
-      final newTvshows =
-          random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
+      final tvshows = generateTvshow.tvshows;
+      final newTvshows = generateTvshow.tvshows;
       final exception = Exception('Differences between old and new database');
 
       when(secondaryDatabaseService.getTvshows())
@@ -160,7 +141,7 @@ void main() {
     test(
         'Should return verifyData status and error when can delete old database',
         () async {
-      final tvshows = random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
+      final tvshows = generateTvshow.tvshows;
       final exception = Exception('Can not delete old database');
 
       when(secondaryDatabaseService.getTvshows())
