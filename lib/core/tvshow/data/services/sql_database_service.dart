@@ -6,7 +6,7 @@ import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_s
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @LazySingleton(as: ISecondaryDatabaseService, env: ['mobile'])
-class SqlDatabaseService extends ISecondaryDatabaseService {
+class SqlDatabaseService implements ISecondaryDatabaseService {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
 
   @override

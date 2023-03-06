@@ -1,10 +1,10 @@
 import 'package:stacked/stacked.dart';
 import 'package:tv_randshow/config/locator.dart';
-import 'package:tv_randshow/core/app/data/services/app_service.dart';
+import 'package:tv_randshow/core/app/domain/interfaces/i_app_service.dart';
 import 'package:tv_randshow/core/io/domain/use_cases/export_tvshows_use_case.dart';
 
 class InfoViewModel extends BaseViewModel {
-  final AppService _appService = locator<AppService>();
+  final IAppService _appService = locator<IAppService>();
   final ExportTvShowsUseCase _exportTvShowsUseCase =
       locator<ExportTvShowsUseCase>();
 

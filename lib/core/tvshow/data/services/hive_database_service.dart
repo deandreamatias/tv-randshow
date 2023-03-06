@@ -12,7 +12,7 @@ import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @LazySingleton(as: IDatabaseRepository)
-class HiveDatabaseService extends IDatabaseRepository {
+class HiveDatabaseService implements IDatabaseRepository {
   Box<TvshowDetails>? tvshowBox;
   Box<StreamingDetailHive>? streamingsBox;
   final tvshowBoxName =

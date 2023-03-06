@@ -12,11 +12,7 @@ class TvshowActions {
 
   String tvshow;
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'tvshow': tvshow,
-    };
-  }
+  Map<String, dynamic> toMap() => <String, dynamic>{'tvshow': tvshow};
 
   String toJson() => json.encode(toMap());
 }

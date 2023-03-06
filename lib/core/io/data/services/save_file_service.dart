@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/io/domain/interfaces/manage_files_service.dart';
 
 @LazySingleton(as: IManageFilesService)
-class SaveFileService extends IManageFilesService {
+class SaveFileService implements IManageFilesService {
   @override
   Future<String> saveFile(String fileName, String json) async {
     return FileSaver.instance.saveFile(

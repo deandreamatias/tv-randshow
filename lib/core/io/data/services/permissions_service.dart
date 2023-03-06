@@ -4,7 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:tv_randshow/core/io/domain/interfaces/permissions_service.dart';
 
 @LazySingleton(as: IPermissionsService)
-class PermissionsService extends IPermissionsService {
+class PermissionsService implements IPermissionsService {
   @override
   Future<bool> getStoragePermission() async {
     if (kIsWeb) return true;

@@ -2,19 +2,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/tvshow_actions.dart';
+import 'package:tv_randshow/core/app/domain/interfaces/i_app_service.dart';
+import 'package:tv_randshow/core/app/domain/models/tvshow_actions.dart';
 import 'package:uni_links/uni_links.dart';
 
-@lazySingleton
-class AppService {
-  int timesOpenLink = 0;
+@LazySingleton(as: IAppService)
+class AppService implements IAppService {
   PackageInfo? _packageInfo;
 
+  @override
   Future<String> getVersion() async {
     _packageInfo ??= await PackageInfo.fromPlatform();
     return _packageInfo!.version;
   }
 
+  @override
   Future<TvshowActions> initUniLinks() async {
     try {
       final Uri? initialLink = await getInitialUri();
@@ -25,7 +27,7 @@ class AppService {
         return _parseLink(initialLink);
       }
     } on PlatformException catch (e) {
-      return throw PlatformException(
+      throw PlatformException(
         code: e.code,
         message: e.message,
         details: e.details,
@@ -34,13 +36,11 @@ class AppService {
   }
 
   TvshowActions _parseLink(Uri initialLink) {
-    if (initialLink.path.contains('getRandomEpisode')) {
+    if (!initialLink.path.contains('getRandomEpisode')) {
       final TvshowActions tvshowActions =
           TvshowActions.fromMap(initialLink.queryParameters);
-      timesOpenLink = ++timesOpenLink;
       return tvshowActions;
-    } else {
-      return TvshowActions(tvshow: '');
     }
+    return TvshowActions(tvshow: '');
   }
 }
