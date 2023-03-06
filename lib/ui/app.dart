@@ -4,8 +4,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:theme_provider/theme_provider.dart';
 
-import 'package:tv_randshow/core/utils/constants.dart';
 import 'package:tv_randshow/ui/router.dart' as router;
+import 'package:tv_randshow/ui/router.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

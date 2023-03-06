@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/views/tab_view.dart';
 import 'package:unicons/unicons.dart';
 

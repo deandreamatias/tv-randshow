@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/ui/shared/assets.dart';
+
+const String _baseImage = 'https://image.tmdb.org/t/p/w342/';
 
 class ImageBuilder extends StatelessWidget {
   const ImageBuilder({
@@ -106,5 +108,5 @@ class CachedImage extends StatelessWidget {
 }
 
 String _checkUrl(String url) {
-  return url.isNotEmpty ? baseImage + url : Assets.placeHolder;
+  return url.isNotEmpty ? _baseImage + url : Assets.placeHolder;
 }

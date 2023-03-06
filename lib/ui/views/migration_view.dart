@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/migration_status.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
+import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/states/migration_state.dart';
 import 'package:unicons/unicons.dart';
 

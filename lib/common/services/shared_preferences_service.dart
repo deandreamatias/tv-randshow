@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tv_randshow/common/interfaces/local_preferences_service.dart';
 
-class SharedPreferencesService {
+class SharedPreferencesService implements ILocalPreferencesService {
   Future<SharedPreferences> get _localPrefs async => _initPrefs();
   SharedPreferences? _sharedPreferences;
 
@@ -11,6 +12,7 @@ class SharedPreferencesService {
     return _sharedPreferences!;
   }
 
+  @override
   Future<T?> read<T>({required String key}) async {
     final prefs = await _localPrefs;
     if (!prefs.containsKey(key)) return null;
@@ -30,6 +32,7 @@ class SharedPreferencesService {
     }
   }
 
+  @override
   Future<bool> write<T>({required String key, required T value}) async {
     final prefs = await _localPrefs;
     switch (T) {

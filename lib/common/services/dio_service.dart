@@ -5,9 +5,10 @@ import 'package:dio/dio.dart';
 
 class DioService {
   final String baseUrl;
-  final Map<String, dynamic> headers;
+  final Map<String, dynamic>? headers;
+  final Map<String, dynamic>? queryParams;
   late Dio _dio;
-  DioService(this.baseUrl, this.headers) {
+  DioService(this.baseUrl, {this.headers, this.queryParams}) {
     _initDio();
   }
 
@@ -17,6 +18,7 @@ class DioService {
       connectTimeout: 5000,
       receiveTimeout: 3000,
       headers: headers,
+      queryParameters: queryParams,
     );
     _dio = Dio(options);
   }
@@ -30,7 +32,13 @@ class DioService {
         path,
         queryParameters: dataMap,
       );
-      return jsonDecode(response.data) ?? {};
+      if (response.data is String) {
+        return jsonDecode(response.data) ?? {};
+      }
+      if (response.data is Map) {
+        return response.data ?? {};
+      }
+      return {};
     } on DioError catch (e) {
       log('Error to get $path: ${e.message}', error: e);
       return {};

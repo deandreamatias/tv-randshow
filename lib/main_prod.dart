@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-
-import 'package:tv_randshow/config/env.dart';
-import 'package:tv_randshow/config/flavor_config.dart';
-import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/app/domain/models/env.dart';
+import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
+import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/ui/app.dart';
 
 Future<void> main() async {

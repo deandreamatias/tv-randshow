@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:tv_randshow/core/models/tvshow_details.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/ui/widgets/delete_button.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
 import 'package:tv_randshow/ui/widgets/modal_sheet.dart';

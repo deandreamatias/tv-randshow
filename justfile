@@ -34,3 +34,4 @@ unit-test apiKey streamingApiKey:
 setup:
     just clean
     just get
+    just codegen

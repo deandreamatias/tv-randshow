@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
-
-import 'package:tv_randshow/core/utils/constants.dart';
-import 'package:tv_randshow/core/viewmodels/widgets/favorite_list_model.dart';
+import 'package:tv_randshow/ui/router.dart';
+import 'package:tv_randshow/ui/viewmodels/widgets/favorite_list_model.dart';
 import 'package:tv_randshow/ui/views/loading_view.dart';
 import 'package:tv_randshow/ui/widgets/fav_widget.dart';
 

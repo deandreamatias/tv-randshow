@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
-
-import 'package:tv_randshow/core/models/tvshow_details.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
-import 'package:tv_randshow/core/viewmodels/widgets/random_model.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
+import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/custom_icons.dart';
+import 'package:tv_randshow/ui/viewmodels/widgets/random_model.dart';
 import 'package:tv_randshow/ui/views/loading_view.dart';
 
 class RandomButton extends StatelessWidget {

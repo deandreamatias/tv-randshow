@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/ui/shared/assets.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 

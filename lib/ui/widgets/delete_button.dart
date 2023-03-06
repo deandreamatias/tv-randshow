@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:stacked/stacked.dart';
-import 'package:tv_randshow/core/viewmodels/widgets/delete_model.dart';
+import 'package:tv_randshow/ui/viewmodels/widgets/delete_model.dart';
 import 'package:unicons/unicons.dart';
 
 class DeleteButton extends StatelessWidget {

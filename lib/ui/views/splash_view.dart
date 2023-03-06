@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:tv_randshow/core/utils/constants.dart';
+import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/states/migration_status_state.dart';
 
 class SplashView extends StatefulWidget {
