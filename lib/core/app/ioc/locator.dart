@@ -4,8 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/common/interfaces/local_preferences_service.dart';
 import 'package:tv_randshow/common/services/shared_preferences_service.dart';
-
-import 'package:tv_randshow/config/locator.config.dart';
+import 'package:tv_randshow/core/app/ioc/locator.config.dart';
 
 final GetIt locator = GetIt.instance;
 

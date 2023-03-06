@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming_search.dart';
 import 'package:tv_randshow/core/streaming/domain/use_cases/get_tvshow_streamings_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_database_repository.dart';

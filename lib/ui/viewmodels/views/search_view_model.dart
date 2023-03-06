@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/search.dart';

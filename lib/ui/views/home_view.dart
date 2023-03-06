@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/io/domain/use_cases/export_tvshows_use_case.dart';
 import 'package:tv_randshow/ui/widgets/favorite_list.dart';
 import 'package:unicons/unicons.dart';

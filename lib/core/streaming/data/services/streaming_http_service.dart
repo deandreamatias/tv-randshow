@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/common/services/dio_service.dart';
-import 'package:tv_randshow/config/flavor_config.dart';
+import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
 
 @lazySingleton
 class StreamingHttpService extends DioService {

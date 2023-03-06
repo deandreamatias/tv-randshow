@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:tv_randshow/config/flavor_config.dart';
+import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
 
 class DatabaseHelper {
   DatabaseHelper._privateConstructor();

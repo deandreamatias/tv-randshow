@@ -1,4 +1,4 @@
-import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/migration/domain/use_cases/get_migration_status_use_case.dart';
 import 'package:tv_randshow/core/migration/domain/use_cases/save_migration_status_use_case.dart';

@@ -1,5 +1,5 @@
 import 'package:stacked/stacked.dart';
-import 'package:tv_randshow/config/locator.dart';
+import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/get_random_episode_use_case.dart';
