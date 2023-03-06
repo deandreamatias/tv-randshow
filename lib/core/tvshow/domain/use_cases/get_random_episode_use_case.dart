@@ -1,6 +1,3 @@
-import 'dart:developer' as developer;
-import 'dart:math';
-
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_tvshow_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/episode.dart';
@@ -8,21 +5,22 @@ import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_seasons_details.dart';
+import 'package:tv_randshow/core/tvshow/domain/services/random_service.dart';
 
-@lazySingleton
-class RandomService {
-  RandomService({
-    required ITvshowRepository tvshowRepository,
-  }) : _tvshowRepository = tvshowRepository;
+@injectable
+class GetRandomEpisodeUseCase {
   final ITvshowRepository _tvshowRepository;
+  final RandomService _randomService;
 
-  Future<TvshowResult> randomEpisode(
-    TvshowDetails tvshowDetails,
-    String language,
-  ) async {
+  const GetRandomEpisodeUseCase(this._tvshowRepository, this._randomService);
+
+  Future<TvshowResult> call({
+    required TvshowDetails tvshowDetails,
+    required String language,
+  }) async {
     final Query query = Query(language: language);
     final int randomSeason =
-        _getRandomNumber(tvshowDetails.numberOfSeasons, true);
+        _randomService.getNumber(tvshowDetails.numberOfSeasons, isSeason: true);
     final TvshowSeasonsDetails seasonsDetails =
         await _tvshowRepository.getDetailsTvSeasons(
       query,
@@ -30,26 +28,14 @@ class RandomService {
       randomSeason,
     );
     final Episode episode = seasonsDetails.episodes.elementAt(
-      _getRandomNumber(seasonsDetails.episodes.length, false),
+      _randomService.getNumber(seasonsDetails.episodes.length),
     );
-    final TvshowResult tvshowResult = TvshowResult(
+    return TvshowResult(
       tvshowDetails: tvshowDetails,
       randomSeason: episode.seasonNumber,
       randomEpisode: episode.episodeNumber,
       episodeName: episode.name,
       episodeDescription: episode.overview,
     );
-    return tvshowResult;
-  }
-
-  /// If [total] start with 1, add + 1 to result.
-  /// Else is length of list, get normal random
-  int _getRandomNumber(int total, bool isSeason) {
-    final Random random = Random();
-    final int randomNumber = random.nextInt(total);
-    developer.log(
-      'Random ${isSeason ? 'season' : 'episode'} nº: ${randomNumber + 1}',
-    );
-    return isSeason ? randomNumber + 1 : randomNumber;
   }
 }

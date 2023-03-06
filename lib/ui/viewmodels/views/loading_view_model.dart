@@ -1,11 +1,12 @@
 import 'package:stacked/stacked.dart';
 import 'package:tv_randshow/config/locator.dart';
-import 'package:tv_randshow/core/app/domain/services/random_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
+import 'package:tv_randshow/core/tvshow/domain/use_cases/get_random_episode_use_case.dart';
 
 class LoadingViewModel extends BaseViewModel {
-  final RandomService _randomService = locator<RandomService>();
+  final GetRandomEpisodeUseCase _getRandomEpisodeUseCase =
+      locator<GetRandomEpisodeUseCase>();
 
   TvshowResult? _tvshowResult;
   bool _canNavigate = false;
@@ -18,7 +19,10 @@ class LoadingViewModel extends BaseViewModel {
     String language,
   ) async {
     setBusy(true);
-    _tvshowResult = await _randomService.randomEpisode(tvshowDetails, language);
+    _tvshowResult = await _getRandomEpisodeUseCase(
+      tvshowDetails: tvshowDetails,
+      language: language,
+    );
     _canNavigate = _tvshowResult != null &&
         _tvshowResult!.randomEpisode >= 0 &&
         _tvshowResult!.randomSeason >= 0;
