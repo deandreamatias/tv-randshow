@@ -13,7 +13,7 @@ class AppService implements IAppService {
   @override
   Future<String> getVersion() async {
     _packageInfo ??= await PackageInfo.fromPlatform();
-    return _packageInfo!.version;
+    return _packageInfo?.version ?? '-';
   }
 
   @override
@@ -23,9 +23,8 @@ class AppService implements IAppService {
       if (initialLink == null || initialLink.path.isEmpty) {
         debugPrint('$runtimeType Link empty or null');
         return TvshowActions(tvshow: '');
-      } else {
-        return _parseLink(initialLink);
       }
+      return _parseLink(initialLink);
     } on PlatformException catch (e) {
       throw PlatformException(
         code: e.code,
@@ -36,7 +35,7 @@ class AppService implements IAppService {
   }
 
   TvshowActions _parseLink(Uri initialLink) {
-    if (!initialLink.path.contains('getRandomEpisode')) {
+    if (initialLink.path.contains('getRandomEpisode')) {
       final TvshowActions tvshowActions =
           TvshowActions.fromMap(initialLink.queryParameters);
       return tvshowActions;

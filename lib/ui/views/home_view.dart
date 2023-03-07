@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/core/app/ioc/locator.dart';
-import 'package:tv_randshow/core/io/domain/use_cases/export_tvshows_use_case.dart';
+import 'package:tv_randshow/ui/states/tvshows_provider.dart';
+import 'package:tv_randshow/ui/viewmodels/views/info_view_model.dart';
 import 'package:tv_randshow/ui/widgets/favorite_list.dart';
+import 'package:tv_randshow/ui/widgets/icons/error_icon.dart';
 import 'package:unicons/unicons.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends StatelessWidget {
   const HomeView({super.key});
-
-  @override
-  HomeViewState createState() => HomeViewState();
-}
-
-class HomeViewState extends State<HomeView> {
-  final ExportTvShowsUseCase _exportTvShowsUseCase =
-      locator<ExportTvShowsUseCase>();
-  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +26,37 @@ class HomeViewState extends State<HomeView> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              loading
-                  ? const Center(
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : IconButton(
-                      key: const Key('app.fav.save'),
-                      tooltip: translate('app.fav.save'),
-                      icon: Icon(
-                        UniconsLine.file_export,
-                        color: Theme.of(context).colorScheme.primary,
-                      ),
-                      onPressed: () async {
-                        setState(() => loading = true);
-                        await _exportTvShowsUseCase();
-                        setState(() => loading = false);
-                      },
-                    )
+              Consumer(
+                builder: (context, ref, child) {
+                  final tvshows = ref.watch(tvshowsProvider);
+                  return tvshows.hasValue && tvshows.requireValue.isNotEmpty
+                      ? ref.watch(exportTvshowsProvider).when(
+                            data: (success) => success
+                                ? IconButton(
+                                    key: const Key('app.fav.save'),
+                                    tooltip: translate('app.fav.save'),
+                                    icon: Icon(
+                                      UniconsLine.file_export,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                    onPressed: () async {
+                                      ref
+                                          .read(exportTvshowsProvider.notifier)
+                                          .export();
+                                    },
+                                  )
+                                : const ErrorIcon(
+                                    textTranslateKey: 'app.info.export_error',
+                                  ),
+                            error: (error, stackTrace) => const ErrorIcon(
+                              textTranslateKey: 'app.info.export_error',
+                            ),
+                            loading: () => const CircularProgressIndicator(),
+                          )
+                      : const SizedBox.shrink();
+                },
+              ),
             ],
           ),
         ),

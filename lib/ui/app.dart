@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:theme_provider/theme_provider.dart';
 
@@ -33,9 +34,11 @@ class App extends StatelessWidget {
       ],
       child: ThemeConsumer(
         child: Builder(
-          builder: (themeContext) => _MaterialApp(
-            localizationDelegate: localizationDelegate,
-            themeContext: themeContext,
+          builder: (themeContext) => ProviderScope(
+            child: _MaterialApp(
+              localizationDelegate: localizationDelegate,
+              themeContext: themeContext,
+            ),
           ),
         ),
       ),

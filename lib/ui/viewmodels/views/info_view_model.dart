@@ -1,23 +1,30 @@
-import 'package:stacked/stacked.dart';
+import 'dart:async';
+
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tv_randshow/core/app/domain/interfaces/i_app_service.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/io/domain/use_cases/export_tvshows_use_case.dart';
 
-class InfoViewModel extends BaseViewModel {
-  final IAppService _appService = locator<IAppService>();
-  final ExportTvShowsUseCase _exportTvShowsUseCase =
-      locator<ExportTvShowsUseCase>();
+final versionAppProvider = FutureProvider.autoDispose<String>((ref) async {
+  final IAppService appService = locator<IAppService>();
+  return appService.getVersion();
+});
 
-  String _version = '-';
-  String get version => _version;
-
-  Future<void> getVersion() async {
-    _version = await _appService.getVersion();
+class ExportTvShowsNotifier extends AsyncNotifier<bool> {
+  @override
+  FutureOr<bool> build() {
+    return true;
   }
 
-  Future<void> exportTvshows() async {
-    setBusy(true);
-    await _exportTvShowsUseCase();
-    setBusy(false);
+  void export() async {
+    state = const AsyncValue.loading();
+    state = await AsyncValue.guard(
+      () => locator<ExportTvShowsUseCase>()(),
+    );
   }
 }
+
+final exportTvshowsProvider =
+    AsyncNotifierProvider.autoDispose<ExportTvShowsNotifier, bool>(
+  ExportTvShowsNotifier.new,
+);

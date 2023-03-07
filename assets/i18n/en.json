@@ -39,6 +39,7 @@
             "dark_description": "Choice between light and dark theme",
             "export_title": "Export favs tv shows",
             "export_description": "Export in json file to Downloads",
+            "export_error": "Error to export file",
             "app_title": "Android app",
             "app_description": "Get TV Randshow app in Google Play",
             "web_title": "Web app",
