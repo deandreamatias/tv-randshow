@@ -18,7 +18,7 @@ class GetRandomEpisodeUseCase {
     required String language,
   }) async {
     final int randomSeason =
-        _randomService.getNumber(tvshowDetails.numberOfSeasons, isSeason: true);
+        _randomService.getNumber(max: tvshowDetails.numberOfSeasons, min: 1);
     final TvshowSeasonsDetails seasonsDetails =
         await _onlineRepository.getDetailsTvSeasons(
       language,
@@ -26,7 +26,7 @@ class GetRandomEpisodeUseCase {
       randomSeason,
     );
     final Episode episode = seasonsDetails.episodes.elementAt(
-      _randomService.getNumber(seasonsDetails.episodes.length),
+      _randomService.getNumber(max: seasonsDetails.episodes.length),
     );
     return TvshowResult(
       tvshowDetails: tvshowDetails,

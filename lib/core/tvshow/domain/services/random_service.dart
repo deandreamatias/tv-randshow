@@ -5,14 +5,13 @@ import 'package:injectable/injectable.dart';
 
 @LazySingleton()
 class RandomService {
-  /// If [total] start with 1, add + 1 to result.
-  /// Else is length of list, get normal random
-  int getNumber(int total, {bool isSeason = false}) {
+  /// Get random int between [max] and [min]
+  int getNumber({int max = 1, int min = 0}) {
+    assert(max > min, 'max should be greater than min');
+
     final Random random = Random();
-    final int randomNumber = random.nextInt(total);
-    developer.log(
-      'Random ${isSeason ? 'season' : 'episode'} nº: ${randomNumber + 1}',
-    );
-    return isSeason ? randomNumber + 1 : randomNumber;
+    final int randomNumber = random.nextInt(max - min) + min;
+    developer.log('Random nº: $randomNumber');
+    return randomNumber;
   }
 }
