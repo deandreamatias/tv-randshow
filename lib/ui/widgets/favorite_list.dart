@@ -1,38 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:stacked/stacked.dart';
-import 'package:tv_randshow/ui/router.dart';
-import 'package:tv_randshow/ui/viewmodels/widgets/favorite_list_model.dart';
-import 'package:tv_randshow/ui/views/loading_view.dart';
+import 'package:tv_randshow/ui/states/tvshows_provider.dart';
 import 'package:tv_randshow/ui/widgets/fav_widget.dart';
+import 'package:unicons/unicons.dart';
 
 class FavoriteList extends StatelessWidget {
   const FavoriteList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<FavoriteListModel>.reactive(
-      viewModelBuilder: () => FavoriteListModel(),
-      onViewModelReady: (FavoriteListModel model) async {
-        await model.getFavs();
-        await model.verifyAppLink().then((tvshowDetails) {
-          if (tvshowDetails?.id != null) {
-            Navigator.pushNamed<LoadingView>(
-              context,
-              RoutePaths.loading,
-              arguments: tvshowDetails,
-            );
-          }
-        });
-      },
-      builder: (BuildContext context, FavoriteListModel model, Widget? child) =>
-          model.isBusy
-              ? const Center(
-                  child: CircularProgressIndicator(
-                    key: Key('app.fav.loading'),
-                  ),
-                )
-              : model.data != null && model.data!.isNotEmpty
+    return Consumer(
+      builder: (context, ref, child) {
+        return ref.watch(favTvshowsProvider).when(
+              data: (tvshows) => tvshows.isNotEmpty
                   ? GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -43,11 +24,11 @@ class FavoriteList extends StatelessWidget {
                       ),
                       physics: const BouncingScrollPhysics(),
                       padding: const EdgeInsets.all(16.0),
-                      itemCount: model.data!.length,
+                      itemCount: tvshows.length,
                       itemBuilder: (BuildContext context, int index) =>
                           FavWidget(
-                        key: Key(model.data![index].id.toString()),
-                        tvshowDetails: model.data![index],
+                        key: Key(tvshows[index].id.toString()),
+                        tvshowDetails: tvshows[index],
                       ),
                     )
                   : Center(
@@ -61,6 +42,17 @@ class FavoriteList extends StatelessWidget {
                         ),
                       ),
                     ),
+              error: (error, stackTrace) => Icon(
+                UniconsLine.exclamation_octagon,
+                color: Theme.of(context).colorScheme.error,
+              ),
+              loading: () => const Center(
+                child: CircularProgressIndicator(
+                  key: Key('app.fav.loading'),
+                ),
+              ),
+            );
+      },
     );
   }
 }

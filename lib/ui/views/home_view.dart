@@ -28,7 +28,7 @@ class HomeView extends StatelessWidget {
               ),
               Consumer(
                 builder: (context, ref, child) {
-                  final tvshows = ref.watch(tvshowsProvider);
+                  final tvshows = ref.watch(favTvshowsProvider);
                   return tvshows.hasValue && tvshows.requireValue.isNotEmpty
                       ? ref.watch(exportTvshowsProvider).when(
                             data: (success) => success
