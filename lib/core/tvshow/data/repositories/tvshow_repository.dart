@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
+import 'package:tv_randshow/core/tvshow/data/models/tmdb_query_input.dart';
 import 'package:tv_randshow/core/tvshow/data/services/tmdb_http_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_online_repository.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/search.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_seasons_details.dart';
@@ -13,7 +13,8 @@ class TvshowRepository implements IOnlineRepository {
   TvshowRepository(this._httpService);
 
   @override
-  Future<TvshowDetails> getDetailsTv(Query query, int idTv) async {
+  Future<TvshowDetails> getDetailsTv(String language, int idTv) async {
+    final query = TmdbQueryInput(language: language);
     final String tvshowDetails = '$apiVersion/tv/';
 
     final response = await _httpService.get(
@@ -25,10 +26,11 @@ class TvshowRepository implements IOnlineRepository {
 
   @override
   Future<TvshowSeasonsDetails> getDetailsTvSeasons(
-    Query query,
+    String language,
     int idTv,
     int idSeason,
   ) async {
+    final query = TmdbQueryInput(language: language);
     final String tvshowDetails = '$apiVersion/tv/';
     const String tvshowDetailsSeason = '/season/';
 
@@ -40,7 +42,12 @@ class TvshowRepository implements IOnlineRepository {
   }
 
   @override
-  Future<Search> search(Query query) async {
+  Future<Search> search({
+    required String text,
+    required int page,
+    required String language,
+  }) async {
+    final query = TmdbQueryInput(language: language, page: page, query: text);
     final String tvshowSearch = '$apiVersion/search/tv';
 
     final response = await _httpService.get(

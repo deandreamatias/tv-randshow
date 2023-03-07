@@ -4,7 +4,6 @@ import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:tv_randshow/core/app/ioc/locator.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/search.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/search_tvshow_use_case.dart';
@@ -18,12 +17,11 @@ class SearchViewModel extends BaseViewModel {
 
   Future<List<Result>> loadList(String text, int page, String language) async {
     if (text.isNotEmpty) {
-      final Query query = Query(
+      final Search search = await _searchTvShowUseCase(
         language: language,
         page: page,
-        query: text,
+        text: text,
       );
-      final Search search = await _searchTvShowUseCase(query);
       if (search.results.isNotEmpty) {
         return search.results;
       }

@@ -4,7 +4,6 @@ import 'package:tv_randshow/core/streaming/domain/models/streaming_search.dart';
 import 'package:tv_randshow/core/streaming/domain/use_cases/get_tvshow_streamings_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_online_repository.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/query.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @injectable
@@ -23,9 +22,8 @@ class AddFavTvshowUseCase {
     required String language,
     required int idTv,
   }) async {
-    final Query query = Query(language: language);
     TvshowDetails tvshowDetails =
-        await _onlineRepository.getDetailsTv(query, idTv);
+        await _onlineRepository.getDetailsTv(language, idTv);
 
     final streamings = await _getTvshowStreamingsUseCase(
       StreamingSearch(
