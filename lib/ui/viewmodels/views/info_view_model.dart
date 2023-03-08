@@ -10,7 +10,7 @@ final versionAppProvider = FutureProvider.autoDispose<String>((ref) async {
   return appService.getVersion();
 });
 
-class ExportTvShowsNotifier extends AsyncNotifier<bool> {
+class ExportTvShowsNotifier extends AutoDisposeAsyncNotifier<bool> {
   @override
   FutureOr<bool> build() {
     return true;

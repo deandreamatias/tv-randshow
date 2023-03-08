@@ -1,40 +1,53 @@
 import 'dart:async';
 
-import 'package:flutter_pagewise/flutter_pagewise.dart';
-import 'package:stacked/stacked.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/search.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/search_tvshow_use_case.dart';
+import 'package:tv_randshow/ui/states/pagination_notifier.dart';
 
-class SearchViewModel extends BaseViewModel {
-  final SearchTvShowUseCase _searchTvShowUseCase =
-      locator<SearchTvShowUseCase>();
+final paginationProvider = AsyncNotifierProvider.family<
+    PaginationNotifier<Result, String>, List<Result>, String>(
+  () {
+    return PaginationNotifier(
+      itemsByPage: 20,
+      getNextPage: (page, input) async {
+        final SearchTvShowUseCase searchTvShowUseCase =
+            locator<SearchTvShowUseCase>();
+
+        return (await searchTvShowUseCase(
+          page: page,
+          text: input,
+        ))
+            .results;
+      },
+    );
+  },
+);
+
+class SearchTvshowsNotifier extends Notifier<String> {
   Timer? _timer;
 
-  Timer? get timer => _timer;
-
-  Future<List<Result>> loadList(String text, int page, String language) async {
-    if (text.isNotEmpty) {
-      final Search search = await _searchTvShowUseCase(
-        language: language,
-        page: page,
-        text: text,
-      );
-      if (search.results.isNotEmpty) {
-        return search.results;
-      }
-    }
-    return [];
+  @override
+  String build() {
+    return '';
   }
 
-  void searchAutomatic(PagewiseLoadController<Result>? pageLoadController) {
-    if (pageLoadController == null) return;
+  void update(String text) => state = text;
+
+  void searchAutomatic(String text, VoidCallback function) {
+    if (text.isEmpty || text == state) return;
 
     if (_timer != null && (_timer?.isActive ?? false)) _timer!.cancel();
 
-    _timer =
-        Timer(const Duration(seconds: 3), () => pageLoadController.reset());
+    _timer = Timer(const Duration(seconds: 3), () {
+      state = text;
+      function();
+    });
   }
 }
+
+final searchProvider =
+    NotifierProvider<SearchTvshowsNotifier, String>(SearchTvshowsNotifier.new);

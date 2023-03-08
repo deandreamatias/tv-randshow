@@ -26,6 +26,8 @@
         "search": {
             "tab": "Search",
             "search_bar": "Write a TV show name",
+            "no_more_items": "No more items",
+            "load_more_items": "Load more items",
             "init_message": "Search a TV show in top bar",
             "error_message": "Oops! Have a error. \nTry verify your internet connection",
             "empty_message": "Don't have results for this search",

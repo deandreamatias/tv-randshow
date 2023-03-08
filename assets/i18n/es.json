@@ -26,6 +26,8 @@
         "search": {
             "tab": "Búsqueda",
             "search_bar": "Escriba el nombre de la serie",
+            "no_more_items": "No hay más resultados",
+            "load_more_items": "Cargar más resultados",
             "init_message": "Busca una serie escribiendo en la barra superior",
             "error_message": "Oops! Ha habido un error. \nComprueba tu conexión de internet",
             "empty_message": "No hay resultados para esta búsqueda",
