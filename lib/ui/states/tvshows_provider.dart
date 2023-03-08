@@ -25,7 +25,7 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard<List<TvshowDetails>>(
       () async {
-        await _addFavTvshow(idTv: idTv, language: language);
+        await _addFavTvshow(idTv: idTv);
         return _getLocalTvshows();
       },
     );
