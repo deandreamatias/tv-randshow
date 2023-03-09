@@ -35,162 +35,227 @@ class InfoView extends StatelessWidget {
         Expanded(
           child: ListView(
             physics: const BouncingScrollPhysics(),
-            children: <Widget>[
-              SwitchListTile(
-                value:
-                    ThemeProvider.themeOf(context).id.compareTo('dark_theme') ==
-                        0,
-                onChanged: (changed) =>
-                    ThemeProvider.controllerOf(context).nextTheme(),
-                title: Text(
-                  translate('app.info.dark_title'),
-                  key: const Key('app.info.dark_title'),
-                ),
-                subtitle: Text(
-                  translate('app.info.dark_description'),
-                  key: const Key('app.info.dark_description'),
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  translate(
-                    kIsWeb ? 'app.info.app_title' : 'app.info.web_title',
-                  ),
-                  key: const Key(
-                    kIsWeb ? 'app.info.app_title' : 'app.info.web_title',
-                  ),
-                ),
-                subtitle: Text(
-                  translate(
-                    kIsWeb
-                        ? 'app.info.app_description'
-                        : 'app.info.web_description',
-                  ),
-                  key: const Key(
-                    kIsWeb
-                        ? 'app.info.app_description'
-                        : 'app.info.web_description',
-                  ),
-                ),
-                leading: const Icon(
-                  kIsWeb
-                      ? UniconsLine.google_play
-                      : UniconsLine.external_link_alt,
-                ),
-                onTap: () async {
-                  const String url = kIsWeb
-                      ? 'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow'
-                      : 'https://tvrandshow.com';
-                  if (await canLaunchUrl(Uri.parse(url))) {
-                    await launchUrl(Uri.parse(url));
-                    log('Launched: $url');
-                  } else {
-                    throw 'Could not launch $url';
-                  }
-                },
-              ),
-              Consumer(
-                builder: (context, ref, child) {
-                  return ListTile(
-                    title: Text(
-                      translate('app.info.export_title'),
-                      key: const Key('app.info.export_title'),
-                    ),
-                    subtitle: Text(
-                      translate('app.info.export_description'),
-                      key: const Key('app.info.export_description'),
-                    ),
-                    leading: const Icon(UniconsLine.file_export),
-                    trailing: ref.watch(exportTvshowsProvider).when(
-                          data: (success) => success
-                              ? null
-                              : const ErrorIcon(
-                                  keyText: 'app.info.export_error',),
-                          error: (error, stackTrace) => const ErrorIcon(
-                            keyText: 'app.info.export_error',
-                          ),
-                          loading: () => const Loader(),
-                        ),
-                    onTap: () =>
-                        ref.read(exportTvshowsProvider.notifier).export(),
-                  );
-                },
-              ),
-              Visibility(
-                visible: !kIsWeb,
-                child: ListTile(
-                  title: Text(
-                    translate('app.info.rate_title'),
-                    key: const Key('app.info.rate_title'),
-                  ),
-                  subtitle: Text(
-                    translate('app.info.rate_description'),
-                    key: const Key('app.info.rate_description'),
-                  ),
-                  leading: const Icon(UniconsLine.feedback),
-                  onTap: () async => putReview(),
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  translate('app.info.feedback_title'),
-                  key: const Key('app.info.feedback_title'),
-                ),
-                subtitle: Text(
-                  translate('app.info.feedback_description'),
-                  key: const Key('app.info.feedback_description'),
-                ),
-                leading: const Icon(UniconsLine.envelope),
-                onTap: () async {
-                  const String url =
-                      'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
-                  try {
-                    await launchUrl(Uri.parse(url));
-                    log('Launched: $url');
-                  } catch (e) {
-                    throw 'Could not launch $url because $e';
-                  }
-                },
-              ),
-              ListTile(
-                title: Text(
-                  translate('app.info.version.title'),
-                  key: const Key('app.info.version.title'),
-                ),
-                subtitle: Text(
-                  translate('app.info.version.description'),
-                  key: const Key('app.info.version.description'),
-                ),
-                leading: const Icon(UniconsLine.brackets_curly),
-                onTap: () {
-                  _changelog(context);
-                },
-              ),
-              ListTile(
-                title: Text(
-                  translate('app.info.privacy_title'),
-                  key: const Key('app.info.privacy_title'),
-                ),
-                subtitle: Text(
-                  translate('app.info.privacy_description'),
-                  key: const Key('app.info.privacy_description'),
-                ),
-                leading: const Icon(UniconsLine.file_shield_alt),
-                onTap: () =>
-                    Navigator.of(context).pushNamed(RoutePaths.privacy),
-              ),
+            children: const <Widget>[
+              _SwitchTheme(),
+              kIsWeb ? _OpenAndroidApp() : _OpenWebApp(),
+              _ExportTvShows(),
+              _ReviewApp(),
+              _SendFeedback(),
+              _Changelog(),
+              _Privacy(),
             ],
           ),
         ),
       ],
     );
   }
+}
 
-  Future<void> putReview() async {
-    final InAppReview inAppReview = InAppReview.instance;
-    await inAppReview.isAvailable()
-        ? inAppReview.requestReview()
-        : inAppReview.openStoreListing();
+class _Privacy extends StatelessWidget {
+  const _Privacy();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.privacy_title'),
+        key: const Key('app.info.privacy_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.privacy_description'),
+        key: const Key('app.info.privacy_description'),
+      ),
+      leading: const Icon(UniconsLine.file_shield_alt),
+      onTap: () => Navigator.of(context).pushNamed(RoutePaths.privacy),
+    );
+  }
+}
+
+class _SendFeedback extends StatelessWidget {
+  const _SendFeedback();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.feedback_title'),
+        key: const Key('app.info.feedback_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.feedback_description'),
+        key: const Key('app.info.feedback_description'),
+      ),
+      leading: const Icon(UniconsLine.envelope),
+      onTap: () async {
+        const String url =
+            'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
+        try {
+          await launchUrl(Uri.parse(url));
+          log('Launched: $url');
+        } catch (e) {
+          throw 'Could not launch $url because $e';
+        }
+      },
+    );
+  }
+}
+
+class _OpenAndroidApp extends StatelessWidget {
+  const _OpenAndroidApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.web_title'),
+        key: const Key('app.info.web_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.web_description'),
+        key: const Key('app.info.web_description'),
+      ),
+      leading: const Icon(UniconsLine.external_link_alt),
+      onTap: () async {
+        const String url = 'https://tvrandshow.com';
+        if (await canLaunchUrl(Uri.parse(url))) {
+          await launchUrl(Uri.parse(url));
+          log('Launched: $url');
+        } else {
+          throw 'Could not launch $url';
+        }
+      },
+    );
+  }
+}
+
+class _OpenWebApp extends StatelessWidget {
+  const _OpenWebApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.app_title'),
+        key: const Key('app.info.app_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.app_description'),
+        key: const Key('app.info.app_description'),
+      ),
+      leading: const Icon(UniconsLine.google_play),
+      onTap: () async {
+        const String url =
+            'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow';
+        if (await canLaunchUrl(Uri.parse(url))) {
+          await launchUrl(Uri.parse(url));
+          log('Launched: $url');
+        } else {
+          throw 'Could not launch $url';
+        }
+      },
+    );
+  }
+}
+
+class _SwitchTheme extends StatelessWidget {
+  const _SwitchTheme();
+
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+      value: ThemeProvider.themeOf(context).id.compareTo('dark_theme') == 0,
+      onChanged: (changed) => ThemeProvider.controllerOf(context).nextTheme(),
+      title: Text(
+        translate('app.info.dark_title'),
+        key: const Key('app.info.dark_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.dark_description'),
+        key: const Key('app.info.dark_description'),
+      ),
+    );
+  }
+}
+
+class _ExportTvShows extends StatelessWidget {
+  const _ExportTvShows();
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (context, ref, child) {
+        return ListTile(
+          title: Text(
+            translate('app.info.export_title'),
+            key: const Key('app.info.export_title'),
+          ),
+          subtitle: Text(
+            translate('app.info.export_description'),
+            key: const Key('app.info.export_description'),
+          ),
+          leading: const Icon(UniconsLine.file_export),
+          trailing: ref.watch(exportTvshowsProvider).when(
+                data: (success) => success
+                    ? null
+                    : const ErrorIcon(
+                        keyText: 'app.info.export_error',
+                      ),
+                error: (error, stackTrace) => const ErrorIcon(
+                  keyText: 'app.info.export_error',
+                ),
+                loading: () => const Loader(),
+              ),
+          onTap: () => ref.read(exportTvshowsProvider.notifier).export(),
+        );
+      },
+    );
+  }
+}
+
+class _ReviewApp extends StatelessWidget {
+  const _ReviewApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.rate_title'),
+        key: const Key('app.info.rate_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.rate_description'),
+        key: const Key('app.info.rate_description'),
+      ),
+      leading: const Icon(UniconsLine.feedback),
+      onTap: () async {
+        final InAppReview inAppReview = InAppReview.instance;
+        await inAppReview.isAvailable()
+            ? inAppReview.requestReview()
+            : inAppReview.openStoreListing();
+      },
+    );
+  }
+}
+
+class _Changelog extends StatelessWidget {
+  const _Changelog();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.version.title'),
+        key: const Key('app.info.version.title'),
+      ),
+      subtitle: Text(
+        translate('app.info.version.description'),
+        key: const Key('app.info.version.description'),
+      ),
+      leading: const Icon(UniconsLine.brackets_curly),
+      onTap: () {
+        _changelog(context);
+      },
+    );
   }
 
   void _changelog(BuildContext context) {
@@ -220,7 +285,7 @@ class InfoView extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.8,
           width: MediaQuery.of(context).size.width * 0.5,
           child: FutureBuilder<String>(
-            future: loadAsset(
+            future: _loadAsset(
               LocalizedApp.of(context).delegate.currentLocale.languageCode,
             ),
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -243,7 +308,7 @@ class InfoView extends StatelessWidget {
     );
   }
 
-  Future<String> loadAsset(String languageCode) async {
+  Future<String> _loadAsset(String languageCode) async {
     switch (languageCode) {
       case 'es':
         return rootBundle.loadString(Assets.whatsNewEs);
