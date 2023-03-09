@@ -85,7 +85,8 @@
             "duration": "Duration",
             "undefined": "Undefined",
             "episode_season_metric": "in all",
-            "duration_metric": "min/episode"
+            "duration_metric": "min/episode",
+            "error_load": "Error to load episode details"
         },
         "delete_dialog": {
             "title": "Delete TV show",

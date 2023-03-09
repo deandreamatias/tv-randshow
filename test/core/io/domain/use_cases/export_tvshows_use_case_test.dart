@@ -67,7 +67,7 @@ Future<void> main() async {
     when(manageFiles.saveFile(fileName, TvshowsFile(tvshows: []).toRawJson()))
         .thenAnswer((_) async => fileName);
 
-    expect(await useCase(), isFalse);
+    expect(() async => useCase(), throwsException);
   });
   test('should dont save tv shows when file name is empty', () async {
     final tvshows = generateTvshow.tvshows;

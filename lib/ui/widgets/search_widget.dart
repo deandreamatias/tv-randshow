@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
-import 'package:tv_randshow/ui/widgets/modal_sheet.dart';
 import 'package:tv_randshow/ui/widgets/save_button.dart';
+import 'package:tv_randshow/ui/widgets/tvshow_details_modal.dart';
 
 class SearchWidget extends StatefulWidget {
   const SearchWidget({super.key, required this.result});
@@ -14,7 +13,6 @@ class SearchWidget extends StatefulWidget {
 }
 
 class SearchWidgetState extends State<SearchWidget> {
-  // TODO(deandreamatias): Verify coincidence between database and search result
   late bool _enable;
   @override
   void initState() {
@@ -44,8 +42,9 @@ class SearchWidgetState extends State<SearchWidget> {
                     showModalBottomSheet<void>(
                       isScrollControlled: true,
                       context: context,
-                      builder: (BuildContext builder) => ModalSheet(
+                      builder: (BuildContext builder) => TvshowDetailsModal(
                         idTv: widget.result.id,
+                        showRandom: false,
                       ),
                     );
                   }

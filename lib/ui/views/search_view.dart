@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/ui/viewmodels/views/search_view_model.dart';
+import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:tv_randshow/ui/widgets/search_widget.dart';
 import 'package:unicons/unicons.dart';
@@ -108,7 +109,10 @@ class _PaginationStatus extends ConsumerWidget {
     final state = ref.watch(paginationProvider(text));
 
     return state.when(
-      error: (error, stackTrace) => _ErrorMessage(error: error.toString()),
+      error: (error, stackTrace) => ErrorMessage(
+        keyText: 'app.search.error_message',
+        error: error.toString(),
+      ),
       loading: () => state.hasValue && state.requireValue.isNotEmpty
           ? const Loader()
           : const SizedBox.shrink(),
@@ -173,33 +177,14 @@ class _SearchResult extends StatelessWidget {
                 ? _GridBuilder(items: state.requireValue)
                 : const SliverToBoxAdapter(child: Loader());
           },
-          error: (error, stk) =>
-              SliverToBoxAdapter(child: _ErrorMessage(error: error.toString())),
+          error: (error, stk) => SliverToBoxAdapter(
+            child: ErrorMessage(
+              keyText: 'app.search.error_message',
+              error: error.toString(),
+            ),
+          ),
         );
       },
-    );
-  }
-}
-
-class _ErrorMessage extends StatelessWidget {
-  final String error;
-  const _ErrorMessage({this.error = ''});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          const Icon(UniconsLine.exclamation_octagon),
-          const SizedBox(height: 16),
-          Text(
-            '${translate('app.search.error_message')}\n$error',
-            key: const Key('app.search.error_message'),
-            style: Theme.of(context).textTheme.titleMedium,
-            textAlign: TextAlign.center,
-          )
-        ],
-      ),
     );
   }
 }

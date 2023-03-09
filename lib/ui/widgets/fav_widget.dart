@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/ui/widgets/delete_button.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
-import 'package:tv_randshow/ui/widgets/modal_sheet.dart';
 import 'package:tv_randshow/ui/widgets/random_button.dart';
+import 'package:tv_randshow/ui/widgets/tvshow_details_modal.dart';
 
 class FavWidget extends StatelessWidget {
   const FavWidget({super.key, required this.tvshowDetails});
@@ -28,10 +27,8 @@ class FavWidget extends StatelessWidget {
               onTap: () => showModalBottomSheet<void>(
                 isScrollControlled: true,
                 context: context,
-                builder: (BuildContext context) => ModalSheet(
-                  idTv: tvshowDetails.id,
-                  inDatabase: true,
-                ),
+                builder: (BuildContext context) =>
+                    TvshowDetailsModal(idTv: tvshowDetails.id),
               ),
               child: ImageBuilder(
                 key: Key('${tvshowDetails.id}'),

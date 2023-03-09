@@ -85,7 +85,8 @@
             "duration": "Duración",
             "undefined": "Indefinido",
             "episode_season_metric": "en total",
-            "duration_metric": "min/episodio"
+            "duration_metric": "min/episodio",
+            "error_load": "Error al cargar detalles del episodio"
         },
         "delete_dialog": {
             "title": "Eliminar serie",
