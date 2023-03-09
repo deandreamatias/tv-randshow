@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/states/tvshows_provider.dart';
 import 'package:tv_randshow/ui/widgets/fav_widget.dart';
+import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 
 class FavoriteList extends StatelessWidget {
@@ -46,11 +47,7 @@ class FavoriteList extends StatelessWidget {
                 UniconsLine.exclamation_octagon,
                 color: Theme.of(context).colorScheme.error,
               ),
-              loading: () => const Center(
-                child: CircularProgressIndicator(
-                  key: Key('app.fav.loading'),
-                ),
-              ),
+              loading: () => const Loader(key: Key('app.fav.loading')),
             );
       },
     );

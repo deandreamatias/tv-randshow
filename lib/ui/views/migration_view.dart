@@ -4,6 +4,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/states/migration_state.dart';
+import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 
 class MigrationView extends StatefulWidget {
@@ -170,7 +171,7 @@ class _Checkpoint extends StatelessWidget {
             ? const SizedBox(
                 width: 12,
                 height: 12,
-                child: CircularProgressIndicator(),
+                child: Loader(),
               )
             : checked
                 ? const Icon(UniconsLine.check, color: Colors.green)

@@ -12,6 +12,7 @@ import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
 import 'package:tv_randshow/ui/viewmodels/views/info_view_model.dart';
 import 'package:tv_randshow/ui/widgets/icons/error_icon.dart';
+import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -103,12 +104,12 @@ class InfoView extends StatelessWidget {
                           data: (success) => success
                               ? null
                               : const ErrorIcon(
-                                  textTranslateKey: 'app.info.export_error',
+                                  keyText: 'app.info.export_error',
                                 ),
                           error: (error, stackTrace) => const ErrorIcon(
-                            textTranslateKey: 'app.info.export_error',
+                            keyText: 'app.info.export_error',
                           ),
-                          loading: () => const CircularProgressIndicator(),
+                          loading: () => const Loader(),
                         ),
                     onTap: () =>
                         ref.read(exportTvshowsProvider.notifier).export(),
@@ -225,9 +226,7 @@ class InfoView extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
               return snapshot.hasData
                   ? Markdown(data: snapshot.data ?? '')
-                  : const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                  : const Loader();
             },
           ),
         ),

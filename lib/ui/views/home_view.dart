@@ -5,6 +5,7 @@ import 'package:tv_randshow/ui/states/tvshows_provider.dart';
 import 'package:tv_randshow/ui/viewmodels/views/info_view_model.dart';
 import 'package:tv_randshow/ui/widgets/favorite_list.dart';
 import 'package:tv_randshow/ui/widgets/icons/error_icon.dart';
+import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 
 class HomeView extends StatelessWidget {
@@ -47,12 +48,12 @@ class HomeView extends StatelessWidget {
                                     },
                                   )
                                 : const ErrorIcon(
-                                    textTranslateKey: 'app.info.export_error',
+                                    keyText: 'app.info.export_error',
                                   ),
                             error: (error, stackTrace) => const ErrorIcon(
-                              textTranslateKey: 'app.info.export_error',
+                              keyText: 'app.info.export_error',
                             ),
-                            loading: () => const CircularProgressIndicator(),
+                            loading: () => const Loader(),
                           )
                       : const SizedBox.shrink();
                 },

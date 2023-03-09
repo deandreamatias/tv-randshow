@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
+import 'package:tv_randshow/ui/widgets/loader.dart';
 
 const String _baseImage = 'https://image.tmdb.org/t/p/w342/';
 
@@ -99,8 +100,7 @@ class CachedImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: url,
       fit: BoxFit.cover,
-      placeholder: (BuildContext context, String url) =>
-          const Center(child: CircularProgressIndicator()),
+      placeholder: (BuildContext context, String url) => const Loader(),
       errorWidget: (BuildContext context, String url, Object? error) =>
           Image.asset(Assets.emptyImage),
     );
