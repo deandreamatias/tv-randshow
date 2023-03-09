@@ -19,8 +19,10 @@ class GetRandomEpisodeUseCase {
     required int numberOfSeasons,
     List<StreamingDetail> streamings = const [],
   }) async {
-    final int randomSeason =
-        _randomService.getNumber(max: numberOfSeasons, min: 1);
+    // When has only one season, do not need get random season
+    final int randomSeason = numberOfSeasons == 1
+        ? 1
+        : _randomService.getNumber(max: numberOfSeasons, min: 1);
     final TvshowSeasonsDetails seasonsDetails =
         await _onlineRepository.getDetailsTvSeasons(
       Helpers.getLocale(),
