@@ -6,27 +6,21 @@ import 'package:tv_randshow/core/app/domain/interfaces/i_app_service.dart';
 import 'package:tv_randshow/core/app/domain/models/tvshow_actions.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
-import 'package:tv_randshow/core/tvshow/domain/use_cases/add_fav_tvshow_use_case.dart';
-import 'package:tv_randshow/core/tvshow/domain/use_cases/delete_fav_tvshow_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/get_local_tvshows_use_case.dart';
 
 class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
   final GetLocalTvshowsUseCase _getLocalTvshows =
       locator<GetLocalTvshowsUseCase>();
-  final AddFavTvshowUseCase _addFavTvshow = locator<AddFavTvshowUseCase>();
-  final DeleteFavTvshowUseCase _deleteFavTvshow =
-      locator<DeleteFavTvshowUseCase>();
   @override
   FutureOr<List<TvshowDetails>> build() async {
     return await _getLocalTvshows();
   }
 
-  Future<void> addFav(int idTv, String language) async {
+  Future<void> addFav(TvshowDetails tvshowDetails) async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard<List<TvshowDetails>>(
       () async {
-        await _addFavTvshow(idTv: idTv);
-        return _getLocalTvshows();
+        return [...state.requireValue, tvshowDetails];
       },
     );
   }
@@ -35,7 +29,6 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard<List<TvshowDetails>>(
       () async {
-        await _deleteFavTvshow(id);
         final tempState = state.requireValue;
         tempState.removeWhere((element) => element.id == id);
         return tempState;

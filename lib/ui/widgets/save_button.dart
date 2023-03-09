@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:stacked/stacked.dart';
-import 'package:tv_randshow/ui/viewmodels/widgets/save_model.dart';
+import 'package:tv_randshow/ui/states/tvshow_provider.dart';
+import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 
 class SaveButton extends StatelessWidget {
@@ -10,38 +11,42 @@ class SaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<SaveModel>.reactive(
-      viewModelBuilder: () => SaveModel(),
-      builder: (BuildContext context, SaveModel model, Widget? child) =>
-          AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        child: model.tvshowInDb
-            ? ElevatedButton.icon(
-                key: const ValueKey<String>('delete'),
-                icon: const Icon(UniconsLine.times),
-                label: Text(
-                  translate('app.search.button_delete'),
-                  key: Key('app.search.button_delete.$id'),
-                ),
-                onPressed: () => model.deleteFav(id),
-              )
-            : ElevatedButton.icon(
-                key: const ValueKey<String>('add'),
-                icon: const Icon(UniconsLine.favorite),
-                label: Text(
-                  translate('app.search.button_fav'),
-                  key: Key('app.search.button_fav.$id'),
-                ),
-                onPressed: () => model.addFav(
-                  id,
-                  LocalizedApp.of(context)
-                      .delegate
-                      .currentLocale
-                      .languageCode
-                      .toString(),
-                ),
-              ),
-      ),
+    return Consumer(
+      builder: (context, ref, child) {
+        final watcher = ref.watch(tvshowOnFavsProvider(id));
+        return IgnorePointer(
+          ignoring: watcher.isLoading,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            child: watcher.hasValue && watcher.requireValue
+                ? ElevatedButton.icon(
+                    key: const ValueKey<String>('delete'),
+                    icon: const Icon(UniconsLine.times),
+                    label: watcher.isLoading
+                        ? const SizedBox.square(dimension: 12, child: Loader())
+                        : Text(
+                            translate('app.search.button_delete'),
+                            key: Key('app.search.button_delete.$id'),
+                          ),
+                    onPressed: () => ref
+                        .read(tvshowOnFavsProvider(id).notifier)
+                        .deleteFromFavs(),
+                  )
+                : ElevatedButton.icon(
+                    key: const ValueKey<String>('add'),
+                    icon: const Icon(UniconsLine.favorite),
+                    label: watcher.isLoading
+                        ? const SizedBox.square(dimension: 12, child: Loader())
+                        : Text(
+                            translate('app.search.button_fav'),
+                            key: Key('app.search.button_fav.$id'),
+                          ),
+                    onPressed: () =>
+                        ref.read(tvshowOnFavsProvider(id).notifier).addToFavs(),
+                  ),
+          ),
+        );
+      },
     );
   }
 }

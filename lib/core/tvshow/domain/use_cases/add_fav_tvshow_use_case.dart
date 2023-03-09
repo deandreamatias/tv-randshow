@@ -19,7 +19,7 @@ class AddFavTvshowUseCase {
     this._localRepository,
   );
 
-  Future<void> call({
+  Future<TvshowDetails> call({
     required int idTv,
   }) async {
     TvshowDetails tvshowDetails =
@@ -34,5 +34,7 @@ class AddFavTvshowUseCase {
     tvshowDetails = tvshowDetails.copyWith(streamings: streamings);
 
     await _localRepository.saveTvshow(tvshowDetails);
+
+    return tvshowDetails;
   }
 }
