@@ -95,8 +95,8 @@ class _SendFeedback extends StatelessWidget {
   }
 }
 
-class _OpenAndroidApp extends StatelessWidget {
-  const _OpenAndroidApp();
+class _OpenWebApp extends StatelessWidget {
+  const _OpenWebApp();
 
   @override
   Widget build(BuildContext context) {
@@ -117,8 +117,8 @@ class _OpenAndroidApp extends StatelessWidget {
   }
 }
 
-class _OpenWebApp extends StatelessWidget {
-  const _OpenWebApp();
+class _OpenAndroidApp extends StatelessWidget {
+  const _OpenAndroidApp();
 
   @override
   Widget build(BuildContext context) {

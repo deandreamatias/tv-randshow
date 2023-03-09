@@ -31,7 +31,9 @@ class FavWidget extends StatelessWidget {
                     TvshowDetailsModal(idTv: tvshowDetails.id),
               ),
               child: ImageBuilder(
-                key: Key('${tvshowDetails.id}'),
+                key: Key(
+                  '${tvshowDetails.posterPath}${tvshowDetails.id.toString()}',
+                ),
                 name: tvshowDetails.name,
                 url: tvshowDetails.posterPath,
                 isModal: false,
