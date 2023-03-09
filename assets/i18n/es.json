@@ -1,6 +1,8 @@
 {
     "app": {
         "name": "TV Randshow",
+        "send_error": "Enviar email con el error",
+        "report_action": "Enviar error",
         "migration": {
             "title": "Migración",
             "subtitle": "A continuación se hará un pequeño proceso de migración para mejorar la aplicación",
@@ -26,6 +28,8 @@
         "search": {
             "tab": "Búsqueda",
             "search_bar": "Escriba el nombre de la serie",
+            "no_more_items": "No hay más resultados",
+            "load_more_items": "Cargar más resultados",
             "init_message": "Busca una serie escribiendo en la barra superior",
             "error_message": "Oops! Ha habido un error. \nComprueba tu conexión de internet",
             "empty_message": "No hay resultados para esta búsqueda",
@@ -39,6 +43,7 @@
             "dark_description": "Elige entre el tema claro y el oscuro",
             "export_title": "Exportar series favoritas",
             "export_description": "Exportar archivo json en Descargas",
+            "export_error": "Error al exportar archivo",
             "app_title": "Aplicación Android",
             "app_description": "Instale la app de TV Randshow de la Google Play",
             "web_title": "Aplicación web",
@@ -70,7 +75,8 @@
             "button_random": "OTRO EPISODIO AL AZAR",
             "button_fav": "FAVORITOS",
             "streaming_title": "Ver en streamings:",
-            "no_streaming_title": "No disponible en streamings"
+            "no_streaming_title": "No disponible en streamings",
+            "error_load": "Error al cargar resultado"
         },
         "modal": {
             "description": "Descripción",
@@ -82,7 +88,8 @@
             "duration": "Duración",
             "undefined": "Indefinido",
             "episode_season_metric": "en total",
-            "duration_metric": "min/episodio"
+            "duration_metric": "min/episodio",
+            "error_load": "Error al cargar detalles del episodio"
         },
         "delete_dialog": {
             "title": "Eliminar serie",

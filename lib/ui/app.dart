@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:theme_provider/theme_provider.dart';
+import 'package:tv_randshow/core/app/ioc/locator.dart';
 
 import 'package:tv_randshow/ui/router.dart' as router;
 import 'package:tv_randshow/ui/router.dart';
@@ -33,9 +35,11 @@ class App extends StatelessWidget {
       ],
       child: ThemeConsumer(
         child: Builder(
-          builder: (themeContext) => _MaterialApp(
-            localizationDelegate: localizationDelegate,
-            themeContext: themeContext,
+          builder: (themeContext) => ProviderScope(
+            child: _MaterialApp(
+              localizationDelegate: localizationDelegate,
+              themeContext: themeContext,
+            ),
           ),
         ),
       ),
@@ -60,6 +64,7 @@ class _MaterialApp extends StatelessWidget {
           : 'TV Randshow',
       theme: ThemeProvider.themeOf(themeContext).data,
       initialRoute: RoutePaths.splash,
+      scaffoldMessengerKey: locator.get<GlobalKey<ScaffoldMessengerState>>(),
       onGenerateRoute: router.Router.generateRoute,
       localizationsDelegates: <LocalizationsDelegate<dynamic>>[
         ...GlobalMaterialLocalizations.delegates,

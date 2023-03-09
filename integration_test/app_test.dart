@@ -15,7 +15,6 @@ Future<void> main() async {
 
     expect(find.byKey(const Key('app.fav.title')), findsOneWidget);
     expect(find.byKey(const Key('app.fav.empty_message')), findsOneWidget);
-    expect(find.byKey(const Key('app.fav.save')), findsOneWidget);
 
     expect(find.text('Favorites'), findsOneWidget);
     expect(find.text('Search'), findsOneWidget);
@@ -79,7 +78,9 @@ Future<void> main() async {
     // Navigate to favorites tab
     await tester.tap(find.byKey(const Key('app.fav.tab')));
     await tester.pumpAndSettle();
+    expect(find.byKey(const Key('2316')), findsOneWidget);
     expect(find.byKey(const Key('app.fav.button_random.2316')), findsOneWidget);
+    expect(find.byKey(const Key('app.fav.save')), findsOneWidget);
 
     // Get random episode
     await tester.tap(find.byKey(const Key('app.fav.button_random.2316')));

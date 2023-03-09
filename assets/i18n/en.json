@@ -1,6 +1,8 @@
 {
     "app": {
         "name": "TV Randshow",
+        "send_error": "Send email with the error",
+        "report_action": "Send error",
         "migration": {
             "title": "Migration",
             "subtitle": "The following is a small migration process to improve the application",
@@ -26,6 +28,8 @@
         "search": {
             "tab": "Search",
             "search_bar": "Write a TV show name",
+            "no_more_items": "No more items",
+            "load_more_items": "Load more items",
             "init_message": "Search a TV show in top bar",
             "error_message": "Oops! Have a error. \nTry verify your internet connection",
             "empty_message": "Don't have results for this search",
@@ -39,6 +43,7 @@
             "dark_description": "Choice between light and dark theme",
             "export_title": "Export favs tv shows",
             "export_description": "Export in json file to Downloads",
+            "export_error": "Error to export file",
             "app_title": "Android app",
             "app_description": "Get TV Randshow app in Google Play",
             "web_title": "Web app",
@@ -70,7 +75,8 @@
             "button_random": "ANOTHER RANDOM EPISODE",
             "button_fav": "FAVORITES",
             "streaming_title": "See on streamings:",
-            "no_streaming_title": "No available on streamings"
+            "no_streaming_title": "No available on streamings",
+            "error_load": "Error to load result"
         },
         "modal": {
             "description": "Description",
@@ -82,7 +88,8 @@
             "duration": "Duration",
             "undefined": "Undefined",
             "episode_season_metric": "in all",
-            "duration_metric": "min/episode"
+            "duration_metric": "min/episode",
+            "error_load": "Error to load episode details"
         },
         "delete_dialog": {
             "title": "Delete TV show",

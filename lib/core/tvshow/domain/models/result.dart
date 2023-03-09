@@ -24,6 +24,8 @@ class Result {
     this.originalName = '',
   });
 
+  bool get isOnAir => firstAirDate != null;
+
   factory Result.fromRawJson(String str) => _$ResultFromJson(json.decode(str));
   factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
 

@@ -1,6 +1,8 @@
 {
     "app": {
         "name": "TV Randshow",
+        "send_error": "Enviar email com o erro",
+        "report_action": "Enviar erro",
         "migration": {
             "title": "Migração",
             "subtitle": "Agora haverá um pequeno processo de migração para melhorar a aplicação",
@@ -26,6 +28,8 @@
         "search": {
             "tab": "Busca",
             "search_bar": "Escreva o nome da serie",
+            "no_more_items": "Não há mais resultados",
+            "load_more_items": "Mais resultados",
             "init_message": "Busque uma serie escrevendo na barra superior",
             "error_message": "Oops! Ocorreu um erro. \nVerifique a sua conexão com a internet",
             "empty_message": "Não há resultados para esta busca",
@@ -39,6 +43,7 @@
             "dark_description": "Escolhe entre o tema claro e o escuro",
             "export_title": "Exportar series favoritas",
             "export_description": "Exportar arquivo json em Downloads",
+            "export_error": "Erro ao exportar arquivo",
             "app_title": "App Android",
             "app_description": "Instale a app de TV Randshow da Google Play",
             "web_title": "Aplicação web",
@@ -70,7 +75,8 @@
             "button_random": "OUTRO EPISÓDIO ALEATÓRIO",
             "button_fav": "FAVORITOS",
             "streaming_title": "Ver em streamings:",
-            "no_streaming_title": "Não disponível em streamings"
+            "no_streaming_title": "Não disponível em streamings",
+            "error_load": "Erro ao mostrar resultado"
         },
         "modal": {
             "description": "Descrição",
@@ -82,7 +88,8 @@
             "duration": "Duração",
             "undefined": "Indefinido",
             "episode_season_metric": "em total",
-            "duration_metric": "min/episódio"
+            "duration_metric": "min/episódio",
+            "error_load": "Erro ao recuperar detalhes do episódio"
         },
         "delete_dialog": {
             "title": "Eliminar serie",

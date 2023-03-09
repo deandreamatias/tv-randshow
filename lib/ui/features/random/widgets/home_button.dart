@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/ui/features/init/tab_view.dart';
+import 'package:tv_randshow/ui/router.dart';
+import 'package:unicons/unicons.dart';
+
+class HomeButton extends StatelessWidget {
+  const HomeButton({super.key, required this.keyText});
+  final String keyText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: Key(keyText),
+      padding: const EdgeInsets.only(top: 16),
+      child: TextButton.icon(
+        label: Text(translate(keyText)),
+        icon: const Icon(UniconsLine.favorite),
+        onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
+          context,
+          RoutePaths.tab,
+          ModalRoute.withName(RoutePaths.tab),
+        ),
+      ),
+    );
+  }
+}
