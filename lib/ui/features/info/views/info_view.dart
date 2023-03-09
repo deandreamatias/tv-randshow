@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -11,11 +9,12 @@ import 'package:theme_provider/theme_provider.dart';
 import 'package:tv_randshow/ui/features/info/info_state.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
+import 'package:tv_randshow/ui/shared/constants.dart';
+import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
 import 'package:tv_randshow/ui/states/export_tvshow_state.dart';
 import 'package:tv_randshow/ui/widgets/error_icon.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class InfoView extends StatelessWidget {
   const InfoView({super.key});
@@ -87,14 +86,10 @@ class _SendFeedback extends StatelessWidget {
       ),
       leading: const Icon(UniconsLine.envelope),
       onTap: () async {
-        const String url =
-            'mailto:deandreamatias@gmail.com?subject=TV%20Randshow%20feedback';
-        try {
-          await launchUrl(Uri.parse(url));
-          log('Launched: $url');
-        } catch (e) {
-          throw 'Could not launch $url because $e';
-        }
+        Helpers.openMail(
+          Constants.feedbackEmail,
+          mailtoSubject: 'Tv Randshow - Feedback',
+        );
       },
     );
   }
@@ -116,13 +111,7 @@ class _OpenAndroidApp extends StatelessWidget {
       ),
       leading: const Icon(UniconsLine.external_link_alt),
       onTap: () async {
-        const String url = 'https://tvrandshow.com';
-        if (await canLaunchUrl(Uri.parse(url))) {
-          await launchUrl(Uri.parse(url));
-          log('Launched: $url');
-        } else {
-          throw 'Could not launch $url';
-        }
+        Helpers.openLink(Uri.parse(Constants.webAppUrl));
       },
     );
   }
@@ -144,14 +133,7 @@ class _OpenWebApp extends StatelessWidget {
       ),
       leading: const Icon(UniconsLine.google_play),
       onTap: () async {
-        const String url =
-            'https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow';
-        if (await canLaunchUrl(Uri.parse(url))) {
-          await launchUrl(Uri.parse(url));
-          log('Launched: $url');
-        } else {
-          throw 'Could not launch $url';
-        }
+        Helpers.openLink(Uri.parse(Constants.androidAppurl));
       },
     );
   }

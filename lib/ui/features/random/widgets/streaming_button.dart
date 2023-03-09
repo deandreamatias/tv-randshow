@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
 
 class StreamingButton extends StatelessWidget {
   final StreamingDetail streamingDetail;
@@ -11,13 +9,8 @@ class StreamingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () async {
-        if (await canLaunchUrl(Uri.parse(streamingDetail.link))) {
-          await launchUrl(Uri.parse(streamingDetail.link));
-          log('Launched: ${streamingDetail.link}');
-        } else {
-          throw 'Could not launch ${streamingDetail.link}';
-        }
+      onPressed: () {
+        Helpers.openLink(Uri.parse(streamingDetail.link));
       },
       child: Text(
         streamingDetail.streamingName.toUpperCase(),
