@@ -8,7 +8,7 @@ import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/search_tvshow_use_case.dart';
 import 'package:tv_randshow/ui/states/pagination_notifier.dart';
 
-final paginationProvider = AsyncNotifierProvider.family<
+final paginationProvider = AutoDisposeAsyncNotifierProvider.family<
     PaginationNotifier<Result, String>, List<Result>, String>(
   () {
     return PaginationNotifier(

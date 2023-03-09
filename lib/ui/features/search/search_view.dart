@@ -68,7 +68,7 @@ class _SearchField extends StatelessWidget {
               if (text.isNotEmpty) {
                 ref.watch(searchProvider.notifier).update(text);
                 ref
-                    .read(
+                    .watch(
                       paginationProvider(ref.watch(searchProvider)).notifier,
                     )
                     .firstPage();
@@ -79,7 +79,7 @@ class _SearchField extends StatelessWidget {
                 ref.watch(searchProvider.notifier).searchAutomatic(
                       text,
                       () => ref
-                          .read(
+                          .watch(
                             paginationProvider(ref.watch(searchProvider))
                                 .notifier,
                           )

@@ -6,7 +6,7 @@ import 'package:tv_randshow/core/tvshow/domain/use_cases/add_fav_tvshow_use_case
 import 'package:tv_randshow/core/tvshow/domain/use_cases/delete_fav_tvshow_use_case.dart';
 import 'package:tv_randshow/ui/states/tvshows_state.dart';
 
-class TvshowNotifier extends FamilyAsyncNotifier<bool, int> {
+class TvshowNotifier extends AutoDisposeFamilyAsyncNotifier<bool, int> {
   final AddFavTvshowUseCase _addFavTvshow = locator<AddFavTvshowUseCase>();
   final DeleteFavTvshowUseCase _deleteFavTvshow =
       locator<DeleteFavTvshowUseCase>();
@@ -43,6 +43,6 @@ class TvshowNotifier extends FamilyAsyncNotifier<bool, int> {
 }
 
 final tvshowOnFavsProvider =
-    AsyncNotifierProviderFamily<TvshowNotifier, bool, int>(
+    AutoDisposeAsyncNotifierProviderFamily<TvshowNotifier, bool, int>(
   TvshowNotifier.new,
 );

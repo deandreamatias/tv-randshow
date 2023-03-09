@@ -4,7 +4,8 @@ import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/get_tvshow_details_use_case.dart';
 
-class TvshowDetailsNotifier extends FamilyAsyncNotifier<TvshowDetails, int> {
+class TvshowDetailsNotifier
+    extends AutoDisposeFamilyAsyncNotifier<TvshowDetails, int> {
   final GetTvshowDetailsUseCase _getTvshowDetailsUseCase =
       locator<GetTvshowDetailsUseCase>();
 
@@ -14,7 +15,7 @@ class TvshowDetailsNotifier extends FamilyAsyncNotifier<TvshowDetails, int> {
   }
 }
 
-final tvshowDetailsProvider =
-    AsyncNotifierProviderFamily<TvshowDetailsNotifier, TvshowDetails, int>(
+final tvshowDetailsProvider = AutoDisposeAsyncNotifierProviderFamily<
+    TvshowDetailsNotifier, TvshowDetails, int>(
   TvshowDetailsNotifier.new,
 );

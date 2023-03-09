@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PaginationNotifier<T, K> extends FamilyAsyncNotifier<List<T>, K> {
+class PaginationNotifier<T, K>
+    extends AutoDisposeFamilyAsyncNotifier<List<T>, K> {
   PaginationNotifier({
     required this.getPageFunction,
     required this.sizePage,
