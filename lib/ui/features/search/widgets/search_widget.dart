@@ -4,64 +4,65 @@ import 'package:tv_randshow/ui/containers/tvshow_detail/tvshow_details_modal.dar
 import 'package:tv_randshow/ui/features/search/widgets/save_button.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
 
-class SearchWidget extends StatefulWidget {
+class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key, required this.result});
   final Result result;
 
   @override
-  SearchWidgetState createState() => SearchWidgetState();
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: result.isOnAir ? 1.0 : 0.38,
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        child: result.isOnAir
+            ? Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Positioned(
+                    right: 0.0,
+                    left: 0.0,
+                    top: 0.0,
+                    bottom: 24.0,
+                    child: _ResultImage(result: result),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SaveButton(id: result.id),
+                  ),
+                ],
+              )
+            : _ResultImage(result: result),
+      ),
+    );
+  }
 }
 
-class SearchWidgetState extends State<SearchWidget> {
-  late bool _enable;
-  @override
-  void initState() {
-    _enable = widget.result.firstAirDate != null;
-    super.initState();
-  }
+class _ResultImage extends StatelessWidget {
+  const _ResultImage({required this.result});
+
+  final Result result;
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: _enable ? 1.0 : 0.38,
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            Positioned(
-              right: 0.0,
-              left: 0.0,
-              top: 0.0,
-              bottom: 24.0,
-              child: GestureDetector(
-                onTap: () async {
-                  if (_enable) {
-                    showModalBottomSheet<void>(
-                      isScrollControlled: true,
-                      context: context,
-                      builder: (BuildContext builder) => TvshowDetailsModal(
-                        idTv: widget.result.id,
-                        showRandom: false,
-                      ),
-                    );
-                  }
-                },
-                child: ImageBuilder(
-                  name: widget.result.name,
-                  url: widget.result.posterPath,
-                  isModal: false,
+    return InkWell(
+      onTap: result.isOnAir
+          ? () async {
+              showModalBottomSheet<void>(
+                isScrollControlled: true,
+                context: context,
+                builder: (BuildContext builder) => TvshowDetailsModal(
+                  idTv: result.id,
+                  showRandom: false,
                 ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _enable ? SaveButton(id: widget.result.id) : Container(),
-            ),
-          ],
-        ),
+              );
+            }
+          : null,
+      child: ImageBuilder(
+        name: result.name,
+        url: result.posterPath,
+        isModal: false,
       ),
     );
   }

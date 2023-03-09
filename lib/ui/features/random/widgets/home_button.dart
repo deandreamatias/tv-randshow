@@ -5,18 +5,16 @@ import 'package:tv_randshow/ui/router.dart';
 import 'package:unicons/unicons.dart';
 
 class HomeButton extends StatelessWidget {
-  const HomeButton({super.key, required this.text});
-  final String text;
+  const HomeButton({super.key, required this.keyText});
+  final String keyText;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: Key(text),
-      padding: const EdgeInsets.only(top: 16.0),
+      key: Key(keyText),
+      padding: const EdgeInsets.only(top: 16),
       child: TextButton.icon(
-        label: Text(
-          translate(text),
-        ),
+        label: Text(translate(keyText)),
         icon: const Icon(UniconsLine.favorite),
         onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
           context,

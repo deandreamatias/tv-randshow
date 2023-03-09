@@ -74,9 +74,8 @@ class _FavoriteList extends StatelessWidget {
                         ),
                       ),
                     ),
-              error: (error, stackTrace) => Icon(
-                UniconsLine.exclamation_octagon,
-                color: Theme.of(context).colorScheme.error,
+              error: (error, stackTrace) => const ErrorIcon(
+                keyText: 'app.fav.error_message',
               ),
               loading: () => const Loader(key: Key('app.fav.loading')),
             );

@@ -1,6 +1,7 @@
 {
     "app": {
         "name": "TV Randshow",
+        "send_error": "Enviar email com o erro",
         "migration": {
             "title": "Migração",
             "subtitle": "Agora haverá um pequeno processo de migração para melhorar a aplicação",

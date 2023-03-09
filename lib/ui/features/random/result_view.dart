@@ -68,8 +68,9 @@ class ResultView extends StatelessWidget {
                                             .streamings,
                                       ),
                                       error: (error, stackTrace) =>
-                                          const ErrorMessage(
+                                          ErrorMessage(
                                         keyText: 'app.result.error_load',
+                                        error: error.toString(),
                                       ),
                                       loading: () => const Loader(),
                                     );
@@ -98,7 +99,7 @@ class ResultView extends StatelessWidget {
                   ),
                 ),
               ),
-              const HomeButton(text: 'app.result.button_fav'),
+              const HomeButton(keyText: 'app.result.button_fav'),
             ],
           ),
         ),

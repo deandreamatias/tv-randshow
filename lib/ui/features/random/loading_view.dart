@@ -51,8 +51,9 @@ class LoadingView extends StatelessWidget {
                                 animation: 'Loading',
                               );
                             },
-                            error: (error, stackTrace) => const ErrorMessage(
+                            error: (error, stackTrace) => ErrorMessage(
                               keyText: 'app.loading.general_error',
+                              error: error.toString(),
                             ),
                             loading: () => const FlareActor(
                               Assets.loading,
@@ -62,7 +63,7 @@ class LoadingView extends StatelessWidget {
                     },
                   ),
                 ),
-                const HomeButton(text: 'app.loading.button_fav')
+                const HomeButton(keyText: 'app.loading.button_fav')
               ],
             ),
           ),

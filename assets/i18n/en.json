@@ -1,6 +1,7 @@
 {
     "app": {
         "name": "TV Randshow",
+        "send_error": "Send email with the error",
         "migration": {
             "title": "Migration",
             "subtitle": "The following is a small migration process to improve the application",
