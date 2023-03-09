@@ -119,7 +119,7 @@ class _PaginationStatus extends ConsumerWidget {
       data: (items) {
         final noMoreItems =
             ref.read(paginationProvider(text).notifier).noMoreItems;
-        return noMoreItems
+        return noMoreItems && state.requireValue.isNotEmpty
             ? Text(
                 translate('app.search.no_more_items'),
                 style: Theme.of(context).textTheme.titleMedium,

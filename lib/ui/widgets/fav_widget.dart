@@ -44,7 +44,7 @@ class FavWidget extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: RandomButton(tvshowDetails: tvshowDetails),
+            child: RandomButton(idTv: tvshowDetails.id),
           ),
         ],
       ),

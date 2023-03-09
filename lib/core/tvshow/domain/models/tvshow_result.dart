@@ -1,17 +1,21 @@
-import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
+import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 
 class TvshowResult {
   TvshowResult({
-    required this.tvshowDetails,
+    required this.id,
+    this.name = '',
     required this.randomSeason,
     required this.randomEpisode,
     required this.episodeName,
-    required this.episodeDescription,
+    this.episodeDescription = '',
+    this.streamings = const [],
   });
 
-  TvshowDetails tvshowDetails;
-  int randomSeason;
-  int randomEpisode;
-  String episodeName;
-  String episodeDescription;
+  final int id;
+  final String name;
+  final int randomSeason;
+  final int randomEpisode;
+  final String episodeName;
+  final String episodeDescription;
+  final List<StreamingDetail> streamings;
 }

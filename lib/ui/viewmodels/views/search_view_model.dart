@@ -27,11 +27,14 @@ final paginationProvider = AsyncNotifierProvider.family<
   },
 );
 
-class SearchTvshowsNotifier extends Notifier<String> {
+class SearchTvshowsNotifier extends AutoDisposeNotifier<String> {
   Timer? _timer;
 
   @override
   String build() {
+    ref.onDispose(() {
+      if (_timer != null && (_timer?.isActive ?? false)) _timer!.cancel();
+    });
     return '';
   }
 
@@ -50,4 +53,6 @@ class SearchTvshowsNotifier extends Notifier<String> {
 }
 
 final searchProvider =
-    NotifierProvider<SearchTvshowsNotifier, String>(SearchTvshowsNotifier.new);
+    AutoDisposeNotifierProvider<SearchTvshowsNotifier, String>(
+  SearchTvshowsNotifier.new,
+);

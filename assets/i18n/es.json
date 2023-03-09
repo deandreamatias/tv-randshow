@@ -73,7 +73,8 @@
             "button_random": "OTRO EPISODIO AL AZAR",
             "button_fav": "FAVORITOS",
             "streaming_title": "Ver en streamings:",
-            "no_streaming_title": "No disponible en streamings"
+            "no_streaming_title": "No disponible en streamings",
+            "error_load": "Error al cargar resultado"
         },
         "modal": {
             "description": "Descripción",

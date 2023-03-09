@@ -73,7 +73,8 @@
             "button_random": "ANOTHER RANDOM EPISODE",
             "button_fav": "FAVORITES",
             "streaming_title": "See on streamings:",
-            "no_streaming_title": "No available on streamings"
+            "no_streaming_title": "No available on streamings",
+            "error_load": "Error to load result"
         },
         "modal": {
             "description": "Description",

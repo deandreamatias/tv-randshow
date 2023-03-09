@@ -1,82 +1,73 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:stacked/stacked.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
-import 'package:tv_randshow/ui/viewmodels/views/loading_view_model.dart';
-import 'package:tv_randshow/ui/views/result_view.dart';
+import 'package:tv_randshow/ui/states/random_tvshow_provider.dart';
+import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/home_button.dart';
 
 class LoadingView extends StatelessWidget {
-  const LoadingView({super.key, required this.tvshowDetails});
-  final TvshowDetails tvshowDetails;
+  const LoadingView({super.key, required this.idTv});
+  final int idTv;
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<LoadingViewModel>.nonReactive(
-      viewModelBuilder: () => LoadingViewModel(),
-      onViewModelReady: (LoadingViewModel model) async {
-        await model
-            .sortRandomEpisode(
-          tvshowDetails,
-          LocalizedApp.of(context)
-              .delegate
-              .currentLocale
-              .languageCode
-              .toString(),
-        )
-            .then((value) {
-          if (model.canNavigate) {
-            Navigator.pushNamedAndRemoveUntil<ResultView>(
-              context,
-              RoutePaths.result,
-              ModalRoute.withName(RoutePaths.tab),
-              arguments: model.tvshowResult,
-            );
-          }
-        });
-      },
-      builder: (BuildContext context, LoadingViewModel model, Widget? child) {
-        return Scaffold(
-          body: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: Text(
-                        translate('app.loading.title'),
-                        key: const Key('app.loading.title'),
-                        style: Theme.of(context).textTheme.titleLarge,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    Expanded(
-                      child: !model.isBusy && !model.canNavigate
-                          ? Center(
-                              child: Text(
-                                translate('app.loading.general_error'),
-                                style: Theme.of(context).textTheme.titleMedium,
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          : const FlareActor(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Text(
+                  translate('app.loading.title'),
+                  key: const Key('app.loading.title'),
+                  style: Theme.of(context).textTheme.titleLarge,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: Consumer(
+                    builder: (context, ref, child) {
+                      return ref.watch(randomTvshowProvider(idTv)).when(
+                            data: (data) {
+                              // TODO: navigate when load data
+                              if (!ref
+                                  .watch(randomTvshowProvider(idTv))
+                                  .isRefreshing) {
+                                Future.delayed(
+                                  const Duration(milliseconds: 100),
+                                  () => Navigator.of(context)
+                                      .pushReplacementNamed(
+                                    RoutePaths.result,
+                                    arguments: idTv,
+                                  ),
+                                );
+                              }
+                              return const FlareActor(
+                                Assets.loading,
+                                animation: 'Loading',
+                              );
+                            },
+                            error: (error, stackTrace) => const ErrorMessage(
+                              keyText: 'app.loading.general_error',
+                            ),
+                            loading: () => const FlareActor(
                               Assets.loading,
                               animation: 'Loading',
                             ),
-                    ),
-                    const HomeButton(text: 'app.loading.button_fav')
-                  ],
+                          );
+                    },
+                  ),
                 ),
-              ),
+                const HomeButton(text: 'app.loading.button_fav')
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

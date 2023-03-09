@@ -12,7 +12,7 @@ class TvshowNotifier extends FamilyAsyncNotifier<bool, int> {
       locator<DeleteFavTvshowUseCase>();
   @override
   FutureOr<bool> build(int arg) {
-    return ref.watch(favTvshowsProvider.notifier).tvshowInFav(arg) != null;
+    return ref.watch(favTvshowsProvider.notifier).hasFav(arg);
   }
 
   Future<void> addToFavs() async {

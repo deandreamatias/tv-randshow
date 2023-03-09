@@ -45,9 +45,9 @@ class TvshowDetailsModal extends StatelessWidget {
         Consumer(
           builder: (context, ref, child) {
             final tvshowDetails =
-                ref.watch(favTvshowsProvider.notifier).tvshowInFav(idTv);
-            return tvshowDetails != null && showRandom
-                ? RandomButton(tvshowDetails: tvshowDetails)
+                ref.watch(favTvshowsProvider.notifier).hasFav(idTv);
+            return tvshowDetails && showRandom
+                ? RandomButton(idTv: idTv)
                 : SaveButton(id: idTv);
           },
         )

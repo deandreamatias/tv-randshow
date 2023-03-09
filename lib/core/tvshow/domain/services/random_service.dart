@@ -1,4 +1,3 @@
-import 'dart:developer' as developer;
 import 'dart:math';
 
 import 'package:injectable/injectable.dart';
@@ -11,7 +10,6 @@ class RandomService {
 
     final Random random = Random();
     final int randomNumber = random.nextInt(max - min) + min;
-    developer.log('Random nº: $randomNumber');
     return randomNumber;
   }
 }

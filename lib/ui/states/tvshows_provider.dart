@@ -36,10 +36,14 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
     );
   }
 
-  TvshowDetails? tvshowInFav(int idTv) => state.hasValue &&
-          state.requireValue.isNotEmpty
-      ? state.requireValue.singleWhereOrNull((element) => element.id == idTv)
-      : null;
+  TvshowDetails getFav(int id) =>
+      state.requireValue.singleWhere((element) => element.id == id);
+
+  bool hasFav(int id) =>
+      state.hasValue &&
+      state.requireValue.isNotEmpty &&
+      state.requireValue.singleWhereOrNull((element) => element.id == id) !=
+          null;
 
   Future<TvshowDetails?> verifyAppLink() async {
     final IAppService appService = locator<IAppService>();

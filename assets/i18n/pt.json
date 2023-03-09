@@ -73,7 +73,8 @@
             "button_random": "OUTRO EPISÓDIO ALEATÓRIO",
             "button_fav": "FAVORITOS",
             "streaming_title": "Ver em streamings:",
-            "no_streaming_title": "Não disponível em streamings"
+            "no_streaming_title": "Não disponível em streamings",
+            "error_load": "Erro ao mostrar resultado"
         },
         "modal": {
             "description": "Descrição",
