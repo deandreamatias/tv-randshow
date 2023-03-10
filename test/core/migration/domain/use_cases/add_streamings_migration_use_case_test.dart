@@ -17,7 +17,8 @@ import 'add_streamings_migration_use_case_test.mocks.dart';
 void main() {
   final faker = Faker();
   final randomInt100 = faker.randomGenerator.integer(100);
-  final randomYear = int.parse(faker.date.year(minYear: DateTime.now().year));
+  final randomYear = faker.randomGenerator
+      .integer(DateTime.now().year + 100, min: DateTime.now().year);
   List<StreamingDetail> streamings() => List.generate(
         faker.randomGenerator.integer(20),
         (index) => StreamingDetail(

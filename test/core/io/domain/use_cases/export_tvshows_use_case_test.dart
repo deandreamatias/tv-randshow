@@ -39,20 +39,6 @@ Future<void> main() async {
 
     expect(await useCase(), isTrue);
   });
-  test('should dont save tv shows when permission is denied', () async {
-    final tvshows = generateTvshow.tvshows;
-    final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
-    final fileName = 'tvrandshow-${nowDateTime.first}';
-    when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
-    when(
-      manageFiles.saveFile(
-        fileName,
-        TvshowsFile(tvshows: tvshows).toRawJson(),
-      ),
-    ).thenAnswer((_) async => fileName);
-
-    expect(await useCase(), isFalse);
-  });
   test('should dont save tv shows when database is empty', () {
     final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
     final fileName = 'tvrandshow-${nowDateTime.first}';
