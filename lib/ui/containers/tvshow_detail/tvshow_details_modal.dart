@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/ui/containers/tvshow_detail/tvshow_details_state.dart';
 import 'package:tv_randshow/ui/features/home/widgets/random_button.dart';
 import 'package:tv_randshow/ui/features/search/widgets/save_button.dart';
@@ -67,88 +68,96 @@ class _TvshowInfoDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final state = ref.watch(tvshowDetailsProvider(idTv));
-
-        return state.when(
-          data: (model) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Expanded(
-                flex: 4,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: Styles.small),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(
-                        child: ImageBuilder(
-                          url: model.posterPath,
-                          name: model.name,
-                          isModal: true,
+        return ref.watch(tvshowDetailsProvider(idTv)).when(
+              data: (model) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  _TvshowHeader(model: model),
+                  Expanded(
+                    flex: 5,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        InfoBox(
+                          typeInfo: InfoTypeBox.seasons,
+                          value: model.numberOfSeasons,
                         ),
-                      ),
-                      const SizedBox(width: Styles.small),
-                      Expanded(
-                        // Allow value.
-                        // ignore: no-magic-number
-                        flex: 3,
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            model.name,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            // Allow value.
-                            // ignore: no-magic-number
-                            maxLines: 3,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
+                        InfoBox(
+                          typeInfo: InfoTypeBox.episodes,
+                          value: model.numberOfEpisodes,
                         ),
-                      ),
-                    ],
+                        InfoBox(
+                          typeInfo: InfoTypeBox.duration,
+                          value: model.episodeRunTime.isNotEmpty
+                              ? model.episodeRunTime.first
+                              : 0,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-              Expanded(
-                flex: 5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    InfoBox(
-                      typeInfo: InfoTypeBox.seasons,
-                      value: model.numberOfSeasons,
+                  TextTitleMedium(translate('app.modal.overview')),
+                  const SizedBox(height: Styles.small),
+                  Expanded(
+                    flex: 6,
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Text(model.overview),
                     ),
-                    InfoBox(
-                      typeInfo: InfoTypeBox.episodes,
-                      value: model.numberOfEpisodes,
-                    ),
-                    InfoBox(
-                      typeInfo: InfoTypeBox.duration,
-                      value: model.episodeRunTime.isNotEmpty
-                          ? model.episodeRunTime.first
-                          : 0,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              TextTitleMedium(translate('app.modal.overview')),
-              const SizedBox(height: Styles.small),
-              Expanded(
-                flex: 6,
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Text(model.overview),
-                ),
+              error: (error, stackTrace) => ErrorMessage(
+                keyText: 'app.modal.error_load',
+                error: error.toString(),
               ),
-            ],
-          ),
-          error: (error, stackTrace) => ErrorMessage(
-            keyText: 'app.modal.error_load',
-            error: error.toString(),
-          ),
-          loading: () => const Loader(),
-        );
+              loading: () => const Loader(),
+            );
       },
+    );
+  }
+}
+
+class _TvshowHeader extends StatelessWidget {
+  final TvshowDetails model;
+  const _TvshowHeader({required this.model});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 4,
+      child: Padding(
+        padding: const EdgeInsets.only(top: Styles.small),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              child: ImageBuilder(
+                url: model.posterPath,
+                name: model.name,
+                isModal: true,
+              ),
+            ),
+            const SizedBox(width: Styles.small),
+            Expanded(
+              // Allow value.
+              // ignore: no-magic-number
+              flex: 3,
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  model.name,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                  // Allow value.
+                  // ignore: no-magic-number
+                  maxLines: 3,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
