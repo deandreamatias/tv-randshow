@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class TvshowActions {
+  String tvshow;
   TvshowActions({required this.tvshow});
   factory TvshowActions.fromMap(Map<String, dynamic> map) {
     return TvshowActions(
@@ -10,9 +11,7 @@ class TvshowActions {
   factory TvshowActions.fromJson(String source) =>
       TvshowActions.fromMap(json.decode(source));
 
-  String tvshow;
-
-  Map<String, dynamic> toMap() => <String, dynamic>{'tvshow': tvshow};
+  Map<String, dynamic> toMap() => {'tvshow': tvshow};
 
   String toJson() => json.encode(toMap());
 }

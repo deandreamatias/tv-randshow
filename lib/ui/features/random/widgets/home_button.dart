@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/init/tab_view.dart';
 import 'package:tv_randshow/ui/router.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:unicons/unicons.dart';
 
 class HomeButton extends StatelessWidget {
@@ -12,7 +13,7 @@ class HomeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       key: Key(keyText),
-      padding: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.only(top: Styles.standard),
       child: TextButton.icon(
         label: Text(translate(keyText)),
         icon: const Icon(UniconsLine.favorite),

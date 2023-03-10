@@ -1,5 +1,6 @@
+// ignore_for_file: avoid-ignoring-return-values, no-magic-number, no-equal-arguments, avoid-top-level-members-in-tests
+
 import 'package:faker/faker.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/season.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 class GenerateTvshow {
@@ -16,10 +17,6 @@ class GenerateTvshow {
         posterPath: _faker.internet.httpsUrl(),
         rowId:
             _faker.randomGenerator.integer(_faker.randomGenerator.integer(999)),
-        seasons: List.generate(
-          _faker.randomGenerator.integer(50),
-          (index) => Season(id: _faker.randomGenerator.integer(9999)),
-        ),
       );
 
   List<TvshowDetails> get tvshows =>

@@ -16,13 +16,11 @@ class RandomButton extends StatelessWidget {
         translate('app.fav.button_random'),
         key: Key('app.fav.button_random.$idTv'),
       ),
-      onPressed: () async {
-        Navigator.pushNamed<LoadingView>(
-          context,
-          RoutePaths.loading,
-          arguments: idTv,
-        );
-      },
+      onPressed: () => Navigator.pushNamed<LoadingView>(
+        context,
+        RoutePaths.loading,
+        arguments: idTv,
+      ),
     );
   }
 }

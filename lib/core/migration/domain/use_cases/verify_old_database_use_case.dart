@@ -11,6 +11,7 @@ class VerifyOldDatabaseUseCase {
   Future<bool> call() async {
     final List<TvshowDetails> tvshows =
         await _secondaryDatabaseService.getTvshows();
+
     return tvshows.isEmpty;
   }
 }

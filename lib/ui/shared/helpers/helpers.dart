@@ -8,20 +8,19 @@ class Helpers {
     return helpers.getLocale();
   }
 
-  /// Open link with external browser
-  static Future<void> openLink(
-    Uri url, {
-    String mailtoSubject = '',
-    String mailtoBody = '',
-  }) async {
+  /// Open link with external browser.
+  static Future<void> openLink(Uri url) async {
     if (await canLaunchUrl(url)) {
+      // Do not use this return value.
+      // ignore: avoid-ignoring-return-values
       await launchUrl(url);
+
       return;
     }
     throw 'Could not launch $url';
   }
 
-  /// Open mail client to send email
+  /// Open mail client to send email.
   static Future<void> openMail(
     String email, {
     String mailtoSubject = '',

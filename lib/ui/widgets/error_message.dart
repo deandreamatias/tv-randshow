@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/shared/constants.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:unicons/unicons.dart';
 
 class ErrorMessage extends StatelessWidget {
@@ -16,18 +17,19 @@ class ErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final errorText = '${translate(keyText)}\n$error';
+
     return Center(
       child: Column(
         children: [
           const Icon(UniconsLine.exclamation_octagon),
-          const SizedBox(height: 16),
+          const SizedBox(height: Styles.standard),
           Text(
             errorText,
             key: Key(keyText),
             style: Theme.of(context).textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: Styles.standard),
           TextButton.icon(
             onPressed: () => Helpers.openMail(
               Constants.feedbackEmail,
@@ -35,8 +37,10 @@ class ErrorMessage extends StatelessWidget {
               mailtoBody: errorText,
             ),
             icon: const Icon(UniconsLine.fast_mail),
-            label: Text(translate('app.send_error')),
-          )
+            label: Text(
+              translate('app.send_error'),
+            ),
+          ),
         ],
       ),
     );

@@ -1,24 +1,40 @@
+// ignore_for_file: no-equal-arguments
 import 'package:flutter/material.dart';
 
-class CustomTheme {
-  static const Color _primary = Color(0xFFE40505);
-  static const Color _darkGrey = Color(0xFF121212);
+class Styles {
+  /// Size 4.
+  static const double xsmall = 4;
+
+  /// Size 8.
+  static const double small = 8;
+
+  /// Size 12.
+  static const double medium = 12;
+
+  /// Size 16.
+  static const double standard = 16;
+
+  /// Size 24.
+  static const double large = 24;
+
+  /// Size 32.
+  static const double xlarge = 32;
 
   final List<ThemeData> availableThemes = <ThemeData>[
-    // Light theme
+    // Light theme.
     ThemeData(
       fontFamily: 'Nunito',
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(seedColor: _primary),
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
         ),
         contentPadding: EdgeInsets.zero,
       ),
-      dialogTheme: DialogTheme(
+      dialogTheme: const DialogTheme(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
         ),
       ),
       bottomSheetTheme: const BottomSheetThemeData(
@@ -28,7 +44,7 @@ class CustomTheme {
         modalElevation: 0.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.vertical(
-            top: Radius.circular(16.0),
+            top: Radius.circular(Styles.standard),
           ),
         ),
       ),
@@ -36,7 +52,7 @@ class CustomTheme {
         style: ButtonStyle(
           shape: MaterialStateProperty.all<OutlinedBorder>(
             const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
             ),
           ),
         ),
@@ -44,7 +60,7 @@ class CustomTheme {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            const EdgeInsets.all(16.0),
+            const EdgeInsets.all(Styles.standard),
           ),
         ),
       ),
@@ -52,13 +68,13 @@ class CustomTheme {
         style: ButtonStyle(
           shape: MaterialStateProperty.all<OutlinedBorder>(
             const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
             ),
           ),
         ),
       ),
     ),
-    // Dark theme
+    // Dark theme.
     ThemeData(
       fontFamily: 'Nunito',
       useMaterial3: true,
@@ -69,13 +85,13 @@ class CustomTheme {
       ),
       inputDecorationTheme: const InputDecorationTheme(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
         ),
         contentPadding: EdgeInsets.zero,
       ),
-      dialogTheme: DialogTheme(
+      dialogTheme: const DialogTheme(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
         ),
       ),
       bottomSheetTheme: const BottomSheetThemeData(
@@ -85,7 +101,7 @@ class CustomTheme {
         modalElevation: 0.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusDirectional.vertical(
-            top: Radius.circular(16.0),
+            top: Radius.circular(Styles.standard),
           ),
         ),
       ),
@@ -93,7 +109,7 @@ class CustomTheme {
         style: ButtonStyle(
           shape: MaterialStateProperty.all<OutlinedBorder>(
             const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
             ),
           ),
         ),
@@ -101,7 +117,7 @@ class CustomTheme {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            const EdgeInsets.all(16.0),
+            const EdgeInsets.all(Styles.standard),
           ),
         ),
       ),
@@ -109,11 +125,14 @@ class CustomTheme {
         style: ButtonStyle(
           shape: MaterialStateProperty.all<OutlinedBorder>(
             const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
             ),
           ),
         ),
       ),
     ),
   ];
+
+  static const Color _primary = Color(0xFFE40505);
+  static const Color _darkGrey = Color(0xFF121212);
 }

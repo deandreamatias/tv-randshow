@@ -9,27 +9,26 @@ import 'package:tv_randshow/ui/states/tvshows_state.dart';
 
 class RandomTvshowNotifier
     extends AutoDisposeFamilyAsyncNotifier<TvshowResult, int> {
+  late final TvshowDetails tvshow =
+      ref.watch(favTvshowsProvider.notifier).getFav(arg);
+
   final GetRandomEpisodeUseCase _getRandomEpisodeUseCase =
       locator<GetRandomEpisodeUseCase>();
 
-  late TvshowDetails tvshow;
-
   @override
   FutureOr<TvshowResult> build(int arg) {
-    tvshow = ref.watch(favTvshowsProvider.notifier).getFav(arg);
     return _getRandomEpisode();
   }
 
   Future<TvshowResult> _getRandomEpisode() async {
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
-      () async {
-        return _getRandomEpisodeUseCase(
-          idTv: arg,
-          numberOfSeasons: tvshow.numberOfSeasons,
-        );
-      },
+      () => _getRandomEpisodeUseCase(
+        idTv: arg,
+        numberOfSeasons: tvshow.numberOfSeasons,
+      ),
     );
+
     return state.requireValue;
   }
 }

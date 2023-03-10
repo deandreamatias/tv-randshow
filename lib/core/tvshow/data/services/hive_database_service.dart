@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-non-null-assertion
+
 import 'dart:developer';
 import 'dart:io';
 
@@ -11,6 +13,9 @@ import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
+const int tvshowDetailsHiveTypeId = 1;
+const int streamingDetailHiveTypeId = 2;
+
 @LazySingleton(as: ILocalRepository)
 class HiveDatabaseService implements ILocalRepository {
   Box<TvshowDetails>? tvshowBox;
@@ -19,49 +24,6 @@ class HiveDatabaseService implements ILocalRepository {
       FlavorConfig.isDevelopment() ? 'tvshowfavdev' : 'tvshowfav';
   final streamingsBoxName =
       FlavorConfig.isDevelopment() ? 'streamingsdev' : 'streamings';
-
-  Future<void> _init() async {
-    if (tvshowBox != null && streamingsBox != null) {
-      return;
-    }
-    if (kIsWeb) {
-      _registerAdapters();
-    } else {
-      Directory? documentsDirectory;
-      try {
-        if (Platform.isIOS) {
-          documentsDirectory = await getApplicationDocumentsDirectory();
-        }
-        if (Platform.isAndroid) {
-          documentsDirectory = await getExternalStorageDirectory();
-        }
-      } catch (e) {
-        log('Can\'t open directory', error: e);
-      }
-      Hive.init(documentsDirectory?.path ?? '');
-      _registerAdapters();
-    }
-  }
-
-  void _registerAdapters() {
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(TvshowDetailsAdapter());
-    }
-    if (!Hive.isAdapterRegistered(2)) {
-      Hive.registerAdapter(StreamingDetailHiveAdapter());
-    }
-  }
-
-  Future<void> _loadBoxes() async {
-    if (!Hive.isBoxOpen(tvshowBoxName)) {
-      await Hive.openBox<TvshowDetails>(tvshowBoxName);
-    }
-    if (!Hive.isBoxOpen(streamingsBoxName)) {
-      await Hive.openBox<StreamingDetailHive>(streamingsBoxName);
-    }
-    tvshowBox ??= Hive.box<TvshowDetails>(tvshowBoxName);
-    streamingsBox ??= Hive.box<StreamingDetailHive>(streamingsBoxName);
-  }
 
   @override
   Future<bool> deleteTvshow(int id) async {
@@ -78,9 +40,11 @@ class HiveDatabaseService implements ILocalRepository {
         }
       }
       log('Tvshow deleted: $id');
+
       return true;
     } catch (e) {
       log('Error to delete tvshow: $id', error: e);
+
       return false;
     }
   }
@@ -113,9 +77,11 @@ class HiveDatabaseService implements ILocalRepository {
         }
         list.add(tvshow);
       }
+
       return list;
     } catch (e) {
       log('Error to get tv shows: $e', error: e);
+
       return [];
     }
   }
@@ -125,16 +91,11 @@ class HiveDatabaseService implements ILocalRepository {
     await _init();
     await _loadBoxes();
     if (!tvshowBox!.containsKey(tvshowDetails.id)) {
-      try {
-        await tvshowBox!.put(tvshowDetails.id, tvshowDetails);
+      await tvshowBox!.put(tvshowDetails.id, tvshowDetails);
 
-        log('Tvshow ${tvshowDetails.id} saved');
+      log('Tvshow ${tvshowDetails.id} saved');
 
-        await saveStreamings(tvshowDetails);
-      } catch (e) {
-        log('Error to save tvshow ${tvshowDetails.id}', error: e);
-        throw Exception('Can not save tvshow ${tvshowDetails.id}');
-      }
+      await saveStreamings(tvshowDetails);
     }
   }
 
@@ -142,25 +103,66 @@ class HiveDatabaseService implements ILocalRepository {
   Future<void> saveStreamings(TvshowDetails tvshowDetails) async {
     final streamings = tvshowDetails.streamings;
     final tvshowId = tvshowDetails.id;
-    try {
-      if (streamings.isNotEmpty) {
-        for (int i = 0; i < streamings.length; i++) {
-          final streamingHive = StreamingDetailHive(
-            id: '${tvshowId}_$i', // Custom unique id
-            streamingName: streamings[i].streamingName,
-            country: streamings[i].country,
-            link: streamings[i].link,
-            added: streamings[i].added,
-            leaving: streamings[i].leaving,
-            tvshowId: tvshowId,
-          );
 
-          await streamingsBox!.put(streamingHive.id, streamingHive);
-        }
+    if (streamings.isNotEmpty) {
+      for (int index = 0; index < streamings.length; index++) {
+        final streamingHive = StreamingDetailHive(
+          id: '${tvshowId}_$index', // Custom unique id.
+          streamingName: streamings[index].streamingName,
+          country: streamings[index].country,
+          link: streamings[index].link,
+          added: streamings[index].added,
+          leaving: streamings[index].leaving,
+          tvshowId: tvshowId,
+        );
+
+        await streamingsBox!.put(streamingHive.id, streamingHive);
       }
-      log('Streamings saved on tvshow $tvshowId: ${streamings.length} streamings');
-    } catch (e) {
-      throw Exception('Error to save streamings on tv show: $tvshowId');
     }
+    log('Streamings saved on tvshow $tvshowId: ${streamings.length} streamings');
+  }
+
+  Future<void> _init() async {
+    if (tvshowBox != null && streamingsBox != null) {
+      return;
+    }
+    if (kIsWeb) {
+      _registerAdapters();
+    } else {
+      Directory? documentsDirectory;
+      try {
+        if (Platform.isIOS) {
+          documentsDirectory = await getApplicationDocumentsDirectory();
+        }
+        if (Platform.isAndroid) {
+          documentsDirectory = await getExternalStorageDirectory();
+        }
+      } catch (e) {
+        log('Can\'t open directory', error: e);
+      }
+      Hive.init(documentsDirectory?.path ?? '');
+      _registerAdapters();
+    }
+  }
+
+  void _registerAdapters() {
+    if (!Hive.isAdapterRegistered(tvshowDetailsHiveTypeId)) {
+      Hive.registerAdapter(TvshowDetailsAdapter());
+    }
+    if (!Hive.isAdapterRegistered(streamingDetailHiveTypeId)) {
+      Hive.registerAdapter(StreamingDetailHiveAdapter());
+    }
+  }
+
+  Future<void> _loadBoxes() async {
+    if (!Hive.isBoxOpen(tvshowBoxName)) {
+      tvshowBox = await Hive.openBox<TvshowDetails>(tvshowBoxName);
+    }
+    if (!Hive.isBoxOpen(streamingsBoxName)) {
+      streamingsBox =
+          await Hive.openBox<StreamingDetailHive>(streamingsBoxName);
+    }
+    tvshowBox ??= Hive.box<TvshowDetails>(tvshowBoxName);
+    streamingsBox ??= Hive.box<StreamingDetailHive>(streamingsBoxName);
   }
 }

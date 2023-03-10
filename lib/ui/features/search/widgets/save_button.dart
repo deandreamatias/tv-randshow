@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/tvshow_state.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 
 class SaveButton extends StatelessWidget {
-  const SaveButton({super.key, required this.id});
-  final int id;
+  const SaveButton({super.key, required this.tvIdd});
+  final int tvIdd;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final watcher = ref.watch(tvshowOnFavsProvider(id));
+        final watcher = ref.watch(tvshowOnFavsProvider(tvIdd));
+
+        const loader = SizedBox.square(
+          dimension: Styles.medium,
+          child: Loader(),
+        );
+
         return IgnorePointer(
           ignoring: watcher.isLoading,
           child: AnimatedSwitcher(
@@ -23,26 +30,27 @@ class SaveButton extends StatelessWidget {
                     key: const ValueKey<String>('delete'),
                     icon: const Icon(UniconsLine.times),
                     label: watcher.isLoading
-                        ? const SizedBox.square(dimension: 12, child: Loader())
+                        ? loader
                         : Text(
                             translate('app.search.button_delete'),
-                            key: Key('app.search.button_delete.$id'),
+                            key: Key('app.search.button_delete.$tvIdd'),
                           ),
                     onPressed: () => ref
-                        .read(tvshowOnFavsProvider(id).notifier)
+                        .read(tvshowOnFavsProvider(tvIdd).notifier)
                         .deleteFromFavs(),
                   )
                 : ElevatedButton.icon(
                     key: const ValueKey<String>('add'),
                     icon: const Icon(UniconsLine.favorite),
                     label: watcher.isLoading
-                        ? const SizedBox.square(dimension: 12, child: Loader())
+                        ? loader
                         : Text(
                             translate('app.search.button_fav'),
-                            key: Key('app.search.button_fav.$id'),
+                            key: Key('app.search.button_fav.$tvIdd'),
                           ),
-                    onPressed: () =>
-                        ref.read(tvshowOnFavsProvider(id).notifier).addToFavs(),
+                    onPressed: () => ref
+                        .read(tvshowOnFavsProvider(tvIdd).notifier)
+                        .addToFavs(),
                   ),
           ),
         );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/home/widgets/fav_widget.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/export_tvshow_state.dart';
 import 'package:tv_randshow/ui/states/tvshows_state.dart';
 import 'package:tv_randshow/ui/widgets/error_icon.dart';
@@ -16,7 +17,7 @@ class HomeView extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(Styles.standard),
           child: Row(
             children: [
               Expanded(
@@ -51,11 +52,11 @@ class _FavoriteList extends StatelessWidget {
                           const SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 180.0,
                         childAspectRatio: 0.8,
-                        crossAxisSpacing: 16.0,
-                        mainAxisSpacing: 16.0,
+                        crossAxisSpacing: Styles.standard,
+                        mainAxisSpacing: Styles.standard,
                       ),
                       physics: const BouncingScrollPhysics(),
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(Styles.standard),
                       itemCount: tvshows.length,
                       itemBuilder: (BuildContext context, int index) =>
                           FavWidget(
@@ -65,7 +66,7 @@ class _FavoriteList extends StatelessWidget {
                     )
                   : Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(Styles.standard),
                         child: Text(
                           translate('app.fav.empty_message'),
                           key: const Key('app.fav.empty_message'),
@@ -92,6 +93,7 @@ class _ExportTvshowsButton extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final tvshows = ref.watch(favTvshowsProvider);
+
         return tvshows.hasValue && tvshows.requireValue.isNotEmpty
             ? ref.watch(exportTvshowsProvider).when(
                   data: (success) => success
@@ -102,13 +104,11 @@ class _ExportTvshowsButton extends StatelessWidget {
                             UniconsLine.file_export,
                             color: Theme.of(context).colorScheme.primary,
                           ),
-                          onPressed: () async {
+                          onPressed: () {
                             ref.read(exportTvshowsProvider.notifier).export();
                           },
                         )
-                      : const ErrorIcon(
-                          keyText: 'app.info.export_error',
-                        ),
+                      : const ErrorIcon(keyText: 'app.info.export_error'),
                   error: (error, stackTrace) => const ErrorIcon(
                     keyText: 'app.info.export_error',
                   ),

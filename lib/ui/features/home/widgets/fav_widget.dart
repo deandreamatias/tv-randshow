@@ -3,6 +3,7 @@ import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/ui/containers/tvshow_detail/tvshow_details_modal.dart';
 import 'package:tv_randshow/ui/features/home/widgets/delete_button.dart';
 import 'package:tv_randshow/ui/features/home/widgets/random_button.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
 
 class FavWidget extends StatelessWidget {
@@ -13,16 +14,18 @@ class FavWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
       ),
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
-            right: 8.0,
-            left: 8.0,
-            top: 8.0,
-            bottom: 24.0,
+            right: Styles.small,
+            left: Styles.small,
+            // Ignore repetead.
+            // ignore: no-equal-arguments
+            top: Styles.small,
+            bottom: Styles.large,
             child: GestureDetector(
               onTap: () => showModalBottomSheet<void>(
                 isScrollControlled: true,
@@ -42,7 +45,7 @@ class FavWidget extends StatelessWidget {
           ),
           Align(
             alignment: Alignment.topRight,
-            child: DeleteButton(id: tvshowDetails.id),
+            child: DeleteButton(idTv: tvshowDetails.id),
           ),
           Align(
             alignment: Alignment.bottomCenter,

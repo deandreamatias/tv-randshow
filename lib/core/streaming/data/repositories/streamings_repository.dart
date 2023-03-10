@@ -19,6 +19,7 @@ class StreamingsRepository implements IStreamingsRepository {
       tmdbIdOutput: 'tv/${streamingSearch.tmdbId}',
     );
     final response = await _httpService.get(path, data.toJson());
+
     return StreamingOutput.fromJson(response);
   }
 }

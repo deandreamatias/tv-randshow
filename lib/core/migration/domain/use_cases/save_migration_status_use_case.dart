@@ -9,7 +9,7 @@ class SaveMigrationStatusUseCase {
 
   SaveMigrationStatusUseCase(this._migrationRepository);
 
-  Future<bool> call(MigrationStatus status) async {
+  Future<void> call(MigrationStatus status) {
     return _migrationRepository.saveStatus(status);
   }
 }

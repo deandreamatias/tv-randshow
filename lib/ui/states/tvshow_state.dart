@@ -22,6 +22,7 @@ class TvshowNotifier extends AutoDisposeFamilyAsyncNotifier<bool, int> {
         () async {
           final tvshowDetails = await _addFavTvshow(idTv: arg);
           await ref.read(favTvshowsProvider.notifier).addFav(tvshowDetails);
+
           return true;
         },
       );
@@ -35,6 +36,7 @@ class TvshowNotifier extends AutoDisposeFamilyAsyncNotifier<bool, int> {
         () async {
           await _deleteFavTvshow(arg);
           await ref.read(favTvshowsProvider.notifier).deleteFav(arg);
+
           return false;
         },
       );

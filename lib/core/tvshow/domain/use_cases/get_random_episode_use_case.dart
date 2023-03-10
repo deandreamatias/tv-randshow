@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_online_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/episode.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
@@ -17,9 +16,8 @@ class GetRandomEpisodeUseCase {
   Future<TvshowResult> call({
     required int idTv,
     required int numberOfSeasons,
-    List<StreamingDetail> streamings = const [],
   }) async {
-    // When has only one season, do not need get random season
+    // When has only one season, do not need get random season.
     final int randomSeason = numberOfSeasons == 1
         ? 1
         : _randomService.getNumber(max: numberOfSeasons, min: 1);
@@ -40,10 +38,10 @@ class GetRandomEpisodeUseCase {
       episode.episodeNumber > 0,
       'Random episode number should be bigger than 0',
     );
+
     return TvshowResult(
       id: episode.id,
-      name: episode.name,
-      streamings: streamings,
+      name: seasonsDetails.name,
       randomSeason: episode.seasonNumber,
       randomEpisode: episode.episodeNumber,
       episodeName: episode.name,

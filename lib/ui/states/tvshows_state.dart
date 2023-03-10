@@ -31,6 +31,7 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
       () async {
         final tempState = state.requireValue;
         tempState.removeWhere((element) => element.id == id);
+
         return tempState;
       },
     );
@@ -51,6 +52,7 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
     if (state.hasValue && state.requireValue.isNotEmpty && state.isLoading) {
       return null;
     }
+
     return state.requireValue.singleWhere(
       (TvshowDetails tvshowDetails) =>
           tvshowDetails.name.toLowerCase().contains(tvshowActions.tvshow),

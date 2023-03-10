@@ -19,6 +19,7 @@ Future<void> main() async {
   PlatformDispatcher.instance.onError = (error, stack) {
     showSnackBar('Something went wrong', details: error.toString());
     debugPrintStack(label: error.toString(), stackTrace: stack);
+
     return true;
   };
 

@@ -4,15 +4,15 @@ part 'tmdb_query_input.g.dart';
 
 @JsonSerializable(includeIfNull: false, createFactory: false)
 class TmdbQueryInput {
+  String language;
+  String? query;
+  int? page;
+
   TmdbQueryInput({
     required this.language,
     this.query,
     this.page,
   });
-
-  String language;
-  String? query;
-  int? page;
 
   Map<String, dynamic> toJson() => _$TmdbQueryInputToJson(this);
 }

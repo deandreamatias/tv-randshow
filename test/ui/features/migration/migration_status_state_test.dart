@@ -1,3 +1,4 @@
+// ignore_for_file: avoid-ignoring-return-values, no-magic-number
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -56,55 +57,59 @@ void main() {
   });
   group('is web', () {
     group('loadStatus', () {
-      test('when migration status is complete then return immediately',
-          () async {
-        when(getMigrationStatusUseCase())
-            .thenAnswer((_) async => MigrationStatus.complete);
-
-        await webState.loadStatus();
-
-        expect(webState.completeMigration, isTrue);
-
-        when(getMigrationStatusUseCase())
-            .thenAnswer((_) async => MigrationStatus.empty);
-
-        await webState.loadStatus();
-
-        verify(getMigrationStatusUseCase()).called(2);
-        expect(webState.completeMigration, isTrue);
-      });
       test(
-          'when migration status is not complete or empty then complete migration is false',
-          () async {
-        when(getMigrationStatusUseCase()).thenAnswer(
-          (_) async => getRandomStatus(
-            excludedStatus: [MigrationStatus.complete, MigrationStatus.empty],
-          ),
-        );
-        when(verifyDatabaseUseCase()).thenAnswer((_) async => false);
+        'when migration status is complete then return immediately',
+        () async {
+          when(getMigrationStatusUseCase())
+              .thenAnswer((_) async => MigrationStatus.complete);
 
-        await webState.loadStatus();
+          await webState.loadStatus();
 
-        verify(getMigrationStatusUseCase()).called(1);
-        verify(verifyDatabaseUseCase()).called(1);
-        expect(webState.completeMigration, isFalse);
-      });
+          expect(webState.completeMigration, isTrue);
+
+          when(getMigrationStatusUseCase())
+              .thenAnswer((_) async => MigrationStatus.empty);
+
+          await webState.loadStatus();
+
+          verify(getMigrationStatusUseCase()).called(2);
+          expect(webState.completeMigration, isTrue);
+        },
+      );
       test(
-          'when migration status empty on verification database then complete migration is true',
-          () async {
-        when(getMigrationStatusUseCase()).thenAnswer(
-          (_) async => getRandomStatus(
-            excludedStatus: [MigrationStatus.complete, MigrationStatus.empty],
-          ),
-        );
-        when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
+        'when migration status is not complete or empty then complete migration is false',
+        () async {
+          when(getMigrationStatusUseCase()).thenAnswer(
+            (_) async => getRandomStatus(
+              excludedStatus: [MigrationStatus.complete, MigrationStatus.empty],
+            ),
+          );
+          when(verifyDatabaseUseCase()).thenAnswer((_) async => false);
 
-        await webState.loadStatus();
+          await webState.loadStatus();
 
-        verify(getMigrationStatusUseCase()).called(1);
-        verify(verifyDatabaseUseCase()).called(1);
-        expect(webState.completeMigration, isTrue);
-      });
+          verify(getMigrationStatusUseCase()).called(1);
+          verify(verifyDatabaseUseCase()).called(1);
+          expect(webState.completeMigration, isFalse);
+        },
+      );
+      test(
+        'when migration status empty on verification database then complete migration is true',
+        () async {
+          when(getMigrationStatusUseCase()).thenAnswer(
+            (_) async => getRandomStatus(
+              excludedStatus: [MigrationStatus.complete, MigrationStatus.empty],
+            ),
+          );
+          when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
+
+          await webState.loadStatus();
+
+          verify(getMigrationStatusUseCase()).called(1);
+          verify(verifyDatabaseUseCase()).called(1);
+          expect(webState.completeMigration, isTrue);
+        },
+      );
     });
     group('saveStatus', () {
       test('when status is different that init then save it', () async {
@@ -131,89 +136,106 @@ void main() {
   });
   group('is mobile', () {
     group('loadStatus', () {
-      test('when migration status is complete then return immediately',
-          () async {
-        when(getMigrationStatusUseCase())
-            .thenAnswer((_) async => MigrationStatus.complete);
-
-        await mobileState.loadStatus();
-
-        expect(mobileState.completeMigration, isTrue);
-
-        when(getMigrationStatusUseCase())
-            .thenAnswer((_) async => MigrationStatus.empty);
-
-        await mobileState.loadStatus();
-
-        verify(getMigrationStatusUseCase()).called(2);
-        expect(mobileState.completeMigration, isTrue);
-      });
       test(
-          'when migration status is not complete or empty then complete migration is false',
-          () async {
-        when(getMigrationStatusUseCase()).thenAnswer(
-          (_) async => getRandomStatus(
-            excludedStatus: [MigrationStatus.complete, MigrationStatus.empty],
-          ),
-        );
-        when(verifyDatabaseUseCase()).thenAnswer((_) async => false);
-        when(saveMigrationStatusUseCase(MigrationStatus.completeDatabase))
-            .thenAnswer((_) async => true);
+        'when migration status is complete then return immediately',
+        () async {
+          when(getMigrationStatusUseCase())
+              .thenAnswer((_) async => MigrationStatus.complete);
 
-        await mobileState.loadStatus();
+          await mobileState.loadStatus();
 
-        verify(getMigrationStatusUseCase()).called(1);
-        verify(verifyDatabaseUseCase()).called(1);
-        verify(saveMigrationStatusUseCase(MigrationStatus.completeDatabase))
-            .called(1);
-        expect(mobileState.completeMigration, isFalse);
-      });
-      group('verify old database', () {
-        test('when old database is empty then migration status is empty',
-            () async {
+          expect(mobileState.completeMigration, isTrue);
+
+          when(getMigrationStatusUseCase())
+              .thenAnswer((_) async => MigrationStatus.empty);
+
+          await mobileState.loadStatus();
+
+          verify(getMigrationStatusUseCase()).called(2);
+          expect(mobileState.completeMigration, isTrue);
+        },
+      );
+      test(
+        'when migration status is not complete or empty then complete migration is false',
+        () async {
           when(getMigrationStatusUseCase()).thenAnswer(
             (_) async => getRandomStatus(
               excludedStatus: [MigrationStatus.complete, MigrationStatus.empty],
             ),
           );
-          when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
-          when(verifyOldDatabaseUseCase()).thenAnswer((_) async => true);
-          when(saveMigrationStatusUseCase(MigrationStatus.empty))
+          when(verifyDatabaseUseCase()).thenAnswer((_) async => false);
+          when(saveMigrationStatusUseCase(MigrationStatus.completeDatabase))
               .thenAnswer((_) async => true);
 
           await mobileState.loadStatus();
 
           verify(getMigrationStatusUseCase()).called(1);
           verify(verifyDatabaseUseCase()).called(1);
-          verify(verifyOldDatabaseUseCase()).called(1);
-          verify(saveMigrationStatusUseCase(MigrationStatus.empty)).called(1);
-          verifyNever(
-            saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
-          );
-          expect(mobileState.migration, MigrationStatus.empty);
-        });
-        test('when old database is not empty then return immediately',
+          verify(saveMigrationStatusUseCase(MigrationStatus.completeDatabase))
+              .called(1);
+          expect(mobileState.completeMigration, isFalse);
+        },
+      );
+      group(
+        'verify old database',
+        () {
+          test(
+            'when old database is empty then migration status is empty',
             () async {
-          final status = getRandomStatus(
-            excludedStatus: [MigrationStatus.complete, MigrationStatus.empty],
-          );
-          when(getMigrationStatusUseCase()).thenAnswer((_) async => status);
-          when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
-          when(verifyOldDatabaseUseCase()).thenAnswer((_) async => false);
-          when(saveMigrationStatusUseCase(MigrationStatus.init))
-              .thenAnswer((_) async => true);
+              when(getMigrationStatusUseCase()).thenAnswer(
+                (_) async => getRandomStatus(
+                  excludedStatus: [
+                    MigrationStatus.complete,
+                    MigrationStatus.empty,
+                  ],
+                ),
+              );
+              when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
+              when(verifyOldDatabaseUseCase()).thenAnswer((_) async => true);
+              when(saveMigrationStatusUseCase(MigrationStatus.empty))
+                  .thenAnswer((_) async => true);
 
-          await mobileState.loadStatus();
+              await mobileState.loadStatus();
 
-          verify(getMigrationStatusUseCase()).called(1);
-          verify(verifyDatabaseUseCase()).called(1);
-          verify(verifyOldDatabaseUseCase()).called(1);
-          verifyNever(
-            saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
+              verify(getMigrationStatusUseCase()).called(1);
+              verify(verifyDatabaseUseCase()).called(1);
+              verify(verifyOldDatabaseUseCase()).called(1);
+              verify(saveMigrationStatusUseCase(MigrationStatus.empty))
+                  .called(1);
+              verifyNever(
+                saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
+              );
+              expect(mobileState.migration, MigrationStatus.empty);
+            },
           );
-          expect(mobileState.migration, status);
-        });
-      });
+          test(
+            'when old database is not empty then return immediately',
+            () async {
+              final status = getRandomStatus(
+                excludedStatus: [
+                  MigrationStatus.complete,
+                  MigrationStatus.empty,
+                ],
+              );
+              when(getMigrationStatusUseCase()).thenAnswer((_) async => status);
+              when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
+              when(verifyOldDatabaseUseCase()).thenAnswer((_) async => false);
+              when(saveMigrationStatusUseCase(MigrationStatus.init))
+                  .thenAnswer((_) async => true);
+
+              await mobileState.loadStatus();
+
+              verify(getMigrationStatusUseCase()).called(1);
+              verify(verifyDatabaseUseCase()).called(1);
+              verify(verifyOldDatabaseUseCase()).called(1);
+              verifyNever(
+                saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
+              );
+              expect(mobileState.migration, status);
+            },
+          );
+        },
+      );
     });
     group('saveStatus', () {
       test('when status is different that init then save it', () async {

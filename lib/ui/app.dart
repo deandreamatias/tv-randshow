@@ -25,12 +25,12 @@ class App extends StatelessWidget {
         AppTheme(
           id: 'light_theme',
           description: 'Light Theme',
-          data: CustomTheme().availableThemes[0],
+          data: Styles().availableThemes.first,
         ),
         AppTheme(
           id: 'dark_theme',
           description: 'Dark Theme',
-          data: CustomTheme().availableThemes[1],
+          data: Styles().availableThemes[1],
         ),
       ],
       child: ThemeConsumer(
@@ -66,7 +66,7 @@ class _MaterialApp extends StatelessWidget {
       initialRoute: RoutePaths.splash,
       scaffoldMessengerKey: locator.get<GlobalKey<ScaffoldMessengerState>>(),
       onGenerateRoute: router.Router.generateRoute,
-      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+      localizationsDelegates: [
         ...GlobalMaterialLocalizations.delegates,
         GlobalWidgetsLocalizations.delegate,
         localizationDelegate,

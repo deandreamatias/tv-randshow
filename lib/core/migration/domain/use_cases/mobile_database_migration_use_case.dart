@@ -44,6 +44,7 @@ class MobileDatabaseMigrationUseCase {
       }
       yield MigrationStatus.deletedOld;
       yield MigrationStatus.completeDatabase;
+
       return;
     }
     yield MigrationStatus.empty;

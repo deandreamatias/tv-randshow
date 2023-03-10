@@ -4,6 +4,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/ui/features/search/search_state.dart';
 import 'package:tv_randshow/ui/features/search/widgets/search_widget.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
@@ -23,7 +24,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
     scrollController.addListener(() {
       double maxScroll = scrollController.position.maxScrollExtent;
       double currentScroll = scrollController.position.pixels;
-      double delta = MediaQuery.of(context).size.width * 0.20;
+      double delta = MediaQuery.of(context).size.width * 0.2;
       if (maxScroll - currentScroll <= delta) {
         ref
             .read(paginationProvider(ref.watch(searchProvider)).notifier)
@@ -31,6 +32,12 @@ class _SearchViewState extends ConsumerState<SearchView> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,7 +49,7 @@ class _SearchViewState extends ConsumerState<SearchView> {
         const SliverToBoxAdapter(child: _SearchField()),
         _SearchResult(text: ref.watch(searchProvider)),
         SliverPadding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(Styles.standard),
           sliver: SliverToBoxAdapter(
             child: _PaginationStatus(text: ref.watch(searchProvider)),
           ),
@@ -55,37 +62,44 @@ class _SearchViewState extends ConsumerState<SearchView> {
 class _SearchField extends StatelessWidget {
   const _SearchField();
 
+  void _onChanged(String text, WidgetRef ref) {
+    if (text.isNotEmpty) {
+      ref.watch(searchProvider.notifier).searchAutomatic(
+            text,
+            () => ref
+                .watch(
+                  paginationProvider(ref.watch(searchProvider)).notifier,
+                )
+                .firstPage(),
+          );
+    }
+  }
+
+  void _onSubmitted(String text, WidgetRef ref) {
+    if (text.isNotEmpty) {
+      ref.watch(searchProvider.notifier).update(text);
+      ref
+          .watch(
+            paginationProvider(ref.watch(searchProvider)).notifier,
+          )
+          .firstPage();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(Styles.standard),
       child: Consumer(
         builder: (context, ref, child) {
           return TextField(
             key: const Key('app.search.search_bar'),
             textInputAction: TextInputAction.search,
             onSubmitted: (String text) {
-              if (text.isNotEmpty) {
-                ref.watch(searchProvider.notifier).update(text);
-                ref
-                    .watch(
-                      paginationProvider(ref.watch(searchProvider)).notifier,
-                    )
-                    .firstPage();
-              }
+              _onSubmitted(text, ref);
             },
             onChanged: (String text) {
-              if (text.isNotEmpty) {
-                ref.watch(searchProvider.notifier).searchAutomatic(
-                      text,
-                      () => ref
-                          .watch(
-                            paginationProvider(ref.watch(searchProvider))
-                                .notifier,
-                          )
-                          .firstPage(),
-                    );
-              }
+              _onChanged(text, ref);
             },
             autofocus: true,
             keyboardType: TextInputType.text,
@@ -119,6 +133,7 @@ class _PaginationStatus extends ConsumerWidget {
       data: (items) {
         final noMoreItems =
             ref.read(paginationProvider(text).notifier).noMoreItems;
+
         return noMoreItems && state.requireValue.isNotEmpty
             ? Text(
                 translate('app.search.no_more_items'),
@@ -150,13 +165,14 @@ class _SearchResult extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final state = ref.watch(paginationProvider(text));
+
         return state.when(
           data: (items) {
             return items.isEmpty
                 ? SliverToBoxAdapter(
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(Styles.standard),
                         child: Text(
                           translate(
                             text.isEmpty
@@ -197,13 +213,13 @@ class _GridBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: Styles.standard),
       sliver: SliverGrid.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 180,
           childAspectRatio: 0.8,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
+          mainAxisSpacing: Styles.standard,
+          crossAxisSpacing: Styles.standard,
         ),
         itemCount: items.length,
         itemBuilder: (context, index) => SearchWidget(result: items[index]),

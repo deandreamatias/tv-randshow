@@ -7,12 +7,10 @@ import 'package:tv_randshow/core/migration/domain/use_cases/mobile_database_migr
 import 'package:tv_randshow/ui/features/migration/migration_status_state.dart';
 
 class MigrationState {
-  MigrationState({required this.isWeb}) {
-    _migrationStatusState = MigrationStatusState(isWeb: isWeb);
-  }
-
   final bool isWeb;
-  late MigrationStatusState _migrationStatusState;
+
+  late final MigrationStatusState _migrationStatusState =
+      MigrationStatusState(isWeb: isWeb);
   final AddStreamingsMigrationUseCase _addStreamingsMigrationUseCase =
       locator<AddStreamingsMigrationUseCase>();
 
@@ -20,19 +18,26 @@ class MigrationState {
       StreamController();
 
   Stream<MigrationStatus> get stream => _streamController.stream;
-  Future<dynamic> Function() get close => _streamController.close;
+  Future<void> Function() get close => _streamController.close;
 
-  void initMigration() {
+  MigrationState({required this.isWeb});
+
+  void initMigration() async {
     _streamController.add(_migrationStatusState.migration);
     if (!isWeb) {
       final MobileDatabaseMigrationUseCase databaseMigrationUseCase =
           locator<MobileDatabaseMigrationUseCase>();
+      // Do not use this return value.
+      // ignore: avoid-ignoring-return-values, prefer-async-await
       _streamController.addStream(databaseMigrationUseCase()).then(
             (_) =>
                 _streamController.addStream(_addStreamingsMigrationUseCase()),
           );
+
       return;
     }
+    // Do not use this return value.
+    // ignore: avoid-ignoring-return-values
     _streamController.addStream(_addStreamingsMigrationUseCase());
   }
 

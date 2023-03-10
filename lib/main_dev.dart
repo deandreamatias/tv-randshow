@@ -20,12 +20,14 @@ Future<void> main() async {
   FlutterError.demangleStackTrace = (StackTrace stack) {
     if (stack is stack_trace.Trace) return stack.vmTrace;
     if (stack is stack_trace.Chain) return stack.toTrace().vmTrace;
+
     return stack;
   };
 
   PlatformDispatcher.instance.onError = (error, stack) {
     showSnackBar('Something went wrong', details: error.toString());
     debugPrintStack(label: error.toString(), stackTrace: stack);
+
     return true;
   };
 

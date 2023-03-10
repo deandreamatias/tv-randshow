@@ -6,17 +6,8 @@ import 'package:tv_randshow/ui/features/migration/migration_view.dart';
 import 'package:tv_randshow/ui/features/random/loading_view.dart';
 import 'package:tv_randshow/ui/features/random/result_view.dart';
 
-class RoutePaths {
-  static const String migraiton = 'migration';
-  static const String tab = '/tab';
-  static const String privacy = 'privacy';
-  static const String splash = '/';
-  static const String loading = 'loading';
-  static const String result = 'result';
-}
-
 class Router {
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case RoutePaths.splash:
         return MaterialPageRoute<SplashView>(
@@ -41,7 +32,7 @@ class Router {
           builder: (_) => const PrivacyPolicyView(),
         );
       default:
-        return MaterialPageRoute<dynamic>(
+        return MaterialPageRoute(
           builder: (_) => Scaffold(
             body: Center(
               child: Text('No route defined for ${settings.name}'),
@@ -50,4 +41,13 @@ class Router {
         );
     }
   }
+}
+
+class RoutePaths {
+  static const String migraiton = 'migration';
+  static const String tab = '/tab';
+  static const String privacy = 'privacy';
+  static const String splash = '/';
+  static const String loading = 'loading';
+  static const String result = 'result';
 }

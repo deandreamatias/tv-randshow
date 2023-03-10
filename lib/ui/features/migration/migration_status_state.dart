@@ -6,6 +6,18 @@ import 'package:tv_randshow/core/migration/domain/use_cases/verify_database_use_
 import 'package:tv_randshow/core/migration/domain/use_cases/verify_old_database_use_case.dart';
 
 class MigrationStatusState {
+  final bool isWeb;
+
+  late VerifyDatabaseUseCase _verifyDatabaseUseCase;
+  late GetMigrationStatusUseCase _getMigrationStatusUseCase;
+  late SaveMigrationStatusUseCase _saveMigrationStatusUseCase;
+  VerifyOldDatabaseUseCase? _verifyOldDatabaseUseCase;
+  MigrationStatus _migration = MigrationStatus.init;
+
+  MigrationStatus get migration => _migration;
+  bool get completeMigration =>
+      [MigrationStatus.complete, MigrationStatus.empty].contains(_migration);
+
   MigrationStatusState({
     required this.isWeb,
     VerifyDatabaseUseCase? verifyDatabaseUseCase,
@@ -21,18 +33,6 @@ class MigrationStatusState {
         saveMigrationStatusUseCase ?? locator<SaveMigrationStatusUseCase>();
     _verifyOldDatabaseUseCase = verifyOldDatabaseUseCase;
   }
-
-  final bool isWeb;
-
-  late VerifyDatabaseUseCase _verifyDatabaseUseCase;
-  late GetMigrationStatusUseCase _getMigrationStatusUseCase;
-  late SaveMigrationStatusUseCase _saveMigrationStatusUseCase;
-  VerifyOldDatabaseUseCase? _verifyOldDatabaseUseCase;
-  MigrationStatus _migration = MigrationStatus.init;
-
-  MigrationStatus get migration => _migration;
-  bool get completeMigration =>
-      [MigrationStatus.complete, MigrationStatus.empty].contains(_migration);
 
   Future<void> loadStatus() async {
     _migration = await _getMigrationStatusUseCase();
@@ -67,6 +67,7 @@ class MigrationStatusState {
       if (isEmptyOldDatabase) {
         await saveStatus(MigrationStatus.empty);
       }
+
       return;
     }
     await saveStatus(MigrationStatus.completeDatabase);

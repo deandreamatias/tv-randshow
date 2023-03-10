@@ -11,6 +11,7 @@ class GetTvshowStreamingsUseCase {
 
   Future<List<StreamingDetail>> call(StreamingSearch streamingSearch) async {
     final tvshow = await _streamingsRepository.searchTvShow(streamingSearch);
+
     return tvshow.streamings;
   }
 }

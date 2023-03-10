@@ -7,9 +7,12 @@ import 'package:tv_randshow/ui/features/random/random_tvshow_state.dart';
 import 'package:tv_randshow/ui/features/random/widgets/home_button.dart';
 import 'package:tv_randshow/ui/features/random/widgets/streaming_button.dart';
 import 'package:tv_randshow/ui/shared/custom_icons.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/info_box.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/text_title_large.dart';
+import 'package:tv_randshow/ui/widgets/text_title_medium.dart';
 
 class ResultView extends StatelessWidget {
   const ResultView({super.key, required this.idTv});
@@ -19,16 +22,15 @@ class ResultView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(Styles.standard),
           child: Column(
             children: <Widget>[
-              Text(
+              TextTitleLarge(
                 translate('app.result.title'),
                 key: const Key('app.result.title'),
-                style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: Styles.standard),
               Expanded(
                 child: Center(
                   child: ConstrainedBox(
@@ -41,12 +43,13 @@ class ResultView extends StatelessWidget {
                           right: 0.0,
                           left: 0.0,
                           top: 0.0,
-                          bottom: 24.0,
+                          bottom: Styles.large,
                           child: Container(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(Styles.standard),
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8.0)),
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(Styles.small),
+                              ),
                               border: Border.all(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -57,16 +60,20 @@ class ResultView extends StatelessWidget {
                                 return ref
                                     .watch(randomTvshowProvider(idTv))
                                     .when(
-                                      data: (tvshowResult) => _TvshowResultInfo(
-                                        tvshowResult: tvshowResult,
-                                        streamings: ref
+                                      data: (tvshowResult) {
+                                        final tvshow = ref
                                             .read(
                                               randomTvshowProvider(idTv)
                                                   .notifier,
                                             )
-                                            .tvshow
-                                            .streamings,
-                                      ),
+                                            .tvshow;
+
+                                        return _TvshowResultInfo(
+                                          tvshowResult: tvshowResult,
+                                          streamings: tvshow.streamings,
+                                          tvshowName: tvshow.name,
+                                        );
+                                      },
                                       error: (error, stackTrace) =>
                                           ErrorMessage(
                                         keyText: 'app.result.error_load',
@@ -93,7 +100,7 @@ class ResultView extends StatelessWidget {
                               );
                             },
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -111,9 +118,11 @@ class ResultView extends StatelessWidget {
 class _TvshowResultInfo extends StatelessWidget {
   final TvshowResult tvshowResult;
   final List<StreamingDetail> streamings;
+  final String tvshowName;
   const _TvshowResultInfo({
     required this.tvshowResult,
     this.streamings = const [],
+    this.tvshowName = '',
   });
 
   @override
@@ -122,51 +131,40 @@ class _TvshowResultInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Text(
-          tvshowResult.name,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        TextTitleLarge(tvshowName),
         Flexible(
           flex: 2,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               InfoBox(
-                typeInfo: 3,
+                typeInfo: InfoTypeBox.season,
                 value: tvshowResult.randomSeason,
               ),
               InfoBox(
-                typeInfo: 4,
+                typeInfo: InfoTypeBox.episode,
                 value: tvshowResult.randomEpisode,
               ),
             ],
           ),
         ),
-        const SizedBox(height: 8),
-        Text(
-          tvshowResult.episodeName,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        const SizedBox(height: 8),
+        const SizedBox(height: Styles.small),
+        TextTitleMedium(tvshowResult.episodeName),
+        const SizedBox(height: Styles.small),
         Flexible(
           flex: 3,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
-            child: Text(
-              tvshowResult.episodeDescription,
-            ),
+            child: Text(tvshowResult.episodeDescription),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: Styles.small),
         if (streamings.isNotEmpty) ...[
-          Text(
-            translate('app.result.streaming_title'),
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 4),
+          TextTitleMedium(translate('app.result.streaming_title')),
+          const SizedBox(height: Styles.small),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: Styles.small,
+            runSpacing: Styles.small,
             children: streamings
                 .map(
                   (streaming) => StreamingButton(
@@ -177,12 +175,7 @@ class _TvshowResultInfo extends StatelessWidget {
           ),
         ],
         if (streamings.isEmpty)
-          Text(
-            translate(
-              'app.result.no_streaming_title',
-            ),
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
+          TextTitleMedium(translate('app.result.no_streaming_title')),
       ],
     );
   }

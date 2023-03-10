@@ -23,6 +23,7 @@ class AddStreamingsMigrationUseCase {
 
     if (tvshows.isEmpty) {
       yield MigrationStatus.empty;
+
       return;
     }
 

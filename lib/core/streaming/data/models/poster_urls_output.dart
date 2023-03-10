@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 
-part 'poster_url_output.g.dart';
+part 'poster_urls_output.g.dart';
 
 @JsonSerializable(createToJson: false)
 class PosterUrlsOutput extends PosterUrLs {

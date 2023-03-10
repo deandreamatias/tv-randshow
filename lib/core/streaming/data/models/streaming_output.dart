@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tv_randshow/core/streaming/data/models/backdrop_urls_output.dart';
-import 'package:tv_randshow/core/streaming/data/models/poster_url_output.dart';
+import 'package:tv_randshow/core/streaming/data/models/poster_urls_output.dart';
 import 'package:tv_randshow/core/streaming/data/models/streaming_detail_output.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 
@@ -53,17 +53,18 @@ class StreamingOutput extends Streaming {
   factory StreamingOutput.fromJson(Map<String, dynamic> json) =>
       _$StreamingOutputFromJson(json);
 
-  /// Simplify json streaming
+  /// Simplify json streaming.
   static List<StreamingDetailOutput> _streamingsFromJson(
     Map<String, dynamic> json,
   ) {
     if (json.entries.isEmpty) {
       return [];
     }
+
     return json.entries.map((streaming) {
       final countries = streaming.value as Map<String, dynamic>;
 
-      /// TODO: Add all countries to list
+      /// TODO: Add all countries to list.
       final Map<String, dynamic> streamingDetail =
           countries.entries.map((countries) => countries.value).first;
 

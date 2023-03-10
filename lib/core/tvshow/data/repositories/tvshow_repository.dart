@@ -8,8 +8,8 @@ import 'package:tv_randshow/core/tvshow/domain/models/tvshow_seasons_details.dar
 
 @Injectable(as: IOnlineRepository)
 class TvshowRepository implements IOnlineRepository {
-  final TmdbHttpService _httpService;
   final String apiVersion = '/3';
+  final TmdbHttpService _httpService;
   TvshowRepository(this._httpService);
 
   @override
@@ -21,6 +21,7 @@ class TvshowRepository implements IOnlineRepository {
       '$tvshowDetails$idTv',
       query.toJson(),
     );
+
     return TvshowDetails.fromJson(response);
   }
 
@@ -38,6 +39,7 @@ class TvshowRepository implements IOnlineRepository {
       '$tvshowDetails$idTv$tvshowDetailsSeason$idSeason',
       query.toJson(),
     );
+
     return TvshowSeasonsDetails.fromJson(response);
   }
 
@@ -54,6 +56,7 @@ class TvshowRepository implements IOnlineRepository {
       tvshowSearch,
       query.toJson(),
     );
+
     return Search.fromJson(response);
   }
 }

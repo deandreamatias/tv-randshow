@@ -28,13 +28,17 @@ final paginationProvider = AutoDisposeAsyncNotifierProvider.family<
 );
 
 class SearchTvshowsNotifier extends AutoDisposeNotifier<String> {
-  Timer? _timer;
+  Timer _timer = Timer(
+    const Duration(seconds: 3),
+    () => {},
+  );
 
   @override
   String build() {
     ref.onDispose(() {
-      if (_timer != null && (_timer?.isActive ?? false)) _timer!.cancel();
+      if (_timer.isActive) _timer.cancel();
     });
+
     return '';
   }
 
@@ -43,7 +47,7 @@ class SearchTvshowsNotifier extends AutoDisposeNotifier<String> {
   void searchAutomatic(String text, VoidCallback function) {
     if (text.isEmpty || text == state) return;
 
-    if (_timer != null && (_timer?.isActive ?? false)) _timer!.cancel();
+    if (_timer.isActive) _timer.cancel();
 
     _timer = Timer(const Duration(seconds: 3), () {
       state = text;

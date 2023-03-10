@@ -9,10 +9,7 @@ class SearchTvShowUseCase {
 
   const SearchTvShowUseCase(this._onlineRepository);
 
-  Future<Search> call({
-    required String text,
-    int page = 1,
-  }) async {
+  Future<Search> call({required String text, int page = 1}) {
     return _onlineRepository.search(
       language: Helpers.getLocale(),
       page: page,

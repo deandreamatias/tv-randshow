@@ -8,7 +8,7 @@ class GetLocalTvshowsUseCase {
 
   const GetLocalTvshowsUseCase(this._localRepository);
 
-  Future<List<TvshowDetails>> call() async {
+  Future<List<TvshowDetails>> call() {
     return _localRepository.getTvshows();
   }
 }

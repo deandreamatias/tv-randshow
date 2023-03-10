@@ -9,7 +9,7 @@ class StreamingHttpService extends DioService {
           FlavorConfig.instance.values.streamingBaseUrl,
           headers: {
             'x-rapidapi-host': FlavorConfig.instance.values.streamingBaseUrl
-                .substring(8), // Remove https://
+                .substring(8), // Remove https://.
             'x-rapidapi-key': FlavorConfig.instance.values.streamingApiKey,
           },
         );

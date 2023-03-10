@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-non-null-assertion
+
 import 'dart:developer';
 import 'dart:io';
 
@@ -7,10 +9,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
 
 class DatabaseHelper {
-  DatabaseHelper._privateConstructor();
-
-  String _databaseName = '';
-  static const int _databaseVersion = 1;
   static const String tvshowTable = 'tvshowfav';
   static const String streamingsTable = 'tvshowstreaming';
 
@@ -32,19 +30,95 @@ class DatabaseHelper {
   static const String columnStreamingLeaving = 'leaving';
   static const String columnStreamingAdded = 'added';
 
-  // make this a singleton class
+  // Make this a singleton class.
   static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+  String _databaseName = '';
+  static const int _databaseVersion = 1;
 
-  // only have a single app-wide reference to the database
+  // Only have a single app-wide reference to the database.
   static Database? _database;
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();
+
     return _database!;
   }
 
-  // this opens the database (and creates it if it doesn't exist)
+  DatabaseHelper._privateConstructor();
+
+  // Helper methods.
+
+  /// Inserts a row in the database where each key in the Map is a column name
+  /// and the value is the column value.
+  ///
+  /// The return value is the id of the inserted row.
+  Future<int> insert({
+    required Map<String, dynamic> row,
+    required String table,
+  }) async {
+    final Database database = await instance.database;
+
+    return database.insert(table, row);
+  }
+
+  /// Get list from `table` on database by selected `columns`.
+  Future<List<Map<String, dynamic>>> queryList({
+    required String table,
+    required List<String> columns,
+    MapEntry? filter,
+  }) async {
+    final Database database = await instance.database;
+
+    return database.query(
+      table,
+      columns: columns,
+      where: filter != null ? '${filter.key} = ?' : null,
+      whereArgs: filter != null ? <int?>[filter.value] : null,
+    );
+  }
+
+  /// Deletes the row specified by the id. The number of affected rows is
+  /// returned. This should be 1 as long as the row exists.
+  Future<int> delete({
+    required String table,
+    required MapEntry deletefilter,
+  }) async {
+    final Database database = await instance.database;
+
+    return database.delete(
+      table,
+      where: '${deletefilter.key} = ?',
+      whereArgs: <int>[deletefilter.value],
+    );
+  }
+
+  /// Deletes the row specified by the id. The number of affected rows is
+  /// returned. This should be 1 as long as the row exists.
+  Future<bool> deleteAll() async {
+    final Database database = await instance.database;
+    final idDeleted = await database.delete(tvshowTable);
+
+    return idDeleted > 0;
+  }
+
+  // This opens the database (and creates it if it doesn't exist).
   Future<Database> _initDatabase() async {
+    String path = await _getDatabasePath();
+
+    return openDatabase(
+      path,
+      version: _databaseVersion,
+      onCreate: (db, version) async {
+        final batch = db.batch();
+        _createTvshowTable(batch);
+        // Do not use this return value.
+        // ignore: avoid-ignoring-return-values
+        await batch.commit();
+      },
+    );
+  }
+
+  Future<String> _getDatabasePath() async {
     Directory? documentsDirectory;
     try {
       documentsDirectory = await getExternalStorageDirectory();
@@ -52,24 +126,13 @@ class DatabaseHelper {
       log('Open directory', error: e);
     }
 
-    if (FlavorConfig.isDevelopment()) {
-      _databaseName = 'tvshowfavdev.db';
-    } else {
-      _databaseName = 'tvshowfav.db';
-    }
-    final String path = join(documentsDirectory?.path ?? '', _databaseName);
-    return openDatabase(
-      path,
-      version: _databaseVersion,
-      onCreate: (db, version) async {
-        final batch = db.batch();
-        _createTvshowTable(batch);
-        await batch.commit();
-      },
-    );
+    _databaseName =
+        FlavorConfig.isDevelopment() ? 'tvshowfavdev.db' : 'tvshowfav.db';
+
+    return join(documentsDirectory?.path ?? '', _databaseName);
   }
 
-  // SQL code to create the database tvshows table
+  // SQL code to create the database tvshows table.
   void _createTvshowTable(Batch batch, {String auxiliar = ''}) {
     final table = auxiliar.isNotEmpty ? auxiliar : tvshowTable;
     batch.execute('''
@@ -85,58 +148,5 @@ class DatabaseHelper {
             $columnInProduction INTEGER
           )
           ''');
-  }
-
-  // Helper methods
-
-  /// Inserts a row in the database where each key in the Map is a column name
-  /// and the value is the column value.
-  ///
-  /// The return value is the id of the inserted row.
-  Future<int> insert({
-    required Map<String, dynamic> row,
-    required String table,
-  }) async {
-    final Database db = await instance.database;
-
-    return db.insert(table, row);
-  }
-
-  /// Get list from `table` on database by selected `columns`
-  Future<List<Map<String, dynamic>>> queryList({
-    required String table,
-    required List<String> columns,
-    MapEntry? filter,
-  }) async {
-    final Database db = await instance.database;
-    return db.query(
-      table,
-      columns: columns,
-      where: filter != null ? '${filter.key} = ?' : null,
-      whereArgs: filter != null ? <int?>[filter.value] : null,
-    );
-  }
-
-  /// Deletes the row specified by the id. The number of affected rows is
-  /// returned. This should be 1 as long as the row exists.
-  Future<int> delete({
-    required String table,
-    required MapEntry deletefilter,
-  }) async {
-    final Database db = await instance.database;
-    final idDeleted = await db.delete(
-      table,
-      where: '${deletefilter.key} = ?',
-      whereArgs: <int>[deletefilter.value],
-    );
-    return idDeleted;
-  }
-
-  /// Deletes the row specified by the id. The number of affected rows is
-  /// returned. This should be 1 as long as the row exists.
-  Future<bool> deleteAll() async {
-    final Database db = await instance.database;
-    final idDeleted = await db.delete(tvshowTable);
-    return idDeleted > 0;
   }
 }

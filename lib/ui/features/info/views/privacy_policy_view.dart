@@ -4,8 +4,9 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
-import 'package:tv_randshow/ui/widgets/image_builder.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/online_image.dart';
 
 class PrivacyPolicyView extends StatelessWidget {
   const PrivacyPolicyView({super.key});
@@ -15,7 +16,7 @@ class PrivacyPolicyView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(Styles.standard),
           key: const Key('app.privacy.scroll'),
           physics: const BouncingScrollPhysics(),
           child: FutureBuilder<String>(
@@ -37,7 +38,7 @@ class PrivacyPolicyView extends StatelessWidget {
                             url: uri.toString(),
                             name: title ?? 'No name',
                           ),
-                          onTapLink: (text, href, title) async {
+                          onTapLink: (text, href, title) {
                             Helpers.openLink(Uri.parse(href ?? ''));
                           },
                           selectable: true,

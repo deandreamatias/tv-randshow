@@ -33,7 +33,6 @@ class TabViewState extends State<TabView> {
                 : Brightness.dark,
       ),
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) =>
               constraints.maxWidth > 600
@@ -58,7 +57,7 @@ class TabViewState extends State<TabView> {
                             NavigationRailDestination(
                               icon: const Icon(UniconsLine.info_circle),
                               label: Text(translate('app.info.tab')),
-                            )
+                            ),
                           ],
                           selectedIndex: _selectedIndex,
                         ),
@@ -108,7 +107,7 @@ class TabViewState extends State<TabView> {
                               label: translate('app.info.tab'),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
         ),

@@ -10,6 +10,7 @@ class VerifyDatabaseUseCase {
 
   Future<bool> call() async {
     final List<TvshowDetails> tvshows = await _getTvshows();
+
     return tvshows.isEmpty;
   }
 }

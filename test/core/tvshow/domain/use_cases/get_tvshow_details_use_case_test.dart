@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-ignoring-return-values
+
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -25,44 +27,48 @@ void main() {
   });
 
   group('get online tvshow', () {
-    test('should return online tvshow when local tvshow list is empty',
-        () async {
-      final tvshows = generateTvshow.tvshows;
-      final randomTvshow =
-          faker.randomGenerator.element<TvshowDetails>(tvshows);
-      final String language = Helpers.getLocale();
+    test(
+      'should return online tvshow when local tvshow list is empty',
+      () async {
+        final tvshows = generateTvshow.tvshows;
+        final randomTvshow =
+            faker.randomGenerator.element<TvshowDetails>(tvshows);
+        final String language = Helpers.getLocale();
 
-      when(getLocalTvshow()).thenAnswer((_) async => []);
-      when(onlineRepository.getDetailsTv(language, randomTvshow.id))
-          .thenAnswer((_) async => randomTvshow);
+        when(getLocalTvshow()).thenAnswer((_) async => []);
+        when(onlineRepository.getDetailsTv(language, randomTvshow.id))
+            .thenAnswer((_) async => randomTvshow);
 
-      final tvshow = await useCase(randomTvshow.id);
+        final tvshow = await useCase(randomTvshow.id);
 
-      verify(getLocalTvshow()).called(1);
-      verify(onlineRepository.getDetailsTv(language, randomTvshow.id))
-          .called(1);
-      expect(tvshow.id, randomTvshow.id);
-    });
-    test('should return online tvshow when local tvshow id do not exist',
-        () async {
-      final tvshows = generateTvshow.tvshows;
-      final randomTvshow =
-          faker.randomGenerator.element<TvshowDetails>(tvshows);
-      final localTvshows =
-          tvshows.where((element) => element.id != randomTvshow.id).toList();
-      final String language = Helpers.getLocale();
+        verify(getLocalTvshow()).called(1);
+        verify(onlineRepository.getDetailsTv(language, randomTvshow.id))
+            .called(1);
+        expect(tvshow.id, randomTvshow.id);
+      },
+    );
+    test(
+      'should return online tvshow when local tvshow id do not exist',
+      () async {
+        final tvshows = generateTvshow.tvshows;
+        final randomTvshow =
+            faker.randomGenerator.element<TvshowDetails>(tvshows);
+        final localTvshows =
+            tvshows.where((element) => element.id != randomTvshow.id).toList();
+        final String language = Helpers.getLocale();
 
-      when(getLocalTvshow()).thenAnswer((_) async => localTvshows);
-      when(onlineRepository.getDetailsTv(language, randomTvshow.id))
-          .thenAnswer((_) async => randomTvshow);
+        when(getLocalTvshow()).thenAnswer((_) async => localTvshows);
+        when(onlineRepository.getDetailsTv(language, randomTvshow.id))
+            .thenAnswer((_) async => randomTvshow);
 
-      final tvshow = await useCase(randomTvshow.id);
+        final tvshow = await useCase(randomTvshow.id);
 
-      verify(getLocalTvshow()).called(1);
-      verify(onlineRepository.getDetailsTv(language, randomTvshow.id))
-          .called(1);
-      expect(tvshow.id, randomTvshow.id);
-    });
+        verify(getLocalTvshow()).called(1);
+        verify(onlineRepository.getDetailsTv(language, randomTvshow.id))
+            .called(1);
+        expect(tvshow.id, randomTvshow.id);
+      },
+    );
   });
   group('get local tvshow', () {
     test('should return local tvshow when exists', () async {

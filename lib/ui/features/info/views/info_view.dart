@@ -11,6 +11,7 @@ import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
 import 'package:tv_randshow/ui/shared/constants.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/export_tvshow_state.dart';
 import 'package:tv_randshow/ui/widgets/error_icon.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
@@ -23,7 +24,7 @@ class InfoView extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(Styles.standard),
           child: Text(
             translate('app.info.title'),
             key: const Key('app.info.title'),
@@ -85,7 +86,7 @@ class _SendFeedback extends StatelessWidget {
         key: const Key('app.info.feedback_description'),
       ),
       leading: const Icon(UniconsLine.envelope),
-      onTap: () async {
+      onTap: () {
         Helpers.openMail(
           Constants.feedbackEmail,
           mailtoSubject: 'Tv Randshow - Feedback',
@@ -110,7 +111,7 @@ class _OpenWebApp extends StatelessWidget {
         key: const Key('app.info.web_description'),
       ),
       leading: const Icon(UniconsLine.external_link_alt),
-      onTap: () async {
+      onTap: () {
         Helpers.openLink(Uri.parse(Constants.webAppUrl));
       },
     );
@@ -132,7 +133,7 @@ class _OpenAndroidApp extends StatelessWidget {
         key: const Key('app.info.app_description'),
       ),
       leading: const Icon(UniconsLine.google_play),
-      onTap: () async {
+      onTap: () {
         Helpers.openLink(Uri.parse(Constants.androidAppurl));
       },
     );
@@ -176,17 +177,20 @@ class _ExportTvShows extends StatelessWidget {
             key: const Key('app.info.export_description'),
           ),
           leading: const Icon(UniconsLine.file_export),
-          trailing: ref.watch(exportTvshowsProvider).when(
-                data: (success) => success
-                    ? null
-                    : const ErrorIcon(
-                        keyText: 'app.info.export_error',
-                      ),
-                error: (error, stackTrace) => const ErrorIcon(
-                  keyText: 'app.info.export_error',
+          trailing: SizedBox.square(
+            dimension: Styles.xlarge,
+            child: ref.watch(exportTvshowsProvider).when(
+                  data: (success) => success
+                      ? null
+                      : const ErrorIcon(
+                          keyText: 'app.info.export_error',
+                        ),
+                  error: (error, stackTrace) => const ErrorIcon(
+                    keyText: 'app.info.export_error',
+                  ),
+                  loading: () => const Loader(),
                 ),
-                loading: () => const Loader(),
-              ),
+          ),
           onTap: () => ref.read(exportTvshowsProvider.notifier).export(),
         );
       },
@@ -209,11 +213,15 @@ class _ReviewApp extends StatelessWidget {
         key: const Key('app.info.rate_description'),
       ),
       leading: const Icon(UniconsLine.feedback),
-      onTap: () async {
+      onTap: () {
         final InAppReview inAppReview = InAppReview.instance;
-        await inAppReview.isAvailable()
-            ? inAppReview.requestReview()
-            : inAppReview.openStoreListing();
+        // Verify and open review.
+        // ignore: prefer-async-await
+        inAppReview.isAvailable().then((isAvailable) {
+          isAvailable
+              ? inAppReview.requestReview()
+              : inAppReview.openStoreListing();
+        });
       },
     );
   }
@@ -222,29 +230,13 @@ class _ReviewApp extends StatelessWidget {
 class _Changelog extends StatelessWidget {
   const _Changelog();
 
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        translate('app.info.version.title'),
-        key: const Key('app.info.version.title'),
-      ),
-      subtitle: Text(
-        translate('app.info.version.description'),
-        key: const Key('app.info.version.description'),
-      ),
-      leading: const Icon(UniconsLine.brackets_curly),
-      onTap: () {
-        _changelog(context);
-      },
-    );
-  }
-
   void _changelog(BuildContext context) {
-    showDialog<bool>(
+    // Do not use this return value.
+    // ignore: avoid-ignoring-return-values
+    showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        contentPadding: const EdgeInsets.all(16.0),
+        contentPadding: const EdgeInsets.all(Styles.standard),
         title: Consumer(
           builder: (context, ref, child) {
             return ref.watch(versionAppProvider).when(
@@ -284,13 +276,13 @@ class _Changelog extends StatelessWidget {
               translate('app.info.version.dialog_button'),
             ),
             onPressed: () => Navigator.of(context).pop(),
-          )
+          ),
         ],
       ),
     );
   }
 
-  Future<String> _loadAsset(String languageCode) async {
+  Future<String> _loadAsset(String languageCode) {
     switch (languageCode) {
       case 'es':
         return rootBundle.loadString(Assets.whatsNewEs);
@@ -300,5 +292,23 @@ class _Changelog extends StatelessWidget {
       default:
         return rootBundle.loadString(Assets.whatsNewEn);
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.version.title'),
+        key: const Key('app.info.version.title'),
+      ),
+      subtitle: Text(
+        translate('app.info.version.description'),
+        key: const Key('app.info.version.description'),
+      ),
+      leading: const Icon(UniconsLine.brackets_curly),
+      onTap: () {
+        _changelog(context);
+      },
+    );
   }
 }

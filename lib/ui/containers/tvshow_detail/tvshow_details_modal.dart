@@ -4,11 +4,13 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/containers/tvshow_detail/tvshow_details_state.dart';
 import 'package:tv_randshow/ui/features/home/widgets/random_button.dart';
 import 'package:tv_randshow/ui/features/search/widgets/save_button.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/tvshows_state.dart';
 import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/image_builder.dart';
 import 'package:tv_randshow/ui/widgets/info_box.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/text_title_medium.dart';
 
 class TvshowDetailsModal extends StatelessWidget {
   const TvshowDetailsModal({
@@ -26,15 +28,15 @@ class TvshowDetailsModal extends StatelessWidget {
       children: <Widget>[
         ConstrainedBox(
           constraints: const BoxConstraints(
-            maxWidth: 500.0,
-            maxHeight: 425.0,
+            maxWidth: 500,
+            maxHeight: 425,
           ),
           child: Container(
-            margin: const EdgeInsets.only(top: 24),
-            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.only(top: Styles.large),
+            padding: const EdgeInsets.all(Styles.standard),
             decoration: BoxDecoration(
               borderRadius: const BorderRadiusDirectional.vertical(
-                top: Radius.circular(16),
+                top: Radius.circular(Styles.standard),
               ),
               color: Theme.of(context).colorScheme.background,
             ),
@@ -45,11 +47,12 @@ class TvshowDetailsModal extends StatelessWidget {
           builder: (context, ref, child) {
             final tvshowDetails =
                 ref.watch(favTvshowsProvider.notifier).hasFav(idTv);
+
             return tvshowDetails && showRandom
                 ? RandomButton(idTv: idTv)
-                : SaveButton(id: idTv);
+                : SaveButton(tvIdd: idTv);
           },
-        )
+        ),
       ],
     );
   }
@@ -65,6 +68,7 @@ class _TvshowInfoDetails extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child) {
         final state = ref.watch(tvshowDetailsProvider(idTv));
+
         return state.when(
           data: (model) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +76,7 @@ class _TvshowInfoDetails extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 6.0),
+                  padding: const EdgeInsets.only(top: Styles.small),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -83,8 +87,10 @@ class _TvshowInfoDetails extends StatelessWidget {
                           isModal: true,
                         ),
                       ),
-                      const SizedBox(width: 8.0),
+                      const SizedBox(width: Styles.small),
                       Expanded(
+                        // Allow value.
+                        // ignore: no-magic-number
                         flex: 3,
                         child: Align(
                           alignment: Alignment.topLeft,
@@ -92,6 +98,8 @@ class _TvshowInfoDetails extends StatelessWidget {
                             model.name,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
+                            // Allow value.
+                            // ignore: no-magic-number
                             maxLines: 3,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
@@ -107,27 +115,24 @@ class _TvshowInfoDetails extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     InfoBox(
-                      typeInfo: 0,
+                      typeInfo: InfoTypeBox.seasons,
                       value: model.numberOfSeasons,
                     ),
                     InfoBox(
-                      typeInfo: 1,
+                      typeInfo: InfoTypeBox.episodes,
                       value: model.numberOfEpisodes,
                     ),
                     InfoBox(
-                      typeInfo: 2,
+                      typeInfo: InfoTypeBox.duration,
                       value: model.episodeRunTime.isNotEmpty
                           ? model.episodeRunTime.first
                           : 0,
-                    )
+                    ),
                   ],
                 ),
               ),
-              Text(
-                translate('app.modal.overview'),
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: 8),
+              TextTitleMedium(translate('app.modal.overview')),
+              const SizedBox(height: Styles.small),
               Expanded(
                 flex: 6,
                 child: SingleChildScrollView(

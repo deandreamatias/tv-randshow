@@ -15,6 +15,7 @@ class SqlDatabaseService implements ISecondaryDatabaseService {
       return await dbHelper.deleteAll();
     } catch (e) {
       log('Error to delete tvshow rows', error: e);
+
       return false;
     }
   }
@@ -40,6 +41,7 @@ class SqlDatabaseService implements ISecondaryDatabaseService {
       return tvShowsMaps.map((i) => TvshowDetails.fromJson(i)).toList();
     } catch (e) {
       log('Error to get db list', error: e);
+
       return [];
     }
   }
@@ -54,12 +56,14 @@ class SqlDatabaseService implements ISecondaryDatabaseService {
       );
       if (tvshowRowId == 0) {
         log('Error to save tvshow ${tvshow.id}');
+
         return false;
       }
       log('Tvshow ${tvshow.id} saved');
 
       return tvshowRowId.isFinite;
     }
+
     return true;
   }
 }

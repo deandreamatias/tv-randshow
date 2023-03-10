@@ -1,4 +1,33 @@
 class Streaming {
+  final String imdbId;
+  final String tmdbId;
+  final int imdbRating;
+  final int imdbVoteCount;
+  final int tmdbRating;
+  final String backdropPath;
+  final BackdropUrLs? backdropUrLs;
+  final String originalTitle;
+  final List<int> genres;
+  final List<String> countries;
+  final int year;
+  final int firstAirYear;
+  final int lastAirYear;
+  final List<int> episodeRuntimes;
+  final List<String> cast;
+  final List<String> significants;
+  final String title;
+  final String overview;
+  final String video;
+  final String posterPath;
+  final PosterUrLs? posterUrLs;
+  final int seasons;
+  final int episodes;
+  final int age;
+  final int status;
+  final String tagline;
+  final List<StreamingDetail> streamings;
+  final String originalLanguage;
+
   Streaming({
     this.imdbId = '',
     this.tmdbId = '',
@@ -29,52 +58,31 @@ class Streaming {
     this.streamings = const [],
     this.originalLanguage = '',
   });
-
-  final String imdbId;
-  final String tmdbId;
-  final int imdbRating;
-  final int imdbVoteCount;
-  final int tmdbRating;
-  final String backdropPath;
-  final BackdropUrLs? backdropUrLs;
-  final String originalTitle;
-  final List<int> genres;
-  final List<String> countries;
-  final int year;
-  final int firstAirYear;
-  final int lastAirYear;
-  final List<int> episodeRuntimes;
-  final List<String> cast;
-  final List<String> significants;
-  final String title;
-  final String overview;
-  final String video;
-  final String posterPath;
-  final PosterUrLs? posterUrLs;
-  final int seasons;
-  final int episodes;
-  final int age;
-  final int status;
-  final String tagline;
-  final List<StreamingDetail> streamings;
-  final String originalLanguage;
 }
 
 class BackdropUrLs {
+  final String the300;
+  final String the780;
+  final String the1280;
+  final String original;
+
   BackdropUrLs({
     this.the300 = '',
     this.the780 = '',
     this.the1280 = '',
     this.original = '',
   });
-
-  final String the300;
-  final String the780;
-  final String the1280;
-  final String original;
 }
 
 class PosterUrLs {
+  final String the92;
+  final String the154;
+  final String the185;
+  final String the342;
+  final String the500;
+  final String the780;
+  final String original;
+
   PosterUrLs({
     this.the92 = '',
     this.the154 = '',
@@ -84,30 +92,22 @@ class PosterUrLs {
     this.the780 = '',
     this.original = '',
   });
-
-  final String the92;
-  final String the154;
-  final String the185;
-  final String the342;
-  final String the500;
-  final String the780;
-  final String original;
 }
 
 class StreamingDetail {
+  final String id;
+  final String streamingName;
+  final String country;
+  final String link;
+  final int added;
+  final int leaving;
+
   StreamingDetail({
-    this.id,
+    this.id = '',
     required this.streamingName,
     this.link = '',
     required this.added,
     required this.leaving,
     required this.country,
   });
-
-  final String? id;
-  final String streamingName;
-  final String country;
-  final String link;
-  final int added;
-  final int leaving;
 }

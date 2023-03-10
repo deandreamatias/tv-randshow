@@ -3,32 +3,13 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/season.dart';
+import 'package:tv_randshow/core/tvshow/data/services/hive_database_service.dart';
 
 part 'tvshow_details.g.dart';
 
 @JsonSerializable(includeIfNull: false)
-@HiveType(typeId: 1)
+@HiveType(typeId: tvshowDetailsHiveTypeId)
 class TvshowDetails extends HiveObject {
-  TvshowDetails({
-    this.rowId,
-    this.episodeRunTime = const [],
-    required this.id,
-    this.inProduction,
-    required this.name,
-    required this.numberOfEpisodes,
-    required this.numberOfSeasons,
-    this.overview = '',
-    this.posterPath = '',
-    this.seasons = const [],
-    this.streamings = const [],
-  });
-
-  factory TvshowDetails.fromRawJson(String str) =>
-      _$TvshowDetailsFromJson(json.decode(str));
-  factory TvshowDetails.fromJson(Map<String, dynamic> json) =>
-      _$TvshowDetailsFromJson(json);
-
   @HiveField(0)
   int? rowId;
 
@@ -41,6 +22,8 @@ class TvshowDetails extends HiveObject {
 
   @JsonKey(name: 'in_production')
   @HiveField(3)
+  // Undefined parameter from api.
+  // ignore: avoid-dynamic
   dynamic inProduction;
 
   @HiveField(4)
@@ -59,11 +42,25 @@ class TvshowDetails extends HiveObject {
   @HiveField(8)
   String posterPath;
 
-  @JsonKey(toJson: _seasonsToJson)
-  List<Season> seasons;
-
   @JsonKey(ignore: true)
   List<StreamingDetail> streamings;
+  TvshowDetails({
+    this.rowId,
+    this.episodeRunTime = const [],
+    required this.id,
+    this.inProduction,
+    required this.name,
+    required this.numberOfEpisodes,
+    required this.numberOfSeasons,
+    this.overview = '',
+    this.posterPath = '',
+    this.streamings = const [],
+  });
+
+  factory TvshowDetails.fromRawJson(String str) =>
+      _$TvshowDetailsFromJson(json.decode(str));
+  factory TvshowDetails.fromJson(Map<String, dynamic> json) =>
+      _$TvshowDetailsFromJson(json);
 
   TvshowDetails copyWith({
     int? rowId,
@@ -75,7 +72,6 @@ class TvshowDetails extends HiveObject {
     int? numberOfSeasons,
     String? overview,
     String? posterPath,
-    List<Season>? seasons,
     List<StreamingDetail>? streamings,
   }) =>
       TvshowDetails(
@@ -88,13 +84,9 @@ class TvshowDetails extends HiveObject {
         overview: overview ?? this.overview,
         posterPath: posterPath ?? this.posterPath,
         rowId: rowId ?? this.rowId,
-        seasons: seasons ?? this.seasons,
         streamings: streamings ?? this.streamings,
       );
 
   Map<String, dynamic> toJson() => _$TvshowDetailsToJson(this);
   String toRawJson() => json.encode(_$TvshowDetailsToJson(this));
-
-  /// Disable toJson to seasons property
-  static List<Season>? _seasonsToJson(List<Season> seasons) => null;
 }

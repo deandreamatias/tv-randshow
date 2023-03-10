@@ -7,28 +7,23 @@ class DioService {
   final String baseUrl;
   final Map<String, dynamic>? headers;
   final Map<String, dynamic>? queryParams;
-  late Dio _dio;
-  DioService(this.baseUrl, {this.headers, this.queryParams}) {
-    _initDio();
-  }
-
-  void _initDio() {
-    BaseOptions options = BaseOptions(
+  late final Dio _dio = Dio(
+    BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: 5000,
       receiveTimeout: 3000,
       headers: headers,
       queryParameters: queryParams,
-    );
-    _dio = Dio(options);
-  }
+    ),
+  );
+  DioService(this.baseUrl, {this.headers, this.queryParams});
 
   Future<Map<String, dynamic>> get(
     String path,
     Map<String, dynamic> dataMap,
   ) async {
     try {
-      final Response<dynamic> response = await _dio.get<dynamic>(
+      final Response response = await _dio.get(
         path,
         queryParameters: dataMap,
       );
@@ -38,9 +33,11 @@ class DioService {
       if (response.data is Map) {
         return response.data ?? {};
       }
+
       return {};
     } on DioError catch (e) {
       log('Error to get $path: ${e.message}', error: e);
+
       return {};
     }
   }

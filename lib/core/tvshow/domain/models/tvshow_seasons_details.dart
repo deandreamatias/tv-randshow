@@ -8,6 +8,18 @@ part 'tvshow_seasons_details.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class TvshowSeasonsDetails {
+  final int id;
+  @JsonKey(name: 'air_date', fromJson: _fromJsonAirDate)
+  final DateTime? airDate;
+  final List<Episode> episodes;
+  final String name;
+  final String overview;
+  final int? tvshowSeasonsDetailsId;
+  @JsonKey(name: 'poster_path')
+  final String posterPath;
+  @JsonKey(name: 'season_number')
+  final int seasonNumber;
+
   const TvshowSeasonsDetails({
     required this.id,
     this.airDate,
@@ -23,18 +35,6 @@ class TvshowSeasonsDetails {
       _$TvshowSeasonsDetailsFromJson(json.decode(str));
   factory TvshowSeasonsDetails.fromJson(Map<String, dynamic> json) =>
       _$TvshowSeasonsDetailsFromJson(json);
-
-  final int id;
-  @JsonKey(name: 'air_date', fromJson: _fromJsonAirDate)
-  final DateTime? airDate;
-  final List<Episode> episodes;
-  final String name;
-  final String overview;
-  final int? tvshowSeasonsDetailsId;
-  @JsonKey(name: 'poster_path')
-  final String posterPath;
-  @JsonKey(name: 'season_number')
-  final int seasonNumber;
 
   Map<String, dynamic> toJson() => _$TvshowSeasonsDetailsToJson(this);
   String toRawJson() => json.encode(_$TvshowSeasonsDetailsToJson(this));

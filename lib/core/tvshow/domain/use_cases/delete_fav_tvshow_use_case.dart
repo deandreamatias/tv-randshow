@@ -7,7 +7,7 @@ class DeleteFavTvshowUseCase {
 
   const DeleteFavTvshowUseCase(this._localRepository);
 
-  Future<bool> call(int id) async {
+  Future<void> call(int id) {
     return _localRepository.deleteTvshow(id);
   }
 }
