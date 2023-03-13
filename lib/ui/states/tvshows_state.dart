@@ -16,25 +16,17 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
     return await _getLocalTvshows();
   }
 
-  Future<void> addFav(TvshowDetails tvshowDetails) async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard<List<TvshowDetails>>(
-      () async {
-        return [...state.requireValue, tvshowDetails];
-      },
+  void addFav(TvshowDetails tvshowDetails) {
+    state = AsyncValue<List<TvshowDetails>>.data(
+      [...state.requireValue, tvshowDetails],
     );
   }
 
-  Future<void> deleteFav(int id) async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard<List<TvshowDetails>>(
-      () async {
-        final tempState = state.requireValue;
-        tempState.removeWhere((element) => element.id == id);
+  void deleteFav(int id) {
+    final tempState = state.requireValue;
+    tempState.removeWhere((element) => element.id == id);
 
-        return tempState;
-      },
-    );
+    state = AsyncValue<List<TvshowDetails>>.data(tempState);
   }
 
   TvshowDetails getFav(int id) =>
