@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/common/services/database_helper.dart';
+import 'package:tv_randshow/core/tvshow/data/helpers/database_helper.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 

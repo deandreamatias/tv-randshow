@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/common/services/dio_service.dart';
+import 'package:tv_randshow/core/app/data/services/dio_service.dart';
 import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
 
 @lazySingleton

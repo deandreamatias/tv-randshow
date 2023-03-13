@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/common/interfaces/i_local_preferences_service.dart';
+import 'package:tv_randshow/core/app/domain/interfaces/i_local_preferences_service.dart';
 import 'package:tv_randshow/core/migration/domain/interfaces/i_migration_repository.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 

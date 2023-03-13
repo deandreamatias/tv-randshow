@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/common/interfaces/i_local_preferences_service.dart';
-import 'package:tv_randshow/common/services/shared_preferences_service.dart';
+import 'package:tv_randshow/core/app/data/services/local_preferences_service.dart';
+import 'package:tv_randshow/core/app/domain/interfaces/i_local_preferences_service.dart';
 import 'package:tv_randshow/core/app/ioc/locator.config.dart';
 
 final GetIt locator = GetIt.instance;
@@ -15,8 +15,7 @@ void setupLocator() => locator.init(environment: kIsWeb ? 'web' : 'mobile');
 @module
 abstract class RegisterModule {
   @Singleton(as: ILocalPreferencesService)
-  SharedPreferencesService get getLocalPreferences =>
-      SharedPreferencesService();
+  LocalPreferencesService get getLocalPreferences => LocalPreferencesService();
 
   @singleton
   GlobalKey<ScaffoldMessengerState> get getScaffoldKey =>
