@@ -6,6 +6,7 @@ import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/export_tvshow_state.dart';
 import 'package:tv_randshow/ui/states/tvshows_state.dart';
 import 'package:tv_randshow/ui/widgets/error_icon.dart';
+import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 
@@ -75,7 +76,8 @@ class _FavoriteList extends StatelessWidget {
                         ),
                       ),
                     ),
-              error: (error, stackTrace) => const ErrorIcon(
+              error: (error, stackTrace) => ErrorMessage(
+                error: error,
                 keyText: 'app.fav.error_message',
               ),
               loading: () => const Loader(key: Key('app.fav.loading')),

@@ -125,7 +125,7 @@ class _PaginationStatus extends ConsumerWidget {
     return state.when(
       error: (error, stackTrace) => ErrorMessage(
         keyText: 'app.search.error_message',
-        error: error.toString(),
+        error: error,
       ),
       loading: () => state.hasValue && state.requireValue.isNotEmpty
           ? const Loader()
@@ -196,7 +196,7 @@ class _SearchResult extends StatelessWidget {
           error: (error, stk) => SliverToBoxAdapter(
             child: ErrorMessage(
               keyText: 'app.search.error_message',
-              error: error.toString(),
+              error: error,
             ),
           ),
         );

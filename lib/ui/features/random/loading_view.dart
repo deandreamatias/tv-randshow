@@ -55,7 +55,7 @@ class LoadingView extends StatelessWidget {
                             },
                             error: (error, stackTrace) => ErrorMessage(
                               keyText: 'app.loading.general_error',
-                              error: error.toString(),
+                              error: error,
                             ),
                             loading: () => const FlareActor(
                               Assets.loading,

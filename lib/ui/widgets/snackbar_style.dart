@@ -14,6 +14,8 @@ class StyledSnackBar {
     String details = '',
     SnackBarStyle style = SnackBarStyle.info,
   }) {
+    const double bigWidth = 600;
+    final isBigWidth = MediaQuery.of(context).size.width > 600;
     Color? bgColor;
     Color? labelColor;
 
@@ -28,12 +30,14 @@ class StyledSnackBar {
     }
 
     return SnackBar(
-      margin: const EdgeInsets.all(Styles.standard),
+      width: isBigWidth ? bigWidth : null,
+      margin: isBigWidth ? null : const EdgeInsets.all(Styles.standard),
       behavior: SnackBarBehavior.floating,
       backgroundColor: bgColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(Styles.large)),
       ),
+      duration: Duration(seconds: style == SnackBarStyle.error ? 6 : 4),
       content: Text(message),
       action: style == SnackBarStyle.error
           ? SnackBarAction(

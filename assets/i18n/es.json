@@ -3,6 +3,22 @@
         "name": "TV Randshow",
         "send_error": "Enviar email con el error",
         "report_action": "Enviar error",
+        "errors": {
+            "api": "Error de la api: {detail}",
+            "internal_server_streaming": "Problema en el servidor de streaming availability",
+            "internal_server_tvshows": "Problema en el servidor de TV shows",
+            "not_found": "La solicitud no se encuentra",
+            "forbidden": "No se tienen los permisos para acceder a este recurso",
+            "bad_request": "Solicitud inválida",
+            "unauthorized": "Acceso denegado",
+            "global": "Problema desconocido",
+            "app": "Error de la aplicación: {detail}",
+            "internal_program_unknown": "Problema interno desconocido",
+            "internal_program_argument": "Argumento inválido en la función",
+            "internal_program_range": "Valor fuera del rango",
+            "internal_program_state": "Operación inválida con el estado actual",
+            "internal_program_type": "Tipo inválido"
+        },
         "migration": {
             "title": "Migración",
             "subtitle": "A continuación se hará un pequeño proceso de migración para mejorar la aplicación",
@@ -22,7 +38,7 @@
             "save": "Guarda tus series en un archivo",
             "title": "Tus series favoritas para elegir al azar un episodio",
             "empty_message": "Busca una serie para añadir en tu lista de favoritos",
-            "error_message": "Oops! Ocurrió un error al cargar los favoritos",
+            "error_message": "Ocurrió un error al cargar los favoritos",
             "button_random": "AL AZAR"
         },
         "search": {
@@ -31,10 +47,11 @@
             "no_more_items": "No hay más resultados",
             "load_more_items": "Cargar más resultados",
             "init_message": "Busca una serie escribiendo en la barra superior",
-            "error_message": "Oops! Ha habido un error. \nComprueba tu conexión de internet",
+            "error_message": "Ha habido un error en la búsqueda",
             "empty_message": "No hay resultados para esta búsqueda",
             "button_fav": "AÑADIR",
-            "button_delete": "ELIMINAR"
+            "button_delete": "ELIMINAR",
+            "error_fav": "Error al añadir a tus favoritos"
         },
         "info": {
             "tab": "Info",
@@ -66,8 +83,7 @@
         },
         "loading": {
             "title": "Eligiendo un episodio aleatorio",
-            "general_error": "Hubo un error al elegir el episodio. Por favor intenta de nuevo",
-            "connection_error": "Falló en la conexión. Conéctate e intenta de nuevo",
+            "general_error": "Hubo un error al hacer la petición aletaoria",
             "button_fav": "FAVORITOS"
         },
         "result": {
@@ -95,7 +111,8 @@
             "title": "Eliminar serie",
             "subtitle": "¿Quieres eliminar esta serie de tus favoritos?",
             "button_cancel": "CANCELAR",
-            "button_delete": "ELIMINAR"
+            "button_delete": "ELIMINAR",
+            "delete_error": "Error al eliminar serie"
         }
     }
 }

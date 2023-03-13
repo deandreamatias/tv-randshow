@@ -108,7 +108,7 @@ class _TvshowInfoDetails extends StatelessWidget {
               ),
               error: (error, stackTrace) => ErrorMessage(
                 keyText: 'app.modal.error_load',
-                error: error.toString(),
+                error: error,
               ),
               loading: () => const Loader(),
             );

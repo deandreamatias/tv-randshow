@@ -3,6 +3,22 @@
         "name": "TV Randshow",
         "send_error": "Send email with the error",
         "report_action": "Send error",
+        "errors": {
+            "api": "Api error: {detail}",
+            "internal_server_streaming": "Streaming availability server problem",
+            "internal_server_tvshows": "TV shows server problem",
+            "not_found": "Not found request",
+            "forbidden": "Forbidden permissions to access",
+            "bad_request": "Bad request",
+            "unauthorized": "Denied access",
+            "global": "Something went wrong",
+            "app": "App error: {detail}",
+            "internal_program_unknown": "Internal program error unknown",
+            "internal_program_argument": "Invalid argument on function",
+            "internal_program_range": "Value not in range",
+            "internal_program_state": "Invalid operation with actual state",
+            "internal_program_type": "Invalid type"
+        },
         "migration": {
             "title": "Migration",
             "subtitle": "The following is a small migration process to improve the application",
@@ -22,7 +38,7 @@
             "save": "Save your tv show to file",
             "title": "Your favorite TV shows to get a random episode",
             "empty_message": "Search TV show to add in your favorites TV shows",
-            "error_message": "Oops! Have a error to load your favorites",
+            "error_message": "Have a error to load your favorites",
             "button_random": "RANDOM"
         },
         "search": {
@@ -31,10 +47,11 @@
             "no_more_items": "No more items",
             "load_more_items": "Load more items",
             "init_message": "Search a TV show in top bar",
-            "error_message": "Oops! Have a error. \nTry verify your internet connection",
+            "error_message": "Have a error to complete your search",
             "empty_message": "Don't have results for this search",
             "button_fav": "ADD TO FAV",
-            "button_delete": "DELETE"
+            "button_delete": "DELETE",
+            "error_fav": "Error to add to your favs"
         },
         "info": {
             "tab": "Info",
@@ -66,8 +83,7 @@
         },
         "loading": {
             "title": "Choosing a random TV show",
-            "general_error": "Error to get episode. Please try again",
-            "connection_error": "Fail connection. Connect and try again",
+            "general_error": "Error to complete random request",
             "button_fav": "FAVORITES"
         },
         "result": {
@@ -76,7 +92,7 @@
             "button_fav": "FAVORITES",
             "streaming_title": "See on streamings:",
             "no_streaming_title": "No available on streamings",
-            "error_load": "Error to load result"
+            "error_load": "Error to load random result"
         },
         "modal": {
             "description": "Description",
@@ -95,7 +111,8 @@
             "title": "Delete TV show",
             "subtitle": "Do you want delete this TV show from your favorites?",
             "button_cancel": "CANCEL",
-            "button_delete": "DELETE"
+            "button_delete": "DELETE",
+            "delete_error": "Error to delete TV show"
         }
     }
 }

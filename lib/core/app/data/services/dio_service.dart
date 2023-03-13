@@ -1,12 +1,17 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class DioService {
+  /// Use [baseUrl] to config a base url of api, like `https://api.tmdb.com`.
   final String baseUrl;
   final Map<String, dynamic>? headers;
   final Map<String, dynamic>? queryParams;
+
+  /// Optional [catchErrors] to get DioError. This is usuful when need
+  /// transform a DioError to custom error.
+  final void Function(DioError)? catchErrors;
   late final Dio _dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
@@ -16,7 +21,12 @@ class DioService {
       queryParameters: queryParams,
     ),
   );
-  DioService(this.baseUrl, {this.headers, this.queryParams});
+  DioService(
+    this.baseUrl, {
+    this.headers,
+    this.queryParams,
+    this.catchErrors,
+  });
 
   Future<Map<String, dynamic>> get(
     String path,
@@ -35,10 +45,20 @@ class DioService {
       }
 
       return {};
-    } on DioError catch (e) {
-      log('Error to get $path: ${e.message}', error: e);
+    } on DioError catch (e, stackTrace) {
+      debugPrintStack(
+        label: e.toString(),
+        stackTrace: stackTrace,
+        maxFrames: 10,
+      );
+      if (catchErrors == null) {
+        rethrow;
+      }
+      catchErrors?.call(e);
 
       return {};
+    } catch (e) {
+      rethrow;
     }
   }
 }
