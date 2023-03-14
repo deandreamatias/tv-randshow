@@ -1,6 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tv_randshow/core/tvshow/domain/services/random_service.dart';
+import 'package:tv_randshow/core/random/domain/services/random_service.dart';
 
 void main() {
   final randomService = RandomService();

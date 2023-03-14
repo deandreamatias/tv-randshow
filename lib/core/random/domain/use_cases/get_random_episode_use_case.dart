@@ -1,9 +1,9 @@
 import 'package:injectable/injectable.dart';
+import 'package:tv_randshow/core/random/domain/services/random_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_online_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/episode.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_seasons_details.dart';
-import 'package:tv_randshow/core/tvshow/domain/services/random_service.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
 
 @injectable

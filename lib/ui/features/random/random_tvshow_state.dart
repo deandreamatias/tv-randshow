@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
+import 'package:tv_randshow/core/random/domain/use_cases/get_random_episode_use_case.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
-import 'package:tv_randshow/core/tvshow/domain/use_cases/get_random_episode_use_case.dart';
 import 'package:tv_randshow/ui/states/tvshows_state.dart';
 
 class RandomTvshowNotifier
