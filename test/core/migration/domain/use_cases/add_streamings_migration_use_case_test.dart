@@ -16,9 +16,6 @@ import 'add_streamings_migration_use_case_test.mocks.dart';
 @GenerateMocks([ILocalRepository, IStreamingsRepository])
 void main() {
   final faker = Faker();
-  final randomInt100 = faker.randomGenerator.integer(100);
-  final randomYear = faker.randomGenerator
-      .integer(DateTime.now().year + 100, min: DateTime.now().year);
   List<StreamingDetail> streamings() => List.generate(
         faker.randomGenerator.integer(20),
         (index) => StreamingDetail(
@@ -28,19 +25,6 @@ void main() {
           added: faker.randomGenerator.integer(1),
           streamingName: faker.lorem.word(),
         ),
-      );
-  Streaming streaming() => Streaming(
-        imdbRating: randomInt100,
-        imdbVoteCount: faker.randomGenerator.integer(9999),
-        tmdbRating: randomInt100,
-        year: randomYear,
-        lastAirYear: randomYear,
-        firstAirYear: randomYear,
-        seasons: faker.randomGenerator.integer(50),
-        episodes: faker.randomGenerator.integer(9999),
-        age: faker.randomGenerator.integer(100),
-        status: faker.randomGenerator.integer(1),
-        streamings: streamings(),
       );
   TvshowDetails tvshowDetails({bool withStreamings = false}) => TvshowDetails(
         episodeRunTime: faker.randomGenerator
@@ -104,7 +88,7 @@ void main() {
         when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
 
         for (TvshowDetails tvshow in tvshows) {
-          final localStreaming = streaming();
+          final localStreaming = streamings();
 
           when(streamingsRepository.searchTvShow(argThat(isNotNull)))
               .thenAnswer(
@@ -112,7 +96,7 @@ void main() {
           );
 
           final localTvshow = tvshow.copyWith(
-            streamings: localStreaming.streamings,
+            streamings: localStreaming,
             rowId: tvshow.rowId,
           );
           when(databaseService.saveStreamings(localTvshow))
@@ -194,7 +178,7 @@ void main() {
         when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
 
         for (var tvshow in tvshows) {
-          final streaming0 = streaming();
+          final streaming0 = streamings();
 
           when(streamingsRepository.searchTvShow(argThat(isNotNull)))
               .thenAnswer(

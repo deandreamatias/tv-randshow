@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 class DioService {
   /// Use [baseUrl] to config a base url of api, like `https://api.tmdb.com`.
@@ -45,12 +45,8 @@ class DioService {
       }
 
       return {};
-    } on DioError catch (e, stackTrace) {
-      debugPrintStack(
-        label: e.toString(),
-        stackTrace: stackTrace,
-        maxFrames: 10,
-      );
+    } on DioError catch (e) {
+      log('${e.message.toString()} - ${e.response.toString()}');
       if (catchErrors == null) {
         rethrow;
       }

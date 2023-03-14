@@ -45,7 +45,9 @@ class StreamingErrorTransformer {
       if (response.data is String) {
         apiErrorMessage = response.data;
       }
-      apiErrorMessage = response.statusMessage ?? '';
+      if (apiErrorMessage.isEmpty) {
+        apiErrorMessage = response.statusMessage ?? '';
+      }
     } else {
       apiErrorMessage = 'Empty or invalid response';
     }

@@ -37,7 +37,7 @@ class AddStreamingsMigrationUseCase {
         final tvshowStremings =
             await _streamingsRepository.searchTvShow(search);
 
-        streamings.addAll(tvshowStremings.streamings);
+        streamings.addAll(tvshowStremings);
 
         if (streamings.isNotEmpty) {
           tvshow = tvshow.copyWith(streamings: streamings, rowId: tvshow.rowId);
