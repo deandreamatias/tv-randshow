@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/api_error.dart';
+import 'package:tv_randshow/core/app/domain/exceptions/app_error.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/database_error.dart';
 import 'package:tv_randshow/ui/shared/constants.dart';
 import 'package:tv_randshow/ui/shared/errors_messages/api_error_extension.dart';
+import 'package:tv_randshow/ui/shared/errors_messages/app_error_extension.dart';
 import 'package:tv_randshow/ui/shared/errors_messages/database_error_extension.dart';
 import 'package:tv_randshow/ui/shared/errors_messages/program_error_extension.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
@@ -29,6 +31,8 @@ class ErrorMessage extends StatelessWidget {
         return (error as Error).getMessage();
       case DatabaseError:
         return (error as DatabaseError).code.getMessage();
+      case AppError:
+        return (error as AppError).code.getMessage();
       default:
         return '';
     }

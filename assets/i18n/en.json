@@ -12,7 +12,7 @@
             "bad_request": "Bad request",
             "unauthorized": "Denied access",
             "global": "Something went wrong",
-            "app": "App error: {detail}",
+            "internal": "App internal error: {detail}",
             "internal_program_unknown": "Internal program error unknown",
             "internal_program_argument": "Invalid argument on function",
             "internal_program_range": "Value not in range",
@@ -22,7 +22,10 @@
             "database_delete": "Can not delete",
             "database_read": "Can not read",
             "database_init": "Is not initialize",
-            "database_unknown": "Unknown"
+            "database_unknown": "Unknown",
+            "app": "App use error: {detail}",
+            "app_empty_favs": "Empty favorites. Add some item (example: tv show) to your favorites and try again",
+            "app_unknown": "Unknown"
         },
         "migration": {
             "title": "Migration",

@@ -12,7 +12,7 @@
             "bad_request": "Solicitud inválida",
             "unauthorized": "Acceso denegado",
             "global": "Problema desconocido",
-            "app": "Error de la aplicación: {detail}",
+            "internal": "Error interno de la aplicación: {detail}",
             "internal_program_unknown": "Problema interno desconocido",
             "internal_program_argument": "Argumento inválido en la función",
             "internal_program_range": "Valor fuera del rango",
@@ -22,7 +22,10 @@
             "database_delete": "No se puede eliminar",
             "database_read": "No se puede leer",
             "database_init": "No se ha inicializado",
-            "database_unknown": "Desconocido"
+            "database_unknown": "Desconocido",
+            "app": "Error de uso de la aplicación: {detail}",
+            "app_empty_favs": "No hay favoritos guardados. Añada algún item (ejemplo: serie) a sus favoritos e intente nuevamente",
+            "app_unknown": "Desconocido"
         },
         "migration": {
             "title": "Migración",
