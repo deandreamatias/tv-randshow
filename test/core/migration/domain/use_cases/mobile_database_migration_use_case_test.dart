@@ -15,15 +15,15 @@ import 'mobile_database_migration_use_case_test.mocks.dart';
 void main() {
   final generateTvshow = GenerateTvshow();
 
-  final databaseService = MockILocalRepository();
+  final localRepository = MockILocalRepository();
   final secondaryDatabaseService = MockISecondaryDatabaseService();
   final usecase = MobileDatabaseMigrationUseCase(
-    databaseService,
+    localRepository,
     secondaryDatabaseService,
   );
 
   setUp(() {
-    reset(databaseService);
+    reset(localRepository);
     reset(secondaryDatabaseService);
   });
 
@@ -52,9 +52,9 @@ void main() {
 
         when(secondaryDatabaseService.getTvshows())
             .thenAnswer((_) async => tvshows);
-        when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+        when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
         for (var tvshow in tvshows) {
-          when(databaseService.saveTvshow(tvshow))
+          when(localRepository.saveTvshow(tvshow))
               .thenAnswer((_) async => true);
         }
         when(secondaryDatabaseService.deleteAll())
@@ -91,10 +91,10 @@ void main() {
 
         for (var tvshow in tvshows) {
           if (tvshow.id != errorTvshow.id) {
-            when(databaseService.saveTvshow(tvshow))
+            when(localRepository.saveTvshow(tvshow))
                 .thenAnswer((_) => Future.value());
           } else {
-            when(databaseService.saveTvshow(tvshow)).thenThrow(exception);
+            when(localRepository.saveTvshow(tvshow)).thenThrow(exception);
           }
         }
         usecase().listen(
@@ -106,7 +106,7 @@ void main() {
           ),
           onDone: () {
             verify(secondaryDatabaseService.getTvshows()).called(1);
-            verify(databaseService.saveTvshow(errorTvshow)).called(1);
+            verify(localRepository.saveTvshow(errorTvshow)).called(1);
           },
         );
       },
@@ -120,9 +120,9 @@ void main() {
 
         when(secondaryDatabaseService.getTvshows())
             .thenAnswer((_) async => tvshows);
-        when(databaseService.getTvshows()).thenAnswer((_) async => newTvshows);
+        when(localRepository.getTvshows()).thenAnswer((_) async => newTvshows);
         for (var tvshow in tvshows) {
-          when(databaseService.saveTvshow(tvshow))
+          when(localRepository.saveTvshow(tvshow))
               .thenAnswer((_) => Future.value());
         }
 
@@ -140,8 +140,8 @@ void main() {
           ),
           onDone: () {
             verify(secondaryDatabaseService.getTvshows()).called(1);
-            verify(databaseService.saveTvshow(tvshows.first)).called(1);
-            verify(databaseService.getTvshows()).called(1);
+            verify(localRepository.saveTvshow(tvshows.first)).called(1);
+            verify(localRepository.getTvshows()).called(1);
           },
         );
       },
@@ -154,9 +154,9 @@ void main() {
 
         when(secondaryDatabaseService.getTvshows())
             .thenAnswer((_) async => tvshows);
-        when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+        when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
         for (var tvshow in tvshows) {
-          when(databaseService.saveTvshow(tvshow))
+          when(localRepository.saveTvshow(tvshow))
               .thenAnswer((_) async => true);
         }
         when(secondaryDatabaseService.deleteAll())
@@ -179,8 +179,8 @@ void main() {
           ),
           onDone: () {
             verify(secondaryDatabaseService.getTvshows()).called(1);
-            verify(databaseService.saveTvshow(tvshows.first)).called(1);
-            verify(databaseService.getTvshows()).called(1);
+            verify(localRepository.saveTvshow(tvshows.first)).called(1);
+            verify(localRepository.getTvshows()).called(1);
             verify(secondaryDatabaseService.deleteAll()).called(1);
           },
         );

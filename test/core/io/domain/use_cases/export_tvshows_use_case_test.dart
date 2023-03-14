@@ -12,15 +12,15 @@ import 'export_tvshows_use_case_test.mocks.dart';
 @GenerateMocks([ILocalRepository, IManageFilesService])
 Future<void> main() async {
   final generateTvshow = GenerateTvshow();
-  final databaseService = MockILocalRepository();
+  final localRepository = MockILocalRepository();
   final manageFiles = MockIManageFilesService();
   final useCase = ExportTvShowsUseCase(
-    databaseService,
+    localRepository,
     manageFiles,
   );
 
   setUpAll(() {
-    reset(databaseService);
+    reset(localRepository);
     reset(manageFiles);
   });
 
@@ -29,7 +29,7 @@ Future<void> main() async {
     final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
     final fileName = 'tvrandshow-${nowDateTime.first}';
     final tvshowFile = TvshowsFile(tvshows: tvshows).toRawJson();
-    when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+    when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
     when(
       manageFiles.saveFile(
         fileName,
@@ -42,7 +42,7 @@ Future<void> main() async {
   test('should dont save tv shows when database is empty', () {
     final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
     final fileName = 'tvrandshow-${nowDateTime.first}';
-    when(databaseService.getTvshows()).thenAnswer((_) async => []);
+    when(localRepository.getTvshows()).thenAnswer((_) async => []);
     when(manageFiles.saveFile(fileName, TvshowsFile(tvshows: []).toRawJson()))
         .thenAnswer((_) async => fileName);
 
@@ -52,7 +52,7 @@ Future<void> main() async {
     final tvshows = generateTvshow.tvshows;
     final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
     final fileName = 'tvrandshow-${nowDateTime.first}';
-    when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+    when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
     when(
       manageFiles.saveFile(
         fileName,

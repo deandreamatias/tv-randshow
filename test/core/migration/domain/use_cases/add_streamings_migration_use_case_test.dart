@@ -41,21 +41,21 @@ void main() {
             faker.randomGenerator.integer(faker.randomGenerator.integer(999)),
       );
 
-  final databaseService = MockILocalRepository();
+  final localRepository = MockILocalRepository();
   final streamingsRepository = MockIStreamingsRepository();
 
   final usecase = AddStreamingsMigrationUseCase(
-    databaseService,
+    localRepository,
     streamingsRepository,
   );
 
   setUp(() {
-    reset(databaseService);
+    reset(localRepository);
     reset(streamingsRepository);
   });
   group('complete -', () {
     test('Should return complete status when has empty database', () {
-      when(databaseService.getTvshows()).thenAnswer((_) async => []);
+      when(localRepository.getTvshows()).thenAnswer((_) async => []);
 
       expect(usecase(), emits(MigrationStatus.empty));
       expect(
@@ -71,7 +71,7 @@ void main() {
           (i) => tvshowDetails(withStreamings: true),
           50,
         );
-        when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+        when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
 
         expect(usecase(), emits(MigrationStatus.complete));
         expect(
@@ -85,7 +85,7 @@ void main() {
       () {
         final tvshows =
             random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
-        when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+        when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
 
         for (TvshowDetails tvshow in tvshows) {
           final localStreaming = streamings();
@@ -99,7 +99,7 @@ void main() {
             streamings: localStreaming,
             rowId: tvshow.rowId,
           );
-          when(databaseService.saveStreamings(localTvshow))
+          when(localRepository.saveStreamings(localTvshow))
               .thenAnswer((_) async => Future<void>);
         }
 
@@ -123,7 +123,7 @@ void main() {
   group('errors -', () {
     test('Should get exception when has exception on get tv shows', () {
       final exception = Exception('Error to get tvshows');
-      when(databaseService.getTvshows()).thenThrow(exception);
+      when(localRepository.getTvshows()).thenThrow(exception);
 
       usecase().listen(
         (value) => {},
@@ -131,7 +131,7 @@ void main() {
           (value) => expect(value, exception),
         ),
         onDone: () {
-          verify(databaseService.getTvshows()).called(1);
+          verify(localRepository.getTvshows()).called(1);
         },
       );
     });
@@ -141,7 +141,7 @@ void main() {
         final exception = Exception('Error to get tvshows');
         final tvshows =
             random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
-        when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+        when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
 
         for (var tvshow in tvshows) {
           when(
@@ -163,7 +163,7 @@ void main() {
             (value) => expect(value, exception),
           ),
           onDone: () {
-            verify(databaseService.getTvshows()).called(1);
+            verify(localRepository.getTvshows()).called(1);
             verify(streamingsRepository.searchTvShow(any)).called(1);
           },
         );
@@ -175,7 +175,7 @@ void main() {
         final exception = Exception('Error to get tvshows');
         final tvshows =
             random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
-        when(databaseService.getTvshows()).thenAnswer((_) async => tvshows);
+        when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
 
         for (var tvshow in tvshows) {
           final streaming0 = streamings();
@@ -186,7 +186,7 @@ void main() {
           );
 
           when(
-            databaseService.saveStreamings(
+            localRepository.saveStreamings(
               argThat(
                 isA<TvshowDetails>().having(
                   (tvshowDetail) => tvshowDetail.id,
@@ -204,9 +204,9 @@ void main() {
             (value) => expect(value, exception),
           ),
           onDone: () {
-            verify(databaseService.getTvshows()).called(1);
+            verify(localRepository.getTvshows()).called(1);
             verify(streamingsRepository.searchTvShow(any)).called(1);
-            verify(databaseService.saveStreamings(any)).called(1);
+            verify(localRepository.saveStreamings(any)).called(1);
           },
         );
       },
