@@ -49,6 +49,9 @@ class TmdbErrorTransformer {
       if (data is List) {
         apiErrorMessage = data.first.toString();
       }
+      if (data is String) {
+        apiErrorMessage = data;
+      }
       if (apiErrorMessage.isEmpty) {
         apiErrorMessage = response.statusMessage ?? '';
       }

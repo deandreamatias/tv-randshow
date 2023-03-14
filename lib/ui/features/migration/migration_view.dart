@@ -5,6 +5,7 @@ import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/ui/features/migration/migration_state.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
+import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 
@@ -40,7 +41,6 @@ class _MigrationViewState extends State<MigrationView> {
           child: StreamBuilder<MigrationStatus>(
             stream: migrationState.stream,
             builder: (context, snapshot) {
-              final error = snapshot.error;
               final order = snapshot.data?.getOrder() ?? 0;
               final isLoading =
                   snapshot.connectionState != ConnectionState.done &&
@@ -70,7 +70,10 @@ class _MigrationViewState extends State<MigrationView> {
                   ],
                   if (snapshot.hasError) ...[
                     const Divider(thickness: 2),
-                    Text('${translate('app.migration.error')}: ${error ?? ''}'),
+                    ErrorMessage(
+                      error: snapshot.error ?? Object(),
+                      keyText: 'app.migration.error',
+                    ),
                   ],
                   const SizedBox(height: Styles.large),
                   OutlinedButton.icon(

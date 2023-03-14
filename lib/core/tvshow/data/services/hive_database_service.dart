@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tv_randshow/core/app/domain/exceptions/database_error.dart';
 import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
 import 'package:tv_randshow/core/streaming/data/models/streaming_detail_hive.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
@@ -42,10 +43,14 @@ class HiveDatabaseService implements ILocalRepository {
       log('Tvshow deleted: $id');
 
       return true;
-    } catch (e) {
-      log('Error to delete tvshow: $id', error: e);
-
-      return false;
+    } catch (e, stackTrace) {
+      Error.throwWithStackTrace(
+        DatabaseError(
+          code: DatabaseErrorCode.delete,
+          message: e.toString(),
+        ),
+        stackTrace,
+      );
     }
   }
 
@@ -79,10 +84,14 @@ class HiveDatabaseService implements ILocalRepository {
       }
 
       return list;
-    } catch (e) {
-      log('Error to get tv shows: $e', error: e);
-
-      return [];
+    } catch (e, stackTrace) {
+      Error.throwWithStackTrace(
+        DatabaseError(
+          code: DatabaseErrorCode.read,
+          message: e.toString(),
+        ),
+        stackTrace,
+      );
     }
   }
 
@@ -137,8 +146,14 @@ class HiveDatabaseService implements ILocalRepository {
         if (Platform.isAndroid) {
           documentsDirectory = await getExternalStorageDirectory();
         }
-      } catch (e) {
-        log('Can\'t open directory', error: e);
+      } catch (e, stackTrace) {
+        Error.throwWithStackTrace(
+          DatabaseError(
+            code: DatabaseErrorCode.init,
+            message: e.toString(),
+          ),
+          stackTrace,
+        );
       }
       Hive.init(documentsDirectory?.path ?? '');
       _registerAdapters();

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/api_error.dart';
+import 'package:tv_randshow/core/app/domain/exceptions/database_error.dart';
 import 'package:tv_randshow/ui/shared/constants.dart';
 import 'package:tv_randshow/ui/shared/errors_messages/api_error_extension.dart';
+import 'package:tv_randshow/ui/shared/errors_messages/database_error_extension.dart';
 import 'package:tv_randshow/ui/shared/errors_messages/program_error_extension.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
@@ -25,6 +27,8 @@ class ErrorMessage extends StatelessWidget {
         return (error as ApiError).code.getMessage();
       case Error:
         return (error as Error).getMessage();
+      case DatabaseError:
+        return (error as DatabaseError).code.getMessage();
       default:
         return '';
     }
@@ -36,19 +40,26 @@ class ErrorMessage extends StatelessWidget {
 
     return Center(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            UniconsLine.exclamation_octagon,
-            color: Theme.of(context).colorScheme.error,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                UniconsLine.exclamation_octagon,
+                color: Theme.of(context).colorScheme.error,
+              ),
+              const SizedBox(width: Styles.standard),
+              Text(
+                errorText,
+                key: Key(keyText),
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ],
           ),
-          const SizedBox(height: Styles.standard),
-          Text(
-            errorText,
-            key: Key(keyText),
-            style: Theme.of(context).textTheme.titleMedium,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: Styles.standard),
+          const SizedBox(height: Styles.medium),
           TextButton.icon(
             onPressed: () => Helpers.openMail(
               Constants.feedbackEmail,

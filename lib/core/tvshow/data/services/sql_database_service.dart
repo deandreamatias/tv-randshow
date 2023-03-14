@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:injectable/injectable.dart';
+import 'package:tv_randshow/core/app/domain/exceptions/database_error.dart';
 import 'package:tv_randshow/core/tvshow/data/helpers/database_helper.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
@@ -13,10 +14,14 @@ class SqlDatabaseService implements ISecondaryDatabaseService {
   Future<bool> deleteAll() async {
     try {
       return await dbHelper.deleteAll();
-    } catch (e) {
-      log('Error to delete tvshow rows', error: e);
-
-      return false;
+    } catch (e, stackTrace) {
+      Error.throwWithStackTrace(
+        DatabaseError(
+          code: DatabaseErrorCode.delete,
+          message: e.toString(),
+        ),
+        stackTrace,
+      );
     }
   }
 
@@ -39,10 +44,14 @@ class SqlDatabaseService implements ISecondaryDatabaseService {
       );
 
       return tvShowsMaps.map((i) => TvshowDetails.fromJson(i)).toList();
-    } catch (e) {
-      log('Error to get db list', error: e);
-
-      return [];
+    } catch (e, stackTrace) {
+      Error.throwWithStackTrace(
+        DatabaseError(
+          code: DatabaseErrorCode.read,
+          message: e.toString(),
+        ),
+        stackTrace,
+      );
     }
   }
 

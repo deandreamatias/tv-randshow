@@ -17,7 +17,12 @@
             "internal_program_argument": "Invalid argument on function",
             "internal_program_range": "Value not in range",
             "internal_program_state": "Invalid operation with actual state",
-            "internal_program_type": "Invalid type"
+            "internal_program_type": "Invalid type",
+            "database": "Database error: {detail}",
+            "database_delete": "Can not delete",
+            "database_read": "Can not read",
+            "database_init": "Is not initialize",
+            "database_unknown": "Unknown"
         },
         "migration": {
             "title": "Migration",

@@ -17,7 +17,12 @@
             "internal_program_argument": "Argumento inválido na função",
             "internal_program_range": "Valor fora do intervalo",
             "internal_program_state": "Operação inválida com o estado actual",
-            "internal_program_type": "Tipo inválido"
+            "internal_program_type": "Tipo inválido",
+            "database": "Erro na base de dados: {detail}",
+            "database_delete": "Não é possível eliminar",
+            "database_read": "Não é possível ler",
+            "database_init": "Não está inicializado",
+            "database_unknown": "Desconhecido"
         },
         "migration": {
             "title": "Migração",
