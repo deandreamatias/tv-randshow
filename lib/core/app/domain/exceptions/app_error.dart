@@ -15,4 +15,6 @@ class AppError implements Exception {
 
 enum AppErrorCode {
   emptyFavs,
+  invalidSeasonNumber,
+  invalidEpisodeNumber,
 }

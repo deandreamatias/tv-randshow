@@ -55,6 +55,36 @@ class Episode {
   Map<String, dynamic> toJson() => _$EpisodeToJson(this);
   String toRawJson() => json.encode(_$EpisodeToJson(this));
 
+  Episode copyWith({
+    DateTime? airDate,
+    List<Crew>? crew,
+    int? episodeNumber,
+    List<GuestStar>? guestStars,
+    String? name,
+    String? overview,
+    int? id,
+    String? productionCode,
+    int? seasonNumber,
+    String? stillPath,
+    double? voteAverage,
+    int? voteCount,
+  }) {
+    return Episode(
+      airDate: airDate ?? this.airDate,
+      crew: crew ?? this.crew,
+      episodeNumber: episodeNumber ?? this.episodeNumber,
+      guestStars: guestStars ?? this.guestStars,
+      name: name ?? this.name,
+      overview: overview ?? this.overview,
+      id: id ?? this.id,
+      productionCode: productionCode ?? this.productionCode,
+      seasonNumber: seasonNumber ?? this.seasonNumber,
+      stillPath: stillPath ?? this.stillPath,
+      voteAverage: voteAverage ?? this.voteAverage,
+      voteCount: voteCount ?? this.voteCount,
+    );
+  }
+
   static DateTime? _fromJsonAirDate(String? airDate) {
     return Converters.fromJsonDate(airDate);
   }

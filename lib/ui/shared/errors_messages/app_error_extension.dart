@@ -8,6 +8,12 @@ extension AppErrorExtension on AppErrorCode {
       case AppErrorCode.emptyFavs:
         appError = translate('app.errors.app_empty_favs');
         break;
+      case AppErrorCode.invalidEpisodeNumber:
+        appError = translate('app.errors.app_invalid_episode');
+        break;
+      case AppErrorCode.invalidSeasonNumber:
+        appError = translate('app.errors.app_invalid_season');
+        break;
       default:
         appError = translate('app.errors.app_unknown');
     }

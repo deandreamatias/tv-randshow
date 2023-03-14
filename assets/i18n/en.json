@@ -25,6 +25,8 @@
             "database_unknown": "Unknown",
             "app": "App use error: {detail}",
             "app_empty_favs": "Empty favorites. Add some item (example: tv show) to your favorites and try again",
+            "app_invalid_episode": "The episode number is invalid (less or equal to 0). Please, try again",
+            "app_invalid_season": "The season number is invalid (less or equal to 0). Please, try again",
             "app_unknown": "Unknown"
         },
         "migration": {

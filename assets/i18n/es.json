@@ -25,6 +25,8 @@
             "database_unknown": "Desconocido",
             "app": "Error de uso de la aplicación: {detail}",
             "app_empty_favs": "No hay favoritos guardados. Añada algún item (ejemplo: serie) a sus favoritos e intente nuevamente",
+            "app_invalid_episode": "El número de episodio es inválido (menor o igual a 0). Por favor, intente nuevamente",
+            "app_invalid_season": "El número de temporada es inválido (menor o igual a 0). Por favor, intente nuevamente",
             "app_unknown": "Desconocido"
         },
         "migration": {
