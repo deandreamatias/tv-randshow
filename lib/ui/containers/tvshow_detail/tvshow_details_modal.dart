@@ -51,7 +51,7 @@ class TvshowDetailsModal extends StatelessWidget {
 
             return tvshowDetails && showRandom
                 ? RandomButton(idTv: idTv)
-                : SaveButton(tvIdd: idTv);
+                : SaveButton(tvId: idTv);
           },
         ),
       ],

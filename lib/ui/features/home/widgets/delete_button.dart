@@ -76,7 +76,7 @@ class DeleteButton extends StatelessWidget {
             // ignore: prefer-async-await
             _deleteConfirm(context).then((result) {
               if (result) {
-                ref.read(tvshowOnFavsProvider(idTv).notifier).deleteFromFavs();
+                ref.watch(tvshowOnFavsProvider(idTv).notifier).deleteFromFavs();
               }
             });
           },

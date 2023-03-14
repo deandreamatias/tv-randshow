@@ -7,14 +7,14 @@ import 'package:tv_randshow/ui/widgets/loader.dart';
 import 'package:unicons/unicons.dart';
 
 class SaveButton extends StatelessWidget {
-  const SaveButton({super.key, required this.tvIdd});
-  final int tvIdd;
+  const SaveButton({super.key, required this.tvId});
+  final int tvId;
 
   @override
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final watcher = ref.watch(tvshowOnFavsProvider(tvIdd));
+        final watcher = ref.watch(tvshowOnFavsProvider(tvId));
 
         const loader = SizedBox.square(
           dimension: Styles.medium,
@@ -33,10 +33,10 @@ class SaveButton extends StatelessWidget {
                         ? loader
                         : Text(
                             translate('app.search.button_delete'),
-                            key: Key('app.search.button_delete.$tvIdd'),
+                            key: Key('app.search.button_delete.$tvId'),
                           ),
                     onPressed: () => ref
-                        .read(tvshowOnFavsProvider(tvIdd).notifier)
+                        .read(tvshowOnFavsProvider(tvId).notifier)
                         .deleteFromFavs(),
                   )
                 : ElevatedButton.icon(
@@ -46,10 +46,10 @@ class SaveButton extends StatelessWidget {
                         ? loader
                         : Text(
                             translate('app.search.button_fav'),
-                            key: Key('app.search.button_fav.$tvIdd'),
+                            key: Key('app.search.button_fav.$tvId'),
                           ),
                     onPressed: () => ref
-                        .read(tvshowOnFavsProvider(tvIdd).notifier)
+                        .read(tvshowOnFavsProvider(tvId).notifier)
                         .addToFavs(),
                   ),
           ),

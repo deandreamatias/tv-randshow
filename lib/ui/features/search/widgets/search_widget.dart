@@ -30,7 +30,7 @@ class SearchWidget extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: SaveButton(tvIdd: result.id),
+                    child: SaveButton(tvId: result.id),
                   ),
                 ],
               )
