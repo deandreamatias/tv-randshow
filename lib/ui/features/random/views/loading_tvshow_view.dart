@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tv_randshow/ui/features/random/random_tvshow_state.dart';
+import 'package:tv_randshow/ui/features/random/states/random_tvshow_state.dart';
 import 'package:tv_randshow/ui/features/random/widgets/loading_base_view.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/widgets/error_message.dart';
@@ -13,7 +13,7 @@ class LoadingTvshowView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LoadingBaseView(
-      titleKey: 'app.loading.title',
+      titleKey: 'app.loading.episode.title',
       child: Consumer(
         builder: (context, ref, child) {
           return ref.watch(randomTvshowProvider(idTv)).when(
@@ -32,7 +32,7 @@ class LoadingTvshowView extends StatelessWidget {
                   return const AnimationRandomLoader();
                 },
                 error: (error, stackTrace) => ErrorMessage(
-                  keyText: 'app.loading.general_error',
+                  keyText: 'app.loading.episode.general_error',
                   error: error,
                 ),
                 loading: () => const AnimationRandomLoader(),

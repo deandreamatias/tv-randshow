@@ -92,17 +92,21 @@
             "button_back": "BACK"
         },
         "loading": {
-            "title": "Choosing a random TV show",
-            "general_error": "Error to complete random request",
+            "episode": {
+                "title": "Choosing a random TV show",
+                "general_error": "Error to complete random request"
+            },
             "button_fav": "FAVORITES"
         },
         "result": {
-            "title": "This is the TV show episode chosen at random!",
-            "button_random": "ANOTHER RANDOM EPISODE",
-            "button_fav": "FAVORITES",
-            "streaming_title": "See on streamings:",
-            "no_streaming_title": "No available on streamings",
-            "error_load": "Error to load random result"
+            "episode": {
+                "title": "This is the TV show episode chosen at random!",
+                "button_random": "ANOTHER RANDOM EPISODE",
+                "streaming_title": "See on streamings:",
+                "no_streaming_title": "No available on streamings",
+                "error_load": "Error to load random result"
+            },
+            "button_fav": "FAVORITES"
         },
         "modal": {
             "description": "Description",

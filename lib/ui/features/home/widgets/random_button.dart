@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/ui/features/random/loading_tvshow_view.dart';
+import 'package:tv_randshow/ui/features/random/views/loading_tvshow_view.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/custom_icons.dart';
 

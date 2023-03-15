@@ -92,17 +92,21 @@
             "button_back": "VOLVER"
         },
         "loading": {
-            "title": "Eligiendo un episodio aleatorio",
-            "general_error": "Hubo un error al hacer la petición aletaoria",
+            "episode": {
+                "title": "Eligiendo un episodio aleatorio",
+                "general_error": "Hubo un error al hacer la petición aletaoria"
+            },
             "button_fav": "FAVORITOS"
         },
         "result": {
-            "title": "¡Este es el episodio elegido al azar de la serie!",
-            "button_random": "OTRO EPISODIO AL AZAR",
-            "button_fav": "FAVORITOS",
-            "streaming_title": "Ver en streamings:",
-            "no_streaming_title": "No disponible en streamings",
-            "error_load": "Error al cargar resultado"
+            "episode": {
+                "title": "¡Este es el episodio elegido al azar de la serie!",
+                "button_random": "OTRO EPISODIO AL AZAR",
+                "streaming_title": "Ver en streamings:",
+                "no_streaming_title": "No disponible en streamings",
+                "error_load": "Error al cargar resultado"
+            },
+            "button_fav": "FAVORITOS"
         },
         "modal": {
             "description": "Descripción",

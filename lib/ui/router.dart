@@ -3,8 +3,8 @@ import 'package:tv_randshow/ui/features/info/views/privacy_policy_view.dart';
 import 'package:tv_randshow/ui/features/init/splash_view.dart';
 import 'package:tv_randshow/ui/features/init/tab_view.dart';
 import 'package:tv_randshow/ui/features/migration/migration_view.dart';
-import 'package:tv_randshow/ui/features/random/loading_tvshow_view.dart';
-import 'package:tv_randshow/ui/features/random/result_view.dart';
+import 'package:tv_randshow/ui/features/random/views/loading_tvshow_view.dart';
+import 'package:tv_randshow/ui/features/random/views/result_tvshow_view.dart';
 
 class Router {
   static Route generateRoute(RouteSettings settings) {
@@ -24,8 +24,8 @@ class Router {
           builder: (_) => LoadingTvshowView(idTv: settings.arguments as int),
         );
       case RoutePaths.result:
-        return MaterialPageRoute<ResultView>(
-          builder: (_) => ResultView(idTv: settings.arguments as int),
+        return MaterialPageRoute<ResultTvshowView>(
+          builder: (_) => ResultTvshowView(idTv: settings.arguments as int),
         );
       case RoutePaths.privacy:
         return MaterialPageRoute<PrivacyPolicyView>(
