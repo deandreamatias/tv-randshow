@@ -6,8 +6,6 @@ import 'package:tv_randshow/ui/features/info/views/info_view.dart';
 import 'package:tv_randshow/ui/features/random/views/loading_tvshows_view.dart';
 import 'package:tv_randshow/ui/features/search/search_view.dart';
 import 'package:tv_randshow/ui/router.dart';
-import 'package:tv_randshow/ui/shared/custom_icons.dart';
-import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/widgets/expandable_fab/expandable_fab.dart';
 import 'package:tv_randshow/ui/widgets/expandable_fab/fab_action_button.dart';
 import 'package:unicons/unicons.dart';
