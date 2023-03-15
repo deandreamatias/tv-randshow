@@ -18,7 +18,7 @@ class RandomButton extends StatelessWidget {
       ),
       onPressed: () => Navigator.pushNamed<LoadingTvshowView>(
         context,
-        RoutePaths.loading,
+        RoutePaths.loadingTvshow,
         arguments: idTv,
       ),
     );

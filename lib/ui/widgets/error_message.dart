@@ -56,10 +56,12 @@ class ErrorMessage extends StatelessWidget {
                 color: Theme.of(context).colorScheme.error,
               ),
               const SizedBox(width: Styles.standard),
-              Text(
-                errorText,
-                key: Key(keyText),
-                style: Theme.of(context).textTheme.titleMedium,
+              Expanded(
+                child: Text(
+                  errorText,
+                  key: Key(keyText),
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ),
             ],
           ),

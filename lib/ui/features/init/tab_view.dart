@@ -3,7 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/home/home_view.dart';
 import 'package:tv_randshow/ui/features/info/views/info_view.dart';
+import 'package:tv_randshow/ui/features/random/views/loading_tvshows_view.dart';
 import 'package:tv_randshow/ui/features/search/search_view.dart';
+import 'package:tv_randshow/ui/router.dart';
+import 'package:tv_randshow/ui/shared/custom_icons.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
+import 'package:tv_randshow/ui/widgets/expandable_fab/expandable_fab.dart';
+import 'package:tv_randshow/ui/widgets/expandable_fab/fab_action_button.dart';
 import 'package:unicons/unicons.dart';
 
 class TabView extends StatefulWidget {
@@ -24,6 +30,8 @@ class TabViewState extends State<TabView> {
 
   @override
   Widget build(BuildContext context) {
+    const bigSize = 600;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -33,32 +41,20 @@ class TabViewState extends State<TabView> {
                 : Brightness.dark,
       ),
       child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton:
+            _selectedIndex == 0 ? const _RandomActions(bigSize: bigSize) : null,
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) =>
-              constraints.maxWidth > 600
+              constraints.maxWidth > bigSize
                   ? Row(
                       children: <Widget>[
-                        NavigationRail(
-                          labelType: NavigationRailLabelType.all,
-                          onDestinationSelected: (int value) {
+                        _BigScreenMenu(
+                          onChange: (index) {
                             setState(() {
-                              _selectedIndex = value;
+                              _selectedIndex = index;
                             });
                           },
-                          destinations: <NavigationRailDestination>[
-                            NavigationRailDestination(
-                              icon: const Icon(UniconsLine.favorite),
-                              label: Text(translate('app.fav.tab')),
-                            ),
-                            NavigationRailDestination(
-                              icon: const Icon(UniconsLine.search),
-                              label: Text(translate('app.search.tab')),
-                            ),
-                            NavigationRailDestination(
-                              icon: const Icon(UniconsLine.info_circle),
-                              label: Text(translate('app.info.tab')),
-                            ),
-                          ],
                           selectedIndex: _selectedIndex,
                         ),
                         const VerticalDivider(thickness: 1, width: 1),
@@ -77,41 +73,121 @@ class TabViewState extends State<TabView> {
                             child: _widgetOptions.elementAt(_selectedIndex),
                           ),
                         ),
-                        BottomNavigationBar(
-                          currentIndex: _selectedIndex,
-                          onTap: (int value) {
+                        _SmallScreenMenu(
+                          onChange: (index) {
                             setState(() {
-                              _selectedIndex = value;
+                              _selectedIndex = index;
                             });
                           },
-                          items: <BottomNavigationBarItem>[
-                            BottomNavigationBarItem(
-                              icon: const Icon(
-                                UniconsLine.favorite,
-                                key: Key('app.fav.tab'),
-                              ),
-                              label: translate('app.fav.tab'),
-                            ),
-                            BottomNavigationBarItem(
-                              icon: const Icon(
-                                UniconsLine.search,
-                                key: Key('app.search.tab'),
-                              ),
-                              label: translate('app.search.tab'),
-                            ),
-                            BottomNavigationBarItem(
-                              icon: const Icon(
-                                UniconsLine.info_circle,
-                                key: Key('app.info.tab'),
-                              ),
-                              label: translate('app.info.tab'),
-                            ),
-                          ],
+                          selectedIndex: _selectedIndex,
                         ),
                       ],
                     ),
         ),
       ),
+    );
+  }
+}
+
+class _BigScreenMenu extends StatelessWidget {
+  final int selectedIndex;
+  final void Function(int index) onChange;
+  const _BigScreenMenu({
+    required this.selectedIndex,
+    required this.onChange,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return NavigationRail(
+      labelType: NavigationRailLabelType.all,
+      onDestinationSelected: onChange,
+      destinations: <NavigationRailDestination>[
+        NavigationRailDestination(
+          icon: const Icon(UniconsLine.favorite),
+          label: Text(translate('app.fav.tab')),
+        ),
+        NavigationRailDestination(
+          icon: const Icon(UniconsLine.search),
+          label: Text(translate('app.search.tab')),
+        ),
+        NavigationRailDestination(
+          icon: const Icon(UniconsLine.info_circle),
+          label: Text(translate('app.info.tab')),
+        ),
+      ],
+      selectedIndex: selectedIndex,
+    );
+  }
+}
+
+class _SmallScreenMenu extends StatelessWidget {
+  final int selectedIndex;
+  final void Function(int index) onChange;
+  const _SmallScreenMenu({
+    required this.selectedIndex,
+    required this.onChange,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      currentIndex: selectedIndex,
+      onTap: onChange,
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: const Icon(
+            UniconsLine.favorite,
+            key: Key('app.fav.tab'),
+          ),
+          label: translate('app.fav.tab'),
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(
+            UniconsLine.search,
+            key: Key('app.search.tab'),
+          ),
+          label: translate('app.search.tab'),
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(
+            UniconsLine.info_circle,
+            key: Key('app.info.tab'),
+          ),
+          label: translate('app.info.tab'),
+        ),
+      ],
+    );
+  }
+}
+
+class _RandomActions extends StatelessWidget {
+  const _RandomActions({
+    required this.bigSize,
+  });
+
+  final int bigSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpandableFab(
+      startAngle: 45,
+      children: [
+        FabActionButton(
+          icon: const Icon(UniconsLine.tv_retro),
+          onPressed: () => Navigator.of(context).pushNamed<LoadingTvshowsView>(
+            RoutePaths.loadingTvshows,
+          ),
+        ),
+        FabActionButton(
+          icon: const Icon(UniconsLine.film),
+          onPressed: () => {},
+        ),
+        FabActionButton(
+          icon: const Icon(UniconsLine.arrow_growth),
+          onPressed: () => {},
+        ),
+      ],
     );
   }
 }

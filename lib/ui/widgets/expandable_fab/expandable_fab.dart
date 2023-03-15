@@ -2,8 +2,11 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:tv_randshow/ui/shared/custom_icons.dart';
-import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:unicons/unicons.dart';
+
+const int _quarterAngle = 90;
+const int _midAngle = 180;
+const int _divisable = 2;
 
 @immutable
 class ExpandableFab extends StatefulWidget {
@@ -12,12 +15,14 @@ class ExpandableFab extends StatefulWidget {
     this.initialOpen,
     this.distance = 100,
     this.startAngle = 0,
+    this.maxAngle = _quarterAngle,
     required this.children,
   });
 
   final bool? initialOpen;
   final double distance;
   final int startAngle;
+  final int maxAngle;
   final List<Widget> children;
 
   @override
@@ -61,26 +66,40 @@ class _ExpandableFabState extends State<ExpandableFab>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          _CloseFabButton(onTap: _toggle),
-          ...widget.children.map((e) {
-            final count = widget.children.length;
-            final index = widget.children.indexOf(e);
-            final step = 90.0 / (count - 1);
-            final angleInDegrees = step * index + widget.startAngle;
+    final offsetCorrection = Offset.fromDirection(
+      (widget.maxAngle + widget.startAngle) * (math.pi / _midAngle),
+      widget.distance,
+    );
+    final height = offsetCorrection.dy.abs() * 2;
+    final width = widget.distance * 1.8;
 
-            return _ExpandingActionButton(
-              directionInDegrees: angleInDegrees,
-              maxDistance: widget.distance,
-              progress: _expandAnimation,
-              child: e,
-            );
-          }),
-          _OpenFabButton(onTap: _toggle, isOpen: _open),
-        ],
+    return SafeArea(
+      child: SizedBox(
+        width: _open ? width : null,
+        height: _open ? height : null,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          clipBehavior: Clip.none,
+          children: [
+            _CloseFabButton(onTap: _toggle),
+            ...widget.children.map((e) {
+              final count = widget.children.length;
+              final index = widget.children.indexOf(e);
+              final step = widget.maxAngle / (count - 1);
+              final angleInDegrees = step * index + widget.startAngle;
+
+              return _ExpandingActionButton(
+                directionInDegrees: angleInDegrees,
+                maxDistance: widget.distance,
+                progress: _expandAnimation,
+                correctionPosition:
+                    _open ? offsetCorrection.dx.abs().toInt() : 0,
+                child: e,
+              );
+            }),
+            _OpenFabButton(onTap: _toggle, isOpen: _open),
+          ],
+        ),
       ),
     );
   }
@@ -93,12 +112,14 @@ class _ExpandingActionButton extends StatelessWidget {
     required this.maxDistance,
     required this.progress,
     required this.child,
+    this.correctionPosition = 0,
   });
 
   final double directionInDegrees;
   final double maxDistance;
   final Animation<double> progress;
   final Widget child;
+  final int correctionPosition;
 
   @override
   Widget build(BuildContext context) {
@@ -106,17 +127,15 @@ class _ExpandingActionButton extends StatelessWidget {
       animation: progress,
       builder: (context, child) {
         final offset = Offset.fromDirection(
-          directionInDegrees * (math.pi / 180.0),
+          directionInDegrees * (math.pi / _midAngle),
           progress.value * maxDistance,
         );
 
-        const position = 4;
-
         return Positioned(
-          right: position + offset.dx,
-          bottom: position + offset.dy,
+          left: correctionPosition + offset.dx,
+          bottom: offset.dy,
           child: Transform.rotate(
-            angle: (1.0 - progress.value) * math.pi / 2,
+            angle: (1.0 - progress.value) * math.pi / _divisable,
             child: child ?? const SizedBox.shrink(),
           ),
         );
@@ -159,6 +178,7 @@ class _OpenFabButton extends StatelessWidget {
           curve: const Interval(0.25, 1.0, curve: Curves.easeInOut),
           duration: const Duration(milliseconds: 250),
           child: FloatingActionButton(
+            heroTag: const Key('open_fab'),
             onPressed: onTap,
             child: const Icon(CustomIcons.diceMultiple),
           ),
@@ -174,26 +194,12 @@ class _CloseFabButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.square(
-      dimension: 56,
-      child: Center(
-        child: Material(
-          shape: const CircleBorder(),
-          clipBehavior: Clip.antiAlias,
-          color: Theme.of(context).colorScheme.inversePrimary,
-          elevation: Styles.xsmall,
-          child: InkWell(
-            onTap: onTap,
-            child: Padding(
-              padding: const EdgeInsets.all(Styles.small),
-              child: Icon(
-                UniconsLine.multiply,
-                color: Theme.of(context).colorScheme.onPrimaryContainer,
-              ),
-            ),
-          ),
-        ),
-      ),
+    return FloatingActionButton.small(
+      heroTag: const Key('close_fab'),
+      onPressed: onTap,
+      backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      foregroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      child: const Icon(UniconsLine.multiply),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:tv_randshow/core/random/domain/use_cases/get_random_episode_use_
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
 
 final randomTvshowProvider =
-    FutureProvider.family<TvshowResult, int>((ref, int tvId) {
+    FutureProvider.autoDispose.family<TvshowResult, int>((ref, int tvId) {
   final GetRandomEpisodeUseCase getRandomEpisodeUseCase =
       locator<GetRandomEpisodeUseCase>();
 

@@ -17,7 +17,9 @@ class FabActionButton extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Material(
-      shape: const CircleBorder(),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+      ),
       clipBehavior: Clip.antiAlias,
       color: theme.colorScheme.secondaryContainer,
       elevation: Styles.xsmall,
