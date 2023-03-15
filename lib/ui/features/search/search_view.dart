@@ -6,7 +6,7 @@ import 'package:tv_randshow/ui/features/search/search_state.dart';
 import 'package:tv_randshow/ui/features/search/widgets/search_widget.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/widgets/error_message.dart';
-import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
 import 'package:unicons/unicons.dart';
 
 class SearchView extends ConsumerStatefulWidget {

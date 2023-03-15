@@ -5,7 +5,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
-import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
 import 'package:tv_randshow/ui/widgets/online_image.dart';
 
 class PrivacyPolicyView extends StatelessWidget {

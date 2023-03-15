@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tv_randshow/ui/features/migration/migration_status_state.dart';
 import 'package:tv_randshow/ui/router.dart';
-import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});

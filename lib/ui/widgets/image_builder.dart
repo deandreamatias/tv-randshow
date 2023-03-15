@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
 import 'package:tv_randshow/ui/shared/constants.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
-import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
 import 'package:tv_randshow/ui/widgets/online_image.dart';
 
 class ImageBuilder extends StatelessWidget {

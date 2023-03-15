@@ -8,7 +8,7 @@ import 'package:tv_randshow/ui/shared/custom_icons.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/info_box.dart';
-import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
 import 'package:tv_randshow/ui/widgets/text_title_large.dart';
 import 'package:tv_randshow/ui/widgets/text_title_medium.dart';
 

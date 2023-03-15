@@ -14,7 +14,7 @@ import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/export_tvshow_state.dart';
 import 'package:tv_randshow/ui/widgets/error_icon.dart';
-import 'package:tv_randshow/ui/widgets/loader.dart';
+import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
 import 'package:unicons/unicons.dart';
 
 class InfoView extends StatelessWidget {
