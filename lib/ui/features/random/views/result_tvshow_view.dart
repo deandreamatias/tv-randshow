@@ -42,17 +42,11 @@ class _TvshowResultInfo extends StatelessWidget {
       builder: (context, ref, child) {
         return ref.watch(randomTvshowProvider(idTv)).when(
               data: (tvshowResult) {
-                final tvshow = ref
-                    .read(
-                      randomTvshowProvider(idTv).notifier,
-                    )
-                    .tvshow;
-
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    TextTitleLarge(tvshow.name),
+                    TextTitleLarge(tvshowResult.name),
                     Flexible(
                       flex: 2,
                       child: Row(
@@ -80,14 +74,15 @@ class _TvshowResultInfo extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: Styles.small),
-                    if (tvshow.streamings.isNotEmpty) ...[
+                    if (tvshowResult.streamings.isNotEmpty) ...[
                       TextTitleMedium(
-                          translate('app.result.episode.streaming_title')),
+                        translate('app.result.episode.streaming_title'),
+                      ),
                       const SizedBox(height: Styles.small),
                       Wrap(
                         spacing: Styles.small,
                         runSpacing: Styles.small,
-                        children: tvshow.streamings
+                        children: tvshowResult.streamings
                             .map(
                               (streaming) => StreamingButton(
                                 streamingDetail: streaming,
@@ -96,7 +91,7 @@ class _TvshowResultInfo extends StatelessWidget {
                             .toList(),
                       ),
                     ],
-                    if (tvshow.streamings.isEmpty)
+                    if (tvshowResult.streamings.isEmpty)
                       TextTitleMedium(
                         translate('app.result.episode.no_streaming_title'),
                       ),

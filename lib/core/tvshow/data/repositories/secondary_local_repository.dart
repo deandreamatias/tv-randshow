@@ -3,11 +3,11 @@ import 'dart:developer';
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/database_error.dart';
 import 'package:tv_randshow/core/tvshow/data/helpers/database_helper.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
-@LazySingleton(as: ISecondaryDatabaseService, env: ['mobile'])
-class SqlDatabaseService implements ISecondaryDatabaseService {
+@LazySingleton(as: ISecondaryLocalRepository, env: ['mobile'])
+class SecondaryLocalRepository implements ISecondaryLocalRepository {
   final DatabaseHelper dbHelper = DatabaseHelper.instance;
 
   @override

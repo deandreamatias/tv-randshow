@@ -1,39 +1,42 @@
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/app_error.dart';
 import 'package:tv_randshow/core/random/domain/interfaces/i_random_service.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_online_repository.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/episode.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_seasons_details.dart';
-import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
+import 'package:tv_randshow/core/tvshow/domain/use_cases/get_tvshow_seasons_details_use_case.dart';
 
 @injectable
 class GetRandomEpisodeUseCase {
-  final IOnlineRepository _onlineRepository;
+  final ILocalRepository _localRepository;
   final IRandomService _randomService;
+  final GetTvshowSeasonsDetailsUseCase _seasonsDetailsUseCase;
 
-  const GetRandomEpisodeUseCase(this._onlineRepository, this._randomService);
+  const GetRandomEpisodeUseCase(
+    this._localRepository,
+    this._randomService,
+    this._seasonsDetailsUseCase,
+  );
 
-  Future<TvshowResult> call({
-    required int idTv,
-    required int numberOfSeasons,
-  }) async {
-    if (numberOfSeasons <= 0) {
+  Future<TvshowResult> call({required int idTv}) async {
+    // Get local tvshow.
+    final tvshow = await _localRepository.getTvshow(idTv);
+    if (tvshow.numberOfSeasons <= 0) {
       throw const AppError(
         code: AppErrorCode.invalidSeasonNumber,
         message: 'Invalid numberOfSeasons. Should be bigger than 0',
       );
     }
+
+    // Get random season.
     // When has only one season, do not need get random season.
-    final int randomSeason = numberOfSeasons == 1
+    final int randomSeason = tvshow.numberOfSeasons == 1
         ? 1
-        : _randomService.getNumber(max: numberOfSeasons, min: 1);
+        : _randomService.getNumber(max: tvshow.numberOfSeasons, min: 1);
     final TvshowSeasonsDetails seasonsDetails =
-        await _onlineRepository.getDetailsTvSeasons(
-      Helpers.getLocale(),
-      idTv,
-      randomSeason,
-    );
+        await _seasonsDetailsUseCase(idTv: idTv, season: randomSeason);
+
     // Get random episode.
     final episodeIndex =
         _randomService.getNumber(max: seasonsDetails.episodes.length);
@@ -54,12 +57,12 @@ class GetRandomEpisodeUseCase {
     }
 
     return TvshowResult(
-      id: episode.id,
-      name: seasonsDetails.name,
+      name: tvshow.name,
       randomSeason: episode.seasonNumber,
       randomEpisode: episode.episodeNumber,
       episodeName: episode.name,
       episodeDescription: episode.overview,
+      streamings: tvshow.streamings,
     );
   }
 }

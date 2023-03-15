@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:tv_randshow/core/tvshow/data/services/hive_database_service.dart';
+import 'package:tv_randshow/core/tvshow/data/repositories/hive_local_repository.dart';
 
 part 'streaming_detail_hive.g.dart';
 

@@ -34,7 +34,6 @@ void main() {
     final tvshows = generateTvshow.tvshows;
     final randomIndex = faker.randomGenerator.integer(tvshows.length);
     final tvshowResult = TvshowResult(
-      id: tvshows[randomIndex].id,
       randomSeason: tvshows[randomIndex].numberOfSeasons,
       randomEpisode: faker.randomGenerator.integer(999, min: 1),
       episodeName: faker.lorem.sentence(),
@@ -44,10 +43,7 @@ void main() {
     when(randomService.getNumber(max: tvshows.length))
         .thenAnswer((async) => randomIndex);
     when(
-      getRandomEpisodeUseCase(
-        idTv: tvshows[randomIndex].id,
-        numberOfSeasons: tvshows[randomIndex].numberOfSeasons,
-      ),
+      getRandomEpisodeUseCase(idTv: tvshows[randomIndex].id),
     ).thenAnswer(
       (_) async => tvshowResult,
     );

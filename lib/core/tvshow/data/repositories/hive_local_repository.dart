@@ -18,7 +18,7 @@ const int tvshowDetailsHiveTypeId = 1;
 const int streamingDetailHiveTypeId = 2;
 
 @LazySingleton(as: ILocalRepository)
-class HiveDatabaseService implements ILocalRepository {
+class HiveLocalRepository implements ILocalRepository {
   Box<TvshowDetails>? tvshowBox;
   Box<StreamingDetailHive>? streamingsBox;
   final tvshowBoxName =
@@ -129,6 +129,49 @@ class HiveDatabaseService implements ILocalRepository {
       }
     }
     log('Streamings saved on tvshow $tvshowId: ${streamings.length} streamings');
+  }
+
+  @override
+  Future<TvshowDetails> getTvshow(int id) async {
+    await _init();
+    await _loadBoxes();
+    try {
+      TvshowDetails? tvshow = tvshowBox!.get(id);
+      if (tvshow == null) {
+        throw DatabaseError(
+          code: DatabaseErrorCode.read,
+          message: 'Do not exist the tvshow with id $id',
+        );
+      }
+      final streamings = streamingsBox!.values;
+      if (streamings.isNotEmpty) {
+        tvshow = tvshow.copyWith(
+          streamings: streamings
+              .where((streaming) => streaming.tvshowId == tvshow?.id)
+              .map(
+                (streaming) => StreamingDetail(
+                  id: streaming.id,
+                  streamingName: streaming.streamingName,
+                  link: streaming.link,
+                  added: streaming.added,
+                  leaving: streaming.leaving,
+                  country: streaming.country,
+                ),
+              )
+              .toList(),
+        );
+      }
+
+      return tvshow;
+    } catch (e, stackTrace) {
+      Error.throwWithStackTrace(
+        DatabaseError(
+          code: DatabaseErrorCode.read,
+          message: e.toString(),
+        ),
+        stackTrace,
+      );
+    }
   }
 
   Future<void> _init() async {

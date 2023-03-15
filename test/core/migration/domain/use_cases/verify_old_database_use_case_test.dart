@@ -2,15 +2,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:tv_randshow/core/migration/domain/use_cases/verify_old_database_use_case.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_local_repository.dart';
 
 import '../../../../helpers/generate_tvshow.dart';
 import 'verify_old_database_use_case_test.mocks.dart';
 
-@GenerateMocks([ISecondaryDatabaseService])
+@GenerateMocks([ISecondaryLocalRepository])
 void main() {
   final generateTvshow = GenerateTvshow();
-  final secondaryDatabase = MockISecondaryDatabaseService();
+  final secondaryDatabase = MockISecondaryLocalRepository();
   final usecase = VerifyOldDatabaseUseCase(secondaryDatabase);
 
   setUp(() {

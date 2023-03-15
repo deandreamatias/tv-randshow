@@ -1,10 +1,10 @@
 import 'package:injectable/injectable.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @Injectable(env: ['mobile'])
 class VerifyOldDatabaseUseCase {
-  final ISecondaryDatabaseService _secondaryDatabaseService;
+  final ISecondaryLocalRepository _secondaryDatabaseService;
 
   VerifyOldDatabaseUseCase(this._secondaryDatabaseService);
 

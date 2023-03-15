@@ -29,9 +29,6 @@ class GetRandomEpisodeFromAllTvshowsUseCase {
 
     final tvshowIndex = _randomService.getNumber(max: tvshows.length);
 
-    return _getRandomEpisodeUseCase(
-      idTv: tvshows[tvshowIndex].id,
-      numberOfSeasons: tvshows[tvshowIndex].numberOfSeasons,
-    );
+    return _getRandomEpisodeUseCase(idTv: tvshows[tvshowIndex].id);
   }
 }

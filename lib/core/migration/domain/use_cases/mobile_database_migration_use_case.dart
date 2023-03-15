@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
-import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_database_service.dart';
+import 'package:tv_randshow/core/tvshow/domain/interfaces/i_secondary_local_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 
 @Injectable(env: ['mobile'])
 class MobileDatabaseMigrationUseCase {
   final ILocalRepository _localRepository;
-  final ISecondaryDatabaseService _secondaryDatabaseService;
+  final ISecondaryLocalRepository _secondaryDatabaseService;
 
   MobileDatabaseMigrationUseCase(
     this._localRepository,

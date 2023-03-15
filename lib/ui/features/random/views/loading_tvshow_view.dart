@@ -23,7 +23,7 @@ class LoadingTvshowView extends StatelessWidget {
                     Future.delayed(
                       const Duration(milliseconds: 100),
                       () => Navigator.of(context).pushReplacementNamed(
-                        RoutePaths.result,
+                        RoutePaths.resultTvshow,
                         arguments: idTv,
                       ),
                     );
