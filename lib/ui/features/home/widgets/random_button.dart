@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/ui/features/random/loading_view.dart';
+import 'package:tv_randshow/ui/features/random/loading_tvshow_view.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/custom_icons.dart';
 
@@ -16,7 +16,7 @@ class RandomButton extends StatelessWidget {
         translate('app.fav.button_random'),
         key: Key('app.fav.button_random.$idTv'),
       ),
-      onPressed: () => Navigator.pushNamed<LoadingView>(
+      onPressed: () => Navigator.pushNamed<LoadingTvshowView>(
         context,
         RoutePaths.loading,
         arguments: idTv,
