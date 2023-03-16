@@ -3,33 +3,25 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-
-import 'package:tv_randshow/core/tvshow/data/transformers/converters.dart';
+import 'package:tv_randshow/core/app/data/transformers/date_time_transformer.dart';
 
 part 'episode.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
+@DateTimeTransformer()
 class Episode {
-  @JsonKey(name: 'air_date', fromJson: _fromJsonAirDate)
   DateTime? airDate;
   @JsonKey(ignore: true)
   List<Crew> crew;
-  @JsonKey(name: 'episode_number')
   int episodeNumber;
-  @JsonKey(name: 'guest_starts')
   List<GuestStar> guestStars;
   String name;
   String overview;
   int id;
-  @JsonKey(name: 'production_code')
   String productionCode;
-  @JsonKey(name: 'season_number')
   int seasonNumber;
-  @JsonKey(name: 'still_path')
   String stillPath;
-  @JsonKey(name: 'vote_average')
   double voteAverage;
-  @JsonKey(name: 'vote_count')
   int voteCount;
 
   Episode({
@@ -83,10 +75,6 @@ class Episode {
       voteAverage: voteAverage ?? this.voteAverage,
       voteCount: voteCount ?? this.voteCount,
     );
-  }
-
-  static DateTime? _fromJsonAirDate(String? airDate) {
-    return Converters.fromJsonDate(airDate);
   }
 }
 

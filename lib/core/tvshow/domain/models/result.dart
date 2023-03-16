@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-
-import 'package:tv_randshow/core/tvshow/data/transformers/converters.dart';
+import 'package:tv_randshow/core/app/data/transformers/date_time_transformer.dart';
 
 part 'result.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
+@DateTimeTransformer()
 class Result {
   @JsonKey(name: 'poster_path')
   String posterPath;
@@ -17,7 +17,6 @@ class Result {
   @JsonKey(name: 'voter_average')
   double? voteAverage;
   String overview;
-  @JsonKey(name: 'first_air_date', fromJson: _fromJsonFirstAirDate)
   DateTime? firstAirDate;
   @JsonKey(name: 'origin_country')
   List<String> originCountry;
@@ -54,8 +53,4 @@ class Result {
 
   Map<String, dynamic> toJson() => _$ResultToJson(this);
   String toRawJson() => json.encode(_$ResultToJson(this));
-
-  static DateTime? _fromJsonFirstAirDate(String? firstAirDate) {
-    return Converters.fromJsonDate(firstAirDate);
-  }
 }

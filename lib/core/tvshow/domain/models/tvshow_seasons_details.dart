@@ -1,24 +1,22 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tv_randshow/core/app/data/transformers/date_time_transformer.dart';
 
-import 'package:tv_randshow/core/tvshow/data/transformers/converters.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/episode.dart';
 
 part 'tvshow_seasons_details.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
+@DateTimeTransformer()
 class TvshowSeasonsDetails {
   final int id;
-  @JsonKey(name: 'air_date', fromJson: _fromJsonAirDate)
   final DateTime? airDate;
   final List<Episode> episodes;
   final String name;
   final String overview;
   final int? tvshowSeasonsDetailsId;
-  @JsonKey(name: 'poster_path')
   final String posterPath;
-  @JsonKey(name: 'season_number')
   final int seasonNumber;
 
   const TvshowSeasonsDetails({
@@ -61,9 +59,5 @@ class TvshowSeasonsDetails {
       posterPath: posterPath ?? this.posterPath,
       seasonNumber: seasonNumber ?? this.seasonNumber,
     );
-  }
-
-  static DateTime? _fromJsonAirDate(String? airDate) {
-    return Converters.fromJsonDate(airDate);
   }
 }

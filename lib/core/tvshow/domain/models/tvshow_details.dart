@@ -7,20 +7,18 @@ import 'package:tv_randshow/core/tvshow/data/repositories/local_repository.dart'
 
 part 'tvshow_details.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 @HiveType(typeId: tvshowDetailsHiveTypeId)
 class TvshowDetails extends HiveObject {
   @HiveField(0)
   int? rowId;
 
-  @JsonKey(name: 'episode_run_time')
   @HiveField(1)
   List<int> episodeRunTime;
 
   @HiveField(2)
   int id;
 
-  @JsonKey(name: 'in_production')
   @HiveField(3)
   // Undefined parameter from api.
   // ignore: avoid-dynamic
@@ -28,17 +26,14 @@ class TvshowDetails extends HiveObject {
 
   @HiveField(4)
   String name;
-  @JsonKey(name: 'number_of_episodes')
   @HiveField(5)
   int numberOfEpisodes;
-  @JsonKey(name: 'number_of_seasons')
   @HiveField(6)
   int numberOfSeasons;
 
   @HiveField(7)
   String overview;
 
-  @JsonKey(name: 'poster_path')
   @HiveField(8)
   String posterPath;
 

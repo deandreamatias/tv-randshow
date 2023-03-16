@@ -4,16 +4,13 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'season.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class Season {
-  @JsonKey(name: 'episode_count')
   int episodeCount;
   int id;
   String name;
   String overview;
-  @JsonKey(name: 'poster_path')
   String posterPath;
-  @JsonKey(name: 'season_number')
   int seasonNumber;
 
   Season({

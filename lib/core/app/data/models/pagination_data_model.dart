@@ -3,12 +3,15 @@ import 'package:tv_randshow/core/app/domain/models/pagination_model.dart';
 
 part 'pagination_data_model.g.dart';
 
-@JsonSerializable(createToJson: false, genericArgumentFactories: true)
+@JsonSerializable(
+  createToJson: false,
+  genericArgumentFactories: true,
+  fieldRename: FieldRename.snake,
+)
 class PaginationDataModel<T> {
   final int? page;
   final int totalResults;
   final int totalPages;
-  @JsonKey(defaultValue: [])
   final List<T> results;
 
   const PaginationDataModel({
