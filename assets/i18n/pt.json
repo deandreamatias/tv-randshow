@@ -89,7 +89,26 @@
             }
         },
         "privacy": {
-            "button_back": "VOLTAR"
+            "title": "Politica de privacidade",
+            "created": "Criado em: {date}",
+            "modified": "Modificado e,: {date}",
+            "subtitle_who": "Quem faz TV Randshow",
+            "text_who": "TV Randshow e seus serviços são proporcionados por Matias de Andrea em Espanha.",
+            "subtitle_permissions": "Permisos da aplicação",
+            "text_permissions_1": "O seguinte explica por que TV Randshow requer certas permissões.",
+            "text_permissions_2": "Acesso completo à internet: para coletar dados de series",
+            "subtitle_contact": "Contatar TV Randshow",
+            "text_contact_1": "Se você entrar em contato comigo (por exemplo, por e-mail), posso manter um registro de suas comunicações para ajudá-lo a resolver qualquer problema que possa ter. Posso usar seu endereço de e-mail ou detalhes de contato para informá-lo sobre o programa de TV Randshow, por exemplo, para informá-lo sobre mudanças ou melhorias futuras.",
+            "text_contact_2": "Você pode me contatar através de",
+            "text_contact_3": "se você deseja que seus dados de contato e mensagens enviadas sejam excluídos.",
+            "subtitle_about": "Sobre TV Randshow",
+            "header_about_first": "Com a tecnologia de",
+            "text_about_first_1": "Logotipo de The Movie Database",
+            "text_about_first_2": "As informações e imagens de TV são fornecidas pela TMDb, mas não são endossadas ou certificadas pela TMDb.com ou por suas afiliadas.",
+            "header_about_second": "Outros recursos",
+            "text_about_second_1": "Código fonte em",
+            "text_about_second_2": "repositório de Github",
+            "text_about_second_3": "Feito em Espanha por Matias de Andrea\nAndroid, Google Play e o logotipo do Google Play são marcas registradas da Google Inc."
         },
         "loading": {
             "episode": {

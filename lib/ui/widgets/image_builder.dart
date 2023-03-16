@@ -10,7 +10,7 @@ import 'package:tv_randshow/ui/widgets/online_image.dart';
 class ImageBuilder extends StatelessWidget {
   const ImageBuilder({
     super.key,
-    required this.isModal,
+    this.isModal = false,
     required this.url,
     this.name = '',
   });

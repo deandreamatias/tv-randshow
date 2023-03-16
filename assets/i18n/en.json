@@ -89,7 +89,27 @@
             }
         },
         "privacy": {
-            "button_back": "BACK"
+            "title": "Privacy policy",
+            "subtitle_who": "Who makes TV Randshow",
+            "text_who": "TV Randshow and its services are provided by Matias de Andrea in Spain.",
+            "subtitle_permissions": "App permissions",
+            "text_permissions_1": "What follows are explanations of why TV Randshow requires certain permissions.",
+            "text_permissions_2": "Full network access: to get data about tv shows.",
+            "subtitle_contact": "Contacting TV Randshow",
+            "text_contact_1": "If you contact me (such as via Email), I may keep a record of your communications to help solve any issues you might be facing. I may use your email address or contact data to inform you about TV Randshow, such as letting you know about upcoming changes or improvements.",
+            "text_contact_2": "You can contact me via",
+            "text_contact_3": "if you want your contact data and sent messages to be deleted.",
+            "subtitle_about": "About TV Randshow",
+            "header_about_first": "Powered by",
+            "text_about_first_1": "Logo of The Movie Database",
+            "text_about_first_2": "TV information and images are provided by TMDb, but we are not endorsed or certified by TMDb.com or its affiliates.",
+            "header_about_second": "Further resources",
+            "text_about_second_1": "Source code on",
+            "text_about_second_2": "Github repository",
+            "text_about_second_3": "Made on España by Matias de Andrea\nAndroid, Google Play and the Google Play logo are trademarks of Google Inc.",
+            "changes": "Privacy policy changes",
+            "created": "Created on: {date}",
+            "modified": "Modified on: {date}"
         },
         "loading": {
             "episode": {

@@ -71,6 +71,7 @@ flutter:
     - assets/i18n/
     - assets/markdown/
     - assets/img/no_image.webp
+    - assets/img/tmdb.png
     - assets/img/loading.flr
   fonts:
     - family: Nunito

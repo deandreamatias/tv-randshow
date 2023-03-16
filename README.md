@@ -81,3 +81,9 @@ If you want to take the time to make this project better, please read the [contr
 ## License
 
 This project is licensed under the GNU GPL v3 License - see the [LICENSE](LICENSE) file for details.
+
+## Powered by
+
+<img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg" width="200">
+
+TV information and images are provided by TMDb, but we are not endorsed or certified by TMDb.com or its affiliates.

@@ -63,7 +63,6 @@ class _ResultImage extends StatelessWidget {
       child: ImageBuilder(
         name: result.name,
         url: result.posterPath,
-        isModal: false,
       ),
     );
   }

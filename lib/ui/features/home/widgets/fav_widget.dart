@@ -39,7 +39,6 @@ class FavWidget extends StatelessWidget {
                 ),
                 name: tvshowDetails.name,
                 url: tvshowDetails.posterPath,
-                isModal: false,
               ),
             ),
           ),
