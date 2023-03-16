@@ -168,23 +168,31 @@ class _RandomActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpandableFab(
-      startAngle: 45,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        FabActionButton(
-          icon: const Icon(UniconsLine.tv_retro),
-          onPressed: () => Navigator.of(context).pushNamed<LoadingTvshowsView>(
-            RoutePaths.loadingTvshows,
-          ),
+        ExpandableFab(
+          startAngle: 45,
+          children: [
+            FabActionButton(
+              icon: const Icon(UniconsLine.tv_retro),
+              onPressed: () =>
+                  Navigator.of(context).pushNamed<LoadingTvshowsView>(
+                RoutePaths.loadingTvshows,
+              ),
+            ),
+            FabActionButton(
+              icon: const Icon(UniconsLine.film),
+              onPressed: () => {},
+            ),
+            FabActionButton(
+              icon: const Icon(UniconsLine.arrow_growth),
+              onPressed: () => {},
+            ),
+          ],
         ),
-        FabActionButton(
-          icon: const Icon(UniconsLine.film),
-          onPressed: () => {},
-        ),
-        FabActionButton(
-          icon: const Icon(UniconsLine.arrow_growth),
-          onPressed: () => {},
-        ),
+        if (MediaQuery.of(context).size.width <= bigSize)
+          const SizedBox(height: 56),
       ],
     );
   }
