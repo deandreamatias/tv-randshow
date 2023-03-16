@@ -1,8 +1,9 @@
 import 'package:injectable/injectable.dart';
+import 'package:tv_randshow/core/app/data/models/pagination_data_model.dart';
+import 'package:tv_randshow/core/app/data/models/tmdb_query_input.dart';
 import 'package:tv_randshow/core/app/data/services/tmdb_http_service.dart';
-import 'package:tv_randshow/core/tvshow/data/models/tmdb_query_input.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_online_repository.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/search.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_seasons_details.dart';
 
@@ -19,7 +20,7 @@ class TvshowRepository implements IOnlineRepository {
 
     final response = await _httpService.get(
       '$tvshowDetails$idTv',
-      query.toJson(),
+      query: query.toJson(),
     );
 
     return TvshowDetails.fromJson(response);
@@ -37,14 +38,14 @@ class TvshowRepository implements IOnlineRepository {
 
     final response = await _httpService.get(
       '$tvshowDetails$idTv$tvshowDetailsSeason$idSeason',
-      query.toJson(),
+      query: query.toJson(),
     );
 
     return TvshowSeasonsDetails.fromJson(response);
   }
 
   @override
-  Future<Search> search({
+  Future<PaginationDataModel<Result>> search({
     required String text,
     required int page,
     required String language,
@@ -54,9 +55,12 @@ class TvshowRepository implements IOnlineRepository {
 
     final response = await _httpService.get(
       tvshowSearch,
-      query.toJson(),
+      query: query.toJson(),
     );
 
-    return Search.fromJson(response);
+    return PaginationDataModel<Result>.fromJson(
+      response,
+      (json) => Result.fromJson(json as Map<String, dynamic>),
+    );
   }
 }

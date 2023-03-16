@@ -29,13 +29,13 @@ class DioService {
   });
 
   Future<Map<String, dynamic>> get(
-    String path,
-    Map<String, dynamic> dataMap,
-  ) async {
+    String path, {
+    Map<String, dynamic> query = const {},
+  }) async {
     try {
       final Response response = await _dio.get(
         path,
-        queryParameters: dataMap,
+        queryParameters: query,
       );
       if (response.data is String) {
         return jsonDecode(response.data) ?? {};

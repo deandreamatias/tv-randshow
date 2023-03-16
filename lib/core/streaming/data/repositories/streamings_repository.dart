@@ -22,7 +22,7 @@ class StreamingsRepository implements IStreamingsRepository {
       tmdbIdOutput: 'tv/${streamingSearch.tmdbId}',
     );
     try {
-      final response = await _httpService.get(path, data.toJson());
+      final response = await _httpService.get(path, query: data.toJson());
 
       return StreamingOutput.fromJson(response).streamings;
     } on ApiError catch (e) {

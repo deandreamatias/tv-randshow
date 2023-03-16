@@ -1,9 +1,10 @@
-import 'package:tv_randshow/core/tvshow/domain/models/search.dart';
+import 'package:tv_randshow/core/app/data/models/pagination_data_model.dart';
+import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_seasons_details.dart';
 
 abstract class IOnlineRepository {
-  Future<Search> search({
+  Future<PaginationDataModel<Result>> search({
     required String text,
     required int page,
     required String language,
