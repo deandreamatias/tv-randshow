@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tv_randshow/core/app/domain/interfaces/i_app_service.dart';
-import 'package:tv_randshow/core/app/domain/models/tvshow_actions.dart';
+import 'package:tv_randshow/common/interfaces/i_app_service.dart';
+import 'package:tv_randshow/common/models/tvshow_actions.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/get_local_tvshows_use_case.dart';

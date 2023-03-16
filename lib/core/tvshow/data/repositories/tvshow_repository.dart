@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
+import 'package:tv_randshow/core/app/data/services/tmdb_http_service.dart';
 import 'package:tv_randshow/core/tvshow/data/models/tmdb_query_input.dart';
-import 'package:tv_randshow/core/tvshow/data/services/tmdb_http_service.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_online_repository.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/search.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';

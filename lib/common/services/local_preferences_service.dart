@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tv_randshow/core/app/domain/interfaces/i_local_preferences_service.dart';
+import 'package:tv_randshow/common/interfaces/i_local_preferences_service.dart';
 
 class LocalPreferencesService implements ILocalPreferencesService {
   late SharedPreferences _sharedPreferences;

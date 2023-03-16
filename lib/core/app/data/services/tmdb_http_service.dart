@@ -1,8 +1,7 @@
 import 'package:injectable/injectable.dart';
-
-import 'package:tv_randshow/core/app/data/services/dio_service.dart';
-import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
-import 'package:tv_randshow/core/tvshow/data/helpers/tmdb_error_transformer.dart';
+import 'package:tv_randshow/common/models/flavor_config.dart';
+import 'package:tv_randshow/common/services/dio_service.dart';
+import 'package:tv_randshow/core/app/data/transformers/tmdb_error_transformer.dart';
 
 @lazySingleton
 class TmdbHttpService extends DioService {

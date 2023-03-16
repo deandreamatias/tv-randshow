@@ -7,8 +7,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:tv_randshow/common/models/flavor_config.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/database_error.dart';
-import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
 import 'package:tv_randshow/core/streaming/data/models/streaming_detail_hive.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 import 'package:tv_randshow/core/tvshow/domain/interfaces/i_local_repository.dart';
@@ -18,7 +18,7 @@ const int tvshowDetailsHiveTypeId = 1;
 const int streamingDetailHiveTypeId = 2;
 
 @LazySingleton(as: ILocalRepository)
-class HiveLocalRepository implements ILocalRepository {
+class LocalRepository implements ILocalRepository {
   Box<TvshowDetails>? tvshowBox;
   Box<StreamingDetailHive>? streamingsBox;
   final tvshowBoxName =

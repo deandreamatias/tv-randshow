@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:tv_randshow/core/app/domain/interfaces/i_app_service.dart';
-import 'package:tv_randshow/core/app/domain/models/tvshow_actions.dart';
+import 'package:tv_randshow/common/interfaces/i_app_service.dart';
+import 'package:tv_randshow/common/models/tvshow_actions.dart';
 import 'package:uni_links/uni_links.dart';
 
 @LazySingleton(as: IAppService)

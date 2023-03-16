@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tv_randshow/core/app/domain/models/env.dart';
-import 'package:tv_randshow/core/app/domain/models/flavor_config.dart';
+import 'package:tv_randshow/common/models/env.dart';
+import 'package:tv_randshow/common/models/flavor_config.dart';
 
 void main() {
   group('Env -', () {
