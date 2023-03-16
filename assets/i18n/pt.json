@@ -116,7 +116,7 @@
                 "general_error": "Ocorreu um erro ao obter o episodio na petição aleatoria"
             },
             "tvshow": {
-                "title": "Escolhendo um episódio de todas tuas series favoritas",
+                "title": "Escolhendo um episódio das tuas series favoritas",
                 "general_error": "Ocorreu um erro ao obter o episodio na petição aleatoria"
             },
             "trending_tvshow": {
@@ -132,6 +132,22 @@
                 "streaming_title": "Ver em streamings:",
                 "no_streaming_title": "Não disponível em streamings",
                 "error_load": "Erro ao mostrar resultado"
+            },
+            "tvshow": {
+                "title": "Este é o episódio escolhido aleatoriamente das tuas series favoritas!",
+                "button_random": "OUTRO EPISÓDIO ALEATÓRIO",
+                "streaming_title": "Ver em streamings:",
+                "no_streaming_title": "Não disponível em streamings",
+                "error_load": "Erro ao mostrar resultado"
+            },
+            "trending_tvshow": {
+                "title": "Este é a serie aleatória escolhida entre as tendências!",
+                "button_random": "ANOTHER RANDOM TV SHOW",
+                "error_load": "Erro ao mostrar resultado",
+                "dialog_title": "Tendências e resultado aleatório",
+                "dialog_body_1": "A tendência semanal é oferecida por The Movie Database e segue as series durante o período de 7 dias, com uma vida média de 7 dias.",
+                "dialog_body_2": "O resultado aleatório seleciona uma serie das 60 mas em tendência na atualidade.",
+                "dialog_button": "FECHAR"
             },
             "button_fav": "FAVORITOS"
         },

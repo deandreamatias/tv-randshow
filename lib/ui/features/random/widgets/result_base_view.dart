@@ -8,12 +8,14 @@ class ResultBaseView extends StatelessWidget {
   final String titleKey;
   final Widget child;
   final Widget actionButton;
+  final Widget? trailing;
 
   const ResultBaseView({
     super.key,
     required this.titleKey,
     required this.child,
     required this.actionButton,
+    this.trailing,
   });
 
   @override
@@ -23,19 +25,30 @@ class ResultBaseView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(Styles.standard),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              TextTitleLarge(
-                translate(titleKey),
-                key: Key(titleKey),
-                textAlign: TextAlign.center,
+              Row(
+                children: [
+                  Expanded(
+                    child: TextTitleLarge(
+                      translate(titleKey),
+                      key: Key(titleKey),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  trailing ?? const SizedBox.shrink(),
+                ],
               ),
               const SizedBox(height: Styles.standard),
-              Expanded(
-                child: Center(
+              Flexible(
+                child: Align(
+                  alignment: Alignment.topCenter,
                   child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 500),
+                    constraints:
+                        const BoxConstraints(maxWidth: 500, maxHeight: 500),
                     child: Stack(
                       clipBehavior: Clip.none,
+                      fit: StackFit.passthrough,
                       alignment: Alignment.center,
                       children: <Widget>[
                         Positioned(

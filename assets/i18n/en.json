@@ -144,7 +144,11 @@
             "trending_tvshow": {
                 "title": "This is the TV show chosen at random from trending!",
                 "button_random": "ANOTHER RANDOM TV SHOW",
-                "error_load": "Error to load random result"
+                "error_load": "Error to load random result",
+                "dialog_title": "Trending and random result",
+                "dialog_body_1": "The weekly trend is provided by The Movie Database and tracks series over a 7-day period, with an average life of 7 days.",
+                "dialog_body_2": "The random result selects a series of the 60 most currently trending.",
+                "dialog_button": "CLOSE"
             },
             "button_fav": "FAVORITES"
         },

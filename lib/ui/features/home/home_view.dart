@@ -8,6 +8,7 @@ import 'package:tv_randshow/ui/states/tvshows_state.dart';
 import 'package:tv_randshow/ui/widgets/error_icon.dart';
 import 'package:tv_randshow/ui/widgets/error_message.dart';
 import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
+import 'package:tv_randshow/ui/widgets/text_title_large.dart';
 import 'package:unicons/unicons.dart';
 
 class HomeView extends StatelessWidget {
@@ -22,10 +23,9 @@ class HomeView extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Text(
+                child: TextTitleLarge(
                   translate('app.fav.title'),
                   key: const Key('app.fav.title'),
-                  style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
               ),

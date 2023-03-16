@@ -120,7 +120,7 @@
                 "general_error": "Hubo un error al obtener el episodio en la petición aletaoria"
             },
             "trending_tvshow": {
-                "title": "Eligiendo una serie aleatoria del trending",
+                "title": "Eligiendo una serie aleatoria de las tendencias",
                 "general_error": "Hubo un error al obtener una serie en la petición aletaoria"
             },
             "button_fav": "FAVORITOS"
@@ -141,9 +141,13 @@
                 "error_load": "Error al cargar resultado"
             },
             "trending_tvshow": {
-                "title": "¡Este es la serie elegida al azar del trending!",
+                "title": "¡Este es la serie elegida al azar de las tendencias!",
                 "button_random": "OTRA SERIE AL AZAR",
-                "error_load": "Error al cargar resultado"
+                "error_load": "Error al cargar resultado",
+                "dialog_title": "Tendencias y resultado aleatorio",
+                "dialog_body_1": "La tendencia semanal la ofrece The Movie Database y sigue las series durante un periodo de 7 días, con una vida media de 7 días.",
+                "dialog_body_2": "El resultado aleatorio selecciona una serie de las 60 más en tendencia en la actualidad.",
+                "dialog_button": "CERRAR"
             },
             "button_fav": "FAVORITOS"
         },
