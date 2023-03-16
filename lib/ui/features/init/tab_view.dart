@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/home/home_view.dart';
 import 'package:tv_randshow/ui/features/info/views/info_view.dart';
+import 'package:tv_randshow/ui/features/random/views/loading_trending_tvshow_view.dart';
 import 'package:tv_randshow/ui/features/random/views/loading_tvshows_view.dart';
 import 'package:tv_randshow/ui/features/search/search_view.dart';
 import 'package:tv_randshow/ui/router.dart';
@@ -187,7 +188,10 @@ class _RandomActions extends StatelessWidget {
             ),
             FabActionButton(
               icon: const Icon(UniconsLine.arrow_growth),
-              onPressed: () => {},
+              onPressed: () =>
+                  Navigator.of(context).pushNamed<LoadingTrendingTvshowView>(
+                RoutePaths.loadingTrendingTvshow,
+              ),
             ),
           ],
         ),

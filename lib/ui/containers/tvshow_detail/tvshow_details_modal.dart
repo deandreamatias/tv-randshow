@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/ui/containers/tvshow_detail/tvshow_details_state.dart';
 import 'package:tv_randshow/ui/features/home/widgets/random_button.dart';
 import 'package:tv_randshow/ui/features/search/widgets/save_button.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/tvshows_state.dart';
 import 'package:tv_randshow/ui/widgets/error_message.dart';
-import 'package:tv_randshow/ui/widgets/image_builder.dart';
 import 'package:tv_randshow/ui/widgets/info_box.dart';
 import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
+import 'package:tv_randshow/ui/widgets/media_header.dart';
 import 'package:tv_randshow/ui/widgets/text_title_medium.dart';
 
 class TvshowDetailsModal extends StatelessWidget {
@@ -72,7 +71,16 @@ class _TvshowInfoDetails extends StatelessWidget {
               data: (model) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  _TvshowHeader(model: model),
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: Styles.small),
+                      child: MediaHeader(
+                        imagePath: model.posterPath,
+                        title: model.name,
+                      ),
+                    ),
+                  ),
                   Expanded(
                     flex: 5,
                     child: Row(
@@ -113,51 +121,6 @@ class _TvshowInfoDetails extends StatelessWidget {
               loading: () => const Loader(),
             );
       },
-    );
-  }
-}
-
-class _TvshowHeader extends StatelessWidget {
-  final TvshowDetails model;
-  const _TvshowHeader({required this.model});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 4,
-      child: Padding(
-        padding: const EdgeInsets.only(top: Styles.small),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              child: ImageBuilder(
-                url: model.posterPath,
-                name: model.name,
-                isModal: true,
-              ),
-            ),
-            const SizedBox(width: Styles.small),
-            Expanded(
-              // Allow value.
-              // ignore: no-magic-number
-              flex: 3,
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  model.name,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  // Allow value.
-                  // ignore: no-magic-number
-                  maxLines: 3,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

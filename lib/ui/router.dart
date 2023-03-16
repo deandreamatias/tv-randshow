@@ -3,8 +3,10 @@ import 'package:tv_randshow/ui/features/info/views/privacy_policy_view.dart';
 import 'package:tv_randshow/ui/features/init/splash_view.dart';
 import 'package:tv_randshow/ui/features/init/tab_view.dart';
 import 'package:tv_randshow/ui/features/migration/migration_view.dart';
+import 'package:tv_randshow/ui/features/random/views/loading_trending_tvshow_view.dart';
 import 'package:tv_randshow/ui/features/random/views/loading_tvshow_view.dart';
 import 'package:tv_randshow/ui/features/random/views/loading_tvshows_view.dart';
+import 'package:tv_randshow/ui/features/random/views/result_trending_tvshow_view.dart';
 import 'package:tv_randshow/ui/features/random/views/result_tvshow_view.dart';
 import 'package:tv_randshow/ui/features/random/views/result_tvshows_view.dart';
 
@@ -37,6 +39,14 @@ class Router {
         return MaterialPageRoute<ResultTvshowsView>(
           builder: (_) => const ResultTvshowsView(),
         );
+      case RoutePaths.loadingTrendingTvshow:
+        return MaterialPageRoute<LoadingTrendingTvshowView>(
+          builder: (_) => const LoadingTrendingTvshowView(),
+        );
+      case RoutePaths.resultTrendingTvshow:
+        return MaterialPageRoute<ResultTrendingTvshowView>(
+          builder: (_) => const ResultTrendingTvshowView(),
+        );
       case RoutePaths.privacy:
         return MaterialPageRoute<PrivacyPolicyView>(
           builder: (_) => const PrivacyPolicyView(),
@@ -62,4 +72,6 @@ class RoutePaths {
   static const String resultTvshow = 'result-tvshow';
   static const String loadingTvshows = 'loading-tvshows';
   static const String resultTvshows = 'result-tvshows';
+  static const String loadingTrendingTvshow = 'loading-trending-tvshow';
+  static const String resultTrendingTvshow = 'result-trending-tvshow';
 }

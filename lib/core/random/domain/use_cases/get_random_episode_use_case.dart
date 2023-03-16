@@ -58,6 +58,7 @@ class GetRandomEpisodeUseCase {
 
     return TvshowResult(
       name: tvshow.name,
+      image: tvshow.posterPath,
       randomSeason: episode.seasonNumber,
       randomEpisode: episode.episodeNumber,
       episodeName: episode.name,

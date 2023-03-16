@@ -113,7 +113,15 @@
         "loading": {
             "episode": {
                 "title": "Escolhendo um episódio aleatório",
-                "general_error": "Ocorreu um erro ao fazer a petição aleatoria"
+                "general_error": "Ocorreu um erro ao obter o episodio na petição aleatoria"
+            },
+            "tvshow": {
+                "title": "Escolhendo um episódio de todas tuas series favoritas",
+                "general_error": "Ocorreu um erro ao obter o episodio na petição aleatoria"
+            },
+            "trending_tvshow": {
+                "title": "Escolhendo uma serie aleatoria do trending",
+                "general_error": "Ocorreu um erro ao obter a serie do trending na petição aleatoria"
             },
             "button_fav": "FAVORITOS"
         },
