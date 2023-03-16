@@ -5,16 +5,16 @@ extension ProgramErrorExtension on Error {
   String getMessage() {
     String internalError = '';
     if (_verifyErrorTypes(ArgumentError)) {
-      return translate('app.errors.internal_program_argument');
+      internalError = translate('app.errors.internal_program_argument');
     }
     if (_verifyErrorTypes(RangeError)) {
-      return translate('app.errors.internal_program_range');
+      internalError = translate('app.errors.internal_program_range');
     }
     if (_verifyErrorTypes(StateError)) {
-      return translate('app.errors.internal_program_state');
+      internalError = translate('app.errors.internal_program_state');
     }
     if (_verifyErrorTypes(TypeError)) {
-      return translate('app.errors.internal_program_type');
+      internalError = translate('app.errors.internal_program_type');
     }
 
     return translate('app.errors.internal', args: {'detail': internalError});

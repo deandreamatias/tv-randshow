@@ -24,11 +24,12 @@ class ErrorMessage extends StatelessWidget {
   });
 
   String _convertErrors() {
+    if (error is Error) {
+      return (error as Error).getMessage();
+    }
     switch (error.runtimeType) {
       case ApiError:
         return (error as ApiError).code.getMessage();
-      case Error:
-        return (error as Error).getMessage();
       case DatabaseError:
         return (error as DatabaseError).code.getMessage();
       case AppError:
