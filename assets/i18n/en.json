@@ -82,6 +82,8 @@
             "rate_description": "Make your review about this app in Google Play",
             "feedback_title": "Feedback",
             "feedback_description": "Send a email with feedback or problem report about this app",
+            "donation_title": "Donation",
+            "donation_description": "Help this free app to keep alive",
             "privacy_title": "Privacy policy",
             "privacy_description": "See page with privacy policy details",
             "version": {

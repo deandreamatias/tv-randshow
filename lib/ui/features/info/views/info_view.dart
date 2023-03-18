@@ -44,6 +44,7 @@ class InfoView extends StatelessWidget {
               _DividerTitle(titleKey: 'app.info.support'),
               _ReviewApp(),
               _SendFeedback(),
+              _Donation(),
               SizedBox(height: Styles.small),
               _DividerTitle(titleKey: 'app.info.about'),
               kIsWeb ? _OpenAndroidApp() : _OpenWebApp(),
@@ -124,6 +125,28 @@ class _ExportTvShows extends StatelessWidget {
           ),
           onTap: () => ref.read(exportTvshowsProvider.notifier).export(),
         );
+      },
+    );
+  }
+}
+
+class _Donation extends StatelessWidget {
+  const _Donation({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.donation_title'),
+        key: const Key('app.info.donation_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.donation_description'),
+        key: const Key('app.info.donation_description'),
+      ),
+      leading: const Icon(UniconsLine.heart),
+      onTap: () {
+        Helpers.openLink(Uri.parse(Constants.donationUrl));
       },
     );
   }

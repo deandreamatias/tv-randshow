@@ -6,4 +6,6 @@ class Constants {
   static const String tmdbBaseImage = 'https://image.tmdb.org/t/p/w342/';
   static const String repository =
       'https://github.com/deandreamatias/tv-randshow';
+  static const String donationUrl =
+      'https://www.paypal.com/paypalme/deandreamatias';
 }

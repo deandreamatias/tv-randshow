@@ -82,6 +82,8 @@
             "rate_description": "Escribe tu reseña sobre la app en la Google Play",
             "feedback_title": "Enviar comentario",
             "feedback_description": "Envia un email con tu opinión o problema sobre la aplicación",
+            "donation_title": "Donación",
+            "donation_description": "Ayuda a esta aplicación a mantenerse viva",
             "privacy_title": "Política de privacidad",
             "privacy_description": "Ver detalles de la política de privacidad",
             "version": {
