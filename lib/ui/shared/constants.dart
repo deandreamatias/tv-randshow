@@ -7,5 +7,5 @@ class Constants {
   static const String repository =
       'https://github.com/deandreamatias/tv-randshow';
   static const String donationUrl =
-      'https://www.paypal.com/paypalme/deandreamatias';
+      'https://www.paypal.com/donate/?hosted_button_id=QWL5BXSRLCUJJ';
 }
