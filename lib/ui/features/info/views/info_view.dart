@@ -131,7 +131,7 @@ class _ExportTvShows extends StatelessWidget {
 }
 
 class _Donation extends StatelessWidget {
-  const _Donation({Key? key}) : super(key: key);
+  const _Donation();
 
   @override
   Widget build(BuildContext context) {
