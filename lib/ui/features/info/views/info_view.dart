@@ -15,6 +15,8 @@ import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/export_tvshow_state.dart';
 import 'package:tv_randshow/ui/widgets/error_icon.dart';
 import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
+import 'package:tv_randshow/ui/widgets/text_title_large.dart';
+import 'package:tv_randshow/ui/widgets/text_title_medium.dart';
 import 'package:unicons/unicons.dart';
 
 class InfoView extends StatelessWidget {
@@ -25,10 +27,9 @@ class InfoView extends StatelessWidget {
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(Styles.standard),
-          child: Text(
+          child: TextTitleLarge(
             translate('app.info.title'),
             key: const Key('app.info.title'),
-            style: Theme.of(context).textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
         ),
@@ -36,17 +37,35 @@ class InfoView extends StatelessWidget {
           child: ListView(
             physics: const BouncingScrollPhysics(),
             children: const <Widget>[
+              _DividerTitle(titleKey: 'app.info.settings'),
               _SwitchTheme(),
-              kIsWeb ? _OpenAndroidApp() : _OpenWebApp(),
               _ExportTvShows(),
+              SizedBox(height: Styles.small),
+              _DividerTitle(titleKey: 'app.info.support'),
               _ReviewApp(),
               _SendFeedback(),
+              SizedBox(height: Styles.small),
+              _DividerTitle(titleKey: 'app.info.about'),
+              kIsWeb ? _OpenAndroidApp() : _OpenWebApp(),
               _Changelog(),
               _Privacy(),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class _DividerTitle extends StatelessWidget {
+  final String titleKey;
+  const _DividerTitle({required this.titleKey});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: Styles.medium),
+      child: TextTitleMedium(translate(titleKey)),
     );
   }
 }
@@ -152,6 +171,7 @@ class _SwitchTheme extends StatelessWidget {
         translate('app.info.dark_title'),
         key: const Key('app.info.dark_title'),
       ),
+      secondary: const Icon(UniconsLine.palette),
       subtitle: Text(
         translate('app.info.dark_description'),
         key: const Key('app.info.dark_description'),

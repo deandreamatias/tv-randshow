@@ -111,7 +111,7 @@ class _BigScreenMenu extends StatelessWidget {
           label: Text(translate('app.search.tab')),
         ),
         NavigationRailDestination(
-          icon: const Icon(UniconsLine.info_circle),
+          icon: const Icon(UniconsLine.setting),
           label: Text(translate('app.info.tab')),
         ),
       ],
@@ -150,7 +150,7 @@ class _SmallScreenMenu extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: const Icon(
-            UniconsLine.info_circle,
+            UniconsLine.setting,
             key: Key('app.info.tab'),
           ),
           label: translate('app.info.tab'),

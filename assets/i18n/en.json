@@ -64,8 +64,11 @@
             "error_fav": "Error to add to your favs"
         },
         "info": {
-            "tab": "Info",
-            "title": "Info about TV Randshow",
+            "tab": "Settings",
+            "title": "More about TV Randshow",
+            "settings": "Settings",
+            "support": "Support",
+            "about": "About",
             "dark_title": "Dark theme",
             "dark_description": "Choice between light and dark theme",
             "export_title": "Export favs tv shows",

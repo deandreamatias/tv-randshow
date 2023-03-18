@@ -64,8 +64,11 @@
             "error_fav": "Error al añadir a tus favoritos"
         },
         "info": {
-            "tab": "Info",
-            "title": "Información sobre TV Randshow",
+            "tab": "Settings",
+            "title": "Más sobre TV Randshow",
+            "settings": "Configuraciones",
+            "support": "Soporte",
+            "about": "Sobre",
             "dark_title": "Tema oscuro",
             "dark_description": "Elige entre el tema claro y el oscuro",
             "export_title": "Exportar series favoritas",
