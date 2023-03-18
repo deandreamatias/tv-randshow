@@ -1,3 +1,15 @@
+## 2.0.0 - 2023/03/18
+
+### Features
+
+* NEW: **Pick random episode from all favorites TV shows**
+* NEW: **Pick random TV show from trending TV shows**
+* Add donation button
+* Updated to Material Design 3
+* Improved errors management
+* Built with Flutter 3.7
+* Fixed a lot bugs
+
 ## 1.10.0 - 2022/12/27
 
 ### Features
