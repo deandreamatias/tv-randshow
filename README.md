@@ -61,15 +61,18 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 
 ### Run
 
-Run `just run dev DEVICE_ID` command or copy the command from `./justfile`
+Run `just run dev DEVICE_ID TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
 
 ### Tests
 
-Integration tests (only mobile): run `just integration-test TMDB_API_KEY STREAMING_API_KEY DEVICE_ID` command or copy the command from `./justfile`
-Unit tests: run `just unit-test TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
+- Integration tests (only mobile): run `just integration-test TMDB_API_KEY STREAMING_API_KEY DEVICE_ID` command or copy the command from `./justfile`
+- Unit tests: run `just unit-test TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
+
+### Build
+
+- Android APK: Run `just run prod TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile
 
 > Replace screaming snake case with your values
-
 ## Author
 
 - **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com) and [GitHub](https://github.com/deandreamatias)
