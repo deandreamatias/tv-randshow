@@ -95,6 +95,9 @@
         },
         "privacy": {
             "title": "Privacy policy",
+            "changes": "Privacy policy changes",
+            "created": "Created on: {date}",
+            "modified": "Modified on: {date}",
             "subtitle_who": "Who makes TV Randshow",
             "text_who": "TV Randshow and its services are provided by Matias de Andrea in Spain.",
             "subtitle_permissions": "App permissions",
@@ -111,10 +114,8 @@
             "header_about_second": "Further resources",
             "text_about_second_1": "Source code on",
             "text_about_second_2": "Github repository",
-            "text_about_second_3": "Made on España by Matias de Andrea\nAndroid, Google Play and the Google Play logo are trademarks of Google Inc.",
-            "changes": "Privacy policy changes",
-            "created": "Created on: {date}",
-            "modified": "Modified on: {date}"
+            "text_about_second_3": "Made on España by Matias de Andrea\nAndroid, Google Play and the Google Play logo are trademarks of Google Inc."
+
         },
         "loading": {
             "episode": {
