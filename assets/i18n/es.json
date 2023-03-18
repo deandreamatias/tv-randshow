@@ -1,6 +1,34 @@
 {
     "app": {
         "name": "TV Randshow",
+        "send_error": "Enviar email con el error",
+        "report_action": "Enviar error",
+        "errors": {
+            "api": "Error de la api: {detail}",
+            "internal_server_streaming": "Problema en el servidor de streaming availability",
+            "internal_server_tvshows": "Problema en el servidor de TV shows",
+            "not_found": "La solicitud no se encuentra",
+            "forbidden": "No se tienen los permisos para acceder a este recurso",
+            "bad_request": "Solicitud inválida",
+            "unauthorized": "Acceso denegado",
+            "global": "Problema desconocido",
+            "internal": "Error interno de la aplicación: {detail}",
+            "internal_program_unknown": "Problema interno desconocido",
+            "internal_program_argument": "Argumento inválido en la función",
+            "internal_program_range": "Valor fuera del rango",
+            "internal_program_state": "Operación inválida con el estado actual",
+            "internal_program_type": "Tipo inválido",
+            "database": "Error de base de datos: {detail}",
+            "database_delete": "No se puede eliminar",
+            "database_read": "No se puede leer",
+            "database_init": "No se ha inicializado",
+            "database_unknown": "Desconocido",
+            "app": "Error de uso de la aplicación: {detail}",
+            "app_empty_favs": "No hay favoritos guardados. Añada algún item (ejemplo: serie) a sus favoritos e intente nuevamente",
+            "app_invalid_episode": "El número de episodio es inválido (menor o igual a 0). Por favor, intente nuevamente",
+            "app_invalid_season": "El número de temporada es inválido (menor o igual a 0). Por favor, intente nuevamente",
+            "app_unknown": "Desconocido"
+        },
         "migration": {
             "title": "Migración",
             "subtitle": "A continuación se hará un pequeño proceso de migración para mejorar la aplicación",
@@ -20,25 +48,32 @@
             "save": "Guarda tus series en un archivo",
             "title": "Tus series favoritas para elegir al azar un episodio",
             "empty_message": "Busca una serie para añadir en tu lista de favoritos",
-            "error_message": "Oops! Ocurrió un error al cargar los favoritos",
+            "error_message": "Ocurrió un error al cargar los favoritos",
             "button_random": "AL AZAR"
         },
         "search": {
             "tab": "Búsqueda",
             "search_bar": "Escriba el nombre de la serie",
+            "no_more_items": "No hay más resultados",
+            "load_more_items": "Cargar más resultados",
             "init_message": "Busca una serie escribiendo en la barra superior",
-            "error_message": "Oops! Ha habido un error. \nComprueba tu conexión de internet",
+            "error_message": "Ha habido un error en la búsqueda",
             "empty_message": "No hay resultados para esta búsqueda",
             "button_fav": "AÑADIR",
-            "button_delete": "ELIMINAR"
+            "button_delete": "ELIMINAR",
+            "error_fav": "Error al añadir a tus favoritos"
         },
         "info": {
-            "tab": "Info",
-            "title": "Información sobre TV Randshow",
+            "tab": "Settings",
+            "title": "Más sobre TV Randshow",
+            "settings": "Configuraciones",
+            "support": "Soporte",
+            "about": "Sobre",
             "dark_title": "Tema oscuro",
             "dark_description": "Elige entre el tema claro y el oscuro",
             "export_title": "Exportar series favoritas",
             "export_description": "Exportar archivo json en Descargas",
+            "export_error": "Error al exportar archivo",
             "app_title": "Aplicación Android",
             "app_description": "Instale la app de TV Randshow de la Google Play",
             "web_title": "Aplicación web",
@@ -47,6 +82,8 @@
             "rate_description": "Escribe tu reseña sobre la app en la Google Play",
             "feedback_title": "Enviar comentario",
             "feedback_description": "Envia un email con tu opinión o problema sobre la aplicación",
+            "donation_title": "Donación",
+            "donation_description": "Ayuda a esta aplicación a mantenerse viva",
             "privacy_title": "Política de privacidad",
             "privacy_description": "Ver detalles de la política de privacidad",
             "version": {
@@ -57,20 +94,67 @@
             }
         },
         "privacy": {
-            "button_back": "VOLVER"
+            "title": "Politica de privacidad",
+            "created": "Creado en: {date}",
+            "modified": "Cambiado en: {date}",
+            "subtitle_who": "Quien hace TV Randshow",
+            "text_who": "TV Randshow y sus servicios son proporcionados por Matias de Andrea en España.",
+            "subtitle_permissions": "Permisos de la aplicación",
+            "text_permissions_1": "A continuación se explica por qué TV Randshow requiere determinados permisos.",
+            "text_permissions_2": "Acceso total a internet: para recoger datos de series",
+            "subtitle_contact": "Contactar TV Randshow",
+            "text_contact_1": "Si te pones en contacto conmigo (por ejemplo, por correo electrónico), puedo guardar un registro de tus comunicaciones para ayudarte a resolver cualquier problema que puedas tener. Puedo utilizar su dirección de correo electrónico o sus datos de contacto para informarle sobre TV Randshow, por ejemplo, para comunicarle próximos cambios o mejoras.",
+            "text_contact_2": "Puedes ponerte en contacto conmigo a través de",
+            "text_contact_3": "si deseas que se eliminen tus datos de contacto y los mensajes enviados.",
+            "subtitle_about": "Sobre TV Randshow",
+            "header_about_first": "Con la tecnología de",
+            "text_about_first_1": "Logotipo de The Movie Database",
+            "text_about_first_2": "La información y las imágenes de TV son proporcionadas por TMDb, pero no están avaladas ni certificadas por TMDb.com ni sus afiliados.",
+            "header_about_second": "Otros recursos",
+            "text_about_second_1": "Código fuente en",
+            "text_about_second_2": "repositorio de Github",
+            "text_about_second_3": "Hecho en España por Matias de Andrea\nAndroid, Google Play y el logotipo de Google Play son marcas comerciales de Google Inc."
         },
         "loading": {
-            "title": "Eligiendo un episodio aleatorio",
-            "general_error": "Hubo un error al elegir el episodio. Por favor intenta de nuevo",
-            "connection_error": "Falló en la conexión. Conéctate e intenta de nuevo",
+            "episode": {
+                "title": "Eligiendo un episodio aleatorio",
+                "general_error": "Hubo un error al obtener el episodio en la petición aletaoria"
+            },
+            "tvshow": {
+                "title": "Eligiendo un episodio aleatorio de todas tus series favoritas",
+                "general_error": "Hubo un error al obtener el episodio en la petición aletaoria"
+            },
+            "trending_tvshow": {
+                "title": "Eligiendo una serie aleatoria de las tendencias",
+                "general_error": "Hubo un error al obtener una serie en la petición aletaoria"
+            },
             "button_fav": "FAVORITOS"
         },
         "result": {
-            "title": "¡Este es el episodio elegido al azar de la serie!",
-            "button_random": "OTRO EPISODIO AL AZAR",
-            "button_fav": "FAVORITOS",
-            "streaming_title": "Ver en streamings:",
-            "no_streaming_title": "No disponible en streamings"
+            "episode": {
+                "title": "¡Este es el episodio elegido al azar de la serie!",
+                "button_random": "OTRO EPISODIO AL AZAR",
+                "streaming_title": "Ver en streamings:",
+                "no_streaming_title": "No disponible en streamings",
+                "error_load": "Error al cargar resultado"
+            },
+            "tvshow": {
+                "title": "¡Este es el episodio elegido al azar de tus series!",
+                "button_random": "OTRO EPISODIO AL AZAR",
+                "streaming_title": "Ver en streamings:",
+                "no_streaming_title": "No disponible en streamings",
+                "error_load": "Error al cargar resultado"
+            },
+            "trending_tvshow": {
+                "title": "¡Este es la serie elegida al azar de las tendencias!",
+                "button_random": "OTRA SERIE AL AZAR",
+                "error_load": "Error al cargar resultado",
+                "dialog_title": "Tendencias y resultado aleatorio",
+                "dialog_body_1": "La tendencia semanal la ofrece The Movie Database y sigue las series durante un periodo de 7 días, con una vida media de 7 días.",
+                "dialog_body_2": "El resultado aleatorio selecciona una serie de las 60 más en tendencia en la actualidad.",
+                "dialog_button": "CERRAR"
+            },
+            "button_fav": "FAVORITOS"
         },
         "modal": {
             "description": "Descripción",
@@ -82,13 +166,15 @@
             "duration": "Duración",
             "undefined": "Indefinido",
             "episode_season_metric": "en total",
-            "duration_metric": "min/episodio"
+            "duration_metric": "min/episodio",
+            "error_load": "Error al cargar detalles del episodio"
         },
         "delete_dialog": {
             "title": "Eliminar serie",
             "subtitle": "¿Quieres eliminar esta serie de tus favoritos?",
             "button_cancel": "CANCELAR",
-            "button_delete": "ELIMINAR"
+            "button_delete": "ELIMINAR",
+            "delete_error": "Error al eliminar serie"
         }
     }
 }

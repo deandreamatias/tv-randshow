@@ -1,24 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 
 class InfoBox extends StatelessWidget {
-  const InfoBox({super.key, required this.typeInfo, required this.value});
-  final int typeInfo;
+  final InfoTypeBox typeInfo;
   final int value;
+
+  const InfoBox({
+    super.key,
+    required this.typeInfo,
+    required this.value,
+  });
+
+  String _selectTitle(InfoTypeBox typeInfo) {
+    switch (typeInfo) {
+      case InfoTypeBox.seasons:
+        return translate('app.modal.seasons');
+      case InfoTypeBox.episodes:
+        return translate('app.modal.episodes');
+      case InfoTypeBox.duration:
+        return translate('app.modal.duration');
+      case InfoTypeBox.season:
+        return translate('app.modal.season');
+      case InfoTypeBox.episode:
+        return translate('app.modal.episode');
+      default:
+        return translate('app.modal.undefined');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Flexible(
       child: AspectRatio(
         aspectRatio: 1,
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary,
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            color: colorScheme.primary,
+            borderRadius: const BorderRadius.all(Radius.circular(Styles.small)),
           ),
           alignment: Alignment.topCenter,
-          margin: const EdgeInsets.all(8.0),
-          padding: const EdgeInsets.all(8.0),
+          margin: const EdgeInsets.all(Styles.small),
+          padding: const EdgeInsets.all(Styles.small),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -26,9 +52,9 @@ class InfoBox extends StatelessWidget {
                 fit: BoxFit.fitWidth,
                 child: Text(
                   _selectTitle(typeInfo),
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                      ),
+                  style: textTheme.titleMedium?.copyWith(
+                    color: colorScheme.onPrimary,
+                  ),
                 ),
               ),
               Text(
@@ -36,43 +62,34 @@ class InfoBox extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headlineSmall
-                    ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
+                    ?.copyWith(color: colorScheme.onPrimary),
               ),
-              if (typeInfo <= 2)
-                typeInfo == 2
-                    ? Text(
-                        translate('app.modal.duration_metric'),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                      )
-                    : Text(
-                        translate('app.modal.episode_season_metric'),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                      ),
+              if ([
+                InfoTypeBox.episodes,
+                InfoTypeBox.seasons,
+                InfoTypeBox.duration,
+              ].contains(typeInfo))
+                Text(
+                  InfoTypeBox.duration == typeInfo
+                      ? translate('app.modal.duration_metric')
+                      : translate('app.modal.episode_season_metric'),
+                  style: textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onPrimary,
+                  ),
+                ),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  String _selectTitle(int typeInfo) {
-    switch (typeInfo) {
-      case 0:
-        return translate('app.modal.seasons');
-      case 1:
-        return translate('app.modal.episodes');
-      case 2:
-        return translate('app.modal.duration');
-      case 3:
-        return translate('app.modal.season');
-      case 4:
-        return translate('app.modal.episode');
-      default:
-        return translate('app.modal.undefined');
-    }
-  }
+enum InfoTypeBox {
+  seasons,
+  episodes,
+  duration,
+  season,
+  episode,
+  undefined,
 }

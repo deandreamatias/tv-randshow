@@ -1,3 +1,4 @@
+// ignore_for_file: avoid-ignoring-return-values
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -15,13 +16,12 @@ Future<void> main() async {
 
     expect(find.byKey(const Key('app.fav.title')), findsOneWidget);
     expect(find.byKey(const Key('app.fav.empty_message')), findsOneWidget);
-    expect(find.byKey(const Key('app.fav.save')), findsOneWidget);
 
     expect(find.text('Favorites'), findsOneWidget);
     expect(find.text('Search'), findsOneWidget);
     expect(find.text('Info'), findsOneWidget);
 
-    // Navigate to info tab
+    // Navigate to info tab.
     await tester.tap(find.byKey(const Key('app.info.tab')));
     await tester.pumpAndSettle();
 
@@ -32,7 +32,7 @@ Future<void> main() async {
     expect(find.byKey(const Key('app.info.feedback_title')), findsOneWidget);
     expect(find.byKey(const Key('app.info.version.title')), findsOneWidget);
 
-    // Show version dialog
+    // Show version dialog.
     await tester.tap(find.byKey(const Key('app.info.version.title')));
     await tester.pumpAndSettle();
     expect(
@@ -49,14 +49,14 @@ Future<void> main() async {
     await tester.pumpWidget(LocalizedApp(delegate, const app.App()));
     await tester.pumpAndSettle();
 
-    // Navigate to search tab
+    // Navigate to search tab.
     await tester.tap(find.byKey(const Key('app.search.tab')));
     await tester.pumpAndSettle();
 
     expect(find.byKey(const Key('app.search.message')), findsOneWidget);
     expect(find.text('Write a TV show name'), findsOneWidget);
 
-    // Search tv show
+    // Search tv show.
     expect(find.byKey(const Key('app.search.search_bar')), findsOneWidget);
     await tester.enterText(find.byType(TextField), tvshows.first);
     await waitUntil(
@@ -67,7 +67,7 @@ Future<void> main() async {
           .isNotEmpty,
     );
 
-    // Save tv show
+    // Save tv show.
     expect(find.byKey(const Key('app.search.button_fav.2316')), findsOneWidget);
     await tester.tap(find.byKey(const Key('app.search.button_fav.2316')));
     await tester.pumpAndSettle();
@@ -76,31 +76,35 @@ Future<void> main() async {
       findsOneWidget,
     );
 
-    // Navigate to favorites tab
+    // Navigate to favorites tab.
     await tester.tap(find.byKey(const Key('app.fav.tab')));
     await tester.pumpAndSettle();
+    expect(find.byKey(const Key('2316')), findsOneWidget);
     expect(find.byKey(const Key('app.fav.button_random.2316')), findsOneWidget);
+    expect(find.byKey(const Key('app.fav.save')), findsOneWidget);
 
-    // Get random episode
+    // Get random episode.
     await tester.tap(find.byKey(const Key('app.fav.button_random.2316')));
     await waitUntil(
       tester: tester,
-      conditionMet: () =>
-          find.byKey(const Key('app.result.title')).evaluate().isNotEmpty,
+      conditionMet: () => find
+          .byKey(const Key('app.result.episode.title'))
+          .evaluate()
+          .isNotEmpty,
     );
-    expect(find.byKey(const Key('app.result.title')), findsOneWidget);
+    expect(find.byKey(const Key('app.result.episode.title')), findsOneWidget);
 
-    await tester.tap(find.byKey(const Key('app.result.button_random')));
+    await tester.tap(find.byKey(const Key('app.result.episode.button_random')));
     await waitUntil(
       tester: tester,
       conditionMet: () =>
           find.byKey(const Key('app.result.button_fav')).evaluate().isNotEmpty,
     );
-    expect(find.byKey(const Key('app.result.title')), findsOneWidget);
+    expect(find.byKey(const Key('app.result.episode.title')), findsOneWidget);
     expect(find.byKey(const Key('app.result.button_fav')), findsOneWidget);
     await tester.pumpAndSettle();
 
-    // Delete tv show
+    // Delete tv show.
     await tester.tap(find.byKey(const Key('app.result.button_fav')));
     await waitUntil(
       tester: tester,
@@ -127,29 +131,31 @@ Future<void> main() async {
 }
 
 // This function is from this article
-// https://vini2001.medium.com/the-ultimate-guide-to-flutter-integration-testing-8aabb7749476
+// https://vini2001.medium.com/the-ultimate-guide-to-flutter-integration-testing-8aabb7749476.
 Future waitUntil({
   required WidgetTester tester,
   required bool Function() conditionMet,
   Duration timeout = const Duration(seconds: 30),
 }) async {
   final binding = tester.binding;
+
   return TestAsyncUtils.guard<int>(() async {
     final endTime = binding.clock.fromNowBy(timeout);
     var count = 0;
     while (true) {
-      // stop loop if it has timed out or if condition is reached
+      // Stop loop if it has timed out or if condition is reached.
       if ((binding.clock.now().isAfter(endTime) &&
               !binding.hasScheduledFrame) ||
           conditionMet()) {
         break;
       }
-      // triggers ui frames
+      // Triggers ui frames.
       await binding.pump(
         const Duration(milliseconds: 100),
       );
       count += 1;
     }
+
     return count;
   });
 }

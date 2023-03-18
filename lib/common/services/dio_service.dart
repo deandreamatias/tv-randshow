@@ -4,36 +4,57 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 
 class DioService {
+  /// Use [baseUrl] to config a base url of api, like `https://api.tmdb.com`.
   final String baseUrl;
-  final Map<String, dynamic> headers;
-  late Dio _dio;
-  DioService(this.baseUrl, this.headers) {
-    _initDio();
-  }
+  final Map<String, dynamic>? headers;
+  final Map<String, dynamic>? queryParams;
 
-  void _initDio() {
-    BaseOptions options = BaseOptions(
+  /// Optional [catchErrors] to get DioError. This is usuful when need
+  /// transform a DioError to custom error.
+  final void Function(DioError)? catchErrors;
+  late final Dio _dio = Dio(
+    BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: 5000,
       receiveTimeout: 3000,
       headers: headers,
-    );
-    _dio = Dio(options);
-  }
+      queryParameters: queryParams,
+    ),
+  );
+  DioService(
+    this.baseUrl, {
+    this.headers,
+    this.queryParams,
+    this.catchErrors,
+  });
 
   Future<Map<String, dynamic>> get(
-    String path,
-    Map<String, dynamic> dataMap,
-  ) async {
+    String path, {
+    Map<String, dynamic> query = const {},
+  }) async {
     try {
-      final Response<dynamic> response = await _dio.get<dynamic>(
+      final Response response = await _dio.get(
         path,
-        queryParameters: dataMap,
+        queryParameters: query,
       );
-      return jsonDecode(response.data) ?? {};
-    } on DioError catch (e) {
-      log('Error to get $path: ${e.message}', error: e);
+      if (response.data is String) {
+        return jsonDecode(response.data) ?? {};
+      }
+      if (response.data is Map) {
+        return response.data ?? {};
+      }
+
       return {};
+    } on DioError catch (e) {
+      log('${e.message.toString()} - ${e.response.toString()}');
+      if (catchErrors == null) {
+        rethrow;
+      }
+      catchErrors?.call(e);
+
+      return {};
+    } catch (e) {
+      rethrow;
     }
   }
 }

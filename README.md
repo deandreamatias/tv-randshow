@@ -13,7 +13,7 @@
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green?label=App)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
 [![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Ftvrandshow.com%2F)](https://tvrandshow.com/)
-[![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://paypal.me/deandreamatias)
+[![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://www.paypal.com/donate/?hosted_button_id=QWL5BXSRLCUJJ)
 
 ### About the project
 
@@ -26,7 +26,6 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
   <img src="./images/search.png" width="150" hspace="4">
   <img src="./images/favs.png" width="150" hspace="4">
   <img src="./images/result.png" width="150" hspace="4">
-  <img src="./images/details.png" width="150" hspace="4">
   <img src="./images/info.png" width="150" hspace="4">
 </p>
 
@@ -50,23 +49,29 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
    2. When build to iOS, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-xcode)
    3. When build to Android, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-android-studio)
    4. (Recommended) [Just](https://github.com/casey/just) to use commands
-3. Install dependencies from pubspec.yaml using `just get` or running `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
-4. Generate auto generate files with `just codegen` or copy the command from `./justfile`
-5. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
-6. Get your APi Key from Streaming Availabilty (on [RapidApi](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability)) and paste in file `lib/config/env.dart`
-7. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
+3. Install dependencies and generate code
+   1. Only use `just setup`
+   2. If don't have just, can do manual proccess
+      1. Run `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
+      2. Run `flutter pub run build_runner build`
+4. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
+5. Get your APi Key from Streaming Availabilty (on [RapidApi](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability)) and paste in file `lib/config/env.dart`
+6. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
 
 ### Run
 
-Run `just run dev DEVICE_ID` command or copy the command from `./justfile`
+Run `just run dev DEVICE_ID TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
 
 ### Tests
 
-Integration tests (only mobile): run `just integration-test TMDB_API_KEY STREAMING_API_KEY DEVICE_ID` command or copy the command from `./justfile`
-Unit tests: run `just unit-test TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
+- Integration tests (only mobile): run `just integration-test TMDB_API_KEY STREAMING_API_KEY DEVICE_ID` command or copy the command from `./justfile`
+- Unit tests: run `just unit-test TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
+
+### Build
+
+- Android APK: Run `just run prod TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile
 
 > Replace screaming snake case with your values
-
 ## Author
 
 - **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com) and [GitHub](https://github.com/deandreamatias)
@@ -78,3 +83,9 @@ If you want to take the time to make this project better, please read the [contr
 ## License
 
 This project is licensed under the GNU GPL v3 License - see the [LICENSE](LICENSE) file for details.
+
+## Powered by
+
+<img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg" width="200">
+
+TV information and images are provided by TMDb, but we are not endorsed or certified by TMDb.com or its affiliates.

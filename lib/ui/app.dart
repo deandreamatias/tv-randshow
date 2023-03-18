@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:theme_provider/theme_provider.dart';
+import 'package:tv_randshow/core/app/ioc/locator.dart';
 
-import 'package:tv_randshow/core/utils/constants.dart';
 import 'package:tv_randshow/ui/router.dart' as router;
+import 'package:tv_randshow/ui/router.dart';
+import 'package:tv_randshow/ui/shared/styles.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -22,19 +25,21 @@ class App extends StatelessWidget {
         AppTheme(
           id: 'light_theme',
           description: 'Light Theme',
-          data: CustomTheme().availableThemes[0],
+          data: Styles().availableThemes.first,
         ),
         AppTheme(
           id: 'dark_theme',
           description: 'Dark Theme',
-          data: CustomTheme().availableThemes[1],
+          data: Styles().availableThemes[1],
         ),
       ],
       child: ThemeConsumer(
         child: Builder(
-          builder: (themeContext) => _MaterialApp(
-            localizationDelegate: localizationDelegate,
-            themeContext: themeContext,
+          builder: (themeContext) => ProviderScope(
+            child: _MaterialApp(
+              localizationDelegate: localizationDelegate,
+              themeContext: themeContext,
+            ),
           ),
         ),
       ),
@@ -59,8 +64,9 @@ class _MaterialApp extends StatelessWidget {
           : 'TV Randshow',
       theme: ThemeProvider.themeOf(themeContext).data,
       initialRoute: RoutePaths.splash,
+      scaffoldMessengerKey: locator.get<GlobalKey<ScaffoldMessengerState>>(),
       onGenerateRoute: router.Router.generateRoute,
-      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+      localizationsDelegates: [
         ...GlobalMaterialLocalizations.delegates,
         GlobalWidgetsLocalizations.delegate,
         localizationDelegate,

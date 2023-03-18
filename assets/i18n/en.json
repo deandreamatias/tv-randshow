@@ -1,6 +1,34 @@
 {
     "app": {
         "name": "TV Randshow",
+        "send_error": "Send email with the error",
+        "report_action": "Send error",
+        "errors": {
+            "api": "Api error: {detail}",
+            "internal_server_streaming": "Streaming availability server problem",
+            "internal_server_tvshows": "TV shows server problem",
+            "not_found": "Not found request",
+            "forbidden": "Forbidden permissions to access",
+            "bad_request": "Bad request",
+            "unauthorized": "Denied access",
+            "global": "Something went wrong",
+            "internal": "App internal error: {detail}",
+            "internal_program_unknown": "Internal program error unknown",
+            "internal_program_argument": "Invalid argument on function",
+            "internal_program_range": "Value not in range",
+            "internal_program_state": "Invalid operation with actual state",
+            "internal_program_type": "Invalid type",
+            "database": "Database error: {detail}",
+            "database_delete": "Can not delete",
+            "database_read": "Can not read",
+            "database_init": "Is not initialize",
+            "database_unknown": "Unknown",
+            "app": "App use error: {detail}",
+            "app_empty_favs": "Empty favorites. Add some item (example: tv show) to your favorites and try again",
+            "app_invalid_episode": "The episode number is invalid (less or equal to 0). Please, try again",
+            "app_invalid_season": "The season number is invalid (less or equal to 0). Please, try again",
+            "app_unknown": "Unknown"
+        },
         "migration": {
             "title": "Migration",
             "subtitle": "The following is a small migration process to improve the application",
@@ -20,25 +48,32 @@
             "save": "Save your tv show to file",
             "title": "Your favorite TV shows to get a random episode",
             "empty_message": "Search TV show to add in your favorites TV shows",
-            "error_message": "Oops! Have a error to load your favorites",
+            "error_message": "Have a error to load your favorites",
             "button_random": "RANDOM"
         },
         "search": {
             "tab": "Search",
             "search_bar": "Write a TV show name",
+            "no_more_items": "No more items",
+            "load_more_items": "Load more items",
             "init_message": "Search a TV show in top bar",
-            "error_message": "Oops! Have a error. \nTry verify your internet connection",
+            "error_message": "Have a error to complete your search",
             "empty_message": "Don't have results for this search",
             "button_fav": "ADD TO FAV",
-            "button_delete": "DELETE"
+            "button_delete": "DELETE",
+            "error_fav": "Error to add to your favs"
         },
         "info": {
-            "tab": "Info",
-            "title": "Info about TV Randshow",
+            "tab": "Settings",
+            "title": "More about TV Randshow",
+            "settings": "Settings",
+            "support": "Support",
+            "about": "About",
             "dark_title": "Dark theme",
             "dark_description": "Choice between light and dark theme",
             "export_title": "Export favs tv shows",
             "export_description": "Export in json file to Downloads",
+            "export_error": "Error to export file",
             "app_title": "Android app",
             "app_description": "Get TV Randshow app in Google Play",
             "web_title": "Web app",
@@ -47,6 +82,8 @@
             "rate_description": "Make your review about this app in Google Play",
             "feedback_title": "Feedback",
             "feedback_description": "Send a email with feedback or problem report about this app",
+            "donation_title": "Donation",
+            "donation_description": "Help this free app to keep alive",
             "privacy_title": "Privacy policy",
             "privacy_description": "See page with privacy policy details",
             "version": {
@@ -57,20 +94,68 @@
             }
         },
         "privacy": {
-            "button_back": "BACK"
+            "title": "Privacy policy",
+            "subtitle_who": "Who makes TV Randshow",
+            "text_who": "TV Randshow and its services are provided by Matias de Andrea in Spain.",
+            "subtitle_permissions": "App permissions",
+            "text_permissions_1": "What follows are explanations of why TV Randshow requires certain permissions.",
+            "text_permissions_2": "Full network access: to get data about tv shows.",
+            "subtitle_contact": "Contacting TV Randshow",
+            "text_contact_1": "If you contact me (such as via Email), I may keep a record of your communications to help solve any issues you might be facing. I may use your email address or contact data to inform you about TV Randshow, such as letting you know about upcoming changes or improvements.",
+            "text_contact_2": "You can contact me via",
+            "text_contact_3": "if you want your contact data and sent messages to be deleted.",
+            "subtitle_about": "About TV Randshow",
+            "header_about_first": "Powered by",
+            "text_about_first_1": "Logo of The Movie Database",
+            "text_about_first_2": "TV information and images are provided by TMDb, but we are not endorsed or certified by TMDb.com or its affiliates.",
+            "header_about_second": "Further resources",
+            "text_about_second_1": "Source code on",
+            "text_about_second_2": "Github repository",
+            "text_about_second_3": "Made on España by Matias de Andrea\nAndroid, Google Play and the Google Play logo are trademarks of Google Inc.",
+            "changes": "Privacy policy changes",
+            "created": "Created on: {date}",
+            "modified": "Modified on: {date}"
         },
         "loading": {
-            "title": "Choosing a random TV show",
-            "general_error": "Error to get episode. Please try again",
-            "connection_error": "Fail connection. Connect and try again",
+            "episode": {
+                "title": "Choosing a random TV show",
+                "general_error": "Error to complete random request"
+            },
+            "tvshow": {
+                "title": "Choosing a random TV show from your favorites",
+                "general_error": "Error to complete random request"
+            },
+            "trending_tvshow": {
+                "title": "Choosing a random TV show from trending",
+                "general_error": "Error to complete random request"
+            },
             "button_fav": "FAVORITES"
         },
         "result": {
-            "title": "This is the TV show episode chosen at random!",
-            "button_random": "ANOTHER RANDOM EPISODE",
-            "button_fav": "FAVORITES",
-            "streaming_title": "See on streamings:",
-            "no_streaming_title": "No available on streamings"
+            "episode": {
+                "title": "This is the episode chosen at random!",
+                "button_random": "ANOTHER RANDOM EPISODE",
+                "streaming_title": "See on streamings:",
+                "no_streaming_title": "No available on streamings",
+                "error_load": "Error to load random result"
+            },
+            "tvshow": {
+                "title": "This is the episode chosen at random from your tv shows!",
+                "button_random": "ANOTHER RANDOM EPISODE",
+                "streaming_title": "See on streamings:",
+                "no_streaming_title": "No available on streamings",
+                "error_load": "Error to load random result"
+            },
+            "trending_tvshow": {
+                "title": "This is the TV show chosen at random from trending!",
+                "button_random": "ANOTHER RANDOM TV SHOW",
+                "error_load": "Error to load random result",
+                "dialog_title": "Trending and random result",
+                "dialog_body_1": "The weekly trend is provided by The Movie Database and tracks series over a 7-day period, with an average life of 7 days.",
+                "dialog_body_2": "The random result selects a series of the 60 most currently trending.",
+                "dialog_button": "CLOSE"
+            },
+            "button_fav": "FAVORITES"
         },
         "modal": {
             "description": "Description",
@@ -82,13 +167,15 @@
             "duration": "Duration",
             "undefined": "Undefined",
             "episode_season_metric": "in all",
-            "duration_metric": "min/episode"
+            "duration_metric": "min/episode",
+            "error_load": "Error to load episode details"
         },
         "delete_dialog": {
             "title": "Delete TV show",
             "subtitle": "Do you want delete this TV show from your favorites?",
             "button_cancel": "CANCEL",
-            "button_delete": "DELETE"
+            "button_delete": "DELETE",
+            "delete_error": "Error to delete TV show"
         }
     }
 }

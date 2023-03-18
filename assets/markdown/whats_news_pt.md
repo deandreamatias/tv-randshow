@@ -1,3 +1,15 @@
+## 2.0.0 - 2023/03/18
+
+### Features
+
+* NOVO: **Escolher episódio aleatório de todas as series favoritas**
+* NOVO: **Escolher uma serie aleatória a partir das series em tendência**
+* Adicionar botão de doação
+* Actualizado para Material Design 3
+* Melhoria da gestão de erros
+* Construído com Flutter 3.7
+* Corrigido varios erros
+
 ## 1.10.0 - 2022/12/27
 
 ### Features

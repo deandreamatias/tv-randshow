@@ -9,8 +9,7 @@ class GetTvshowStreamingsUseCase {
 
   GetTvshowStreamingsUseCase(this._streamingsRepository);
 
-  Future<List<StreamingDetail>> call(StreamingSearch streamingSearch) async {
-    final tvshow = await _streamingsRepository.searchTvShow(streamingSearch);
-    return tvshow.streamings;
+  Future<List<StreamingDetail>> call(StreamingSearch streamingSearch) {
+    return _streamingsRepository.searchTvShow(streamingSearch);
   }
 }

@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/deandreamatias/tv-randshow/compare/v1.10.2...v2.0.0) (2023-03-18)
+
+* Improve architecture (clean)
+* Add more unit tests
+* Migrate to Riverpod to state management
+* Add management errors
+* Add feature: Pick random episode from all favorites TV shows
+* Add feature: Pick random TV show from trending TV shows
+* Add donation button
+* Update to Material Design 3
+* Add ios compatibility
+* Fix integration test
+* Build with Flutter 3.7
+* Fix a lot bugs
+
 ## [1.10.2](https://github.com/deandreamatias/tv-randshow/compare/v1.9.0...v1.10.2) (2023-02-26)
 
 * **Add streamig link on random episode result**
