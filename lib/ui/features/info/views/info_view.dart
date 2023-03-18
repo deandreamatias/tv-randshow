@@ -70,95 +70,6 @@ class _DividerTitle extends StatelessWidget {
   }
 }
 
-class _Privacy extends StatelessWidget {
-  const _Privacy();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        translate('app.info.privacy_title'),
-        key: const Key('app.info.privacy_title'),
-      ),
-      subtitle: Text(
-        translate('app.info.privacy_description'),
-        key: const Key('app.info.privacy_description'),
-      ),
-      leading: const Icon(UniconsLine.file_shield_alt),
-      onTap: () => Navigator.of(context).pushNamed(RoutePaths.privacy),
-    );
-  }
-}
-
-class _SendFeedback extends StatelessWidget {
-  const _SendFeedback();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        translate('app.info.feedback_title'),
-        key: const Key('app.info.feedback_title'),
-      ),
-      subtitle: Text(
-        translate('app.info.feedback_description'),
-        key: const Key('app.info.feedback_description'),
-      ),
-      leading: const Icon(UniconsLine.envelope),
-      onTap: () {
-        Helpers.openMail(
-          Constants.feedbackEmail,
-          mailtoSubject: 'Tv Randshow - Feedback',
-        );
-      },
-    );
-  }
-}
-
-class _OpenWebApp extends StatelessWidget {
-  const _OpenWebApp();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        translate('app.info.web_title'),
-        key: const Key('app.info.web_title'),
-      ),
-      subtitle: Text(
-        translate('app.info.web_description'),
-        key: const Key('app.info.web_description'),
-      ),
-      leading: const Icon(UniconsLine.external_link_alt),
-      onTap: () {
-        Helpers.openLink(Uri.parse(Constants.webAppUrl));
-      },
-    );
-  }
-}
-
-class _OpenAndroidApp extends StatelessWidget {
-  const _OpenAndroidApp();
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(
-        translate('app.info.app_title'),
-        key: const Key('app.info.app_title'),
-      ),
-      subtitle: Text(
-        translate('app.info.app_description'),
-        key: const Key('app.info.app_description'),
-      ),
-      leading: const Icon(UniconsLine.google_play),
-      onTap: () {
-        Helpers.openLink(Uri.parse(Constants.androidAppurl));
-      },
-    );
-  }
-}
-
 class _SwitchTheme extends StatelessWidget {
   const _SwitchTheme();
 
@@ -247,6 +158,75 @@ class _ReviewApp extends StatelessWidget {
   }
 }
 
+class _SendFeedback extends StatelessWidget {
+  const _SendFeedback();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.feedback_title'),
+        key: const Key('app.info.feedback_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.feedback_description'),
+        key: const Key('app.info.feedback_description'),
+      ),
+      leading: const Icon(UniconsLine.envelope),
+      onTap: () {
+        Helpers.openMail(
+          Constants.feedbackEmail,
+          mailtoSubject: 'Tv Randshow - Feedback',
+        );
+      },
+    );
+  }
+}
+
+class _OpenWebApp extends StatelessWidget {
+  const _OpenWebApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.web_title'),
+        key: const Key('app.info.web_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.web_description'),
+        key: const Key('app.info.web_description'),
+      ),
+      leading: const Icon(UniconsLine.external_link_alt),
+      onTap: () {
+        Helpers.openLink(Uri.parse(Constants.webAppUrl));
+      },
+    );
+  }
+}
+
+class _OpenAndroidApp extends StatelessWidget {
+  const _OpenAndroidApp();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.app_title'),
+        key: const Key('app.info.app_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.app_description'),
+        key: const Key('app.info.app_description'),
+      ),
+      leading: const Icon(UniconsLine.google_play),
+      onTap: () {
+        Helpers.openLink(Uri.parse(Constants.androidAppurl));
+      },
+    );
+  }
+}
+
 class _Changelog extends StatelessWidget {
   const _Changelog();
 
@@ -329,6 +309,26 @@ class _Changelog extends StatelessWidget {
       onTap: () {
         _changelog(context);
       },
+    );
+  }
+}
+
+class _Privacy extends StatelessWidget {
+  const _Privacy();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      title: Text(
+        translate('app.info.privacy_title'),
+        key: const Key('app.info.privacy_title'),
+      ),
+      subtitle: Text(
+        translate('app.info.privacy_description'),
+        key: const Key('app.info.privacy_description'),
+      ),
+      leading: const Icon(UniconsLine.file_shield_alt),
+      onTap: () => Navigator.of(context).pushNamed(RoutePaths.privacy),
     );
   }
 }
