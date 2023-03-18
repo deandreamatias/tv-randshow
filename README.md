@@ -33,9 +33,12 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 
 - **Save your favorites TV shows with available streamings links**
 - **Choose a random episode from a single TV show**
+- **Choose a random episode from all saved TV shows**
+- **Choose a random TV show from trending TMDB**
 - **Support to Android and Web**
+- **Export saved TV shows to json**
 - **Dark mode**
-- **Material 3**
+- **Material Design 3**
 - **Support to deeplink `https://tvrandshow.com/getRandomEpisode?tvshow=friends`**
 - **Roadmap in [public Trello](https://trello.com/b/ib0jdUzK)**
 

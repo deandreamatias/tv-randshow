@@ -95,6 +95,7 @@
         },
         "privacy": {
             "title": "Politica de privacidade",
+            "changes": "Mudanças na politica de privacidade",
             "created": "Criado em: {date}",
             "modified": "Modificado e,: {date}",
             "subtitle_who": "Quem faz TV Randshow",
