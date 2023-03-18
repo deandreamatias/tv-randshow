@@ -183,10 +183,6 @@ class _RandomActions extends StatelessWidget {
               ),
             ),
             FabActionButton(
-              icon: const Icon(UniconsLine.film),
-              onPressed: () => {},
-            ),
-            FabActionButton(
               icon: const Icon(UniconsLine.arrow_growth),
               onPressed: () =>
                   Navigator.of(context).pushNamed<LoadingTrendingTvshowView>(

@@ -21,20 +21,23 @@ class TvshowEpisodeInfoResult extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Flexible(
+          flex: 3,
           child: MediaHeader(
             title: result.name,
             imagePath: result.image,
             child: result.streamings.isNotEmpty
-                ? Wrap(
-                    spacing: Styles.small,
-                    runSpacing: Styles.small,
-                    children: result.streamings
-                        .map(
-                          (streaming) => StreamingButton(
-                            streamingDetail: streaming,
-                          ),
-                        )
-                        .toList(),
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: result.streamings
+                          .map(
+                            (streaming) => StreamingButton(
+                              streamingDetail: streaming,
+                            ),
+                          )
+                          .toList(),
+                    ),
                   )
                 : TextTitleMedium(
                     translate(
@@ -44,7 +47,7 @@ class TvshowEpisodeInfoResult extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 2,
+          flex: 4,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -63,7 +66,7 @@ class TvshowEpisodeInfoResult extends StatelessWidget {
         TextTitleMedium(result.episodeName),
         const SizedBox(height: Styles.small),
         Flexible(
-          flex: 3,
+          flex: 6,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Text(result.episodeDescription),

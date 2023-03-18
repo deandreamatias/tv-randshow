@@ -35,6 +35,7 @@ class MediaHeader extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
