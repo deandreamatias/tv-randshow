@@ -26,7 +26,6 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
   <img src="./images/search.png" width="150" hspace="4">
   <img src="./images/favs.png" width="150" hspace="4">
   <img src="./images/result.png" width="150" hspace="4">
-  <img src="./images/details.png" width="150" hspace="4">
   <img src="./images/info.png" width="150" hspace="4">
 </p>
 
