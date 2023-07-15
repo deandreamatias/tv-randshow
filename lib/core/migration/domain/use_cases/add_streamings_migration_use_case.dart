@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/streaming/domain/interfaces/i_streamings_repository.dart';
