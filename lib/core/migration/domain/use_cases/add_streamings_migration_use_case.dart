@@ -1,5 +1,6 @@
-import 'dart:ui' as ui;
+import 'dart:ui';
 
+import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/core/streaming/domain/interfaces/i_streamings_repository.dart';
@@ -32,7 +33,7 @@ class AddStreamingsMigrationUseCase {
         List<StreamingDetail> streamings = [];
         final search = StreamingSearch(
           tmdbId: tvshow.id.toString(),
-          country: ui.window.locale.countryCode ?? '',
+          country: PlatformDispatcher.instance.locale.countryCode ?? '',
         );
         final tvshowStremings =
             await _streamingsRepository.searchTvShow(search);

@@ -11,7 +11,7 @@ part 'episode.g.dart';
 @DateTimeTransformer()
 class Episode {
   DateTime? airDate;
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<Crew> crew;
   int episodeNumber;
   List<GuestStar> guestStars;

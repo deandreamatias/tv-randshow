@@ -11,12 +11,12 @@ class DioService {
 
   /// Optional [catchErrors] to get DioError. This is usuful when need
   /// transform a DioError to custom error.
-  final void Function(DioError)? catchErrors;
+  final void Function(DioException)? catchErrors;
   late final Dio _dio = Dio(
     BaseOptions(
       baseUrl: baseUrl,
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 3),
       headers: headers,
       queryParameters: queryParams,
     ),
@@ -45,7 +45,7 @@ class DioService {
       }
 
       return {};
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       log('${e.message.toString()} - ${e.response.toString()}');
       if (catchErrors == null) {
         rethrow;

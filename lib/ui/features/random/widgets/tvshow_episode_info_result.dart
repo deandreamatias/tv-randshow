@@ -32,8 +32,11 @@ class TvshowEpisodeInfoResult extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: result.streamings
                           .map(
-                            (streaming) => StreamingButton(
-                              streamingDetail: streaming,
+                            (streaming) => Row(
+                              children: [
+                                StreamingButton(streamingDetail: streaming),
+                                const SizedBox(width: Styles.small),
+                              ],
                             ),
                           )
                           .toList(),
