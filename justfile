@@ -12,7 +12,7 @@ run flavor apiKey streamingApiKey device:
 
 # Build Android apk with {{flavor}}, {{apikey}} and {{streamingApiKey}}
 build-apk flavor apiKey streamingApiKey:
-    fvm flutter build apk--flavor {{flavor}} -t lib/main_{{flavor}}.dart --obfuscate --split-debug-info=./android/split-debug/ --dart-define API_KEY={{apiKey}} --dart-define STREAMING_API_KEY={{streamingApiKey}}
+    fvm flutter build apk --flavor {{flavor}} -t lib/main_{{flavor}}.dart --obfuscate --split-debug-info=./android/split-debug/ --dart-define API_KEY={{apiKey}} --dart-define STREAMING_API_KEY={{streamingApiKey}}
 
 # Build Android appbundle with {{flavor}}, {{apikey}} and {{streamingApiKey}}
 build-appbundle flavor apiKey streamingApiKey:

@@ -72,7 +72,7 @@ Run `just run dev DEVICE_ID TMDB_API_KEY STREAMING_API_KEY` command or copy the 
 
 ### Build
 
-- Android APK: Run `just run prod TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile
+- Android APK: Run `just build-apk prod TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile
 
 > Replace screaming snake case with your values
 ## Author
