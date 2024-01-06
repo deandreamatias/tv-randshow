@@ -12,8 +12,10 @@
 [![Tests](https://api.codemagic.io/apps/5ea04fef2173e4001d6d6c75/6210143b0b28f63215deee7d/status_badge.svg)](https://codemagic.io/apps/5ea04fef2173e4001d6d6c75/6210143b0b28f63215deee7d/latest_build)
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green?label=App)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
+[![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/deandrea.matias.tv_randshow/)](https://apt.izzysoft.de/fdroid/index/apk/deandrea.matias.tv_randshow/)
 [![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Ftvrandshow.com%2F)](https://tvrandshow.com/)
 [![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://www.paypal.com/donate/?hosted_button_id=QWL5BXSRLCUJJ)
+[![Trello](https://img.shields.io/badge/trello-roadmap-blue)](https://trello.com/b/ib0jdUzK)
 
 ### About the project
 
@@ -72,7 +74,7 @@ Run `just run dev DEVICE_ID TMDB_API_KEY STREAMING_API_KEY` command or copy the 
 
 ### Build
 
-- Android APK: Run `just run prod TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile
+- Android APK: Run `just build-apk prod TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile
 
 > Replace screaming snake case with your values
 ## Author

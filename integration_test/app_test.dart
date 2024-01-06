@@ -19,9 +19,9 @@ Future<void> main() async {
 
     expect(find.text('Favorites'), findsOneWidget);
     expect(find.text('Search'), findsOneWidget);
-    expect(find.text('Info'), findsOneWidget);
+    expect(find.text('Settings'), findsOneWidget);
 
-    // Navigate to info tab.
+    // Navigate to settings tab.
     await tester.tap(find.byKey(const Key('app.info.tab')));
     await tester.pumpAndSettle();
 

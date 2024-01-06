@@ -1,4 +1,4 @@
-import 'dart:ui' as ui;
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming_search.dart';
 import 'package:tv_randshow/core/streaming/domain/use_cases/get_tvshow_streamings_use_case.dart';
@@ -28,7 +28,7 @@ class AddFavTvshowUseCase {
     final streamings = await _getTvshowStreamingsUseCase(
       StreamingSearch(
         tmdbId: idTv.toString(),
-        country: ui.window.locale.countryCode ?? '',
+        country: PlatformDispatcher.instance.locale.countryCode ?? '',
       ),
     );
     tvshowDetails = tvshowDetails.copyWith(streamings: streamings);

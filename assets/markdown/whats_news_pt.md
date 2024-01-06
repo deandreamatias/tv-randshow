@@ -1,3 +1,8 @@
+## 2.1.0 - 2024/01/06
+
+* Atualizadas dependencias
+* Construído com Flutter 3.16
+
 ## 2.0.0 - 2023/03/18
 
 ### Features

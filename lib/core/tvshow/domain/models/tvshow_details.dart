@@ -37,7 +37,7 @@ class TvshowDetails extends HiveObject {
   @HiveField(8)
   String posterPath;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<StreamingDetail> streamings;
   TvshowDetails({
     this.rowId,

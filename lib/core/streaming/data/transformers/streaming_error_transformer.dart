@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/api_error.dart';
 
 class StreamingErrorTransformer {
-  static void transformDioErros(DioError error) {
+  static void transformDioErros(DioException error) {
     final String apiErrorMessage = _getMessage(error.response);
 
     switch (error.response?.statusCode) {

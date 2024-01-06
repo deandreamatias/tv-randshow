@@ -13,15 +13,15 @@ class LocalPreferencesService implements ILocalPreferencesService {
   Future<T?> read<T>({required String key}) async {
     if (!_sharedPreferences.containsKey(key)) return null;
     switch (T) {
-      case String:
+      case const (String):
         return (_sharedPreferences.getString(key) ?? '') as T;
-      case int:
+      case const (int):
         return _sharedPreferences.getInt(key) as T?;
-      case bool:
+      case const (bool):
         return _sharedPreferences.getBool(key) as T?;
-      case double:
+      case const (double):
         return _sharedPreferences.getDouble(key) as T?;
-      case List:
+      case List _:
         return _sharedPreferences.getStringList(key) as T?;
       default:
         return _sharedPreferences.get(key) as T?;
@@ -31,19 +31,19 @@ class LocalPreferencesService implements ILocalPreferencesService {
   @override
   Future<bool> write<T>({required String key, required T value}) async {
     switch (T) {
-      case String:
+      case const (String):
         value as String;
         return _sharedPreferences.setString(key, value);
-      case int:
+      case const (int):
         value as int;
         return _sharedPreferences.setInt(key, value);
-      case bool:
+      case const (bool):
         value as bool;
         return _sharedPreferences.setBool(key, value);
-      case double:
+      case const (double):
         value as double;
         return _sharedPreferences.setDouble(key, value);
-      case List:
+      case List _:
         value as List<String>;
         return _sharedPreferences.setStringList(key, value);
       default:
