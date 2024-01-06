@@ -28,11 +28,11 @@ class ErrorMessage extends StatelessWidget {
       return (error as Error).getMessage();
     }
     switch (error.runtimeType) {
-      case ApiError:
+      case ApiError _:
         return (error as ApiError).code.getMessage();
-      case DatabaseError:
+      case DatabaseError _:
         return (error as DatabaseError).code.getMessage();
-      case AppError:
+      case AppError _:
         return (error as AppError).code.getMessage();
       default:
         return '';
