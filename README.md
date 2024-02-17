@@ -52,9 +52,8 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
    1. Flutter (see version in `.fvmrc`). Use [FVM 3.0](https://fvm.app/docs/getting_started/installation) to install Flutter versions
    2. When build to iOS, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-xcode)
    3. When build to Android, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-android-studio)
-   4. (Recommended) [Just](https://github.com/casey/just) to use commands
 3. Install dependencies and generate code
-   1. Only use `just setup`
+   1. Only use `sh tool/setup.sh`
    2. If don't have just, can do manual proccess
       1. Run `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
       2. Run `flutter pub run build_runner build`
@@ -66,18 +65,16 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 
 ### Run
 
-Run `just run dev DEVICE_ID` command or copy the command from `./justfile`
+Run `sh tool/run.sh dev` command or copy the command from `tool/run.sh`.
 
 ### Tests
 
-- Integration tests (only mobile): run `just integration-test DEVICE_ID` command or copy the command from `./justfile`
-- Unit tests: run `just unit-test` command or copy the command from `./justfile`
+- Integration tests (only mobile): run `sh tool/integration-test.sh` command or copy the command from `tool/integration-test.sh`.
+- Unit tests: run `sh tool/unit-test.sh unit` command or copy the command from `tool/unit-test.sh`.
 
 ### Build
 
-- Android APK: Run `just build-apk prod` command or copy the command from `./justfile
-
-> Replace screaming snake case with your values
+- Android APK: Run `sh tool/build-android.sh apk` command or copy the command from `tool/build-android.sh`.
 
 ## Author
 
