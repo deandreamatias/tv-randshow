@@ -41,7 +41,6 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Export saved TV shows to json**
 - **Dark mode**
 - **Material Design 3**
-- **Support to deeplink `https://tvrandshow.com/getRandomEpisode?tvshow=friends`**
 - **Roadmap in [public Trello](https://trello.com/b/ib0jdUzK)**
 
 ## Build and run
@@ -50,7 +49,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 
 1. Clone repository with 'git clone' command or just download the zip. `git clone git@github.com:deandreamatias/tv-randshow.git`
 2. Prepare your develop enviroment
-   1. Flutter (see version in ./fvm/fvm_config.json). Use [FVM](https://fvm.app/docs/getting_started/installation) to install Flutter versions
+   1. Flutter (see version in `.fvmrc`). Use [FVM 3.0](https://fvm.app/docs/getting_started/installation) to install Flutter versions
    2. When build to iOS, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-xcode)
    3. When build to Android, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-android-studio)
    4. (Recommended) [Just](https://github.com/casey/just) to use commands
@@ -77,17 +76,14 @@ Run `just run dev DEVICE_ID TMDB_API_KEY STREAMING_API_KEY` command or copy the 
 - Android APK: Run `just build-apk prod TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile
 
 > Replace screaming snake case with your values
+
 ## Author
 
-- **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com) and [GitHub](https://github.com/deandreamatias)
+- **Matias de Andrea** - Mobile developer: [Website](https://deandreamatias.com)
 
 ## Contributing
 
 If you want to take the time to make this project better, please read the [contributing guides](https://github.com/deandreamatias/tv-randshow/blob/master/CONTRIBUTING.md) first. Then, you can open an new [issue](https://github.com/deandreamatias/tv-randshow/issues/new/choose), of a [pull request](https://github.com/deandreamatias/tv-randshow/compare).
-
-## License
-
-This project is licensed under the GNU GPL v3 License - see the [LICENSE](LICENSE) file for details.
 
 ## Powered by
 
