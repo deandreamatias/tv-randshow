@@ -9,7 +9,6 @@
 .buildlog/
 .history
 .svn/
-.fvm/flutter_sdk
 package-lock.json
 
 # IntelliJ related
@@ -61,3 +60,6 @@ lib/generated_plugin_registrant.dart
 .runtimeconfig.json
 .firebase/
 **/web/.well-known/
+
+# FVM Version Cache
+.fvm/
