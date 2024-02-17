@@ -58,22 +58,24 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
    2. If don't have just, can do manual proccess
       1. Run `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
       2. Run `flutter pub run build_runner build`
-4. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details) and paste in file `lib/config/env.dart`
-5. Get your APi Key from Streaming Availabilty (on [RapidApi](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability)) and paste in file `lib/config/env.dart`
-6. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
+4. Get your own API keys
+   1. Get your API Key from TMDB (see [this FAQ](https://www.themoviedb.org/faq/api) for more details).
+   2. Get your API Key from Streaming Availabilty (on [RapidApi](https://rapidapi.com/movie-of-the-night-movie-of-the-night-default/api/streaming-availability))
+   3. Paste your API keys values in `.env/dev.json` or `.env/prod.json` files. Take `.env/dev.example.json` like example.
+5. (Optional) If you want build to web, do you need follow [this steps](https://flutter.dev/docs/get-started/web)
 
 ### Run
 
-Run `just run dev DEVICE_ID TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
+Run `just run dev DEVICE_ID` command or copy the command from `./justfile`
 
 ### Tests
 
-- Integration tests (only mobile): run `just integration-test TMDB_API_KEY STREAMING_API_KEY DEVICE_ID` command or copy the command from `./justfile`
-- Unit tests: run `just unit-test TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile`
+- Integration tests (only mobile): run `just integration-test DEVICE_ID` command or copy the command from `./justfile`
+- Unit tests: run `just unit-test` command or copy the command from `./justfile`
 
 ### Build
 
-- Android APK: Run `just build-apk prod TMDB_API_KEY STREAMING_API_KEY` command or copy the command from `./justfile
+- Android APK: Run `just build-apk prod` command or copy the command from `./justfile
 
 > Replace screaming snake case with your values
 

@@ -10,6 +10,8 @@
 .history
 .svn/
 package-lock.json
+.env/dev.json
+.env/prod.json
 
 # IntelliJ related
 *.iml
