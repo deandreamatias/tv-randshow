@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tv_randshow/common/interfaces/i_app_service.dart';
-import 'package:tv_randshow/common/models/tvshow_actions.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_details.dart';
 import 'package:tv_randshow/core/tvshow/domain/use_cases/get_local_tvshows_use_case.dart';
@@ -37,19 +35,6 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
       state.requireValue.isNotEmpty &&
       state.requireValue.singleWhereOrNull((element) => element.id == id) !=
           null;
-
-  Future<TvshowDetails?> verifyAppLink() async {
-    final IAppService appService = locator<IAppService>();
-    final TvshowActions tvshowActions = await appService.initUniLinks();
-    if (state.hasValue && state.requireValue.isNotEmpty && state.isLoading) {
-      return null;
-    }
-
-    return state.requireValue.singleWhere(
-      (TvshowDetails tvshowDetails) =>
-          tvshowDetails.name.toLowerCase().contains(tvshowActions.tvshow),
-    );
-  }
 }
 
 final favTvshowsProvider =

@@ -33,7 +33,6 @@ dependencies:
   sqflite: 2.3.0
   stack_trace: 1.11.1
   theme_provider: 0.6.0
-  uni_links: 0.5.1
   unicons: 2.1.1
   url_launcher: 6.2.2
 
