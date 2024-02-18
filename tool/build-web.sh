@@ -7,4 +7,10 @@ fi
 
 flavor="$1"
 
-fvm flutter build web -t "lib/main_$flavor.dart" "--dart-define-from-file=.env/$flavor.json"
+command="flutter build web -t "lib/main_$flavor.dart" "--dart-define-from-file=.env/$flavor.json""
+
+if command -v fvm &> /dev/null; then
+    fvm $command
+else
+    command
+fi

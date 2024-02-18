@@ -7,4 +7,10 @@ fi
 
 flavor="$1"
 
-fvm flutter test integration_test/app_test.dart --flavor $flavor "--dart-define-from-file=.env/$flavor.json"
+command="flutter test integration_test/app_test.dart --flavor $flavor "--dart-define-from-file=.env/$flavor.json""
+
+if command -v fvm &> /dev/null; then
+    fvm $command
+else
+    command
+fi

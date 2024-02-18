@@ -7,4 +7,10 @@ fi
 
 flavor="$1"
 
-fvm flutter run --flavor $flavor -t "lib/main_$flavor.dart"  "--dart-define-from-file=.env/$flavor.json"
+command="flutter run --flavor $flavor -t "lib/main_$flavor.dart" "--dart-define-from-file=.env/$flavor.json""
+
+if command -v fvm &> /dev/null; then
+    fvm $command
+else
+    command
+fi

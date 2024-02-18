@@ -7,4 +7,10 @@ fi
 
 flavor="$1"
 
-fvm flutter test "--dart-define-from-file=.env/$flavor.json"
+command="flutter test "--dart-define-from-file=.env/$flavor.json" --test-randomize-ordering-seed random"
+
+if command -v fvm &> /dev/null; then
+    fvm $command
+else
+    command
+fi
