@@ -12,5 +12,5 @@ command="flutter test "--dart-define-from-file=.env/$flavor.json" --test-randomi
 if command -v fvm &> /dev/null; then
     fvm $command
 else
-    command
+    $command
 fi

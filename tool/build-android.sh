@@ -13,6 +13,6 @@ command="flutter build $type --flavor $flavor -t "lib/main_$flavor.dart" --obfus
 if command -v fvm &> /dev/null; then
     fvm $command
 else
-    command
+    $command
 fi
 

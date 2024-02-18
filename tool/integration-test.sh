@@ -12,5 +12,5 @@ command="flutter test integration_test/app_test.dart --flavor $flavor "--dart-de
 if command -v fvm &> /dev/null; then
     fvm $command
 else
-    command
+    $command
 fi

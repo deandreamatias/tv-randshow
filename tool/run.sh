@@ -12,5 +12,5 @@ command="flutter run --flavor $flavor -t "lib/main_$flavor.dart" "--dart-define-
 if command -v fvm &> /dev/null; then
     fvm $command
 else
-    command
+    $command
 fi

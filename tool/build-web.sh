@@ -12,5 +12,5 @@ command="flutter build web -t "lib/main_$flavor.dart" "--dart-define-from-file=.
 if command -v fvm &> /dev/null; then
     fvm $command
 else
-    command
+    $command
 fi

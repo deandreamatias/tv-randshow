@@ -26,7 +26,7 @@ jobs:
       run: flutter doctor
 
     - name: Install dependencies
-      run: sh tool/setup.sh
+      run: chmod +x tool/setup.sh && sh tool/setup.sh
 
     - name: Verify formated files
       run: dart format $(find . -name "*.dart" -not -wholename "**/*.g.dart") --set-exit-if-changed
@@ -35,4 +35,4 @@ jobs:
       run: flutter analyze
 
     - name: Test
-      run: sh tool/unit-test.sh prod
+      run: chmod +x tool/unit-test.sh && sh tool/unit-test.sh prod
