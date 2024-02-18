@@ -1,6 +1,5 @@
 # Miscellaneous
 *.class
-*.lock
 *.log
 *.pyc
 *.swp
@@ -12,6 +11,7 @@
 package-lock.json
 .env/dev.json
 .env/prod.json
+*.zip
 
 # IntelliJ related
 *.iml
@@ -54,6 +54,7 @@ unlinked_spec.ds
 *.g.dart
 *.config.dart
 *.mocks.dart
+pubspec.lock
 
 ### Firebase ###
 **/node_modules/*

@@ -1,0 +1,7 @@
+* NUEVO: **Elige un episodio al azar de todas tus series favoritas**.
+* NUEVO: **Elige una serie al azar de entre las de tendencia actual**.
+* Añadido botón de donación
+* Actualizado a Material Design 3
+* Errores de gestión mejorados
+* Construido con Flutter 3.7
+* Corregidos muchos errores

@@ -1,0 +1,7 @@
+* NEW: **Pick random episode from all favorites TV shows**
+* NEW: **Pick random TV show from trending TV shows**
+* Add donation button
+* Updated to Material Design 3
+* Improved errors management
+* Built with Flutter 3.7
+* Fixed a lot bugs

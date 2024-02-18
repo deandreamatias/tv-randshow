@@ -1,0 +1,18 @@
+TV Randshow was created to help choose a random TV show episode or trending TV show.
+The TV shows database comes from the TMDB and the app saves them in a database on the device. With the list of favorites, you can roll the dice of a TV shows to get a random episode.
+
+Features:
+Save your favorites TV shows
+Choose a random episode from one or all saved TV shows
+Choose a random TV show from trending
+Dark mode
+Web app
+Export tv shows
+
+Notes: 
+- This app no show a TV show, only choose a random season and episode number and show to user
+
+Permissions:
+Internet: To get TV Shows from online database
+
+This is a open-source project. Github: https://github.com/deandreamatias/tv-randshow

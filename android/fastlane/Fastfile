@@ -1,0 +1,37 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Build app"
+  lane :build_prod do
+    Dir.chdir("../..") do
+      sh("chmod +x tool/build-android.sh")
+      sh("tool/build-android.sh prod appbundle")
+    end
+    sh "zip -r ../split-debug.zip ../split-debug/"
+  end
+
+  desc "Deploy a new version to the Google Play internal test track"
+  lane :internal do
+    upload_to_play_store(
+      track: 'internal',
+      aab: '../build/app/outputs/bundle/prodRelease/app-prod-release.aab',
+      mapping: true,
+      mapping_paths: 'split-debug.zip'
+    )
+  end
+end

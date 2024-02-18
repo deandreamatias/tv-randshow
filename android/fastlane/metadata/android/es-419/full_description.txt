@@ -1,0 +1,18 @@
+TV Randshow fue creado para ayudarte a elegir un episodio al azar de tu serie favorita o una serie de las tendencias. 
+La base de datos de la serie es de TMDB, a la que se conecta la aplicación para guardar las series en tu dispositivo. Con la lista de series favoritas guardadas, puedes tirar los dados para obtener un episodio al azar de una serie.
+
+Características:
+Guarda tus series favoritas.
+Elige un episodio aleatorio de una serie o de todas tus series favoritas.
+Elige una serie aleatoria entre las tendencias
+Modo oscuro
+Aplicación web
+Exportar series guardadas
+
+Permisos:
+Internet: para obtener las series de la base de datos
+
+Notas: 
+- Esta aplicación no muestra o reproduce la serie, solamente elige un número de temporada y episodio aleatoriamente y lo muestra al usuario.
+
+Este es un proyecto de código abierto. Github: https://github.com/deandreamatias/tv-randshow
