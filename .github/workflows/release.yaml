@@ -1,0 +1,43 @@
+name: Release
+on:
+  push:
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+
+    steps:
+    - name: Get repository
+      uses: actions/checkout@v4
+    - name: Configure enviroment
+      run: 
+        echo $ENV_PROD_BASE64 | base64 --decode > .env/prod.json |
+        echo $ENV_DEV_BASE64 | base64 --decode > .env/dev.json
+
+    - name: Get Flutter version
+      uses: kuhnroyal/flutter-fvm-config-action@v2
+      id: fvm-config-action
+      with:
+        path: '.fvmrc'
+    - name: Install Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+        cache: true
+        cache-key: 'flutter-:os:-:version:-:arch:'
+        cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
+
+    - name: Show Flutter info
+      run: flutter doctor
+
+    - name: Install dependencies
+      run: sh tool/setup.sh
+
+    - name: Get Android keystore secrets
+      run: 
+        echo $PLAY_STORE_UPLOAD_KEY | base64 -d > android/key.jks |
+        echo $PLAY_STORE_UPLOAD_KEY_PROPERTIES | base64 -d > android/key.properties
+
+    - name: Build Android prod
+      run: fastlane build_prod
