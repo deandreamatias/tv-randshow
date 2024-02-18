@@ -21,6 +21,7 @@ jobs:
         flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
         cache: true
         cache-key: 'flutter-:os:-:version:-:arch:'
+        cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
 
     - name: Show flutter info
       run: flutter doctor
