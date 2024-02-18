@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     name: Build and test
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Configure enviroment
@@ -20,6 +20,9 @@ jobs:
       with:
         flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
         cache: true
+
+    - name: Show flutter info
+      run: flutter doctor
 
     - name: Install dependencies
       run: sh tool/setup.sh
