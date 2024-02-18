@@ -53,4 +53,4 @@ jobs:
         echo $PLAY_STORE_UPLOAD_KEY_PROPERTIES | base64 -d > android/key.properties
 
     - name: Build Android prod
-      run: sh tool/build_android_prod.sh prod appbundle
+      run: sh tool/build-android.sh prod appbundle
