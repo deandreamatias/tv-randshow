@@ -12,8 +12,8 @@ jobs:
       uses: actions/checkout@v4
     - name: Configure enviroment
       run: 
-        $ENV_PROD_BASE64 | base64 --decode > .env/prod.json |
-        $ENV_DEV_BASE64 | base64 --decode > .env/dev.json
+        echo $ENV_PROD_BASE64 | base64 --decode > .env/prod.json |
+        echo $ENV_DEV_BASE64 | base64 --decode > .env/dev.json
 
     - name: Get flutter version
       uses: kuhnroyal/flutter-fvm-config-action@v2
