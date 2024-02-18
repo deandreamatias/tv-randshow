@@ -1,0 +1,34 @@
+name: Build and test
+on:
+  push:
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: macos-latest
+
+    steps:
+    - name: Configure enviroment
+      uses: actions/checkout@v4
+
+    - name: Download flutter
+      uses: kuhnroyal/flutter-fvm-config-action@v2
+      id: fvm-config-action
+      with:
+        path: '.fvmrc'
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+        cache: true
+
+    - name: Install dependencies
+      run: sh tool/setup.sh
+
+    - name: Verify formated files
+      run: dart format $(find . -name "*.dart" -not -wholename "**/*.g.dart") --set-exit-if-changed
+
+    - name: Analyze code
+      run: flutter analyze
+
+    - name: Test
+      run: sh tool/unit-test.sh prod
