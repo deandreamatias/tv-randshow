@@ -8,16 +8,20 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: Configure enviroment
+    - name: Get repository
       uses: actions/checkout@v4
-    - run: $ENV_PROD_BASE64 | base64 --decode > .env/prod.json
+    - name: Configure enviroment
+      run: 
+        $ENV_PROD_BASE64 | base64 --decode > .env/prod.json |
+        $ENV_DEV_BASE64 | base64 --decode > .env/dev.json
 
-    - name: Download flutter
+    - name: Get flutter version
       uses: kuhnroyal/flutter-fvm-config-action@v2
       id: fvm-config-action
       with:
         path: '.fvmrc'
-    - uses: subosito/flutter-action@v2
+    - name: Install Flutter
+      uses: subosito/flutter-action@v2
       with:
         flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
         cache: true
