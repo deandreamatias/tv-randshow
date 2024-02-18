@@ -13,18 +13,10 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+opt_out_usage
 default_platform(:android)
 
 platform :android do
-  desc "Build app"
-  lane :build_prod do
-    Dir.chdir("../..") do
-      sh("chmod +x tool/build-android.sh")
-      sh("tool/build-android.sh prod appbundle")
-    end
-    sh "zip -r ../split-debug.zip ../split-debug/"
-  end
-
   desc "Deploy a new version to the Google Play internal test track"
   lane :internal do
     upload_to_play_store(

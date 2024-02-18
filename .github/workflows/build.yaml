@@ -10,6 +10,7 @@ jobs:
     steps:
     - name: Get repository
       uses: actions/checkout@v4
+
     - name: Configure enviroment
       env:
         ENV_PROD_BASE64: ${{ secrets.ENV_PROD_BASE64 }}

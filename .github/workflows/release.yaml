@@ -18,6 +18,13 @@ jobs:
         echo $ENV_PROD_BASE64 | base64 --decode > .env/prod.json
         echo $ENV_DEV_BASE64 | base64 --decode > .env/dev.json
 
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '18'
+        cache: 'gradle'
+  
     - name: Get Flutter version
       uses: kuhnroyal/flutter-fvm-config-action@v2
       id: fvm-config-action
@@ -46,6 +53,4 @@ jobs:
         echo $PLAY_STORE_UPLOAD_KEY_PROPERTIES | base64 -d > android/key.properties
 
     - name: Build Android prod
-      run: |
-        cd android
-        fastlane build_prod
+      run: sh tool/build_android_prod.sh prod appbundle

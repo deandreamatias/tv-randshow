@@ -16,3 +16,4 @@ else
     $command
 fi
 
+zip -r android/split-debug.zip android/split-debug/
