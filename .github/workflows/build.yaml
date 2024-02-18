@@ -10,6 +10,7 @@ jobs:
     steps:
     - name: Configure enviroment
       uses: actions/checkout@v4
+    - run: $ENV_PROD_BASE64 | base64 --decode > .env/prod.json
 
     - name: Download flutter
       uses: kuhnroyal/flutter-fvm-config-action@v2
@@ -27,7 +28,7 @@ jobs:
       run: flutter doctor
 
     - name: Install dependencies
-      run: chmod +x tool/setup.sh && sh tool/setup.sh
+      run: sh tool/setup.sh
 
     - name: Verify formated files
       run: dart format $(find . -name "*.dart" -not -wholename "**/*.g.dart") --set-exit-if-changed
@@ -36,4 +37,4 @@ jobs:
       run: flutter analyze
 
     - name: Test
-      run: chmod +x tool/unit-test.sh && sh tool/unit-test.sh prod
+      run: sh tool/unit-test.sh prod
