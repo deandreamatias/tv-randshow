@@ -54,3 +54,11 @@ jobs:
 
     - name: Build Android prod
       run: sh tool/build-android.sh prod appbundle
+    
+    - name: Archive appbundle
+      uses: actions/upload-artifact@v4
+      with:
+        name: appbundle
+        path: build/app/outputs/bundle/prodRelease/app-prod-release.aab
+        retention-days: 1
+        overwrite: true
