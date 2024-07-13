@@ -62,3 +62,79 @@ jobs:
         path: build/app/outputs/bundle/prodRelease/app-prod-release.aab
         retention-days: 1
         overwrite: true
+
+    - name: Build Web prod
+      run: sh tool/build-web.sh prod
+    - name: Archive web
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-app
+        path: build/web/
+        retention-days: 1
+
+  upload-play-store:
+    name: Upload appbundle
+    runs-on: macos-latest
+    needs: build
+    steps:
+    - name: Download appbundle
+      uses: actions/download-artifact@v4
+      with:
+        name: appbundle              
+    - name: Upload Android Release to Play Store
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_API_KEY }}
+        packageName: deandrea.matias.tv_randshow
+        releaseFiles: build/app/outputs/bundle/prodRelease/app-prod-release.aab
+        track: qa
+
+  deployment-web-preview:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build
+    name: Deploy web
+    runs-on: ubuntu-latest
+    steps:
+    - name: Configure enviroment
+      uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      with:
+        name: web-app
+        path: build/web
+    - name: HTML/CSS/JS Minifier
+      uses: docker://devatherock/minify-js:2.0.0
+      with:
+        directory: 'build/web'
+        add_suffix: false
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TV_RANDSHOW }}'
+        projectId: tv-randshow
+        channelId: preview
+
+  deployment-web:
+    if: ${{ github.ref_type == 'tag' }}
+    needs: build
+    name: Deploy web
+    runs-on: ubuntu-latest
+    steps:
+    - name: Configure enviroment
+      uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      with:
+        name: web-app
+        path: build/web
+    - name: HTML/CSS/JS Minifier
+      uses: docker://devatherock/minify-js:2.0.0
+      with:
+        directory: 'build/web'
+        add_suffix: false
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TV_RANDSHOW }}'
+        projectId: tv-randshow
+        channelId: live
+    - name: Release
+      uses: softprops/action-gh-release@v2
