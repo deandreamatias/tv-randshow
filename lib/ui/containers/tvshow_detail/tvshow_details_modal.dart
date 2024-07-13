@@ -38,7 +38,7 @@ class TvshowDetailsModal extends StatelessWidget {
               borderRadius: const BorderRadiusDirectional.vertical(
                 top: Radius.circular(Styles.standard),
               ),
-              color: Theme.of(context).colorScheme.background,
+              color: Theme.of(context).colorScheme.surface,
             ),
             child: _TvshowInfoDetails(idTv: idTv),
           ),

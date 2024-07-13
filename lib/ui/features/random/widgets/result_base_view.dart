@@ -64,7 +64,7 @@ class ResultBaseView extends StatelessWidget {
                               ),
                               border: Border.all(
                                 color:
-                                    Theme.of(context).colorScheme.onBackground,
+                                    Theme.of(context).colorScheme.onSurface,
                               ),
                             ),
                             child: child,

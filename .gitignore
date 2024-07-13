@@ -1,6 +1,5 @@
 # Miscellaneous
 *.class
-*.lock
 *.log
 *.pyc
 *.swp
@@ -9,8 +8,10 @@
 .buildlog/
 .history
 .svn/
-.fvm/flutter_sdk
 package-lock.json
+.env/dev.json
+.env/prod.json
+*.zip
 
 # IntelliJ related
 *.iml
@@ -50,10 +51,10 @@ linked_*.ds
 unlinked.ds
 unlinked_spec.ds
 .flutter-plugins-dependencies
-lib/generated_plugin_registrant.dart
 *.g.dart
 *.config.dart
 *.mocks.dart
+pubspec.lock
 
 ### Firebase ###
 **/node_modules/*
@@ -61,3 +62,6 @@ lib/generated_plugin_registrant.dart
 .runtimeconfig.json
 .firebase/
 **/web/.well-known/
+
+# FVM Version Cache
+.fvm/

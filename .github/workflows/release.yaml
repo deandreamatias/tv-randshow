@@ -1,0 +1,142 @@
+name: Release
+on:
+  push:
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-latest
+
+    steps:
+    - name: Get repository
+      uses: actions/checkout@v4
+    - name: Configure enviroment
+      env:
+        ENV_PROD_BASE64: ${{ secrets.ENV_PROD_BASE64 }}
+        ENV_DEV_BASE64: ${{ secrets.ENV_DEV_BASE64 }}
+      run: |
+        echo $ENV_PROD_BASE64 | base64 --decode > .env/prod.json
+        echo $ENV_DEV_BASE64 | base64 --decode > .env/dev.json
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '18'
+        cache: 'gradle'
+  
+    - name: Get Flutter version
+      uses: kuhnroyal/flutter-fvm-config-action@v2
+      id: fvm-config-action
+      with:
+        path: '.fvmrc'
+    - name: Install Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+        cache: true
+        cache-key: 'flutter-:os:-:version:'
+        cache-path: '${{ runner.tool_cache }}/flutter/:os:-:version:'
+
+    - name: Show Flutter info
+      run: flutter doctor
+
+    - name: Install dependencies
+      run: sh tool/setup.sh
+
+    - name: Get Android keystore secrets
+      env:
+        PLAY_STORE_UPLOAD_KEY: ${{ secrets.PLAY_STORE_UPLOAD_KEY }}
+        PLAY_STORE_UPLOAD_KEY_PROPERTIES: ${{ secrets.PLAY_STORE_UPLOAD_KEY_PROPERTIES }}
+      run: |
+        echo $PLAY_STORE_UPLOAD_KEY | base64 -d > android/key.jks
+        echo $PLAY_STORE_UPLOAD_KEY_PROPERTIES | base64 -d > android/key.properties
+
+    - name: Build Android prod
+      run: sh tool/build-android.sh prod appbundle
+    
+    - name: Archive appbundle
+      uses: actions/upload-artifact@v4
+      with:
+        name: appbundle
+        path: build/app/outputs/bundle/prodRelease/app-prod-release.aab
+        retention-days: 1
+        overwrite: true
+
+    - name: Build Web prod
+      run: sh tool/build-web.sh prod
+    - name: Archive web
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-app
+        path: build/web/
+        retention-days: 1
+
+  upload-play-store:
+    if: ${{ github.ref_type == 'tag' }}
+    name: Upload appbundle
+    runs-on: macos-latest
+    needs: build
+    steps:
+    - name: Download appbundle
+      uses: actions/download-artifact@v4
+      with:
+        name: appbundle
+        path: build/app/outputs/bundle/prodRelease/
+    - name: Upload Android Release to Play Store
+      uses: r0adkll/upload-google-play@v1
+      with:
+        serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_API_KEY }}
+        packageName: deandrea.matias.tv_randshow
+        releaseFiles: build/app/outputs/bundle/prodRelease/app-prod-release.aab
+        track: internal
+
+  deployment-web-preview:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build
+    name: Deploy web
+    runs-on: ubuntu-latest
+    steps:
+    - name: Configure enviroment
+      uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      with:
+        name: web-app
+        path: build/web
+    - name: HTML/CSS/JS Minifier
+      uses: docker://devatherock/minify-js:2.0.0
+      with:
+        directory: 'build/web'
+        add_suffix: false
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TV_RANDSHOW }}'
+        projectId: tv-randshow
+        channelId: preview
+
+  deployment-web:
+    if: ${{ github.ref_type == 'tag' }}
+    needs: build
+    name: Deploy web
+    runs-on: ubuntu-latest
+    steps:
+    - name: Configure enviroment
+      uses: actions/checkout@v4
+    - uses: actions/download-artifact@v4
+      with:
+        name: web-app
+        path: build/web
+    - name: HTML/CSS/JS Minifier
+      uses: docker://devatherock/minify-js:2.0.0
+      with:
+        directory: 'build/web'
+        add_suffix: false
+    - uses: FirebaseExtended/action-hosting-deploy@v0
+      with:
+        repoToken: '${{ secrets.GITHUB_TOKEN }}'
+        firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TV_RANDSHOW }}'
+        projectId: tv-randshow
+        channelId: live
+    - name: Release
+      uses: softprops/action-gh-release@v2
