@@ -35,8 +35,8 @@ jobs:
       with:
         flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
         cache: true
-        cache-key: 'flutter-:os:-:version:-:arch:'
-        cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
+        cache-key: 'flutter-:os:-:version:'
+        cache-path: '${{ runner.tool_cache }}/flutter/:os:-:version:'
 
     - name: Show Flutter info
       run: flutter doctor
@@ -80,7 +80,8 @@ jobs:
     - name: Download appbundle
       uses: actions/download-artifact@v4
       with:
-        name: appbundle              
+        name: appbundle
+        path: build/app/outputs/bundle/prodRelease/
     - name: Upload Android Release to Play Store
       uses: r0adkll/upload-google-play@v1
       with:
