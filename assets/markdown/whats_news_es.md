@@ -1,3 +1,9 @@
+## 2.2.0 - 2024/07/13
+
+* Actualiza icono de Android
+* Actualiza dependencias
+* Construido con Flutter 3.22.2
+
 ## 2.1.0 - 2024/01/06
 
 * Actualizadas dependencias
