@@ -56,7 +56,7 @@ class DeleteButton extends StatelessWidget {
         dimension: 20,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: colorScheme.background,
+            color: colorScheme.surface,
             borderRadius: const BorderRadius.all(Radius.circular(4.0)),
             border:
                 Border.fromBorderSide(BorderSide(color: colorScheme.primary)),
