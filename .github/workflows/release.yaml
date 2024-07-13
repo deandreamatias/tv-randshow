@@ -88,7 +88,7 @@ jobs:
         serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_API_KEY }}
         packageName: deandrea.matias.tv_randshow
         releaseFiles: build/app/outputs/bundle/prodRelease/app-prod-release.aab
-        track: qa
+        track: internal
 
   deployment-web-preview:
     if: ${{ github.ref == 'refs/heads/main' }}
