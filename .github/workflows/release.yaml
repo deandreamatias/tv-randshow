@@ -73,6 +73,7 @@ jobs:
         retention-days: 1
 
   upload-play-store:
+    if: ${{ github.ref_type == 'tag' }}
     name: Upload appbundle
     runs-on: macos-latest
     needs: build
