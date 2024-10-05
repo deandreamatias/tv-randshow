@@ -1,3 +1,8 @@
+## 2.3.0 - 2024/10/05
+
+* Update dependencies
+* Build with Flutter 3.24.3
+
 ## 2.2.0 - 2024/07/13
 
 * Update Android icon
