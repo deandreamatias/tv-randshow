@@ -5,12 +5,10 @@ on:
 jobs:
   build:
     name: Build and test
-    runs-on: macos-latest
-
+    runs-on: ubuntu-latest
     steps:
     - name: Get repository
       uses: actions/checkout@v4
-
     - name: Configure enviroment
       env:
         ENV_PROD_BASE64: ${{ secrets.ENV_PROD_BASE64 }}
@@ -18,31 +16,15 @@ jobs:
       run: |
         echo $ENV_PROD_BASE64 | base64 --decode > .env/prod.json
         echo $ENV_DEV_BASE64 | base64 --decode > .env/dev.json
-
-    - name: Get flutter version
-      uses: kuhnroyal/flutter-fvm-config-action@v2
-      id: fvm-config-action
+    - name: Get Flutter version by FVM
+      uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       with:
         path: '.fvmrc'
-    - name: Install Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
-        cache: true
-        cache-key: 'flutter-:os:-:version:-:arch:'
-        cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
-
-    - name: Show flutter info
-      run: flutter doctor
-
     - name: Install dependencies
       run: sh tool/setup.sh
-
     - name: Verify formated files
       run: dart format $(find . -name "*.dart" -not -wholename "**/*.g.dart") --set-exit-if-changed
-
     - name: Analyze code
       run: flutter analyze
-
     - name: Test
       run: sh tool/unit-test.sh prod
