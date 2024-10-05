@@ -16,7 +16,7 @@ jobs:
       run: |
         echo $ENV_PROD_BASE64 | base64 -di > .env/prod.json
         echo $ENV_DEV_BASE64 | base64 -di > .env/dev.json
-    - name: Get Flutter version by FVM
+    - name: Setup Flutter
       uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       with:
         path: '.fvmrc'
