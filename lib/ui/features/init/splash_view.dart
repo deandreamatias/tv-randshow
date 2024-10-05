@@ -18,6 +18,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     _migrationStatusState.loadStatus().whenComplete(() {
+      if (!mounted) return;
       _migrationStatusState.completeMigration
           ? Navigator.of(context).pushReplacementNamed(RoutePaths.tab)
           : Navigator.of(context).pushReplacementNamed(RoutePaths.migraiton);

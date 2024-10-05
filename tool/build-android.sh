@@ -8,12 +8,6 @@ fi
 flavor="$1"
 type="$2"
 
-command="flutter build $type --flavor $flavor -t "lib/main_$flavor.dart" --obfuscate --split-debug-info=./android/split-debug/ "--dart-define-from-file=.env/$flavor.json""
-
-if command -v fvm &> /dev/null; then
-    fvm $command
-else
-    $command
-fi
+flutter build $type --flavor $flavor -t "lib/main_$flavor.dart" --obfuscate --split-debug-info=./android/split-debug/ "--dart-define-from-file=.env/$flavor.json"
 
 zip -r android/split-debug.zip android/split-debug/
