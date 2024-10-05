@@ -34,7 +34,7 @@ void main() {
     final tvshows = generateTvshow.tvshows;
     final randomIndex = faker.randomGenerator.integer(tvshows.length);
     final tvshowResult = TvshowResult(
-      image: faker.image.image(),
+      image: faker.image.loremPicsum(),
       randomSeason: tvshows[randomIndex].numberOfSeasons,
       randomEpisode: faker.randomGenerator.integer(999, min: 1),
       episodeName: faker.lorem.sentence(),

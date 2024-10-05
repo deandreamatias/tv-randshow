@@ -63,8 +63,7 @@ class ResultBaseView extends StatelessWidget {
                                 Radius.circular(Styles.small),
                               ),
                               border: Border.all(
-                                color:
-                                    Theme.of(context).colorScheme.onSurface,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                             ),
                             child: child,

@@ -21,9 +21,11 @@ class LoadingTrendingTvshowView extends StatelessWidget {
                   if (!ref.watch(randomTrendingTvshowProvider).isRefreshing) {
                     Future.delayed(
                       const Duration(milliseconds: 100),
-                      () => Navigator.of(context).pushReplacementNamed(
-                        RoutePaths.resultTrendingTvshow,
-                      ),
+                      () => context.mounted
+                          ? Navigator.of(context).pushReplacementNamed(
+                              RoutePaths.resultTrendingTvshow,
+                            )
+                          : null,
                     );
                   }
 
