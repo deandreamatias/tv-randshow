@@ -39,15 +39,21 @@ jobs:
       run: sh tool/build-android.sh prod apk
     - name: Build Android prod
       run: sh tool/build-android.sh prod appbundle
-    - name: Build Web prod
-      run: sh tool/build-web.sh prod
-    - name: Archive artifacts
+    - name: Archive Android artifacts
       uses: actions/upload-artifact@v4
       with:
+        name: android-app
         path: |
           build/app/outputs/bundle/prodRelease/app-prod-release.aab
           build/app/outputs/flutter-apk/app-prod-release.apk
-          build/web/
+        retention-days: 1
+    - name: Build Web prod
+      run: sh tool/build-web.sh prod
+    - name: Archive web artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: web-app
+        path: build/web/
         retention-days: 1
 
   upload-play-store:
@@ -59,6 +65,7 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
+        name: android-app
         path: artifacts/
     - name: Upload Android Release to Play Store
       uses: r0adkll/upload-google-play@v1
@@ -81,8 +88,11 @@ jobs:
     - name: Configure enviroment
       uses: actions/checkout@v4
     - uses: actions/download-artifact@v4
+      with:
+        name: web-app
+        path: build/web
     - name: HTML/CSS/JS Minifier
-      uses: docker://devatherock/minify-js:2.0.0
+      uses: docker://devatherock/minify-js:3.1.0
       with:
         directory: 'build/web'
         add_suffix: false
@@ -106,7 +116,7 @@ jobs:
         name: web-app
         path: build/web
     - name: HTML/CSS/JS Minifier
-      uses: docker://devatherock/minify-js:2.0.0
+      uses: docker://devatherock/minify-js:3.1.0
       with:
         directory: 'build/web'
         add_suffix: false
