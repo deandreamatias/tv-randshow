@@ -9,7 +9,7 @@
 
 ## TV Randshow - App to choose a random TV show episode
 
-[![Tests](https://api.codemagic.io/apps/5ea04fef2173e4001d6d6c75/6210143b0b28f63215deee7d/status_badge.svg)](https://codemagic.io/apps/5ea04fef2173e4001d6d6c75/6210143b0b28f63215deee7d/latest_build)
+[![Build and test](https://github.com/deandreamatias/tv-randshow/actions/workflows/build.yaml/badge.svg)](https://github.com/deandreamatias/tv-randshow/actions/workflows/build.yaml)
 [![Releases](https://img.shields.io/github/v/release/deandreamatias/tv-randshow)](https://github.com/deandreamatias/tv-randshow/releases)
 [![Google Play](https://img.shields.io/badge/google--play-Google--Play-green?label=App)](https://play.google.com/store/apps/details?id=deandrea.matias.tv_randshow)
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/deandrea.matias.tv_randshow/)](https://apt.izzysoft.de/fdroid/index/apk/deandrea.matias.tv_randshow/)
