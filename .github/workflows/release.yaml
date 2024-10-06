@@ -66,23 +66,23 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: android-app
-        path: artifacts/
+        path: artifacts
     - name: Upload Android Release to Play Store
       uses: r0adkll/upload-google-play@v1
       with:
         serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_API_KEY }}
         packageName: deandrea.matias.tv_randshow
-        releaseFiles: artifacts/app-prod-release.aab
+        releaseFiles: artifacts/bundle/prodRelease/app-prod-release.aab
         track: internal
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        files: artifacts/app-prod-release.apk
+        files: artifacts/flutter-apk/app-prod-release.apk
 
   deployment-web-preview:
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: build
-    name: Deploy web
+    name: Deploy preview web
     runs-on: ubuntu-latest
     steps:
     - name: Configure enviroment
@@ -106,7 +106,7 @@ jobs:
   deployment-web:
     if: ${{ github.ref_type == 'tag' }}
     needs: build
-    name: Deploy web
+    name: Deploy prod web
     runs-on: ubuntu-latest
     steps:
     - name: Configure enviroment
