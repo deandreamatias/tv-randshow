@@ -12,7 +12,6 @@ dependencies:
   collection: 1.19.0
   dio: 5.7.0
   file_saver: 0.2.14
-  flare_flutter: 3.0.2
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -29,6 +28,7 @@ dependencies:
   package_info_plus: 8.1.2
   path: 1.9.0
   path_provider: 2.1.5
+  rive: 0.13.20
   shared_preferences: 2.3.4
   sqflite: 2.4.1
   stack_trace: 1.12.0
@@ -69,7 +69,7 @@ flutter:
     - assets/markdown/
     - assets/img/no_image.webp
     - assets/img/tmdb.png
-    - assets/img/loading.flr
+    - assets/img/loading.riv
   fonts:
     - family: Nunito
       fonts:

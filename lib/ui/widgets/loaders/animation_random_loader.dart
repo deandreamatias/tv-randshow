@@ -1,5 +1,5 @@
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
 
 class AnimationRandomLoader extends StatelessWidget {
@@ -7,9 +7,9 @@ class AnimationRandomLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const FlareActor(
+    return const RiveAnimation.asset(
       Assets.loading,
-      animation: 'Loading',
+      animations: ['Loading'],
     );
   }
 }
