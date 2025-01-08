@@ -20,8 +20,7 @@ extension ApiErrorExtension on ApiErrorCode {
       case ApiErrorCode.serverError:
         apiError = translate('app.errors.internal_server_tvshows');
         break;
-      case ApiErrorCode.generalError:
-      default:
+      case ApiErrorCode.generalError: 
         apiError = translate('app.errors.global');
     }
 

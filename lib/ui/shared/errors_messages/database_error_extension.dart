@@ -15,7 +15,7 @@ extension DatabaseErrorExtension on DatabaseErrorCode {
         databaseError = translate('app.errors.database_read');
         break;
       case DatabaseErrorCode.unknown:
-      default:
+      
         databaseError = translate('app.errors.database_unknown');
     }
 
