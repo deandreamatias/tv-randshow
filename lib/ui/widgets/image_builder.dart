@@ -39,7 +39,10 @@ class ImageBuilder extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius:
                     const BorderRadius.all(Radius.circular(Styles.small)),
-                color: Theme.of(context).colorScheme.surface.withValues(alpha : 0.8),
+                color: Theme.of(context)
+                    .colorScheme
+                    .surface
+                    .withValues(alpha: 0.8),
               ),
               child: Text(
                 name,
