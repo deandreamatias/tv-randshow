@@ -31,7 +31,6 @@ extension MigrationStatusExtenstion on MigrationStatus {
       case MigrationStatus.complete:
         return 8;
       case MigrationStatus.init:
-      default:
         return 0;
     }
   }

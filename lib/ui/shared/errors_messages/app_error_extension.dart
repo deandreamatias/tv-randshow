@@ -14,8 +14,6 @@ extension AppErrorExtension on AppErrorCode {
       case AppErrorCode.invalidSeasonNumber:
         appError = translate('app.errors.app_invalid_season');
         break;
-      default:
-        appError = translate('app.errors.app_unknown');
     }
 
     return translate('app.errors.app', args: {'detail': appError});
