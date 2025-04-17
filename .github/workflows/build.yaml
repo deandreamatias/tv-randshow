@@ -2,6 +2,14 @@ name: Build and test
 on:
   push:
 
+  pull_request:
+    branches: [main]
+
+# This ensures that previous jobs for the PR are canceled when PR is updated
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build and test
@@ -23,7 +31,7 @@ jobs:
     - name: Install dependencies
       run: sh tool/setup.sh
     - name: Verify formated files
-      run: dart format $(find . -name "*.dart" -not -wholename "**/*.g.dart") --set-exit-if-changed
+      run: dart format $(find . -name "*.dart" -not -wholename "**/*.g.dart" -not -wholename "**/*.mocks.dart") --set-exit-if-changed
     - name: Analyze code
       run: flutter analyze
     - name: Test

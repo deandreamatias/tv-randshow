@@ -2,6 +2,11 @@ name: Release
 on:
   push:
 
+# This ensures that previous jobs for the PR are canceled when PR is updated
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build
