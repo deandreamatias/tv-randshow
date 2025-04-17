@@ -111,15 +111,19 @@ class _ExportTvShows extends StatelessWidget {
           leading: const Icon(UniconsLine.file_export),
           trailing: SizedBox.square(
             dimension: Styles.xlarge,
-            child: ref.watch(exportTvshowsProvider).when(
-                  data: (success) => success
-                      ? null
-                      : const ErrorIcon(
-                          keyText: 'app.info.export_error',
-                        ),
-                  error: (error, stackTrace) => const ErrorIcon(
-                    keyText: 'app.info.export_error',
-                  ),
+            child: ref
+                .watch(exportTvshowsProvider)
+                .when(
+                  data:
+                      (success) =>
+                          success
+                              ? null
+                              : const ErrorIcon(
+                                keyText: 'app.info.export_error',
+                              ),
+                  error:
+                      (error, stackTrace) =>
+                          const ErrorIcon(keyText: 'app.info.export_error'),
                   loading: () => const Loader(),
                 ),
           ),
@@ -258,50 +262,57 @@ class _Changelog extends StatelessWidget {
     // ignore: avoid-ignoring-return-values
     showDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
-        contentPadding: const EdgeInsets.all(Styles.standard),
-        title: Consumer(
-          builder: (context, ref, child) {
-            return ref.watch(versionAppProvider).when(
-                  data: (version) => Text(
-                    '${translate('app.info.version.dialog_title')} ($version)',
-                    key: const Key('app.info.version.dialog_title'),
-                  ),
-                  error: (error, stackTrace) => Text(
-                    translate('app.info.version.dialog_title'),
-                    key: const Key('app.info.version.dialog_title'),
-                  ),
-                  loading: () => const Align(
-                    alignment: Alignment.centerLeft,
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-          },
-        ),
-        content: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.8,
-          width: MediaQuery.of(context).size.width * 0.5,
-          child: FutureBuilder<String>(
-            future: _loadAsset(
-              LocalizedApp.of(context).delegate.currentLocale.languageCode,
+      builder:
+          (BuildContext context) => AlertDialog(
+            contentPadding: const EdgeInsets.all(Styles.standard),
+            title: Consumer(
+              builder: (context, ref, child) {
+                return ref
+                    .watch(versionAppProvider)
+                    .when(
+                      data:
+                          (version) => Text(
+                            '${translate('app.info.version.dialog_title')} ($version)',
+                            key: const Key('app.info.version.dialog_title'),
+                          ),
+                      error:
+                          (error, stackTrace) => Text(
+                            translate('app.info.version.dialog_title'),
+                            key: const Key('app.info.version.dialog_title'),
+                          ),
+                      loading:
+                          () => const Align(
+                            alignment: Alignment.centerLeft,
+                            child: CircularProgressIndicator(),
+                          ),
+                    );
+              },
             ),
-            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-              return snapshot.hasData
-                  ? Markdown(data: snapshot.data ?? '')
-                  : const Loader();
-            },
-          ),
-        ),
-        actions: <Widget>[
-          OutlinedButton(
-            key: const Key('app.info.version.dialog_button'),
-            child: Text(
-              translate('app.info.version.dialog_button'),
+            content: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.8,
+              width: MediaQuery.of(context).size.width * 0.5,
+              child: FutureBuilder<String>(
+                future: _loadAsset(
+                  LocalizedApp.of(context).delegate.currentLocale.languageCode,
+                ),
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<String> snapshot,
+                ) {
+                  return snapshot.hasData
+                      ? Markdown(data: snapshot.data ?? '')
+                      : const Loader();
+                },
+              ),
             ),
-            onPressed: () => Navigator.of(context).pop(),
+            actions: <Widget>[
+              OutlinedButton(
+                key: const Key('app.info.version.dialog_button'),
+                child: Text(translate('app.info.version.dialog_button')),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 

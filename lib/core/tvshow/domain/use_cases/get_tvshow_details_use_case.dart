@@ -10,10 +10,7 @@ class GetTvshowDetailsUseCase {
   final GetLocalTvshowsUseCase _getLocalTvshows;
   final IOnlineRepository _onlineRepository;
 
-  const GetTvshowDetailsUseCase(
-    this._onlineRepository,
-    this._getLocalTvshows,
-  );
+  const GetTvshowDetailsUseCase(this._onlineRepository, this._getLocalTvshows);
 
   Future<TvshowDetails> call(int idTv) async {
     final tvshows = await _getLocalTvshows();

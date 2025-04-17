@@ -9,8 +9,9 @@ import 'package:tv_randshow/ui/features/migration/migration_status_state.dart';
 class MigrationState {
   final bool isWeb;
 
-  late final MigrationStatusState _migrationStatusState =
-      MigrationStatusState(isWeb: isWeb);
+  late final MigrationStatusState _migrationStatusState = MigrationStatusState(
+    isWeb: isWeb,
+  );
   final AddStreamingsMigrationUseCase _addStreamingsMigrationUseCase =
       locator<AddStreamingsMigrationUseCase>();
 
@@ -29,7 +30,9 @@ class MigrationState {
           locator<MobileDatabaseMigrationUseCase>();
       // Do not use this return value.
       // ignore: avoid-ignoring-return-values, prefer-async-await
-      _streamController.addStream(databaseMigrationUseCase()).then(
+      _streamController
+          .addStream(databaseMigrationUseCase())
+          .then(
             (_) =>
                 _streamController.addStream(_addStreamingsMigrationUseCase()),
           );

@@ -21,22 +21,14 @@ class DioService {
       queryParameters: queryParams,
     ),
   );
-  DioService(
-    this.baseUrl, {
-    this.headers,
-    this.queryParams,
-    this.catchErrors,
-  });
+  DioService(this.baseUrl, {this.headers, this.queryParams, this.catchErrors});
 
   Future<Map<String, dynamic>> get(
     String path, {
     Map<String, dynamic> query = const {},
   }) async {
     try {
-      final Response response = await _dio.get(
-        path,
-        queryParameters: query,
-      );
+      final Response response = await _dio.get(path, queryParameters: query);
       if (response.data is String) {
         return jsonDecode(response.data) ?? {};
       }

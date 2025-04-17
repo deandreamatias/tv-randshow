@@ -60,15 +60,17 @@ void main() {
       test(
         'when migration status is complete then return immediately',
         () async {
-          when(getMigrationStatusUseCase())
-              .thenAnswer((_) async => MigrationStatus.complete);
+          when(
+            getMigrationStatusUseCase(),
+          ).thenAnswer((_) async => MigrationStatus.complete);
 
           await webState.loadStatus();
 
           expect(webState.completeMigration, isTrue);
 
-          when(getMigrationStatusUseCase())
-              .thenAnswer((_) async => MigrationStatus.empty);
+          when(
+            getMigrationStatusUseCase(),
+          ).thenAnswer((_) async => MigrationStatus.empty);
 
           await webState.loadStatus();
 
@@ -113,8 +115,9 @@ void main() {
     });
     group('saveStatus', () {
       test('when status is different that init then save it', () async {
-        final MigrationStatus status =
-            getRandomStatus(excludedStatus: [MigrationStatus.init]);
+        final MigrationStatus status = getRandomStatus(
+          excludedStatus: [MigrationStatus.init],
+        );
         when(saveMigrationStatusUseCase(status)).thenAnswer((_) async => true);
 
         await webState.saveStatus(status);
@@ -124,8 +127,9 @@ void main() {
       });
       test('when status is init then do nothing', () async {
         const MigrationStatus status0 = MigrationStatus.init;
-        when(saveMigrationStatusUseCase(status0))
-            .thenAnswer((_) async => false);
+        when(
+          saveMigrationStatusUseCase(status0),
+        ).thenAnswer((_) async => false);
 
         await webState.saveStatus(status0);
 
@@ -139,15 +143,17 @@ void main() {
       test(
         'when migration status is complete then return immediately',
         () async {
-          when(getMigrationStatusUseCase())
-              .thenAnswer((_) async => MigrationStatus.complete);
+          when(
+            getMigrationStatusUseCase(),
+          ).thenAnswer((_) async => MigrationStatus.complete);
 
           await mobileState.loadStatus();
 
           expect(mobileState.completeMigration, isTrue);
 
-          when(getMigrationStatusUseCase())
-              .thenAnswer((_) async => MigrationStatus.empty);
+          when(
+            getMigrationStatusUseCase(),
+          ).thenAnswer((_) async => MigrationStatus.empty);
 
           await mobileState.loadStatus();
 
@@ -164,83 +170,81 @@ void main() {
             ),
           );
           when(verifyDatabaseUseCase()).thenAnswer((_) async => false);
-          when(saveMigrationStatusUseCase(MigrationStatus.completeDatabase))
-              .thenAnswer((_) async => true);
+          when(
+            saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
+          ).thenAnswer((_) async => true);
 
           await mobileState.loadStatus();
 
           verify(getMigrationStatusUseCase()).called(1);
           verify(verifyDatabaseUseCase()).called(1);
-          verify(saveMigrationStatusUseCase(MigrationStatus.completeDatabase))
-              .called(1);
+          verify(
+            saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
+          ).called(1);
           expect(mobileState.completeMigration, isFalse);
         },
       );
-      group(
-        'verify old database',
-        () {
-          test(
-            'when old database is empty then migration status is empty',
-            () async {
-              when(getMigrationStatusUseCase()).thenAnswer(
-                (_) async => getRandomStatus(
-                  excludedStatus: [
-                    MigrationStatus.complete,
-                    MigrationStatus.empty,
-                  ],
-                ),
-              );
-              when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
-              when(verifyOldDatabaseUseCase()).thenAnswer((_) async => true);
-              when(saveMigrationStatusUseCase(MigrationStatus.empty))
-                  .thenAnswer((_) async => true);
-
-              await mobileState.loadStatus();
-
-              verify(getMigrationStatusUseCase()).called(1);
-              verify(verifyDatabaseUseCase()).called(1);
-              verify(verifyOldDatabaseUseCase()).called(1);
-              verify(saveMigrationStatusUseCase(MigrationStatus.empty))
-                  .called(1);
-              verifyNever(
-                saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
-              );
-              expect(mobileState.migration, MigrationStatus.empty);
-            },
-          );
-          test(
-            'when old database is not empty then return immediately',
-            () async {
-              final status = getRandomStatus(
+      group('verify old database', () {
+        test(
+          'when old database is empty then migration status is empty',
+          () async {
+            when(getMigrationStatusUseCase()).thenAnswer(
+              (_) async => getRandomStatus(
                 excludedStatus: [
                   MigrationStatus.complete,
                   MigrationStatus.empty,
                 ],
-              );
-              when(getMigrationStatusUseCase()).thenAnswer((_) async => status);
-              when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
-              when(verifyOldDatabaseUseCase()).thenAnswer((_) async => false);
-              when(saveMigrationStatusUseCase(MigrationStatus.init))
-                  .thenAnswer((_) async => true);
+              ),
+            );
+            when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
+            when(verifyOldDatabaseUseCase()).thenAnswer((_) async => true);
+            when(
+              saveMigrationStatusUseCase(MigrationStatus.empty),
+            ).thenAnswer((_) async => true);
 
-              await mobileState.loadStatus();
+            await mobileState.loadStatus();
 
-              verify(getMigrationStatusUseCase()).called(1);
-              verify(verifyDatabaseUseCase()).called(1);
-              verify(verifyOldDatabaseUseCase()).called(1);
-              verifyNever(
-                saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
-              );
-              expect(mobileState.migration, status);
-            },
-          );
-        },
-      );
+            verify(getMigrationStatusUseCase()).called(1);
+            verify(verifyDatabaseUseCase()).called(1);
+            verify(verifyOldDatabaseUseCase()).called(1);
+            verify(saveMigrationStatusUseCase(MigrationStatus.empty)).called(1);
+            verifyNever(
+              saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
+            );
+            expect(mobileState.migration, MigrationStatus.empty);
+          },
+        );
+        test(
+          'when old database is not empty then return immediately',
+          () async {
+            final status = getRandomStatus(
+              excludedStatus: [MigrationStatus.complete, MigrationStatus.empty],
+            );
+            when(getMigrationStatusUseCase()).thenAnswer((_) async => status);
+            when(verifyDatabaseUseCase()).thenAnswer((_) async => true);
+            when(verifyOldDatabaseUseCase()).thenAnswer((_) async => false);
+            when(
+              saveMigrationStatusUseCase(MigrationStatus.init),
+            ).thenAnswer((_) async => true);
+
+            await mobileState.loadStatus();
+
+            verify(getMigrationStatusUseCase()).called(1);
+            verify(verifyDatabaseUseCase()).called(1);
+            verify(verifyOldDatabaseUseCase()).called(1);
+            verifyNever(
+              saveMigrationStatusUseCase(MigrationStatus.completeDatabase),
+            );
+            expect(mobileState.migration, status);
+          },
+        );
+      });
     });
     group('saveStatus', () {
       test('when status is different that init then save it', () async {
-        final MigrationStatus status =
-            getRandomStatus(excludedStatus: [MigrationStatus.init]);
+        final MigrationStatus status = getRandomStatus(
+          excludedStatus: [MigrationStatus.init],
+        );
         when(saveMigrationStatusUseCase(status)).thenAnswer((_) async => true);
 
         await mobileState.saveStatus(status);
@@ -250,8 +254,9 @@ void main() {
       });
       test('when status is init then do nothing', () async {
         const MigrationStatus status0 = MigrationStatus.init;
-        when(saveMigrationStatusUseCase(status0))
-            .thenAnswer((_) async => false);
+        when(
+          saveMigrationStatusUseCase(status0),
+        ).thenAnswer((_) async => false);
 
         await mobileState.saveStatus(status0);
 

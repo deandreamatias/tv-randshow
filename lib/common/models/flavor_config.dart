@@ -5,12 +5,12 @@ class FlavorConfig {
   final FlavorValues values;
   static FlavorConfig? _instance;
   static FlavorConfig get instance => _instance!;
-  factory FlavorConfig({
-    required Flavor flavor,
-    required FlavorValues values,
-  }) {
-    _instance ??=
-        FlavorConfig._internal(flavor, enumName(flavor.toString()), values);
+  factory FlavorConfig({required Flavor flavor, required FlavorValues values}) {
+    _instance ??= FlavorConfig._internal(
+      flavor,
+      enumName(flavor.toString()),
+      values,
+    );
 
     return _instance!;
   }

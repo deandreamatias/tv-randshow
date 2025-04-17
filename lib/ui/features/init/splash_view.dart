@@ -12,8 +12,9 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  final MigrationStatusState _migrationStatusState =
-      MigrationStatusState(isWeb: kIsWeb);
+  final MigrationStatusState _migrationStatusState = MigrationStatusState(
+    isWeb: kIsWeb,
+  );
 
   @override
   void initState() {

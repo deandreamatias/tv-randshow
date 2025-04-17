@@ -2,10 +2,7 @@ class DatabaseError implements Exception {
   final String message;
   final DatabaseErrorCode code;
 
-  const DatabaseError({
-    this.message = '',
-    required this.code,
-  });
+  const DatabaseError({this.message = '', required this.code});
 
   @override
   String toString() {
@@ -13,9 +10,4 @@ class DatabaseError implements Exception {
   }
 }
 
-enum DatabaseErrorCode {
-  init,
-  read,
-  delete,
-  unknown,
-}
+enum DatabaseErrorCode { init, read, delete, unknown }

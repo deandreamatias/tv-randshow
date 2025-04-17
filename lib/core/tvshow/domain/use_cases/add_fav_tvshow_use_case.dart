@@ -19,11 +19,11 @@ class AddFavTvshowUseCase {
     this._localRepository,
   );
 
-  Future<TvshowDetails> call({
-    required int idTv,
-  }) async {
-    TvshowDetails tvshowDetails =
-        await _onlineRepository.getDetailsTv(Helpers.getLocale(), idTv);
+  Future<TvshowDetails> call({required int idTv}) async {
+    TvshowDetails tvshowDetails = await _onlineRepository.getDetailsTv(
+      Helpers.getLocale(),
+      idTv,
+    );
 
     final streamings = await _getTvshowStreamingsUseCase(
       StreamingSearch(

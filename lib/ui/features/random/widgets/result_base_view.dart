@@ -44,8 +44,10 @@ class ResultBaseView extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: ConstrainedBox(
-                    constraints:
-                        const BoxConstraints(maxWidth: 500, maxHeight: 500),
+                    constraints: const BoxConstraints(
+                      maxWidth: 500,
+                      maxHeight: 500,
+                    ),
                     child: Stack(
                       clipBehavior: Clip.none,
                       fit: StackFit.passthrough,

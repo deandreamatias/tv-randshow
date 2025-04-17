@@ -17,29 +17,30 @@ import 'add_streamings_migration_use_case_test.mocks.dart';
 void main() {
   final faker = Faker();
   List<StreamingDetail> streamings() => List.generate(
-        faker.randomGenerator.integer(20),
-        (index) => StreamingDetail(
-          id: faker.randomGenerator.integer(9999).toString(),
-          country: faker.address.country(),
-          leaving: faker.randomGenerator.integer(1),
-          added: faker.randomGenerator.integer(1),
-          streamingName: faker.lorem.word(),
-        ),
-      );
+    faker.randomGenerator.integer(20),
+    (index) => StreamingDetail(
+      id: faker.randomGenerator.integer(9999).toString(),
+      country: faker.address.country(),
+      leaving: faker.randomGenerator.integer(1),
+      added: faker.randomGenerator.integer(1),
+      streamingName: faker.lorem.word(),
+    ),
+  );
   TvshowDetails tvshowDetails({bool withStreamings = false}) => TvshowDetails(
-        episodeRunTime: faker.randomGenerator
-            .numbers(1000, faker.randomGenerator.integer(999)),
-        id: faker.randomGenerator.integer(9999),
-        inProduction: faker.randomGenerator.boolean() ? 1 : 0,
-        name: faker.lorem.sentence(),
-        numberOfEpisodes: faker.randomGenerator.integer(999),
-        numberOfSeasons: faker.randomGenerator.integer(50),
-        overview: faker.lorem.sentence(),
-        posterPath: faker.internet.httpsUrl(),
-        streamings: withStreamings ? streamings() : [],
-        rowId:
-            faker.randomGenerator.integer(faker.randomGenerator.integer(999)),
-      );
+    episodeRunTime: faker.randomGenerator.numbers(
+      1000,
+      faker.randomGenerator.integer(999),
+    ),
+    id: faker.randomGenerator.integer(9999),
+    inProduction: faker.randomGenerator.boolean() ? 1 : 0,
+    name: faker.lorem.sentence(),
+    numberOfEpisodes: faker.randomGenerator.integer(999),
+    numberOfSeasons: faker.randomGenerator.integer(50),
+    overview: faker.lorem.sentence(),
+    posterPath: faker.internet.httpsUrl(),
+    streamings: withStreamings ? streamings() : [],
+    rowId: faker.randomGenerator.integer(faker.randomGenerator.integer(999)),
+  );
 
   final localRepository = MockILocalRepository();
   final streamingsRepository = MockIStreamingsRepository();
@@ -58,10 +59,7 @@ void main() {
       when(localRepository.getTvshows()).thenAnswer((_) async => []);
 
       expect(usecase(), emits(MigrationStatus.empty));
-      expect(
-        usecase(),
-        neverEmits(isA<Exception>()),
-      );
+      expect(usecase(), neverEmits(isA<Exception>()));
     });
 
     test(
@@ -74,33 +72,32 @@ void main() {
         when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
 
         expect(usecase(), emits(MigrationStatus.complete));
-        expect(
-          usecase(),
-          neverEmits(isA<Exception>()),
-        );
+        expect(usecase(), neverEmits(isA<Exception>()));
       },
     );
     test(
       'Should return complete status when save all tvshows with streamings',
       () {
-        final tvshows =
-            random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
+        final tvshows = random.amount<TvshowDetails>(
+          (i) => tvshowDetails(),
+          50,
+        );
         when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
 
         for (TvshowDetails tvshow in tvshows) {
           final localStreaming = streamings();
 
-          when(streamingsRepository.searchTvShow(argThat(isNotNull)))
-              .thenAnswer(
-            (_) async => localStreaming,
-          );
+          when(
+            streamingsRepository.searchTvShow(argThat(isNotNull)),
+          ).thenAnswer((_) async => localStreaming);
 
           final localTvshow = tvshow.copyWith(
             streamings: localStreaming,
             rowId: tvshow.rowId,
           );
-          when(localRepository.saveStreamings(localTvshow))
-              .thenAnswer((_) async => Future<void>);
+          when(
+            localRepository.saveStreamings(localTvshow),
+          ).thenAnswer((_) async => Future<void>);
         }
 
         expect(
@@ -113,10 +110,7 @@ void main() {
             MigrationStatus.complete,
           ]),
         );
-        expect(
-          usecase(),
-          neverEmits(isA<Exception>()),
-        );
+        expect(usecase(), neverEmits(isA<Exception>()));
       },
     );
   });
@@ -127,9 +121,7 @@ void main() {
 
       usecase().listen(
         (value) => {},
-        onError: expectAsync1(
-          (value) => expect(value, exception),
-        ),
+        onError: expectAsync1((value) => expect(value, exception)),
         onDone: () {
           verify(localRepository.getTvshows()).called(1);
         },
@@ -139,8 +131,10 @@ void main() {
       'Should get exception when has exception on search streamings tv shows',
       () {
         final exception = Exception('Error to get tvshows');
-        final tvshows =
-            random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
+        final tvshows = random.amount<TvshowDetails>(
+          (i) => tvshowDetails(),
+          50,
+        );
         when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
 
         for (var tvshow in tvshows) {
@@ -159,9 +153,7 @@ void main() {
 
         usecase().listen(
           (value) => {},
-          onError: expectAsync1(
-            (value) => expect(value, exception),
-          ),
+          onError: expectAsync1((value) => expect(value, exception)),
           onDone: () {
             verify(localRepository.getTvshows()).called(1);
             verify(streamingsRepository.searchTvShow(any)).called(1);
@@ -173,17 +165,18 @@ void main() {
       'Should get exception when has exception on save streamings tv shows',
       () {
         final exception = Exception('Error to get tvshows');
-        final tvshows =
-            random.amount<TvshowDetails>((i) => tvshowDetails(), 50);
+        final tvshows = random.amount<TvshowDetails>(
+          (i) => tvshowDetails(),
+          50,
+        );
         when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
 
         for (var tvshow in tvshows) {
           final streaming0 = streamings();
 
-          when(streamingsRepository.searchTvShow(argThat(isNotNull)))
-              .thenAnswer(
-            (_) async => streaming0,
-          );
+          when(
+            streamingsRepository.searchTvShow(argThat(isNotNull)),
+          ).thenAnswer((_) async => streaming0);
 
           when(
             localRepository.saveStreamings(
@@ -200,9 +193,7 @@ void main() {
 
         usecase().listen(
           (value) => {},
-          onError: expectAsync1(
-            (value) => expect(value, exception),
-          ),
+          onError: expectAsync1((value) => expect(value, exception)),
           onDone: () {
             verify(localRepository.getTvshows()).called(1);
             verify(streamingsRepository.searchTvShow(any)).called(1);

@@ -44,7 +44,7 @@ class _MigrationViewState extends State<MigrationView> {
               final order = snapshot.data?.getOrder() ?? 0;
               final isLoading =
                   snapshot.connectionState != ConnectionState.done &&
-                      !snapshot.hasError;
+                  !snapshot.hasError;
               if (order > 0) {
                 migrationState.updateStatus(snapshot.requireData);
               }
@@ -79,10 +79,11 @@ class _MigrationViewState extends State<MigrationView> {
                   OutlinedButton.icon(
                     label: Text(translate('app.migration.home_button')),
                     icon: const Icon(UniconsLine.home),
-                    onPressed: () => Navigator.pushReplacementNamed(
-                      context,
-                      RoutePaths.tab,
-                    ),
+                    onPressed:
+                        () => Navigator.pushReplacementNamed(
+                          context,
+                          RoutePaths.tab,
+                        ),
                   ),
                 ],
               );
@@ -120,10 +121,7 @@ class _Header extends StatelessWidget {
 class _DatabaseMigration extends StatelessWidget {
   final int order;
   final bool isLoading;
-  const _DatabaseMigration({
-    required this.order,
-    this.isLoading = false,
-  });
+  const _DatabaseMigration({required this.order, this.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -161,10 +159,7 @@ class _DatabaseMigration extends StatelessWidget {
 class _StreamMigration extends StatelessWidget {
   final int order;
   final bool isLoading;
-  const _StreamMigration({
-    required this.order,
-    this.isLoading = false,
-  });
+  const _StreamMigration({required this.order, this.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -204,13 +199,10 @@ class _Checkpoint extends StatelessWidget {
         Text(translate(label)),
         const SizedBox(height: Styles.xsmall),
         isLoading
-            ? const SizedBox.square(
-                dimension: Styles.medium,
-                child: Loader(),
-              )
+            ? const SizedBox.square(dimension: Styles.medium, child: Loader())
             : checked
-                ? const Icon(UniconsLine.check, color: Colors.green)
-                : const Icon(UniconsLine.times, color: Colors.red),
+            ? const Icon(UniconsLine.check, color: Colors.green)
+            : const Icon(UniconsLine.times, color: Colors.red),
       ],
     );
   }

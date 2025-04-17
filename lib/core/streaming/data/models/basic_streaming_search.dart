@@ -8,12 +8,8 @@ class BasicStreamingSearch extends StreamingSearch {
   @JsonKey(name: 'tmdb_id')
   final String tmdbIdOutput;
 
-  BasicStreamingSearch({
-    required this.tmdbIdOutput,
-    required super.country,
-  }) : super(
-          tmdbId: tmdbIdOutput,
-        );
+  BasicStreamingSearch({required this.tmdbIdOutput, required super.country})
+    : super(tmdbId: tmdbIdOutput);
 
   factory BasicStreamingSearch.fromJson(Map<String, dynamic> json) =>
       _$BasicStreamingSearchFromJson(json);

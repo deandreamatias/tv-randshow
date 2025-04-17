@@ -9,29 +9,23 @@ import 'package:tv_randshow/core/tvshow/domain/use_cases/search_tvshow_use_case.
 import 'package:tv_randshow/ui/states/pagination_notifier.dart';
 
 final paginationProvider = AutoDisposeAsyncNotifierProvider.family<
-    PaginationNotifier<Result, String>, List<Result>, String>(
-  () {
-    return PaginationNotifier(
-      sizePage: 20,
-      getPageFunction: (page, input) async {
-        final SearchTvShowUseCase searchTvShowUseCase =
-            locator<SearchTvShowUseCase>();
+  PaginationNotifier<Result, String>,
+  List<Result>,
+  String
+>(() {
+  return PaginationNotifier(
+    sizePage: 20,
+    getPageFunction: (page, input) async {
+      final SearchTvShowUseCase searchTvShowUseCase =
+          locator<SearchTvShowUseCase>();
 
-        return (await searchTvShowUseCase(
-          page: page,
-          text: input,
-        ))
-            .results;
-      },
-    );
-  },
-);
+      return (await searchTvShowUseCase(page: page, text: input)).results;
+    },
+  );
+});
 
 class SearchTvshowsNotifier extends AutoDisposeNotifier<String> {
-  Timer _timer = Timer(
-    const Duration(seconds: 3),
-    () => {},
-  );
+  Timer _timer = Timer(const Duration(seconds: 3), () => {});
 
   @override
   String build() {
@@ -58,5 +52,5 @@ class SearchTvshowsNotifier extends AutoDisposeNotifier<String> {
 
 final searchProvider =
     AutoDisposeNotifierProvider<SearchTvshowsNotifier, String>(
-  SearchTvshowsNotifier.new,
-);
+      SearchTvshowsNotifier.new,
+    );

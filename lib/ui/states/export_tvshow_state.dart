@@ -21,5 +21,5 @@ class ExportTvShowsNotifier extends AutoDisposeAsyncNotifier<bool> {
 
 final exportTvshowsProvider =
     AsyncNotifierProvider.autoDispose<ExportTvShowsNotifier, bool>(
-  ExportTvShowsNotifier.new,
-);
+      ExportTvShowsNotifier.new,
+    );

@@ -17,11 +17,12 @@ class HomeButton extends StatelessWidget {
       child: TextButton.icon(
         label: Text(translate(keyText)),
         icon: const Icon(UniconsLine.favorite),
-        onPressed: () => Navigator.pushNamedAndRemoveUntil<TabView>(
-          context,
-          RoutePaths.tab,
-          ModalRoute.withName(RoutePaths.tab),
-        ),
+        onPressed:
+            () => Navigator.pushNamedAndRemoveUntil<TabView>(
+              context,
+              RoutePaths.tab,
+              ModalRoute.withName(RoutePaths.tab),
+            ),
       ),
     );
   }

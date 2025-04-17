@@ -26,9 +26,10 @@ class ImageBuilder extends StatelessWidget {
       children: <Widget>[
         ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(Styles.small)),
-          child: kIsWeb
-              ? OnlineImage(url: _checkUrl(url), name: name)
-              : _CachedImage(url: _checkUrl(url)),
+          child:
+              kIsWeb
+                  ? OnlineImage(url: _checkUrl(url), name: name)
+                  : _CachedImage(url: _checkUrl(url)),
         ),
         Visibility(
           visible: !isModal,
@@ -37,18 +38,18 @@ class ImageBuilder extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(Styles.small),
               decoration: BoxDecoration(
-                borderRadius:
-                    const BorderRadius.all(Radius.circular(Styles.small)),
-                color: Theme.of(context)
-                    .colorScheme
-                    .surface
-                    .withValues(alpha: 0.8),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(Styles.small),
+                ),
+                color: Theme.of(
+                  context,
+                ).colorScheme.surface.withValues(alpha: 0.8),
               ),
               child: Text(
                 name,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
               ),
             ),
           ),
@@ -68,8 +69,9 @@ class _CachedImage extends StatelessWidget {
       imageUrl: url,
       fit: BoxFit.cover,
       placeholder: (BuildContext context, String url) => const Loader(),
-      errorWidget: (BuildContext context, String url, Object? error) =>
-          Image.asset(Assets.emptyImage),
+      errorWidget:
+          (BuildContext context, String url, Object? error) =>
+              Image.asset(Assets.emptyImage),
     );
   }
 }

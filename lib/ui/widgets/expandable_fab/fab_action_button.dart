@@ -3,11 +3,7 @@ import 'package:tv_randshow/ui/shared/styles.dart';
 
 @immutable
 class FabActionButton extends StatelessWidget {
-  const FabActionButton({
-    super.key,
-    this.onPressed,
-    required this.icon,
-  });
+  const FabActionButton({super.key, this.onPressed, required this.icon});
 
   final VoidCallback? onPressed;
   final Widget icon;

@@ -6,10 +6,7 @@ import 'package:tv_randshow/ui/states/tvshow_state.dart';
 import 'package:unicons/unicons.dart';
 
 class DeleteButton extends StatelessWidget {
-  const DeleteButton({
-    super.key,
-    required this.idTv,
-  });
+  const DeleteButton({super.key, required this.idTv});
   final int idTv;
 
   Future<bool> _deleteConfirm(BuildContext context) async {
@@ -58,8 +55,9 @@ class DeleteButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: colorScheme.surface,
             borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-            border:
-                Border.fromBorderSide(BorderSide(color: colorScheme.primary)),
+            border: Border.fromBorderSide(
+              BorderSide(color: colorScheme.primary),
+            ),
           ),
           child: Icon(
             UniconsLine.times,

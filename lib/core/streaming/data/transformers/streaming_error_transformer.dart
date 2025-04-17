@@ -7,25 +7,16 @@ class StreamingErrorTransformer {
 
     switch (error.response?.statusCode) {
       case 400:
-        throw ApiError(
-          message: apiErrorMessage,
-          code: ApiErrorCode.badRequest,
-        );
+        throw ApiError(message: apiErrorMessage, code: ApiErrorCode.badRequest);
       case 401:
         throw ApiError(
           message: apiErrorMessage,
           code: ApiErrorCode.unauthorized,
         );
       case 403:
-        throw ApiError(
-          message: apiErrorMessage,
-          code: ApiErrorCode.forbidden,
-        );
+        throw ApiError(message: apiErrorMessage, code: ApiErrorCode.forbidden);
       case 404:
-        throw ApiError(
-          message: apiErrorMessage,
-          code: ApiErrorCode.notFound,
-        );
+        throw ApiError(message: apiErrorMessage, code: ApiErrorCode.notFound);
       case 500:
         throw ApiError(
           message: apiErrorMessage,

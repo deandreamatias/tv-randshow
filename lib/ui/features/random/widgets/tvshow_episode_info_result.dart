@@ -9,10 +9,7 @@ import 'package:tv_randshow/ui/widgets/text_title_medium.dart';
 
 class TvshowEpisodeInfoResult extends StatelessWidget {
   final TvshowResult result;
-  const TvshowEpisodeInfoResult({
-    super.key,
-    required this.result,
-  });
+  const TvshowEpisodeInfoResult({super.key, required this.result});
 
   @override
   Widget build(BuildContext context) {
@@ -25,28 +22,30 @@ class TvshowEpisodeInfoResult extends StatelessWidget {
           child: MediaHeader(
             title: result.name,
             imagePath: result.image,
-            child: result.streamings.isNotEmpty
-                ? SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: result.streamings
-                          .map(
-                            (streaming) => Row(
-                              children: [
-                                StreamingButton(streamingDetail: streaming),
-                                const SizedBox(width: Styles.small),
-                              ],
-                            ),
-                          )
-                          .toList(),
+            child:
+                result.streamings.isNotEmpty
+                    ? SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:
+                            result.streamings
+                                .map(
+                                  (streaming) => Row(
+                                    children: [
+                                      StreamingButton(
+                                        streamingDetail: streaming,
+                                      ),
+                                      const SizedBox(width: Styles.small),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                      ),
+                    )
+                    : TextTitleMedium(
+                      translate('app.result.episode.no_streaming_title'),
                     ),
-                  )
-                : TextTitleMedium(
-                    translate(
-                      'app.result.episode.no_streaming_title',
-                    ),
-                  ),
           ),
         ),
         Flexible(
@@ -54,10 +53,7 @@ class TvshowEpisodeInfoResult extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              InfoBox(
-                typeInfo: InfoTypeBox.season,
-                value: result.randomSeason,
-              ),
+              InfoBox(typeInfo: InfoTypeBox.season, value: result.randomSeason),
               InfoBox(
                 typeInfo: InfoTypeBox.episode,
                 value: result.randomEpisode,

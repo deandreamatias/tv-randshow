@@ -27,10 +27,7 @@ class TvshowDetailsModal extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: <Widget>[
         ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: 500,
-            maxHeight: 425,
-          ),
+          constraints: const BoxConstraints(maxWidth: 500, maxHeight: 425),
           child: Container(
             margin: const EdgeInsets.only(top: Styles.large),
             padding: const EdgeInsets.all(Styles.standard),
@@ -45,8 +42,9 @@ class TvshowDetailsModal extends StatelessWidget {
         ),
         Consumer(
           builder: (context, ref, child) {
-            final tvshowDetails =
-                ref.watch(favTvshowsProvider.notifier).hasFav(idTv);
+            final tvshowDetails = ref
+                .watch(favTvshowsProvider.notifier)
+                .hasFav(idTv);
 
             return tvshowDetails && showRandom
                 ? RandomButton(idTv: idTv)
@@ -67,57 +65,62 @@ class _TvshowInfoDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        return ref.watch(tvshowDetailsProvider(idTv)).when(
-              data: (model) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    flex: 4,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: Styles.small),
-                      child: MediaHeader(
-                        imagePath: model.posterPath,
-                        title: model.name,
+        return ref
+            .watch(tvshowDetailsProvider(idTv))
+            .when(
+              data:
+                  (model) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 4,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: Styles.small),
+                          child: MediaHeader(
+                            imagePath: model.posterPath,
+                            title: model.name,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        InfoBox(
-                          typeInfo: InfoTypeBox.seasons,
-                          value: model.numberOfSeasons,
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            InfoBox(
+                              typeInfo: InfoTypeBox.seasons,
+                              value: model.numberOfSeasons,
+                            ),
+                            InfoBox(
+                              typeInfo: InfoTypeBox.episodes,
+                              value: model.numberOfEpisodes,
+                            ),
+                            InfoBox(
+                              typeInfo: InfoTypeBox.duration,
+                              value:
+                                  model.episodeRunTime.isNotEmpty
+                                      ? model.episodeRunTime.first
+                                      : 0,
+                            ),
+                          ],
                         ),
-                        InfoBox(
-                          typeInfo: InfoTypeBox.episodes,
-                          value: model.numberOfEpisodes,
+                      ),
+                      TextTitleMedium(translate('app.modal.overview')),
+                      const SizedBox(height: Styles.small),
+                      Expanded(
+                        flex: 6,
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Text(model.overview),
                         ),
-                        InfoBox(
-                          typeInfo: InfoTypeBox.duration,
-                          value: model.episodeRunTime.isNotEmpty
-                              ? model.episodeRunTime.first
-                              : 0,
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  TextTitleMedium(translate('app.modal.overview')),
-                  const SizedBox(height: Styles.small),
-                  Expanded(
-                    flex: 6,
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Text(model.overview),
-                    ),
+              error:
+                  (error, stackTrace) => ErrorMessage(
+                    keyText: 'app.modal.error_load',
+                    error: error,
                   ),
-                ],
-              ),
-              error: (error, stackTrace) => ErrorMessage(
-                keyText: 'app.modal.error_load',
-                error: error,
-              ),
               loading: () => const Loader(),
             );
       },

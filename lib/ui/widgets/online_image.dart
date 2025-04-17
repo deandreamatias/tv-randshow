@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
 
 class OnlineImage extends StatelessWidget {
-  const OnlineImage({
-    super.key,
-    required this.url,
-    required this.name,
-  });
+  const OnlineImage({super.key, required this.url, required this.name});
 
   final String url;
   final String name;
@@ -29,10 +25,11 @@ class OnlineImage extends StatelessWidget {
 
         return Center(
           child: CircularProgressIndicator(
-            value: loadingProgress.expectedTotalBytes != null
-                ? loadingProgress.cumulativeBytesLoaded /
-                    (loadingProgress.expectedTotalBytes ?? 1)
-                : null,
+            value:
+                loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        (loadingProgress.expectedTotalBytes ?? 1)
+                    : null,
           ),
         );
       },

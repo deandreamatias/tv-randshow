@@ -140,10 +140,7 @@ class _ExpandingActionButton extends StatelessWidget {
           ),
         );
       },
-      child: FadeTransition(
-        opacity: progress,
-        child: child,
-      ),
+      child: FadeTransition(opacity: progress, child: child),
     );
   }
 }
@@ -151,10 +148,7 @@ class _ExpandingActionButton extends StatelessWidget {
 class _OpenFabButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool isOpen;
-  const _OpenFabButton({
-    this.isOpen = false,
-    required this.onTap,
-  });
+  const _OpenFabButton({this.isOpen = false, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

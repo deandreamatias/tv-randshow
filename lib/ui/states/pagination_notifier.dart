@@ -65,13 +65,11 @@ class PaginationNotifier<T, K>
     if (_noMoreItems) return;
 
     state = AsyncValue<List<T>>.loading();
-    state = await AsyncValue.guard(
-      () async {
-        final result = await getPageFunction(_page, arg);
+    state = await AsyncValue.guard(() async {
+      final result = await getPageFunction(_page, arg);
 
-        return _updateData(result);
-      },
-    );
+      return _updateData(result);
+    });
   }
 
   List<T> _updateData(List<T> result) {

@@ -32,8 +32,9 @@ class LocalRepository implements ILocalRepository {
     await _loadBoxes();
     try {
       await tvshowBox!.delete(id);
-      final streamings =
-          streamingsBox!.values.where((streaming) => streaming.tvshowId == id);
+      final streamings = streamingsBox!.values.where(
+        (streaming) => streaming.tvshowId == id,
+      );
       if (streamings.isNotEmpty) {
         for (var streaming in streamings) {
           await streamingsBox!.delete(streaming.id);
@@ -45,10 +46,7 @@ class LocalRepository implements ILocalRepository {
       return true;
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
-        DatabaseError(
-          code: DatabaseErrorCode.delete,
-          message: e.toString(),
-        ),
+        DatabaseError(code: DatabaseErrorCode.delete, message: e.toString()),
         stackTrace,
       );
     }
@@ -65,19 +63,20 @@ class LocalRepository implements ILocalRepository {
       for (TvshowDetails tvshow in tvshows) {
         if (streamings.isNotEmpty) {
           tvshow = tvshow.copyWith(
-            streamings: streamings
-                .where((streaming) => streaming.tvshowId == tvshow.id)
-                .map(
-                  (streaming) => StreamingDetail(
-                    id: streaming.id,
-                    streamingName: streaming.streamingName,
-                    link: streaming.link,
-                    added: streaming.added,
-                    leaving: streaming.leaving,
-                    country: streaming.country,
-                  ),
-                )
-                .toList(),
+            streamings:
+                streamings
+                    .where((streaming) => streaming.tvshowId == tvshow.id)
+                    .map(
+                      (streaming) => StreamingDetail(
+                        id: streaming.id,
+                        streamingName: streaming.streamingName,
+                        link: streaming.link,
+                        added: streaming.added,
+                        leaving: streaming.leaving,
+                        country: streaming.country,
+                      ),
+                    )
+                    .toList(),
           );
         }
         list.add(tvshow);
@@ -86,10 +85,7 @@ class LocalRepository implements ILocalRepository {
       return list;
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
-        DatabaseError(
-          code: DatabaseErrorCode.read,
-          message: e.toString(),
-        ),
+        DatabaseError(code: DatabaseErrorCode.read, message: e.toString()),
         stackTrace,
       );
     }
@@ -128,7 +124,9 @@ class LocalRepository implements ILocalRepository {
         await streamingsBox!.put(streamingHive.id, streamingHive);
       }
     }
-    log('Streamings saved on tvshow $tvshowId: ${streamings.length} streamings');
+    log(
+      'Streamings saved on tvshow $tvshowId: ${streamings.length} streamings',
+    );
   }
 
   @override
@@ -146,29 +144,27 @@ class LocalRepository implements ILocalRepository {
       final streamings = streamingsBox!.values;
       if (streamings.isNotEmpty) {
         tvshow = tvshow.copyWith(
-          streamings: streamings
-              .where((streaming) => streaming.tvshowId == tvshow?.id)
-              .map(
-                (streaming) => StreamingDetail(
-                  id: streaming.id,
-                  streamingName: streaming.streamingName,
-                  link: streaming.link,
-                  added: streaming.added,
-                  leaving: streaming.leaving,
-                  country: streaming.country,
-                ),
-              )
-              .toList(),
+          streamings:
+              streamings
+                  .where((streaming) => streaming.tvshowId == tvshow?.id)
+                  .map(
+                    (streaming) => StreamingDetail(
+                      id: streaming.id,
+                      streamingName: streaming.streamingName,
+                      link: streaming.link,
+                      added: streaming.added,
+                      leaving: streaming.leaving,
+                      country: streaming.country,
+                    ),
+                  )
+                  .toList(),
         );
       }
 
       return tvshow;
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
-        DatabaseError(
-          code: DatabaseErrorCode.read,
-          message: e.toString(),
-        ),
+        DatabaseError(code: DatabaseErrorCode.read, message: e.toString()),
         stackTrace,
       );
     }
@@ -191,10 +187,7 @@ class LocalRepository implements ILocalRepository {
         }
       } catch (e, stackTrace) {
         Error.throwWithStackTrace(
-          DatabaseError(
-            code: DatabaseErrorCode.init,
-            message: e.toString(),
-          ),
+          DatabaseError(code: DatabaseErrorCode.init, message: e.toString()),
           stackTrace,
         );
       }
@@ -217,8 +210,9 @@ class LocalRepository implements ILocalRepository {
       tvshowBox = await Hive.openBox<TvshowDetails>(tvshowBoxName);
     }
     if (!Hive.isBoxOpen(streamingsBoxName)) {
-      streamingsBox =
-          await Hive.openBox<StreamingDetailHive>(streamingsBoxName);
+      streamingsBox = await Hive.openBox<StreamingDetailHive>(
+        streamingsBoxName,
+      );
     }
     tvshowBox ??= Hive.box<TvshowDetails>(tvshowBoxName);
     streamingsBox ??= Hive.box<StreamingDetailHive>(streamingsBoxName);

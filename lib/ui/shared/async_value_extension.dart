@@ -16,44 +16,29 @@ class AsyncValueExtension {
     try {
       return AsyncValue.data(await future());
     } on ApiError catch (e, stackTrace) {
-      debugPrintStack(
-        label: e.toString(),
-        stackTrace: stackTrace,
-      );
+      debugPrintStack(label: e.toString(), stackTrace: stackTrace);
       showSnackBar(e.code.getMessage());
 
       return AsyncValue.error(e, stackTrace);
     } on DatabaseError catch (e, stackTrace) {
-      debugPrintStack(
-        label: e.toString(),
-        stackTrace: stackTrace,
-      );
+      debugPrintStack(label: e.toString(), stackTrace: stackTrace);
       showSnackBar(e.code.getMessage());
 
       return AsyncValue.error(e, stackTrace);
     } on AppError catch (e, stackTrace) {
-      debugPrintStack(
-        label: e.toString(),
-        stackTrace: stackTrace,
-      );
+      debugPrintStack(label: e.toString(), stackTrace: stackTrace);
 
       showSnackBar(e.code.getMessage());
 
       return AsyncValue.error(e, stackTrace);
     } on Error catch (e, stackTrace) {
-      debugPrintStack(
-        label: e.getMessage(),
-        stackTrace: stackTrace,
-      );
+      debugPrintStack(label: e.getMessage(), stackTrace: stackTrace);
 
       showSnackBar(e.getMessage());
 
       return AsyncValue.error(e, stackTrace);
     } catch (e, stackTrace) {
-      debugPrintStack(
-        label: e.toString(),
-        stackTrace: stackTrace,
-      );
+      debugPrintStack(label: e.toString(), stackTrace: stackTrace);
 
       return AsyncValue.error(e, stackTrace);
     }

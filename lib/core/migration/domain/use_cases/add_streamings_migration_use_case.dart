@@ -34,8 +34,9 @@ class AddStreamingsMigrationUseCase {
           tmdbId: tvshow.id.toString(),
           country: PlatformDispatcher.instance.locale.countryCode ?? '',
         );
-        final tvshowStremings =
-            await _streamingsRepository.searchTvShow(search);
+        final tvshowStremings = await _streamingsRepository.searchTvShow(
+          search,
+        );
 
         streamings.addAll(tvshowStremings);
 

@@ -17,8 +17,9 @@ void main() {
     reset(secondaryDatabase);
   });
   test('should be false when tv shows is not empty', () async {
-    when(secondaryDatabase.getTvshows())
-        .thenAnswer((_) async => generateTvshow.tvshows);
+    when(
+      secondaryDatabase.getTvshows(),
+    ).thenAnswer((_) async => generateTvshow.tvshows);
 
     final result = await usecase();
 

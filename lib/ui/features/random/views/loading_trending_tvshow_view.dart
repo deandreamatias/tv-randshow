@@ -15,26 +15,30 @@ class LoadingTrendingTvshowView extends StatelessWidget {
       titleKey: 'app.loading.trending_tvshow.title',
       child: Consumer(
         builder: (context, ref, child) {
-          return ref.watch(randomTrendingTvshowProvider).when(
+          return ref
+              .watch(randomTrendingTvshowProvider)
+              .when(
                 data: (data) {
                   // TODO: navigate when load data.
                   if (!ref.watch(randomTrendingTvshowProvider).isRefreshing) {
                     Future.delayed(
                       const Duration(milliseconds: 100),
-                      () => context.mounted
-                          ? Navigator.of(context).pushReplacementNamed(
-                              RoutePaths.resultTrendingTvshow,
-                            )
-                          : null,
+                      () =>
+                          context.mounted
+                              ? Navigator.of(context).pushReplacementNamed(
+                                RoutePaths.resultTrendingTvshow,
+                              )
+                              : null,
                     );
                   }
 
                   return const AnimationRandomLoader();
                 },
-                error: (error, stackTrace) => ErrorMessage(
-                  keyText: 'app.loading.trending_tvshow.general_error',
-                  error: error,
-                ),
+                error:
+                    (error, stackTrace) => ErrorMessage(
+                      keyText: 'app.loading.trending_tvshow.general_error',
+                      error: error,
+                    ),
                 loading: () => const AnimationRandomLoader(),
               );
         },

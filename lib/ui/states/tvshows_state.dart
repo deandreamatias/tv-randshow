@@ -15,9 +15,10 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
   }
 
   void addFav(TvshowDetails tvshowDetails) {
-    state = AsyncValue<List<TvshowDetails>>.data(
-      [...state.requireValue, tvshowDetails],
-    );
+    state = AsyncValue<List<TvshowDetails>>.data([
+      ...state.requireValue,
+      tvshowDetails,
+    ]);
   }
 
   void deleteFav(int id) {
@@ -39,5 +40,5 @@ class FavTvshowsNotifier extends AsyncNotifier<List<TvshowDetails>> {
 
 final favTvshowsProvider =
     AsyncNotifierProvider<FavTvshowsNotifier, List<TvshowDetails>>(
-  FavTvshowsNotifier.new,
-);
+      FavTvshowsNotifier.new,
+    );

@@ -6,11 +6,9 @@ import 'package:tv_randshow/core/app/data/transformers/tmdb_error_transformer.da
 @lazySingleton
 class TmdbHttpService extends DioService {
   TmdbHttpService()
-      : super(
-          FlavorConfig.instance.values.baseUrl,
-          queryParams: {
-            'api_key': FlavorConfig.instance.values.apiKey,
-          },
-          catchErrors: TmdbErrorTransformer.transformDioErros,
-        );
+    : super(
+        FlavorConfig.instance.values.baseUrl,
+        queryParams: {'api_key': FlavorConfig.instance.values.apiKey},
+        catchErrors: TmdbErrorTransformer.transformDioErros,
+      );
 }
