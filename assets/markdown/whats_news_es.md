@@ -1,3 +1,11 @@
+## 2.4.0 - 2025/04/18
+
+* Actualiza dependencias
+* Construido con Flutter 3.29
+* Añade soporte para Linux
+* Actualiza configuración de Android y añade soporte para pantalla completa
+* Elimina pantalla de migración para el usuario
+
 ## 2.3.0 - 2024/10/05
 
 * Actualiza dependencias

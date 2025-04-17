@@ -1,3 +1,11 @@
+## 2.4.0 - 2025/04/18
+
+* Update dependencies
+* Build with Flutter 3.29
+* Add support to Linux
+* Update Android setup and add support to edge-to-edge
+* Remove migration screen for user
+
 ## 2.3.0 - 2024/10/05
 
 * Update dependencies
