@@ -147,7 +147,7 @@ class _PaginationStatus extends ConsumerWidget {
                         ref.read(paginationProvider(text).notifier).nextPage();
                       },
                       icon: const Icon(UniconsLine.plus_circle),
-                      label: Text(translate('app.search.no_more_items')),
+                      label: Text(translate('app.search.load_more_items')),
                     ),
                   )
                 : const SizedBox.shrink();
