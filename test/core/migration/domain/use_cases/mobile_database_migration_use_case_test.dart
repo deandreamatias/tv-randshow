@@ -33,49 +33,36 @@ void main() {
 
       expect(
         usecase(),
-        emitsInOrder([
-          MigrationStatus.loadedOld,
-          MigrationStatus.empty,
-        ]),
+        emitsInOrder([MigrationStatus.loadedOld, MigrationStatus.empty]),
       );
-      expect(
-        usecase(),
-        neverEmits(isA<Exception>()),
-      );
+      expect(usecase(), neverEmits(isA<Exception>()));
     });
   });
   group('completeDatabase -', () {
-    test(
-      'Should return completeDatabase status when dont has errors',
-      () {
-        final tvshows = generateTvshow.tvshows;
+    test('Should return completeDatabase status when dont has errors', () {
+      final tvshows = generateTvshow.tvshows;
 
-        when(secondaryDatabaseService.getTvshows())
-            .thenAnswer((_) async => tvshows);
-        when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
-        for (var tvshow in tvshows) {
-          when(localRepository.saveTvshow(tvshow))
-              .thenAnswer((_) async => true);
-        }
-        when(secondaryDatabaseService.deleteAll())
-            .thenAnswer((_) async => true);
+      when(
+        secondaryDatabaseService.getTvshows(),
+      ).thenAnswer((_) async => tvshows);
+      when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
+      for (var tvshow in tvshows) {
+        when(localRepository.saveTvshow(tvshow)).thenAnswer((_) async => true);
+      }
+      when(secondaryDatabaseService.deleteAll()).thenAnswer((_) async => true);
 
-        expect(
-          usecase(),
-          emitsInOrder([
-            MigrationStatus.loadedOld,
-            MigrationStatus.savedToNew,
-            MigrationStatus.verifyData,
-            MigrationStatus.deletedOld,
-            MigrationStatus.completeDatabase,
-          ]),
-        );
-        expect(
-          usecase(),
-          neverEmits(isA<Exception>()),
-        );
-      },
-    );
+      expect(
+        usecase(),
+        emitsInOrder([
+          MigrationStatus.loadedOld,
+          MigrationStatus.savedToNew,
+          MigrationStatus.verifyData,
+          MigrationStatus.deletedOld,
+          MigrationStatus.completeDatabase,
+        ]),
+      );
+      expect(usecase(), neverEmits(isA<Exception>()));
+    });
   });
   group('errors -', () {
     test(
@@ -86,24 +73,22 @@ void main() {
         final errorTvshow = tvshows[index];
         final exception = Exception('Error to save tvshow ${errorTvshow.id}');
 
-        when(secondaryDatabaseService.getTvshows())
-            .thenAnswer((_) async => tvshows);
+        when(
+          secondaryDatabaseService.getTvshows(),
+        ).thenAnswer((_) async => tvshows);
 
         for (var tvshow in tvshows) {
           if (tvshow.id != errorTvshow.id) {
-            when(localRepository.saveTvshow(tvshow))
-                .thenAnswer((_) => Future.value());
+            when(
+              localRepository.saveTvshow(tvshow),
+            ).thenAnswer((_) => Future.value());
           } else {
             when(localRepository.saveTvshow(tvshow)).thenThrow(exception);
           }
         }
         usecase().listen(
-          expectAsync1(
-            (value) => expect(value, MigrationStatus.loadedOld),
-          ),
-          onError: expectAsync1(
-            (value) => expect(value, exception),
-          ),
+          expectAsync1((value) => expect(value, MigrationStatus.loadedOld)),
+          onError: expectAsync1((value) => expect(value, exception)),
           onDone: () {
             verify(secondaryDatabaseService.getTvshows()).called(1);
             verify(localRepository.saveTvshow(errorTvshow)).called(1);
@@ -118,19 +103,23 @@ void main() {
         final newTvshows = generateTvshow.tvshows;
         final exception = Exception('Differences between old and new database');
 
-        when(secondaryDatabaseService.getTvshows())
-            .thenAnswer((_) async => tvshows);
+        when(
+          secondaryDatabaseService.getTvshows(),
+        ).thenAnswer((_) async => tvshows);
         when(localRepository.getTvshows()).thenAnswer((_) async => newTvshows);
         for (var tvshow in tvshows) {
-          when(localRepository.saveTvshow(tvshow))
-              .thenAnswer((_) => Future.value());
+          when(
+            localRepository.saveTvshow(tvshow),
+          ).thenAnswer((_) => Future.value());
         }
 
         usecase().listen(
           expectAsync1(
             (value) => expect(
-              [MigrationStatus.loadedOld, MigrationStatus.savedToNew]
-                  .contains(value),
+              [
+                MigrationStatus.loadedOld,
+                MigrationStatus.savedToNew,
+              ].contains(value),
               true,
             ),
             count: 2,
@@ -152,15 +141,18 @@ void main() {
         final tvshows = generateTvshow.tvshows;
         final exception = Exception('Can not delete old database');
 
-        when(secondaryDatabaseService.getTvshows())
-            .thenAnswer((_) async => tvshows);
+        when(
+          secondaryDatabaseService.getTvshows(),
+        ).thenAnswer((_) async => tvshows);
         when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
         for (var tvshow in tvshows) {
-          when(localRepository.saveTvshow(tvshow))
-              .thenAnswer((_) async => true);
+          when(
+            localRepository.saveTvshow(tvshow),
+          ).thenAnswer((_) async => true);
         }
-        when(secondaryDatabaseService.deleteAll())
-            .thenAnswer((_) async => false);
+        when(
+          secondaryDatabaseService.deleteAll(),
+        ).thenAnswer((_) async => false);
 
         usecase().listen(
           expectAsync1(

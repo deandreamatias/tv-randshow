@@ -23,12 +23,15 @@ class ResultTvshowsView extends StatelessWidget {
       titleKey: 'app.result.tvshow.title',
       child: Consumer(
         builder: (context, ref, child) {
-          return ref.watch(randomTvshowsProvider).when(
+          return ref
+              .watch(randomTvshowsProvider)
+              .when(
                 data: (result) => TvshowEpisodeInfoResult(result: result),
-                error: (error, stackTrace) => ErrorMessage(
-                  keyText: 'app.result.tvshow.error_load',
-                  error: error,
-                ),
+                error:
+                    (error, stackTrace) => ErrorMessage(
+                      keyText: 'app.result.tvshow.error_load',
+                      error: error,
+                    ),
                 loading: () => const Loader(),
               );
         },

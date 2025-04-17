@@ -14,10 +14,7 @@ Future<void> main() async {
   final generateTvshow = GenerateTvshow();
   final localRepository = MockILocalRepository();
   final manageFiles = MockIManageFilesService();
-  final useCase = ExportTvShowsUseCase(
-    localRepository,
-    manageFiles,
-  );
+  final useCase = ExportTvShowsUseCase(localRepository, manageFiles);
 
   setUpAll(() {
     reset(localRepository);
@@ -31,10 +28,7 @@ Future<void> main() async {
     final tvshowFile = TvshowsFile(tvshows: tvshows).toRawJson();
     when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
     when(
-      manageFiles.saveFile(
-        fileName,
-        tvshowFile,
-      ),
+      manageFiles.saveFile(fileName, tvshowFile),
     ).thenAnswer((_) async => fileName);
 
     expect(await useCase(), isTrue);
@@ -43,8 +37,9 @@ Future<void> main() async {
     final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
     final fileName = 'tvrandshow-${nowDateTime.first}';
     when(localRepository.getTvshows()).thenAnswer((_) async => []);
-    when(manageFiles.saveFile(fileName, TvshowsFile(tvshows: []).toRawJson()))
-        .thenAnswer((_) async => fileName);
+    when(
+      manageFiles.saveFile(fileName, TvshowsFile(tvshows: []).toRawJson()),
+    ).thenAnswer((_) async => fileName);
 
     expect(() => useCase(), throwsException);
   });
@@ -54,10 +49,7 @@ Future<void> main() async {
     final fileName = 'tvrandshow-${nowDateTime.first}';
     when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
     when(
-      manageFiles.saveFile(
-        fileName,
-        TvshowsFile(tvshows: tvshows).toRawJson(),
-      ),
+      manageFiles.saveFile(fileName, TvshowsFile(tvshows: tvshows).toRawJson()),
     ).thenAnswer((_) async => '');
 
     expect(await useCase(), isFalse);

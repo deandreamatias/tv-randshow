@@ -6,11 +6,7 @@ class InfoBox extends StatelessWidget {
   final InfoTypeBox typeInfo;
   final int value;
 
-  const InfoBox({
-    super.key,
-    required this.typeInfo,
-    required this.value,
-  });
+  const InfoBox({super.key, required this.typeInfo, required this.value});
 
   String _selectTitle(InfoTypeBox typeInfo) {
     switch (typeInfo) {
@@ -59,10 +55,9 @@ class InfoBox extends StatelessWidget {
               ),
               Text(
                 value > 0 ? value.toString() : '--',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall
-                    ?.copyWith(color: colorScheme.onPrimary),
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  color: colorScheme.onPrimary,
+                ),
               ),
               if ([
                 InfoTypeBox.episodes,
@@ -85,11 +80,4 @@ class InfoBox extends StatelessWidget {
   }
 }
 
-enum InfoTypeBox {
-  seasons,
-  episodes,
-  duration,
-  season,
-  episode,
-  undefined,
-}
+enum InfoTypeBox { seasons, episodes, duration, season, episode, undefined }

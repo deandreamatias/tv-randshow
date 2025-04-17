@@ -68,19 +68,18 @@ class TvshowDetails extends HiveObject {
     String? overview,
     String? posterPath,
     List<StreamingDetail>? streamings,
-  }) =>
-      TvshowDetails(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        numberOfEpisodes: numberOfEpisodes ?? this.numberOfEpisodes,
-        numberOfSeasons: numberOfSeasons ?? this.numberOfSeasons,
-        episodeRunTime: episodeRunTime ?? this.episodeRunTime,
-        inProduction: inProduction ?? this.inProduction,
-        overview: overview ?? this.overview,
-        posterPath: posterPath ?? this.posterPath,
-        rowId: rowId ?? this.rowId,
-        streamings: streamings ?? this.streamings,
-      );
+  }) => TvshowDetails(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    numberOfEpisodes: numberOfEpisodes ?? this.numberOfEpisodes,
+    numberOfSeasons: numberOfSeasons ?? this.numberOfSeasons,
+    episodeRunTime: episodeRunTime ?? this.episodeRunTime,
+    inProduction: inProduction ?? this.inProduction,
+    overview: overview ?? this.overview,
+    posterPath: posterPath ?? this.posterPath,
+    rowId: rowId ?? this.rowId,
+    streamings: streamings ?? this.streamings,
+  );
 
   Map<String, dynamic> toJson() => _$TvshowDetailsToJson(this);
   String toRawJson() => json.encode(_$TvshowDetailsToJson(this));

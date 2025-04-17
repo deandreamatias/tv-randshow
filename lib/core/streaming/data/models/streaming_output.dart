@@ -45,10 +45,10 @@ class StreamingOutput extends Streaming {
     this.streamingInfoOutput = const [],
     super.originalLanguage,
   }) : super(
-          backdropUrLs: backdropUrLsOutput,
-          posterUrLs: posterUrLsOutput,
-          streamings: streamingInfoOutput,
-        );
+         backdropUrLs: backdropUrLsOutput,
+         posterUrLs: posterUrLsOutput,
+         streamings: streamingInfoOutput,
+       );
 
   factory StreamingOutput.fromJson(Map<String, dynamic> json) =>
       _$StreamingOutputFromJson(json);

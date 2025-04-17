@@ -24,8 +24,7 @@ class PaginationDataModel<T> {
   factory PaginationDataModel.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) =>
-      _$PaginationDataModelFromJson<T>(json, fromJsonT);
+  ) => _$PaginationDataModelFromJson<T>(json, fromJsonT);
 
   PaginationModel<T> toDomain() {
     return PaginationModel<T>(

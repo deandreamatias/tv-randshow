@@ -9,10 +9,7 @@ class ExportTvShowsUseCase {
   final ILocalRepository _localRepository;
   final IManageFilesService _manageFilesService;
 
-  const ExportTvShowsUseCase(
-    this._localRepository,
-    this._manageFilesService,
-  );
+  const ExportTvShowsUseCase(this._localRepository, this._manageFilesService);
 
   Future<bool> call() async {
     final favTvshows = await _localRepository.getTvshows();
@@ -23,8 +20,10 @@ class ExportTvShowsUseCase {
     final nowDateTime = DateTime.now().toLocal().toIso8601String().split('.');
     final fileName = 'tvrandshow-${nowDateTime.first}';
 
-    final downloadPath =
-        await _manageFilesService.saveFile(fileName, jsonFavTvshows);
+    final downloadPath = await _manageFilesService.saveFile(
+      fileName,
+      jsonFavTvshows,
+    );
 
     return downloadPath.isNotEmpty;
   }

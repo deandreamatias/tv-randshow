@@ -19,33 +19,29 @@ class TvshowNotifier extends AutoDisposeFamilyAsyncNotifier<bool, int> {
   Future<void> addToFavs() async {
     if (state.hasValue && !state.requireValue) {
       state = const AsyncValue.loading();
-      state = await AsyncValueExtension.catchGuard<bool>(
-        () async {
-          final tvshowDetails = await _addFavTvshow(idTv: arg);
-          ref.read(favTvshowsProvider.notifier).addFav(tvshowDetails);
+      state = await AsyncValueExtension.catchGuard<bool>(() async {
+        final tvshowDetails = await _addFavTvshow(idTv: arg);
+        ref.read(favTvshowsProvider.notifier).addFav(tvshowDetails);
 
-          return true;
-        },
-      );
+        return true;
+      });
     }
   }
 
   Future<void> deleteFromFavs() async {
     if (state.hasValue && state.requireValue) {
       state = const AsyncValue.loading();
-      state = await AsyncValueExtension.catchGuard<bool>(
-        () async {
-          await _deleteFavTvshow(arg);
-          ref.read(favTvshowsProvider.notifier).deleteFav(arg);
+      state = await AsyncValueExtension.catchGuard<bool>(() async {
+        await _deleteFavTvshow(arg);
+        ref.read(favTvshowsProvider.notifier).deleteFav(arg);
 
-          return false;
-        },
-      );
+        return false;
+      });
     }
   }
 }
 
 final tvshowOnFavsProvider =
     AutoDisposeAsyncNotifierProviderFamily<TvshowNotifier, bool, int>(
-  TvshowNotifier.new,
-);
+      TvshowNotifier.new,
+    );

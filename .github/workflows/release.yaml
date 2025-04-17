@@ -2,6 +2,11 @@ name: Release
 on:
   push:
 
+# This ensures that previous jobs for the PR are canceled when PR is updated
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build
@@ -46,6 +51,7 @@ jobs:
         path: |
           build/app/outputs/bundle/prodRelease/app-prod-release.aab
           build/app/outputs/flutter-apk/app-prod-release.apk
+          android/split-debug.zip
         retention-days: 1
     - name: Build Web prod
       run: sh tool/build-web.sh prod
@@ -73,6 +79,7 @@ jobs:
         serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_API_KEY }}
         packageName: deandrea.matias.tv_randshow
         releaseFiles: artifacts/bundle/prodRelease/app-prod-release.aab
+        debugSymbols: artifacts/split-debug.zip
         track: internal
     - name: Release
       uses: softprops/action-gh-release@v2

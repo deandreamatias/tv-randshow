@@ -16,10 +16,7 @@ class SecondaryLocalRepository implements ISecondaryLocalRepository {
       return await dbHelper.deleteAll();
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
-        DatabaseError(
-          code: DatabaseErrorCode.delete,
-          message: e.toString(),
-        ),
+        DatabaseError(code: DatabaseErrorCode.delete, message: e.toString()),
         stackTrace,
       );
     }
@@ -46,10 +43,7 @@ class SecondaryLocalRepository implements ISecondaryLocalRepository {
       return tvShowsMaps.map((i) => TvshowDetails.fromJson(i)).toList();
     } catch (e, stackTrace) {
       Error.throwWithStackTrace(
-        DatabaseError(
-          code: DatabaseErrorCode.read,
-          message: e.toString(),
-        ),
+        DatabaseError(code: DatabaseErrorCode.read, message: e.toString()),
         stackTrace,
       );
     }

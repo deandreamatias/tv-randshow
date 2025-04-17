@@ -8,11 +8,7 @@ class TmdbQueryInput {
   String? query;
   int? page;
 
-  TmdbQueryInput({
-    required this.language,
-    this.query,
-    this.page,
-  });
+  TmdbQueryInput({required this.language, this.query, this.page});
 
   Map<String, dynamic> toJson() => _$TmdbQueryInputToJson(this);
 }

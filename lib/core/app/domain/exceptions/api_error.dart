@@ -2,10 +2,7 @@ class ApiError implements Exception {
   final String message;
   final ApiErrorCode code;
 
-  const ApiError({
-    this.message = '',
-    required this.code,
-  });
+  const ApiError({this.message = '', required this.code});
 
   @override
   String toString() {

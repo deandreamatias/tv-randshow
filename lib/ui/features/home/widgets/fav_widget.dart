@@ -27,12 +27,14 @@ class FavWidget extends StatelessWidget {
             top: Styles.small,
             bottom: Styles.large,
             child: GestureDetector(
-              onTap: () => showModalBottomSheet<void>(
-                isScrollControlled: true,
-                context: context,
-                builder: (BuildContext context) =>
-                    TvshowDetailsModal(idTv: tvshowDetails.id),
-              ),
+              onTap:
+                  () => showModalBottomSheet<void>(
+                    isScrollControlled: true,
+                    context: context,
+                    builder:
+                        (BuildContext context) =>
+                            TvshowDetailsModal(idTv: tvshowDetails.id),
+                  ),
               child: ImageBuilder(
                 key: Key(
                   '${tvshowDetails.posterPath}${tvshowDetails.id.toString()}',

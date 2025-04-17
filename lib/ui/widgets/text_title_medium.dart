@@ -6,9 +6,6 @@ class TextTitleMedium extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: Theme.of(context).textTheme.titleMedium,
-    );
+    return Text(label, style: Theme.of(context).textTheme.titleMedium);
   }
 }

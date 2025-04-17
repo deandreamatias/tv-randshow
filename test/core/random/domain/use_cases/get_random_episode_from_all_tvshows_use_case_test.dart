@@ -41,13 +41,12 @@ void main() {
     );
 
     when(localRepository.getTvshows()).thenAnswer((_) async => tvshows);
-    when(randomService.getNumber(max: tvshows.length))
-        .thenAnswer((async) => randomIndex);
+    when(
+      randomService.getNumber(max: tvshows.length),
+    ).thenAnswer((async) => randomIndex);
     when(
       getRandomEpisodeUseCase(idTv: tvshows[randomIndex].id),
-    ).thenAnswer(
-      (_) async => tvshowResult,
-    );
+    ).thenAnswer((_) async => tvshowResult);
 
     final result = await useCase();
 

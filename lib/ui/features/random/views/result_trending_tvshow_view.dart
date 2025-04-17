@@ -55,19 +55,13 @@ class _TrendingInfoDialog extends StatelessWidget {
       ),
       contentPadding: const EdgeInsets.all(Styles.large),
       children: [
-        Text(
-          translate('app.result.trending_tvshow.dialog_body_1'),
-        ),
+        Text(translate('app.result.trending_tvshow.dialog_body_1')),
         const SizedBox(height: Styles.medium),
-        Text(
-          translate('app.result.trending_tvshow.dialog_body_2'),
-        ),
+        Text(translate('app.result.trending_tvshow.dialog_body_2')),
         const SizedBox(height: Styles.medium),
         OutlinedButton(
           key: const Key('app.result.trending_tvshow.dialog_button'),
-          child: Text(
-            translate('app.result.trending_tvshow.dialog_button'),
-          ),
+          child: Text(translate('app.result.trending_tvshow.dialog_button')),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ],
@@ -82,7 +76,9 @@ class _TvshowResultInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        return ref.watch(randomTrendingTvshowProvider).when(
+        return ref
+            .watch(randomTrendingTvshowProvider)
+            .when(
               data: (result) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,17 +91,15 @@ class _TvshowResultInfo extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: Styles.small),
-                    Flexible(
-                      flex: 3,
-                      child: Text(result.overview),
-                    ),
+                    Flexible(flex: 3, child: Text(result.overview)),
                   ],
                 );
               },
-              error: (error, stackTrace) => ErrorMessage(
-                keyText: 'app.result.trending_tvshow.error_load',
-                error: error,
-              ),
+              error:
+                  (error, stackTrace) => ErrorMessage(
+                    keyText: 'app.result.trending_tvshow.error_load',
+                    error: error,
+                  ),
               loading: () => const Loader(),
             );
       },

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -lt 2 ]; then
-    echo "Error: Need two parameters to use this command. $0 flavor(options: dev/prod) type(options: apk/app-bundle)"
+    echo "Error: Need two parameters to use this command. $0 flavor(options: dev/prod) type(options: apk/appbundle)"
     exit 1
 fi
 

@@ -44,44 +44,45 @@ class TabViewState extends State<TabView> {
         floatingActionButton:
             _selectedIndex == 0 ? const _RandomActions(bigSize: bigSize) : null,
         body: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) =>
-              constraints.maxWidth > bigSize
-                  ? Row(
-                      children: <Widget>[
-                        _BigScreenMenu(
-                          onChange: (index) {
-                            setState(() {
-                              _selectedIndex = index;
-                            });
-                          },
-                          selectedIndex: _selectedIndex,
-                        ),
-                        const VerticalDivider(thickness: 1, width: 1),
-                        Expanded(
-                          child: SafeArea(
-                            left: false,
-                            child: _widgetOptions.elementAt(_selectedIndex),
+          builder:
+              (BuildContext context, BoxConstraints constraints) =>
+                  constraints.maxWidth > bigSize
+                      ? Row(
+                        children: <Widget>[
+                          _BigScreenMenu(
+                            onChange: (index) {
+                              setState(() {
+                                _selectedIndex = index;
+                              });
+                            },
+                            selectedIndex: _selectedIndex,
                           ),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: <Widget>[
-                        Expanded(
-                          child: SafeArea(
-                            child: _widgetOptions.elementAt(_selectedIndex),
+                          const VerticalDivider(thickness: 1, width: 1),
+                          Expanded(
+                            child: SafeArea(
+                              left: false,
+                              child: _widgetOptions.elementAt(_selectedIndex),
+                            ),
                           ),
-                        ),
-                        _SmallScreenMenu(
-                          onChange: (index) {
-                            setState(() {
-                              _selectedIndex = index;
-                            });
-                          },
-                          selectedIndex: _selectedIndex,
-                        ),
-                      ],
-                    ),
+                        ],
+                      )
+                      : Column(
+                        children: <Widget>[
+                          Expanded(
+                            child: SafeArea(
+                              child: _widgetOptions.elementAt(_selectedIndex),
+                            ),
+                          ),
+                          _SmallScreenMenu(
+                            onChange: (index) {
+                              setState(() {
+                                _selectedIndex = index;
+                              });
+                            },
+                            selectedIndex: _selectedIndex,
+                          ),
+                        ],
+                      ),
         ),
       ),
     );
@@ -91,10 +92,7 @@ class TabViewState extends State<TabView> {
 class _BigScreenMenu extends StatelessWidget {
   final int selectedIndex;
   final void Function(int index) onChange;
-  const _BigScreenMenu({
-    required this.selectedIndex,
-    required this.onChange,
-  });
+  const _BigScreenMenu({required this.selectedIndex, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -123,10 +121,7 @@ class _BigScreenMenu extends StatelessWidget {
 class _SmallScreenMenu extends StatelessWidget {
   final int selectedIndex;
   final void Function(int index) onChange;
-  const _SmallScreenMenu({
-    required this.selectedIndex,
-    required this.onChange,
-  });
+  const _SmallScreenMenu({required this.selectedIndex, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -135,24 +130,15 @@ class _SmallScreenMenu extends StatelessWidget {
       onTap: onChange,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: const Icon(
-            UniconsLine.favorite,
-            key: Key('app.fav.tab'),
-          ),
+          icon: const Icon(UniconsLine.favorite, key: Key('app.fav.tab')),
           label: translate('app.fav.tab'),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(
-            UniconsLine.search,
-            key: Key('app.search.tab'),
-          ),
+          icon: const Icon(UniconsLine.search, key: Key('app.search.tab')),
           label: translate('app.search.tab'),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(
-            UniconsLine.setting,
-            key: Key('app.info.tab'),
-          ),
+          icon: const Icon(UniconsLine.setting, key: Key('app.info.tab')),
           label: translate('app.info.tab'),
         ),
       ],
@@ -161,9 +147,7 @@ class _SmallScreenMenu extends StatelessWidget {
 }
 
 class _RandomActions extends StatelessWidget {
-  const _RandomActions({
-    required this.bigSize,
-  });
+  const _RandomActions({required this.bigSize});
 
   final int bigSize;
 
@@ -177,17 +161,19 @@ class _RandomActions extends StatelessWidget {
           children: [
             FabActionButton(
               icon: const Icon(UniconsLine.tv_retro),
-              onPressed: () =>
-                  Navigator.of(context).pushNamed<LoadingTvshowsView>(
-                RoutePaths.loadingTvshows,
-              ),
+              onPressed:
+                  () => Navigator.of(
+                    context,
+                  ).pushNamed<LoadingTvshowsView>(RoutePaths.loadingTvshows),
             ),
             FabActionButton(
               icon: const Icon(UniconsLine.arrow_growth),
-              onPressed: () =>
-                  Navigator.of(context).pushNamed<LoadingTrendingTvshowView>(
-                RoutePaths.loadingTrendingTvshow,
-              ),
+              onPressed:
+                  () => Navigator.of(
+                    context,
+                  ).pushNamed<LoadingTrendingTvshowView>(
+                    RoutePaths.loadingTrendingTvshow,
+                  ),
             ),
           ],
         ),

@@ -13,7 +13,6 @@ extension AppErrorExtension on AppErrorCode {
         break;
       case AppErrorCode.invalidSeasonNumber:
         appError = translate('app.errors.app_invalid_season');
-        break;
     }
 
     return translate('app.errors.app', args: {'detail': appError});

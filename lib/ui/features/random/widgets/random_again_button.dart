@@ -15,10 +15,7 @@ class RandomAgainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       icon: const Icon(CustomIcons.diceMultiple),
-      label: Text(
-        translate(labelKey),
-        key: Key(labelKey),
-      ),
+      label: Text(translate(labelKey), key: Key(labelKey)),
       onPressed: onPressed,
     );
   }

@@ -31,19 +31,22 @@ void main() {
       'should return online tvshow when local tvshow list is empty',
       () async {
         final tvshows = generateTvshow.tvshows;
-        final randomTvshow =
-            faker.randomGenerator.element<TvshowDetails>(tvshows);
+        final randomTvshow = faker.randomGenerator.element<TvshowDetails>(
+          tvshows,
+        );
         final String language = Helpers.getLocale();
 
         when(getLocalTvshow()).thenAnswer((_) async => []);
-        when(onlineRepository.getDetailsTv(language, randomTvshow.id))
-            .thenAnswer((_) async => randomTvshow);
+        when(
+          onlineRepository.getDetailsTv(language, randomTvshow.id),
+        ).thenAnswer((_) async => randomTvshow);
 
         final tvshow = await useCase(randomTvshow.id);
 
         verify(getLocalTvshow()).called(1);
-        verify(onlineRepository.getDetailsTv(language, randomTvshow.id))
-            .called(1);
+        verify(
+          onlineRepository.getDetailsTv(language, randomTvshow.id),
+        ).called(1);
         expect(tvshow.id, randomTvshow.id);
       },
     );
@@ -51,21 +54,24 @@ void main() {
       'should return online tvshow when local tvshow id do not exist',
       () async {
         final tvshows = generateTvshow.tvshows;
-        final randomTvshow =
-            faker.randomGenerator.element<TvshowDetails>(tvshows);
+        final randomTvshow = faker.randomGenerator.element<TvshowDetails>(
+          tvshows,
+        );
         final localTvshows =
             tvshows.where((element) => element.id != randomTvshow.id).toList();
         final String language = Helpers.getLocale();
 
         when(getLocalTvshow()).thenAnswer((_) async => localTvshows);
-        when(onlineRepository.getDetailsTv(language, randomTvshow.id))
-            .thenAnswer((_) async => randomTvshow);
+        when(
+          onlineRepository.getDetailsTv(language, randomTvshow.id),
+        ).thenAnswer((_) async => randomTvshow);
 
         final tvshow = await useCase(randomTvshow.id);
 
         verify(getLocalTvshow()).called(1);
-        verify(onlineRepository.getDetailsTv(language, randomTvshow.id))
-            .called(1);
+        verify(
+          onlineRepository.getDetailsTv(language, randomTvshow.id),
+        ).called(1);
         expect(tvshow.id, randomTvshow.id);
       },
     );

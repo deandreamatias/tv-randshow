@@ -2,10 +2,7 @@ class AppError implements Exception {
   final String message;
   final AppErrorCode code;
 
-  const AppError({
-    this.message = '',
-    required this.code,
-  });
+  const AppError({this.message = '', required this.code});
 
   @override
   String toString() {
@@ -13,8 +10,4 @@ class AppError implements Exception {
   }
 }
 
-enum AppErrorCode {
-  emptyFavs,
-  invalidSeasonNumber,
-  invalidEpisodeNumber,
-}
+enum AppErrorCode { emptyFavs, invalidSeasonNumber, invalidEpisodeNumber }

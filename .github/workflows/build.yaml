@@ -5,6 +5,11 @@ on:
   pull_request:
     branches: [main]
 
+# This ensures that previous jobs for the PR are canceled when PR is updated
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     name: Build and test
@@ -25,8 +30,12 @@ jobs:
         path: '.fvmrc'
     - name: Install dependencies
       run: sh tool/setup.sh
-    - name: Verify formated files
-      run: dart format $(find . -name "*.dart" -not -wholename "**/*.g.dart") --set-exit-if-changed
+    - name: Verify formatted files
+      run: |
+        dart format $(find . -type f -name "*.dart" \
+          ! -path "**/*.g.dart" \
+          ! -path "**/*.mocks.dart" \
+          ! -path "**/*.config.dart") --set-exit-if-changed
     - name: Analyze code
       run: flutter analyze
     - name: Test

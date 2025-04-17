@@ -20,11 +20,7 @@ class MediaHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Expanded(
-          child: ImageBuilder(
-            url: imagePath,
-            name: title,
-            isModal: true,
-          ),
+          child: ImageBuilder(url: imagePath, name: title, isModal: true),
         ),
         const SizedBox(width: Styles.small),
         Expanded(
