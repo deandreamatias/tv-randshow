@@ -183,7 +183,7 @@ class LocalRepository implements ILocalRepository {
     } else {
       Directory? documentsDirectory;
       try {
-        if (Platform.isIOS) {
+        if (Platform.isIOS || Platform.isMacOS || Platform.isLinux) {
           documentsDirectory = await getApplicationDocumentsDirectory();
         }
         if (Platform.isAndroid) {
