@@ -1,6 +1,9 @@
 name: Release
 on:
   push:
+    branches: [main, develop]
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
 
 # This ensures that previous jobs for the PR are canceled when PR is updated
 concurrency:
