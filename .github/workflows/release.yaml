@@ -81,7 +81,7 @@ jobs:
       with:
         serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_API_KEY }}
         packageName: deandrea.matias.tv_randshow
-        releaseFiles: artifacts/bundle/prodRelease/app-prod-release.aab
+        releaseFiles: artifacts/build/app/outputs/bundle/prodRelease/app-prod-release.aab
         debugSymbols: artifacts/split-debug.zip
         track: internal
     - name: Release
