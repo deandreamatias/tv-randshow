@@ -41,7 +41,6 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
 - **Export saved TV shows to json**
 - **Dark mode**
 - **Material Design 3**
-- **Roadmap in [public Trello](https://trello.com/b/ib0jdUzK)**
 
 ## Build and run
 
