@@ -15,7 +15,6 @@
 [![IzzyOnDroid](https://img.shields.io/endpoint?url=https://apt.izzysoft.de/fdroid/api/v1/shield/deandrea.matias.tv_randshow/)](https://apt.izzysoft.de/fdroid/index/apk/deandrea.matias.tv_randshow/)
 [![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Ftvrandshow.com%2F)](https://tvrandshow.com/)
 [![Paypal donate](https://img.shields.io/badge/paypal-donate-blue)](https://www.paypal.com/donate/?hosted_button_id=QWL5BXSRLCUJJ)
-[![Trello](https://img.shields.io/badge/trello-roadmap-blue)](https://trello.com/b/ib0jdUzK)
 
 ### About the project
 
