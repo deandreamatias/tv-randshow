@@ -82,12 +82,12 @@ jobs:
         serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_API_KEY }}
         packageName: deandrea.matias.tv_randshow
         releaseFiles: artifacts/build/app/outputs/bundle/prodRelease/app-prod-release.aab
-        debugSymbols: artifacts/split-debug.zip
+        debugSymbols: artifacts/android/split-debug.zip
         track: internal
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
-        files: artifacts/flutter-apk/app-prod-release.apk
+        files: artifacts/build/app/outputs/flutter-apk/app-prod-release.apk
 
   deployment-web-preview:
     if: ${{ github.ref == 'refs/heads/main' }}
