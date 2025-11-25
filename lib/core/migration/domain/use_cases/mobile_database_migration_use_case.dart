@@ -18,8 +18,8 @@ class MobileDatabaseMigrationUseCase {
   );
 
   Stream<MigrationStatus> call() async* {
-    final List<TvshowDetails> tvshows =
-        await _secondaryDatabaseService.getTvshows();
+    final List<TvshowDetails> tvshows = await _secondaryDatabaseService
+        .getTvshows();
     yield MigrationStatus.loadedOld;
 
     if (tvshows.isNotEmpty) {

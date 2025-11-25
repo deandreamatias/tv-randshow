@@ -36,53 +36,53 @@ class TabViewState extends State<TabView> {
         statusBarColor: Colors.transparent,
         statusBarIconBrightness:
             Theme.of(context).colorScheme.brightness == Brightness.dark
-                ? Brightness.light
-                : Brightness.dark,
+            ? Brightness.light
+            : Brightness.dark,
       ),
       child: Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton:
-            _selectedIndex == 0 ? const _RandomActions(bigSize: bigSize) : null,
+        floatingActionButton: _selectedIndex == 0
+            ? const _RandomActions(bigSize: bigSize)
+            : null,
         body: LayoutBuilder(
-          builder:
-              (BuildContext context, BoxConstraints constraints) =>
-                  constraints.maxWidth > bigSize
-                      ? Row(
-                        children: <Widget>[
-                          _BigScreenMenu(
-                            onChange: (index) {
-                              setState(() {
-                                _selectedIndex = index;
-                              });
-                            },
-                            selectedIndex: _selectedIndex,
-                          ),
-                          const VerticalDivider(thickness: 1, width: 1),
-                          Expanded(
-                            child: SafeArea(
-                              left: false,
-                              child: _widgetOptions.elementAt(_selectedIndex),
-                            ),
-                          ),
-                        ],
-                      )
-                      : Column(
-                        children: <Widget>[
-                          Expanded(
-                            child: SafeArea(
-                              child: _widgetOptions.elementAt(_selectedIndex),
-                            ),
-                          ),
-                          _SmallScreenMenu(
-                            onChange: (index) {
-                              setState(() {
-                                _selectedIndex = index;
-                              });
-                            },
-                            selectedIndex: _selectedIndex,
-                          ),
-                        ],
+          builder: (BuildContext context, BoxConstraints constraints) =>
+              constraints.maxWidth > bigSize
+              ? Row(
+                  children: <Widget>[
+                    _BigScreenMenu(
+                      onChange: (index) {
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
+                      selectedIndex: _selectedIndex,
+                    ),
+                    const VerticalDivider(thickness: 1, width: 1),
+                    Expanded(
+                      child: SafeArea(
+                        left: false,
+                        child: _widgetOptions.elementAt(_selectedIndex),
                       ),
+                    ),
+                  ],
+                )
+              : Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: SafeArea(
+                        child: _widgetOptions.elementAt(_selectedIndex),
+                      ),
+                    ),
+                    _SmallScreenMenu(
+                      onChange: (index) {
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
+                      selectedIndex: _selectedIndex,
+                    ),
+                  ],
+                ),
         ),
       ),
     );
@@ -161,17 +161,14 @@ class _RandomActions extends StatelessWidget {
           children: [
             FabActionButton(
               icon: const Icon(UniconsLine.tv_retro),
-              onPressed:
-                  () => Navigator.of(
-                    context,
-                  ).pushNamed<LoadingTvshowsView>(RoutePaths.loadingTvshows),
+              onPressed: () => Navigator.of(
+                context,
+              ).pushNamed<LoadingTvshowsView>(RoutePaths.loadingTvshows),
             ),
             FabActionButton(
               icon: const Icon(UniconsLine.arrow_growth),
-              onPressed:
-                  () => Navigator.of(
-                    context,
-                  ).pushNamed<LoadingTrendingTvshowView>(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed<LoadingTrendingTvshowView>(
                     RoutePaths.loadingTrendingTvshow,
                   ),
             ),

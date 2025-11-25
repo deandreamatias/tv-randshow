@@ -15,8 +15,9 @@ class TvshowDetailsNotifier
   }
 }
 
-final tvshowDetailsProvider = AutoDisposeAsyncNotifierProviderFamily<
-  TvshowDetailsNotifier,
-  TvshowDetails,
-  int
->(TvshowDetailsNotifier.new);
+final tvshowDetailsProvider =
+    AutoDisposeAsyncNotifierProviderFamily<
+      TvshowDetailsNotifier,
+      TvshowDetails,
+      int
+    >(TvshowDetailsNotifier.new);

@@ -25,40 +25,33 @@ class SaveButton extends StatelessWidget {
           ignoring: watcher.isLoading,
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
-            child:
-                watcher.hasValue && watcher.requireValue
-                    ? ElevatedButton.icon(
-                      key: const ValueKey<String>('delete'),
-                      icon: const Icon(UniconsLine.times),
-                      label:
-                          watcher.isLoading
-                              ? loader
-                              : Text(
-                                context.tr('app.search.button_delete'),
-                                key: Key('app.search.button_delete.$tvId'),
-                              ),
-                      onPressed:
-                          () =>
-                              ref
-                                  .read(tvshowOnFavsProvider(tvId).notifier)
-                                  .deleteFromFavs(),
-                    )
-                    : ElevatedButton.icon(
-                      key: const ValueKey<String>('add'),
-                      icon: const Icon(UniconsLine.favorite),
-                      label:
-                          watcher.isLoading
-                              ? loader
-                              : Text(
-                                context.tr('app.search.button_fav'),
-                                key: Key('app.search.button_fav.$tvId'),
-                              ),
-                      onPressed:
-                          () =>
-                              ref
-                                  .read(tvshowOnFavsProvider(tvId).notifier)
-                                  .addToFavs(),
-                    ),
+            child: watcher.hasValue && watcher.requireValue
+                ? ElevatedButton.icon(
+                    key: const ValueKey<String>('delete'),
+                    icon: const Icon(UniconsLine.times),
+                    label: watcher.isLoading
+                        ? loader
+                        : Text(
+                            context.tr('app.search.button_delete'),
+                            key: Key('app.search.button_delete.$tvId'),
+                          ),
+                    onPressed: () => ref
+                        .read(tvshowOnFavsProvider(tvId).notifier)
+                        .deleteFromFavs(),
+                  )
+                : ElevatedButton.icon(
+                    key: const ValueKey<String>('add'),
+                    icon: const Icon(UniconsLine.favorite),
+                    label: watcher.isLoading
+                        ? loader
+                        : Text(
+                            context.tr('app.search.button_fav'),
+                            key: Key('app.search.button_fav.$tvId'),
+                          ),
+                    onPressed: () => ref
+                        .read(tvshowOnFavsProvider(tvId).notifier)
+                        .addToFavs(),
+                  ),
           ),
         );
       },

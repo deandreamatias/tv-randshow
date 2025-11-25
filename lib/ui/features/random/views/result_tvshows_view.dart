@@ -27,11 +27,10 @@ class ResultTvshowsView extends StatelessWidget {
               .watch(randomTvshowsProvider)
               .when(
                 data: (result) => TvshowEpisodeInfoResult(result: result),
-                error:
-                    (error, stackTrace) => ErrorMessage(
-                      keyText: 'app.result.tvshow.error_load',
-                      error: error,
-                    ),
+                error: (error, stackTrace) => ErrorMessage(
+                  keyText: 'app.result.tvshow.error_load',
+                  error: error,
+                ),
                 loading: () => const Loader(),
               );
         },

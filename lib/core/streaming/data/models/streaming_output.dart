@@ -65,8 +65,9 @@ class StreamingOutput extends Streaming {
       final countries = streaming.value as Map<String, dynamic>;
 
       /// TODO: Add all countries to list.
-      final Map<String, dynamic> streamingDetail =
-          countries.entries.map((countries) => countries.value).first;
+      final Map<String, dynamic> streamingDetail = countries.entries
+          .map((countries) => countries.value)
+          .first;
 
       return StreamingDetailOutput(
         country: countries.entries.first.key,

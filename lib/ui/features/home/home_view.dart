@@ -49,42 +49,37 @@ class _FavoriteList extends StatelessWidget {
         return ref
             .watch(favTvshowsProvider)
             .when(
-              data:
-                  (tvshows) =>
-                      tvshows.isNotEmpty
-                          ? GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 180.0,
-                                  childAspectRatio: 0.8,
-                                  crossAxisSpacing: Styles.standard,
-                                  mainAxisSpacing: Styles.standard,
-                                ),
-                            physics: const BouncingScrollPhysics(),
-                            padding: const EdgeInsets.all(Styles.standard),
-                            itemCount: tvshows.length,
-                            itemBuilder:
-                                (BuildContext context, int index) => FavWidget(
-                                  key: Key(tvshows[index].id.toString()),
-                                  tvshowDetails: tvshows[index],
-                                ),
-                          )
-                          : Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(Styles.standard),
-                              child: Text(
-                                context.tr('app.fav.empty_message'),
-                                key: const Key('app.fav.empty_message'),
-                                style: Theme.of(context).textTheme.titleMedium,
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
+              data: (tvshows) => tvshows.isNotEmpty
+                  ? GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 180.0,
+                            childAspectRatio: 0.8,
+                            crossAxisSpacing: Styles.standard,
+                            mainAxisSpacing: Styles.standard,
                           ),
-              error:
-                  (error, stackTrace) => ErrorMessage(
-                    error: error,
-                    keyText: 'app.fav.error_message',
-                  ),
+                      physics: const BouncingScrollPhysics(),
+                      padding: const EdgeInsets.all(Styles.standard),
+                      itemCount: tvshows.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          FavWidget(
+                            key: Key(tvshows[index].id.toString()),
+                            tvshowDetails: tvshows[index],
+                          ),
+                    )
+                  : Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(Styles.standard),
+                        child: Text(
+                          context.tr('app.fav.empty_message'),
+                          key: const Key('app.fav.empty_message'),
+                          style: Theme.of(context).textTheme.titleMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+              error: (error, stackTrace) =>
+                  ErrorMessage(error: error, keyText: 'app.fav.error_message'),
               loading: () => const Loader(key: Key('app.fav.loading')),
             );
       },
@@ -103,32 +98,25 @@ class _ExportTvshowsButton extends StatelessWidget {
 
         return tvshows.hasValue && tvshows.requireValue.isNotEmpty
             ? ref
-                .watch(exportTvshowsProvider)
-                .when(
-                  data:
-                      (success) =>
-                          success
-                              ? IconButton(
-                                key: const Key('app.fav.save'),
-                                tooltip: context.tr('app.fav.save'),
-                                icon: Icon(
-                                  UniconsLine.file_export,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                                onPressed: () {
-                                  ref
-                                      .read(exportTvshowsProvider.notifier)
-                                      .export();
-                                },
-                              )
-                              : const ErrorIcon(
-                                keyText: 'app.info.export_error',
-                              ),
-                  error:
-                      (error, stackTrace) =>
-                          const ErrorIcon(keyText: 'app.info.export_error'),
-                  loading: () => const Loader(),
-                )
+                  .watch(exportTvshowsProvider)
+                  .when(
+                    data: (success) => success
+                        ? IconButton(
+                            key: const Key('app.fav.save'),
+                            tooltip: context.tr('app.fav.save'),
+                            icon: Icon(
+                              UniconsLine.file_export,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            onPressed: () {
+                              ref.read(exportTvshowsProvider.notifier).export();
+                            },
+                          )
+                        : const ErrorIcon(keyText: 'app.info.export_error'),
+                    error: (error, stackTrace) =>
+                        const ErrorIcon(keyText: 'app.info.export_error'),
+                    loading: () => const Loader(),
+                  )
             : const SizedBox.shrink();
       },
     );

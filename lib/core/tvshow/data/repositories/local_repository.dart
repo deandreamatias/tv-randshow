@@ -21,10 +21,12 @@ const int streamingDetailHiveTypeId = 2;
 class LocalRepository implements ILocalRepository {
   Box<TvshowDetails>? tvshowBox;
   Box<StreamingDetailHive>? streamingsBox;
-  final tvshowBoxName =
-      FlavorConfig.isDevelopment() ? 'tvshowfavdev' : 'tvshowfav';
-  final streamingsBoxName =
-      FlavorConfig.isDevelopment() ? 'streamingsdev' : 'streamings';
+  final tvshowBoxName = FlavorConfig.isDevelopment()
+      ? 'tvshowfavdev'
+      : 'tvshowfav';
+  final streamingsBoxName = FlavorConfig.isDevelopment()
+      ? 'streamingsdev'
+      : 'streamings';
 
   @override
   Future<bool> deleteTvshow(int id) async {
@@ -63,20 +65,19 @@ class LocalRepository implements ILocalRepository {
       for (TvshowDetails tvshow in tvshows) {
         if (streamings.isNotEmpty) {
           tvshow = tvshow.copyWith(
-            streamings:
-                streamings
-                    .where((streaming) => streaming.tvshowId == tvshow.id)
-                    .map(
-                      (streaming) => StreamingDetail(
-                        id: streaming.id,
-                        streamingName: streaming.streamingName,
-                        link: streaming.link,
-                        added: streaming.added,
-                        leaving: streaming.leaving,
-                        country: streaming.country,
-                      ),
-                    )
-                    .toList(),
+            streamings: streamings
+                .where((streaming) => streaming.tvshowId == tvshow.id)
+                .map(
+                  (streaming) => StreamingDetail(
+                    id: streaming.id,
+                    streamingName: streaming.streamingName,
+                    link: streaming.link,
+                    added: streaming.added,
+                    leaving: streaming.leaving,
+                    country: streaming.country,
+                  ),
+                )
+                .toList(),
           );
         }
         list.add(tvshow);
@@ -144,20 +145,19 @@ class LocalRepository implements ILocalRepository {
       final streamings = streamingsBox!.values;
       if (streamings.isNotEmpty) {
         tvshow = tvshow.copyWith(
-          streamings:
-              streamings
-                  .where((streaming) => streaming.tvshowId == tvshow?.id)
-                  .map(
-                    (streaming) => StreamingDetail(
-                      id: streaming.id,
-                      streamingName: streaming.streamingName,
-                      link: streaming.link,
-                      added: streaming.added,
-                      leaving: streaming.leaving,
-                      country: streaming.country,
-                    ),
-                  )
-                  .toList(),
+          streamings: streamings
+              .where((streaming) => streaming.tvshowId == tvshow?.id)
+              .map(
+                (streaming) => StreamingDetail(
+                  id: streaming.id,
+                  streamingName: streaming.streamingName,
+                  link: streaming.link,
+                  added: streaming.added,
+                  leaving: streaming.leaving,
+                  country: streaming.country,
+                ),
+              )
+              .toList(),
         );
       }
 

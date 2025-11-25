@@ -57,8 +57,9 @@ void main() {
         final randomTvshow = faker.randomGenerator.element<TvshowDetails>(
           tvshows,
         );
-        final localTvshows =
-            tvshows.where((element) => element.id != randomTvshow.id).toList();
+        final localTvshows = tvshows
+            .where((element) => element.id != randomTvshow.id)
+            .toList();
         final String language = Helpers.getLocale();
 
         when(getLocalTvshow()).thenAnswer((_) async => localTvshows);

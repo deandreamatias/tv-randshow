@@ -31,10 +31,9 @@ class GetRandomEpisodeUseCase {
 
     // Get random season.
     // When has only one season, do not need get random season.
-    final int randomSeason =
-        tvshow.numberOfSeasons == 1
-            ? 1
-            : _randomService.getNumber(max: tvshow.numberOfSeasons, min: 1);
+    final int randomSeason = tvshow.numberOfSeasons == 1
+        ? 1
+        : _randomService.getNumber(max: tvshow.numberOfSeasons, min: 1);
     final TvshowSeasonsDetails seasonsDetails = await _seasonsDetailsUseCase(
       idTv: idTv,
       season: randomSeason,

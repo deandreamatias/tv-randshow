@@ -62,11 +62,10 @@ class PrivacyPolicyView extends StatelessWidget {
                     style: textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
-                    recognizer:
-                        TapGestureRecognizer()
-                          ..onTap = () {
-                            Helpers.openMail(Constants.feedbackEmail);
-                          },
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Helpers.openMail(Constants.feedbackEmail);
+                      },
                   ),
                   TextSpan(
                     text: context.tr('app.privacy.text_contact_3'),
@@ -102,11 +101,10 @@ class PrivacyPolicyView extends StatelessWidget {
                     style: textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
-                    recognizer:
-                        TapGestureRecognizer()
-                          ..onTap = () {
-                            Helpers.openLink(Uri.parse(Constants.repository));
-                          },
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Helpers.openLink(Uri.parse(Constants.repository));
+                      },
                   ),
                 ],
               ),

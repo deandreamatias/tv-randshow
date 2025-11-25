@@ -66,12 +66,10 @@ Future<void> main() async {
     await tester.enterText(find.byType(TextField), tvshows.first);
     await waitUntil(
       tester: tester,
-      conditionMet:
-          () =>
-              find
-                  .byKey(const Key('app.search.button_fav.2316'))
-                  .evaluate()
-                  .isNotEmpty,
+      conditionMet: () => find
+          .byKey(const Key('app.search.button_fav.2316'))
+          .evaluate()
+          .isNotEmpty,
     );
 
     // Save tv show.
@@ -94,24 +92,18 @@ Future<void> main() async {
     await tester.tap(find.byKey(const Key('app.fav.button_random.2316')));
     await waitUntil(
       tester: tester,
-      conditionMet:
-          () =>
-              find
-                  .byKey(const Key('app.result.episode.title'))
-                  .evaluate()
-                  .isNotEmpty,
+      conditionMet: () => find
+          .byKey(const Key('app.result.episode.title'))
+          .evaluate()
+          .isNotEmpty,
     );
     expect(find.byKey(const Key('app.result.episode.title')), findsOneWidget);
 
     await tester.tap(find.byKey(const Key('app.result.episode.button_random')));
     await waitUntil(
       tester: tester,
-      conditionMet:
-          () =>
-              find
-                  .byKey(const Key('app.result.button_fav'))
-                  .evaluate()
-                  .isNotEmpty,
+      conditionMet: () =>
+          find.byKey(const Key('app.result.button_fav')).evaluate().isNotEmpty,
     );
     expect(find.byKey(const Key('app.result.episode.title')), findsOneWidget);
     expect(find.byKey(const Key('app.result.button_fav')), findsOneWidget);
@@ -121,12 +113,10 @@ Future<void> main() async {
     await tester.tap(find.byKey(const Key('app.result.button_fav')));
     await waitUntil(
       tester: tester,
-      conditionMet:
-          () =>
-              find
-                  .byKey(const Key('app.fav.button_random.2316'))
-                  .evaluate()
-                  .isNotEmpty,
+      conditionMet: () => find
+          .byKey(const Key('app.fav.button_random.2316'))
+          .evaluate()
+          .isNotEmpty,
     );
     expect(find.byKey(const Key('app.fav.button_random.2316')), findsOneWidget);
 
@@ -136,12 +126,10 @@ Future<void> main() async {
     await tester.tap(find.byKey(const Key('app.delete_dialog.button_delete')));
     await waitUntil(
       tester: tester,
-      conditionMet:
-          () =>
-              find
-                  .byKey(const Key('app.fav.button_random.2316'))
-                  .evaluate()
-                  .isEmpty,
+      conditionMet: () => find
+          .byKey(const Key('app.fav.button_random.2316'))
+          .evaluate()
+          .isEmpty,
     );
     expect(find.byKey(const Key('app.fav.button_random.2316')), findsNothing);
   });

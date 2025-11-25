@@ -29,10 +29,9 @@ class TrendingRepository implements ITrendingRepository {
 
     return PaginationDataModel<TrendingResult>.fromJson(
       response,
-      (json) =>
-          TrendingResultDataModel.fromJson(
-            json as Map<String, dynamic>,
-          ).toDomain(),
+      (json) => TrendingResultDataModel.fromJson(
+        json as Map<String, dynamic>,
+      ).toDomain(),
     );
   }
 }

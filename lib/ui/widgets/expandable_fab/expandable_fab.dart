@@ -92,8 +92,9 @@ class _ExpandableFabState extends State<ExpandableFab>
                 directionInDegrees: angleInDegrees,
                 maxDistance: widget.distance,
                 progress: _expandAnimation,
-                correctionPosition:
-                    _open ? offsetCorrection.dx.abs().toInt() : 0,
+                correctionPosition: _open
+                    ? offsetCorrection.dx.abs().toInt()
+                    : 0,
                 child: e,
               );
             }),

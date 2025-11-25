@@ -79,11 +79,8 @@ class _MigrationViewState extends State<MigrationView> {
                   OutlinedButton.icon(
                     label: Text(context.tr('app.migration.home_button')),
                     icon: const Icon(UniconsLine.home),
-                    onPressed:
-                        () => Navigator.pushReplacementNamed(
-                          context,
-                          RoutePaths.tab,
-                        ),
+                    onPressed: () =>
+                        Navigator.pushReplacementNamed(context, RoutePaths.tab),
                   ),
                 ],
               );

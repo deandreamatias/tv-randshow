@@ -157,10 +157,9 @@ void main() {
 
       final baseTshowSeasonsDetails = generateTvshow.tvshowSeasonsDetails;
       final seasonsDetails = baseTshowSeasonsDetails.copyWith(
-        episodes:
-            baseTshowSeasonsDetails.episodes
-                .map((e) => e.copyWith(seasonNumber: 0))
-                .toList(),
+        episodes: baseTshowSeasonsDetails.episodes
+            .map((e) => e.copyWith(seasonNumber: 0))
+            .toList(),
       );
       final episodeIndex = faker.randomGenerator.integer(
         seasonsDetails.episodes.length,
@@ -199,10 +198,9 @@ void main() {
 
       final baseTshowSeasonsDetails = generateTvshow.tvshowSeasonsDetails;
       final seasonsDetails = baseTshowSeasonsDetails.copyWith(
-        episodes:
-            baseTshowSeasonsDetails.episodes
-                .map((e) => e.copyWith(episodeNumber: 0))
-                .toList(),
+        episodes: baseTshowSeasonsDetails.episodes
+            .map((e) => e.copyWith(episodeNumber: 0))
+            .toList(),
       );
       final episodeIndex = faker.randomGenerator.integer(
         seasonsDetails.episodes.length,

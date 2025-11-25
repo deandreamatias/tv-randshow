@@ -126,8 +126,9 @@ class DatabaseHelper {
       log('Open directory', error: e);
     }
 
-    _databaseName =
-        FlavorConfig.isDevelopment() ? 'tvshowfavdev.db' : 'tvshowfav.db';
+    _databaseName = FlavorConfig.isDevelopment()
+        ? 'tvshowfavdev.db'
+        : 'tvshowfav.db';
 
     return join(documentsDirectory?.path ?? '', _databaseName);
   }

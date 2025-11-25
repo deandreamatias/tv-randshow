@@ -26,10 +26,9 @@ class ImageBuilder extends StatelessWidget {
       children: <Widget>[
         ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(Styles.small)),
-          child:
-              kIsWeb
-                  ? OnlineImage(url: _checkUrl(url), name: name)
-                  : _CachedImage(url: _checkUrl(url)),
+          child: kIsWeb
+              ? OnlineImage(url: _checkUrl(url), name: name)
+              : _CachedImage(url: _checkUrl(url)),
         ),
         Visibility(
           visible: !isModal,
@@ -69,9 +68,8 @@ class _CachedImage extends StatelessWidget {
       imageUrl: url,
       fit: BoxFit.cover,
       placeholder: (BuildContext context, String url) => const Loader(),
-      errorWidget:
-          (BuildContext context, String url, Object? error) =>
-              Image.asset(Assets.emptyImage),
+      errorWidget: (BuildContext context, String url, Object? error) =>
+          Image.asset(Assets.emptyImage),
     );
   }
 }

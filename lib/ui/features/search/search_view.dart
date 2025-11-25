@@ -68,12 +68,9 @@ class _SearchField extends StatelessWidget {
           .watch(searchProvider.notifier)
           .searchAutomatic(
             text,
-            () =>
-                ref
-                    .watch(
-                      paginationProvider(ref.watch(searchProvider)).notifier,
-                    )
-                    .firstPage(),
+            () => ref
+                .watch(paginationProvider(ref.watch(searchProvider)).notifier)
+                .firstPage(),
           );
     }
   }
@@ -124,34 +121,32 @@ class _PaginationStatus extends ConsumerWidget {
     final state = ref.watch(paginationProvider(text));
 
     return state.when(
-      error:
-          (error, stackTrace) =>
-              ErrorMessage(keyText: 'app.search.error_message', error: error),
-      loading:
-          () =>
-              state.hasValue && state.requireValue.isNotEmpty
-                  ? const Loader()
-                  : const SizedBox.shrink(),
+      error: (error, stackTrace) =>
+          ErrorMessage(keyText: 'app.search.error_message', error: error),
+      loading: () => state.hasValue && state.requireValue.isNotEmpty
+          ? const Loader()
+          : const SizedBox.shrink(),
       data: (items) {
-        final noMoreItems =
-            ref.read(paginationProvider(text).notifier).noMoreItems;
+        final noMoreItems = ref
+            .read(paginationProvider(text).notifier)
+            .noMoreItems;
 
         return noMoreItems && state.requireValue.isNotEmpty
             ? Text(
-              context.tr('app.search.no_more_items'),
-              style: Theme.of(context).textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            )
+                context.tr('app.search.no_more_items'),
+                style: Theme.of(context).textTheme.titleMedium,
+                textAlign: TextAlign.center,
+              )
             : items.isNotEmpty
             ? Center(
-              child: TextButton.icon(
-                onPressed: () {
-                  ref.read(paginationProvider(text).notifier).nextPage();
-                },
-                icon: const Icon(UniconsLine.plus_circle),
-                label: Text(context.tr('app.search.load_more_items')),
-              ),
-            )
+                child: TextButton.icon(
+                  onPressed: () {
+                    ref.read(paginationProvider(text).notifier).nextPage();
+                  },
+                  icon: const Icon(UniconsLine.plus_circle),
+                  label: Text(context.tr('app.search.load_more_items')),
+                ),
+              )
             : const SizedBox.shrink();
       },
     );
@@ -172,22 +167,22 @@ class _SearchResult extends StatelessWidget {
           data: (items) {
             return items.isEmpty
                 ? SliverToBoxAdapter(
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(Styles.standard),
-                      child: Text(
-                        context.tr(
-                          text.isEmpty
-                              ? 'app.search.init_message'
-                              : 'app.search.empty_message',
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(Styles.standard),
+                        child: Text(
+                          context.tr(
+                            text.isEmpty
+                                ? 'app.search.init_message'
+                                : 'app.search.empty_message',
+                          ),
+                          key: const Key('app.search.message'),
+                          style: Theme.of(context).textTheme.titleMedium,
+                          textAlign: TextAlign.center,
                         ),
-                        key: const Key('app.search.message'),
-                        style: Theme.of(context).textTheme.titleMedium,
-                        textAlign: TextAlign.center,
                       ),
                     ),
-                  ),
-                )
+                  )
                 : _GridBuilder(items: items);
           },
           loading: () {
@@ -195,13 +190,12 @@ class _SearchResult extends StatelessWidget {
                 ? _GridBuilder(items: state.requireValue)
                 : const SliverToBoxAdapter(child: Loader());
           },
-          error:
-              (error, stk) => SliverToBoxAdapter(
-                child: ErrorMessage(
-                  keyText: 'app.search.error_message',
-                  error: error,
-                ),
-              ),
+          error: (error, stk) => SliverToBoxAdapter(
+            child: ErrorMessage(
+              keyText: 'app.search.error_message',
+              error: error,
+            ),
+          ),
         );
       },
     );

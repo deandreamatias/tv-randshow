@@ -31,10 +31,8 @@ class App extends StatelessWidget {
       ],
       child: ThemeConsumer(
         child: Builder(
-          builder:
-              (themeContext) => ProviderScope(
-                child: _MaterialApp(themeContext: themeContext),
-              ),
+          builder: (themeContext) =>
+              ProviderScope(child: _MaterialApp(themeContext: themeContext)),
         ),
       ),
     );
@@ -49,10 +47,9 @@ class _MaterialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:
-          kIsWeb
-              ? 'TV Randshow | App to choose a random TV show episode'
-              : 'TV Randshow',
+      title: kIsWeb
+          ? 'TV Randshow | App to choose a random TV show episode'
+          : 'TV Randshow',
       theme: ThemeProvider.themeOf(themeContext).data,
       initialRoute: RoutePaths.splash,
       scaffoldMessengerKey: locator.get<GlobalKey<ScaffoldMessengerState>>(),

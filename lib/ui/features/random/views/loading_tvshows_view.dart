@@ -23,22 +23,20 @@ class LoadingTvshowsView extends StatelessWidget {
                   if (!ref.watch(randomTvshowsProvider).isRefreshing) {
                     Future.delayed(
                       const Duration(milliseconds: 100),
-                      () =>
-                          context.mounted
-                              ? Navigator.of(
-                                context,
-                              ).pushReplacementNamed(RoutePaths.resultTvshows)
-                              : null,
+                      () => context.mounted
+                          ? Navigator.of(
+                              context,
+                            ).pushReplacementNamed(RoutePaths.resultTvshows)
+                          : null,
                     );
                   }
 
                   return const AnimationRandomLoader();
                 },
-                error:
-                    (error, stackTrace) => ErrorMessage(
-                      keyText: 'app.loading.tvshow.general_error',
-                      error: error,
-                    ),
+                error: (error, stackTrace) => ErrorMessage(
+                  keyText: 'app.loading.tvshow.general_error',
+                  error: error,
+                ),
                 loading: () => const AnimationRandomLoader(),
               );
         },

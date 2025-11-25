@@ -95,11 +95,10 @@ class _TvshowResultInfo extends StatelessWidget {
                   ],
                 );
               },
-              error:
-                  (error, stackTrace) => ErrorMessage(
-                    keyText: 'app.result.trending_tvshow.error_load',
-                    error: error,
-                  ),
+              error: (error, stackTrace) => ErrorMessage(
+                keyText: 'app.result.trending_tvshow.error_load',
+                error: error,
+              ),
               loading: () => const Loader(),
             );
       },

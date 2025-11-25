@@ -22,30 +22,26 @@ class TvshowEpisodeInfoResult extends StatelessWidget {
           child: MediaHeader(
             title: result.name,
             imagePath: result.image,
-            child:
-                result.streamings.isNotEmpty
-                    ? SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:
-                            result.streamings
-                                .map(
-                                  (streaming) => Row(
-                                    children: [
-                                      StreamingButton(
-                                        streamingDetail: streaming,
-                                      ),
-                                      const SizedBox(width: Styles.small),
-                                    ],
-                                  ),
-                                )
-                                .toList(),
-                      ),
-                    )
-                    : TextTitleMedium(
-                      context.tr('app.result.episode.no_streaming_title'),
+            child: result.streamings.isNotEmpty
+                ? SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: result.streamings
+                          .map(
+                            (streaming) => Row(
+                              children: [
+                                StreamingButton(streamingDetail: streaming),
+                                const SizedBox(width: Styles.small),
+                              ],
+                            ),
+                          )
+                          .toList(),
                     ),
+                  )
+                : TextTitleMedium(
+                    context.tr('app.result.episode.no_streaming_title'),
+                  ),
           ),
         ),
         Flexible(

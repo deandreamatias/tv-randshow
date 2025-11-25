@@ -59,12 +59,11 @@ class ErrorMessage extends StatelessWidget {
           ),
           const SizedBox(height: Styles.medium),
           TextButton.icon(
-            onPressed:
-                () => Helpers.openMail(
-                  Constants.feedbackEmail,
-                  mailtoSubject: 'Tv Randshow - Bug report',
-                  mailtoBody: errorText,
-                ),
+            onPressed: () => Helpers.openMail(
+              Constants.feedbackEmail,
+              mailtoSubject: 'Tv Randshow - Bug report',
+              mailtoBody: errorText,
+            ),
             icon: const Icon(UniconsLine.fast_mail),
             label: Text(context.tr('app.send_error')),
           ),

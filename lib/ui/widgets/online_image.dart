@@ -16,23 +16,23 @@ class OnlineImage extends StatelessWidget {
       errorBuilder:
           (BuildContext context, Object error, StackTrace? stackTrace) =>
               Image.asset(Assets.emptyImage),
-      loadingBuilder: (
-        BuildContext context,
-        Widget child,
-        ImageChunkEvent? loadingProgress,
-      ) {
-        if (loadingProgress == null) return child;
+      loadingBuilder:
+          (
+            BuildContext context,
+            Widget child,
+            ImageChunkEvent? loadingProgress,
+          ) {
+            if (loadingProgress == null) return child;
 
-        return Center(
-          child: CircularProgressIndicator(
-            value:
-                loadingProgress.expectedTotalBytes != null
+            return Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
                     ? loadingProgress.cumulativeBytesLoaded /
-                        (loadingProgress.expectedTotalBytes ?? 1)
+                          (loadingProgress.expectedTotalBytes ?? 1)
                     : null,
-          ),
-        );
-      },
+              ),
+            );
+          },
     );
   }
 }

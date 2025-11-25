@@ -16,12 +16,11 @@ class RandomButton extends StatelessWidget {
         context.tr('app.fav.button_random'),
         key: Key('app.fav.button_random.$idTv'),
       ),
-      onPressed:
-          () => Navigator.pushNamed<LoadingTvshowView>(
-            context,
-            RoutePaths.loadingTvshow,
-            arguments: idTv,
-          ),
+      onPressed: () => Navigator.pushNamed<LoadingTvshowView>(
+        context,
+        RoutePaths.loadingTvshow,
+        arguments: idTv,
+      ),
     );
   }
 }

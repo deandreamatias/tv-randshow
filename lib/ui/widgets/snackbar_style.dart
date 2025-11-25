@@ -39,24 +39,23 @@ class StyledSnackBar {
       ),
       duration: Duration(seconds: style == SnackBarStyle.error ? 6 : 4),
       content: Text(message),
-      action:
-          style == SnackBarStyle.error
-              ? SnackBarAction(
-                label: context.tr('app.report_action'),
-                textColor: labelColor,
-                onPressed: () {
-                  Helpers.openMail(
-                    Constants.feedbackEmail,
-                    mailtoSubject: 'Tv Randshow - Bug report',
-                    mailtoBody: details,
-                  );
-                  GetIt.I
-                      .get<GlobalKey<ScaffoldMessengerState>>()
-                      .currentState
-                      ?.hideCurrentSnackBar();
-                },
-              )
-              : null,
+      action: style == SnackBarStyle.error
+          ? SnackBarAction(
+              label: context.tr('app.report_action'),
+              textColor: labelColor,
+              onPressed: () {
+                Helpers.openMail(
+                  Constants.feedbackEmail,
+                  mailtoSubject: 'Tv Randshow - Bug report',
+                  mailtoBody: details,
+                );
+                GetIt.I
+                    .get<GlobalKey<ScaffoldMessengerState>>()
+                    .currentState
+                    ?.hideCurrentSnackBar();
+              },
+            )
+          : null,
     );
   }
 }
