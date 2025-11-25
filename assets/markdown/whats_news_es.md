@@ -1,3 +1,15 @@
+## 2.5.0 - 2025/11/25
+
+* Permite exportar favoritos en web
+* Evita errores al iniciar la aplicación
+* Permite abrir enlaces `mailto`
+* Evita setState en init
+* Corrige texto
+* Actualiza para construir con API 36 de Android SDK
+* Construido con Flutter 3.38 y Dart 3.10
+* Actualiza dependencias y corrige cambios incompatibles
+* Añade la aplicación al repositorio IzzyDroid
+
 ## 2.4.0 - 2025/04/18
 
 * Actualiza dependencias

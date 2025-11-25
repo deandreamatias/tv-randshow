@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/deandreamatias/tv-randshow/compare/v2.4.0...v2.5.0) (2025-11-25)
+
+### Bug Fixes
+
+* Allow export favs on web ([ea674a9](https://github.com/deandreamatias/tv-randshow/commit/ea674a9))
+* Avoid errors to start app ([70f954f](https://github.com/deandreamatias/tv-randshow/commit/70f954f))
+* Allow open mailto urls ([c1bd5a3](https://github.com/deandreamatias/tv-randshow/commit/c1bd5a3))
+* Avoid setState on init ([6bd1882](https://github.com/deandreamatias/tv-randshow/commit/6bd1882))
+* Replace copy ([dd3c869](https://github.com/deandreamatias/tv-randshow/commit/dd3c869))
+
+### Build
+
+* Update to build for 36 sdk android api ([42a5f97](https://github.com/deandreamatias/tv-randshow/commit/42a5f97))
+* Update platforms setup ([cff72a0](https://github.com/deandreamatias/tv-randshow/commit/cff72a0))
+* Update flutter and dart version ([c33f392](https://github.com/deandreamatias/tv-randshow/commit/c33f392))
+* Update dependencies and fix breaking changes ([8f3f268](https://github.com/deandreamatias/tv-randshow/commit/8f3f268))
+
+### Refactor
+
+* Replace flutter translate to easy localizations ([473f999](https://github.com/deandreamatias/tv-randshow/commit/473f999))
+* Replace web dependency ([c8d5884](https://github.com/deandreamatias/tv-randshow/commit/c8d5884))
+* Apply new dart format ([288a988](https://github.com/deandreamatias/tv-randshow/commit/288a988))
+
+### Documentation
+
+* Add app to IzzyDroid repository
+
 ## [2.4.0](https://github.com/deandreamatias/tv-randshow/compare/v2.3.0...v2.4.0) (2025-04-18)
 
 * Update dependencies

@@ -1,3 +1,15 @@
+## 2.5.0 - 2025/11/25
+
+* Allow export favs on web
+* Avoid errors to start app
+* Allow open mailto urls
+* Avoid setState on init
+* Replace copy
+* Update to build for 36 sdk android api
+* Build with Flutter 3.38 and Dart 3.10
+* Update dependencies and fix breaking changes
+* Add app to IzzyDroid repository
+
 ## 2.4.0 - 2025/04/18
 
 * Update dependencies
