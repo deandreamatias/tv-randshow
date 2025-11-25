@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/containers/tvshow_detail/tvshow_details_state.dart';
 import 'package:tv_randshow/ui/features/home/widgets/random_button.dart';
 import 'package:tv_randshow/ui/features/search/widgets/save_button.dart';
@@ -105,7 +105,7 @@ class _TvshowInfoDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      TextTitleMedium(translate('app.modal.overview')),
+                      TextTitleMedium(context.tr('app.modal.overview')),
                       const SizedBox(height: Styles.small),
                       Expanded(
                         flex: 6,

@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/shared/assets.dart';
 import 'package:tv_randshow/ui/shared/constants.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
@@ -21,7 +21,7 @@ class PrivacyPolicyView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(translate('app.privacy.title')),
+        title: Text(context.tr('app.privacy.title')),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
@@ -37,24 +37,24 @@ class PrivacyPolicyView extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           children: [
             // Creator section.
-            TextTitleLarge(translate('app.privacy.subtitle_who')),
+            TextTitleLarge(context.tr('app.privacy.subtitle_who')),
             const SizedBox(height: Styles.small),
-            Text(translate('app.privacy.text_who')),
+            Text(context.tr('app.privacy.text_who')),
             const SizedBox(height: Styles.standard),
             // Permissions section.
-            TextTitleLarge(translate('app.privacy.subtitle_permissions')),
+            TextTitleLarge(context.tr('app.privacy.subtitle_permissions')),
             const SizedBox(height: Styles.small),
-            Text(translate('app.privacy.text_permissions_1')),
-            Text(translate('app.privacy.text_permissions_2')),
+            Text(context.tr('app.privacy.text_permissions_1')),
+            Text(context.tr('app.privacy.text_permissions_2')),
             const SizedBox(height: Styles.standard),
             // Contact section.
-            TextTitleLarge(translate('app.privacy.subtitle_contact')),
+            TextTitleLarge(context.tr('app.privacy.subtitle_contact')),
             const SizedBox(height: Styles.small),
-            Text(translate('app.privacy.text_contact_1')),
+            Text(context.tr('app.privacy.text_contact_1')),
             const SizedBox(height: Styles.small),
             RichText(
               text: TextSpan(
-                text: '${translate('app.privacy.text_contact_2')} ',
+                text: '${context.tr('app.privacy.text_contact_2')} ',
                 style: textTheme.bodyMedium,
                 children: [
                   TextSpan(
@@ -69,7 +69,7 @@ class PrivacyPolicyView extends StatelessWidget {
                           },
                   ),
                   TextSpan(
-                    text: translate('app.privacy.text_contact_3'),
+                    text: context.tr('app.privacy.text_contact_3'),
                     style: textTheme.bodyMedium,
                   ),
                 ],
@@ -77,9 +77,9 @@ class PrivacyPolicyView extends StatelessWidget {
             ),
             const SizedBox(height: Styles.standard),
             // About section.
-            TextTitleLarge(translate('app.privacy.subtitle_about')),
+            TextTitleLarge(context.tr('app.privacy.subtitle_about')),
             const SizedBox(height: Styles.small),
-            TextTitleMedium(translate('app.privacy.header_about_first')),
+            TextTitleMedium(context.tr('app.privacy.header_about_first')),
             const SizedBox(height: Styles.small),
             Align(
               alignment: Alignment.centerLeft,
@@ -89,16 +89,16 @@ class PrivacyPolicyView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: Styles.small),
-            Text(translate('app.privacy.text_about_first_2')),
+            Text(context.tr('app.privacy.text_about_first_2')),
             const SizedBox(height: Styles.standard),
-            TextTitleMedium(translate('app.privacy.header_about_second')),
+            TextTitleMedium(context.tr('app.privacy.header_about_second')),
             RichText(
               text: TextSpan(
-                text: '${translate('app.privacy.text_about_second_1')} ',
+                text: '${context.tr('app.privacy.text_about_second_1')} ',
                 style: textTheme.bodyMedium,
                 children: [
                   TextSpan(
-                    text: translate('app.privacy.text_about_second_2'),
+                    text: context.tr('app.privacy.text_about_second_2'),
                     style: textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -112,23 +112,23 @@ class PrivacyPolicyView extends StatelessWidget {
               ),
             ),
             Text(
-              translate('app.privacy.text_about_second_3'),
+              context.tr('app.privacy.text_about_second_3'),
               style: textTheme.bodyMedium,
             ),
             const SizedBox(height: Styles.standard),
             // Changes section.
-            TextTitleLarge(translate('app.privacy.changes')),
+            TextTitleLarge(context.tr('app.privacy.changes')),
             const SizedBox(height: Styles.small),
             Text(
-              translate(
+              context.tr(
                 'app.privacy.created',
-                args: {'date': _createdPrivacy.toString()},
+                namedArgs: {'date': _createdPrivacy.toString()},
               ),
             ),
             Text(
-              translate(
+              context.tr(
                 'app.privacy.modified',
-                args: {'date': _modifiedPrivacy.toString()},
+                namedArgs: {'date': _modifiedPrivacy.toString()},
               ),
             ),
           ],

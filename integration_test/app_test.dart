@@ -1,13 +1,14 @@
 // ignore_for_file: avoid-ignoring-return-values
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:tv_randshow/main_prod.dart' as main_prod;
 import 'package:tv_randshow/ui/app.dart' as app;
 
 Future<void> main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   final List<String> tvshows = ['The Office'];
 
   testWidgets('initial app', (WidgetTester tester) async {
@@ -42,11 +43,15 @@ Future<void> main() async {
     await tester.tap(find.byKey(const Key('app.info.version.dialog_button')));
   });
   testWidgets('tv show flow', (WidgetTester tester) async {
-    final LocalizationDelegate delegate = await LocalizationDelegate.create(
-      fallbackLocale: 'en',
-      supportedLocales: <String>['en', 'es', 'pt'],
+    await tester.pumpWidget(
+      EasyLocalization(
+        supportedLocales: const [Locale('en'), Locale('es'), Locale('pt')],
+        path: 'assets/i18n',
+        useOnlyLangCode: true,
+        fallbackLocale: const Locale('en'),
+        child: const app.App(),
+      ),
     );
-    await tester.pumpWidget(LocalizedApp(delegate, const app.App()));
     await tester.pumpAndSettle();
 
     // Navigate to search tab.

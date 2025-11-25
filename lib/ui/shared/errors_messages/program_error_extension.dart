@@ -1,23 +1,23 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 extension ProgramErrorExtension on Error {
   /// References: https://api.flutter.dev/flutter/dart-core/dart-core-library.html#exceptions.
   String getMessage() {
     String internalError = '';
     if (_verifyErrorTypes(ArgumentError)) {
-      internalError = translate('app.errors.internal_program_argument');
+      internalError = tr('app.errors.internal_program_argument');
     }
     if (_verifyErrorTypes(RangeError)) {
-      internalError = translate('app.errors.internal_program_range');
+      internalError = tr('app.errors.internal_program_range');
     }
     if (_verifyErrorTypes(StateError)) {
-      internalError = translate('app.errors.internal_program_state');
+      internalError = tr('app.errors.internal_program_state');
     }
     if (_verifyErrorTypes(TypeError)) {
-      internalError = translate('app.errors.internal_program_type');
+      internalError = tr('app.errors.internal_program_type');
     }
 
-    return translate('app.errors.internal', args: {'detail': internalError});
+    return tr('app.errors.internal', namedArgs: {'detail': internalError});
   }
 
   bool _verifyErrorTypes(Type errorType) =>

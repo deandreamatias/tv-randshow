@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/home/home_view.dart';
 import 'package:tv_randshow/ui/features/info/views/info_view.dart';
 import 'package:tv_randshow/ui/features/random/views/loading_trending_tvshow_view.dart';
@@ -102,15 +102,15 @@ class _BigScreenMenu extends StatelessWidget {
       destinations: <NavigationRailDestination>[
         NavigationRailDestination(
           icon: const Icon(UniconsLine.favorite),
-          label: Text(translate('app.fav.tab')),
+          label: Text(context.tr('app.fav.tab')),
         ),
         NavigationRailDestination(
           icon: const Icon(UniconsLine.search),
-          label: Text(translate('app.search.tab')),
+          label: Text(context.tr('app.search.tab')),
         ),
         NavigationRailDestination(
           icon: const Icon(UniconsLine.setting),
-          label: Text(translate('app.info.tab')),
+          label: Text(context.tr('app.info.tab')),
         ),
       ],
       selectedIndex: selectedIndex,
@@ -131,15 +131,15 @@ class _SmallScreenMenu extends StatelessWidget {
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: const Icon(UniconsLine.favorite, key: Key('app.fav.tab')),
-          label: translate('app.fav.tab'),
+          label: context.tr('app.fav.tab'),
         ),
         BottomNavigationBarItem(
           icon: const Icon(UniconsLine.search, key: Key('app.search.tab')),
-          label: translate('app.search.tab'),
+          label: context.tr('app.search.tab'),
         ),
         BottomNavigationBarItem(
           icon: const Icon(UniconsLine.setting, key: Key('app.info.tab')),
-          label: translate('app.info.tab'),
+          label: context.tr('app.info.tab'),
         ),
       ],
     );

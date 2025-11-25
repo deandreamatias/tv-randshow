@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/shared/custom_icons.dart';
 
 class RandomAgainButton extends StatelessWidget {
@@ -15,7 +15,7 @@ class RandomAgainButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       icon: const Icon(CustomIcons.diceMultiple),
-      label: Text(translate(labelKey), key: Key(labelKey)),
+      label: Text(context.tr(labelKey), key: Key(labelKey)),
       onPressed: onPressed,
     );
   }

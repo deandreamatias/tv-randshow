@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/home/widgets/fav_widget.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/export_tvshow_state.dart';
@@ -24,7 +24,7 @@ class HomeView extends StatelessWidget {
             children: [
               Expanded(
                 child: TextTitleLarge(
-                  translate('app.fav.title'),
+                  context.tr('app.fav.title'),
                   key: const Key('app.fav.title'),
                   textAlign: TextAlign.center,
                 ),
@@ -73,7 +73,7 @@ class _FavoriteList extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(Styles.standard),
                               child: Text(
-                                translate('app.fav.empty_message'),
+                                context.tr('app.fav.empty_message'),
                                 key: const Key('app.fav.empty_message'),
                                 style: Theme.of(context).textTheme.titleMedium,
                                 textAlign: TextAlign.center,
@@ -110,7 +110,7 @@ class _ExportTvshowsButton extends StatelessWidget {
                           success
                               ? IconButton(
                                 key: const Key('app.fav.save'),
-                                tooltip: translate('app.fav.save'),
+                                tooltip: context.tr('app.fav.save'),
                                 icon: Icon(
                                   UniconsLine.file_export,
                                   color: Theme.of(context).colorScheme.primary,

@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:theme_provider/theme_provider.dart';
 import 'package:tv_randshow/ui/features/info/info_state.dart';
@@ -28,7 +28,7 @@ class InfoView extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(Styles.standard),
           child: TextTitleLarge(
-            translate('app.info.title'),
+            context.tr('app.info.title'),
             key: const Key('app.info.title'),
             textAlign: TextAlign.center,
           ),
@@ -66,7 +66,7 @@ class _DividerTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: Styles.medium),
-      child: TextTitleMedium(translate(titleKey)),
+      child: TextTitleMedium(context.tr(titleKey)),
     );
   }
 }
@@ -80,12 +80,12 @@ class _SwitchTheme extends StatelessWidget {
       value: ThemeProvider.themeOf(context).id.compareTo('dark_theme') == 0,
       onChanged: (changed) => ThemeProvider.controllerOf(context).nextTheme(),
       title: Text(
-        translate('app.info.dark_title'),
+        context.tr('app.info.dark_title'),
         key: const Key('app.info.dark_title'),
       ),
       secondary: const Icon(UniconsLine.palette),
       subtitle: Text(
-        translate('app.info.dark_description'),
+        context.tr('app.info.dark_description'),
         key: const Key('app.info.dark_description'),
       ),
     );
@@ -101,11 +101,11 @@ class _ExportTvShows extends StatelessWidget {
       builder: (context, ref, child) {
         return ListTile(
           title: Text(
-            translate('app.info.export_title'),
+            context.tr('app.info.export_title'),
             key: const Key('app.info.export_title'),
           ),
           subtitle: Text(
-            translate('app.info.export_description'),
+            context.tr('app.info.export_description'),
             key: const Key('app.info.export_description'),
           ),
           leading: const Icon(UniconsLine.file_export),
@@ -141,11 +141,11 @@ class _Donation extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        translate('app.info.donation_title'),
+        context.tr('app.info.donation_title'),
         key: const Key('app.info.donation_title'),
       ),
       subtitle: Text(
-        translate('app.info.donation_description'),
+        context.tr('app.info.donation_description'),
         key: const Key('app.info.donation_description'),
       ),
       leading: const Icon(UniconsLine.heart),
@@ -163,11 +163,11 @@ class _ReviewApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        translate('app.info.rate_title'),
+        context.tr('app.info.rate_title'),
         key: const Key('app.info.rate_title'),
       ),
       subtitle: Text(
-        translate('app.info.rate_description'),
+        context.tr('app.info.rate_description'),
         key: const Key('app.info.rate_description'),
       ),
       leading: const Icon(UniconsLine.feedback),
@@ -192,11 +192,11 @@ class _SendFeedback extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        translate('app.info.feedback_title'),
+        context.tr('app.info.feedback_title'),
         key: const Key('app.info.feedback_title'),
       ),
       subtitle: Text(
-        translate('app.info.feedback_description'),
+        context.tr('app.info.feedback_description'),
         key: const Key('app.info.feedback_description'),
       ),
       leading: const Icon(UniconsLine.envelope),
@@ -217,11 +217,11 @@ class _OpenWebApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        translate('app.info.web_title'),
+        context.tr('app.info.web_title'),
         key: const Key('app.info.web_title'),
       ),
       subtitle: Text(
-        translate('app.info.web_description'),
+        context.tr('app.info.web_description'),
         key: const Key('app.info.web_description'),
       ),
       leading: const Icon(UniconsLine.external_link_alt),
@@ -239,11 +239,11 @@ class _OpenAndroidApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        translate('app.info.app_title'),
+        context.tr('app.info.app_title'),
         key: const Key('app.info.app_title'),
       ),
       subtitle: Text(
-        translate('app.info.app_description'),
+        context.tr('app.info.app_description'),
         key: const Key('app.info.app_description'),
       ),
       leading: const Icon(UniconsLine.google_play),
@@ -272,12 +272,12 @@ class _Changelog extends StatelessWidget {
                     .when(
                       data:
                           (version) => Text(
-                            '${translate('app.info.version.dialog_title')} ($version)',
+                            '${context.tr('app.info.version.dialog_title')} ($version)',
                             key: const Key('app.info.version.dialog_title'),
                           ),
                       error:
                           (error, stackTrace) => Text(
-                            translate('app.info.version.dialog_title'),
+                            context.tr('app.info.version.dialog_title'),
                             key: const Key('app.info.version.dialog_title'),
                           ),
                       loading:
@@ -292,9 +292,7 @@ class _Changelog extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.8,
               width: MediaQuery.of(context).size.width * 0.5,
               child: FutureBuilder<String>(
-                future: _loadAsset(
-                  LocalizedApp.of(context).delegate.currentLocale.languageCode,
-                ),
+                future: _loadAsset(context.deviceLocale.languageCode),
                 builder: (
                   BuildContext context,
                   AsyncSnapshot<String> snapshot,
@@ -308,7 +306,7 @@ class _Changelog extends StatelessWidget {
             actions: <Widget>[
               OutlinedButton(
                 key: const Key('app.info.version.dialog_button'),
-                child: Text(translate('app.info.version.dialog_button')),
+                child: Text(context.tr('app.info.version.dialog_button')),
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],
@@ -317,26 +315,22 @@ class _Changelog extends StatelessWidget {
   }
 
   Future<String> _loadAsset(String languageCode) {
-    switch (languageCode) {
-      case 'es':
-        return rootBundle.loadString(Assets.whatsNewEs);
-      case 'pt':
-        return rootBundle.loadString(Assets.whatsNewPt);
-      case 'en':
-      default:
-        return rootBundle.loadString(Assets.whatsNewEn);
-    }
+    return switch (languageCode) {
+      'es' => rootBundle.loadString(Assets.whatsNewEs),
+      'pt' => rootBundle.loadString(Assets.whatsNewPt),
+      'en' || _ => rootBundle.loadString(Assets.whatsNewEn),
+    };
   }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        translate('app.info.version.title'),
+        context.tr('app.info.version.title'),
         key: const Key('app.info.version.title'),
       ),
       subtitle: Text(
-        translate('app.info.version.description'),
+        context.tr('app.info.version.description'),
         key: const Key('app.info.version.description'),
       ),
       leading: const Icon(UniconsLine.brackets_curly),
@@ -354,11 +348,11 @@ class _Privacy extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        translate('app.info.privacy_title'),
+        context.tr('app.info.privacy_title'),
         key: const Key('app.info.privacy_title'),
       ),
       subtitle: Text(
-        translate('app.info.privacy_description'),
+        context.tr('app.info.privacy_description'),
         key: const Key('app.info.privacy_description'),
       ),
       leading: const Icon(UniconsLine.file_shield_alt),

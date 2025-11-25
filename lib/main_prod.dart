@@ -1,7 +1,7 @@
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/common/models/env.dart';
 import 'package:tv_randshow/common/models/flavor_config.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
@@ -10,10 +10,6 @@ import 'package:tv_randshow/ui/shared/show_snackbar.dart';
 
 Future<void> main() async {
   FlavorConfig(flavor: Flavor.prod, values: FlavorValues.fromJson(environment));
-  final LocalizationDelegate delegate = await LocalizationDelegate.create(
-    fallbackLocale: 'en',
-    supportedLocales: <String>['en', 'es', 'pt'],
-  );
   setupLocator();
 
   PlatformDispatcher.instance.onError = (error, stack) {
@@ -22,6 +18,15 @@ Future<void> main() async {
 
     return true;
   };
+  await EasyLocalization.ensureInitialized();
 
-  runApp(LocalizedApp(delegate, const App()));
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en'), Locale('es'), Locale('pt')],
+      path: 'assets/i18n',
+      useOnlyLangCode: true,
+      fallbackLocale: const Locale('en'),
+      child: const App(),
+    ),
+  );
 }

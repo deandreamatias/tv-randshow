@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/tvshow_state.dart';
 import 'package:tv_randshow/ui/widgets/loaders/loader.dart';
@@ -34,7 +34,7 @@ class SaveButton extends StatelessWidget {
                           watcher.isLoading
                               ? loader
                               : Text(
-                                translate('app.search.button_delete'),
+                                context.tr('app.search.button_delete'),
                                 key: Key('app.search.button_delete.$tvId'),
                               ),
                       onPressed:
@@ -50,7 +50,7 @@ class SaveButton extends StatelessWidget {
                           watcher.isLoading
                               ? loader
                               : Text(
-                                translate('app.search.button_fav'),
+                                context.tr('app.search.button_fav'),
                                 key: Key('app.search.button_fav.$tvId'),
                               ),
                       onPressed:

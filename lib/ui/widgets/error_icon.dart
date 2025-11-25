@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:unicons/unicons.dart';
 
 class ErrorIcon extends StatelessWidget {
@@ -9,7 +9,7 @@ class ErrorIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: translate(keyText),
+      message: context.tr(keyText),
       child: Icon(
         UniconsLine.exclamation_octagon,
         color: Theme.of(context).colorScheme.error,

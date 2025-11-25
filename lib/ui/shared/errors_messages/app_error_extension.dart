@@ -1,20 +1,14 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/app_error.dart';
 
 extension AppErrorExtension on AppErrorCode {
   String getMessage() {
-    String appError = '';
-    switch (this) {
-      case AppErrorCode.emptyFavs:
-        appError = translate('app.errors.app_empty_favs');
-        break;
-      case AppErrorCode.invalidEpisodeNumber:
-        appError = translate('app.errors.app_invalid_episode');
-        break;
-      case AppErrorCode.invalidSeasonNumber:
-        appError = translate('app.errors.app_invalid_season');
-    }
+    final appError = switch (this) {
+      AppErrorCode.emptyFavs => tr('app.errors.app_empty_favs'),
+      AppErrorCode.invalidEpisodeNumber => tr('app.errors.app_invalid_episode'),
+      AppErrorCode.invalidSeasonNumber => tr('app.errors.app_invalid_season'),
+    };
 
-    return translate('app.errors.app', args: {'detail': appError});
+    return tr('app.errors.app', namedArgs: {'detail': appError});
   }
 }

@@ -1,29 +1,17 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/api_error.dart';
 
 extension ApiErrorExtension on ApiErrorCode {
   String getMessage() {
-    String apiError = '';
-    switch (this) {
-      case ApiErrorCode.badRequest:
-        apiError = translate('app.errors.bad_request');
-        break;
-      case ApiErrorCode.unauthorized:
-        apiError = translate('app.errors.unauthorized');
-        break;
-      case ApiErrorCode.forbidden:
-        apiError = translate('app.errors.forbidden');
-        break;
-      case ApiErrorCode.notFound:
-        apiError = translate('app.errors.not_found');
-        break;
-      case ApiErrorCode.serverError:
-        apiError = translate('app.errors.internal_server_tvshows');
-        break;
-      case ApiErrorCode.generalError:
-        apiError = translate('app.errors.global');
-    }
+    final apiError = switch (this) {
+      ApiErrorCode.badRequest => tr('app.errors.bad_request'),
+      ApiErrorCode.unauthorized => tr('app.errors.unauthorized'),
+      ApiErrorCode.forbidden => tr('app.errors.forbidden'),
+      ApiErrorCode.notFound => tr('app.errors.not_found'),
+      ApiErrorCode.serverError => tr('app.errors.internal_server_tvshows'),
+      ApiErrorCode.generalError => tr('app.errors.global'),
+    };
 
-    return translate('app.errors.api', args: {'detail': apiError});
+    return tr('app.errors.api', namedArgs: {'detail': apiError});
   }
 }

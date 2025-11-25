@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/states/tvshow_state.dart';
 import 'package:unicons/unicons.dart';
@@ -15,24 +15,24 @@ class DeleteButton extends StatelessWidget {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text(
-                translate('app.delete_dialog.title'),
+                context.tr('app.delete_dialog.title'),
                 key: const Key('app.delete_dialog.title'),
               ),
               content: Text(
-                translate('app.delete_dialog.subtitle'),
+                context.tr('app.delete_dialog.subtitle'),
                 key: const Key('app.delete_dialog.subtitle'),
               ),
               actions: <Widget>[
                 TextButton(
                   key: const Key('app.delete_dialog.button_cancel'),
-                  child: Text(translate('app.delete_dialog.button_cancel')),
+                  child: Text(context.tr('app.delete_dialog.button_cancel')),
                   onPressed: () {
                     Navigator.of(context).pop(false);
                   },
                 ),
                 OutlinedButton(
                   key: const Key('app.delete_dialog.button_delete'),
-                  child: Text(translate('app.delete_dialog.button_delete')),
+                  child: Text(context.tr('app.delete_dialog.button_delete')),
                   onPressed: () {
                     Navigator.of(context).pop(true);
                   },

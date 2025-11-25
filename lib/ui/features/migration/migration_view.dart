@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/migration/domain/models/migration_status.dart';
 import 'package:tv_randshow/ui/features/migration/migration_state.dart';
 import 'package:tv_randshow/ui/router.dart';
@@ -77,7 +77,7 @@ class _MigrationViewState extends State<MigrationView> {
                   ],
                   const SizedBox(height: Styles.large),
                   OutlinedButton.icon(
-                    label: Text(translate('app.migration.home_button')),
+                    label: Text(context.tr('app.migration.home_button')),
                     icon: const Icon(UniconsLine.home),
                     onPressed:
                         () => Navigator.pushReplacementNamed(
@@ -103,12 +103,12 @@ class _Header extends StatelessWidget {
     return Column(
       children: [
         Text(
-          translate('app.migration.title'),
+          context.tr('app.migration.title'),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: Styles.small),
         Text(
-          translate('app.migration.subtitle'),
+          context.tr('app.migration.subtitle'),
           style: Theme.of(context).textTheme.titleSmall,
           textAlign: TextAlign.center,
         ),
@@ -196,7 +196,7 @@ class _Checkpoint extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(translate(label)),
+        Text(context.tr(label)),
         const SizedBox(height: Styles.xsmall),
         isLoading
             ? const SizedBox.square(dimension: Styles.medium, child: Loader())

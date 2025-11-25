@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/result.dart';
 import 'package:tv_randshow/ui/features/search/search_state.dart';
 import 'package:tv_randshow/ui/features/search/widgets/search_widget.dart';
@@ -105,7 +105,7 @@ class _SearchField extends StatelessWidget {
             autofocus: true,
             keyboardType: TextInputType.text,
             decoration: InputDecoration(
-              hintText: translate('app.search.search_bar'),
+              hintText: context.tr('app.search.search_bar'),
               prefixIcon: const Icon(UniconsLine.search),
             ),
           );
@@ -138,7 +138,7 @@ class _PaginationStatus extends ConsumerWidget {
 
         return noMoreItems && state.requireValue.isNotEmpty
             ? Text(
-              translate('app.search.no_more_items'),
+              context.tr('app.search.no_more_items'),
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             )
@@ -149,7 +149,7 @@ class _PaginationStatus extends ConsumerWidget {
                   ref.read(paginationProvider(text).notifier).nextPage();
                 },
                 icon: const Icon(UniconsLine.plus_circle),
-                label: Text(translate('app.search.load_more_items')),
+                label: Text(context.tr('app.search.load_more_items')),
               ),
             )
             : const SizedBox.shrink();
@@ -176,7 +176,7 @@ class _SearchResult extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(Styles.standard),
                       child: Text(
-                        translate(
+                        context.tr(
                           text.isEmpty
                               ? 'app.search.init_message'
                               : 'app.search.empty_message',

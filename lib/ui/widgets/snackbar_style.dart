@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tv_randshow/ui/shared/constants.dart';
 import 'package:tv_randshow/ui/shared/helpers/helpers.dart';
@@ -42,7 +42,7 @@ class StyledSnackBar {
       action:
           style == SnackBarStyle.error
               ? SnackBarAction(
-                label: translate('app.report_action'),
+                label: context.tr('app.report_action'),
                 textColor: labelColor,
                 onPressed: () {
                   Helpers.openMail(

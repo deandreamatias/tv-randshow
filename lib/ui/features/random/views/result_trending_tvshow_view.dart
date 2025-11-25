@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/random/states/random_trending_tvshow_state.dart';
 import 'package:tv_randshow/ui/features/random/widgets/random_again_button.dart';
 import 'package:tv_randshow/ui/features/random/widgets/result_base_view.dart';
@@ -51,17 +51,17 @@ class _TrendingInfoDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return SimpleDialog(
       title: TextTitleLarge(
-        translate('app.result.trending_tvshow.dialog_title'),
+        context.tr('app.result.trending_tvshow.dialog_title'),
       ),
       contentPadding: const EdgeInsets.all(Styles.large),
       children: [
-        Text(translate('app.result.trending_tvshow.dialog_body_1')),
+        Text(context.tr('app.result.trending_tvshow.dialog_body_1')),
         const SizedBox(height: Styles.medium),
-        Text(translate('app.result.trending_tvshow.dialog_body_2')),
+        Text(context.tr('app.result.trending_tvshow.dialog_body_2')),
         const SizedBox(height: Styles.medium),
         OutlinedButton(
           key: const Key('app.result.trending_tvshow.dialog_button'),
-          child: Text(translate('app.result.trending_tvshow.dialog_button')),
+          child: Text(context.tr('app.result.trending_tvshow.dialog_button')),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ],

@@ -1,8 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:theme_provider/theme_provider.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
 
@@ -15,9 +14,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LocalizationDelegate localizationDelegate =
-        LocalizedApp.of(context).delegate;
-
     return ThemeProvider(
       saveThemesOnChange: true,
       loadThemeOnInit: true,
@@ -37,10 +33,7 @@ class App extends StatelessWidget {
         child: Builder(
           builder:
               (themeContext) => ProviderScope(
-                child: _MaterialApp(
-                  localizationDelegate: localizationDelegate,
-                  themeContext: themeContext,
-                ),
+                child: _MaterialApp(themeContext: themeContext),
               ),
         ),
       ),
@@ -50,12 +43,8 @@ class App extends StatelessWidget {
 
 class _MaterialApp extends StatelessWidget {
   final BuildContext themeContext;
-  final LocalizationDelegate localizationDelegate;
 
-  const _MaterialApp({
-    required this.themeContext,
-    required this.localizationDelegate,
-  });
+  const _MaterialApp({required this.themeContext});
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +57,9 @@ class _MaterialApp extends StatelessWidget {
       initialRoute: RoutePaths.splash,
       scaffoldMessengerKey: locator.get<GlobalKey<ScaffoldMessengerState>>(),
       onGenerateRoute: router.Router.generateRoute,
-      localizationsDelegates: [
-        ...GlobalMaterialLocalizations.delegates,
-        GlobalWidgetsLocalizations.delegate,
-        localizationDelegate,
-      ],
-      supportedLocales: localizationDelegate.supportedLocales,
-      locale: localizationDelegate.currentLocale,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
     );
   }
 }

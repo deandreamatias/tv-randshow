@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 
 class InfoBox extends StatelessWidget {
@@ -8,21 +8,15 @@ class InfoBox extends StatelessWidget {
 
   const InfoBox({super.key, required this.typeInfo, required this.value});
 
-  String _selectTitle(InfoTypeBox typeInfo) {
-    switch (typeInfo) {
-      case InfoTypeBox.seasons:
-        return translate('app.modal.seasons');
-      case InfoTypeBox.episodes:
-        return translate('app.modal.episodes');
-      case InfoTypeBox.duration:
-        return translate('app.modal.duration');
-      case InfoTypeBox.season:
-        return translate('app.modal.season');
-      case InfoTypeBox.episode:
-        return translate('app.modal.episode');
-      default:
-        return translate('app.modal.undefined');
-    }
+  String _selectTitle(BuildContext context, InfoTypeBox typeInfo) {
+    return switch (typeInfo) {
+      InfoTypeBox.seasons => context.tr('app.modal.seasons'),
+      InfoTypeBox.episodes => context.tr('app.modal.episodes'),
+      InfoTypeBox.duration => context.tr('app.modal.duration'),
+      InfoTypeBox.season => context.tr('app.modal.season'),
+      InfoTypeBox.episode => context.tr('app.modal.episode'),
+      _ => context.tr('app.modal.undefined'),
+    };
   }
 
   @override
@@ -47,7 +41,7 @@ class InfoBox extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.fitWidth,
                 child: Text(
-                  _selectTitle(typeInfo),
+                  _selectTitle(context, typeInfo),
                   style: textTheme.titleMedium?.copyWith(
                     color: colorScheme.onPrimary,
                   ),
@@ -66,8 +60,8 @@ class InfoBox extends StatelessWidget {
               ].contains(typeInfo))
                 Text(
                   InfoTypeBox.duration == typeInfo
-                      ? translate('app.modal.duration_metric')
-                      : translate('app.modal.episode_season_metric'),
+                      ? context.tr('app.modal.duration_metric')
+                      : context.tr('app.modal.episode_season_metric'),
                   style: textTheme.bodySmall?.copyWith(
                     color: colorScheme.onPrimary,
                   ),

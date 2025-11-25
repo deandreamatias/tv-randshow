@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/random/widgets/home_button.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 import 'package:tv_randshow/ui/widgets/text_title_large.dart';
@@ -31,7 +31,7 @@ class ResultBaseView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: TextTitleLarge(
-                      translate(titleKey),
+                      context.tr(titleKey),
                       key: Key(titleKey),
                       textAlign: TextAlign.center,
                     ),

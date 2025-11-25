@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/tvshow/domain/models/tvshow_result.dart';
 import 'package:tv_randshow/ui/features/random/widgets/streaming_button.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
@@ -44,7 +44,7 @@ class TvshowEpisodeInfoResult extends StatelessWidget {
                       ),
                     )
                     : TextTitleMedium(
-                      translate('app.result.episode.no_streaming_title'),
+                      context.tr('app.result.episode.no_streaming_title'),
                     ),
           ),
         ),

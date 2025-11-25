@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/random/widgets/home_button.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
 
@@ -23,7 +23,7 @@ class LoadingBaseView extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Text(
-                  translate(titleKey),
+                  context.tr(titleKey),
                   key: Key(titleKey),
                   style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,

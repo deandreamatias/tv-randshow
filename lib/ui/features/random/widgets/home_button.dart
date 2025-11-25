@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/ui/features/init/tab_view.dart';
 import 'package:tv_randshow/ui/router.dart';
 import 'package:tv_randshow/ui/shared/styles.dart';
@@ -15,7 +15,7 @@ class HomeButton extends StatelessWidget {
       key: Key(keyText),
       padding: const EdgeInsets.only(top: Styles.standard),
       child: TextButton.icon(
-        label: Text(translate(keyText)),
+        label: Text(context.tr(keyText)),
         icon: const Icon(UniconsLine.favorite),
         onPressed:
             () => Navigator.pushNamedAndRemoveUntil<TabView>(

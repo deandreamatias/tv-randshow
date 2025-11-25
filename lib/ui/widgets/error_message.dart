@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/api_error.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/app_error.dart';
 import 'package:tv_randshow/core/app/domain/exceptions/database_error.dart';
@@ -20,24 +20,19 @@ class ErrorMessage extends StatelessWidget {
   const ErrorMessage({super.key, required this.error, required this.keyText});
 
   String _convertErrors() {
-    if (error is Error) {
-      return (error as Error).getMessage();
-    }
-    switch (error.runtimeType) {
-      case ApiError _:
-        return (error as ApiError).code.getMessage();
-      case DatabaseError _:
-        return (error as DatabaseError).code.getMessage();
-      case AppError _:
-        return (error as AppError).code.getMessage();
-      default:
-        return '';
-    }
+    if (error is Error) return (error as Error).getMessage();
+
+    return switch (error.runtimeType) {
+      ApiError _ => (error as ApiError).code.getMessage(),
+      DatabaseError _ => (error as DatabaseError).code.getMessage(),
+      AppError _ => (error as AppError).code.getMessage(),
+      _ => '',
+    };
   }
 
   @override
   Widget build(BuildContext context) {
-    final errorText = '${translate(keyText)}\n${_convertErrors()}';
+    final errorText = '${context.tr(keyText)}\n${_convertErrors()}';
 
     return Center(
       child: Column(
@@ -71,7 +66,7 @@ class ErrorMessage extends StatelessWidget {
                   mailtoBody: errorText,
                 ),
             icon: const Icon(UniconsLine.fast_mail),
-            label: Text(translate('app.send_error')),
+            label: Text(context.tr('app.send_error')),
           ),
         ],
       ),
