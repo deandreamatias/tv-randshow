@@ -30,6 +30,17 @@ jobs:
         distribution: 'zulu'
         java-version: '18'
         cache: 'gradle'
+    - name: Cache Android SDK
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.android/sdk/ndk
+          ~/.android/sdk/cmake
+          ~/Library/Android/sdk/ndk
+          ~/Library/Android/sdk/cmake
+        key: ${{ runner.os }}-android-sdk-${{ hashFiles('**/build.gradle.kts', '**/gradle-wrapper.properties') }}
+        restore-keys: |
+          ${{ runner.os }}-android-sdk-
     - name: Setup Flutter
       uses: kuhnroyal/flutter-fvm-config-action/setup@v3
       with:
