@@ -11,7 +11,7 @@ class SaveFileService implements IManageFilesService {
     return (await FileSaver.instance.saveAs(
           name: fileName,
           bytes: Uint8List.fromList(json.codeUnits),
-          ext: 'json',
+          fileExtension: 'json',
           mimeType: MimeType.json,
         )) ??
         '';

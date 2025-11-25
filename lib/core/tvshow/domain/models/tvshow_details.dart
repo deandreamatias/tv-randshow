@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:tv_randshow/core/streaming/domain/models/streaming.dart';
 import 'package:tv_randshow/core/tvshow/data/repositories/local_repository.dart';

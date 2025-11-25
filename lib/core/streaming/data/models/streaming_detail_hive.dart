@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:tv_randshow/core/tvshow/data/repositories/local_repository.dart';
 
 part 'streaming_detail_hive.g.dart';

@@ -32,7 +32,7 @@ class Styles {
         ),
         contentPadding: EdgeInsets.zero,
       ),
-      dialogTheme: const DialogTheme(
+      dialogTheme: const DialogThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
         ),
@@ -89,7 +89,7 @@ class Styles {
         ),
         contentPadding: EdgeInsets.zero,
       ),
-      dialogTheme: const DialogTheme(
+      dialogTheme: const DialogThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(Styles.small)),
         ),
