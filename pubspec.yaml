@@ -4,8 +4,8 @@ description: App to pick a random TV show episode
 version: 2.4.0+31
 
 environment:
-  sdk: ">=3.7.0 <4.0.0"
-  flutter: ">=3.29.0"
+  sdk: ">=3.10.0 <4.0.0"
+  flutter: ">=3.38.0"
 
 dependencies:
   cached_network_image: ^3.4.1
