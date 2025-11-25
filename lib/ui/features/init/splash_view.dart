@@ -12,7 +12,9 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Navigator.of(context).pushReplacementNamed(RoutePaths.tab);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.of(context).pushReplacementNamed(RoutePaths.tab);
+    });
     super.initState();
   }
 
