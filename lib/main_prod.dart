@@ -10,6 +10,7 @@ import 'package:tv_randshow/ui/shared/show_snackbar.dart';
 
 Future<void> main() async {
   FlavorConfig(flavor: Flavor.prod, values: FlavorValues.fromJson(environment));
+  WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
 
   PlatformDispatcher.instance.onError = (error, stack) {
