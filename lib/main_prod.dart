@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 import 'package:tv_randshow/common/models/env.dart';
 import 'package:tv_randshow/common/models/flavor_config.dart';
 import 'package:tv_randshow/core/app/ioc/locator.dart';
@@ -12,6 +13,7 @@ Future<void> main() async {
   FlavorConfig(flavor: Flavor.prod, values: FlavorValues.fromJson(environment));
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+  await RiveNative.init();
 
   PlatformDispatcher.instance.onError = (error, stack) {
     showSnackBar('Something went wrong', details: error.toString());

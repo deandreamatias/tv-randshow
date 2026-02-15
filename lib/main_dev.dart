@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 import 'package:stack_trace/stack_trace.dart' as stack_trace;
 import 'package:tv_randshow/common/models/env.dart';
 import 'package:tv_randshow/common/models/flavor_config.dart';
@@ -13,6 +14,7 @@ Future<void> main() async {
   FlavorConfig(flavor: Flavor.dev, values: FlavorValues.fromJson(environment));
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
+  await RiveNative.init();
 
   FlutterError.demangleStackTrace = (StackTrace stack) {
     if (stack is stack_trace.Trace) return stack.vmTrace;

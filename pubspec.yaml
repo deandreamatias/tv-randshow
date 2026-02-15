@@ -1,7 +1,7 @@
 name: tv_randshow
 description: App to pick a random TV show episode
 
-version: 2.5.0+32
+version: 2.5.1+36
 
 environment:
   sdk: ">=3.10.0 <4.0.0"
@@ -28,7 +28,7 @@ dependencies:
   package_info_plus: ^9.0.0
   path: ^1.9.1
   path_provider: ^2.1.5
-  rive: ^0.13.20
+  rive: ^0.14.2
   shared_preferences: ^2.5.3
   sqflite: ^2.4.2
   stack_trace: ^1.12.1
@@ -65,6 +65,7 @@ flutter_icons:
   image_path: "assets/img/icon_launcher.png"
 
 flutter:
+  default-flavor: prod
   assets:
     - assets/i18n/
     - assets/markdown/
