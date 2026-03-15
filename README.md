@@ -52,7 +52,7 @@ This project has been built using the [Flutter](https://flutter.dev/) framework,
    3. When build to Android, follow [this steps](https://docs.flutter.dev/get-started/install/macos#install-android-studio)
 3. Install dependencies and generate code
    1. Only use `sh tool/setup.sh`
-   2. If don't have just, can do manual proccess
+   2. Or can do manual proccess
       1. Run `flutter pub get` from the project root (see [using packages documentation](https://flutter.dev/docs/development/packages-and-plugins/using-packages#adding-a-package-dependency-to-an-app) for details and how to do this in the editor).
       2. Run `flutter pub run build_runner build`
 4. Get your own API keys
