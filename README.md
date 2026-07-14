@@ -1,3 +1,14 @@
+# Archived
+
+After many years of developing this project and trying to maintain it, I’ve decided to stop and archive it.
+It was my first app, from the initial idea all the way to its release in app stores. I’m proud to see how I’ve grown and that it has been useful as a learning experience or tool, both for me and for others.
+Unfortunately, in recent years I haven’t been able to maintain the app as I’d like, and in the last few months I’ve realized that I won’t be able to do so again.
+Life changes, and at certain times you have to make decisions that, although they may seem simple, carry great weight for the person making them.
+
+With that in mind, I’ve decided to stop maintaining this project. It will remain public, like all the personal projects I work on, but it will be read-only.
+
+---
+
 <p>
   <a href="https://tvrandshow.com/">
     <img alt="TV Randshow website" src="./images/icon.png" height="100">
